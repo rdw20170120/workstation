@@ -1,0 +1,23 @@
+# NOTE: Intended to be sourced into a BASH shell
+# BASH alias definitions for source control
+
+alias add='git add .'
+alias commit='git commit'
+alias ignored='git status --ignored'
+alias ignored='git status --ignored'
+alias log='git shortlog'
+alias pull='git pull'
+alias push='git push'
+alias status='git status'
+
+alias egrep=
+alias fgrep=
+grep_options='--color=auto'
+grep_options+=' --exclude-dir=.git'
+grep_options+=' --exclude-dir=.pytest_cache'
+grep_options+=' --exclude-dir=.PVE'
+grep_options+=' --exclude-from=$DirProject/.grep-exclude-from'
+alias grep="grep $grep_options"
+
+alias todo='grep -ER TODO $DirProject'
+

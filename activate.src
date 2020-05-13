@@ -1,0 +1,61 @@
+# NOTE: Intended to be sourced into a BASH shell
+# Activate this directory tree as a project that can be managed by its scripts
+
+# Prevent duplicate activation
+if [[ -n "$DirProject" ]]; then
+    echo "FATAL: This project is already activated as '$DirProject', aborting"
+    return 1  # Exit from the script, but not from the shell
+fi
+
+# Capture incoming environment
+env | sort > $PWD/env-incoming.out
+
+# Remember this activated directory
+echo "INFO: Activating this directory '$PWD' as the current project"
+export DirProject=$PWD
+
+# Remember temporary directory
+export TMPDIR=$HOME/tmp
+echo "DEBUG: Remembering temporary directory as '$TMPDIR'"
+if [[ ! -d $TMPDIR ]] ; then
+    mkdir $TMPDIR
+    echo "INFO: Temporary directory '$TMPDIR' created"
+else
+    echo "DEBUG: Temporary directory '$TMPDIR' already exists"
+fi
+
+# Remember an adjusted PATH
+PATH=$DirProject/bin:$PATH
+export PATH
+echo "DEBUG: Remembering PATH as:  $PATH"
+
+# Source optional BASH alias definitions for source control
+Script=$DirProject/alias-git.src
+if [[ -r $Script ]] ; then
+    echo "INFO: Sourcing BASH alias definitions from script '$Script'"
+    source $Script
+else
+    echo "WARN: Script file '$Script' is not readable, ignoring"
+fi
+
+# Source optional BASH alias definitions specific to this project
+Script=$DirProject/alias-project.src
+if [[ -r $Script ]] ; then
+    echo "INFO: Sourcing BASH alias definitions from script '$Script'"
+    source $Script
+else
+    echo "WARN: Script file '$Script' is not readable, ignoring"
+fi
+
+# Source an optional user/machine-specific context
+Script=$DirProject/context.src
+if [[ -r $Script ]] ; then
+    echo "INFO: Sourcing user/machine-specific context from script '$Script'"
+    source $Script
+else
+    echo "WARN: Script file '$Script' is not readable, ignoring"
+fi
+
+# Capture outgoing environment
+env | sort > $PWD/env-outgoing.out
+
