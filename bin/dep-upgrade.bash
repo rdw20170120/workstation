@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Upgrade Python dependencies
 
 if [[ -z "$DirProject" ]] ; then

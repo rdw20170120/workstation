@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Compile all Python source
 
 if [[ -z "$DirProject" ]] ; then

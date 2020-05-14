@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Report tool dependencies
 
 Rule=##########

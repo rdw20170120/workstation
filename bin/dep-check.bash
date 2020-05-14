@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Check Python dependencies
 
 if [[ -z "$DirProject" ]] ; then

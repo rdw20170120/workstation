@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Check tool dependencies
 
 if [[ -z "$DirProject" ]] ; then

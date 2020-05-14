@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Check Python code
 
 if [[ -z "$DirProject" ]] ; then

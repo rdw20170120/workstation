@@ -1,5 +1,7 @@
 #!/bin/false
 # NOTE: Intended to be sourced into a BASH shell
+set -ex
+
 # Activate this directory tree as a project that can be managed by its scripts
 
 # Prevent duplicate activation

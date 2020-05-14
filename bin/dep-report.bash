@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Report Python dependencies
 
 if [[ -z "$DirProject" ]] ; then

@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Check BASH environment
 
 if [[ -z "$DirProject" ]] ; then

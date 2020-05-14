@@ -1,5 +1,6 @@
 #!/bin/bash
 # Check all dependencies
+set -ex
 
 if [[ -z "$DirProject" ]] ; then
     echo "FATAL: Environment variable 'DirProject' is undefined, aborting"

@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Capture BASH environment
 
 if [[ -z "$DirProject" ]] ; then

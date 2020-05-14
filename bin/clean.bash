@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Clean project directory
 # TODO: Enhance to handle directories
 
@@ -21,13 +23,11 @@ findAnd () {
 
 echo "INFO: Found these files..."
 findAnd print '__pycache'
-findAnd print '.pytest_cache'
 findAnd print '*.log'
 findAnd print '*.pyc'
 
 echo "INFO: Deleting files..."
 findAnd delete '__pycache'
-findAnd delete '.pytest_cache'
 findAnd delete '*.log'
 findAnd delete '*.pyc'
 
@@ -37,7 +37,6 @@ rm -fr "$dir"
 
 echo "WARN: Found these files REMAINING..."
 findAnd print '__pycache'
-findAnd print '.pytest_cache'
 findAnd print '*.log'
 findAnd print '*.pyc'
 

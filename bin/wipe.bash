@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Wipe project directory, which is a deeper clean
 
 if [[ -z "$DirProject" ]] ; then

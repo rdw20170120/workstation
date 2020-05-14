@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Remove Python virtual environment directory
 
 if [[ -z "$DirProject" ]] ; then

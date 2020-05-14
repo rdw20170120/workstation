@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Report BASH environment
 
 if [[ -z "$DirProject" ]] ; then

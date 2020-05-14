@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Run tests
 
 if [[ -z "$DirProject" ]] ; then

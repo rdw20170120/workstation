@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Install Python dependencies
 
 if [[ -z "$DirProject" ]] ; then

@@ -1,4 +1,6 @@
 #!/bin/bash
+set -ex
+
 # Recreate Python virtual environment directory
 
 if [[ -z "$DirProject" ]] ; then
