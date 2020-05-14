@@ -1,4 +1,6 @@
+#!/bin/false
 # NOTE: Intended to be sourced into a BASH shell
+
 # BASH alias definitions for source control
 
 alias add='git add .'

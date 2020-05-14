@@ -1,5 +1,5 @@
-#!/bin/bash
-set -ex
+#!/usr/bin/env bash -ex
+# This script is intended to be executed by a user in a BASH shell.
 
 # Capture Python dependencies
 
