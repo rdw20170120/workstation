@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -ex
+#!/usr/bin/env bash -e
 # This script is intended to be executed by a user in a BASH shell.
 
 # Capture tool dependencies
