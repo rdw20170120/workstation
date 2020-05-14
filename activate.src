@@ -1,3 +1,4 @@
+#!/bin/false
 # NOTE: Intended to be sourced into a BASH shell
 # Activate this directory tree as a project that can be managed by its scripts
 

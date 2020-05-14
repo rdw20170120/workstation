@@ -1,16 +1,13 @@
 Notes on project initiation
 ===========================
-These notes describe how Rob first initiated this project by preparing his development workstation
-and creating this source directory tree with Kelly.  Rob based his approach on his pre-existing
-open-source project BriteOnyx, which is likewise based on his many years of consulting experience.
-We adjusted this approach to accomodate Kelly and his IDE.
+These notes describe how Rob first initiated this project by preparing his
+development workstation and creating this source directory tree.
+Rob based his approach on his pre-existing open-source project BriteOnyx, which
+is likewise based on his many years of consulting experience.
 
 Install tools
 -------------
-* Using Apple MacBook Pro (Retina, 15-inch, Late 2013)
-    * Processor: 2.3 GHz Intel Core i7
-    * Memory:    16 GB 1600 MHz DDR3
-    * Graphics:  NVIDIA GeForce GT 750M 2 GB & Intel Iris Pro 1536 MB
+* Using Apple MacBook Pro
 * Running Apple macOS Mojave 10.14.6
 
 1. Install VMware Fusion 8.5.10.7527438
@@ -30,6 +27,7 @@ Prepare project directory
 Create a project-specific Python virtual environment
 ----------------------------------------------------
 [Activate this project in a shell][activate].
+
 ~~~ bash
 pve-create.bash
 source $PVE/bin/activate
@@ -39,18 +37,18 @@ tool-capture.bash
 exit
 ~~~
 
-Create [activate.src](../activate.src) to source $PVE/bin/activate.
+Create [activate.src](activate.src) to source $PVE/bin/activate.
 
-[activate]: ./HowTo-activate_this_project.md "HowTo activate this project"
-[application]: ./HowTo-execute_application.md "HowTo execute application"
-[AWS CLI]: ./HowTo-setup-AWS_CLI.md "HowTo setup AWS CLI"
-[clone]: ./HowTo-setup-source_control.md "HowTo setup source control"
-[deploy]: ./HowTo-deploy-server.md "HowTo deploy server"
-[initiation]: ./project_initiation.md "How Rob initiated the project repository"
-[install]: ./HowTo-install-packages.md "HowTo install Ubuntu packages"
-[license]: ../LICENSE.md "License"
-[ReadMe]: ../README.md "ReadMe"
-[test]: ./HowTo-test.md "HowTo test"
-[venv]: ./HowTo-setup-Python_virtual_environment.md "HowTo setup Python virtual environment"
-[workstation]: ./HowTo-setup-workstation.md "HowTo setup workstation"
+[activate]: doc/HowTo-activate_this_project.md "HowTo activate this project"
+[application]: doc/HowTo-execute_application.md "HowTo execute application"
+[AWS CLI]: doc/HowTo-setup-AWS_CLI.md "HowTo setup AWS CLI"
+[clone]: doc/HowTo-setup-source_control.md "HowTo setup source control"
+[initiation]: doc/project_initiation.md
+  "How Rob initiated the project repository"
+[license]: LICENSE "project license"
+[ReadMe]: README.md "project ReadMe"
+[test]: doc/HowTo-test.md "HowTo test"
+[venv]: doc/HowTo-setup-Python_virtual_environment.md
+  "HowTo setup Python virtual environment"
+[workstation]: doc/HowTo-setup-workstation.md "HowTo setup workstation"
 
