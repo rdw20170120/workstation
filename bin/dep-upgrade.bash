@@ -1,4 +1,5 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env bash
+set -e
 # This script is intended to be executed by a user in a BASH shell.
 
 # Upgrade Python dependencies
