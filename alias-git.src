@@ -12,10 +12,7 @@ alias pull='git pull'
 alias push='git push'
 alias status='git status'
 
-# TODO: Write these so that they only unalias if there exists an alias to remove
-unalias egrep
-unalias fgrep
-
+# TODO: Consider augmenting the other forms of 'grep' too
 grep_options='--color=auto'
 grep_options+=' --exclude-dir=.git'
 grep_options+=' --exclude-dir=.pytest_cache'
