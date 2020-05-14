@@ -3,6 +3,9 @@
 context.src
 log/
 
+# Apple macOS
+.DS_Store
+
 # Common files
 *.list
 *.log
