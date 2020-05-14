@@ -12,13 +12,22 @@ alias pull='git pull'
 alias push='git push'
 alias status='git status'
 
+# TODO: Write these so that they only unalias if there exists an alias to remove
 unalias egrep
 unalias fgrep
+
 grep_options='--color=auto'
 grep_options+=' --exclude-dir=.git'
 grep_options+=' --exclude-dir=.pytest_cache'
 grep_options+=' --exclude-dir=.PVE'
-grep_options+=' --exclude-from=$DirProject/.grep-exclude-from'
+
+# TODO: It appears that '--exclude-from' is not supported on macOS Mojave 10.14.6
+# TODO: Perhaps I should consider installing a compatible 'grep' using Homebrew
+# grep_options+=' --exclude-from=$DirProject/.grep-exclude-from'
+# NOTE: For now, let's handle this by brute force
+grep_options+=' --exclude="*.pyc"'
+grep_options+=' --exclude="*.swp"'
+
 alias grep="grep $grep_options"
 
 alias todo='grep -ER TODO $DirProject'
