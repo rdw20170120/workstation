@@ -116,6 +116,13 @@ you should see the new settings.
     file:.git/config        user.name=Rob Williams
     file:.git/config        user.email=rob@refactory.biz
 
+TODO: Document how to change git remote URLs
+
+~~~ bash
+git remove -v
+git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+~~~
+
 [activate]: ./HowTo-activate_this_project.md "HowTo activate this project"
 [application]: ./HowTo-execute_application.md "HowTo execute application"
 [AWS CLI]: ./HowTo-setup-AWS_CLI.md "HowTo setup AWS CLI"

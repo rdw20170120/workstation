@@ -16,6 +16,8 @@ unalias egrep
 unalias fgrep
 grep_options='--color=auto'
 grep_options+=' --exclude-dir=.git'
+grep_options+=' --exclude-dir=.pytest_cache'
+grep_options+=' --exclude-dir=.PVE'
 grep_options+=' --exclude-from=$DirProject/.grep-exclude-from'
 alias grep="grep $grep_options"
 
