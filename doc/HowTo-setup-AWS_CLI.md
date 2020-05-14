@@ -29,9 +29,9 @@ AWS credentials to an application.  We must name the profile, but the name is
 nothing more than a reference; pick a name that is convenient and meaningful.
 
 The profile name must be provided to the application, which is accomplished
-during [activation][activate].  The [activate.src](activate.src) script will
+during [activation][activate].  The [activate.src](../activate.src) script will
 `source` the `context.src` script, if any.  You can create this script by
-copying the [cfg/sample_context.src](cfg/sample_context.src) script.
+copying the [cfg/sample_context.src](../cfg/sample_context.src) script.
 **Note** that the copied script MUST NOT be checked into source control.
 
 [Activate this project in a shell][activate].
@@ -85,17 +85,17 @@ These are the shell environment variables used by the AWS CLI, which you
 should check if you must troubleshoot the AWS CLI.
 
 ~~~ bash
-$AWS\_ACCESS\_KEY\_ID
-$AWS\_CA\_BUNDLE
-$AWS\_CONFIG\_FILE
-$AWS\_DEFAULT\_OUTPUT
-$AWS\_DEFAULT\_REGION
-$AWS\_PAGER
-$AWS\_PROFILE
-$AWS\_ROLE\_SESSION\_NAME
-$AWS\_SECRET\_ACCESS\_KEY
-$AWS\_SESSION\_TOKEN
-$AWS\_SHARED\_CREDENTIALS\_FILE
+$AWS_ACCESS_KEY_ID
+$AWS_CA_BUNDLE
+$AWS_CONFIG_FILE
+$AWS_DEFAULT_OUTPUT
+$AWS_DEFAULT_REGION
+$AWS_PAGER
+$AWS_PROFILE
+$AWS_ROLE_SESSION_NAME
+$AWS_SECRET_ACCESS_KEY
+$AWS_SESSION_TOKEN
+$AWS_SHARED_CREDENTIALS_FILE
 ~~~
 
 Files
@@ -111,16 +111,16 @@ for troubleshooting.
 
 * **TODO**: Add command completion documented at https://pypi.org/project/awscli/
 
-[activate]: doc/HowTo-activate_this_project.md "HowTo activate this project"
-[application]: doc/HowTo-execute_application.md "HowTo execute application"
-[AWS CLI]: doc/HowTo-setup-AWS_CLI.md "HowTo setup AWS CLI"
-[clone]: doc/HowTo-setup-source_control.md "HowTo setup source control"
-[initiation]: doc/project_initiation.md
-  "How Rob initiated the project repository"
-[license]: LICENSE "project license"
-[ReadMe]: README.md "project ReadMe"
-[test]: doc/HowTo-test.md "HowTo test"
-[venv]: doc/HowTo-setup-Python_virtual_environment.md
-  "HowTo setup Python virtual environment"
-[workstation]: doc/HowTo-setup-workstation.md "HowTo setup workstation"
+[activate]: ./HowTo-activate_this_project.md "HowTo activate this project"
+[application]: ./HowTo-execute_application.md "HowTo execute application"
+[AWS CLI]: ./HowTo-setup-AWS_CLI.md "HowTo setup AWS CLI"
+[clone]: ./HowTo-setup-source_control.md "HowTo setup source control"
+[deploy]: ./HowTo-deploy-server.md "HowTo deploy server"
+[initiation]: ./project_initiation.md "How Rob initiated the project repository"
+[install]: ./HowTo-install-packages.md "HowTo install Ubuntu packages"
+[license]: ../LICENSE.md "License"
+[ReadMe]: ../README.md "ReadMe"
+[test]: ./HowTo-test.md "HowTo test"
+[venv]: ./HowTo-setup-Python_virtual_environment.md "HowTo setup Python virtual environment"
+[workstation]: ./HowTo-setup-workstation.md "HowTo setup workstation"
 

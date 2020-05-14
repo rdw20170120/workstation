@@ -24,16 +24,16 @@ So, I will probably stay with an Ubuntu workstation too.
 I love NixOS, but I have not done anything with it in quite a while; I need to
 explore that again.
 
-[activate]: doc/HowTo-activate_this_project.md "HowTo activate this project"
-[application]: doc/HowTo-execute_application.md "HowTo execute application"
-[AWS CLI]: doc/HowTo-setup-AWS_CLI.md "HowTo setup AWS CLI"
-[clone]: doc/HowTo-setup-source_control.md "HowTo setup source control"
-[initiation]: doc/project_initiation.md
-  "How Rob initiated the project repository"
-[license]: LICENSE "project license"
-[ReadMe]: README.md "project ReadMe"
-[test]: doc/HowTo-test.md "HowTo test"
-[venv]: doc/HowTo-setup-Python_virtual_environment.md
-  "HowTo setup Python virtual environment"
-[workstation]: doc/HowTo-setup-workstation.md "HowTo setup workstation"
+[activate]: ./doc/HowTo-activate_this_project.md "HowTo activate this project"
+[application]: ./doc/HowTo-execute_application.md "HowTo execute application"
+[AWS CLI]: ./doc/HowTo-setup-AWS_CLI.md "HowTo setup AWS CLI"
+[clone]: ./doc/HowTo-setup-source_control.md "HowTo setup source control"
+[deploy]: ./doc/HowTo-deploy-server.md "HowTo deploy server"
+[initiation]: ./doc/project_initiation.md "How Rob initiated the project repository"
+[install]: ./doc/HowTo-install-packages.md "HowTo install Ubuntu packages"
+[license]: ./LICENSE.md "License"
+[ReadMe]: ./README.md "ReadMe"
+[test]: ./doc/HowTo-test.md "HowTo test"
+[venv]: ./doc/HowTo-setup-Python_virtual_environment.md "HowTo setup Python virtual environment"
+[workstation]: ./doc/HowTo-setup-workstation.md "HowTo setup workstation"
 

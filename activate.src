@@ -25,6 +25,21 @@ else
     echo "DEBUG: Temporary directory '$TMPDIR' already exists"
 fi
 
+# Remember Python virtual environment directory
+export PVE=$DirProject/.PVE
+if [[ ! -d $PVE ]] ; then
+    echo "WARN: Python virtual environment directory '$PVE' is not found"
+fi
+
+# Source the Python virtual environment activation script
+Script=$PVE/bin/activate
+if [[ -r $Script ]] ; then
+    echo "INFO: Activating Python virtual environment in directory '$PVE' via script '$Script'"
+    source $Script
+else
+    echo "WARN: Script file '$Script' is not readable"
+fi
+
 # Remember an adjusted PATH
 PATH=$DirProject/bin:$PATH
 export PATH

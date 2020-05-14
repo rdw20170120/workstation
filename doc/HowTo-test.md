@@ -1,15 +1,17 @@
-HowTo setup a development workstation
-=====================================
-Choose or create an Ubuntu Linux workstation or server.  Read
-[how I created my development workstation][initiation] for an example.
+HowTo test
+==========
+Testing is performed using the `pytest` tool.  The Python source has been
+organized under a parent `src` directory, and the test code has been mixed in
+with the production code.  For a Python library, this would be unacceptable.
+But this code will never be released as a Python library.  Instead, it will be
+executed from source only.  Having the tests mixed in keeps everything simpler.
 
-Install packages for Python 3, for PIP, and for Python virtual environment
-(`venv`).  Install packages for the relevant source control tool (`git`), if
-necessary.
-
-1. [Install packages][install].
-1. [Setup source control][clone].
-1. [Create a Python virtual environment][venv].
+Run tests
+---------
+[Activate this project in a shell][activate].
+~~~ bash
+test-run.bash
+~~~
 
 [activate]: ./HowTo-activate_this_project.md "HowTo activate this project"
 [application]: ./HowTo-execute_application.md "HowTo execute application"
