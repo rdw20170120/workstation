@@ -1,7 +1,7 @@
 #!/usr/bin/env bash -ex
 # This script is intended to be executed by a user in a BASH shell.
 
-# Check Python dependencies
+# Capture Python dependencies
 
 if [[ -z "$DirProject" ]] ; then
     echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
@@ -10,11 +10,6 @@ fi
 
 File=$DirProject/cfg/requirements.txt
 
-if [[ ! -r "$File" ]] ; then
-    echo "FATAL: Python dependencies file '$File' is unreadable, aborting"
-    exit 1
-fi
-
-echo "INFO: Checking Python dependencies against '$File'"
-dep-report.bash | diff - $File
+echo "INFO: Capturing Python dependencies to '$File'"
+dep-report > $File
 

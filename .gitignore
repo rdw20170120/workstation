@@ -1,6 +1,6 @@
 # Files and directories within project
 .PVE/
-context.src
+context
 log/
 
 # Apple macOS

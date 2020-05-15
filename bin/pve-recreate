@@ -14,8 +14,8 @@ if [[ -z "$PVE" ]] ; then
 fi
 
 echo "INFO: Recreating Python virtual environment directory '$PVE'"
-wipe.bash
-pve-create.bash
+wipe
+pve-create
 
 pip3 install pip wheel --upgrade --upgrade-strategy=eager
 pip3 install logzero pytest

@@ -47,7 +47,7 @@ export PATH
 echo "DEBUG: Remembering PATH as:  $PATH"
 
 # Source optional BASH alias definitions for source control
-Script=$DirProject/alias-git.src
+Script=$DirProject/alias-git
 if [[ -r $Script ]] ; then
     echo "INFO: Sourcing BASH alias definitions from script '$Script'"
     source $Script
@@ -56,7 +56,7 @@ else
 fi
 
 # Source optional BASH alias definitions specific to this project
-Script=$DirProject/alias-project.src
+Script=$DirProject/alias-project
 if [[ -r $Script ]] ; then
     echo "INFO: Sourcing BASH alias definitions from script '$Script'"
     source $Script
@@ -65,7 +65,7 @@ else
 fi
 
 # Source an optional user/machine-specific context
-Script=$DirProject/context.src
+Script=$DirProject/context
 if [[ -r $Script ]] ; then
     echo "INFO: Sourcing user/machine-specific context from script '$Script'"
     source $Script

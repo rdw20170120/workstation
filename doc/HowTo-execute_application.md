@@ -1,24 +1,20 @@
 HowTo execute the application
 =============================
 This application is intended to be executed in a shell (on the command-line).
-It will likely be deployed to execute under a `cron` job, or perhaps even
-turned into a service.
 
-This application relies upon the [AWS CLI][AWS CLI] tool to manage a
-configuration for accessing the Amazon cloud.  We create an AWS CLI profile for
-the application.
-
-The profile name must be provided to the application, which is accomplished
-during [activation][activate].  The [activate.src](../activate.src) script will
-`source` the `context.src` script, if it exists.  You can create this script by
-copying the [cfg/sample_context.src](../cfg/sample_context.src) script.
+This application is configured via a `context` script that sets up the
+necessary execution environment via BASH environment variables, `$PATH`, etc.
+The [activate](../activate) script will `source` the `context` script, if it
+exists.
+You can create this script by copying the [cfg/sample_context]
+(../cfg/sample_context) script as `context` in the root of this repository.
 **Note** that the copied script MUST NOT be checked into source control.
 
 Execute this application
 ------------------------
 [Activate this project in a shell][activate].
 ~~~ bash
-app-run.bash
+app-run
 ~~~
 
 [activate]: ./HowTo-activate_this_project.md "HowTo activate this project"

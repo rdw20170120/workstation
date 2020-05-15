@@ -3,7 +3,7 @@ Notes on project initiation
 These notes describe how Rob first initiated this project by preparing his
 development workstation and creating this source directory tree.
 Rob based his approach on his pre-existing open-source project BriteOnyx, which
-is likewise based on his many years of consulting experience.
+is likewise based on his many years of technical experience.
 
 Install tools
 -------------
@@ -29,15 +29,15 @@ Create a project-specific Python virtual environment
 [Activate this project in a shell][activate].
 
 ~~~ bash
-pve-create.bash
+pve-create
 source $PVE/bin/activate
 pip3 install wheel
-dep-capture.bash
-tool-capture.bash
+dep-capture
+tool-capture
 exit
 ~~~
 
-Create [activate.src](../activate.src) to source $PVE/bin/activate.
+Create [activate](../activate) to source `$PVE/bin/activate`.
 
 [activate]: ./HowTo-activate_this_project.md "HowTo activate this project"
 [application]: ./HowTo-execute_application.md "HowTo execute application"

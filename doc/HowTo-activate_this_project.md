@@ -48,7 +48,7 @@ Open a new BASH shell, then:
 
 ~~~ bash
 cd PROJECT-ROOT-DIRECTORY
-source activate.src
+source activate
 ~~~
 
 Do work.  When finished, then

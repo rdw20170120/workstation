@@ -29,10 +29,10 @@ AWS credentials to an application.  We must name the profile, but the name is
 nothing more than a reference; pick a name that is convenient and meaningful.
 
 The profile name must be provided to the application, which is accomplished
-during [activation][activate].  The [activate.src](../activate.src) script will
-`source` the `context.src` script, if any.  You can create this script by
-copying the [cfg/sample_context.src](../cfg/sample_context.src) script.
-**Note** that the copied script MUST NOT be checked into source control.
+during [activation][activate].  The [activate](../activate) script will
+`source` the `context` script, if any.  You can create this script by copying
+the [cfg/sample_context](../cfg/sample_context) script.  **Note** that the
+copied script MUST NOT be checked into source control.
 
 [Activate this project in a shell][activate].
 
