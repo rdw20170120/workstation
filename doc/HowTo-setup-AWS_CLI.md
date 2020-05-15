@@ -1,8 +1,9 @@
 HowTo setup the AWS CLI
 =======================
 This application relies upon the AWS CLI tool to manage a configuration for
-accessing the Amazon cloud.  We create an AWS CLI profile for the application,
-and you can optionally create other profiles such as for yourself.
+accessing the Amazon cloud.
+We create an AWS CLI profile for the application, and you can optionally create
+other profiles such as for yourself.
 
 **NOTE**: You must first have [setup the Python virtual environment][venv].
 
@@ -12,8 +13,8 @@ We have already created AWS credentials for the application, which are NOT
 contained and should NEVER be contained within this project's repository.
 Instead, those credentials must be obtained separately.  If necessary or
 desired, one can use an IAM user with administrator privileges to create new
-credentials for the application.  Below is the basic information for the
-application's IAM user.
+credentials for the application.
+Below is the basic information for the application's IAM user.
 
 IAM user account for application
 ----------------------------------------------
@@ -25,14 +26,16 @@ IAM user account for application
 Configure AWS CLI
 -----------------
 The AWS CLI can manage named profiles, which are the best way to easily provide
-AWS credentials to an application.  We must name the profile, but the name is
-nothing more than a reference; pick a name that is convenient and meaningful.
+AWS credentials to an application.
+We must name the profile, but the name is nothing more than a reference; pick a
+name that is convenient and meaningful.
 
 The profile name must be provided to the application, which is accomplished
-during [activation][activate].  The [activate](../activate) script will
-`source` the `context` script, if any.  You can create this script by copying
-the [cfg/sample_context](../cfg/sample_context) script.  **Note** that the
-copied script MUST NOT be checked into source control.
+during [activation][activate].
+The [activate](../activate) script will `source` the `context` script, if any.
+You can create this script by copying the [cfg/sample_context]
+(../cfg/sample_context) script.
+**Note** that the copied script MUST NOT be checked into source control.
 
 [Activate this project in a shell][activate].
 

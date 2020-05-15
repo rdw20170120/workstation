@@ -60,6 +60,10 @@ python3 -c 'import platform; print(platform.python_version())'
 echo $Rule
 python3 -c 'import os; print(os.sys.path)'
 
+# AWS CLI
+check 'aws --version'
+checkExecutable aws
+
 # Git
 check 'git --version'
 checkExecutable git

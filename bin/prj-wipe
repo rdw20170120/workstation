@@ -14,7 +14,7 @@ if [[ -z "$PVE" ]] ; then
     exit 1
 fi
 
-clean
+prj-clean
 
 echo "INFO: Wiping (cleaning deeper)..."
 rm -fr $DirProject/.pytest_cache 

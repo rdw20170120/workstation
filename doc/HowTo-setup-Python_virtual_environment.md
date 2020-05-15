@@ -17,7 +17,7 @@ then only rarely for troubleshooting later.
 [Activate this project][activate].
 
 ~~~ bash
-pve-recreate.bash
+pve-recreate
 ~~~
 
 Rebuild the Python virtual environment
@@ -30,8 +30,8 @@ example, it was incomplete the first time that I wrote it.
 [Activate this project][activate].
 
 ~~~ bash
-pve-rebuild.bash
-dep-check.bash
+pve-rebuild
+dep-check
 ~~~
 
 Upgrade the Python virtual environment (periodically)
@@ -39,9 +39,9 @@ Upgrade the Python virtual environment (periodically)
 [Activate this project][activate].
 
 ~~~ bash
-dep-upgrade.bash
+dep-upgrade
 # Verify that everything still works...
-dep-capture.bash
+dep-capture
 ~~~
 
 Check dependency versions
@@ -52,14 +52,14 @@ versions.
 [Activate this project][activate].
 
 ~~~ bash
-dep-check.bash
-tool-check.bash
+dep-check
+tool-check
 ~~~
 
 OR
 
 ~~~ bash
-all-check.bash | less
+all-check | less
 ~~~
 
 Capture dependency versions
@@ -67,20 +67,20 @@ Capture dependency versions
 [Activate this project][activate].
 
 ~~~ bash
-dep-capture.bash
-tool-capture.bash
+dep-capture
+tool-capture
 ~~~
 
 OR
 
 ~~~ bash
-all-capture.bash
+all-capture
 ~~~
 
 Check paths
 -----------
 ~~~ bash
-tool-check.bash | less
+tool-check | less
 ~~~
 
 [activate]: ./HowTo-activate_this_project.md "HowTo activate this project"

@@ -10,7 +10,7 @@ Run tests
 ---------
 [Activate this project in a shell][activate].
 ~~~ bash
-test-run.bash
+test-run
 ~~~
 
 [activate]: ./HowTo-activate_this_project.md "HowTo activate this project"
