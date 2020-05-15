@@ -3,15 +3,15 @@
 context
 log/
 
-# Apple macOS
-.DS_Store
-
 # Common files
 *.list
 *.log
 *.out
 *.pid
 *.txt
+
+# Apple macOS
+.DS_Store
 
 # Vim swap file
 *.swp

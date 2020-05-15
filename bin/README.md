@@ -1,6 +1,6 @@
 # `bin`
 This is the `bin` directory for this repository.
-This directory should be included on the shell's path ONLY when this repository
+This directory should be included on the shell's PATH only when this repository
 is activated as the current project.
 This directory tends to contain mostly BASH scripts, though I am leaning more
 towards using Python for simple scripts.
