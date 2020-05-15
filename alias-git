@@ -17,7 +17,6 @@ grep_options='--color=auto'
 grep_options+=' --exclude-dir=.git'
 grep_options+=' --exclude-dir=.pytest_cache'
 grep_options+=' --exclude-dir=.PVE'
-
 # TODO: It appears that '--exclude-from' is not supported on macOS Mojave 10.14.6
 # TODO: Perhaps I should consider installing a compatible 'grep' using Homebrew
 # grep_options+=' --exclude-from=$DirProject/.grep-exclude-from'

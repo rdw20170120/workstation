@@ -23,6 +23,10 @@ checkVariable() {
 }
 
 # operating system
+# TODO: Resolve this OS-specific syntax
+# NOTE: This works on macOS
+check 'uname -a'
+# NOTE: This works on Ubuntu
 check 'uname --all'
 checkExecutable uname
 checkVariable PATH "$PATH"
