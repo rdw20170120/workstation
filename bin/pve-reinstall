@@ -17,5 +17,14 @@ fi
 echo "INFO: Reinstalling Python virtual environment directory '$PVE'"
 pve-rm
 pve-create
+
+# Source Python virtual environment activation script (indirectly)
+Script=$DirProject/bin/lib/pve-activate
+if [[ -r $Script ]] ; then
+    source $Script
+else
+    echo "WARN: Script file '$Script' is not readable"
+fi
+
 dep-install
 

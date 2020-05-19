@@ -18,6 +18,14 @@ echo "INFO: Recreating Python virtual environment directory '$PVE'"
 prj-wipe
 pve-create
 
+# Source Python virtual environment activation script (indirectly)
+Script=$DirProject/bin/lib/pve-activate
+if [[ -r $Script ]] ; then
+    source $Script
+else
+    echo "WARN: Script file '$Script' is not readable"
+fi
+
 pip3 install pip wheel --upgrade --upgrade-strategy=eager
 pip3 install logzero pytest
 

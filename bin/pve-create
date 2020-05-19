@@ -2,7 +2,7 @@
 set -e
 # This script is intended to be executed by a user in a BASH shell.
 
-# Create Python virtual environment directory
+# Create (and activate) Python virtual environment directory
 
 if [[ -z "$DirProject" ]] ; then
     echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
@@ -16,4 +16,6 @@ fi
 
 echo "INFO: Creating Python virtual environment directory '$PVE'"
 python3 -m venv $PVE
+
+echo "WARN: This new Python virtual environment has NOT been activated, so you should exit this shell and activate a new one"
 

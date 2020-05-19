@@ -8,7 +8,7 @@ from logzero import logger as log
 from logzero import loglevel
 
 from build.helper.Python.my_system                     import recreate_directory
-from potrero_cloud_lab.src.pipeline.config             import Config
+from .config                                           import Config
 from potrero_cloud_lab.src.pipeline.utility.processing import create_pid_file
 from potrero_cloud_lab.src.pipeline.utility.processing import delete_pid_file
 from potrero_cloud_lab.src.pipeline.utility.processing import get_pid

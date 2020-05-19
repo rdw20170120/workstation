@@ -3,7 +3,7 @@
 from pathlib  import Path
 from pathlib  import PurePosixPath as S3Key
 
-from utility import environment
+from potrero_cloud_lab.src.pipeline.utility import environment
 
 
 class Config:
