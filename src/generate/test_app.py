@@ -1,7 +1,7 @@
 #!/bin/false
 
-from .app import PipelineApp
+from .app import ContentGeneratorApp
 
-def test_PipelineApp():
-    assert PipelineApp() is not None
+def test_ContentGeneratorApp():
+    assert ContentGeneratorApp() is not None
 

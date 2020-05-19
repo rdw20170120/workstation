@@ -1,7 +1,8 @@
 #!/bin/false
 
-from pathlib  import Path
-from pathlib  import PurePosixPath as S3Key
+from pathlib import Path
+from pathlib import PurePosixPath as S3Key
+from sys     import maxsize
 
 from potrero_cloud_lab.src.pipeline.utility import environment
 

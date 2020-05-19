@@ -16,15 +16,17 @@ if [[ -z "$TMPDIR" ]] ; then
     exit 1
 fi
 
-# Configure Python path
-DirMine=$DirProject/lib/mine
-DirThird=$DirProject/lib/tavisrudd-throw-out-your-templates
-export PYTHONPATH=$PYTHONPATH:$DirThird:$DirMine
-
 # Recreate target directory
 DirTgt=$TMPDIR/tgt
 rm -fr "$DirTgt"
 mkdir -p "$DirTgt"
+
+Script=$DirProject/bin/lib/reference-Python-lib
+if [[ -r $Script ]] ; then
+    source $Script
+else
+    echo "WARN: Script file '$Script' is not readable"
+fi
 
 echo "INFO: Generating content into directory '$DirTgt'"
 cd $DirProject/src

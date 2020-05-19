@@ -9,6 +9,13 @@ if [[ -z "$DirProject" ]] ; then
     exit 1
 fi
 
+Script=$DirProject/bin/lib/reference-Python-lib
+if [[ -r $Script ]] ; then
+    source $Script
+else
+    echo "WARN: Script file '$Script' is not readable"
+fi
+
 cd $DirProject/src
 python3 -m TODO
 
