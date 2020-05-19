@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -e
+# This script is intended to be executed by a user in a BASH shell.
+
+# Generate content
+
+# Require activation
+if [[ -z "$DirProject" ]] ; then
+    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+    exit 1
+fi
+
+# Require TMPDIR
+if [[ -z "$TMPDIR" ]] ; then
+    echo "FATAL: Environment variable 'TMPDIR' is undefined, aborting"
+    exit 1
+fi
+
+# Configure Python path
+DirMine=$DirProject/lib/mine
+DirThird=$DirProject/lib/tavisrudd-throw-out-your-templates
+export PYTHONPATH=$PYTHONPATH:$DirThird:$DirMine
+
+# Recreate target directory
+DirTgt=$TMPDIR/tgt
+rm -fr "$DirTgt"
+mkdir -p "$DirTgt"
+
+echo "INFO: Generating content into directory '$DirTgt'"
+cd $DirProject/src
+python3 -m generate "$DirTgt"
+
+echo "WARN: Please manually synchronize updates into the project from the generated output"
+echo "INFO: meld '$DirTgt' '$DirProject'"
+# TODO: meld >/dev/null 2>&1 --newtab "$DirTgt" "$DirProject" &
+

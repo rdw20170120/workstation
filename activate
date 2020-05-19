@@ -42,7 +42,7 @@ else
 fi
 
 # Remember an adjusted PATH
-PATH=$DirProject/bin:$PATH
+PATH=$PATH:$DirProject/bin
 export PATH
 echo "DEBUG: Remembering PATH as:  $PATH"
 

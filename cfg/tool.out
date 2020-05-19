@@ -1,0 +1,103 @@
+##########
+uname --all
+Linux jabbah 5.3.0-51-generic #44~18.04.2-Ubuntu SMP Thu Apr 23 14:27:18 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+##########
+type uname
+uname is hashed (/bin/uname)
+##########
+which uname
+/bin/uname
+##########
+PATH=/home/rob/project/workstation/bin:/home/rob/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+##########
+bash --version
+GNU bash, version 4.4.20(1)-release (x86_64-pc-linux-gnu)
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+
+This is free software; you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+##########
+type bash
+bash is hashed (/bin/bash)
+##########
+which bash
+/bin/bash
+##########
+python --version
+##########
+type python
+python is hashed (/usr/bin/python)
+##########
+which python
+/usr/bin/python
+##########
+PYTHONPATH=
+##########
+pip --version
+pip 20.0.2 from /home/rob/.local/lib/python3.6/site-packages/pip (python 3.6)
+##########
+type pip
+pip is hashed (/home/rob/.local/bin/pip)
+##########
+which pip
+/home/rob/.local/bin/pip
++ echo '##########'
+##########
++ echo python2 --version
+python2 --version
++ python2 --version
+Python 2.7.17
+##########
+type python2
+python2 is hashed (/usr/bin/python2)
+##########
+which python2
+/usr/bin/python2
+##########
+2.7.17
+##########
+['', '/usr/lib/python2.7', '/usr/lib/python2.7/plat-x86_64-linux-gnu', '/usr/lib/python2.7/lib-tk', '/usr/lib/python2.7/lib-old', '/usr/lib/python2.7/lib-dynload', '/usr/local/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages/gtk-2.0']
+##########
+pip3 --version
+pip 20.0.2 from /home/rob/.local/lib/python3.6/site-packages/pip (python 3.6)
+##########
+type pip3
+pip3 is hashed (/home/rob/.local/bin/pip3)
+##########
+which pip3
+/home/rob/.local/bin/pip3
+##########
+python3 --version
+Python 3.6.9
+##########
+type python3
+python3 is hashed (/usr/bin/python3)
+##########
+which python3
+/usr/bin/python3
+##########
+3.6.9
+##########
+['', '/usr/lib/python36.zip', '/usr/lib/python3.6', '/usr/lib/python3.6/lib-dynload', '/home/rob/.local/lib/python3.6/site-packages', '/usr/local/lib/python3.6/dist-packages', '/usr/lib/python3/dist-packages', '/usr/lib/python3.6/dist-packages']
+##########
+git --version
+git version 2.17.1
+##########
+type git
+git is hashed (/usr/bin/git)
+##########
+which git
+/usr/bin/git
++ echo '##########'
+##########
++ echo py.test --version
+py.test --version
++ py.test --version
+This is pytest version 5.4.1, imported from /home/rob/.local/lib/python3.6/site-packages/pytest/__init__.py
+##########
+type py.test
+py.test is hashed (/home/rob/.local/bin/py.test)
+##########
+which py.test
+/home/rob/.local/bin/py.test
