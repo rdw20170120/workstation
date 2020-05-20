@@ -1,0 +1,8 @@
+#!/bin/false
+# NOTE: Intended to be sourced into a BASH shell by another script.
+
+# Configure Python path
+DirMine=$DirProject/lib/mine
+DirThird=$DirProject/lib/tavisrudd-throw-out-your-templates
+export PYTHONPATH=$PYTHONPATH:$DirThird:$DirMine
+
