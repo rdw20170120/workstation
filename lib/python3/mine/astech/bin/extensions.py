@@ -24,16 +24,16 @@ def main():
    aCounts = {}
    for aRoot, aDirectories, aFiles in os.walk("."):
       prune(aDirectories, aFiles)
-      print("Directory '%s'" % aRoot)
+      print(("Directory '%s'" % aRoot))
       for aFile in aFiles:
-         print("File '%s'" % aFile)
+         print(("File '%s'" % aFile))
          aPrefix, aExtension = os.path.splitext(aFile)
          if aExtension in aCounts:
             aCounts[aExtension] += 1
          else:
             aCounts[aExtension] = 1
    for aExtension in sorted(aCounts.keys()):
-      print("%6u  %s" %(aCounts[aExtension], aExtension))
+      print(("%6u  %s" %(aCounts[aExtension], aExtension)))
 
 if __name__ == "__main__":
    main()

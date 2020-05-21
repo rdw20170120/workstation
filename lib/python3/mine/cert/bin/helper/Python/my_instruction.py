@@ -177,7 +177,7 @@ def get_output(content):
     return _get_serializer().serialize(content)
 
 def print_output(output):
-    print(output.encode(_get_default_encoding()))
+    print((output.encode(_get_default_encoding())))
 
 ####################################################################################################
 # TODO: DELETE: these

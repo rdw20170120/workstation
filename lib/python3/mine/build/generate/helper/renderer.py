@@ -16,7 +16,7 @@ class Renderer(object):
         return Serializer(self._visitor_map, self._encoding)
 
     def _print_output(self, output):
-        print(output.encode(self._encoding))
+        print((output.encode(self._encoding)))
 
     def render(self, content, file_name=None):
         if file_name is None:
