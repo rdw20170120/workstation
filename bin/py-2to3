@@ -14,5 +14,15 @@ if [[ -z "$1" ]] ; then
     exit 1
 fi
 
-2to3 -npW --fix=all --no-diffs $1
+cmd="2to3"
+cmd+=" -npW"
+cmd+=" --fix=all"
+# cmd+=" --fix=buffer"
+# cmd+=" --fix=idioms"
+# cmd+=" --fix=set_literal"
+# cmd+=" --fix=ws_comma"
+cmd+=" --no-diffs"
+cmd+=" $1"
+echo $cmd
+$cmd
 
