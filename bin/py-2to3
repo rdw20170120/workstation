@@ -57,11 +57,11 @@ convert () {
     # NO: cmd+=" --add-suffix=3"
     cmd+=" --verbose"
     # Write back to source files
-    cmd+=" -nw --no-diffs"
+#   cmd+=" -nw --no-diffs"
     # All safe bulk transformations
-#   cmd+=" --fix=all"
+    cmd+=" --fix=all"
     # Optional not-so-safe transformations
-#   cmd+=" -p"
+    cmd+=" -p"
     cmd+=" --fix=buffer"
     cmd+=" --fix=idioms"
     cmd+=" --fix=set_literal"
