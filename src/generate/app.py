@@ -29,7 +29,7 @@ class ContentGeneratorApp:
         log.info(
             "Generating scripts into directory '%s'", self._target_directory
             )
-        recreate_directory(target_directory)
+        recreate_directory(self._target_directory)
 
     def _shutdown(self):
         delete_pid_file(c.pid_file)
@@ -56,7 +56,7 @@ def run():
     try:
         log.info("Began ContentGeneratorApp process with pid '%d'", get_pid())
         args = _parse_args()
-        ContentGeneratorApp(args.target_directory).run()
+        ContentGeneratorApp(Path(args.target_directory)).run()
     except RuntimeError as e:
         log.error(str(e))
         log.fatal("Aborted ContentGeneratorApp process")
