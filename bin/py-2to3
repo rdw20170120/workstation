@@ -10,22 +10,52 @@ if [[ -z "$DirProject" ]] ; then
 fi
 
 # NOTE: Apparently, it is not possible to run Python3 code exclusively with the
-# .py3 file extension, so do not add a suffix to the source files.
+# .py3 file extension, so do not add a '3' suffix to the source files.
+
+# NOTE: The 2to3 tool throws a parsing error sometimes, which requires careful
+# effort to hunt down and fix manually in the Python2 code.
+
+# Therefore, I STRONGLY recommend that one works through this conversion
+# process incrementally.
+#  1.  Start by disabling (commenting out) writing back to the source files.
+#  2.  Disable the optional fix transformations.
+#  3.  Run only the 'all' transformation.
+#  4.  Look at the command output for problems, hunt them down in the Python2
+#      source files, and fix them.  Continue until the output is clean.
+#  5.  Enable write back to the source files.
+#  6.  Save the conversions to the source files.  I suggest commiting these
+#      file changes before proceeding.  If anything goes wrong in the following
+#      steps, you can revert back to these safe bulk conversions.
+#  7.  Disable writing back to the source files again.
+#  8.  Now disable the 'all' fix transformation.
+#  9.  One by one, enable the optional fix transformations.
+# 10.  Look at the command output for problems, hunt them down in the Python2
+#      source files, and fix them.  Continue until the output is clean.
+# 11.  Enable write back to the source files.
+# 12.  Save the conversions to the source files.  I suggest commiting these
+#      file changes too.
+# 13.  When this process is done, leave this script as you found it.  Writing
+#      back should be left disabled, while all the transformations should be
+#      left enabled.
 
 convert () {
     # Convert Python2 source files to Python3 within directory $1
     # $1 = directory within which to work
 
     local cmd="2to3"
-    cmd+=" -npW"
-    # cmd+=" -W"
-    cmd+=" --fix=all"
-    cmd+=" --fix=buffer"
-    cmd+=" --fix=idioms"
-    cmd+=" --fix=set_literal"
-    cmd+=" --fix=ws_comma"
-    cmd+=" --no-diffs"
+    # NO: cmd+=" --add-suffix=3"
+    cmd+=" -p"
     cmd+=" --verbose"
+    # Write back to source files
+    cmd+=" -nw --no-diffs"
+    # All safe bulk transformations
+    cmd+=" --fix=all"
+    # Optional not-so-safe transformations
+#   cmd+=" --fix=buffer"
+#   cmd+=" --fix=idioms"
+#   cmd+=" --fix=set_literal"
+#   cmd+=" --fix=ws_comma"
+    # Execute tool, but filter out the noise
     $cmd $1 2>&1 \
         | grep -v 'Adding transformation' \
         | grep -v 'Descending into' \
@@ -35,6 +65,8 @@ convert () {
         | grep -v 'Wrote changes'
 }
 
+# These directories should have Python3 source files in them
+# But $DirProject/lib/python2 should remain as Python2 source (until deleted)
 convert $DirProject/bin         $screening
 convert $DirProject/lib/python3 $screening
 convert $DirProject/src         $screening

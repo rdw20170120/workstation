@@ -63,7 +63,7 @@ def valid_md5(file_path):
         with open(file_path + '.md5', 'rb') as md5_file:
             digest2 = md5_file.read().rstrip()[-32:]
         return digest1 == digest2
-    except StandardError:
+    except Exception:
         return False
 
 

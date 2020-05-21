@@ -1,6 +1,6 @@
 #!/bin/false
 
-from math import nan
+from .math import nan
 
 
 class Percentage:

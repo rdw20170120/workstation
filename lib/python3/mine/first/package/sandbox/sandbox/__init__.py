@@ -15,14 +15,14 @@ def force_unicode(value, encodings=(
     'iso-8859-15',
     'iso-8859-1',
 )):
-    if isinstance(value, basestring):
-        if not isinstance(value, unicode):
+    if isinstance(value, str):
+        if not isinstance(value, str):
             if not value:
-                return u''
+                return ''
             else:
                 for encoding in encodings:
                     try:
-                        return unicode(value, encoding)
+                        return str(value, encoding)
                     except UnicodeDecodeError as e:
                         #print 'Tried "' + encoding + '" -> ' + str(e)
                         pass

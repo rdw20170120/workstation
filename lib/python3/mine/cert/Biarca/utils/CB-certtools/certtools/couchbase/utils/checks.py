@@ -112,7 +112,7 @@ def ck007(server_host):
 def ck008(server_host, exp_quotas, response):
     score = 1
     msg = "{0}: RAM quotas are allocated for the services".format(server_host)
-    for service, quota in exp_quotas.iteritems():
+    for service, quota in exp_quotas.items():
         if int(quota) != response.get(service):
             score = 0
             msg = (
@@ -511,7 +511,7 @@ def ck032(result, bucket_name, old_key):
     score = 0
     msg = 'Output contains no correct results'
     for bucket in result:
-        if bucket_name in bucket.keys():
+        if bucket_name in list(bucket.keys()):
             msg = 'Userprofile not selected with key - {0}'.format(old_key)
             if bucket.get(bucket_name).get('username') in old_key:
                 score = 1
@@ -556,7 +556,7 @@ def ck037(response, new_key, old_key, bucket_name):
     if response.json().get('status') == 'success':
         msg = 'Userprofile not inserted with new key - {0}'.format(new_key)
         for bucket in response.json().get('results'):
-            if bucket_name in bucket.keys():
+            if bucket_name in list(bucket.keys()):
                 if bucket.get(bucket_name).get('username') in old_key:
                     score = 1
                     msg = (

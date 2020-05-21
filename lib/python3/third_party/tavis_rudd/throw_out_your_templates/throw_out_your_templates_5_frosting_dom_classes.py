@@ -35,7 +35,7 @@ class XmlElement(object):
 
     def _normalize_attrs(self, attrs):
         out = XmlAttributes()
-        for n, v in attrs.items():
+        for n, v in list(attrs.items()):
             if n.endswith('_'):
                 n = n[:-1]
             if '_' in n:

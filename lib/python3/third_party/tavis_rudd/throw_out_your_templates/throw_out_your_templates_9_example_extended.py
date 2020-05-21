@@ -50,7 +50,7 @@ def render_price(pr):
 customer1 = Organization(name='Smith and Sons')
 customer1.price_rules.extend(
     [PriceRule(oid=i, product='Product %i'%i, price=Money(str('%0.2f'%(i*1.5))))
-     for i in xrange(10)])
+     for i in range(10)])
 
 Example(
     'Customer pricing printout, imperative',

@@ -1,6 +1,6 @@
 #!/bin/false
 
-from math import isnan
+from .math import isnan
 
 from .math import Percentage
 from .math import Rate
