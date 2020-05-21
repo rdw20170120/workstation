@@ -3,6 +3,7 @@
 
 from argparse import ArgumentParser
 from logging  import DEBUG
+from pathlib  import Path
 
 from logzero import logger as log
 from logzero import loglevel
@@ -17,19 +18,18 @@ loglevel(level=DEBUG)
 c = Config()
 
 class ContentGeneratorApp:
-    def __init__(self):
+    def __init__(self, target_directory):
+        assert isinstance(target_directory, Path)
+        self._target_directory = target_directory
+
+    def _generate(self):
         pass
 
-    def _generate(self, target_directory):
-        log.info("Generating scripts into directory '%s'", target_directory)
-        recreate_directory(target_directory)
-
-    def _parse_args(self):
-        parser = ArgumentParser()
-        parser.add_argument(
-            'target_directory', help='into which to generate output'
+    def _prepare(self):
+        log.info(
+            "Generating scripts into directory '%s'", self._target_directory
             )
-        return parser.parse_args()
+        recreate_directory(target_directory)
 
     def _shutdown(self):
         delete_pid_file(c.pid_file)
@@ -40,15 +40,23 @@ class ContentGeneratorApp:
     def run(self):
         try:
             self._startup()
-            args = self._parse_args()
-            self._generate(args.target_directory)
+            self._prepare()
+            self._generate()
         finally:
             self._shutdown()
+
+def _parse_args():
+    parser = ArgumentParser()
+    parser.add_argument(
+        'target_directory', help='into which to generate output'
+        )
+    return parser.parse_args()
 
 def run():
     try:
         log.info("Began ContentGeneratorApp process with pid '%d'", get_pid())
-        ContentGeneratorApp().run()
+        args = _parse_args()
+        ContentGeneratorApp(args.target_directory).run()
     except RuntimeError as e:
         log.error(str(e))
         log.fatal("Aborted ContentGeneratorApp process")
