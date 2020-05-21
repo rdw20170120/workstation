@@ -20,7 +20,7 @@ import os
 import re
 import sys
 import time
-from queue import Queue
+from Queue import Queue
 from threading import Thread
 
 from watchdog.events import RegexMatchingEventHandler
@@ -47,7 +47,7 @@ def process(queue):
         file_path = queue.get()
         try:
             processor.process(repo, file_path)
-        except Exception as ex:
+        except StandardError as ex:
             LOG.error(ex.message)
         queue.task_done()
 

@@ -78,7 +78,7 @@ def check_results(result, bucket_name, doc_type, doc_username):
     score = 0
     msg = 'The Document contains incorrect results'
     for bucket in result:
-        if bucket_name in list(bucket.keys()):
+        if bucket_name in bucket.keys():
             if bucket.get(bucket_name).get('username') == doc_username and \
                bucket.get(bucket_name).get('type') == doc_type:
                 score = 1
@@ -177,7 +177,7 @@ def get_details(host, extra_path, auth, port=8091):
 
 
 def get_errors(file_data):
-    if isinstance(file_data, dict):
+    if type(file_data) == dict:
         return file_data.get('errors', [])
     return file_data
 
@@ -218,7 +218,7 @@ def get_ip_list(address_list):
 
 
 def get_results(file_data):
-    if isinstance(file_data, dict):
+    if type(file_data) == dict:
         return file_data.get('results', [])
     return file_data
 

@@ -151,7 +151,7 @@ class AccurynDataIter:
         # Tweak record
         result = {
             key: (value if value != NANVALUE else None)
-            for key, value in list(result.items())
+            for key, value in result.items()
             }
         result['timestamp'] = (
             result['timestamp']
@@ -213,7 +213,7 @@ class AccurynDataIter:
                 or int(hex(M)[2:]) < 1
                 or int(hex(M)[2:]) > 12
                 or int(hex(Y)[2:]) < 0
-                for s, m, h, D, M, Y in records[[
+                for s,m,h,D,M,Y in records[[
                     'second', 'minute', 'hour', 'day', 'month', 'year'
                     ]]
                 ]

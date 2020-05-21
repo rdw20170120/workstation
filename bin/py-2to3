@@ -9,23 +9,33 @@ if [[ -z "$DirProject" ]] ; then
     exit 1
 fi
 
-if [[ -z "$1" ]] ; then
-    echo "FATAL: A target directory or file is required as an argument, aborting"
-    exit 1
-fi
-
 # NOTE: Apparently, it is not possible to run Python3 code exclusively with the
 # .py3 file extension, so do not add a suffix to the source files.
 
-cmd="2to3"
-cmd+=" -npW"
-cmd+=" --fix=all"
-cmd+=" --fix=buffer"
-cmd+=" --fix=idioms"
-cmd+=" --fix=set_literal"
-cmd+=" --fix=ws_comma"
-cmd+=" --no-diffs"
-cmd+=" $1"
-echo $cmd
-$cmd
+convert () {
+    # Convert Python2 source files to Python3 within directory $1
+    # $1 = directory within which to work
+
+    local cmd="2to3"
+    cmd+=" -npW"
+    # cmd+=" -W"
+    cmd+=" --fix=all"
+    cmd+=" --fix=buffer"
+    cmd+=" --fix=idioms"
+    cmd+=" --fix=set_literal"
+    cmd+=" --fix=ws_comma"
+    cmd+=" --no-diffs"
+    cmd+=" --verbose"
+    $cmd $1 2>&1 \
+        | grep -v 'Adding transformation' \
+        | grep -v 'Descending into' \
+        | grep -v 'No changes' \
+        | grep -v 'Refactoring ' \
+        | grep -v 'write-unchanged-files' \
+        | grep -v 'Wrote changes'
+}
+
+convert $DirProject/bin         $screening
+convert $DirProject/lib/python3 $screening
+convert $DirProject/src         $screening
 

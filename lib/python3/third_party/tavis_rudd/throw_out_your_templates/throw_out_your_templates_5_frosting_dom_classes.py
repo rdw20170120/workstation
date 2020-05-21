@@ -35,12 +35,12 @@ class XmlElement(object):
 
     def _normalize_attrs(self, attrs):
         out = XmlAttributes()
-        for n, v in list(attrs.items()):
+        for n, v in attrs.items():
             if n.endswith('_'):
                 n = n[:-1]
             if '_' in n:
                 if '__' in n:
-                    n = n.replace('__', ':')
+                    n = n.replace('__',':')
                 elif 'http_' in n:
                     n = n.replace('http_', 'http-')
             # may eventually run into encoding issues with name:
