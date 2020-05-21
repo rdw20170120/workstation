@@ -64,7 +64,7 @@ convert () {
 #   cmd+=" -p"
     cmd+=" --fix=buffer"
     cmd+=" --fix=idioms"
-#   cmd+=" --fix=set_literal"
+    cmd+=" --fix=set_literal"
 #   cmd+=" --fix=ws_comma"
     # Execute tool, but filter out the noise
     $cmd $1 2>&1 \

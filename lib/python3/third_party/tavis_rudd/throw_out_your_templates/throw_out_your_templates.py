@@ -690,7 +690,7 @@ Example(
      , 4.0
      , 'a', 'b'
      , ('c', ('d', 'e')
-        , set(['f', 'f'])) # nested
+        , {'f', 'f'}) # nested
      , (i*2 for i in range(10))
      ])
 # output = '1234.0abcdef024681012141618'
