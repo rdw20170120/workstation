@@ -20,7 +20,7 @@ def main():
         if uptime[0] != '0':
             hours = int(uptime[0])
         minutes = (hours * 60) + int(uptime[1])
-        print "System Running from {0} Minutes".format(minutes)
+        print("System Running from {0} Minutes".format(minutes))
 
         # Testing CX000 exam
         if minutes >= 15 and minutes < 20:
@@ -31,9 +31,9 @@ def main():
             )
             p.wait()
             if p.returncode != 0:
-                print p.stderr.read()
+                print(p.stderr.read())
             else:
-                print "CX000 testing done - successful"
+                print("CX000 testing done - successful")
 
 
 if __name__ == '__main__':

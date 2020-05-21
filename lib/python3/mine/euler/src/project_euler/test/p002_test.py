@@ -28,7 +28,7 @@ def test_zeroth_term():
     '''Test the zeroth term of the Fibonacci sequence.'''
     p = P002()
     nose.tools.eq_(1, p.fibonacci_term(0))
-    print "\nCache size is now '{0}'.".format(p.cache_size())    
+    print("\nCache size is now '{0}'.".format(p.cache_size()))    
 
 def test_sum_of_given_even_terms():
     '''Test sum of given even-valued terms.'''
@@ -37,7 +37,7 @@ def test_sum_of_given_even_terms():
     total += p.fibonacci_term(5)
     total += p.fibonacci_term(8)
     nose.tools.eq_(total, sum(even(p.fibonacci(10))))
-    print "\nCache size is now '{0}'.".format(p.cache_size())    
+    print("\nCache size is now '{0}'.".format(p.cache_size()))    
 
 def test_given_terms():
     '''Test given terms of Fibonacci sequence.'''
@@ -52,7 +52,7 @@ def test_given_terms():
     nose.tools.eq_(34, p.fibonacci_term( 8))
     nose.tools.eq_(55, p.fibonacci_term( 9))
     nose.tools.eq_(89, p.fibonacci_term(10))
-    print "\nCache size is now '{0}'.".format(p.cache_size())    
+    print("\nCache size is now '{0}'.".format(p.cache_size()))    
 
 def test_sum_of_given_terms():
     '''Test sum of given first ten terms.'''
@@ -68,15 +68,15 @@ def test_sum_of_given_terms():
     total += p.fibonacci_term( 9)
     total += p.fibonacci_term(10)
     nose.tools.eq_(total, sum(p.fibonacci(10)))
-    print "\nCache size is now '{0}'.".format(p.cache_size())    
+    print("\nCache size is now '{0}'.".format(p.cache_size()))    
 
 def test_solution():
     '''Test sum(even(fibonacci_below(4000000))).'''
     p = P002()
     total = sum(even(p.fibonacci_below(4000000)))
-    print "\nDesired solution is calculated to be '{0}'.".format(total)
+    print("\nDesired solution is calculated to be '{0}'.".format(total))
     nose.tools.eq_(4613732, total)
-    print "Cache size is now '{0}'.".format(p.cache_size())
+    print("Cache size is now '{0}'.".format(p.cache_size()))
 
 def test_fibonacci_below():
     '''Test fibonacci_below().'''
@@ -92,7 +92,7 @@ def test_fibonacci_below():
     total += p.fibonacci_term( 9)
     total += p.fibonacci_term(10)
     nose.tools.eq_(total, sum(p.fibonacci_below(100)))
-    print "\nCache size is now '{0}'.".format(p.cache_size())    
+    print("\nCache size is now '{0}'.".format(p.cache_size()))    
 
 @nose.tools.raises(RuntimeError)
 def test_big_fibonacci():

@@ -14,7 +14,7 @@
     with details provided for those that have been already been processed.
 """
 
-from __future__ import print_function
+
 
 import logging
 import sys
@@ -24,8 +24,8 @@ from repository import PhaseRepository
 from utility import configure_logging, get_filename_parts
 
 MISSING = "  "
-ERROR = colorama.Fore.RED + u"\u2717 ".encode('utf-8')
-SUCCESS = u"\u2713 ".encode('utf-8')
+ERROR = colorama.Fore.RED + "\u2717 ".encode('utf-8')
+SUCCESS = "\u2713 ".encode('utf-8')
 LOG = logging.getLogger('query')
 DB_LOCATION = '/tmp/jane.db'
 

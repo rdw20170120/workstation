@@ -12,28 +12,28 @@ class TestForUserprofile(unittest.TestCase):
     def test_with_empty_list(self):
         score, msg = checks.ck032([], self.bucket_name, self.old_key)
         assert_equal(score, 0)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
     def test_with_empty_dict(self):
         score, msg = checks.ck032({}, self.bucket_name, self.old_key)
         assert_equal(score, 0)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
     def test_for_userprofile(self):
         score, msg = checks.ck032(self.result, self.bucket_name, self.old_key)
         assert_equal(score, 1)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
     def test_with_wrong_bucket(self):
         score, msg = checks.ck032(self.result, 'wrong_bucket', self.old_key)
         assert_equal(score, 0)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
     def test_with_wrong_oldkey(self):
         score, msg = checks.ck032(self.result, self.bucket_name,
                                   'aahingheadwaiter')
         assert_equal(score, 0)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
 
 class TestForUserprofileInsert(unittest.TestCase):
@@ -51,19 +51,19 @@ class TestForUserprofileInsert(unittest.TestCase):
         score, msg = checks.ck037(self.resp_obj, self.new_key,
                                   self.old_key, self.bucket_name)
         assert_equal(score, 1)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
     def test_userprofile_wrong_old_key(self):
         score, msg = checks.ck037(self.resp_obj, self.new_key, 'wrongkey',
                                   self.bucket_name)
         assert_equal(score, 0)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
     def test_userprofile_wrong_bucket(self):
         score, msg = checks.ck037(self.resp_obj, self.new_key, self.old_key,
                                   'wrongbucket')
         assert_equal(score, 0)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
 
 class TestForUserprofileUpdate(unittest.TestCase):
@@ -82,7 +82,7 @@ class TestForUserprofileUpdate(unittest.TestCase):
     def test_userprofile_update(self):
         score, msg = checks.ck039(self.old_resp, self.new_resp, self.new_key)
         assert_equal(score, 1)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
 
 class TestForUserprofileDelete(unittest.TestCase):
@@ -105,14 +105,14 @@ class TestForUserprofileDelete(unittest.TestCase):
     def test_userprofile_delete(self):
         score, msg = checks.ck038(self.response, self.old_key)
         assert_equal(score, 1)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
     def test_userprofile_delete_wrong_resultcount(self):
         score, msg = checks.ck038(self.wrong_resultcount, self.old_key)
         assert_equal(score, 0)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))
 
     def test_userprofile_delete_wrong_status(self):
         score, msg = checks.ck038(self.wrong_status, self.old_key)
         assert_equal(score, 0)
-        print 'Check score: {0}'.format(score)
+        print('Check score: {0}'.format(score))

@@ -247,7 +247,7 @@ p.p.s Christopher Lenz wrote a good reply to Cliff's post:
     -- http://www.cmlenz.net/archives/2007/01/genshi-smells-like-php
 
 """
-from __future__ import with_statement
+
 import types
 from types import InstanceType
 from decimal import Decimal
@@ -274,7 +274,7 @@ class safe_bytes(str):
         else:
             return res
 
-class safe_unicode(unicode):
+class safe_unicode(str):
     def encode(self, *args, **kws):
         return safe_bytes(super(safe_unicode, self).encode(*args, **kws))
 
@@ -300,7 +300,7 @@ class Serializer(object):
         """Serialize an object, and its children, into sanitized unicode."""
         self._safe_unicode_buffer = []
         self.walk(obj)
-        return safe_unicode(u''.join(self._safe_unicode_buffer))
+        return safe_unicode(''.join(self._safe_unicode_buffer))
 
     def walk(self, obj):
         """This method is called by visitors for anything they
@@ -431,16 +431,16 @@ class _VisitorMapContextManager(object):
 # visitor signature = "f(obj_to_be_walked, walker)", return value ignored
 # o = obj_to_be_walked, w = walker (aka serializer)
 default_visitors_map = VisitorMap({
-    str: (lambda o,w: w.walk(unicode(o, w.input_encoding, 'strict'))),
-    unicode: (lambda o, w: w.emit(o)),
-    safe_bytes: (lambda o, w: w.emit(unicode(o, w.input_encoding, 'strict'))),
+    str: (lambda o,w: w.walk(str(o, w.input_encoding, 'strict'))),
+    str: (lambda o, w: w.emit(o)),
+    safe_bytes: (lambda o, w: w.emit(str(o, w.input_encoding, 'strict'))),
     safe_unicode: (lambda o, w: w.emit(o)),
-    types.NoneType: (lambda o, w: None),
+    type(None): (lambda o, w: None),
     bool: (lambda o, w: w.emit(str(o))),
-    type: (lambda o, w: w.walk(unicode(o))),
+    type: (lambda o, w: w.walk(str(o))),
     DEFAULT: (lambda o, w: w.walk(repr(o)))})
 
-number_types = (int, long, Decimal, float, complex)
+number_types = (int, int, Decimal, float, complex)
 func_types = (types.FunctionType, types.BuiltinMethodType, types.MethodType)
 sequence_types = (tuple, list, set, frozenset, xrange, types.GeneratorType)
 
@@ -485,7 +485,7 @@ class XmlElement(object):
 
     def _normalize_attrs(self, attrs):
         out = XmlAttributes()
-        for n, v in attrs.items():
+        for n, v in list(attrs.items()):
             if n.endswith('_'):
                 n = n[:-1]
             if '_' in n:
@@ -567,8 +567,8 @@ htmltags = dict(
 xml_default_visitors_map = default_visitors_map.copy()
 # o = obj_to_be_walked, w = walker (aka serializer)
 xml_default_visitors_map.update({
-    unicode: (lambda o, w: w.emit(xml_escape(o))),
-    XmlName: (lambda o, w: w.emit(unicode(o))),
+    str: (lambda o, w: w.emit(xml_escape(o))),
+    XmlName: (lambda o, w: w.emit(str(o))),
     XmlAttributes: (lambda o, w: [w.walk(i) for i in o]),
     XmlElementProto: (lambda o, w: (
         w.emit(safe_unicode('<%s />'%o.name)
@@ -587,7 +587,7 @@ def visit_xml_element(elem, walker):
 
 def _substring_replace_ctx(walker, s, r, ofilter=lambda x: x):
     return VisitorMap(
-        {unicode: lambda o, w: w.emit(ofilter(o.replace(s, r, -1)))
+        {str: lambda o, w: w.emit(ofilter(o.replace(s, r, -1)))
          }).as_context(walker)
 
 @xml_default_visitors_map.register(XmlAttribute)
@@ -647,13 +647,13 @@ class Example(object):
         Example.all_examples.append(self)
 
     def show(self):
-        print '-'*80
-        print '## Output from example:', self.name
-        print
+        print('-'*80)
+        print('## Output from example:', self.name)
+        print()
         output = Serializer(
             self.visitor_map,
             self.input_encoding).serialize(self.content)
-        print output.encode(get_default_encoding())
+        print(output.encode(get_default_encoding()))
 
 
 ## put some html tags in the module scope to make the examples less
@@ -688,10 +688,10 @@ Example(
     'Standard python types, no html',
     [1, 2, 3
      , 4.0
-     , 'a', u'b'
+     , 'a', 'b'
      , ('c', ('d', 'e')
         , set(['f', 'f'])) # nested
-     , (i*2 for i in xrange(10))
+     , (i*2 for i in range(10))
      ])
 # output = '1234.0abcdef024681012141618'
 
@@ -740,7 +740,7 @@ Example(
     (does any template lang other than Genshi do this?)""",
     HTML5Doc(
         body(onload='func_with_esc_args(1, "bar")')[
-            div['Escaped chars: ', '< ', u'>', '&'],
+            div['Escaped chars: ', '< ', '>', '&'],
             script(type='text/javascript')[
                  'var lt_not_escaped = (1 < 2);',
                  '\nvar escaped_cdata_close = "]]>";',
@@ -751,14 +751,14 @@ Example(
             escaped: "-->"
             '''),
             div['some encoded bytes and the equivalent unicode:',
-                '你好', unicode('你好', 'utf-8')],
+                '你好', str('你好', 'utf-8')],
             safe_unicode('<b>My surrounding b tags are not escaped</b>'),
             ]))
 
 Example(
     'a snippet using a list comprehension',
     div[[span(id=('id', i))[i, ' is > ', i-1]
-         for i in xrange(5)]])
+         for i in range(5)]])
 
 
 ################################################################################
@@ -799,7 +799,7 @@ def render_price(pr):
 customer1 = Organization(name='Smith and Sons')
 customer1.price_rules.extend(
     [PriceRule(oid=i, product='Product %i'%i, price=Money(str('%0.2f'%(i*1.5))))
-     for i in xrange(10)])
+     for i in range(10)])
 
 Example(
     'Customer pricing printout, imperative',

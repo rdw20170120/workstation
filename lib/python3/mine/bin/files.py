@@ -22,29 +22,29 @@ class FileManager(object):
                     if self.name_matches(next_source, pattern):
                         self.copy_file(next_source, next_target, maybe)
             except (IOError, os.error) as e:
-                print 'Cannot copy "%s"\n  to "%s"\n  because %s' % (
+                print('Cannot copy "%s"\n  to "%s"\n  because %s' % (
                     source, target, e
-                )
+                ))
 
     def copy_file(self, source, target, maybe=False):
         skip = maybe
         if skip:
             skip = os.path.exists(target)
         if not skip:
-            print 'Copying file "%s"\n  to "%s"' % (source, target)
+            print('Copying file "%s"\n  to "%s"' % (source, target))
             shutil.copyfile(source, target)
 
     def create_directory(self, directory):
         if not os.path.exists(directory):
-            print 'Creating directory "%s"' % (directory, )
+            print('Creating directory "%s"' % (directory, ))
             os.mkdir(directory)
 
     def list(self, directory, pattern=None):
         # TODO: FIX: implement use of glob pattern
         for current, directories, files in os.walk(directory):
-            print 'Current ', current
-            print '  Subdirectories', directories
-            print '  Files', files
+            print('Current ', current)
+            print('  Subdirectories', directories)
+            print('  Files', files)
 
     def names_in_directory(self, directory):
         return os.listdir(directory)
@@ -76,12 +76,12 @@ if __name__ == '__main__':
                     )
                 )
         except ValueError:
-            print 'Command-line arguments:'
-            print sys.argv
+            print('Command-line arguments:')
+            print(sys.argv)
             raise
 
     def help():
-        print '''
+        print('''
 Available commands:
     copy_flat <source> <target> [<glob>]
         Copy source directory tree flattened into single target directory
@@ -100,7 +100,7 @@ Available commands:
         Maybe copy source directory tree to target
         Optionally filtering with glob pattern (see Python glob module)
         Skip existing files
-'''
+''')
 
     import sys
     mgr = FileManager()
@@ -112,10 +112,10 @@ Available commands:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=unicode(sys.argv[4])
+            pattern=str(sys.argv[4])
         mgr.copy_directory(
-            source=unicode(sys.argv[2]),
-            target=unicode(sys.argv[3]),
+            source=str(sys.argv[2]),
+            target=str(sys.argv[3]),
             pattern=pattern,
             flatten=True,
             maybe=False,
@@ -124,10 +124,10 @@ Available commands:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=unicode(sys.argv[4])
+            pattern=str(sys.argv[4])
         mgr.copy_directory(
-            source=unicode(sys.argv[2]),
-            target=unicode(sys.argv[3]),
+            source=str(sys.argv[2]),
+            target=str(sys.argv[3]),
             pattern=pattern,
             flatten=False,
             maybe=False,
@@ -136,19 +136,19 @@ Available commands:
         check_argument_count(sys.argv, 3, 4)
         pattern = None
         if len(sys.argv) == 4:
-            pattern=unicode(sys.argv[3])
+            pattern=str(sys.argv[3])
         mgr.list(
-            directory=unicode(sys.argv[2]),
+            directory=str(sys.argv[2]),
             pattern=pattern,
         )
     elif 'maybe_copy_flat' == command:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=unicode(sys.argv[4])
+            pattern=str(sys.argv[4])
         mgr.copy_directory(
-            source=unicode(sys.argv[2]),
-            target=unicode(sys.argv[3]),
+            source=str(sys.argv[2]),
+            target=str(sys.argv[3]),
             pattern=pattern,
             flatten=True,
             maybe=True,
@@ -157,10 +157,10 @@ Available commands:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=unicode(sys.argv[4])
+            pattern=str(sys.argv[4])
         mgr.copy_directory(
-            source=unicode(sys.argv[2]),
-            target=unicode(sys.argv[3]),
+            source=str(sys.argv[2]),
+            target=str(sys.argv[3]),
             pattern=pattern,
             flatten=False,
             maybe=True,

@@ -35,5 +35,5 @@ def test_given_sum():
 def test_solution():
     '''Test sum(desired_multiples_below(1000)).'''
     total = sum(desired_multiples_below(1000))
-    print "\nDesired solution is calculated to be '{0}'.".format(total)
+    print("\nDesired solution is calculated to be '{0}'.".format(total))
     nose.tools.eq_(233168, total)

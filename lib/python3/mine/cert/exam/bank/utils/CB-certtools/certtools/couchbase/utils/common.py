@@ -77,7 +77,7 @@ def check_results(result, bucket_name, doc_type, doc_username):
     score = 0
     msg = 'The Document contains incorrect results'
     for bucket in result:
-        if bucket_name in bucket.keys():
+        if bucket_name in list(bucket.keys()):
             if bucket.get(bucket_name).get('username') == doc_username and \
                bucket.get(bucket_name).get('type') == doc_type:
                 score = 1
@@ -176,10 +176,10 @@ def get_details(host, extra_path, auth, port=8091):
         response = make_request(requests.get, url, auth=auth)
     except requests.exceptions.RequestException:
         return None
-    print 'DEBUG: get_details()\nDEBUG: url={0}\n'.format(url)
-    print 'DEBUG: status_code={0}\nDEBUG: response={1}\n'.format(
+    print('DEBUG: get_details()\nDEBUG: url={0}\n'.format(url))
+    print('DEBUG: status_code={0}\nDEBUG: response={1}\n'.format(
         response.status_code, response.text
-    )
+    ))
     return response
 
 

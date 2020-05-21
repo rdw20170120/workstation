@@ -30,4 +30,4 @@ def pseudo_infinite(start=0):
     
        Real length of sequence is subject to Python limits.
     '''
-    return xrange(start, _pseudo_infinite_range_limit)
+    return range(start, _pseudo_infinite_range_limit)

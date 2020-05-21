@@ -17,5 +17,5 @@ def args_parse(args):
 def debug(msg):
     args = args_parse(args=sys.argv)
     if hasattr(args, 'debug') and args.debug in ['y', '1', 'true']:
-        print msg
+        print(msg)
 

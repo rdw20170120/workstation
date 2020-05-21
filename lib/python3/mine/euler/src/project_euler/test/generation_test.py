@@ -15,7 +15,7 @@ def test_infinite_sum():
     # TODO:  Figure out how to test RAM usage
     total = sum(value for value in infinite() if value < terms)
     message = "\nSum of infinite() of about '{0}' terms is '{1}'."
-    print message.format(terms, total)
+    print(message.format(terms, total))
 
 def test_pseudo_infinite_sum():
     '''Test sum of a pseudo-infinite sequence (avoid RAM abuse).
@@ -26,4 +26,4 @@ def test_pseudo_infinite_sum():
     # TODO:  Figure out how to test RAM usage
     total = sum(value for value in pseudo_infinite() if value < terms)
     message = "\nSum of pseudo_infinite() of about '{0}' terms is '{1}'."
-    print message.format(terms, total)
+    print(message.format(terms, total))

@@ -24,9 +24,9 @@ def single_node_info():
             common.check_host(server_host)
         except Exception as e:
             if 'Host not reachable' in str(e):
-                print "***************", server_host, "***************"
-                print "CB server is not installed or not running"
-                print
+                print("***************", server_host, "***************")
+                print("CB server is not installed or not running")
+                print()
                 continue
         else:
             url = 'http://{0}:{1}/pools/nodes'.format(server_host, Q.port)
@@ -38,18 +38,18 @@ def single_node_info():
                         node_address = node.get('hostname').split(':')[0]
                         node_status = node.get('status')
                         services = node.get('services')
-                        print "***************", node_address, "**************"
-                        print "Node Status     :", node_status
+                        print("***************", node_address, "**************")
+                        print("Node Status     :", node_status)
                         data_ram = response.json().get('memoryQuota')
                         index_ram = response.json().get('indexMemoryQuota')
-                        print "Data RAM Quota  :", data_ram
-                        print "Index RAM Quota :", index_ram
-                        print "Services        :", ','.join(services)
-                        print
+                        print("Data RAM Quota  :", data_ram)
+                        print("Index RAM Quota :", index_ram)
+                        print("Services        :", ','.join(services))
+                        print()
             else:
-                print "***************", server_host, "***************"
-                print "CB server is installed but not configured"
-                print
+                print("***************", server_host, "***************")
+                print("CB server is installed but not configured")
+                print()
 
 
 def cluster_info():
@@ -75,27 +75,27 @@ def cluster_info():
             for host in nodes:
                 nodes_list.append(host.get('hostname').split(':')[0])
                 final_list.append(host.get('hostname').split(':')[0])
-            print "Nodes in the cluster:", cluster_name
-            print "*****************************************"
-            print '\n'.join(nodes_list)
-            print
+            print("Nodes in the cluster:", cluster_name)
+            print("*****************************************")
+            print('\n'.join(nodes_list))
+            print()
             # Rack awareness
             response = common.get_details(
                 nodes_list[0], 'pools/default/serverGroups',
                 auth=(Q.cluster_user, Q.cluster_pass)
             )
             if response:
-                print "Server Groups in the cluster:", cluster_name
-                print "*****************************************"
+                print("Server Groups in the cluster:", cluster_name)
+                print("*****************************************")
                 for group in response.json().get('groups'):
                     nodes = []
                     for node in group.get('nodes'):
                         nodes.append(node.get('hostname').split(':')[0])
                     if nodes != []:
                         group_name = group.get('name')
-                        print group_name, "\n**********"
-                        print '\n'.join(nodes)
-                        print
+                        print(group_name, "\n**********")
+                        print('\n'.join(nodes))
+                        print()
 
             # Bucket Details
             url = (
@@ -110,13 +110,13 @@ def cluster_info():
                 for bucket in response.json():
                     buckets.append(bucket.get('name'))
                 if buckets != []:
-                    print "Bucket(s) in the cluster:", cluster_name
-                    print "*********************************"
-                    print '\n'.join(buckets)
-                    print
+                    print("Bucket(s) in the cluster:", cluster_name)
+                    print("*********************************")
+                    print('\n'.join(buckets))
+                    print()
                 else:
-                    print "****No Buckets in the cluster:", cluster_name, "***"
-                    print
+                    print("****No Buckets in the cluster:", cluster_name, "***")
+                    print()
 
 
 def main():

@@ -34,7 +34,7 @@ def main():
          else:
             aCounts[aExtension] = 1
    for aExtension in sorted(aCounts.keys()):
-      print "%6u  %s" %(aCounts[aExtension], aExtension)
+      print("%6u  %s" %(aCounts[aExtension], aExtension))
 
 if __name__ == "__main__":
    main()

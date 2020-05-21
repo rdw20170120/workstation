@@ -151,7 +151,7 @@ class AccurynDataIter:
         # Tweak record
         result = {
             key: (value if value != NANVALUE else None)
-            for key, value in result.items()
+            for key, value in list(result.items())
             }
         result['timestamp'] = (
             result['timestamp']

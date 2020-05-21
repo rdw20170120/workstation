@@ -22,10 +22,10 @@ Example(
     'Standard python types, no html',
     [1, 2, 3
      , 4.0
-     , 'a', u'b'
+     , 'a', 'b'
      , ('c', ('d', 'e')
         , set(['f', 'f'])) # nested
-     , (i*2 for i in xrange(10))
+     , (i*2 for i in range(10))
      ])
 # output = '1234.0abcdef024681012141618'
 
@@ -74,7 +74,7 @@ Example(
     (does any template lang other than Genshi do this?)""",
     HTML5Doc(
         body(onload='func_with_esc_args(1, "bar")')[
-            div['Escaped chars: ', '< ', u'>', '&'],
+            div['Escaped chars: ', '< ', '>', '&'],
             script(type='text/javascript')[
                  'var lt_not_escaped = (1 < 2);',
                  '\nvar escaped_cdata_close = "]]>";',
@@ -85,12 +85,12 @@ Example(
             escaped: "-->"
             '''),
             div['some encoded bytes and the equivalent unicode:',
-                '你好', unicode('你好', 'utf-8')],
+                '你好', str('你好', 'utf-8')],
             safe_unicode('<b>My surrounding b tags are not escaped</b>'),
             ]))
 
 Example(
     'a snippet using a list comprehension',
     div[[span(id=('id', i))[i, ' is > ', i-1]
-         for i in xrange(5)]])
+         for i in range(5)]])
 
