@@ -20,7 +20,7 @@ class Serializer(object):
         """Serialize an object, and its children, into sanitized unicode."""
         self._safe_unicode_buffer = []
         self.walk(obj)
-        return safe_unicode(u''.join(self._safe_unicode_buffer))
+        return safe_unicode(''.join(self._safe_unicode_buffer))
 
     def walk(self, obj):
         """This method is called by visitors for anything they

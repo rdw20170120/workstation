@@ -112,10 +112,10 @@ Available commands:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=unicode(sys.argv[4])
+            pattern=str(sys.argv[4])
         mgr.copy_directory(
-            source=unicode(sys.argv[2]),
-            target=unicode(sys.argv[3]),
+            source=str(sys.argv[2]),
+            target=str(sys.argv[3]),
             pattern=pattern,
             flatten=True,
             maybe=False,
@@ -124,10 +124,10 @@ Available commands:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=unicode(sys.argv[4])
+            pattern=str(sys.argv[4])
         mgr.copy_directory(
-            source=unicode(sys.argv[2]),
-            target=unicode(sys.argv[3]),
+            source=str(sys.argv[2]),
+            target=str(sys.argv[3]),
             pattern=pattern,
             flatten=False,
             maybe=False,
@@ -136,19 +136,19 @@ Available commands:
         check_argument_count(sys.argv, 3, 4)
         pattern = None
         if len(sys.argv) == 4:
-            pattern=unicode(sys.argv[3])
+            pattern=str(sys.argv[3])
         mgr.list(
-            directory=unicode(sys.argv[2]),
+            directory=str(sys.argv[2]),
             pattern=pattern,
         )
     elif 'maybe_copy_flat' == command:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=unicode(sys.argv[4])
+            pattern=str(sys.argv[4])
         mgr.copy_directory(
-            source=unicode(sys.argv[2]),
-            target=unicode(sys.argv[3]),
+            source=str(sys.argv[2]),
+            target=str(sys.argv[3]),
             pattern=pattern,
             flatten=True,
             maybe=True,
@@ -157,10 +157,10 @@ Available commands:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=unicode(sys.argv[4])
+            pattern=str(sys.argv[4])
         mgr.copy_directory(
-            source=unicode(sys.argv[2]),
-            target=unicode(sys.argv[3]),
+            source=str(sys.argv[2]),
+            target=str(sys.argv[3]),
             pattern=pattern,
             flatten=False,
             maybe=True,
