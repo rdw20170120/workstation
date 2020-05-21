@@ -14,9 +14,11 @@ if [[ -z "$1" ]] ; then
     exit 1
 fi
 
+# NOTE: Apparently, it is not possible to run Python3 code exclusively with the
+# .py3 file extension, so do not add a suffix to the source files.
+
 cmd="2to3"
 cmd+=" -npW"
-cmd+=" --add-suffix=3"
 cmd+=" --fix=all"
 cmd+=" --fix=buffer"
 cmd+=" --fix=idioms"
