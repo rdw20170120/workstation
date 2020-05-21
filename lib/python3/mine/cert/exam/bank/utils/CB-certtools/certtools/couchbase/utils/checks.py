@@ -112,7 +112,7 @@ def ck007(server):
 def ck008(server, exp_quotas, response):
     score = 1
     msg = "{0}: RAM quotas are allocated for the services".format(server)
-    for service, quota in exp_quotas.items():
+    for service, quota in list(exp_quotas.items()):
         if int(quota) != response.get(service):
             score = 0
             msg = (

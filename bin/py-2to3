@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -e
+# This script is intended to be executed by a user in a BASH shell.
+
+# Convert all Python source from Python2 to Python3
+
+if [[ -z "$DirProject" ]] ; then
+    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+    exit 1
+fi
+
+if [[ -z "$1" ]] ; then
+    echo "FATAL: A target directory or file is required as an argument, aborting"
+    exit 1
+fi
+
+2to3 -npW --fix=all --no-diffs $1
+

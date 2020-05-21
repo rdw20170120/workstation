@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+# NOT: set -e
 # This script is intended to be executed by a user in a BASH shell.
 
 # Report tool dependencies
@@ -24,16 +24,23 @@ checkVariable() {
 
 # operating system
 # TODO: Resolve this OS-specific syntax
-# NOTE: This works on macOS
-check 'uname -a'
-# NOTE: This works on Ubuntu
-check 'uname --all'
+if [[ "$(uname)" -eq 'Darwin' ]] ; then
+    # NOTE: This works on macOS
+    check 'uname -a'
+else
+    # NOTE: This works on Ubuntu
+    check 'uname --all'
+fi
 checkExecutable uname
 checkVariable PATH "$PATH"
 
 # BASH
 check 'bash --version'
 checkExecutable bash
+
+# Git
+check 'git --version'
+checkExecutable git
 
 # Python shared
 check 'python --version'
@@ -60,11 +67,14 @@ python3 -c 'import platform; print(platform.python_version())'
 echo $Rule
 python3 -c 'import os; print(os.sys.path)'
 
-# Git
-check 'git --version'
-checkExecutable git
+# Python 2to3
+checkExecutable 2to3
 
 # Python testing
 check 'py.test --version' 2>&1
 checkExecutable py.test
+
+# Ensure a successful script return
+echo "Tool report succeeded"
+exit 0
 

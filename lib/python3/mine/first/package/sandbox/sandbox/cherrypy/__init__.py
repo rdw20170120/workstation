@@ -180,7 +180,7 @@ class CherryPyDumper(object):
         )
 
     def _dump_pair_as_quoted_string(self, name, value, datatype=None):
-        if not isinstance(datatype, (str,)):
+        if not isinstance(datatype, str):
             datatype = sandbox.force_unicode(str(datatype))
         self._dump_line(
             '"' + name + '": ' +
@@ -189,7 +189,7 @@ class CherryPyDumper(object):
         )
 
     def _dump_pair_as_string(self, name, value, datatype=None):
-        if not isinstance(datatype, (str,)):
+        if not isinstance(datatype, str):
             datatype = sandbox.force_unicode(str(datatype))
         self._dump_line(
             '"' + name + '": ' +
