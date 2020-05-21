@@ -17,25 +17,35 @@ fi
 
 # Therefore, I STRONGLY recommend that one works through this conversion
 # process incrementally.
-#  1.  Start by disabling (commenting out) writing back to the source files.
-#  2.  Disable the optional fix transformations.
-#  3.  Run only the 'all' transformation.
-#  4.  Look at the command output for problems, hunt them down in the Python2
+#  1.  Ensure that you are starting with a clean checkout from the source
+#      control repository.  If anything goes wrong in the following
+#      steps, you can revert back.
+#  2.  Start by disabling (commenting out) writing back to the source files.
+#  3.  Disable the 'all' transformation.
+#  4.  Enable the '-p' print function transformation.
+#  5.  Disable every optional fix transformations.
+#  6.  Look at the command output for problems, hunt them down in the Python2
 #      source files, and fix them.  Continue until the output is clean.  In
 #      particular, fix any 'ParseError's that arise.
-#  5.  Enable write back to the source files.
-#  6.  Save the conversions to the source files.  I suggest commiting these
-#      file changes before proceeding.  If anything goes wrong in the following
-#      steps, you can revert back to these safe bulk conversions.
-#  7.  Disable writing back to the source files again.
-#  8.  Now disable the 'all' fix transformation.
-#  9.  One by one, enable the optional fix transformations.
-# 10.  Look at the command output for problems, hunt them down in the Python2
+#  7.  Enable write back to the source files.
+#  8.  Save the conversions to the source files.  I suggest commiting these
+#      file changes before proceeding.
+#  9.  Disable writing back to the source files again.
+# 10.  Enable the 'all' transformation.
+# 11.  Disable the '-p' print function transformation.
+# 12.  Disable the optional fix transformations.
+# 13.  Look at the command output for problems, hunt them down in the Python2
+#      source files, and fix them.  Continue until the output is clean.  In
+#      particular, fix any 'ParseError's that arise.
+# 14.  Disable the 'all' transformation.
+# 15.  Disable the '-p' print function transformation.
+# 16.  One by one, enable the optional fix transformations.
+# 17.  Look at the command output for problems, hunt them down in the Python2
 #      source files, and fix them.  Continue until the output is clean.
-# 11.  Enable write back to the source files.
-# 12.  Save the conversions to the source files.  I suggest commiting these
+# 18.  Enable write back to the source files.
+# 19.  Save the conversions to the source files.  I suggest commiting these
 #      file changes too.
-# 13.  When this process is done, leave this script as you found it.  Writing
+# 20.  When the process is done, leave this script as you found it: writing
 #      back should be left disabled, while all the transformations should be
 #      left enabled.
 
@@ -45,13 +55,13 @@ convert () {
 
     local cmd="2to3"
     # NO: cmd+=" --add-suffix=3"
-    cmd+=" -p"
     cmd+=" --verbose"
     # Write back to source files
-    cmd+=" -nw --no-diffs"
+#   cmd+=" -nw --no-diffs"
     # All safe bulk transformations
-    cmd+=" --fix=all"
+#   cmd+=" --fix=all"
     # Optional not-so-safe transformations
+    cmd+=" -p"
 #   cmd+=" --fix=buffer"
 #   cmd+=" --fix=idioms"
 #   cmd+=" --fix=set_literal"
@@ -68,7 +78,14 @@ convert () {
 
 # These directories should have Python3 source files in them
 # But $DirProject/lib/python2 should remain as Python2 source (until deleted)
-convert $DirProject/bin         $screening
-convert $DirProject/lib/python3 $screening
-convert $DirProject/src         $screening
+convert $DirProject/bin
+convert $DirProject/lib/python3/mine/astech
+convert $DirProject/lib/python3/mine/build
+convert $DirProject/lib/python3/mine/cert
+convert $DirProject/lib/python3/mine/euler
+convert $DirProject/lib/python3/mine/first
+convert $DirProject/lib/python3/mine/potrero_cloud_lab
+convert $DirProject/lib/python3/mine/sample_python
+convert $DirProject/lib/python3/third_party
+convert $DirProject/src
 

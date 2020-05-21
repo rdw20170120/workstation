@@ -8,13 +8,12 @@
 
 import os
 
-###############################################################################
 def main():
    """Script entry point."""
    for aRoot, aDirectories, aFiles in os.walk("."):
-      print "Directory '%s'" % aRoot
+      print("Directory '%s'" % aRoot)
       for aFile in aFiles:
-         print "File '%s/%s'" % (aRoot, aFile)
+         print("File '%s/%s'" % (aRoot, aFile))
 
 if __name__ == "__main__":
    main()

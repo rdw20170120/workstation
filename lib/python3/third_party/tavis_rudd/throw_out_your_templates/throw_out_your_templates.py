@@ -647,13 +647,13 @@ class Example(object):
         Example.all_examples.append(self)
 
     def show(self):
-        print '-'*80
-        print '## Output from example:', self.name
-        print
+        print('-'*80)
+        print('## Output from example:', self.name)
+        print()
         output = Serializer(
             self.visitor_map,
             self.input_encoding).serialize(self.content)
-        print output.encode(get_default_encoding())
+        print(output.encode(get_default_encoding()))
 
 
 ## put some html tags in the module scope to make the examples less
