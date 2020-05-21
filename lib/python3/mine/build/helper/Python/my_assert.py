@@ -1,6 +1,6 @@
 def has_type(actual_value, expected_type):
     """Return whether actual_value has expected_type"""
-    return type(actual_value) is expected_type
+    return isinstance(actual_value, expected_type)
 
 def has_type_message(actual_value, expected_type):
     return "Value is of type '{0}', instead of type '{1}'".format(

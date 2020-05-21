@@ -53,8 +53,7 @@ def literal(content):
     return htmltags.span('literal')[content]
 
 def literal_list(content):
-    list = content.split(',')
-    list.sort()
+    list = sorted(content.split(','))
     return literal(', '.join(list))
     # TODO: RESEARCH: How do I make this work?
     # list = [literal(item) for item in list]
@@ -66,8 +65,7 @@ def service_list(content):
     incoming string containing a comma-separated list of service identifiers.
     """
     list = content.split(',')
-    list = [service_name(s) for s in list]
-    list.sort()
+    list = sorted([service_name(s) for s in list])
     return ', '.join(list)
 
 ####################################################################################################

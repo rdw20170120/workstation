@@ -59,11 +59,11 @@ convert () {
     # Write back to source files
     cmd+=" -nw --no-diffs"
     # All safe bulk transformations
-    cmd+=" --fix=all"
+#   cmd+=" --fix=all"
     # Optional not-so-safe transformations
 #   cmd+=" -p"
-#   cmd+=" --fix=buffer"
-#   cmd+=" --fix=idioms"
+    cmd+=" --fix=buffer"
+    cmd+=" --fix=idioms"
 #   cmd+=" --fix=set_literal"
 #   cmd+=" --fix=ws_comma"
     # Execute tool, but filter out the noise
