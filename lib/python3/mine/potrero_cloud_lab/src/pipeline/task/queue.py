@@ -1,6 +1,6 @@
 #!/bin/false
 
-from .queue import Queue
+from queue import Queue
 
 
 class TaskQueue:

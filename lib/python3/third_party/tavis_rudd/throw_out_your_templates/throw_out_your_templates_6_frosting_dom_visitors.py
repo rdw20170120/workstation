@@ -20,8 +20,8 @@ xml_default_visitors_map = default_visitors_map.copy()
 
 # o = obj_to_be_walked, w = walker (aka serializer)
 xml_default_visitors_map.update({
-    str: (lambda o, w: w.emit(xml_escape(o))),
-    XmlName: (lambda o, w: w.emit(str(o))),
+    unicode: (lambda o, w: w.emit(xml_escape(o))),
+    XmlName: (lambda o, w: w.emit(unicode(o))),
     XmlAttributes: (lambda o, w: [w.walk(i) for i in o]),
     XmlElementProto: (lambda o, w: (
         w.emit(safe_unicode('<%s />'%o.name)
@@ -40,7 +40,7 @@ def visit_xml_element(elem, walker):
 
 def _substring_replace_ctx(walker, s, r, ofilter=lambda x: x):
     return VisitorMap(
-        {str: lambda o, w: w.emit(ofilter(o.replace(s, r, -1)))
+        {unicode: lambda o, w: w.emit(ofilter(o.replace(s, r, -1)))
          }).as_context(walker)
 
 @xml_default_visitors_map.register(XmlAttribute)

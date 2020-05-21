@@ -11,4 +11,4 @@ def is_desired_multiple(natural):
 
 def desired_multiples_below(natural):
     '''Return the desired multiples below the "natural" number.'''
-    return [n for n in range(natural) if is_desired_multiple(n)]
+    return [n for n in xrange(natural) if is_desired_multiple(n)]

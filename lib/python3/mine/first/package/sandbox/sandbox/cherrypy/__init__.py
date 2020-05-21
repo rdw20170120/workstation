@@ -21,12 +21,12 @@ debug = False
 '''
 class CherryPyDumper(object):
     def populate(self):
-        self._dump_line('Dump of CherryPy module "cherrypy"...')
+        self._dump_line(u'Dump of CherryPy module "cherrypy"...')
         # Start by dumping the contents of the cherrypy module
-        self._dump_dir('cherrypy', cherrypy)
+        self._dump_dir(u'cherrypy', cherrypy)
 
     def render(self):
-        return sandbox.force_unicode('\n'.join(self._lines))
+        return sandbox.force_unicode(u'\n'.join(self._lines))
 
     def _dedent(self):
         self._level -= 1
@@ -35,17 +35,17 @@ class CherryPyDumper(object):
         name = sandbox.force_unicode(name)
         attribute = self._getattr(parent, name)
         if attribute is parent:
-            self._dump_line('"' + name + '" references self')
-        elif name.startswith('__') and name.endswith('__'):
+            self._dump_line(u'"' + name + u'" references self')
+        elif name.startswith(u'__') and name.endswith(u'__'):
             if debug:
-                self._dump_line('"' + name + '": <special>')
+                self._dump_line(u'"' + name + u'": <special>')
         else:
             self._dump_pair(name, attribute)
 
     def _dump_dir(self, parent_name, parent):
         parent_name = sandbox.force_unicode(parent_name)
         if parent in self._had_dir:
-            self._dump_line('object has previously been dumped')
+            self._dump_line(u'object has previously been dumped')
         else:
             self._had_dir.append(parent)
             for name in dir(parent):
@@ -61,24 +61,24 @@ class CherryPyDumper(object):
         datatype = type(value)
         name = sandbox.force_unicode(name)
         # Handle None values
-        if isinstance(value, type(None)):
+        if isinstance(value, types.NoneType):
             self._dump_pair_as_string(name, value, datatype)
         # Handle boolean values
-        elif isinstance(value, bool):
+        elif isinstance(value, types.BooleanType):
             self._dump_pair_as_string(name, value, datatype)
         # Handle textual values
-        elif isinstance(value, bytes):
+        elif isinstance(value, types.StringType):
             self._dump_pair_as_quoted_string(name, value, datatype)
-        elif isinstance(value, str):
+        elif isinstance(value, types.UnicodeType):
             self._dump_pair_as_quoted_string(name, value, datatype)
         # Handle numeric values
-        elif isinstance(value, complex):
+        elif isinstance(value, types.ComplexType):
             self._dump_pair_as_string(name, value, datatype)
-        elif isinstance(value, float):
+        elif isinstance(value, types.FloatType):
             self._dump_pair_as_string(name, value, datatype)
-        elif isinstance(value, int):
+        elif isinstance(value, types.IntType):
             self._dump_pair_as_string(name, value, datatype)
-        elif isinstance(value, int):
+        elif isinstance(value, types.LongType):
             self._dump_pair_as_string(name, value, datatype)
         # Handle other built-in values
 #        elif isinstance(value, types.BuiltinFunctionType):
@@ -93,32 +93,32 @@ class CherryPyDumper(object):
             self._maybe_dump_pair_as_object_shallow(name, value)
         elif isinstance(value, types.ModuleType):
             self._maybe_dump_pair_as_object_shallow(name, value)
-        elif isinstance(value, type):
+        elif isinstance(value, types.TypeType):
             self._maybe_dump_pair_as_object_shallow(name, value)
         # Handle containers
-        elif isinstance(value, dict):
-            self._dump_line('"' + name + '": {')
+        elif isinstance(value, types.DictionaryType):
+            self._dump_line(u'"' + name + u'": {')
             self._indent()
-            for key in list(value.keys()):
+            for key in value.keys():
                 self._dump_pair(str(key), value[key])
             self._dedent()
-            self._dump_line('}')
-        elif isinstance(value, list):
-            self._dump_line('"' + name + '": [')
+            self._dump_line(u'}')
+        elif isinstance(value, types.ListType):
+            self._dump_line(u'"' + name + u'": [')
             self._indent()
             for index, item in enumerate(value):
                 self._dump_pair(str(index), item)
             self._dedent()
-            self._dump_line(']')
+            self._dump_line(u']')
         elif isinstance(value, set):
             self._dump_pair_as_object_deep(name, value)
-        elif isinstance(value, tuple):
-            self._dump_line('"' + name + '": (')
+        elif isinstance(value, types.TupleType):
+            self._dump_line(u'"' + name + u'": (')
             self._indent()
             for item in value:
                 self._dump_pair(None, item)
             self._dedent()
-            self._dump_line(')')
+            self._dump_line(u')')
         # Handle internal library values
         elif isinstance(value, logging.FileHandler):
             self._dump_pair_as_object_deep(name, value)
@@ -166,7 +166,7 @@ class CherryPyDumper(object):
             self._dump_pair_as_object_deep(name, value)
         # Handle unknown values
         else:
-            self._dump_pair_as_string(name, value, 'unknown')
+            self._dump_pair_as_string(name, value, u'unknown')
 
     def _dump_pair_as_object_deep(self, name, value):
         self._dump_pair_as_object_shallow(name, value)
@@ -176,30 +176,30 @@ class CherryPyDumper(object):
 
     def _dump_pair_as_object_shallow(self, name, value):
         self._dump_line(
-            '"' + name + '": ' + sandbox.force_unicode(str(value))
+            u'"' + name + u'": ' + sandbox.force_unicode(str(value))
         )
 
     def _dump_pair_as_quoted_string(self, name, value, datatype=None):
-        if not isinstance(datatype, (str,)):
+        if not isinstance(datatype, types.StringTypes):
             datatype = sandbox.force_unicode(str(datatype))
         self._dump_line(
-            '"' + name + '": ' +
+            u'"' + name + u'": ' +
             datatype +
-            ' "' + sandbox.force_unicode(str(value)) + '"'
+            u' "' + sandbox.force_unicode(str(value)) + u'"'
         )
 
     def _dump_pair_as_string(self, name, value, datatype=None):
-        if not isinstance(datatype, (str,)):
+        if not isinstance(datatype, types.StringTypes):
             datatype = sandbox.force_unicode(str(datatype))
         self._dump_line(
-            '"' + name + '": ' +
-            datatype + ' ' +
+            u'"' + name + u'": ' +
+            datatype + u' ' +
             sandbox.force_unicode(str(value))
         )
         
     def _dump_pair_as_type(self, name, value):
         self._dump_line(
-            '"' + name + '": ' +
+            u'"' + name + u'": ' +
             sandbox.force_unicode(str(type(value)))
         )
 
@@ -226,7 +226,7 @@ class CherryPyDumper(object):
 
     def __init__(self):
         self._had_dir = []
-        self._indentation = '  '
+        self._indentation = u'  '
         self._level = 0
         self._lines = []
 

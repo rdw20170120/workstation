@@ -21,7 +21,8 @@ fi
 #  2.  Disable the optional fix transformations.
 #  3.  Run only the 'all' transformation.
 #  4.  Look at the command output for problems, hunt them down in the Python2
-#      source files, and fix them.  Continue until the output is clean.
+#      source files, and fix them.  Continue until the output is clean.  In
+#      particular, fix any 'ParseError's that arise.
 #  5.  Enable write back to the source files.
 #  6.  Save the conversions to the source files.  I suggest commiting these
 #      file changes before proceeding.  If anything goes wrong in the following

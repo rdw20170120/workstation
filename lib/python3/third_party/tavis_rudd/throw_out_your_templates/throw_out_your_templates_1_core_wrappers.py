@@ -20,7 +20,7 @@ class safe_bytes(str):
         else:
             return res
 
-class safe_unicode(str):
+class safe_unicode(unicode):
     def encode(self, *args, **kws):
         return safe_bytes(super(safe_unicode, self).encode(*args, **kws))
 

@@ -78,7 +78,7 @@ def check_results(result, bucket_name, doc_type, doc_username):
     score = 0
     msg = 'The Document contains incorrect results'
     for bucket in result:
-        if bucket_name in list(bucket.keys()):
+        if bucket_name in bucket.keys():
             if bucket.get(bucket_name).get('username') == doc_username and \
                bucket.get(bucket_name).get('type') == doc_type:
                 score = 1

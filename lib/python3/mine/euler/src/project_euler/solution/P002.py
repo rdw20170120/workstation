@@ -36,7 +36,7 @@ class P002(object):
         if count is None:
             return (self.fibonacci_term(i) for i in pseudo_infinite(1))
         else:
-            return (self.fibonacci_term(i) for i in range(1, count + 1))
+            return (self.fibonacci_term(i) for i in xrange(1, count + 1))
 
     def fibonacci_below(self, limit):
         '''Return the first terms of the Fibonacci sequence below "limit".
