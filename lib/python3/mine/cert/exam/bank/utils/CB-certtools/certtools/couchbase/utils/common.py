@@ -184,7 +184,7 @@ def get_details(host, extra_path, auth, port=8091):
 
 
 def get_errors(file_data):
-    if type(file_data) == dict:
+    if isinstance(file_data, dict):
         return file_data.get('errors', [])
     return file_data
 
@@ -225,7 +225,7 @@ def get_ip_list(address_list):
 
 
 def get_results(file_data):
-    if type(file_data) == dict:
+    if isinstance(file_data, dict):
         return file_data.get('results', [])
     return file_data
 

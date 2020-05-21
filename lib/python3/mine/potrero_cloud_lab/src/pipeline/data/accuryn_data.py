@@ -213,7 +213,7 @@ class AccurynDataIter:
                 or int(hex(M)[2:]) < 1
                 or int(hex(M)[2:]) > 12
                 or int(hex(Y)[2:]) < 0
-                for s,m,h,D,M,Y in records[[
+                for s, m, h, D, M, Y in records[[
                     'second', 'minute', 'hour', 'day', 'month', 'year'
                     ]]
                 ]

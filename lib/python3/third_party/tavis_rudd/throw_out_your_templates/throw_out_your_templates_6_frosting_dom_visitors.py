@@ -53,14 +53,14 @@ def visit_xml_attribute(attr, walker):
 @xml_default_visitors_map.register(Comment)
 def visit_xml_comment(obj, walker):
     walker.emit('<!--')
-    with _substring_replace_ctx(walker, '--','-/-'):
+    with _substring_replace_ctx(walker, '--', '-/-'):
         walker.walk(obj.content)
     walker.emit('-->')
 
 @xml_default_visitors_map.register(XmlCData)
 def visit_xml_cdata(obj, walker):
     walker.emit('<![CDATA[')
-    with _substring_replace_ctx(walker, ']]>',']-]->'):
+    with _substring_replace_ctx(walker, ']]>', ']-]->'):
         walker.walk(obj.content)
     walker.emit(']]>')
 

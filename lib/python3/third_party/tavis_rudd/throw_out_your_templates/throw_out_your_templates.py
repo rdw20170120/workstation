@@ -431,7 +431,7 @@ class _VisitorMapContextManager(object):
 # visitor signature = "f(obj_to_be_walked, walker)", return value ignored
 # o = obj_to_be_walked, w = walker (aka serializer)
 default_visitors_map = VisitorMap({
-    str: (lambda o,w: w.walk(str(o, w.input_encoding, 'strict'))),
+    str: (lambda o, w: w.walk(str(o, w.input_encoding, 'strict'))),
     str: (lambda o, w: w.emit(o)),
     safe_bytes: (lambda o, w: w.emit(str(o, w.input_encoding, 'strict'))),
     safe_unicode: (lambda o, w: w.emit(o)),
@@ -490,7 +490,7 @@ class XmlElement(object):
                 n = n[:-1]
             if '_' in n:
                 if '__' in n:
-                    n = n.replace('__',':')
+                    n = n.replace('__', ':')
                 elif 'http_' in n:
                     n = n.replace('http_', 'http-')
             # may eventually run into encoding issues with name:
@@ -600,14 +600,14 @@ def visit_xml_attribute(attr, walker):
 @xml_default_visitors_map.register(Comment)
 def visit_xml_comment(obj, walker):
     walker.emit('<!--')
-    with _substring_replace_ctx(walker, '--','-/-'):
+    with _substring_replace_ctx(walker, '--', '-/-'):
         walker.walk(obj.content)
     walker.emit('-->')
 
 @xml_default_visitors_map.register(XmlCData)
 def visit_xml_cdata(obj, walker):
     walker.emit('<![CDATA[')
-    with _substring_replace_ctx(walker, ']]>',']-]->'):
+    with _substring_replace_ctx(walker, ']]>', ']-]->'):
         walker.walk(obj.content)
     walker.emit(']]>')
 
@@ -690,7 +690,7 @@ Example(
      , 4.0
      , 'a', 'b'
      , ('c', ('d', 'e')
-        , set(['f', 'f'])) # nested
+        , {'f', 'f'}) # nested
      , (i*2 for i in range(10))
      ])
 # output = '1234.0abcdef024681012141618'
