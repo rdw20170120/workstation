@@ -16,6 +16,7 @@ fi
 
 cmd="2to3"
 cmd+=" -npW"
+cmd+=" --add-suffix=3"
 cmd+=" --fix=all"
 cmd+=" --fix=buffer"
 cmd+=" --fix=idioms"
