@@ -14,4 +14,5 @@ Items should be struck-out and moved to the bottom when completed.
 
 I|U|Item
 -|-|---------------------------------------------------------------------------
+H|L|Add character set coding annotation to all Python source files
 
