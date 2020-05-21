@@ -14,7 +14,7 @@ from throw_out_your_templates_3_core_visitor_map import VisitorMap
 # visitor signature = "f(obj_to_be_walked, walker)", return value ignored
 # o = obj_to_be_walked, w = walker (aka serializer)
 default_visitors_map = VisitorMap({
-    str: (lambda o,w: w.walk(str(o, w.input_encoding, 'strict'))),
+    str: (lambda o, w: w.walk(str(o, w.input_encoding, 'strict'))),
     str: (lambda o, w: w.emit(o)),
     safe_bytes: (lambda o, w: w.emit(str(o, w.input_encoding, 'strict'))),
     safe_unicode: (lambda o, w: w.emit(o)),
