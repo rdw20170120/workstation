@@ -8,13 +8,13 @@ from pathlib  import Path
 from logzero import logger as log
 from logzero import loglevel
 
-from build.helper.Python.my_system                     import recreate_directory
-from potrero_cloud_lab.src.pipeline.utility.processing import create_pid_file
-from potrero_cloud_lab.src.pipeline.utility.processing import delete_pid_file
-from potrero_cloud_lab.src.pipeline.utility.processing import get_pid
+from .utility.my_system     import recreate_directory
+from .utility.my_processing import create_pid_file
+from .utility.my_processing import delete_pid_file
+from .utility.my_processing import get_pid
 
 from .config                  import Config
-from .script_project_activate import render as render_project_activate_script
+from .project_activate_script import render as render_project_activate_script
 
 
 loglevel(level=DEBUG)

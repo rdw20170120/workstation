@@ -34,5 +34,6 @@ python3 -m generate "$DirTgt"
 
 echo "WARN: Please manually synchronize updates into the project from the generated output"
 echo "INFO: meld '$DirTgt' '$DirProject'"
-# TODO: meld >/dev/null 2>&1 --newtab "$DirTgt" "$DirProject" &
+# TODO: Research why Meld does not open a new tab on macOS
+# DISABLED: meld --newtab "$DirTgt" "$DirProject" >/dev/null 2>&1 &
 

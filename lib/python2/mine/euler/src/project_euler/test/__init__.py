@@ -1,1 +1,0 @@
-'''Marks a Python package'''

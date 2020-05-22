@@ -80,7 +80,7 @@ convert () {
 # These directories should have Python3 source files in them
 # But $DirProject/lib/python2 should remain as Python2 source (until deleted)
 convert $DirProject/bin
-convert $DirProject/lib/python3/mine
-convert $DirProject/lib/python3/third_party
+convert $DirProject/lib/mine
+convert $DirProject/lib/third_party
 convert $DirProject/src
 

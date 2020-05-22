@@ -2,8 +2,8 @@
 # NOTE: Intended to be sourced into a BASH shell by another script.
 
 # Configure Python path
-DirMine=$DirProject/lib/python3/mine
-DirThird=$DirProject/lib/python3/third_party
+DirMine=$DirProject/lib/mine
+DirThird=$DirProject/lib/third_party
 export PYTHONPATH=$PYTHONPATH:$DirThird:$DirMine
 echo "DEBUG: PYTHONPATH=$PYTHONPATH"
 

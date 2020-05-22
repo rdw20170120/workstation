@@ -11,7 +11,7 @@ fi
 
 echo "INFO: Compiling Python source files..."
 python3 -m compileall -f $DirProject/bin
-python3 -m compileall -f $DirProject/lib/python3
+python3 -m compileall -f $DirProject/lib
 python3 -m compileall -f $DirProject/src
 
 # TODO: Compile Python2 source files?

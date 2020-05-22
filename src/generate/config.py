@@ -1,10 +1,9 @@
 #!/bin/false
 
 from pathlib import Path
-from pathlib import PurePosixPath as S3Key
 from sys     import maxsize
 
-from potrero_cloud_lab.src.pipeline.utility import environment
+from .utility import my_environment
 
 
 class Config:
@@ -20,7 +19,7 @@ class Config:
         provides an advantage during development and testing.
         """
         try:
-            v = environment.get('Run')
+            v = my_environment.get('Run')
             return v.lower() == 'dry'
         except KeyError:
             return False
@@ -38,7 +37,7 @@ class Config:
         advantage during development and testing.
         """
         try:
-            v = environment.get('Run')
+            v = my_environment.get('Run')
             return v.lower() == 'force'
         except KeyError:
             return False
@@ -65,7 +64,7 @@ class Config:
         development and testing.
         """
         try:
-            return int(environment.get('Quick'))
+            return int(my_environment.get('Quick'))
         except KeyError:
             return maxsize
 
@@ -75,7 +74,7 @@ class Config:
 
     @property
     def project_directory(self):
-        return Path(environment.get('DirProject'))
+        return Path(my_environment.get('DirProject'))
     
     @property
     def should_fake_it(self):
@@ -89,12 +88,12 @@ class Config:
         the real data processing takes significant time.
         """
         try:
-            environment.get('FakeIt')
+            my_environment.get('FakeIt')
             return True
         except KeyError:
             return False
 
     @property
     def temporary_directory(self):
-        return Path(environment.get('TMPDIR'))
+        return Path(my_environment.get('TMPDIR'))
 
