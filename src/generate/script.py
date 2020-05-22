@@ -23,11 +23,17 @@ visitor_map = VisitorMap(parent_map=default_visitors_map)
 def visit_script(script, walker):
     walker.walk(script._content)
 
-def render(parent_directory, filename=None, content=None, visitor_map=visitor_map):
+def render(
+        parent_directory,
+        filename=None,
+        content=None,
+        visitor_map=visitor_map
+        ):
     assert content
-    assert filename
-    maybe_create_directory(parent_directory)
-    Renderer(visitor_map).render(content, parent_directory / filename)
+    filepath = None
+    if filename is not None: filepath = parent_directory / filename
+    if parent_directory is not None: maybe_create_directory(parent_directory)
+    Renderer(visitor_map).render(content, filepath)
 
 """ Disabled content
 """

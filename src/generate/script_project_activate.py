@@ -151,10 +151,9 @@ def build():
 
 visitor_map = VisitorMap(parent_map=script_briteonyx.visitor_map)
 
-def render(parent_directory, filename=None, content=None, visitor_map=visitor_map):
+def render(parent_directory, filename='activate', content=None, visitor_map=visitor_map):
     assert content is None
     content = build()
-    if filename is None: filename = 'activate'
     script_briteonyx.render(parent_directory, filename, content, visitor_map)
 
 
