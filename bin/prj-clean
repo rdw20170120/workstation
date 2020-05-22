@@ -37,18 +37,8 @@ dir=$DirProject/src/.pytest_cache
 echo "INFO: Deleting special directory '$dir' directly..."
 rm -fr "$dir"
 
-echo "INFO: Cleaning up Python source files..."
-findAnd delete $DirProject/src         '*.py'
-findAnd delete $DirProject/lib/python3 '*.py'
-findAnd delete $DirProject/lib/python2 '*.py3'
-
 echo "WARN: Found these files REMAINING..."
 findAnd print $DirProject             '__pycache'
 findAnd print $DirProject             '*.bak'
 findAnd print $DirProject             '*.pyc'
-findAnd print $DirProject/bin         '*.py'
-findAnd print $DirProject/bin         '*.py3'
-findAnd print $DirProject/src         '*.py'
-findAnd print $DirProject/lib/python3 '*.py'
-findAnd print $DirProject/lib/python2 '*.py3'
 
