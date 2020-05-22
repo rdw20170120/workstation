@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from cgi import escape as xml_escape
-from throw_out_your_templates_3_core_visitor_map import VisitorMap
-from throw_out_your_templates_4_core_default_visitors import default_visitors_map
-from throw_out_your_templates_5_frosting_dom_classes import Comment
-from throw_out_your_templates_5_frosting_dom_classes import Script
-from throw_out_your_templates_5_frosting_dom_classes import XmlAttribute
-from throw_out_your_templates_5_frosting_dom_classes import XmlAttributes
-from throw_out_your_templates_5_frosting_dom_classes import XmlCData
-from throw_out_your_templates_5_frosting_dom_classes import XmlElement
-from throw_out_your_templates_5_frosting_dom_classes import XmlElementProto
-from throw_out_your_templates_5_frosting_dom_classes import XmlEntityRef
-from throw_out_your_templates_5_frosting_dom_classes import XmlName
+
+from .section_3 import VisitorMap
+from .section_4 import default_visitors_map
+from .section_5 import Comment
+from .section_5 import Script
+from .section_5 import XmlAttribute
+from .section_5 import XmlAttributes
+from .section_5 import XmlCData
+from .section_5 import XmlElement
+from .section_5 import XmlElementProto
+from .section_5 import XmlEntityRef
+from .section_5 import XmlName
 
 ################################################################################
 # 6: Visitors for the xml/html elements, etc.

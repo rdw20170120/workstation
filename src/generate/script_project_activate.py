@@ -1,8 +1,7 @@
 from tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
 
-from .renderer    import Renderer
-from .script_bash import BashScript
-
+from .                    import script_briteonyx
+from .structure_briteonyx import *
 
 def abort_if_activated():
     return [
@@ -14,15 +13,6 @@ def abort_if_activated():
         echo_fatal('Project ', sq(vr('BO_Project')), ' is already activated, aborting'),
         and_(),
         exit(100), eol(),
-    ]
-
-def activate_for_linux():
-    return [
-        line(),
-        rule(),
-        comment('Activate as a Linux project'),
-        line(),
-        source_script(dq(path(vr('BO_Home'), 'helper', 'activation', 'activate.src'))),
     ]
 
 def comments():
@@ -97,120 +87,6 @@ def capture_outgoing_environment():
         fi(),
     ]
 
-def configure_for_briteonyx():
-    return [
-        line(),
-        rule(),
-        comment('Configure for BriteOnyx'),
-        line(),
-        source_script(dq(path(vr('BO_Project'), 'BriteOnyx', 'env.src'))),
-    ]
-
-def configure_for_project():
-    return [
-        line(),
-        rule(),
-        comment('Configure for this project'),
-        line(),
-        source_script(path(vr('BO_Project'), 'env.src')),
-    ]
-
-def configure_for_user():
-    return [
-        line(),
-        rule(),
-        comment('Configure for this user'),
-        line(),
-        source_script(path(vr('HOME'), '.BriteOnyx.src')),
-    ]
-
-def copy_starter_files():
-    return [
-        line(),
-        rule(),
-        comment('Copy starter files into place as necessary'),
-        line(),
-        assign(vn('DirSrc'), path(vr('BO_Project'), 'BriteOnyx', 'starter')), eol(),
-        line(),
-        require_variable(vn('HOME')), eol(),
-        assign(vn('DirTgt'), vr('HOME')), eol(),
-        path_does_not_exist(vr('DirTgt')), and_(),
-        command('mkdir', '-p', vr('DirTgt')), eol(),
-        line(),
-        assign(vn('FileTgt'), path(vr('DirTgt'), '.BriteOnyx.src')), eol(),
-        comment('Move previous scripts to new path'),
-        file_exists(path(vr('DirTgt'), 'BriteOnyx.src')),
-        and_(),
-        command('mv', path(vr('DirTgt'), 'BriteOnyx.src'), vr('FileTgt')), eol(),
-        file_exists(path(vr('DirTgt'), 'BriteOnyx-env.bash')),
-        and_(),
-        command('mv', path(vr('DirTgt'), 'BriteOnyx-env.bash'), vr('FileTgt')), eol(),
-        file_exists(path(vr('DirTgt'), 'BriteOnyx-env.src')),
-        and_(),
-        command('mv', path(vr('DirTgt'), 'BriteOnyx-env.src'),  vr('FileTgt')), eol(),
-        comment('Copy starter script, if necessary'),
-        path_is_not_file(vr('FileTgt')),
-        and_(),
-        command('cp', path(vr('DirSrc'), 'user-BriteOnyx.src'), vr('FileTgt')), eol(),
-        line(),
-        assign(vn('DirTgt'), path(vr('BO_Project'))), eol(),
-        path_does_not_exist(vr('DirTgt')),
-        and_(),
-        command('mkdir', '-p', vr('DirTgt')), eol(),
-        line(),
-        assign(vn('FileTgt'), path(vr('DirTgt'), 'env.src')), eol(),
-        path_is_not_file(vr('FileTgt')),
-        and_(),
-        command('cp', path(vr('DirSrc'), 'project-env.src'), vr('FileTgt')), eol(),
-        line(),
-        assign(vn('FileTgt'), path(vr('DirTgt'), '.hgignore')), eol(),
-        path_is_not_file(vr('FileTgt')),
-        and_(),
-        command('cp', path(vr('DirSrc'), 'project.hgignore'), vr('FileTgt')), eol(),
-        line(),
-        assign(vn('DirTgt'), path(vr('BO_Project'), 'bin')), eol(),
-        path_does_not_exist(vr('DirTgt')),
-        and_(),
-        command('mkdir', '-p', vr('DirTgt')), eol(),
-        line(),
-        assign(vn('FileTgt'), path(vr('DirTgt'), 'project-fix-permissions.bash')), eol(),
-        comment('Move previous scripts to new path'),
-        file_exists(path(vr('DirTgt'), 'all-fix-permissions.bash')),
-        and_(),
-        command('mv', path(vr('DirTgt'), 'all-fix-permissions.bash'), vr('FileTgt')), eol(),
-        comment('Copy starter script, if necessary'),
-        path_is_not_file(vr('FileTgt')),
-        and_(),
-        command('cp', path(vr('DirSrc'), 'project-fix-permissions.bash'), vr('FileTgt')), eol(),
-        line(),
-        line(": <<'DisabledContent'"),
-        assign(vn('FileTgt'), path(vr('DirTgt'), 'declare.src')), eol(),
-        path_is_not_file(vr('FileTgt')),
-        and_(),
-        command('cp', path(vr('DirSrc'), 'project-declare.src'), vr('FileTgt')), eol(),
-        line(),
-        assign(vn('FileTgt'), path(vr('DirTgt'), 'development.rst')), eol(),
-        path_is_not_file(vr('FileTgt')),
-        and_(),
-        command('cp', path(vr('DirSrc'), 'project-development.rst'), vr('FileTgt')), eol(),
-        line(),
-        assign(vn('FileTgt'), path(vr('DirTgt'), 'README.rst')), eol(),
-        path_is_not_file(vr('FileTgt')),
-        and_(),
-        command('cp', path(vr('DirSrc'), 'project-README.rst'), vr('FileTgt')), eol(),
-        line(),
-        assign(vn('DirTgt'), path(vr('BO_Project'), 'bin', 'helper', 'Linux')), eol(),
-        path_does_not_exist(vr('DirTgt')),
-        and_(),
-        command('mkdir', '-p', vr('DirTgt')), eol(),
-        line(),
-        assign(vn('FileTgt'), path(vr('DirTgt'), 'declare-BASH.src')), eol(),
-        path_is_not_file(vr('FileTgt')),
-        and_(),
-        command('cp', path(vr('DirSrc'), 'project-declare-BASH.src'), vr('FileTgt')), eol(),
-        line('DisabledContent'),
-    ]
-
 def create_random_tmpdir():
     return [
         line(),
@@ -221,42 +97,68 @@ def create_random_tmpdir():
         export(vn('TMPDIR'), vr('Dir')), eol(),
     ]
 
-def declare_for_bootstrap():
+def remember_path():
     return [
         line(),
         rule(),
-        comment('Declare BriteOnyx support functionality'),
+        comment('Remember ', vn('PATH')),
         line(),
-        assign(vn('Script'), dq(path(vr('BO_Project'), 'BriteOnyx', 'declare.src'))), eol(),
-        path_is_not_file(vr('Script')),
-        and_(),
-        echo_fatal('Missing script ', sq(vr('Script'))),
-        and_(),
-        return_(63), eol(),
-        source(dq(vr('Script'))), seq(), remember_status(), eol(),
-        status_is_failure(), and_(), report_status(), and_(), return_status(), eol(),
-        line(),
-        rule(),
-        note('Now that we have our support functionality declared, we can use it from here on'),
+        string_is_null(vr('BO_PathSystem')),
+        and_(), nl(),
+        '  ',
+        export(vn('BO_PathSystem'), vr('PATH')),
+        and_(), nl(),
+        '  ',
+        echo_info('Remembering ', vn('BO_PathSystem'), '=', sq(vr('BO_PathSystem'))), eol(),
     ]
 
-def declare_for_project():
+def remember_project_root():
     return [
         line(),
         rule(),
-        comment('Declare optional project functionality'),
+        comment('Remember the directory containing this script as our project root'),
         line(),
-        assign(vn('Script'), dq(path(vr('BO_Project'), 'declare.src'))), eol(),
-        if_(
-            file_exists(vr('Script')),
-            '  ',
-            source(dq(vr('Script'))), seq(), remember_status(), eol(),
-            '  ',
-            status_is_failure(), and_(), report_status(), and_(), return_status(), eol(),
-        ),
-        fi(),
+        export(vn('BO_Project'), dq(substitute('dirname', vr('BASH_SOURCE')))), eol(),
+        line(),
+        todo('REVIEW: Shall we NOT cd into our project directory since it changes'),
+        comment("the caller's execution environment?"),
+        comment(command('cd', dq(path(vr('BO_Project')))), or_(), return_last_status()),
     ]
 
+def build():
+    return script_briteonyx.BriteOnyxScript([
+#       source_header(),
+        comments(),
+        abort_if_activated(),
+        create_random_tmpdir(),
+#       initialize_logging_file(),
+        capture_incoming_environment(),
+        remember_project_root(),
+#       normalize_reference_to_project_root(),
+#       configure_for_user(),
+#       configure_for_project(),
+#       configure_for_briteonyx(),
+#       verify_briteonyx_bootstrap(),
+        remember_path(),
+#       activate_for_linux(),
+#       set_tmpdir(),
+#       declare_for_project(),
+#       demonstrate_logging(),
+#       shutdown(),
+        disabled_content_footer(),
+    ])
+    
+
+visitor_map = VisitorMap(parent_map=script_briteonyx.visitor_map)
+
+def render(parent_directory, filename=None, content=None, visitor_map=visitor_map):
+    assert content is None
+    content = build()
+    if filename is None: filename = 'activate'
+    script_briteonyx.render(parent_directory, filename, content, visitor_map)
+
+
+""" Disabled content
 def demonstrate_logging():
     return [
         line(),
@@ -320,118 +222,5 @@ def normalize_reference_to_project_root():
         return_last_status(), eol(),
     ]
 
-def remember_path():
-    return [
-        line(),
-        rule(),
-        comment('Remember ', vn('PATH')),
-        line(),
-        string_is_null(vr('BO_PathSystem')),
-        and_(), nl(),
-        '  ',
-        export(vn('BO_PathSystem'), vr('PATH')),
-        and_(), nl(),
-        '  ',
-        echo_info('Remembering ', vn('BO_PathSystem'), '=', sq(vr('BO_PathSystem'))), eol(),
-    ]
-
-def remember_project_root():
-    return [
-        line(),
-        rule(),
-        comment('Remember the directory containing this script as our project root'),
-        line(),
-        export(vn('BO_Project'), dq(substitute('dirname', vr('BASH_SOURCE')))), eol(),
-        line(),
-        todo('REVIEW: Shall we NOT cd into our project directory since it changes'),
-        comment("the caller's execution environment?"),
-        comment(command('cd', dq(path(vr('BO_Project')))), or_(), return_last_status()),
-    ]
-
-def set_tmpdir():
-    return [
-        line(),
-        rule(),
-        comment('Set ', vn('TMPDIR'), ' '),
-        comment('DISABLED: MOVED: to Linux activation script'),
-        line(),
-        comment(export(vn('TMPDIR'), path(vr('TMPDIR'), vr('BO_ProjectName')))),
-        comment(echo_info('Remembering ', vn('TMPDIR'), '=', sq(vr('TMPDIR')))),
-    ]
-
-def shutdown():
-    return [
-        line(),
-        rule(),
-        comment('Shutdown'),
-        line(),
-        log_info(
-            'Project ',
-            sq(vr('BO_ProjectName')),
-            ' in directory ',
-            sq(vr('BO_Project')),
-            ' is now activated, done.',
-        ),
-        eol(),
-        capture_outgoing_environment(),
-    ]
-
-def verify_briteonyx_bootstrap():
-    return [
-        line(),
-        rule(),
-        comment('Verify BriteOnyx bootstrap configuration'),
-        line(),
-        require_variable(vn('BO_Home')),
-        or_(),
-        failed(),
-        or_(),
-        return_last_status(), eol(),
-        require_directory(vr('BO_Home')),
-        or_(),
-        failed(),
-        or_(),
-        return_last_status(), eol(),
-        line(),
-        require_variable(vn('BO_ProjectName')),
-        or_(),
-        failed(),
-        or_(),
-        return_last_status(), eol(),
-    ]
-
-def build():
-    return BashScript([
-        source_header(),
-        comments(),
-        abort_if_activated(),
-        create_random_tmpdir(),
-        initialize_logging_file(),
-        capture_incoming_environment(),
-        remember_project_root(),
-        declare_for_bootstrap(),
-        normalize_reference_to_project_root(),
-        copy_starter_files(),
-        configure_for_user(),
-        configure_for_project(),
-        configure_for_briteonyx(),
-        verify_briteonyx_bootstrap(),
-        remember_path(),
-        activate_for_linux(),
-        set_tmpdir(),
-        declare_for_project(),
-        demonstrate_logging(),
-        shutdown(),
-        disabled_content_footer(),
-    ])
-    
-
-visitor_map = VisitorMap(parent_map=script_bash.visitor_map)
-
-def render(parent_directory):
-    Renderer(visitor_map).render(parent_directory, 'activate')
-
-
-""" Disabled content
 """
 

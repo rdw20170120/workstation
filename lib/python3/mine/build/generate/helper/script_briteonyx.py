@@ -1,4 +1,4 @@
-import script_bash
+from . import script_bash
 
 from throw_out_your_templates_3_core_visitor_map import VisitorMap
 

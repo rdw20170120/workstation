@@ -2,16 +2,16 @@
 
 import argparse
 import os
-import script_briteonyx_bootstrap
-import script_briteonyx_declare
-import script_briteonyx_environment
-import script_gradle_activate
-import script_linux_activate
-import script_project_activate
-import script_project_environment
-import script_project_maybe_activate
-import script_python_activate
-import script_user_environment
+from . import script_briteonyx_bootstrap
+from . import script_briteonyx_declare
+from . import script_briteonyx_environment
+from . import script_gradle_activate
+from . import script_linux_activate
+from . import script_project_activate
+from . import script_project_environment
+from . import script_project_maybe_activate
+from . import script_python_activate
+from . import script_user_environment
 import sys
 
 from logging import getLogger

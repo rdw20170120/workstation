@@ -1,7 +1,7 @@
-from .script_briteonyx import VISITOR_MAP
+# from .script_briteonyx import visitor_map
+from .structure_bash import *
 from .structure_bash import _Command
 
-from .structure_bash import *
 
 ####################################################################################################
 
@@ -21,7 +21,8 @@ def note(*elements):
     return comment('NOTE: ', *elements)
 
 def rule():
-    return line('#' * 100)
+    # TODO: Make line length configurable
+    return line('#' * 79)
 
 def someday(*elements):
     return todo('SOMEDAY: ', *elements)
@@ -29,6 +30,49 @@ def someday(*elements):
 def todo(*elements):
     return comment('TODO: ', *elements)
 
+def debugging_comment():
+    return [
+        note('Uncomment the following two lines for debugging'),
+        comment(set('-o', 'verbose')),
+        comment(set('-o', 'xtrace')),
+    ]
+
+def disabled_content_footer():
+    return [
+        line(),
+        rule(),
+        command(':', '<<', sq('DisabledContent')), eol(),
+        line('DisabledContent'),
+    ]
+
+def remember_status():
+    return assign(vn('Status'), '$?')
+
+def report_status():
+    return echo_fatal('Script exited with ', sq(vr('Status')))
+
+def return_status():
+    return return_(vr('Status'))
+
+def source_header():
+    return [
+        shebang_source(),
+        execution_trace(),
+        rule(),
+    ]
+
+def source_script(file_name):
+    return [
+        assign(vn('Script'), file_name), eol(),
+        require_script(dq(vr('Script'))), or_(), failed(), or_(), return_last_status(), eol(),
+        source(dq(vr('Script'))), or_(), failed(), or_(), return_last_status(), eol(),
+    ]
+
+def status_is_failure():
+    return integer_is_not_equal(dq(vr('Status')), 0)
+
+####################################################################################################
+""" Disabled content
 ####################################################################################################
 
 class _BoLogInfo(_Command):
@@ -106,21 +150,6 @@ def trace_variable(variable_name):
 
 ####################################################################################################
 
-def debugging_comment():
-    return [
-        note('Uncomment the following two lines for debugging'),
-        comment(set('-o', 'verbose')),
-        comment(set('-o', 'xtrace')),
-    ]
-
-def disabled_content_footer():
-    return [
-        line(),
-        rule(),
-        command(':', '<<', sq('DisabledContent')), eol(),
-        line('DisabledContent'),
-    ]
-
 def execution_trace():
     return [
         string_is_not_null(vr('BO_Trace')),
@@ -129,33 +158,5 @@ def execution_trace():
         eol(),
     ]
 
-def remember_status():
-    return assign(vn('Status'), '$?')
-
-def report_status():
-    return echo_fatal('Script exited with ', sq(vr('Status')))
-
-def return_status():
-    return return_(vr('Status'))
-
-def source_header():
-    return [
-        shebang_source(),
-        execution_trace(),
-        rule(),
-    ]
-
-def source_script(file_name):
-    return [
-        assign(vn('Script'), file_name), eol(),
-        require_script(dq(vr('Script'))), or_(), failed(), or_(), return_last_status(), eol(),
-        source(dq(vr('Script'))), or_(), failed(), or_(), return_last_status(), eol(),
-    ]
-
-def status_is_failure():
-    return integer_is_not_equal(dq(vr('Status')), 0)
-
-####################################################################################################
-""" Disabled content
 """
 

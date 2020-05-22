@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from types import InstanceType
+# DISABLED: Python2: from types import InstanceType
 
 ################################################################################
 # 3: VisitorMap
@@ -42,6 +42,7 @@ class VisitorMap(dict):
         return result
 
     def _get_parent_type_visitor(self, obj, py_type):
+        """DISABLED:  Python2
         if py_type is InstanceType: # support old-style classes
             m = [t for t in self if isinstance(obj, t)]
             for i, t in enumerate(m):
@@ -49,9 +50,10 @@ class VisitorMap(dict):
                            if t2 is not t and issubclass(t2, t)):
                     return self[t]
         else: # newstyle type/class
-            for base in py_type.__mro__:
-                if base in self:
-                    return self[base]
+        """
+        for base in py_type.__mro__:
+            if base in self:
+                return self[base]
 
     def copy(self):
         return self.__class__(super(VisitorMap, self).copy())

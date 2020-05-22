@@ -1,6 +1,6 @@
 import os
 
-from renderer import Renderer
+from .renderer import Renderer
 from throw_out_your_templates_3_core_visitor_map import VisitorMap
 from throw_out_your_templates_4_core_default_visitors import default_visitors_map
 

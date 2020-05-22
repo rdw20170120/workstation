@@ -26,7 +26,8 @@ fi
 #  5.  Disable every optional fix transformations.
 #  6.  Look at the command output for problems, hunt them down in the Python2
 #      source files, and fix them.  Continue until the output is clean.  In
-#      particular, fix any 'ParseError's that arise.
+#      particular, fix any 'ParseError's that arise.  It appears that only this
+#      transformation produces a ParseError.
 #  7.  Enable write back to the source files.
 #  8.  Save the conversions to the source files.  I suggest commiting these
 #      file changes before proceeding.
@@ -57,7 +58,7 @@ convert () {
     # NO: cmd+=" --add-suffix=3"
     cmd+=" --verbose"
     # Write back to source files
-#   cmd+=" -nw --no-diffs"
+    cmd+=" -nw --no-diffs"
     # All safe bulk transformations
     cmd+=" --fix=all"
     # Optional not-so-safe transformations
@@ -79,13 +80,7 @@ convert () {
 # These directories should have Python3 source files in them
 # But $DirProject/lib/python2 should remain as Python2 source (until deleted)
 convert $DirProject/bin
-convert $DirProject/lib/python3/mine/astech
-convert $DirProject/lib/python3/mine/build
-convert $DirProject/lib/python3/mine/cert
-convert $DirProject/lib/python3/mine/euler
-convert $DirProject/lib/python3/mine/first
-convert $DirProject/lib/python3/mine/potrero_cloud_lab
-convert $DirProject/lib/python3/mine/sample_python
+convert $DirProject/lib/python3/mine
 convert $DirProject/lib/python3/third_party
 convert $DirProject/src
 

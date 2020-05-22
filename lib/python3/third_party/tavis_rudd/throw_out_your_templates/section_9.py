@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from decimal import Decimal
-from throw_out_your_templates_7_example_helpers import body
-from throw_out_your_templates_7_example_helpers import div
-from throw_out_your_templates_7_example_helpers import Example
-from throw_out_your_templates_7_example_helpers import examples_vmap
-from throw_out_your_templates_7_example_helpers import h1
-from throw_out_your_templates_7_example_helpers import head
-from throw_out_your_templates_7_example_helpers import li
-from throw_out_your_templates_7_example_helpers import span
-from throw_out_your_templates_7_example_helpers import title
-from throw_out_your_templates_7_example_helpers import ul
-from throw_out_your_templates_8_example_basic import HTML5Doc
+
+from .section_7 import Example
+from .section_7 import body
+from .section_7 import div
+from .section_7 import examples_vmap
+from .section_7 import h1
+from .section_7 import head
+from .section_7 import li
+from .section_7 import span
+from .section_7 import title
+from .section_7 import ul
+from .section_8 import HTML5Doc
 
 ################################################################################
 # 9: Extended example using some fictional model data

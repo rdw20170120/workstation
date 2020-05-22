@@ -1,30 +1,10 @@
+# TODO: RESEARCH: Does this need conversion for Python3?
 import itertools
 
-from script_bash import VISITOR_MAP
+from .script_bash      import visitor_map
+from .structure_script import *
+from .structure_script import _Statement
 
-
-####################################################################################################
-
-def flatten_via_chain(list_):
-    return list(itertools.chain.from_iterable(*list_))
-
-def flatten(sequence, types=(list, tuple)):
-    """ Flatten sequence made of types, returned as the same outer type as sequence.
-    REF: http://rightfootin.blogspot.com/2006/09/more-on-python-flatten.html
-    """
-    sequence_type = type(sequence)
-    sequence = list(sequence)
-    i = 0
-    while i < len(sequence):
-        while isinstance(sequence[i], types):
-            if not sequence[i]:
-                sequence.pop(i)
-                i -= 1
-                break
-            else:
-                sequence[i:i + 1] = sequence[i]
-        i += 1
-    return sequence_type(sequence)
 
 ####################################################################################################
 
@@ -54,23 +34,12 @@ def then():
 
 ####################################################################################################
 
-class _Statement(object):
-    def __init__(self, statement):
-        object.__init__(self)
-        self.statement = statement
-
-@VISITOR_MAP.register(_Statement)
-def visit_statement(element, walker):
-    walker.walk(element.statement)
-
-####################################################################################################
-
 class _Arguments(object):
     def __init__(self, *argument):
         object.__init__(self)
         self.arguments = argument
 
-@VISITOR_MAP.register(_Arguments)
+@visitor_map.register(_Arguments)
 def visit_arguments(element, walker):
     if element.arguments is not None:
         for a in element.arguments:
@@ -83,7 +52,7 @@ class _Command(_Statement):
         self.arguments = _Arguments(*argument)
         self.command = command
 
-@VISITOR_MAP.register(_Command)
+@visitor_map.register(_Command)
 def visit_command(element, walker):
     walker.walk(element.command)
     walker.walk(element.arguments)
@@ -92,7 +61,7 @@ class _Substitution(_Command):
     def __init__(self, command, *argument):
         _Command.__init__(self, command, *argument)
 
-@VISITOR_MAP.register(_Substitution)
+@visitor_map.register(_Substitution)
 def visit_substitution(element, walker):
     walker.emit('$(')
     walker.walk(element.command)
@@ -131,7 +100,7 @@ class _Assign(_Command):
         self.expressions = expression
         self.variable = variable
 
-@VISITOR_MAP.register(_Assign)
+@visitor_map.register(_Assign)
 def visit_assign(element, walker):
     if element.command is not None:
         walker.walk(element.command)
@@ -145,25 +114,6 @@ def assign(variable, *expression):
 
 def export(variable, *expression):
     return _Assign('export', variable, *expression)
-
-####################################################################################################
-
-class _Comment(_Statement):
-    def __init__(self, *element):
-        _Statement.__init__(self, '_Comment')
-        self.content = element
-
-@VISITOR_MAP.register(_Comment)
-def visit_comment(element, walker):
-    walker.emit('#')
-    if isinstance(element.content, tuple):
-        if len(element.content) > 0:
-            walker.emit(' ')
-            walker.walk(element.content)
-    walker.emit('\n')
-
-def comment(*element):
-    return _Comment(*element)
 
 ####################################################################################################
 
@@ -199,7 +149,7 @@ class _DoubleQuoted(object):
         object.__init__(self)
         self.content = element
 
-@VISITOR_MAP.register(_DoubleQuoted)
+@visitor_map.register(_DoubleQuoted)
 def visit_double_quoted(element, walker):
     walker.emit('"')
     walker.walk(element.content)
@@ -215,7 +165,7 @@ class _Else(object):
         object.__init__(self)
         self.statements = statement
 
-@VISITOR_MAP.register(_Else)
+@visitor_map.register(_Else)
 def visit_else(element, walker):
     walker.emit('else')
     walker.emit(eol())
@@ -232,7 +182,7 @@ class _ElseIf(object):
         self.condition = condition
         self.statements = statement
 
-@VISITOR_MAP.register(_ElseIf)
+@visitor_map.register(_ElseIf)
 def visit_elif(element, walker):
     walker.emit('elif ')
     walker.walk(element.condition)
@@ -250,7 +200,7 @@ class _Fi(object):
     def __init__(self):
         object.__init__(self)
 
-@VISITOR_MAP.register(_Fi)
+@visitor_map.register(_Fi)
 def visit_fi(element, walker):
     walker.emit('fi')
     walker.emit(eol())
@@ -265,7 +215,7 @@ class _FileSystemPath(object):
         object.__init__(self)
         self.elements = element
 
-@VISITOR_MAP.register(_FileSystemPath)
+@visitor_map.register(_FileSystemPath)
 def visit_file_system_path(element, walker):
     if element.elements is not None:
         past_first = False
@@ -285,7 +235,7 @@ class _If(object):
         self.condition = condition
         self.statements = statement
 
-@VISITOR_MAP.register(_If)
+@visitor_map.register(_If)
 def visit_if(element, walker):
     walker.emit('if ')
     walker.walk(element.condition)
@@ -298,16 +248,6 @@ def if_(condition, *statement):
     return _If(condition, *statement)
 
 ####################################################################################################
-
-class _Shebang(_Comment):
-    def __init__(self, content):
-        _Comment.__init__(self, content)
-
-@VISITOR_MAP.register(_Shebang)
-def visit_comment(element, walker):
-    walker.emit('#!')
-    walker.walk(element.content)
-    walker.emit('\n')
 
 def shebang_execute():
     return _Shebang(_Command(path('/bin', 'bash')))
@@ -322,7 +262,7 @@ class _SingleQuoted(object):
         object.__init__(self)
         self.content = element
 
-@VISITOR_MAP.register(_SingleQuoted)
+@visitor_map.register(_SingleQuoted)
 def visit_single_quoted(element, walker):
     walker.emit("'")
     walker.walk(element.content)
@@ -338,7 +278,7 @@ class _Variable(object):
         object.__init__(self)
         self.name = variable_name
 
-@VISITOR_MAP.register(_Variable)
+@visitor_map.register(_Variable)
 def visit_variable(element, walker):
     walker.walk(element.name)
 
@@ -352,7 +292,7 @@ class _VariableReference(object):
         object.__init__(self)
         self.name = variable_name
 
-@VISITOR_MAP.register(_VariableReference)
+@visitor_map.register(_VariableReference)
 def visit_variable_reference(element, walker):
     walker.emit('$')
     walker.walk(element.name)
@@ -361,6 +301,7 @@ def vr(variable_name):
     return _VariableReference(variable_name)
 
 ####################################################################################################
+
 """ Disabled content
 """
 

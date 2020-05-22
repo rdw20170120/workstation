@@ -1,10 +1,10 @@
-import script_bash
-import script_briteonyx
+from . import script_bash
+from . import script_briteonyx
 
 from throw_out_your_templates_3_core_visitor_map import VisitorMap
 
-from structure_bash import *
-from structure_briteonyx import *
+from .structure_bash import *
+from .structure_briteonyx import *
 
 
 class Script(script_briteonyx.Script):

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from decimal import Decimal
 import types
 
-from decimal import Decimal
-from throw_out_your_templates_1_core_wrappers import safe_bytes
-from throw_out_your_templates_1_core_wrappers import safe_unicode
-from throw_out_your_templates_3_core_visitor_map import DEFAULT
-from throw_out_your_templates_3_core_visitor_map import VisitorMap
+from .section_1 import safe_bytes
+from .section_1 import safe_unicode
+from .section_3 import DEFAULT
+from .section_3 import VisitorMap
 
 ################################################################################
 # 4:  Default serialization visitors for standard Python types
@@ -25,7 +25,7 @@ default_visitors_map = VisitorMap({
 
 number_types = (int, int, Decimal, float, complex)
 func_types = (types.FunctionType, types.BuiltinMethodType, types.MethodType)
-sequence_types = (tuple, list, set, frozenset, xrange, types.GeneratorType)
+sequence_types = (tuple, list, set, frozenset, range, types.GeneratorType)
 
 for typeset, visitor in (
     (number_types, (lambda o, w: w.emit(str(o)))),

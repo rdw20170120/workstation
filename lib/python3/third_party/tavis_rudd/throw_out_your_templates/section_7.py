@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from throw_out_your_templates_1_core_wrappers import get_default_encoding
-from throw_out_your_templates_2_core_serializer import Serializer
-from throw_out_your_templates_5_frosting_dom_classes import htmltags
-from throw_out_your_templates_5_frosting_dom_classes import XmlElement
-from throw_out_your_templates_6_frosting_dom_visitors import visit_xml_element
-from throw_out_your_templates_6_frosting_dom_visitors import xml_default_visitors_map
+from .section_1 import get_default_encoding
+from .section_2 import Serializer
+from .section_5 import XmlElement
+from .section_5 import htmltags
+from .section_6 import visit_xml_element
+from .section_6 import xml_default_visitors_map
 
 ################################################################################
 # 7: Helpers for examples:

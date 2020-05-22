@@ -5,7 +5,7 @@ from tavis_rudd.throw_out_your_templates.section_4 import default_visitors_map
 
 class Renderer(object):
     def __init__(self, visitor_map=default_visitors_map, encoding=get_default_encoding()):
-        super().__init__(self)
+        super().__init__()
         self._encoding = encoding
         self._visitor_map = visitor_map
 

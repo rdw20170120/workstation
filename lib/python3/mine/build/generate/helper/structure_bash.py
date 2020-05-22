@@ -1,6 +1,6 @@
 import itertools
 
-from script_bash import VISITOR_MAP
+from .script_bash import VISITOR_MAP
 
 
 ####################################################################################################

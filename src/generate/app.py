@@ -27,7 +27,6 @@ class ContentGeneratorApp:
         self._target_directory = target_directory
 
     def _generate(self):
-        maybe_create_directory(directory)
         render_project_activate_script(self._target_directory)
 
     def _prepare(self):

@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 
-from throw_out_your_templates_1_core_wrappers import safe_unicode
-from throw_out_your_templates_4_core_default_visitors import default_visitors_map
-from throw_out_your_templates_5_frosting_dom_classes import Comment
-from throw_out_your_templates_7_example_helpers import body
-from throw_out_your_templates_7_example_helpers import div
-from throw_out_your_templates_7_example_helpers import Example
-from throw_out_your_templates_7_example_helpers import examples_vmap
-from throw_out_your_templates_7_example_helpers import head
-from throw_out_your_templates_7_example_helpers import html
-from throw_out_your_templates_7_example_helpers import htmltags
-from throw_out_your_templates_7_example_helpers import meta
-from throw_out_your_templates_7_example_helpers import script
-from throw_out_your_templates_7_example_helpers import span
-from throw_out_your_templates_7_example_helpers import title
+from .section_1 import safe_unicode
+from .section_4 import default_visitors_map
+from .section_5 import Comment
+from .section_7 import Example
+from .section_7 import body
+from .section_7 import div
+from .section_7 import examples_vmap
+from .section_7 import head
+from .section_7 import html
+from .section_7 import htmltags
+from .section_7 import meta
+from .section_7 import script
+from .section_7 import span
+from .section_7 import title
 
 ################################################################################
 # 8: Basic examples

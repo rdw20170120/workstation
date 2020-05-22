@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from throw_out_your_templates_1_core_wrappers import safe_unicode
+from .section_1 import safe_unicode
 
 ################################################################################
 # 2: Serializer
