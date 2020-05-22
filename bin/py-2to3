@@ -46,8 +46,8 @@ fi
 # 19.  Save the conversions to the source files.  I suggest commiting these
 #      file changes too.
 # 20.  When the process is done, leave this script as you found it: writing
-#      back should be left disabled, while all the transformations should be
-#      left enabled.
+#      back should be disabled, while ONLY the 'all' transformation should be
+#      enabled.
 
 convert () {
     # Convert Python2 source files to Python3 within directory $1
@@ -61,11 +61,11 @@ convert () {
     # All safe bulk transformations
     cmd+=" --fix=all"
     # Optional not-so-safe transformations
-    cmd+=" -p"
-    cmd+=" --fix=buffer"
-    cmd+=" --fix=idioms"
-    cmd+=" --fix=set_literal"
-    cmd+=" --fix=ws_comma"
+#   cmd+=" -p"
+#   cmd+=" --fix=buffer"
+#   cmd+=" --fix=idioms"
+#   cmd+=" --fix=set_literal"
+#   cmd+=" --fix=ws_comma"
     # Execute tool, but filter out the noise
     $cmd $1 2>&1 \
         | grep -v 'Adding transformation' \

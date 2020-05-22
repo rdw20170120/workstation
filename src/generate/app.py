@@ -1,5 +1,5 @@
 #!/bin/false
-# Intended to be executed as a Python module: python3 -m MODULE
+# Intended to be executed as a Python module:  python3 -m MODULE
 
 from argparse import ArgumentParser
 from logging  import DEBUG
@@ -9,13 +9,17 @@ from logzero import logger as log
 from logzero import loglevel
 
 from build.helper.Python.my_system                     import recreate_directory
-from .config                                           import Config
 from potrero_cloud_lab.src.pipeline.utility.processing import create_pid_file
 from potrero_cloud_lab.src.pipeline.utility.processing import delete_pid_file
 from potrero_cloud_lab.src.pipeline.utility.processing import get_pid
 
+from .config                  import Config
+from .script_project_activate import render as render_project_activate_script
+
+
 loglevel(level=DEBUG)
 c = Config()
+
 
 class ContentGeneratorApp:
     def __init__(self, target_directory):
@@ -23,7 +27,8 @@ class ContentGeneratorApp:
         self._target_directory = target_directory
 
     def _generate(self):
-        pass
+        maybe_create_directory(directory)
+        render_project_activate_script(self._target_directory)
 
     def _prepare(self):
         log.info(
