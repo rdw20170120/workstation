@@ -74,7 +74,7 @@ class Config:
 
     @property
     def project_directory(self):
-        return Path(my_environment.get('DirProject'))
+        return Path(my_environment.get('BO_Project'))
     
     @property
     def should_fake_it(self):

@@ -4,8 +4,8 @@ set -e
 
 # Wipe project directory, which is a deeper clean
 
-if [[ -z "$DirProject" ]] ; then
-    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+if [[ -z "$BO_Project" ]] ; then
+    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
 fi
 
@@ -17,8 +17,8 @@ fi
 prj-clean
 
 echo "INFO: Wiping (cleaning deeper)..."
-rm -fr $DirProject/.pytest_cache 
-rm -fr $DirProject/log 
+rm -fr $BO_Project/.pytest_cache 
+rm -fr $BO_Project/log 
 pve-rm
 
 # TODO: Wipe other caches such as for 'pip'

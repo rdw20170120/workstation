@@ -4,8 +4,8 @@ set -e
 
 # Recreate Python virtual environment directory
 
-if [[ -z "$DirProject" ]] ; then
-    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+if [[ -z "$BO_Project" ]] ; then
+    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
 fi
 
@@ -19,7 +19,7 @@ prj-wipe
 pve-create
 
 # Source Python virtual environment activation script (indirectly)
-Script=$DirProject/bin/lib/pve-activate
+Script=$BO_Project/bin/lib/pve-activate
 if [[ -r $Script ]] ; then
     source $Script
 else

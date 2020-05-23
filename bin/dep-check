@@ -4,12 +4,12 @@ set -e
 
 # Check Python dependencies
 
-if [[ -z "$DirProject" ]] ; then
-    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+if [[ -z "$BO_Project" ]] ; then
+    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
 fi
 
-File=$DirProject/cfg/requirements.txt
+File=$BO_Project/cfg/requirements.txt
 
 if [[ ! -r "$File" ]] ; then
     echo "FATAL: Python dependencies file '$File' is unreadable, aborting"

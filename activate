@@ -1,33 +1,52 @@
-#!/bin/false
+#!/usr/bin/env/false
 # NOTE: Intended to be sourced into a BASH shell by the user.
+###############################################################################
+# NOTE: We MUST NOT EVER 'exit' during BriteOnyx bootstrap or activation
+###############################################################################
+# Activate the BriteOnyx framework to manage this project directory tree
+#
+# NOTE: This script, and EVERY script that it calls, must NOT invoke 'exit'!  The user calling this
+#   script must be allowed to preserve their shell and every effort must be made to inform the user
+#   of problems while continuing execution where possible.  Terminating the shell robs the user of
+#   useful feedback and interrupts their work, which is unacceptable.  Instead, the BASH 'return'
+#   statement should be invoked to end execution with an appropriate status code.
+###############################################################################
 
-# Activate this directory tree as a project that can be managed by its scripts
-
-# Prevent duplicate activation
-if [[ -n "$DirProject" ]]; then
-    echo "FATAL: This project is already activated as '$DirProject', aborting"
+if [[ -n "$BO_Project" ]] ; then
+    echo "FATAL: This project is already activated as '$BO_Project', aborting"
     return 1  # Exit from the script, but not from the shell
 fi
 
-# Capture incoming environment
-env | sort > $PWD/env-incoming.out
+# Capture incoming BASH environment
+  env | sort > $PWD/BO-env-incoming.out
 
-# Remember this activated directory
-echo "INFO: Activating this directory '$PWD' as the current project"
-export DirProject=$PWD
-
-# Remember temporary directory
-export TMPDIR=$HOME/tmp
-echo "DEBUG: Remembering temporary directory as '$TMPDIR'"
-if [[ ! -d $TMPDIR ]] ; then
+TMPDIR=/tmp
+[[ -n "$USER" ]] && TMPDIR=/tmp/$USER
+[[ -n "$HOME" ]] && TMPDIR=$HOME/tmp
+# Create random temporary directory
+dir=$(mktemp --tmpdir -d BO-XXXXXXXX)
+[[ -d "$dir" ]] && TMPDIR=$dir
+if [[ ! -e "$TMPDIR" ]] ; then
     mkdir $TMPDIR
-    echo "INFO: Temporary directory '$TMPDIR' created"
+    echo "INFO:  Temporary directory '$TMPDIR' created"
+elif [[ ! -d "$TMPDIR" ]] ; then
+    echo "FATAL: Path '$TMPDIR' is NOT a (temporary) directory, aborting"
+    return 1  # Exit from the script, but not from the shell
+fi
+if [[ -d "$TMPDIR" ]] ; then
+    echo "INFO:  Temporary directory '$TMPDIR' remembered"
+    export TMPDIR
 else
-    echo "DEBUG: Temporary directory '$TMPDIR' already exists"
+    echo "FATAL: Failed to establish temporary directory '$TMPDIR', aborting"
+    return 1  # Exit from the script, but not from the shell
 fi
 
+echo "INFO:  Activating this directory '$PWD' as the current project"
+export BO_Project=$PWD
+
 # Source Python virtual environment activation script (indirectly)
-Script=$DirProject/bin/lib/pve-activate
+# TODO: Capture outgoing PATH and PYTHON_PATH
+Script=$BO_Project/bin/lib/pve-activate
 if [[ -r $Script ]] ; then
     source $Script
 else
@@ -35,12 +54,12 @@ else
 fi
 
 # Remember an adjusted PATH
-PATH=$PATH:$DirProject/bin
+PATH=$PATH:$BO_Project/bin
 export PATH
 echo "DEBUG: Remembering PATH as:  $PATH"
 
 # Source optional BASH alias definitions for source control
-Script=$DirProject/alias-git
+Script=$BO_Project/alias-git
 if [[ -r $Script ]] ; then
     echo "INFO: Sourcing BASH alias definitions from script '$Script'"
     source $Script
@@ -49,7 +68,7 @@ else
 fi
 
 # Source optional BASH alias definitions specific to this project
-Script=$DirProject/alias-project
+Script=$BO_Project/alias-project
 if [[ -r $Script ]] ; then
     echo "INFO: Sourcing BASH alias definitions from script '$Script'"
     source $Script
@@ -58,7 +77,7 @@ else
 fi
 
 # Source an optional user/machine-specific context
-Script=$DirProject/context
+Script=$BO_Project/context
 if [[ -r $Script ]] ; then
     echo "INFO: Sourcing user/machine-specific context from script '$Script'"
     source $Script
@@ -66,6 +85,10 @@ else
     echo "WARN: Script file '$Script' is not readable, ignoring"
 fi
 
-# Capture outgoing environment
-env | sort > $PWD/env-outgoing.out
+# Capture outgoing BASH environment
+  env | sort > $PWD/BO-env-outgoing.out
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

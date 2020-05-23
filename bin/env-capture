@@ -4,12 +4,12 @@ set -e
 
 # Capture BASH environment
 
-if [[ -z "$DirProject" ]] ; then
-    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+if [[ -z "$BO_Project" ]] ; then
+    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
 fi
 
-File=$DirProject/cfg/env.out
+File=$BO_Project/cfg/env.out
 
 echo "INFO: Capturing BASH environment to '$File'"
 env-report > $File

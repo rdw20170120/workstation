@@ -4,15 +4,15 @@ set -e
 
 # Compile all Python source
 
-if [[ -z "$DirProject" ]] ; then
-    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+if [[ -z "$BO_Project" ]] ; then
+    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
 fi
 
 echo "INFO: Compiling Python source files..."
-python3 -m compileall -f $DirProject/bin
-python3 -m compileall -f $DirProject/lib
-python3 -m compileall -f $DirProject/src
+python3 -m compileall -f $BO_Project/bin
+python3 -m compileall -f $BO_Project/lib
+python3 -m compileall -f $BO_Project/src
 
 # TODO: Compile Python2 source files?
 

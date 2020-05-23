@@ -3,59 +3,121 @@ import itertools
 
 from .bash_script      import visitor_map
 from .script_structure import *
+from .script_structure import _Command
+from .script_structure import _Shebang
 from .script_structure import _Statement
 
 
 ####################################################################################################
 
-def and_():
-    return ' && '
+def and_(): return ' && '
 
-def eol():
-    return '\n'
+def eol(): return '\n'
 
-def line(text=None):
-    return [text, eol()]
+def indent(): return '    '
 
-def nl():
-    return line('\\')
+def line(text=None): return [text, eol()]
 
-def or_():
-    return ' || '
+def nl(): return line('\\')
 
-def pipe():
-    return ' | '
+def or_(): return ' || '
 
-def seq():
-    return ' ; '
+def pipe(): return ' | '
 
-def then():
-    return 'then'
+def seq(): return ' ; '
+
+def then(): return 'then'
 
 ####################################################################################################
 
-class _Arguments(object):
-    def __init__(self, *argument):
-        object.__init__(self)
-        self.arguments = argument
+def echo(*argument):
+    return command('echo', *argument)
 
-@visitor_map.register(_Arguments)
-def _visit_arguments(element, walker):
-    if element.arguments is not None:
-        for a in element.arguments:
-            walker.emit(' ')
-            walker.walk(a)
+def echo_fatal(*elements):
+    return echo(dq('FATAL: ', *elements))
 
-class _Command(_Statement):
-    def __init__(self, command, *argument):
-        _Statement.__init__(self, '_Command')
-        self.arguments = _Arguments(*argument)
-        self.command = command
+def echo_info(*elements):
+    return echo(dq('INFO:  ', *elements))
 
-@visitor_map.register(_Command)
-def _visit_command(element, walker):
-    walker.walk(element.command)
-    walker.walk(element.arguments)
+def echo_trace(*elements):
+    return echo(dq('TRACE: ', *elements))
+
+def echo_warn(*elements):
+    return echo(dq('WARN:  ', *elements))
+
+####################################################################################################
+
+def debugging_comment():
+    return [
+        note('Uncomment the following two lines for debugging'),
+        comment(set('-o', 'verbose')),
+        comment(set('-o', 'xtrace')),
+    ]
+
+def disabled_content_footer():
+    return [
+        line(),
+        rule(),
+        command(':', '<<', sq('DisabledContent')), eol(),
+        line('DisabledContent'),
+        line(),
+    ]
+
+def note(*elements):
+    return comment('NOTE: ', *elements)
+
+def rule():
+    # TODO: Make line length configurable
+    return line('#' * 79)
+
+def someday(*elements):
+    return todo('SOMEDAY: ', *elements)
+
+def todo(*elements):
+    return comment('TODO: ', *elements)
+
+####################################################################################################
+
+def exit(*argument):
+    return command('exit', *argument)
+
+def remember_status():
+    return assign(vn('Status'), '$?')
+
+def report_status():
+    return echo_fatal('Script exited with ', sq(vr('Status')))
+
+def return_(status):
+    return command('return', status)
+
+def return_last_status():
+    return return_('$?')
+
+def return_status():
+    return return_(vr('Status'))
+
+def status_is_failure():
+    return integer_is_not_equal(dq(vr('Status')), 0)
+
+####################################################################################################
+
+def set(*argument):
+    return command('set', *argument)
+
+####################################################################################################
+
+def source(file_name):
+    return command('source', file_name)
+
+def sourced_header():
+    return [
+        shebang_sourced(),
+        note('Intended to be sourced into a BASH shell by the user.'),
+#       execution_trace(),
+        rule(),
+    ]
+
+####################################################################################################
 
 class _Substitution(_Command):
     def __init__(self, command, *argument):
@@ -68,52 +130,30 @@ def _visit_substitution(element, walker):
     walker.walk(element.arguments)
     walker.emit(')')
 
-def command(command, *argument):
-    return _Command(command, *argument)
-
-def echo(*argument):
-    return command('echo', *argument)
-
-def exit(*argument):
-    return command('exit', *argument)
-
-def return_(status):
-    return command('return', status)
-
-def return_last_status():
-    return return_('$?')
-
-def set(*argument):
-    return command('set', *argument)
-
-def source(file_name):
-    return command('source', file_name)
-
 def substitute(command, *argument):
     return _Substitution(command, *argument)
 
 ####################################################################################################
 
-class _Assign(_Command):
-    def __init__(self, command, variable, *expression):
-        self.command = command
+class _Assign(_Statement):
+    def __init__(self, variable, *expression):
         self.expressions = expression
         self.variable = variable
 
 @visitor_map.register(_Assign)
 def _visit_assign(element, walker):
-    if element.command is not None:
-        walker.walk(element.command)
-        walker.emit(' ')
     walker.walk(element.variable)
     walker.emit('=')
     walker.walk(element.expressions)
 
 def assign(variable, *expression):
-    return _Assign(None, variable, *expression)
+    return _Assign(variable, *expression)
 
-def export(variable, *expression):
-    return _Assign('export', variable, *expression)
+def export(variable, expression=None):
+    if expression is None:
+        return command('export', variable)
+    else:
+        return command('export', _Assign(variable, expression))
 
 ####################################################################################################
 
@@ -132,6 +172,9 @@ def integer_is_not_equal(left, right):
 
 def path_does_not_exist(path_name):
     return _Condition('[[', '!', '-e', dq(path_name), ']]')
+
+def path_is_not_directory(path_name):
+    return _Condition('[[', '!', '-d', dq(path_name), ']]')
 
 def path_is_not_file(path_name):
     return _Condition('[[', '!', '-f', dq(path_name), ']]')
@@ -252,14 +295,8 @@ def if_(condition, *statement):
 def shebang_bash():
     return shebang_thru_env('bash')
 
-def shebang_false():
-    return shebang_thru_env('false')
-
-def shebang_source():
-    return shebang_thru_env('cat')
-
-def shebang_thru_env(executable):
-    return _Shebang(_Command(path('/usr/bin/env', executable)))
+def shebang_sourced():
+    return shebang_false()
 
 ####################################################################################################
 

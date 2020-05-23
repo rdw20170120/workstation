@@ -4,13 +4,13 @@ set -e
 
 # Check Python code
 
-if [[ -z "$DirProject" ]] ; then
-    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+if [[ -z "$BO_Project" ]] ; then
+    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
 fi
 
 clear
-python3 -m tabnanny -v $DirProject/src >$DirProject/cfg/tabnanny.out
-cat $DirProject/cfg/tabnanny.out | grep -v 'listing directory' | grep -v 'Clean bill of health.'
+python3 -m tabnanny -v $BO_Project/src >$BO_Project/cfg/tabnanny.out
+cat $BO_Project/cfg/tabnanny.out | grep -v 'listing directory' | grep -v 'Clean bill of health.'
 echo 'INFO: No output means all Python code passes all checks'
 

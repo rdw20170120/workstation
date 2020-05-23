@@ -5,8 +5,8 @@ set -e
 # Generate content
 
 # Require activation
-if [[ -z "$DirProject" ]] ; then
-    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+if [[ -z "$BO_Project" ]] ; then
+    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
 fi
 
@@ -21,7 +21,7 @@ DirTgt=$TMPDIR/tgt
 rm -fr "$DirTgt"
 mkdir -p "$DirTgt"
 
-Script=$DirProject/bin/lib/reference-Python-lib
+Script=$BO_Project/bin/lib/reference-Python-lib
 if [[ -r $Script ]] ; then
     source $Script
 else
@@ -29,11 +29,11 @@ else
 fi
 
 echo "INFO: Generating content into directory '$DirTgt'"
-cd $DirProject/src
+cd $BO_Project/src
 python3 -m generate "$DirTgt"
 
 echo "WARN: Please manually synchronize updates into the project from the generated output"
-echo "INFO: meld '$DirTgt' '$DirProject'"
+echo "INFO: meld '$DirTgt' '$BO_Project'"
 # TODO: Research why Meld does not open a new tab on macOS
-# DISABLED: meld --newtab "$DirTgt" "$DirProject" >/dev/null 2>&1 &
+# DISABLED: meld --newtab "$DirTgt" "$BO_Project" >/dev/null 2>&1 &
 

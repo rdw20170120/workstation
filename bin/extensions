@@ -32,7 +32,7 @@ def remove(theList, thePattern):
 def main():
    """Script entry point."""
    aCounts = {}
-   for aRoot, aDirectories, aFiles in walk(environ['DirProject']):
+   for aRoot, aDirectories, aFiles in walk(environ['BO_Project']):
       prune(aDirectories, aFiles)
       # print("Directory '%s'" % aRoot)
       for aFile in aFiles:

@@ -5,8 +5,8 @@ set -e
 # Clean project directory
 # TODO: Enhance to handle directories
 
-if [[ -z "$DirProject" ]] ; then
-    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+if [[ -z "$BO_Project" ]] ; then
+    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
 fi
 
@@ -20,25 +20,25 @@ findAnd () {
     # $1 = action to perform, either 'delete' or 'print'
     # $2 = directory in which to work
     # $3 = filename pattern to match
-    find $2 -not -path "$DirProject/.git/*" -and -not -path "$PVE/*" -and -name "$3" -$1 -and -type f
+    find $2 -not -path "$BO_Project/.git/*" -and -not -path "$PVE/*" -and -name "$3" -$1 -and -type f
 }
 
 echo "INFO: Found these files..."
-findAnd print $DirProject '__pycache'
-findAnd print $DirProject '*.bak'
-findAnd print $DirProject '*.pyc'
+findAnd print $BO_Project '__pycache'
+findAnd print $BO_Project '*.bak'
+findAnd print $BO_Project '*.pyc'
 
 echo "INFO: Deleting files..."
-findAnd delete $DirProject '__pycache'
-findAnd delete $DirProject '*.bak'
-findAnd delete $DirProject '*.pyc'
+findAnd delete $BO_Project '__pycache'
+findAnd delete $BO_Project '*.bak'
+findAnd delete $BO_Project '*.pyc'
 
-dir=$DirProject/src/.pytest_cache
+dir=$BO_Project/src/.pytest_cache
 echo "INFO: Deleting special directory '$dir' directly..."
 rm -fr "$dir"
 
 echo "WARN: Found these files REMAINING..."
-findAnd print $DirProject             '__pycache'
-findAnd print $DirProject             '*.bak'
-findAnd print $DirProject             '*.pyc'
+findAnd print $BO_Project             '__pycache'
+findAnd print $BO_Project             '*.bak'
+findAnd print $BO_Project             '*.pyc'
 

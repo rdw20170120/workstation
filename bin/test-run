@@ -4,19 +4,19 @@ set -e
 
 # Run tests
 
-if [[ -z "$DirProject" ]] ; then
-    echo "FATAL: Environment variable 'DirProject' is undefined, aborting"
+if [[ -z "$BO_Project" ]] ; then
+    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
 fi
 
-Script=$DirProject/bin/lib/reference-Python-lib
+Script=$BO_Project/bin/lib/reference-Python-lib
 if [[ -r $Script ]] ; then
     source $Script
 else
     echo "WARN: Script file '$Script' is not readable"
 fi
 
-cd $DirProject/src
+cd $BO_Project/src
 clear
 py.test --log-file=pytest.log --show-capture=no
 
