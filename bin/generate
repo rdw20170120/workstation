@@ -32,8 +32,10 @@ echo "INFO: Generating content into directory '$DirTgt'"
 cd $BO_Project/src
 python3 -m generate "$DirTgt"
 
-echo "WARN: Please manually synchronize updates into the project from the generated output"
-echo "INFO: meld '$DirTgt' '$BO_Project'"
-# TODO: Research why Meld does not open a new tab on macOS
-# DISABLED: meld --newtab "$DirTgt" "$BO_Project" >/dev/null 2>&1 &
+# TODO: Research why Meld does not open a new tab on macOS?
+cmd='meld --newtab'
+cmd+=" '$DirTgt' '$BO_Project'"
+cmd+=' >/dev/null 2>&1 &'
+echo "INFO: Use the following command to manually merge source updates:"
+echo $cmd
 

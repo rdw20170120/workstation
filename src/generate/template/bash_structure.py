@@ -12,13 +12,13 @@ from .script_structure import _Statement
 
 def and_(): return ' && '
 
-def eol(): return '\n'
+def bs(): return eol('\\')
+
+def eol(text=None): return [text, '\n']
 
 def indent(): return '    '
 
-def line(text=None): return [text, eol()]
-
-def nl(): return line('\\')
+def line(text=None): return eol(text)
 
 def or_(): return ' || '
 
@@ -54,6 +54,9 @@ def debugging_comment():
         comment(set('-o', 'xtrace')),
     ]
 
+def disabled(*elements):
+    return comment('DISABLED: ', *elements)
+
 def disabled_content_footer():
     return [
         line(),
@@ -62,6 +65,9 @@ def disabled_content_footer():
         line('DisabledContent'),
         line(),
     ]
+
+def no(*elements):
+    return note('NO: ', *elements)
 
 def note(*elements):
     return comment('NOTE: ', *elements)
@@ -81,17 +87,19 @@ def todo(*elements):
 def exit(*argument):
     return command('exit', *argument)
 
-def remember_status():
-    return assign(vn('Status'), '$?')
-
-def report_status():
-    return echo_fatal('Script exited with ', sq(vr('Status')))
-
-def return_(status):
-    return command('return', status)
+def return_(*argument):
+    return command('return', *argument)
 
 def return_last_status():
     return return_('$?')
+
+####################################################################################################
+
+def remember_status():
+    return assign(vn('Status'), '$?')
+
+def report_exit_status():
+    return echo_fatal('Script exited with ', sq(vr('Status')))
 
 def return_status():
     return return_(vr('Status'))
@@ -101,7 +109,7 @@ def status_is_failure():
 
 ####################################################################################################
 
-def set(*argument):
+def set_(*argument):
     return command('set', *argument)
 
 ####################################################################################################
@@ -167,6 +175,9 @@ def directory_exists(directory_name):
 def file_exists(file_name):
     return _Condition('[[', '-f', dq(file_name), ']]')
 
+def file_is_readable(file_name):
+    return _Condition('[[', '-r', dq(file_name), ']]')
+
 def integer_is_not_equal(left, right):
     return _Condition('[[', left, '-ne', right, ']]')
 
@@ -211,7 +222,7 @@ class _Else(object):
 @visitor_map.register(_Else)
 def _visit_else(element, walker):
     walker.emit('else')
-    walker.emit(eol())
+    walker.emit('\n')
     walker.walk(element.statements)
 
 def else_(*statement):
@@ -231,7 +242,7 @@ def _visit_elif(element, walker):
     walker.walk(element.condition)
     walker.emit(seq())
     walker.emit(then())
-    walker.emit(eol())
+    walker.emit('\n')
     walker.walk(element.statements)
 
 def elif_(condition, *statement):
@@ -246,7 +257,7 @@ class _Fi(object):
 @visitor_map.register(_Fi)
 def _visit_fi(element, walker):
     walker.emit('fi')
-    walker.emit(eol())
+    walker.emit('\n')
 
 def fi():
     return _Fi()
@@ -284,7 +295,7 @@ def _visit_if(element, walker):
     walker.walk(element.condition)
     walker.emit(seq())
     walker.emit(then())
-    walker.emit(eol())
+    walker.emit('\n')
     walker.walk(element.statements)
 
 def if_(condition, *statement):

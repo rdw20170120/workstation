@@ -14,6 +14,9 @@ Items should be struck-out and moved to the bottom when completed.
 
 I|U|Item
 -|-|---------------------------------------------------------------------------
-H|L|Add character set coding annotation to all Python source files
+H|L|Test for appropriate shebang on all source files
+H|L|Fix inappropriate shebang on any source files
+H|L|Test for character set coding annotation on all Python source files
+H|L|Fix inappropriate character set coding annotation on any Python source files
 H|H|~~Convert to Python3 source code~~
 

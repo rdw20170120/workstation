@@ -2,14 +2,18 @@
 # NOTE: Intended to be sourced into a BASH shell by the user.
 ###############################################################################
 # NOTE: We MUST NOT EVER 'exit' during BriteOnyx bootstrap or activation
+# NOTE: NO: set -e
+# DISABLED: set -x
 ###############################################################################
 # Activate the BriteOnyx framework to manage this project directory tree
 #
-# NOTE: This script, and EVERY script that it calls, must NOT invoke 'exit'!  The user calling this
-#   script must be allowed to preserve their shell and every effort must be made to inform the user
-#   of problems while continuing execution where possible.  Terminating the shell robs the user of
-#   useful feedback and interrupts their work, which is unacceptable.  Instead, the BASH 'return'
-#   statement should be invoked to end execution with an appropriate status code.
+# NOTE: This script, and EVERY script that it calls, must NOT invoke 'exit'!
+# The user calling this script must be allowed to preserve their shell and
+# every effort must be made to inform the user of problems while continuing
+# execution where possible.  Terminating the shell robs the user of useful
+# feedback and interrupts their work, which is unacceptable.  Instead, the BASH
+# 'return' statement should be invoked to end execution with an
+# appropriate status code.
 ###############################################################################
 
 if [[ -n "$BO_Project" ]] ; then
@@ -17,76 +21,84 @@ if [[ -n "$BO_Project" ]] ; then
     return 1  # Exit from the script, but not from the shell
 fi
 
-# Capture incoming BASH environment
-  env | sort > $PWD/BO-env-incoming.out
+env | sort > $PWD/BO-incoming.env
 
-TMPDIR=/tmp
-[[ -n "$USER" ]] && TMPDIR=/tmp/$USER
-[[ -n "$HOME" ]] && TMPDIR=$HOME/tmp
+echo "INFO:  Activating this directory '$PWD' as the current project"
+export BO_Project=$PWD
+
 # Create random temporary directory
-dir=$(mktemp --tmpdir -d BO-XXXXXXXX)
-[[ -d "$dir" ]] && TMPDIR=$dir
-if [[ ! -e "$TMPDIR" ]] ; then
-    mkdir $TMPDIR
+# TODO: This is macOS syntax.  Also address Ubuntu syntax.
+dir=$(mktemp -d -t "BO-$USER")
+if [[ -d "$dir" ]] ; then
+    TMPDIR=$dir
     echo "INFO:  Temporary directory '$TMPDIR' created"
-elif [[ ! -d "$TMPDIR" ]] ; then
-    echo "FATAL: Path '$TMPDIR' is NOT a (temporary) directory, aborting"
-    return 1  # Exit from the script, but not from the shell
 fi
 if [[ -d "$TMPDIR" ]] ; then
-    echo "INFO:  Temporary directory '$TMPDIR' remembered"
+    echo "INFO:  Remembering TMPDIR='$TMPDIR'"
     export TMPDIR
 else
     echo "FATAL: Failed to establish temporary directory '$TMPDIR', aborting"
     return 1  # Exit from the script, but not from the shell
 fi
 
-echo "INFO:  Activating this directory '$PWD' as the current project"
-export BO_Project=$PWD
+export BO_PathProject=$BO_Project/bin
+echo "INFO:  Remembering BO_PathProject=$BO_PathProject"
 
-# Source Python virtual environment activation script (indirectly)
-# TODO: Capture outgoing PATH and PYTHON_PATH
+[[ -z "$BO_PathSystem" ]] && \
+    export BO_PathSystem=$PATH && \
+    echo "INFO:  Remembering BO_PathSystem='$BO_PathSystem'"
+
+[[ -z "$BO_PathUser" ]] && \
+    export BO_PathUser=$HOME/bin && \
+    echo "INFO:  Remembering BO_PathUser='$BO_PathUser'"
+
+# Reset PATH before activating Python virtual environment
+export PATH=$BO_PathSystem
+
+env | sort > $PWD/BO-PVE-prior.env
+
 Script=$BO_Project/bin/lib/pve-activate
-if [[ -r $Script ]] ; then
+if [[ -r "$Script" ]] ; then
     source $Script
+    echo "INFO:  Sourced script file '$Script'"
 else
-    echo "WARN: Script file '$Script' is not readable"
+    echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi
 
-# Remember an adjusted PATH
-PATH=$PATH:$BO_Project/bin
-export PATH
-echo "DEBUG: Remembering PATH as:  $PATH"
+env | sort > $PWD/BO-PVE-after.env
 
-# Source optional BASH alias definitions for source control
+[[ -z "$BO_PathPve" ]] && \
+    export BO_PathPve=$PATH && \
+    echo "INFO:  Remembering BO_PathPve='$BO_PathPve'"
+
+export PATH=$BO_PathSystem:$BO_PathPve:$BO_PathProject:$BO_PathUser
+echo "INFO:  Remembering 'PATH' as '$PATH'"
+
 Script=$BO_Project/alias-git
-if [[ -r $Script ]] ; then
-    echo "INFO: Sourcing BASH alias definitions from script '$Script'"
+if [[ -r "$Script" ]] ; then
     source $Script
+    echo "INFO:  Sourced script file '$Script'"
 else
-    echo "WARN: Script file '$Script' is not readable, ignoring"
+    echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi
 
-# Source optional BASH alias definitions specific to this project
 Script=$BO_Project/alias-project
-if [[ -r $Script ]] ; then
-    echo "INFO: Sourcing BASH alias definitions from script '$Script'"
+if [[ -r "$Script" ]] ; then
     source $Script
+    echo "INFO:  Sourced script file '$Script'"
 else
-    echo "WARN: Script file '$Script' is not readable, ignoring"
+    echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi
 
-# Source an optional user/machine-specific context
 Script=$BO_Project/context
-if [[ -r $Script ]] ; then
-    echo "INFO: Sourcing user/machine-specific context from script '$Script'"
+if [[ -r "$Script" ]] ; then
     source $Script
+    echo "INFO:  Sourced script file '$Script'"
 else
-    echo "WARN: Script file '$Script' is not readable, ignoring"
+    echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi
 
-# Capture outgoing BASH environment
-  env | sort > $PWD/BO-env-outgoing.out
+env | sort > $PWD/BO-outgoing.env
 
 ###############################################################################
 : << 'DisabledContent'

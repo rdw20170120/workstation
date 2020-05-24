@@ -3,13 +3,6 @@ from .bash_structure import *
 from .bash_structure import _Command
 
 
-def source_script(file_name):
-    return [
-        assign(vn('Script'), file_name), eol(),
-        require_script(dq(vr('Script'))), or_(), failed(), or_(), return_last_status(), eol(),
-        source(dq(vr('Script'))), or_(), failed(), or_(), return_last_status(), eol(),
-    ]
-
 ####################################################################################################
 """ Disabled content
 ####################################################################################################
@@ -95,6 +88,13 @@ def execution_trace():
         and_(),
         echo_trace('Executing ', sq(vr('BASH_SOURCE'))),
         eol(),
+    ]
+
+def source_script(file_name):
+    return [
+        assign(vn('Script'), file_name), eol(),
+        require_script(dq(vr('Script'))), or_(), failed(), or_(), return_last_status(), eol(),
+        source(dq(vr('Script'))), or_(), failed(), or_(), return_last_status(), eol(),
     ]
 
 """

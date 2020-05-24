@@ -10,7 +10,7 @@ fi
 # Source the Python virtual environment activation script
 Script=$PVE/bin/activate
 if [[ -r $Script ]] ; then
-    echo "INFO: Activating Python virtual environment in directory '$PVE' via script '$Script'"
+    echo "INFO:  Activating Python virtual environment in directory '$PVE' via script '$Script'"
     source $Script
 else
     echo "WARN: Script file '$Script' is not readable"

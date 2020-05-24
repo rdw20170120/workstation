@@ -8,7 +8,7 @@ uname is hashed (/usr/bin/uname)
 which uname
 /usr/bin/uname
 ##########
-PATH=/Users/rwill253/project/Rob/workstation/.PVE/bin:/usr/bin:/bin:/usr/sbin:/usr/local/bin:/Users/rwill253/bin:/Users/rwill253/project/Rob/workstation/bin
+PATH=/usr/bin:/bin:/usr/sbin:/Users/rwill253/project/Rob/workstation/.PVE/bin:/usr/bin:/bin:/usr/sbin:/Users/rwill253/project/Rob/workstation/bin:/usr/local/bin:/Users/rwill253/bin
 ##########
 bash --version
 GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin18)
@@ -30,13 +30,12 @@ which git
 /usr/bin/git
 ##########
 python --version
-Python 3.8.2
 ##########
 type python
-python is hashed (/Users/rwill253/project/Rob/workstation/.PVE/bin/python)
+python is hashed (/usr/bin/python)
 ##########
 which python
-/Users/rwill253/project/Rob/workstation/.PVE/bin/python
+/usr/bin/python
 ##########
 PYTHONPATH=
 ##########
