@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a BASH shell.
+set -ex
+
+# Clone git repositories, if they have not been cloned already.
+# NOTE that I reference my special SSH configuration to handle the connection.
+
+source ~/bin/lib/git-maybe_clone.bash
+
+UrlPrefix=OptumGitHub:optumcaredataplatform
+Dir=~/project/OCDP
+
+maybe_clone $Dir $UrlPrefix OCDP_build_orchestration
+maybe_clone $Dir $UrlPrefix acr_push_charts
+maybe_clone $Dir $UrlPrefix azure-bitnami-charts
+maybe_clone $Dir $UrlPrefix azure-dpaas-client-deploy
+maybe_clone $Dir $UrlPrefix azure-dpaas-client-pre-requisites
+maybe_clone $Dir $UrlPrefix azure_aks_provision
+maybe_clone $Dir $UrlPrefix bitnami-docker-alertmanager
+maybe_clone $Dir $UrlPrefix bitnami-docker-configmap-reload
+maybe_clone $Dir $UrlPrefix bitnami-docker-grafana
+maybe_clone $Dir $UrlPrefix bitnami-docker-jmx-exporter
+maybe_clone $Dir $UrlPrefix bitnami-docker-kafka
+maybe_clone $Dir $UrlPrefix bitnami-docker-kafka-exporter
+maybe_clone $Dir $UrlPrefix bitnami-docker-kube-state-metrics
+maybe_clone $Dir $UrlPrefix bitnami-docker-node-exporter
+maybe_clone $Dir $UrlPrefix bitnami-docker-prometheus
+maybe_clone $Dir $UrlPrefix bitnami-docker-prometheus-operator
+maybe_clone $Dir $UrlPrefix bitnami-docker-zookeeper
+maybe_clone $Dir $UrlPrefix blobwriter
+maybe_clone $Dir $UrlPrefix blobwriter_deploy
+maybe_clone $Dir $UrlPrefix cdc-setup-supportfiles
+maybe_clone $Dir $UrlPrefix cloud_architecture_docs
+maybe_clone $Dir $UrlPrefix connect_deploy
+maybe_clone $Dir $UrlPrefix cp-helm-charts
+maybe_clone $Dir $UrlPrefix deidentify-smt
+maybe_clone $Dir $UrlPrefix dpaas-kafka-streams
+maybe_clone $Dir $UrlPrefix entity-builder-templates-ocd
+maybe_clone $Dir $UrlPrefix helm-schema-registry
+maybe_clone $Dir $UrlPrefix kafka-blob-storage
+maybe_clone $Dir $UrlPrefix kafka_deploy
+maybe_clone $Dir $UrlPrefix on-boarding_teammates
+maybe_clone $Dir $UrlPrefix prometheus_grafana_deploy
+maybe_clone $Dir $UrlPrefix readnfs
+maybe_clone $Dir $UrlPrefix secrets-management
+maybe_clone $Dir $UrlPrefix templates
+maybe_clone $Dir $UrlPrefix terraform-aks
+maybe_clone $Dir $UrlPrefix tf_azure_cosmos_account
+maybe_clone $Dir $UrlPrefix tf_azure_infra
+

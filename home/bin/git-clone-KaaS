@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a BASH shell.
+set -ex
+
+# Clone git repositories, if they have not been cloned already.
+# NOTE that I reference my special SSH configuration to handle the connection.
+
+source ~/bin/lib/git-maybe_clone.bash
+
+UrlPrefix=OptumGitHub:DataExternalization
+Dir=~/project/KaaS/DataExternalization
+
+maybe_clone $Dir $UrlPrefix aks_kafka_exporter
+maybe_clone $Dir $UrlPrefix aks_kafka_minion
+maybe_clone $Dir $UrlPrefix ansible_bespoke_kafka
+maybe_clone $Dir $UrlPrefix ansible_kafka
+maybe_clone $Dir $UrlPrefix ansible_schema_registry
+maybe_clone $Dir $UrlPrefix cass-security-consumer-topic
+maybe_clone $Dir $UrlPrefix common-stream-libs
+maybe_clone $Dir $UrlPrefix de-kafka-topics
+maybe_clone $Dir $UrlPrefix docker-fluentd-kafka
+maybe_clone $Dir $UrlPrefix docker_kafka
+maybe_clone $Dir $UrlPrefix eligibility-mirror-maker
+maybe_clone $Dir $UrlPrefix eligibility-mongo-data-loader
+maybe_clone $Dir $UrlPrefix entity-joiner
+maybe_clone $Dir $UrlPrefix group-reaper
+maybe_clone $Dir $UrlPrefix img_azure_kafka
+maybe_clone $Dir $UrlPrefix k8s-kafka
+maybe_clone $Dir $UrlPrefix kafka-agent-common
+maybe_clone $Dir $UrlPrefix kafka-burrow
+maybe_clone $Dir $UrlPrefix kafka-connect-cli
+maybe_clone $Dir $UrlPrefix kafka-connect-mongodb-docker
+maybe_clone $Dir $UrlPrefix kafka-exporter
+maybe_clone $Dir $UrlPrefix kafka-fluentd-config
+maybe_clone $Dir $UrlPrefix kafka-health
+maybe_clone $Dir $UrlPrefix kafka-minion
+maybe_clone $Dir $UrlPrefix kafka-topics
+maybe_clone $Dir $UrlPrefix kafka-topics-ihr
+maybe_clone $Dir $UrlPrefix kafka-topics-utilities
+maybe_clone $Dir $UrlPrefix kafka-topics-utilities-java
+maybe_clone $Dir $UrlPrefix kafka2es
+maybe_clone $Dir $UrlPrefix kafka_inventories
+maybe_clone $Dir $UrlPrefix kafka_minion_image
+maybe_clone $Dir $UrlPrefix local-kafka-platform
+maybe_clone $Dir $UrlPrefix mq-kafka-connector
+maybe_clone $Dir $UrlPrefix mq-kafka-connector-automation
+maybe_clone $Dir $UrlPrefix pkg_kafka
+maybe_clone $Dir $UrlPrefix pkg_kafka_exporter
+maybe_clone $Dir $UrlPrefix pkg_schema_registry
+maybe_clone $Dir $UrlPrefix prm-kafka-cluster-agent
+maybe_clone $Dir $UrlPrefix prm-kafka-ops-agent
+maybe_clone $Dir $UrlPrefix prm-state
+maybe_clone $Dir $UrlPrefix rest-proxy-openshift-templates
+maybe_clone $Dir $UrlPrefix support-intake
+maybe_clone $Dir $UrlPrefix tf_azure_kafka
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_dev-hemi
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_dev-test
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_dev-test-central
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_lab-ebaas
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_lab-ebaasenc
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_lab-ebaasenc-old
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_lab-hemi
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_prod-ebaasenc
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_prod-ebaasenc-iris
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_prod-ebaasenc-mnr
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_prod-ebaasenc-rxclaims
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_prod-ebaasenc-shared
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_prod-hemi
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_prod-iris
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_prod-mnr
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_prod-rxclaims
+maybe_clone $Dir $UrlPrefix tf_azure_kafka_prod-shared
+maybe_clone $Dir $UrlPrefix tf_kafka_admin
+
+UrlPrefix=OptumGitHub:Kafka
+Dir=~/project/KaaS/Kafka
+
+maybe_clone $Dir $UrlPrefix beholder
+maybe_clone $Dir $UrlPrefix disk-shares
+maybe_clone $Dir $UrlPrefix getting-started
+maybe_clone $Dir $UrlPrefix kaas-alpha
+maybe_clone $Dir $UrlPrefix kaas-client-metrics
+maybe_clone $Dir $UrlPrefix kaas-docker
+maybe_clone $Dir $UrlPrefix kaas-example-code
+maybe_clone $Dir $UrlPrefix kaas-integrations
+maybe_clone $Dir $UrlPrefix kaas-prod
+maybe_clone $Dir $UrlPrefix kafka
+maybe_clone $Dir $UrlPrefix kafka-checks
+maybe_clone $Dir $UrlPrefix prm-deploy
+

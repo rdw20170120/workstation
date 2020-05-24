@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a BASH shell.
+set -ex
+
+# Clone git repositories, if they have not been cloned already.
+# NOTE that I reference my special SSH configuration to handle the connection.
+
+source ~/bin/lib/git-maybe_clone.bash
+
+UrlPrefix=https://github.com/rdw20170120
+Dir=~/project/Rob
+
+# maybe_clone $Dir $UrlPrefix build
+# maybe_clone $Dir $UrlPrefix euler
+# maybe_clone $Dir $UrlPrefix first
+# maybe_clone $Dir $UrlPrefix javascript
+# maybe_clone $Dir $UrlPrefix sample-python
+# maybe_clone $Dir $UrlPrefix samples
+maybe_clone $Dir $UrlPrefix workstation
+

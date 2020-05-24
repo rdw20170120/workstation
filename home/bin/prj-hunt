@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a BASH shell.
+set -ex
+
+# Hunt for interesting content in git repositories checked out here
+
+script=$(which prj-grep)
+if [[ -z "$script" ]] ; then
+  echo "FATAL: Missing script '$script', aborting"
+  exit
+elif [[ ! -r "$script" ]] ; then
+  echo "FATAL: Unreadable script '$script', aborting"
+  exit
+fi
+
+out=~/Documents/hunt
+mkdir -p $out
+if [[ ! -d "$out" ]] ; then
+  echo "FATAL: Missing output directory '$out', aborting"
+  exit
+fi
+
+hunt () {
+  # Hunt for search phrase $2, capturing to file $1
+  # $1 = output directory
+  # $2 = search phrase
+  local -r f=$1/$2.out
+  if [[ -f "$f" ]] ; then
+    echo "WARN: Skipping, output file '$f' already exists"
+  else
+    echo "INFO: Hunting for '$2', writing to output file '$f'"
+    $script $2 >$f
+  fi
+}
+
+# Docker images
+hunt $out docker
+hunt $out image
+
+# other
+hunt $out azure
+hunt $out bitnami
+hunt $out cert
+hunt $out Jenkins
+hunt $out kafka
+hunt $out password
+hunt $out secret
+hunt $out Terraform 
+
