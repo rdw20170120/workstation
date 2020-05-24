@@ -1,6 +1,3 @@
-# TODO: RESEARCH: Does this need conversion for Python3?
-import itertools
-
 from pathlib import Path
 
 from .script import visitor_map
@@ -11,29 +8,6 @@ from .script import visitor_map
 @visitor_map.register(Path)
 def _visit_path(element, walker):
     walker.walk(str(element))
-
-####################################################################################################
-
-def flatten_via_chain(list_):
-    return list(itertools.chain.from_iterable(*list_))
-
-def flatten(sequence, types=(list, tuple)):
-    """ Flatten sequence made of types, returned as the same outer type as sequence.
-    REF: http://rightfootin.blogspot.com/2006/09/more-on-python-flatten.html
-    """
-    sequence_type = type(sequence)
-    sequence = list(sequence)
-    i = 0
-    while i < len(sequence):
-        while isinstance(sequence[i], types):
-            if not sequence[i]:
-                sequence.pop(i)
-                i -= 1
-                break
-            else:
-                sequence[i:i + 1] = sequence[i]
-        i += 1
-    return sequence_type(sequence)
 
 ####################################################################################################
 
@@ -118,6 +92,33 @@ def shebang_thru_env(executable):
 
 ####################################################################################################
 
-""" Disabled content
-"""
+''' Disabled content
+
+####################################################################################################
+
+# TODO: RESEARCH: Does this need conversion for Python3?
+import itertools
+
+def flatten_via_chain(list_):
+    return list(itertools.chain.from_iterable(*list_))
+
+def flatten(sequence, types=(list, tuple)):
+    """ Flatten sequence made of types, returned as the same outer type as sequence.
+    REF: http://rightfootin.blogspot.com/2006/09/more-on-python-flatten.html
+    """
+    sequence_type = type(sequence)
+    sequence = list(sequence)
+    i = 0
+    while i < len(sequence):
+        while isinstance(sequence[i], types):
+            if not sequence[i]:
+                sequence.pop(i)
+                i -= 1
+                break
+            else:
+                sequence[i:i + 1] = sequence[i]
+        i += 1
+    return sequence_type(sequence)
+
+'''
 
