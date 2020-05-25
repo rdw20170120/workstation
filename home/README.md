@@ -4,7 +4,7 @@ workstations.
 So this is where my user login scripts belong, as well as other content to
 support my work on each workstation.
 Notice that there exist subdirectories for various operating systems such as
-macOS and Ubuntu.
+macOS and Linux.
 The content within those subdirectories are targeted for deployment into home
 directories hosted on the corresponding OS.
 The rest of the content within this `home` directory, that is not under one of
