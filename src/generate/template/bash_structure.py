@@ -190,6 +190,9 @@ def path_is_not_directory(path_name):
 def path_is_not_file(path_name):
     return _Condition('[[', '!', '-f', dq(path_name), ']]')
 
+def string_equals(left, right):
+    return _Condition('[[', dq(left), '==', dq(right), ']]')
+
 def string_is_not_null(expression):
     return _Condition('[[', '-n', dq(expression), ']]')
 

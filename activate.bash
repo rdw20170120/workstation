@@ -12,8 +12,8 @@
 # every effort must be made to inform the user of problems while continuing
 # execution where possible.  Terminating the shell robs the user of useful
 # feedback and interrupts their work, which is unacceptable.  Instead, the BASH
-# 'return' statement should be invoked to end execution with an
-# appropriate status code.
+# 'return' statement should be invoked to end execution with an appropriate
+# status code.
 ###############################################################################
 
 if [[ -n "$BO_Project" ]] ; then
@@ -26,9 +26,22 @@ env | sort > $PWD/BO-incoming.env
 echo "INFO:  Activating this directory '$PWD' as the current project"
 export BO_Project=$PWD
 
+# Detect operating system
+dir=$(uname)
+if [[ "$dir" == "Darwin" ]] ; then
+    export BO_OS=macOS
+else
+    export BO_OS=Linux
+fi
+echo "INFO:  Remembering BO_OS='$BO_OS'"
+
 # Create random temporary directory
-# TODO: This is macOS syntax.  Also address Ubuntu syntax.
-dir=$(mktemp -d -t "BO-$USER")
+if [[ "$BO_OS" == "macOS" ]] ; then
+    dir=$(mktemp -d -t "BO-$USER")
+else
+    # TODO: FIX: for Ubuntu
+    dir=$(mktemp -d -t "BO-$USER")
+fi
 if [[ -d "$dir" ]] ; then
     TMPDIR=$dir
     echo "INFO:  Temporary directory '$TMPDIR' created"
@@ -57,10 +70,10 @@ export PATH=$BO_PathSystem
 
 env | sort > $PWD/BO-PVE-prior.env
 
-Script=$BO_Project/bin/lib/pve-activate
+Script=$BO_Project/bin/lib/pve-activate.bash
 if [[ -r "$Script" ]] ; then
+    echo "INFO:  'source'ing script file '$Script'"
     source $Script
-    echo "INFO:  Sourced script file '$Script'"
 else
     echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi
@@ -74,26 +87,26 @@ env | sort > $PWD/BO-PVE-after.env
 export PATH=$BO_PathSystem:$BO_PathPve:$BO_PathProject:$BO_PathUser
 echo "INFO:  Remembering 'PATH' as '$PATH'"
 
-Script=$BO_Project/alias-git
+Script=$BO_Project/alias-git.bash
 if [[ -r "$Script" ]] ; then
+    echo "INFO:  'source'ing script file '$Script'"
     source $Script
-    echo "INFO:  Sourced script file '$Script'"
 else
     echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi
 
-Script=$BO_Project/alias-project
+Script=$BO_Project/alias-project.bash
 if [[ -r "$Script" ]] ; then
+    echo "INFO:  'source'ing script file '$Script'"
     source $Script
-    echo "INFO:  Sourced script file '$Script'"
 else
     echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi
 
-Script=$BO_Project/context
+Script=$BO_Project/context.bash
 if [[ -r "$Script" ]] ; then
+    echo "INFO:  'source'ing script file '$Script'"
     source $Script
-    echo "INFO:  Sourced script file '$Script'"
 else
     echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi

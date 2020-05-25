@@ -24,7 +24,7 @@ def _activate_python_virtual_environment():
         _reset_path_for_pve(),
         _capture_environment(vr('PWD'), 'PVE-prior'), eol(),
         line(),
-        _source_script((vr('BO_Project'), '/bin/lib/pve-activate')),
+        _source_script((vr('BO_Project'), '/bin/lib/pve-activate.bash')),
         _capture_environment(vr('PWD'), 'PVE-after'), eol(),
         _remember_pve_path(),
         _remember_path(),
@@ -52,8 +52,8 @@ def _comments():
         comment('every effort must be made to inform the user of problems while continuing'),
         comment('execution where possible.  Terminating the shell robs the user of useful'),
         comment('feedback and interrupts their work, which is unacceptable.  Instead, the BASH'),
-        comment(sq(return_()), ' statement should be invoked to end execution with an'),
-        comment('appropriate status code.'),
+        comment(sq(return_()), ' statement should be invoked to end execution with an appropriate'),
+        comment('status code.'),
         rule(),
     ]
 
@@ -66,8 +66,15 @@ def _create_random_tmpdir():
         line(),
         comment('Create random temporary directory'),
         # TODO: Consider creating method for 'mktemp'
-        todo('This is macOS syntax.  Also address Ubuntu syntax.'),
-        assign(vn(local), substitute('mktemp', '-d', '-t', dq('BO-', vr(user)))), eol(),
+        if_(
+            string_equals(vr('BO_OS'), 'macOS'),
+            indent(), assign(vn(local), substitute('mktemp', '-d', '-t', dq('BO-', vr(user)))), eol(),
+        ),
+        else_(
+            indent(), todo('FIX: for Ubuntu'),
+            indent(), assign(vn(local), substitute('mktemp', '-d', '-t', dq('BO-', vr(user)))), eol(),
+        ),
+        fi(),
         if_(
             directory_exists(vr(local)),
             indent(), assign(vn(tmpdir), vr(local)), eol(),
@@ -84,6 +91,24 @@ def _create_random_tmpdir():
             indent(), return_(1), '  ', comment('Exit from the script, but not from the shell'),
         ),
         fi(),
+    ]
+
+def _detect_operating_system():
+    # TODO: Make appropriate constants
+    local = 'dir'
+    return [
+        line(),
+        comment('Detect operating system'),
+        assign(vn(local), substitute('uname')), eol(),
+        if_(
+            string_equals(vr(local), 'Darwin'),
+            indent(), export(vn('BO_OS'), 'macOS'), eol(),
+        ),
+        else_(
+            indent(), export(vn('BO_OS'), 'Linux'), eol(),
+        ),
+        fi(),
+        echo_info('Remembering ', vn('BO_OS'), '=', sq(vr('BO_OS'))), eol(),
     ]
 
 # TODO: SOMEDAY: Rearrange PATH
@@ -156,8 +181,8 @@ def _source_script(script):
         assign(vn('Script'), script), eol(),
         if_(
             file_is_readable(vr('Script')),
+            indent(), echo_info(sq('source'), 'ing script file ', sq(vr('Script'))), eol(),
             indent(), source(vr('Script')), eol(),
-            indent(), echo_info('Sourced script file ', sq(vr('Script'))), eol(),
         ),
         else_(
             indent(), echo_warn('Script file ', sq(vr('Script')), ' is not readable, ignoring'), eol(),
@@ -169,11 +194,11 @@ def _source_script(script):
 def _source_supporting_scripts():
     return [
         line(),
-        _source_script((vr('BO_Project'), '/alias-git')),
+        _source_script((vr('BO_Project'), '/alias-git.bash')),
         line(),
-        _source_script((vr('BO_Project'), '/alias-project')),
+        _source_script((vr('BO_Project'), '/alias-project.bash')),
         line(),
-        _source_script((vr('BO_Project'), '/context')),
+        _source_script((vr('BO_Project'), '/context.bash')),
     ]
 
 def _build():
@@ -183,6 +208,7 @@ def _build():
         _abort_if_activated(),
         _capture_environment(vr('PWD'), 'incoming'), eol(),
         _remember_project_root(),
+        _detect_operating_system(),
         _create_random_tmpdir(),
         _activate_python_virtual_environment(),
         _source_supporting_scripts(),
@@ -193,7 +219,7 @@ def _build():
 
 visitor_map = VisitorMap(parent_map=briteonyx_script.visitor_map)
 
-def render(parent_directory, filename='activate', content=None, visitor_map=visitor_map):
+def render(parent_directory, filename='activate.bash', content=None, visitor_map=visitor_map):
     assert content is None
     content = _build()
     briteonyx_script.render(parent_directory, filename, content, visitor_map)
