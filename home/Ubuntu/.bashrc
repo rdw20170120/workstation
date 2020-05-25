@@ -1,8 +1,6 @@
-#!/bin/false
-# NOTE:  This file is intended to be executed as part of starting a BASH shell.
-
-export TERM=vt102
-export COLORTERM=truecolor
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
 [[ -z "$BO_PathOriginal" ]] && export BO_PathOriginal=$PATH
 export BO_PathHomebrew=/usr/local/bin

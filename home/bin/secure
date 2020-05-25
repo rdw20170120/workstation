@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# DISABLED: set -e
+###############################################################################
+# Secure parts of user home directory
+
+# Secure login scripts
+chmod u=rw,g=,o= ~/.bash_logout
+chmod u=rw,g=,o= ~/.bash_profile
+chmod u=rw,g=,o= ~/.bashrc
+chmod u=rw,g=,o= ~/.profile
+chmod u=rw,g=,o= ~/*.bash
+
+# Secure SSH directory
+dir=~/.ssh
+if [[ -d $dir ]] ; then
+  chmod u=rwx,g=,o= $dir
+  chmod u=rw,g=,o=  $dir/*
+fi
+
+# Secure personal script directory
+dir=~/bin
+if [[ -d $dir ]] ; then
+  chmod -R u=rwx,g=,o= $dir
+fi
+dir=~/bin/lib
+if [[ -d $dir ]] ; then
+  chmod u=rw,g=,o= $dir/*
+fi
+
+# Secure projects (GitHub repository checkouts)
+dir=~/project
+if [[ -d $dir ]] ; then
+  chmod -R g=,o= $dir
+fi
+

@@ -1,10 +1,13 @@
 HowTo setup source control
 ==========================
-**NOTE**: Substitute your own GitHub profile name for PROFILE below.
+Here is how to setup source control for this and other GitHub projects.
+Use your own GitHub PROFILE name and REPO name below as appropriate.
 
-Generate new SSH keys
----------------------
-Open a BASH shell on a machine running Ubuntu Linux.
+
+## Generate a new SSH key
+**NOTE**:  Do not bother with `ssh-agent`, if your new key has no passphrase.
+
+1. Open a BASH shell as the target user account on a machine running Ubuntu Linux.
 
 ~~~ bash
 ssh-keygen
@@ -14,23 +17,20 @@ ssh-keygen
 ls ~/.ssh
 ~~~
 
-Outputs at least these two new files:
+   which outputs these two new files:
 
     id_rsa id_rsa.pub
 
-Add the new SSH public key file to your GitHub account.
+1. Add the new SSH public key file (id_rsa.pub) to your GitHub account.
 
-Configure workstation to use SSH key to access GitHub
------------------------------------------------------
-**NOTE**:  Do not bother with `ssh-agent`, if your key has no passphrase.
-
-Open a BASH shell on target machine using target user account.
+## Configure SSH connection to GitHub
+1. Create (or edit) your SSH configuration file.
 
 ~~~ bash
 vim ~/.ssh/config
 ~~~
 
-Add this content to the file:
+1. Add this content to the file:
 
     Host MeAtGitHub
         Compression yes
@@ -39,19 +39,28 @@ Add this content to the file:
         StrictHostKeyChecking yes
         User git
 
-Save & exit vim by pressing `Escape :wq Enter`.
+1. Save & exit vim by pressing `Escape :wq Enter`.
+1. Protect the new SSH files.
 
 ~~~ bash
 chmod g=,o= ~/.ssh/*
+~~~
+
+1. Test and allow the new SSH connection.
+
+~~~ bash
+ssh -T git@github.com
+# Type 'yes' and hit 'Enter' to accept the authenticity of the GitHub host machine.
 ssh -T MeAtGitHub
 ~~~
 
-If necessary, troubleshoot SSH issues and Git issues until it works.
+1. If necessary, troubleshoot SSH issues and Git issues until it works.
 
-Clone project repository
-------------------------
+## Clone project repository
 **NOTE**: We use `MeAtGitHub` now as our prefix for the repo URL to trigger the
 use of the settings in `~/.ssh/config` that we created above.
+
+1. Open a BASH shell.
 
 ~~~ bash
 mkdir ~/project
@@ -60,16 +69,13 @@ git clone MeAtGitHub:PROFILE/REPO.git
 cd REPO
 ~~~
 
-Configure git for proper use
-----------------------------
-Open a BASH shell on target machine using target user account, then:
+1. View git configuration.
 
 ~~~ bash
-cd ~/project/REPO
 git config --list --show-origin
 ~~~
 
-which outputs something like this:
+   which outputs something like this:
 
     file:.git/config        core.repositoryformatversion=0
     file:.git/config        core.filemode=true
@@ -80,29 +86,31 @@ which outputs something like this:
     file:.git/config        branch.master.remote=origin
     file:.git/config        branch.master.merge=refs/heads/master
 
-Upon initial install, this should output nothing about your git user.  Let's
-change that.  These commands will set your name and email address for only
-this project.  If you want to set them globally for this user account on this
-machine, then add the '--global' option to each command.
+   Upon initial install, this should output nothing about your GitHub user.
+
+1. Let's change that.
+   These commands will set your name and email address for only this project.
+   If you want to set them globally for this user account on this machine, then
+   add the `--global` option to each command.
 
 ~~~ bash
 git config user.name 'Rob Williams'
 git config user.email rob@refactory.biz
 ~~~
 
-You may also configure an editor for git to use:
+1. You may also configure an editor for git to use:
 
 ~~~ bash
 git config core.editor vim
 ~~~
 
-Now, when you repeat the command above:
+1. Now, when you repeat the command above:
 
 ~~~ bash
 git config --list --show-origin
 ~~~
 
-you should see the new settings.
+   you should see the new settings.
 
     file:.git/config        core.repositoryformatversion=0
     file:.git/config        core.filemode=true
@@ -120,7 +128,7 @@ TODO: Document how to change git remote URLs
 
 ~~~ bash
 git remove -v
-git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+git remote set-url origin https://github.com/PROFILE/REPOSITORY.git
 ~~~
 
 [activate]: ./HowTo-activate_this_project.md "HowTo activate this project"

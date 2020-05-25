@@ -1,25 +1,56 @@
-HowTo install Ubuntu packages
-=============================
+# HowTo install Ubuntu packages
 Ubuntu provides most of what we need for an effective development, testing, and
-execution environment.  Here is how to get the last few bits specific to this
-project.
+execution environment.
+Here is how to get the last few bits specific to this project.
 
-Install packages
-----------------
+## Install packages
 ~~~bash
 sudo apt-get update
+sudo apt-get install git meld
+sudo apt-get install dropbox python3-gpg
 ~~~
 
-Install some development tools
+## Install Python3 with standard (not debugging) support
+REF: https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
+
+Using Linux Mint 19.3 Tricia Cinnamon (Ubuntu 18.04.1 Bionic Beaver)
+
+1. Open a shell
+1. Add Python PPA
 
 ~~~bash
-sudo apt-get install git meld vim
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    sudo apt-get update
 ~~~
 
-Install required project dependencies
+1. Install these packages
 
 ~~~bash
-sudo apt-get install python3-venv
+sudo apt-get install libpython3.8-minimal libpython3.8-stdlib python3.8 \
+  python3.8-minimal idle-python3.8 python3.8-doc python3.8-examples \
+  python3.8-venv
+~~~
+
+1. Do NOT attempt to install these packages, as they collide with Python 3.6
+   included with this Ubuntu release.
+
+    python3.8-distutils
+    python3.8-gdbm
+    python3.8-lib2to3
+    python3.8-tk
+
+## Install Neovim
+REF: https://launchpad.net/~neovim-ppa/+archive/ubuntu/stable
+
+Using Linux Mint 19.3 Tricia Cinnamon (Ubuntu 18.04.1 Bionic Beaver)
+
+## Install Neovim with Python3 support
+1. Open a shell
+
+~~~bash
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt-get update
+sudo apt-get install neovim neovim-qt neovim-runtime python3-neovim
 ~~~
 
 [activate]: ./HowTo-activate_this_project.md "HowTo activate this project"
