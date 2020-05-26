@@ -19,7 +19,7 @@ pve-rm
 pve-create
 
 # Source Python virtual environment activation script (indirectly)
-Script=$BO_Project/bin/lib/pve-activate
+Script=$BO_Project/bin/lib/pve-activate.bash
 if [[ -r $Script ]] ; then
     source $Script
 else

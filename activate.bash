@@ -39,8 +39,8 @@ echo "INFO:  Remembering BO_OS='$BO_OS'"
 if [[ "$BO_OS" == "macOS" ]] ; then
     dir=$(mktemp -d -t "BO-$USER")
 else
-    # TODO: FIX: for Ubuntu
-    dir=$(mktemp -d -t "BO-$USER")
+    # TODO: FIX: for Linux
+    dir=$(mktemp -d -t "BO-$USER-XXXXXXX")
 fi
 if [[ -d "$dir" ]] ; then
     TMPDIR=$dir
@@ -84,7 +84,7 @@ env | sort > $PWD/BO-PVE-after.env
     export BO_PathPve=$PATH && \
     echo "INFO:  Remembering BO_PathPve='$BO_PathPve'"
 
-export PATH=$BO_PathSystem:$BO_PathPve:$BO_PathProject:$BO_PathUser
+export PATH=$BO_PathPve:$BO_PathSystem:$BO_PathProject:$BO_PathUser
 echo "INFO:  Remembering 'PATH' as '$PATH'"
 
 Script=$BO_Project/alias-git.bash

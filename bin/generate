@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-set -e
 # This script is intended to be executed by a user in a BASH shell.
+set -e
+# DISABLED: set -x
 
 # Generate content
 
@@ -8,6 +9,13 @@ set -e
 if [[ -z "$BO_Project" ]] ; then
     echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
+fi
+
+Script=$BO_Project/bin/lib/reference-Python-lib.bash
+if [[ -r $Script ]] ; then
+    source $Script
+else
+    echo "WARN: Script file '$Script' is not readable"
 fi
 
 # Require TMPDIR
@@ -21,17 +29,11 @@ DirTgt=$TMPDIR/tgt
 rm -fr "$DirTgt"
 mkdir -p "$DirTgt"
 
-Script=$BO_Project/bin/lib/reference-Python-lib
-if [[ -r $Script ]] ; then
-    source $Script
-else
-    echo "WARN: Script file '$Script' is not readable"
-fi
-
 echo "INFO: Generating content into directory '$DirTgt'"
 cd $BO_Project/src
 python3 -m generate "$DirTgt"
 
+# Merge generated files into project directory
 # TODO: Research why Meld does not open a new tab on macOS?
 cmd='meld --newtab'
 cmd+=" '$DirTgt' '$BO_Project'"

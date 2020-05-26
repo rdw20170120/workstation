@@ -9,9 +9,13 @@ def _abort_if_activated():
         if_(
             string_is_not_null(vr('BO_Project')),
             indent(), echo_fatal(
-                'This project is already activated as ', sq(vr('BO_Project')), ', aborting'
+                'This project is already activated as ',
+                sq(vr('BO_Project')),
+                ', aborting'
             ), eol(),
-            indent(), return_(1), '  ', comment('Exit from the script, but not from the shell'),
+            indent(), return_(1), '  ', comment(
+                'Exit from the script, but not from the shell'
+            ),
         ),
         fi(),
     ]
@@ -40,7 +44,11 @@ def _capture_environment(directory_name, file_name):
 
 def _comments():
     return [
-        note('We MUST NOT EVER ', sq(exit()), ' during BriteOnyx bootstrap or activation'),
+        note(
+            'We MUST NOT EVER ',
+            sq(exit()),
+            ' during BriteOnyx bootstrap or activation'
+        ),
         no(set_('-e')),
         disabled(set_('-x')),
         rule(),
@@ -68,27 +76,45 @@ def _create_random_tmpdir():
         # TODO: Consider creating method for 'mktemp'
         if_(
             string_equals(vr('BO_OS'), 'macOS'),
-            indent(), assign(vn(local), substitute('mktemp', '-d', '-t', dq('BO-', vr(user)))), eol(),
+            indent(), assign(
+                vn(local),
+                substitute('mktemp', '-d', '-t', dq('BO-', vr(user)))
+            ), eol(),
         ),
         else_(
-            indent(), todo('FIX: for Ubuntu'),
-            indent(), assign(vn(local), substitute('mktemp', '-d', '-t', dq('BO-', vr(user)))), eol(),
+            indent(), todo('FIX: for Linux'),
+            indent(), assign(
+                vn(local),
+                substitute(
+                    'mktemp', '-d', '-t', dq('BO-', vr(user), '-XXXXXXX')
+                )
+            ), eol(),
         ),
         fi(),
         if_(
             directory_exists(vr(local)),
             indent(), assign(vn(tmpdir), vr(local)), eol(),
-            indent(), echo_info('Temporary directory ', sq(vr(tmpdir)), ' created'), eol(),
+            indent(), echo_info(
+                'Temporary directory ', sq(vr(tmpdir)), ' created'
+            ), eol(),
         ),
         fi(),
         if_(
             directory_exists(vr(tmpdir)),
-            indent(), echo_info('Remembering ', vn(tmpdir), '=', sq(vr(tmpdir))), eol(),
+            indent(), echo_info(
+                'Remembering ', vn(tmpdir), '=', sq(vr(tmpdir))
+            ), eol(),
             indent(), export(vn(tmpdir)), eol(),
         ),
         else_(
-            indent(), echo_fatal('Failed to establish temporary directory ', sq(vr(tmpdir)), ', aborting'), eol(),
-            indent(), return_(1), '  ', comment('Exit from the script, but not from the shell'),
+            indent(), echo_fatal(
+                'Failed to establish temporary directory ',
+                sq(vr(tmpdir)),
+                ', aborting'
+            ), eol(),
+            indent(), return_(1), '  ', comment(
+                'Exit from the script, but not from the shell'
+            ),
         ),
         fi(),
     ]
@@ -112,8 +138,8 @@ def _detect_operating_system():
     ]
 
 # TODO: SOMEDAY: Rearrange PATH
-# so that system directories are first
-# followed by the Python virtual environment directory,
+# so that the Python virtual environment directory is first,
+# followed by the system directories,
 # the project 'bin' directory is last,
 # links are replaced by the linked directory,
 # and duplicates are removed
@@ -122,12 +148,15 @@ def _remember_path():
     return [
         line(),
         export(vn('PATH'), (
-            vr('BO_PathSystem'),
-            ':', vr('BO_PathPve'),
+            # PVE path must precede system path to override Python
+            vr('BO_PathPve'),
+            ':', vr('BO_PathSystem'),
             ':', vr('BO_PathProject'),
             ':', vr('BO_PathUser')
         )), eol(),
-        echo_info('Remembering ', sq(vn('PATH')), ' as ', sq(vr('PATH'))), eol(),
+        echo_info(
+            'Remembering ', sq(vn('PATH')), ' as ', sq(vr('PATH'))
+        ), eol(),
     ]
 
 def _reset_path_for_pve():
@@ -141,13 +170,17 @@ def _remember_project_path():
     return [
         line(),
         export(vn('BO_PathProject'), (vr('BO_Project'), '/bin')), eol(),
-        echo_info('Remembering ', vn('BO_PathProject'), '=', vr('BO_PathProject')), eol(),
+        echo_info(
+            'Remembering ', vn('BO_PathProject'), '=', vr('BO_PathProject')
+        ), eol(),
     ]
 
 def _remember_project_root():
     return [
         line(),
-        echo_info('Activating this directory ', sq(vr('PWD')), ' as the current project'), eol(),
+        echo_info(
+            'Activating this directory ', sq(vr('PWD')), ' as the current project'
+        ), eol(),
         export(vn('BO_Project'), vr('PWD')), eol(),
     ]
 
@@ -156,7 +189,9 @@ def _remember_pve_path():
         line(),
         string_is_null(vr('BO_PathPve')), and_(), bs(),
         indent(), export(vn('BO_PathPve'), vr('PATH')), and_(), bs(),
-        indent(), echo_info('Remembering ', vn('BO_PathPve'), '=', sq(vr('BO_PathPve'))), eol(),
+        indent(), echo_info(
+            'Remembering ', vn('BO_PathPve'), '=', sq(vr('BO_PathPve'))
+        ), eol(),
     ]
 
 def _remember_system_path():
@@ -164,7 +199,9 @@ def _remember_system_path():
         line(),
         string_is_null(vr('BO_PathSystem')), and_(), bs(),
         indent(), export(vn('BO_PathSystem'), vr('PATH')), and_(), bs(),
-        indent(), echo_info('Remembering ', vn('BO_PathSystem'), '=', sq(vr('BO_PathSystem'))), eol(),
+        indent(), echo_info(
+            'Remembering ', vn('BO_PathSystem'), '=', sq(vr('BO_PathSystem'))
+        ), eol(),
     ]
 
 def _remember_user_path():
@@ -172,7 +209,9 @@ def _remember_user_path():
         line(),
         string_is_null(vr('BO_PathUser')), and_(), bs(),
         indent(), export(vn('BO_PathUser'), (vr('HOME'), '/bin')), and_(), bs(),
-        indent(), echo_info('Remembering ', vn('BO_PathUser'), '=', sq(vr('BO_PathUser'))), eol(),
+        indent(), echo_info(
+            'Remembering ', vn('BO_PathUser'), '=', sq(vr('BO_PathUser'))
+        ), eol(),
     ]
 
 # TODO: Make this reusable
@@ -181,11 +220,15 @@ def _source_script(script):
         assign(vn('Script'), script), eol(),
         if_(
             file_is_readable(vr('Script')),
-            indent(), echo_info(sq('source'), 'ing script file ', sq(vr('Script'))), eol(),
+            indent(), echo_info(
+                sq('source'), 'ing script file ', sq(vr('Script'))
+            ), eol(),
             indent(), source(vr('Script')), eol(),
         ),
         else_(
-            indent(), echo_warn('Script file ', sq(vr('Script')), ' is not readable, ignoring'), eol(),
+            indent(), echo_warn(
+                'Script file ', sq(vr('Script')), ' is not readable, ignoring'
+            ), eol(),
         ),
         fi(
         ),
@@ -219,7 +262,12 @@ def _build():
 
 visitor_map = VisitorMap(parent_map=briteonyx_script.visitor_map)
 
-def render(parent_directory, filename='activate.bash', content=None, visitor_map=visitor_map):
+def render(
+        parent_directory,
+        filename='activate.bash',
+        content=None,
+        visitor_map=visitor_map
+    ):
     assert content is None
     content = _build()
     briteonyx_script.render(parent_directory, filename, content, visitor_map)
