@@ -4,7 +4,7 @@
 alias la='ls -Agl'
 alias ll='ls -gl'
 
-alias vim='/usr/local/bin/nvim'
+alias vim='nvim'
 
 alias add='git add .'
 alias commit='git commit'
