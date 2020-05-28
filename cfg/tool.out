@@ -1,22 +1,18 @@
 ##########
 uname -a
-Linux jabbah 5.3.0-53-generic #47~18.04.1-Ubuntu SMP Thu May 7 13:10:50 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+Darwin LAMU02ZL33ZLVDQ.uhc.com. 18.7.0 Darwin Kernel Version 18.7.0: Mon Feb 10 21:08:45 PST 2020; root:xnu-4903.278.28~1/RELEASE_X86_64 x86_64
 ##########
 type uname
-uname is hashed (/bin/uname)
+uname is hashed (/usr/bin/uname)
 ##########
 which uname
-/bin/uname
+/usr/bin/uname
 ##########
-PATH=/usr/bin:/bin:/usr/sbin:/home/rob/project/workstation/.PVE/bin:/usr/bin:/bin:/usr/sbin:/home/rob/project/workstation/bin:/usr/local/bin:/home/rob/bin
+PATH=/Users/rwill253/project/Rob/workstation/.PVE/bin:/usr/bin:/bin:/usr/sbin:/usr/bin:/bin:/usr/sbin:/Users/rwill253/project/Rob/workstation/bin:/usr/local/bin:/Users/rwill253/bin
 ##########
 bash --version
-GNU bash, version 4.4.20(1)-release (x86_64-pc-linux-gnu)
-Copyright (C) 2016 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-
-This is free software; you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
+GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin18)
+Copyright (C) 2007 Free Software Foundation, Inc.
 ##########
 type bash
 bash is hashed (/bin/bash)
@@ -25,7 +21,7 @@ which bash
 /bin/bash
 ##########
 git --version
-git version 2.17.1
+git version 2.20.1 (Apple Git-117)
 ##########
 type git
 git is hashed (/usr/bin/git)
@@ -34,69 +30,68 @@ which git
 /usr/bin/git
 ##########
 python --version
+Python 3.8.2
 ##########
 type python
-python is hashed (/usr/bin/python)
+python is hashed (/Users/rwill253/project/Rob/workstation/.PVE/bin/python)
 ##########
 which python
-/usr/bin/python
+/Users/rwill253/project/Rob/workstation/.PVE/bin/python
 ##########
 PYTHONPATH=
 ##########
 pip --version
-pip 20.1.1 from /home/rob/project/workstation/.PVE/lib/python3.6/site-packages/pip (python 3.6)
+pip 20.1.1 from /Users/rwill253/project/Rob/workstation/.PVE/lib/python3.8/site-packages/pip (python 3.8)
 ##########
 type pip
-pip is hashed (/home/rob/project/workstation/.PVE/bin/pip)
+pip is hashed (/Users/rwill253/project/Rob/workstation/.PVE/bin/pip)
 ##########
 which pip
-/home/rob/project/workstation/.PVE/bin/pip
+/Users/rwill253/project/Rob/workstation/.PVE/bin/pip
 ##########
 python2 --version
-Python 2.7.17
+/Users/rwill253/project/Rob/workstation/bin/tool-report: line 12: python2: command not found
 ##########
 type python2
-python2 is hashed (/usr/bin/python2)
 ##########
 which python2
-/usr/bin/python2
 ##########
-2.7.17
 ##########
-['', '/usr/lib/python2.7', '/usr/lib/python2.7/plat-x86_64-linux-gnu', '/usr/lib/python2.7/lib-tk', '/usr/lib/python2.7/lib-old', '/usr/lib/python2.7/lib-dynload', '/usr/local/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages/gtk-2.0']
 ##########
 pip3 --version
-pip 20.1.1 from /home/rob/project/workstation/.PVE/lib/python3.6/site-packages/pip (python 3.6)
+pip 20.1.1 from /Users/rwill253/project/Rob/workstation/.PVE/lib/python3.8/site-packages/pip (python 3.8)
 ##########
 type pip3
-pip3 is hashed (/home/rob/project/workstation/.PVE/bin/pip3)
+pip3 is hashed (/Users/rwill253/project/Rob/workstation/.PVE/bin/pip3)
 ##########
 which pip3
-/home/rob/project/workstation/.PVE/bin/pip3
+/Users/rwill253/project/Rob/workstation/.PVE/bin/pip3
 ##########
 python3 --version
-Python 3.6.9
+Python 3.8.2
 ##########
 type python3
-python3 is hashed (/usr/bin/python3)
+python3 is hashed (/Users/rwill253/project/Rob/workstation/.PVE/bin/python3)
 ##########
 which python3
-/usr/bin/python3
+/Users/rwill253/project/Rob/workstation/.PVE/bin/python3
 ##########
-3.6.9
+3.8.2
 ##########
-['', '/usr/lib/python36.zip', '/usr/lib/python3.6', '/usr/lib/python3.6/lib-dynload', '/usr/local/lib/python3.6/dist-packages', '/usr/lib/python3/dist-packages', '/usr/lib/python3.6/dist-packages']
+['', '/usr/local/Cellar/python@3.8/3.8.2/Frameworks/Python.framework/Versions/3.8/lib/python38.zip', '/usr/local/Cellar/python@3.8/3.8.2/Frameworks/Python.framework/Versions/3.8/lib/python3.8', '/usr/local/Cellar/python@3.8/3.8.2/Frameworks/Python.framework/Versions/3.8/lib/python3.8/lib-dynload', '/Users/rwill253/project/Rob/workstation/.PVE/lib/python3.8/site-packages']
 ##########
 type 2to3
+2to3 is /usr/local/bin/2to3
 ##########
 which 2to3
+/usr/local/bin/2to3
 ##########
 py.test --version
-This is pytest version 5.4.2, imported from /home/rob/project/workstation/.PVE/lib/python3.6/site-packages/pytest/__init__.py
+This is pytest version 5.4.2, imported from /Users/rwill253/project/Rob/workstation/.PVE/lib/python3.8/site-packages/pytest/__init__.py
 ##########
 type py.test
-py.test is hashed (/home/rob/project/workstation/.PVE/bin/py.test)
+py.test is hashed (/Users/rwill253/project/Rob/workstation/.PVE/bin/py.test)
 ##########
 which py.test
-/home/rob/project/workstation/.PVE/bin/py.test
+/Users/rwill253/project/Rob/workstation/.PVE/bin/py.test
 Tool report succeeded

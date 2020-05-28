@@ -9,7 +9,7 @@ if [[ -z "$BO_Project" ]] ; then
     exit 1
 fi
 
-Script=$BO_Project/bin/lib/reference-Python-lib
+Script=$BO_Project/bin/lib/reference-Python-lib.bash
 if [[ -r $Script ]] ; then
     source $Script
 else

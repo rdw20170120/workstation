@@ -31,7 +31,7 @@ class ContentGeneratorApp:
 
     def _prepare(self):
         log.info(
-            "Generating scripts into directory '%s'", self._target_directory
+            "Generating content into directory '%s'", self._target_directory
             )
         recreate_directory(self._target_directory)
 
