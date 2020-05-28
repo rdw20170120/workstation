@@ -1,7 +1,11 @@
 from tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
 
-from .template                     import briteonyx_script
+from .template.briteonyx_script    import BriteOnyxScript
+from .template.briteonyx_script    import visitor_map as parent_visitor_map
 from .template.briteonyx_structure import *
+
+
+visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
 def _abort_if_activated():
     return [
@@ -244,8 +248,8 @@ def _source_supporting_scripts():
         _source_script((vr('BO_Project'), '/context.bash')),
     ]
 
-def _build():
-    return briteonyx_script.BriteOnyxScript([
+def build():
+    return [
         sourced_header(),
         _comments(),
         _abort_if_activated(),
@@ -257,147 +261,15 @@ def _build():
         _source_supporting_scripts(),
         _capture_environment(vr('PWD'), 'outgoing'), eol(),
         disabled_content_footer(),
-    ])
-
-
-visitor_map = VisitorMap(parent_map=briteonyx_script.visitor_map)
-
-def render(
-        parent_directory,
-        filename='activate.bash',
-        content=None,
-        visitor_map=visitor_map
-    ):
-    assert content is None
-    content = _build()
-    briteonyx_script.render(parent_directory, filename, content, visitor_map)
-
-
-""" Disabled content
-
-def _capture_incoming_environment():
-    return [
-        line(),
-        comment('Capture incoming BASH environment'),
-        if_(
-            string_is_not_null(vr('TMPDIR')),
-            indent(), _capture_environment(vr('TMPDIR'), 'BO-env-incoming.out'), eol(),
-        ),
-        elif_(
-            string_is_not_null(vr('BO_Project')),
-            indent(), _capture_environment(vr('BO_Project'), 'BO-env-incoming.out'), eol(),
-        ),
-        else_(
-            indent(), _capture_environment(vr('PWD'), 'BO-env-incoming.out'), eol(),
-        ),
-        fi(),
     ]
 
-def _capture_outgoing_environment():
-    return [
-        line(),
-        comment('Capture outgoing BASH environment'),
-        if_(
-            string_is_not_null(vr('TMPDIR')),
-            indent(), _capture_environment(vr('TMPDIR'), 'BO-env-outgoing.out'), eol(),
-        ),
-        elif_(
-            string_is_not_null(vr('BO_Project')),
-            indent(), _capture_environment(vr('BO_Project'), 'BO-env-outgoing.out'), eol(),
-        ),
-        else_(
-            indent(), _capture_environment(vr('PWD'), 'BO-env-outgoing.out'), eol(),
-        ),
-        fi(),
-    ]
+def generate(target_directory):
+    content = BriteOnyxScript(build(),
+        Path(), 'activate.bash'
+        )
+    content.render(target_directory)
 
-def demonstrate_logging():
-    return [
-        line(),
-        rule(),
-        comment('Demonstrate logging'),
-        line(),
-        log_debug('EXAMPLE: This is a debugging message'), eol(),
-        log_info('EXAMPLE: This is an informational message'), eol(),
-        log_warn('EXAMPLE: This is a warning message'), eol(),
-        log_error('EXAMPLE: This is an error message'), eol(),
-        log_fatal('"EXAMPLE: This is a fatal message'), eol(),
-    ]
 
-def initialize_logging_file():
-    return [
-        line(),
-        comment('Initialize BriteOnyx logging file'),
-        assign(vn('BO_FileLog'), 'BO.log'), eol(),
-        if_(
-            string_is_not_null(vr('TMPDIR')),
-            indent(), export(vn('BO_FileLog'), path(vr('TMPDIR'), vr('BO_FileLog'))), eol(),
-        ),
-        elif_(
-            string_is_not_null(vr('BO_Project')),
-            indent(), export(vn('BO_FileLog'), path(vr('BO_Project'), vr('BO_FileLog'))), eol(),
-        ),
-        else_(
-            indent(), export(vn('BO_FileLog'), path(vr('PWD'), vr('BO_FileLog'))), eol(),
-        ),
-        fi(),
-        echo_info('Activating...'), ' >', vr('BO_FileLog'), eol(),
-        echo_info('Activating the BriteOnyx framework for this project...'), eol(),
-        echo_warn("This script MUST be executed as 'source activate.src', WAS IT?"), eol(),
-    ]
-
-def normalize_reference_to_project_root():
-    return [
-        line(),
-        require_variable(sq(vn('BO_Project'))),
-        or_(),
-        failed(),
-        or_(),
-        return_last_status(), eol(),
-        trace_variable(sq(vn('BO_Project'))), eol(),
-        export(vn('BO_Project'), dq(substitute('boNodeCanonical', vr('BO_Project')))), eol(),
-        trace_variable(sq(vn('BO_Project'))), eol(),
-        bo_log_info(
-            'Canonical form of ',
-            vn('BO_Project'),
-            ' directory pathname is ',
-            sq(vr('BO_Project')),
-        ), eol(),
-        require_directory(vr('BO_Project')),
-        or_(),
-        failed(),
-        or_(),
-        return_last_status(), eol(),
-    ]
-
-def _remember_project_root():
-    return [
-        line(),
-        rule(),
-        comment('Remember the directory containing this script as our project root'),
-        line(),
-        export(vn('BO_Project'), dq(substitute('dirname', vr('BASH_SOURCE')))), eol(),
-        line(),
-        todo('REVIEW: Shall we NOT cd into our project directory since it changes'),
-        comment("the caller's execution environment?"),
-        comment(command('cd', dq(path(vr('BO_Project')))), or_(), return_last_status()),
-    ]
-
-##########
-
-        rule(),
-        debugging_comment(),
-        someday('Add inverse commands to isolate debugging'),
-        line(),
-
-##########
-
-        comment(),
-        someday(
-            'Verify that ',
-            vr('BO_Project'),
-            ' does indeed point to the root of our project directory tree',
-        ),
-
-"""
+''' Disabled content
+'''
 

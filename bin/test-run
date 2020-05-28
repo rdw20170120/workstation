@@ -17,6 +17,5 @@ else
 fi
 
 cd $BO_Project/src
-clear
 py.test --log-file=pytest.log --show-capture=no
 

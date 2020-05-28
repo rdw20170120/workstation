@@ -110,6 +110,6 @@ def set_file_contents(path_name, contents):
         f.write(contents)
 
 
-""" Disabled content
-"""
+''' Disabled content
+'''
 

@@ -1,24 +1,16 @@
-# TODO: RESEARCH: Does this need conversion for Python3?
-import itertools
-
 from .bash_script      import visitor_map
 from .script_structure import *
 from .script_structure import _Command
 from .script_structure import _Shebang
 from .script_structure import _Statement
 
-
-####################################################################################################
+###############################################################################
 
 def and_(): return ' && '
 
 def bs(): return eol('\\')
 
-def eol(text=None): return [text, '\n']
-
 def indent(): return '    '
-
-def line(text=None): return eol(text)
 
 def or_(): return ' || '
 
@@ -28,24 +20,24 @@ def seq(): return ' ; '
 
 def then(): return 'then'
 
-####################################################################################################
+###############################################################################
 
 def echo(*argument):
     return command('echo', *argument)
 
-def echo_fatal(*elements):
-    return echo(dq('FATAL: ', *elements))
+def echo_fatal(*element):
+    return echo(dq('FATAL: ', *element))
 
-def echo_info(*elements):
-    return echo(dq('INFO:  ', *elements))
+def echo_info(*element):
+    return echo(dq('INFO:  ', *element))
 
-def echo_trace(*elements):
-    return echo(dq('TRACE: ', *elements))
+def echo_trace(*element):
+    return echo(dq('TRACE: ', *element))
 
-def echo_warn(*elements):
-    return echo(dq('WARN:  ', *elements))
+def echo_warn(*element):
+    return echo(dq('WARN:  ', *element))
 
-####################################################################################################
+###############################################################################
 
 def debugging_comment():
     return [
@@ -54,8 +46,8 @@ def debugging_comment():
         comment(set('-o', 'xtrace')),
     ]
 
-def disabled(*elements):
-    return comment('DISABLED: ', *elements)
+def disabled(*element):
+    return comment('DISABLED: ', *element)
 
 def disabled_content_footer():
     return [
@@ -66,23 +58,23 @@ def disabled_content_footer():
         line(),
     ]
 
-def no(*elements):
-    return note('NO: ', *elements)
+def no(*element):
+    return note('NO: ', *element)
 
-def note(*elements):
-    return comment('NOTE: ', *elements)
+def note(*element):
+    return comment('NOTE: ', *element)
 
 def rule():
     # TODO: Make line length configurable
     return line('#' * 79)
 
-def someday(*elements):
-    return todo('SOMEDAY: ', *elements)
+def someday(*element):
+    return todo('SOMEDAY: ', *element)
 
-def todo(*elements):
-    return comment('TODO: ', *elements)
+def todo(*element):
+    return comment('TODO: ', *element)
 
-####################################################################################################
+###############################################################################
 
 def exit(*argument):
     return command('exit', *argument)
@@ -93,7 +85,7 @@ def return_(*argument):
 def return_last_status():
     return return_('$?')
 
-####################################################################################################
+###############################################################################
 
 def remember_status():
     return assign(vn('Status'), '$?')
@@ -107,12 +99,12 @@ def return_status():
 def status_is_failure():
     return integer_is_not_equal(dq(vr('Status')), 0)
 
-####################################################################################################
+###############################################################################
 
 def set_(*argument):
     return command('set', *argument)
 
-####################################################################################################
+###############################################################################
 
 def source(file_name):
     return command('source', file_name)
@@ -125,11 +117,11 @@ def sourced_header():
         rule(),
     ]
 
-####################################################################################################
+###############################################################################
 
 class _Substitution(_Command):
     def __init__(self, command, *argument):
-        _Command.__init__(self, command, *argument)
+        super().__init__(command, *argument)
 
 @visitor_map.register(_Substitution)
 def _visit_substitution(element, walker):
@@ -141,10 +133,11 @@ def _visit_substitution(element, walker):
 def substitute(command, *argument):
     return _Substitution(command, *argument)
 
-####################################################################################################
+###############################################################################
 
-class _Assign(_Statement):
+class _Assign(object):
     def __init__(self, variable, *expression):
+        super().__init__()
         self.expressions = expression
         self.variable = variable
 
@@ -163,11 +156,11 @@ def export(variable, expression=None):
     else:
         return command('export', _Assign(variable, expression))
 
-####################################################################################################
+###############################################################################
 
 class _Condition(_Command):
     def __init__(self, *argument):
-        _Command.__init__(self, *argument)
+        super().__init__(*argument)
 
 def directory_exists(directory_name):
     return _Condition('[[', '-d', dq(directory_name), ']]')
@@ -199,27 +192,11 @@ def string_is_not_null(expression):
 def string_is_null(expression):
     return _Condition('[[', '-z', dq(expression), ']]')
 
-####################################################################################################
-
-class _DoubleQuoted(object):
-    def __init__(self, *element):
-        object.__init__(self)
-        self.content = element
-
-@visitor_map.register(_DoubleQuoted)
-def _visit_double_quoted(element, walker):
-    walker.emit('"')
-    walker.walk(element.content)
-    walker.emit('"')
-
-def dq(*element):
-    return _DoubleQuoted(*element)
-
-####################################################################################################
+###############################################################################
 
 class _Else(object):
     def __init__(self, *statement):
-        object.__init__(self)
+        super().__init__()
         self.statements = statement
 
 @visitor_map.register(_Else)
@@ -231,11 +208,11 @@ def _visit_else(element, walker):
 def else_(*statement):
     return _Else(*statement)
 
-####################################################################################################
+###############################################################################
 
 class _ElseIf(object):
     def __init__(self, condition, *statement):
-        object.__init__(self)
+        super().__init__()
         self.condition = condition
         self.statements = statement
 
@@ -251,11 +228,11 @@ def _visit_elif(element, walker):
 def elif_(condition, *statement):
     return _ElseIf(condition, *statement)
 
-####################################################################################################
+###############################################################################
 
 class _Fi(object):
     def __init__(self):
-        object.__init__(self)
+        super().__init__()
 
 @visitor_map.register(_Fi)
 def _visit_fi(element, walker):
@@ -265,18 +242,18 @@ def _visit_fi(element, walker):
 def fi():
     return _Fi()
 
-####################################################################################################
+###############################################################################
 
 class _FileSystemPath(object):
     def __init__(self, *element):
-        object.__init__(self)
-        self.elements = element
+        super().__init__()
+        self.element = element
 
 @visitor_map.register(_FileSystemPath)
 def _visit_file_system_path(element, walker):
-    if element.elements is not None:
+    if element.element is not None:
         past_first = False
-        for e in element.elements:
+        for e in element.element:
             if past_first: walker.emit('/')
             walker.walk(e)
             past_first = True
@@ -284,11 +261,11 @@ def _visit_file_system_path(element, walker):
 def path(*element):
     return _FileSystemPath(*element)
 
-####################################################################################################
+###############################################################################
 
 class _If(object):
     def __init__(self, condition, *statement):
-        object.__init__(self)
+        super().__init__()
         self.condition = condition
         self.statements = statement
 
@@ -304,7 +281,7 @@ def _visit_if(element, walker):
 def if_(condition, *statement):
     return _If(condition, *statement)
 
-####################################################################################################
+###############################################################################
 
 def shebang_bash():
     return shebang_thru_env('bash')
@@ -312,27 +289,11 @@ def shebang_bash():
 def shebang_sourced():
     return shebang_false()
 
-####################################################################################################
-
-class _SingleQuoted(object):
-    def __init__(self, *element):
-        object.__init__(self)
-        self.content = element
-
-@visitor_map.register(_SingleQuoted)
-def _visit_single_quoted(element, walker):
-    walker.emit("'")
-    walker.walk(element.content)
-    walker.emit("'")
-
-def sq(*element):
-    return _SingleQuoted(*element)
-
-####################################################################################################
+###############################################################################
 
 class _Variable(object):
     def __init__(self, variable_name):
-        object.__init__(self)
+        super().__init__()
         self.name = variable_name
 
 @visitor_map.register(_Variable)
@@ -342,11 +303,11 @@ def _visit_variable(element, walker):
 def vn(variable_name):
     return _Variable(variable_name)
 
-####################################################################################################
+###############################################################################
 
 class _VariableReference(object):
     def __init__(self, variable_name):
-        object.__init__(self)
+        super().__init__()
         self.name = variable_name
 
 @visitor_map.register(_VariableReference)
@@ -357,8 +318,8 @@ def _visit_variable_reference(element, walker):
 def vr(variable_name):
     return _VariableReference(variable_name)
 
-####################################################################################################
+###############################################################################
 
-""" Disabled content
-"""
+''' Disabled content
+'''
 

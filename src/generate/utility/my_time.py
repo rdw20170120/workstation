@@ -38,6 +38,6 @@ def timestamp_as_datetime_utc(timestamp):
     assert has_type(result, dt_datetime), has_type_message(result, dt_datetime)
     return result
 
-""" Disabled content
-"""
+''' Disabled content
+'''
 

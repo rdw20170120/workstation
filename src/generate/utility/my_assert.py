@@ -20,6 +20,6 @@ def unrecognized_message(actual_value, unexpected_kind, name):
     return "Value '{0}' is an unrecognized {1} of '{2}'".format(actual_value, name, unexpected_kind)
 
 
-""" Disabled content
-"""
+''' Disabled content
+'''
 

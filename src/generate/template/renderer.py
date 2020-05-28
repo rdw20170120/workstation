@@ -28,6 +28,6 @@ class Renderer(object):
                 f.write(self._serialize(content))
 
 
-""" Disabled content
-"""
+''' Disabled content
+'''
 
