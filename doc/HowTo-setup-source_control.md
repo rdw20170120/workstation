@@ -1,8 +1,6 @@
-HowTo setup source control
-==========================
+# HowTo setup source control
 Here is how to setup source control for this and other GitHub projects.
 Use your own GitHub PROFILE name and REPO name below as appropriate.
-
 
 ## Generate a new SSH key
 **NOTE**:  Do not bother with `ssh-agent`, if your new key has no passphrase.
@@ -90,8 +88,7 @@ git config --list --show-origin
 
 1. Let's change that.
    These commands will set your name and email address for only this project.
-   If you want to set them globally for this user account on this machine, then
-   add the `--global` option to each command.
+   If you want to set them globally for this user account on this machine, then add the `--global` option to each command.
 
 ~~~ bash
 git config user.name 'Rob Williams'

@@ -1,13 +1,13 @@
 # Files and directories within THIS project
-*.env
+context.bash
 
 # Common files
+*.env
 *.list
 *.log
 *.out
 *.pid
 *.txt
-context.bash
 log/
 
 # Apple macOS

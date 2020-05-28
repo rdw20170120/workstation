@@ -27,7 +27,7 @@ You can create this script by copying the [cfg/sample_context](../cfg/sample_con
 
 [Activate this project in a shell][activate].
 
-**NOTE**: Do *NOT* configure a default profile, so that it cannot be used by mistake!
+**NOTE**: Do **NOT** configure a default profile, so that it cannot be used by mistake!
 
 ~~~ bash
 aws --profile $NameProfile configure
