@@ -74,6 +74,14 @@ checkExecutable 2to3
 check 'py.test --version' 2>&1
 checkExecutable py.test
 
+# AWS CLI
+check 'aws --version'
+checkExecutable aws
+
+# Git
+check 'git --version'
+checkExecutable git
+
 # Ensure a successful script return
 echo "Tool report succeeded"
 exit 0

@@ -1,18 +1,14 @@
-HowTo execute the application
-=============================
+# HowTo execute the application
 This application is intended to be executed in a shell (on the command-line).
 
-This application is configured via a `context` script that sets up the
-necessary execution environment via BASH environment variables, `$PATH`, etc.
-The [activate](../activate) script will `source` the `context` script, if it
-exists.
-You can create this script by copying the [cfg/sample_context]
-(../cfg/sample_context) script as `context` in the root of this repository.
+This application is configured via a `context.bash` script that sets up the necessary execution environment via BASH environment variables, `$PATH`, etc.
+The [activate](../activate.bash) script will `source` the `context.bash` script, if it exists.
+You can create this script by copying the [cfg/sample_context] (../cfg/sample_context.bash) script as `context.bash` in the root of this repository.
 **Note** that the copied script MUST NOT be checked into source control.
 
-Execute this application
-------------------------
+## Execute this application
 [Activate this project in a shell][activate].
+
 ~~~ bash
 app-run
 ~~~

@@ -1,19 +1,15 @@
-HowTo activate this project (directory)
-=======================================
-This project is designed to be developed and executed in a BASH shell running
-on Ubuntu.  It should work on Ubuntu and derivatives.  It may be possible to
-adapt it to run in other shells and/or on other operating systems.
+# HowTo activate this project (directory)
+This project is designed to be developed and executed in a BASH shell running on Ubuntu.
+It should work on Ubuntu and derivatives.
+It may be possible to adapt it to run in other shells and/or on other operating systems.
 
-For each session during which you want to develop or use the code in this
-project, you MUST [activate this project in a shell][activate].  You can THEN
-[run the tests][test] and [execute the application][application].  It is
-assumed that you will use that shell throughout your session, then `exit` it
-when done.  The primary motivation for this approach is ensure the integrity of
-the development, test, deployment, and execution activities.  The EXACT same
-steps and commands MUST be used on the development workstation as on the
-Continuous Integration server as on the production server.  The configuration
-must be tightly controlled and replicated.  Deviations must be quickly
-identified and remediated.
+For each session during which you want to develop or use the code in this project, you MUST [activate this project in a shell][activate].
+You can THEN [run the tests][test] and [execute the application][application].
+It is assumed that you will use that shell throughout your session, then `exit` it when done.
+The primary motivation for this approach is ensure the integrity of the development, test, deployment, and execution activities.
+The EXACT same steps and commands MUST be used on the development workstation as on the Continuous Integration server as on the production server.
+The configuration must be tightly controlled and replicated.
+Deviations must be quickly identified and remediated.
 
 If you also use an IDE (Integrated Development Environment), you MUST NOT allow
 the IDE to circumvent or compromise the work done in the shell.  This generally
@@ -48,7 +44,7 @@ Open a new BASH shell, then:
 
 ~~~ bash
 cd PROJECT-ROOT-DIRECTORY
-source activate
+source activate.bash
 ~~~
 
 Do work.  When finished, then
