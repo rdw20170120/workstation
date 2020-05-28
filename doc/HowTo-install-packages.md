@@ -10,8 +10,35 @@ sudo apt-get install git meld
 sudo apt-get install dropbox python3-gpg
 ~~~
 
-## Install Python3 with standard (not debugging) support
+TODO: Document extended installation of Python 3.6 (default on this Ubuntu release)
+
+## Install Neovim with Python3 support
+REF: https://launchpad.net/~neovim-ppa/+archive/ubuntu/stable
+
+Using Linux Mint 19.3 Tricia Cinnamon (Ubuntu 18.04.1 Bionic Beaver)
+
+1. Open a shell
+
+~~~bash
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt-get update
+sudo apt-get install neovim neovim-qt neovim-runtime python3-neovim
+~~~
+
+## Install vim-plug
+1. Open a shell
+
+~~~bash
+sh -c 'curl -fLo \
+    "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
+    --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+~~~
+
+## Install Python3.8 with standard (not debugging) support
 REF: https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
+
+NOTE: ABORTED:  Need to research how to use Python 3.8 cleanly on Ubuntu
 
 Using Linux Mint 19.3 Tricia Cinnamon (Ubuntu 18.04.1 Bionic Beaver)
 
@@ -38,20 +65,6 @@ sudo apt-get install libpython3.8-minimal libpython3.8-stdlib python3.8 \
     python3.8-gdbm
     python3.8-lib2to3
     python3.8-tk
-
-## Install Neovim
-REF: https://launchpad.net/~neovim-ppa/+archive/ubuntu/stable
-
-Using Linux Mint 19.3 Tricia Cinnamon (Ubuntu 18.04.1 Bionic Beaver)
-
-## Install Neovim with Python3 support
-1. Open a shell
-
-~~~bash
-sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt-get update
-sudo apt-get install neovim neovim-qt neovim-runtime python3-neovim
-~~~
 
 [activate]: ./HowTo-activate_this_project.md "HowTo activate this project"
 [application]: ./HowTo-execute_application.md "HowTo execute application"
