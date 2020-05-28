@@ -17,8 +17,6 @@ REF: https://launchpad.net/~neovim-ppa/+archive/ubuntu/stable
 
 Using Linux Mint 19.3 Tricia Cinnamon (Ubuntu 18.04.1 Bionic Beaver)
 
-1. Open a shell
-
 ~~~bash
 sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt-get update
@@ -26,13 +24,21 @@ sudo apt-get install neovim neovim-qt neovim-runtime python3-neovim
 ~~~
 
 ## Install vim-plug
-1. Open a shell
-
 ~~~bash
 sh -c 'curl -fLo \
     "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
     --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+cp $BO_Project/home/Linux/.config/nvim/init.vim 
+~~~
+
+~~~bash
+mkdir ~/.config/nvim
+# For Linux
+cp $BO_Project/home/Linux/.config/nvim/init.vim ~/.config/nvim/
+# OR
+# For Linux
+cp $BO_Project/home/macOS/.config/nvim/init.vim ~/.config/nvim/
 ~~~
 
 ## Install Python3.8 with standard (not debugging) support
