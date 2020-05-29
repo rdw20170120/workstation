@@ -20,25 +20,33 @@ findAnd () {
     # $1 = action to perform, either 'delete' or 'print'
     # $2 = directory in which to work
     # $3 = filename pattern to match
-    find $2 -not -path "$BO_Project/.git/*" -and -not -path "$PVE/*" -and -name "$3" -$1 -and -type f
+    find $2 \
+	-not -path "$BO_Project/.git/*" \
+	-and -not -path "$PVE/*" \
+	-and -name "$3" \
+	-and -type f \
+	-$1
 }
 
 echo "INFO: Found these files..."
-findAnd print $BO_Project '__pycache'
+findAnd print $BO_Project '__pycache__'
 findAnd print $BO_Project '*.bak'
+findAnd print $BO_Project '*.log'
 findAnd print $BO_Project '*.pyc'
 
 echo "INFO: Deleting files..."
-findAnd delete $BO_Project '__pycache'
+findAnd delete $BO_Project '__pycache__'
 findAnd delete $BO_Project '*.bak'
 findAnd delete $BO_Project '*.pyc'
 
-dir=$BO_Project/src/.pytest_cache
-echo "INFO: Deleting special directory '$dir' directly..."
-rm -fr "$dir"
+_file=$BO_Project/src/pytest.log
+[[ -f "$_file" ]] \
+    && echo "INFO: Deleting file '$_file'" \
+    && rm $_file
 
 echo "WARN: Found these files REMAINING..."
-findAnd print $BO_Project             '__pycache'
-findAnd print $BO_Project             '*.bak'
-findAnd print $BO_Project             '*.pyc'
+findAnd print $BO_Project '__pycache__'
+findAnd print $BO_Project '*.bak'
+findAnd print $BO_Project '*.log'
+findAnd print $BO_Project '*.pyc'
 
