@@ -1,4 +1,4 @@
-from tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
+from ..tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
 
 from .bash_script import BashScript
 from .bash_script import visitor_map as parent_visitor_map

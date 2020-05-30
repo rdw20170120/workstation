@@ -1,4 +1,4 @@
-from tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
+from .tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
 
 from .template.briteonyx_script    import BriteOnyxScript
 from .template.briteonyx_script    import visitor_map as parent_visitor_map
@@ -43,7 +43,7 @@ def _capture_environment(directory_name, file_name):
         line(),
         command('env'),
         pipe(),
-        command('sort', '>', path(directory_name, 'BO-' + file_name + '.env')),
+        command('sort', '>', directory_name, '/BO-', file_name, '.env'),
     ]
 
 def _comments():

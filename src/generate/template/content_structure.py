@@ -1,25 +1,94 @@
-from enum import Enum
+from enum    import Enum
+from numbers import Number
+from pathlib import Path
 
 from .content import visitor_map
+
+
+###############################################################################
+
+def squashed(value):
+    """Return `value`, having squashed all empty contents to `None`.
+
+    Pass through all booleans, all numbers including zeros, all nonempty
+    strings, all dictionaries, anything not explicitly recognized.  Squash
+    empty strings and empty sequences.  Return a nonempty sequence (excluding
+    dictionaries) as a squashed list in which all items have been squashed.
+    Assume no circular references.
+    """
+    print("squashed began with: '{}'".format(value))
+    if value is None:
+        print("squashed ended with: '{}'".format(None))
+        return None
+    if value == '':
+        print("squashed ended with: '{}'".format(None))
+        return None
+    if value == ():
+        print("squashed ended with: '{}'".format(None))
+        return None
+    if value == []:
+        print("squashed ended with: '{}'".format(None))
+        return None
+    if isinstance(value, _ContentElement):
+        print("squashed ended with: '{}'".format(value))
+        return value
+    if isinstance(value, dict):
+        print("squashed ended with: '{}'".format(value))
+        return value
+    if isinstance(value, Number):
+        print("squashed ended with: '{}'".format(value))
+        return value
+    if isinstance(value, Path):
+        print("squashed ended with: '{}'".format(value))
+        return value
+    if isinstance(value, str):
+        print("squashed ended with: '{}'".format(value))
+        return value
+    result = []
+    for i in value:
+        j = squashed(i)
+        if j is not None: result.append(j)
+    if len(result) == 0: result = None
+    elif len(result) == 1: result = result[0]
+    print("squashed ended with: '{}'".format(result))
+    return result
+
+
+class _ContentElement(object):
+    def __init__(self, content):
+        super().__init__()
+        self.content = squashed(content)
+
+    def content_as_list(self):
+        result = self.content
+        if not isinstance(result, list):
+            result = [result]
+        return result
+
+
+@visitor_map.register(_ContentElement)
+def _visit_content_element(element, walker):
+    walker.walk(element.content)
 
 ###############################################################################
 
 @visitor_map.register(Enum)
-def _visit_content(content, walker):
-    walker.walk(content.value)
+def _visit_content(element, walker):
+    walker.walk(element.value)
 
 ###############################################################################
 
-def eol(text=None): return [text, '\n']
+def eol(*text): return [text, '\n']
 
-def line(text=None): return eol(text)
+def line(*text): return eol(text)
 
 ###############################################################################
 
-class _DoubleQuoted(object):
-    def __init__(self, *element):
-        super().__init__()
-        self.content = element
+
+class _DoubleQuoted(_ContentElement):
+    def __init__(self, elements):
+        super().__init__(elements)
+
 
 @visitor_map.register(_DoubleQuoted)
 def _visit_double_quoted(element, walker):
@@ -28,14 +97,15 @@ def _visit_double_quoted(element, walker):
     walker.emit('"')
 
 def dq(*element):
-    return _DoubleQuoted(*element)
+    return _DoubleQuoted(element)
 
 ###############################################################################
 
-class _SingleQuoted(object):
-    def __init__(self, *element):
-        super().__init__()
-        self.content = element
+
+class _SingleQuoted(_ContentElement):
+    def __init__(self, elements):
+        super().__init__(elements)
+
 
 @visitor_map.register(_SingleQuoted)
 def _visit_single_quoted(element, walker):
@@ -44,14 +114,15 @@ def _visit_single_quoted(element, walker):
     walker.emit("'")
 
 def sq(*element):
-    return _SingleQuoted(*element)
+    return _SingleQuoted(element)
 
 ###############################################################################
 
-class _BacktickQuoted(object):
-    def __init__(self, *element):
-        super().__init__()
-        self.content = element
+
+class _BacktickQuoted(_ContentElement):
+    def __init__(self, elements):
+        super().__init__(elements)
+
 
 @visitor_map.register(_BacktickQuoted)
 def _visit_backtick_quoted(element, walker):
@@ -60,34 +131,9 @@ def _visit_backtick_quoted(element, walker):
     walker.emit("`")
 
 def bt(*element):
-    return _BacktickQuoted(*element)
+    return _BacktickQuoted(element)
 
-###############################################################################
 
 ''' Disabled content
-
-# TODO: RESEARCH: Does this need conversion for Python3?
-import itertools
-
-def flatten_via_chain(list_):
-    return list(itertools.chain.from_iterable(*list_))
-
-def flatten(sequence, types=(list, tuple)):
-    """ Flatten sequence made of types, returned as the same outer type as sequence.
-    REF: http://rightfootin.blogspot.com/2006/09/more-on-python-flatten.html
-    """
-    sequence_type = type(sequence)
-    sequence = list(sequence)
-    i = 0
-    while i < len(sequence):
-        while isinstance(sequence[i], types):
-            if not sequence[i]:
-                sequence.pop(i)
-                i -= 1
-                break
-            else:
-                sequence[i:i + 1] = sequence[i]
-        i += 1
-    return sequence_type(sequence)
-
 '''
+

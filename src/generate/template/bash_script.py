@@ -1,4 +1,4 @@
-from tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
+from ..tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
 
 from .script import Script
 from .script import visitor_map as parent_visitor_map

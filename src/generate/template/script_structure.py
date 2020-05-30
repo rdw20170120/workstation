@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from .content_structure import *
+from .content_structure import _ContentElement
 from .script            import visitor_map
 
 ###############################################################################
@@ -11,36 +12,31 @@ def _visit_path(element, walker):
 
 ###############################################################################
 
-class _Arguments(object):
-    def __init__(self, *argument):
-        super().__init__()
-        self.arguments = argument
+
+class _Arguments(_ContentElement):
+    def __init__(self, content):
+        super().__init__(content)
+
 
 @visitor_map.register(_Arguments)
 def _visit_arguments(element, walker):
-    if element.arguments is not None:
-        for a in element.arguments:
-            walker.emit(' ')
-            walker.walk(a)
+    as_list = element.content_as_list()
+    if as_list is not None:
+        for a in as_list:
+            if a is not None:
+                walker.emit(' ')
+                walker.walk(a)
 
 ###############################################################################
 
-class _Statement(object):
-    def __init__(self, statement):
-        super().__init__()
-        self.statement = statement
 
-@visitor_map.register(_Statement)
-def _visit_statement(element, walker):
-    walker.walk(element.statement)
-
-###############################################################################
-
-class _Command(_Statement):
-    def __init__(self, command, *argument):
-        super().__init__('_Command')
-        self.arguments = _Arguments(*argument)
+class _Command(_ContentElement):
+    def __init__(self, command, arguments):
+        super().__init__(None)
+        assert command
         self.command = command
+        self.arguments = _Arguments(arguments)
+
 
 @visitor_map.register(_Command)
 def _visit_command(element, walker):
@@ -48,38 +44,37 @@ def _visit_command(element, walker):
     walker.walk(element.arguments)
 
 def command(command, *argument):
-    return _Command(command, *argument)
+    return _Command(command, argument)
 
 ###############################################################################
 
-class _Comment(_Statement):
-    def __init__(self, *element):
-        super().__init__('_Comment')
-        self.content = element
+
+class _Comment(_ContentElement):
+    def __init__(self, elements, tight=False):
+        super().__init__(elements)
+        if not self.content: tight = True
+        self.tight = tight
+
 
 @visitor_map.register(_Comment)
 def _visit_comment(element, walker):
     walker.emit('#')
-    if isinstance(element.content, tuple):
-        if len(element.content) > 0:
-            walker.emit(' ')
-            walker.walk(element.content)
+    if not element.tight:
+        walker.emit(' ')
+    walker.walk(element.content)
     walker.emit('\n')
 
 def comment(*element):
-    return _Comment(*element)
+    return _Comment(element)
 
 ###############################################################################
 
+
 class _Shebang(_Comment):
     def __init__(self, content):
-        super().__init__(content)
+        super().__init__(['!', content], tight=True)
+        assert self.content
 
-@visitor_map.register(_Shebang)
-def _visit_comment(element, walker):
-    walker.emit('#!')
-    walker.walk(element.content)
-    walker.emit('\n')
 
 def shebang_cat():
     return shebang_thru_env('cat')
@@ -88,9 +83,9 @@ def shebang_false():
     return shebang_thru_env('false')
 
 def shebang_thru_env(executable):
-    return _Shebang(_Command(Path('/usr/bin/env') / executable))
+    assert executable
+    return _Shebang(_Command(Path('/usr/bin/env'), executable))
 
-###############################################################################
 
 ''' Disabled content
 '''

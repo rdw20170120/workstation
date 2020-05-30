@@ -1,6 +1,7 @@
-from .bash_structure   import *
-from .bash_structure   import _Command
-from .briteonyx_script import visitor_map
+from .bash_structure    import *
+from .briteonyx_script  import visitor_map
+from .content_structure import _ContentElement
+
 
 ###############################################################################
 
