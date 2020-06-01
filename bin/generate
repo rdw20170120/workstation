@@ -26,15 +26,13 @@ fi
 
 # Recreate target directory (handled within Python)
 DirTgt=$TMPDIR/tgt
-# rm -fr "$DirTgt"
-# mkdir -p "$DirTgt"
 
 echo "INFO: Generating content into directory '$DirTgt'"
-cd $BO_Project/src
+cd $BO_Project/gen
 
 # Execute Python
 cmd='python3'
-cmd+=' -bb'
+# cmd+=' -bb'
 cmd+=' -m generate'
 cmd+=" $DirTgt"
 echo $cmd

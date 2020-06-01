@@ -22,9 +22,8 @@ cd $BO_Project/src
 
 # Execute Python
 cmd='python3'
-cmd+=' -bb'
+# cmd+=' -bb'
 cmd+=' -m TODO'
-cmd+=" $DirTgt"
 echo $cmd
 $cmd
 

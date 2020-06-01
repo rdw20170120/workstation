@@ -1,6 +1,6 @@
 #!/bin/false
 
-from generate import app
+from . import app
 
 def main():
     app.run()
