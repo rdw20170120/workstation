@@ -14,8 +14,8 @@ def _visit_path(element, walker):
 
 
 class _Arguments(_ContentElement):
-    def __init__(self, content):
-        super().__init__(content)
+    def __init__(self, content, typename='_Arguments'):
+        super().__init__(content, typename)
 
 
 @visitor_map.register(_Arguments)
@@ -31,8 +31,8 @@ def _visit_arguments(element, walker):
 
 
 class _Command(_ContentElement):
-    def __init__(self, command, arguments):
-        super().__init__(None)
+    def __init__(self, command, arguments, typename='_Command'):
+        super().__init__(None, typename)
         assert command
         self.command = command
         self.arguments = _Arguments(arguments)
@@ -50,8 +50,8 @@ def command(command, *argument):
 
 
 class _Comment(_ContentElement):
-    def __init__(self, elements, tight=False):
-        super().__init__(elements)
+    def __init__(self, elements, typename='_Comment', tight=False):
+        super().__init__(elements, typename)
         if not self.content: tight = True
         self.tight = tight
 
@@ -62,7 +62,7 @@ def _visit_comment(element, walker):
     if not element.tight:
         walker.emit(' ')
     walker.walk(element.content)
-    walker.emit('\n')
+    walker.walk(eol())
 
 def comment(*element):
     return _Comment(element)
@@ -71,8 +71,8 @@ def comment(*element):
 
 
 class _Shebang(_Comment):
-    def __init__(self, content):
-        super().__init__(['!', content], tight=True)
+    def __init__(self, content, typename='_Shebang'):
+        super().__init__(['!', content], typename, tight=True)
         assert self.content
 
 

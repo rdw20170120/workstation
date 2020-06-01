@@ -267,7 +267,8 @@ def generate(target_directory):
     content = BriteOnyxScript(build(),
         Path(), 'activate.bash'
         )
-    content.render(target_directory)
+    content.generate(target_directory)
+    content.print()
 
 
 ''' Disabled content

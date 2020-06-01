@@ -1,4 +1,4 @@
-#!/usr/bin/env/false
+#!/usr/bin/env false
 # NOTE: Intended to be sourced into a BASH shell by the user.
 ###############################################################################
 # NOTE: We MUST NOT EVER 'exit' during BriteOnyx bootstrap or activation

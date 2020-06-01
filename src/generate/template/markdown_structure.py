@@ -37,21 +37,13 @@ def s(sentence):
 
 
 class _TableRow(_ContentElement):
-    def __init__(self, column):
-        super().__init__(column)
+    def __init__(self, column, typename='_TableRow'):
+        super().__init__(column, typename)
         assert self.content
 
 
 @visitor_map.register(_TableRow)
 def _visit_table_row(element, walker):
-    """
-    if element.content is not None:
-        for c in element.content:
-            walker.emit('|')
-            walker.walk(c)
-        walker.emit('|')
-        walker.emit('\n')
-    """
     as_list = element.content_as_list()
     if as_list is not None:
         for c in as_list:
@@ -59,7 +51,7 @@ def _visit_table_row(element, walker):
                 walker.emit('|')
                 walker.walk(c)
         walker.emit('|')
-        walker.emit('\n')
+        walker.walk(eol())
 
 def table_header(*column):
     assert column

@@ -9,7 +9,7 @@ from .script_structure  import _Shebang
 
 def and_(): return ' && '
 
-def bs(): return '\\\n'
+def bs(): return ['\\', eol()]
 
 def indent(): return '    '
 
@@ -127,8 +127,8 @@ def sourced_header():
 
 
 class _Substitution(_Command):
-    def __init__(self, command, arguments):
-        super().__init__(command, arguments)
+    def __init__(self, command, arguments, typename='_Substitution'):
+        super().__init__(command, arguments, typename)
 
 
 @visitor_map.register(_Substitution)
@@ -145,8 +145,8 @@ def substitute(command, *argument):
 
 
 class _Assign(_ContentElement):
-    def __init__(self, variable, expressions):
-        super().__init__(None)
+    def __init__(self, variable, expressions, typename='_Assign'):
+        super().__init__(None, typename)
         assert variable
         self.expressions = expressions
         self.variable = variable
@@ -172,8 +172,8 @@ def export(variable, expression=None):
 
 
 class _Condition(_Command):
-    def __init__(self, command, argument):
-        super().__init__(command, argument)
+    def __init__(self, command, argument, typename='_Condition'):
+        super().__init__(command, argument, typename)
 
 
 def condition(command, *argument):
@@ -227,14 +227,14 @@ def else_(*statement):
     statement = squashed(statement)
     assert statement
     assert len(statement)
-    return _ContentElement(['else\n', statement])
+    return _ContentElement(['else', eol(), statement])
 
 ###############################################################################
 
 
 class _ElseIf(_Command):
-    def __init__(self, condition, statement):
-        super().__init__(condition, statement)
+    def __init__(self, condition, statement, typename='_ElseIf'):
+        super().__init__(condition, statement, typename)
         self.condition = condition
         self.statements = statement
 
@@ -243,7 +243,9 @@ class _ElseIf(_Command):
 def _visit_elif(element, walker):
     walker.emit('elif ')
     walker.walk(element.condition)
-    walker.emit(' ; then\n')
+    walker.walk(seq())
+    walker.emit('then')
+    walker.walk(eol())
     walker.walk(element.statements)
 
 def elif_(condition, *statement):
@@ -253,8 +255,8 @@ def elif_(condition, *statement):
 
 
 class _Fi(_ContentElement):
-    def __init__(self):
-        super().__init__('fi\n')
+    def __init__(self, typename='_Fi'):
+        super().__init__(['fi', eol()], typename)
 
 
 def fi():
@@ -264,8 +266,8 @@ def fi():
 
 
 class _If(_Command):
-    def __init__(self, condition, statement):
-        super().__init__(condition, statement)
+    def __init__(self, condition, statement, typename='_If'):
+        super().__init__(condition, statement, typename)
         self.condition = condition
         self.statements = statement
 
@@ -274,7 +276,9 @@ class _If(_Command):
 def _visit_if(element, walker):
     walker.emit('if ')
     walker.walk(element.condition)
-    walker.emit(' ; then\n')
+    walker.walk(seq())
+    walker.emit('then')
+    walker.walk(eol())
     walker.walk(element.statements)
 
 def if_(condition, *statement):
@@ -292,11 +296,11 @@ def shebang_sourced():
 
 def vn(variable_name):
     assert variable_name
-    return _ContentElement(variable_name)
+    return _ContentElement(variable_name, typename='vn')
 
 def vr(variable_name):
     assert variable_name
-    return _ContentElement(['$', variable_name])
+    return _ContentElement(['$', variable_name], typename='vr')
 
 
 ''' Disabled content

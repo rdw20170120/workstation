@@ -1,5 +1,7 @@
 #!/usr/bin/env false
 
+from pytest import raises
+
 from .content           import visitor_map
 from .content_structure import * 
 from .renderer          import Renderer
@@ -33,11 +35,9 @@ def test_dq():
     assert s(dq('Test', '123')) == '"Test123"'
 
 def test_eol():
-    # TODO: Expand tests for full pattern
     # TODO: Break up tests into individual test methods
     assert s(eol()) == '\n'
-    assert s(eol(None)) == '\n'
-    assert s(eol('Test')) == 'Test\n'
+    with raises(TypeError): eol(None)
 
 def test_line():
     # TODO: Expand tests for full pattern

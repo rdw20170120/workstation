@@ -25,11 +25,14 @@ class Content(object):
         self._content.append(content)
         return self
 
-    def render(self, target_directory):
+    def generate(self, target_directory):
         assert isinstance(target_directory, Path)
         directory = target_directory / self._relative_directory
         maybe_create_directory(directory)
         Renderer(visitor_map).render(self._content, directory / self._filename)
+
+    def print(self):
+        Renderer(visitor_map).render(self._content)
 
 
 @visitor_map.register(Content)

@@ -16,33 +16,33 @@ def squashed(value):
     dictionaries) as a squashed list in which all items have been squashed.
     Assume no circular references.
     """
-    print("squashed began with: '{}'".format(value))
+    # print("squashed began with: '{}'".format(value))
     if value is None:
-        print("squashed ended with: '{}'".format(None))
+        # print("squashed ended with: '{}'".format(None))
         return None
     if value == '':
-        print("squashed ended with: '{}'".format(None))
+        # print("squashed ended with: '{}'".format(None))
         return None
     if value == ():
-        print("squashed ended with: '{}'".format(None))
+        # print("squashed ended with: '{}'".format(None))
         return None
     if value == []:
-        print("squashed ended with: '{}'".format(None))
+        # print("squashed ended with: '{}'".format(None))
         return None
     if isinstance(value, _ContentElement):
-        print("squashed ended with: '{}'".format(value))
+        # print("squashed ended with: '{}'".format(value))
         return value
     if isinstance(value, dict):
-        print("squashed ended with: '{}'".format(value))
+        # print("squashed ended with: '{}'".format(value))
         return value
     if isinstance(value, Number):
-        print("squashed ended with: '{}'".format(value))
+        # print("squashed ended with: '{}'".format(value))
         return value
     if isinstance(value, Path):
-        print("squashed ended with: '{}'".format(value))
+        # print("squashed ended with: '{}'".format(value))
         return value
     if isinstance(value, str):
-        print("squashed ended with: '{}'".format(value))
+        # print("squashed ended with: '{}'".format(value))
         return value
     result = []
     for i in value:
@@ -50,14 +50,21 @@ def squashed(value):
         if j is not None: result.append(j)
     if len(result) == 0: result = None
     elif len(result) == 1: result = result[0]
-    print("squashed ended with: '{}'".format(result))
+    # print("squashed ended with: '{}'".format(result))
     return result
 
 
 class _ContentElement(object):
-    def __init__(self, content):
+    def __init__(self, content, typename='_ContentElement'):
         super().__init__()
+        self.typename = typename
         self.content = squashed(content)
+
+#   def __repr__(self):
+#       return self.typename + '(' + repr(self.content) + ')'
+
+#   def __str__(self):
+#       return self.__repr__()
 
     def content_as_list(self):
         result = self.content
@@ -70,6 +77,8 @@ class _ContentElement(object):
 def _visit_content_element(element, walker):
     walker.walk(element.content)
 
+def eol(): return _ContentElement('\n')
+
 ###############################################################################
 
 @visitor_map.register(Enum)
@@ -78,16 +87,14 @@ def _visit_content(element, walker):
 
 ###############################################################################
 
-def eol(*text): return [text, '\n']
-
-def line(*text): return eol(text)
+def line(*text): return [text, eol()]
 
 ###############################################################################
 
 
 class _DoubleQuoted(_ContentElement):
-    def __init__(self, elements):
-        super().__init__(elements)
+    def __init__(self, elements, typename='_DoubleQuoted'):
+        super().__init__(elements, typename)
 
 
 @visitor_map.register(_DoubleQuoted)
@@ -103,8 +110,8 @@ def dq(*element):
 
 
 class _SingleQuoted(_ContentElement):
-    def __init__(self, elements):
-        super().__init__(elements)
+    def __init__(self, elements, typename='_SingleQuoted'):
+        super().__init__(elements, typename)
 
 
 @visitor_map.register(_SingleQuoted)
@@ -120,8 +127,8 @@ def sq(*element):
 
 
 class _BacktickQuoted(_ContentElement):
-    def __init__(self, elements):
-        super().__init__(elements)
+    def __init__(self, elements, typename='_BacktickQuoted'):
+        super().__init__(elements, typename)
 
 
 @visitor_map.register(_BacktickQuoted)

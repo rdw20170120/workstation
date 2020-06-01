@@ -11,7 +11,7 @@ if [[ -z "$BO_Project" ]] ; then
     exit 1
 fi
 
-Script=$BO_Project/bin/lib/reference-Python-lib.bash
+Script=$BO_Project/bin/lib/configure-Python.bash
 if [[ -r $Script ]] ; then
     source $Script
 else
@@ -19,5 +19,12 @@ else
 fi
 
 cd $BO_Project/src
-python3 -m TODO
+
+# Execute Python
+cmd='python3'
+cmd+=' -bb'
+cmd+=' -m TODO'
+cmd+=" $DirTgt"
+echo $cmd
+$cmd
 
