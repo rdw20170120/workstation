@@ -87,7 +87,7 @@ which 2to3
 /usr/local/bin/2to3
 ##########
 py.test --version
-This is pytest version 5.4.2, imported from /Users/rwill253/project/Rob/workstation/.PVE/lib/python3.8/site-packages/pytest/__init__.py
+This is pytest version 5.4.3, imported from /Users/rwill253/project/Rob/workstation/.PVE/lib/python3.8/site-packages/pytest/__init__.py
 ##########
 type py.test
 py.test is hashed (/Users/rwill253/project/Rob/workstation/.PVE/bin/py.test)
