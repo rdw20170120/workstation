@@ -11,7 +11,7 @@ if [[ -z "$BO_Project" ]] ; then
     exit 1
 fi
 
-Script=$BO_Project/bin/lib/configure-Python.bash
+Script=$BO_Project/BriteOnyx/bin/lib/configure-Python.bash
 if [[ -r $Script ]] ; then
     source $Script
 else
@@ -39,7 +39,7 @@ echo $cmd
 $cmd
 
 # Merge generated files into project directory
-# TODO: Research why Meld does not open a new tab on macOS?
+# TODO: Research why Meld does not open a new tab on macOS
 cmd='meld --newtab'
 cmd+=" '$DirTgt' '$BO_Project'"
 cmd+=' >/dev/null 2>&1 &'

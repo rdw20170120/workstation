@@ -9,6 +9,7 @@ context.bash
 *.pid
 *.txt
 log/
+out/
 
 # Apple macOS
 .DS_Store

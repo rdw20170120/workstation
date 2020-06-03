@@ -1,10 +1,10 @@
 from pathlib import Path
 
+from utility.my_system import maybe_create_directory
+
 from ..tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
 from ..tavis_rudd.throw_out_your_templates.section_4 import default_visitor_map
-
-from ..utility.my_system import maybe_create_directory
-from .renderer           import Renderer
+from .renderer                                       import Renderer
 
 
 visitor_map = VisitorMap(parent_map=default_visitor_map)

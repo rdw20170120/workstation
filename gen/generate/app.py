@@ -10,10 +10,11 @@ from pathlib  import Path
 from logzero import logger as log
 from logzero import loglevel
 
-from .config                        import Config
-from .project_activate_script       import generate as generate_project_activate_script
-from .utility.my_system             import recreate_directory
-from .utility.singleton_application import SingletonApplication
+from utility.my_system             import recreate_directory
+from utility.singleton_application import SingletonApplication
+
+from .config                  import Config
+from .project_activate_script import generate as generate_project_activate_script
 
 
 loglevel(level=DEBUG)

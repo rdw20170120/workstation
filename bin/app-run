@@ -11,7 +11,7 @@ if [[ -z "$BO_Project" ]] ; then
     exit 1
 fi
 
-Script=$BO_Project/bin/lib/configure-Python.bash
+Script=$BO_Project/BriteOnyx/bin/lib/configure-Python.bash
 if [[ -r $Script ]] ; then
     source $Script
 else
@@ -23,7 +23,7 @@ cd $BO_Project/src
 # Execute Python
 cmd='python3'
 # cmd+=' -bb'
-cmd+=' -m TODO'
+cmd+=' -m MODULE'
 echo $cmd
 $cmd
 

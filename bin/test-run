@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# set -e
+set -e
 # This script is intended to be executed by a user in a BASH shell.
 
 # Run tests
@@ -9,7 +9,7 @@ if [[ -z "$BO_Project" ]] ; then
     exit 1
 fi
 
-Script=$BO_Project/bin/lib/configure-Python.bash
+Script=$BO_Project/BriteOnyx/bin/lib/configure-Python.bash
 if [[ -r $Script ]] ; then
     source $Script
 else

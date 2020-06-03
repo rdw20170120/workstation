@@ -35,5 +35,9 @@ Items should be struck-out and moved to the bottom when completed.
 - [ ] M/L - Implement full test suite for file character encodings
 - [ ] M/L - Generate a file for each character encoding with every possible character
 - [ ] L/L - Move captured output files to `out` directory
+- [ ] L/L - Switch font in Neovim for better readability
+- [ ] L/L - Switch font in shell for better readability
+- [ ] L/L - Configure Neovim to position itself
+- [ ] L/L - Configure shell to position itself
 - [X] H/H - ~~Convert to Python3 source code~~
 
