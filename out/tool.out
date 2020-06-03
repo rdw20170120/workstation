@@ -8,7 +8,7 @@ uname is hashed (/usr/bin/uname)
 which uname
 /usr/bin/uname
 ##########
-PATH=/Users/rwill253/project/Rob/workstation/.PVE/bin:/usr/bin:/bin:/usr/sbin:/usr/bin:/bin:/usr/sbin:/Users/rwill253/project/Rob/workstation/bin:/usr/local/bin:/Users/rwill253/bin
+PATH=/Users/rwill253/project/Rob/workstation/.PVE/bin:/usr/bin:/bin:/usr/sbin:/usr/bin:/bin:/usr/sbin:/Users/rwill253/project/Rob/workstation/BriteOnyx/bin:/Users/rwill253/project/Rob/workstation/bin:/usr/local/bin:/Users/rwill253/bin
 ##########
 bash --version
 GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin18)
@@ -50,7 +50,7 @@ which pip
 /Users/rwill253/project/Rob/workstation/.PVE/bin/pip
 ##########
 python2 --version
-/Users/rwill253/project/Rob/workstation/bin/tool-report: line 12: python2: command not found
+/Users/rwill253/project/Rob/workstation/BriteOnyx/bin/tool-report: line 12: python2: command not found
 ##########
 type python2
 ##########
@@ -94,4 +94,444 @@ py.test is hashed (/Users/rwill253/project/Rob/workstation/.PVE/bin/py.test)
 ##########
 which py.test
 /Users/rwill253/project/Rob/workstation/.PVE/bin/py.test
+##########
+aws --version
+##########
+type aws
+##########
+which aws
+##########
+git --version
+git version 2.20.1 (Apple Git-117)
+##########
+type git
+git is hashed (/usr/bin/git)
+##########
+which git
+/usr/bin/git
+##########
+openssl version
+LibreSSL 2.6.5
+##########
+openssl list-cipher-algorithms
+AES-128-CBC
+AES-128-CBC-HMAC-SHA1
+AES-128-CFB
+AES-128-CFB1
+AES-128-CFB8
+AES-128-CTR
+AES-128-ECB
+AES-128-OFB
+AES-128-XTS
+AES-192-CBC
+AES-192-CFB
+AES-192-CFB1
+AES-192-CFB8
+AES-192-CTR
+AES-192-ECB
+AES-192-OFB
+AES-256-CBC
+AES-256-CBC-HMAC-SHA1
+AES-256-CFB
+AES-256-CFB1
+AES-256-CFB8
+AES-256-CTR
+AES-256-ECB
+AES-256-OFB
+AES-256-XTS
+AES128 => AES-128-CBC
+AES192 => AES-192-CBC
+AES256 => AES-256-CBC
+BF => BF-CBC
+BF-CBC
+BF-CFB
+BF-ECB
+BF-OFB
+CAMELLIA-128-CBC
+CAMELLIA-128-CFB
+CAMELLIA-128-CFB1
+CAMELLIA-128-CFB8
+CAMELLIA-128-ECB
+CAMELLIA-128-OFB
+CAMELLIA-192-CBC
+CAMELLIA-192-CFB
+CAMELLIA-192-CFB1
+CAMELLIA-192-CFB8
+CAMELLIA-192-ECB
+CAMELLIA-192-OFB
+CAMELLIA-256-CBC
+CAMELLIA-256-CFB
+CAMELLIA-256-CFB1
+CAMELLIA-256-CFB8
+CAMELLIA-256-ECB
+CAMELLIA-256-OFB
+CAMELLIA128 => CAMELLIA-128-CBC
+CAMELLIA192 => CAMELLIA-192-CBC
+CAMELLIA256 => CAMELLIA-256-CBC
+CAST => CAST5-CBC
+CAST-cbc => CAST5-CBC
+CAST5-CBC
+CAST5-CFB
+CAST5-ECB
+CAST5-OFB
+ChaCha
+DES => DES-CBC
+DES-CBC
+DES-CFB
+DES-CFB1
+DES-CFB8
+DES-ECB
+DES-EDE
+DES-EDE-CBC
+DES-EDE-CFB
+DES-EDE-OFB
+DES-EDE3
+DES-EDE3-CBC
+DES-EDE3-CFB
+DES-EDE3-CFB1
+DES-EDE3-CFB8
+DES-EDE3-OFB
+DES-OFB
+DES3 => DES-EDE3-CBC
+DESX => DESX-CBC
+DESX-CBC
+gost89
+RC2 => RC2-CBC
+RC2-40-CBC
+RC2-64-CBC
+RC2-CBC
+RC2-CFB
+RC2-ECB
+RC2-OFB
+RC4
+RC4-40
+RC4-HMAC-MD5
+AES-128-CBC
+AES-128-CBC-HMAC-SHA1
+AES-128-CFB
+AES-128-CFB1
+AES-128-CFB8
+AES-128-CTR
+AES-128-ECB
+id-aes128-GCM
+AES-128-OFB
+AES-128-XTS
+AES-192-CBC
+AES-192-CFB
+AES-192-CFB1
+AES-192-CFB8
+AES-192-CTR
+AES-192-ECB
+id-aes192-GCM
+AES-192-OFB
+AES-256-CBC
+AES-256-CBC-HMAC-SHA1
+AES-256-CFB
+AES-256-CFB1
+AES-256-CFB8
+AES-256-CTR
+AES-256-ECB
+id-aes256-GCM
+AES-256-OFB
+AES-256-XTS
+aes128 => AES-128-CBC
+aes192 => AES-192-CBC
+aes256 => AES-256-CBC
+bf => BF-CBC
+BF-CBC
+BF-CFB
+BF-ECB
+BF-OFB
+blowfish => BF-CBC
+CAMELLIA-128-CBC
+CAMELLIA-128-CFB
+CAMELLIA-128-CFB1
+CAMELLIA-128-CFB8
+CAMELLIA-128-ECB
+CAMELLIA-128-OFB
+CAMELLIA-192-CBC
+CAMELLIA-192-CFB
+CAMELLIA-192-CFB1
+CAMELLIA-192-CFB8
+CAMELLIA-192-ECB
+CAMELLIA-192-OFB
+CAMELLIA-256-CBC
+CAMELLIA-256-CFB
+CAMELLIA-256-CFB1
+CAMELLIA-256-CFB8
+CAMELLIA-256-ECB
+CAMELLIA-256-OFB
+camellia128 => CAMELLIA-128-CBC
+camellia192 => CAMELLIA-192-CBC
+camellia256 => CAMELLIA-256-CBC
+cast => CAST5-CBC
+cast-cbc => CAST5-CBC
+CAST5-CBC
+CAST5-CFB
+CAST5-ECB
+CAST5-OFB
+ChaCha
+des => DES-CBC
+DES-CBC
+DES-CFB
+DES-CFB1
+DES-CFB8
+DES-ECB
+DES-EDE
+DES-EDE-CBC
+DES-EDE-CFB
+DES-EDE-OFB
+DES-EDE3
+DES-EDE3-CBC
+DES-EDE3-CFB
+DES-EDE3-CFB1
+DES-EDE3-CFB8
+DES-EDE3-OFB
+DES-OFB
+des3 => DES-EDE3-CBC
+desx => DESX-CBC
+DESX-CBC
+gost89
+gost89-cnt
+gost89-ecb
+id-aes128-GCM
+id-aes192-GCM
+id-aes256-GCM
+rc2 => RC2-CBC
+RC2-40-CBC
+RC2-64-CBC
+RC2-CBC
+RC2-CFB
+RC2-ECB
+RC2-OFB
+RC4
+RC4-40
+RC4-HMAC-MD5
+##########
+openssl list-cipher-commands
+aes-128-cbc
+aes-128-ecb
+aes-192-cbc
+aes-192-ecb
+aes-256-cbc
+aes-256-ecb
+base64
+bf
+bf-cbc
+bf-cfb
+bf-ecb
+bf-ofb
+camellia-128-cbc
+camellia-128-ecb
+camellia-192-cbc
+camellia-192-ecb
+camellia-256-cbc
+camellia-256-ecb
+cast
+cast-cbc
+cast5-cbc
+cast5-cfb
+cast5-ecb
+cast5-ofb
+chacha
+des
+des-cbc
+des-cfb
+des-ecb
+des-ede
+des-ede-cbc
+des-ede-cfb
+des-ede-ofb
+des-ede3
+des-ede3-cbc
+des-ede3-cfb
+des-ede3-ofb
+des-ofb
+des3
+desx
+rc2
+rc2-40-cbc
+rc2-64-cbc
+rc2-cbc
+rc2-cfb
+rc2-ecb
+rc2-ofb
+rc4
+rc4-40
+##########
+openssl list-message-digest-algorithms
+DSA
+DSA-SHA
+DSA-SHA1 => DSA
+DSA-SHA1-old => DSA-SHA1
+DSS1 => DSA-SHA1
+gost-mac
+streebog512
+streebog256
+md_gost94
+MD4
+MD5
+MD5-SHA1
+RIPEMD160
+RSA-MD4 => MD4
+RSA-MD5 => MD5
+RSA-RIPEMD160 => RIPEMD160
+RSA-SHA1 => SHA1
+RSA-SHA1-2 => RSA-SHA1
+RSA-SHA224 => SHA224
+RSA-SHA256 => SHA256
+RSA-SHA384 => SHA384
+RSA-SHA512 => SHA512
+SHA1
+SHA224
+SHA256
+SHA384
+SHA512
+DSA
+DSA-SHA
+dsaWithSHA1 => DSA
+dss1 => DSA-SHA1
+ecdsa-with-SHA1
+gost-mac
+MD4
+md4WithRSAEncryption => MD4
+MD5
+MD5-SHA1
+md5WithRSAEncryption => MD5
+md_gost94
+ripemd => RIPEMD160
+RIPEMD160
+ripemd160WithRSA => RIPEMD160
+rmd160 => RIPEMD160
+SHA1
+sha1WithRSAEncryption => SHA1
+SHA224
+sha224WithRSAEncryption => SHA224
+SHA256
+sha256WithRSAEncryption => SHA256
+SHA384
+sha384WithRSAEncryption => SHA384
+SHA512
+sha512WithRSAEncryption => SHA512
+ssl2-md5 => MD5
+ssl3-md5 => MD5
+ssl3-sha1 => SHA1
+streebog256
+streebog512
+whirlpool
+##########
+openssl list-message-digest-commands
+gost-mac
+md4
+md5
+md_gost94
+ripemd160
+sha1
+sha224
+sha256
+sha384
+sha512
+streebog256
+streebog512
+whirlpool
+##########
+openssl list-public-key-algorithms
+Name: OpenSSL RSA method
+	Type: Builtin Algorithm
+	OID: rsaEncryption
+	PEM string: RSA
+Name: rsa
+	Type: Alias to rsaEncryption
+Name: OpenSSL PKCS#3 DH method
+	Type: Builtin Algorithm
+	OID: dhKeyAgreement
+	PEM string: DH
+Name: dsaWithSHA
+	Type: Alias to dsaEncryption
+Name: dsaEncryption-old
+	Type: Alias to dsaEncryption
+Name: dsaWithSHA1-old
+	Type: Alias to dsaEncryption
+Name: dsaWithSHA1
+	Type: Alias to dsaEncryption
+Name: OpenSSL DSA method
+	Type: Builtin Algorithm
+	OID: dsaEncryption
+	PEM string: DSA
+Name: OpenSSL EC algorithm
+	Type: Builtin Algorithm
+	OID: id-ecPublicKey
+	PEM string: EC
+Name: GOST R 34.10-2001
+	Type: Builtin Algorithm
+	OID: GOST R 34.10-2001
+	PEM string: GOST2001
+Name: GOST 28147-89 MAC
+	Type: Builtin Algorithm
+	OID: GOST 28147-89 MAC
+	PEM string: GOST-MAC
+Name: OpenSSL HMAC method
+	Type: Builtin Algorithm
+	OID: hmac
+	PEM string: HMAC
+Name: OpenSSL CMAC method
+	Type: Builtin Algorithm
+	OID: cmac
+	PEM string: CMAC
+Name: GOST R 34.10-2012 (256 bit)
+	Type: Alias to GOST R 34.10-2001
+Name: GOST R 34.10-2012 (512 bit)
+	Type: Alias to GOST R 34.10-2001
+##########
+openssl list-standard-commands
+asn1parse
+ca
+certhash
+ciphers
+crl
+crl2pkcs7
+dgst
+dh
+dhparam
+dsa
+dsaparam
+ec
+ecparam
+enc
+errstr
+gendh
+gendsa
+genpkey
+genrsa
+nseq
+ocsp
+passwd
+pkcs12
+pkcs7
+pkcs8
+pkey
+pkeyparam
+pkeyutl
+prime
+rand
+req
+rsa
+rsautl
+s_client
+s_server
+s_time
+sess_id
+smime
+speed
+spkac
+ts
+verify
+version
+x509
+##########
+type openssl
+openssl is hashed (/usr/bin/openssl)
+##########
+which openssl
+/usr/bin/openssl
 Tool report succeeded
