@@ -1,18 +1,8 @@
-HowTo setup Python virtual environment
-======================================
-**TODO**: Upgrade to latest version of Python3
+# HowTo setup Python virtual environment
+We are using dependencies documented in [cfg/requirements.txt](../cfg/requirements.txt) and tools documented in [cfg/tool.out](../cfg/tool.out).
 
-**NOTE**: But upgrading the Python version on Ubuntu gets rather involved, so
-put it off unless truly necessary.
-
-We are using
-dependencies documented in [cfg/requirements.txt](../cfg/requirements.txt) and
-tools documented in [cfg/tool.out](../cfg/tool.out).
-
-Recreate the Python virtual environment
----------------------------------------
-This is needed the first time you build a working copy of this project, and
-then only rarely for troubleshooting later.
+## Recreate Python virtual environment
+This is needed the first time you build a working copy of this project, and then only rarely for troubleshooting later.
 
 [Activate this project][activate].
 
@@ -20,12 +10,10 @@ then only rarely for troubleshooting later.
 pve-recreate
 ~~~
 
-Rebuild the Python virtual environment
---------------------------------------
-If you need to rebuild the Python virtual environment at a much more
-fundamental level, then do this.  **NOTE**: It is wise to do this every once
-in a while just to be sure that it is up-to-date and completely accurate.  For
-example, it was incomplete the first time that I wrote it.
+## Rebuild Python virtual environment
+If you need to rebuild the Python virtual environment at a more fundamental level, then do this.
+**NOTE**: It is wise to do this every once in a while just to be sure that it is up-to-date and completely accurate.
+For example, the dependencies were incomplete the first time that I wrote and executed these scripts.
 
 [Activate this project][activate].
 
@@ -34,20 +22,24 @@ pve-rebuild
 dep-check
 ~~~
 
-Upgrade the Python virtual environment (periodically)
------------------------------------------------------
+## Upgrade Python virtual environment (periodically)
+This procedure attempts to upgrade all the Python dependencies, if possible.
+Note that this can be very disruptive, so one should allow space and time for the process.
+In particular, one should take steps to prepare to undo the attempt.
+
 [Activate this project][activate].
 
 ~~~ bash
 dep-upgrade
 # Verify that everything still works...
+generate
+test-run
+app-run
 dep-capture
 ~~~
 
-Check dependency versions
--------------------------
-This command should output nothing if all dependencies match their expected
-versions.
+## Check dependency versions
+This step should output nothing if all dependencies match their expected versions.
 
 [Activate this project][activate].
 
@@ -62,8 +54,8 @@ OR
 all-check | less
 ~~~
 
-Capture dependency versions
----------------------------
+## Capture dependency versions
+
 [Activate this project][activate].
 
 ~~~ bash
@@ -77,22 +69,19 @@ OR
 all-capture
 ~~~
 
-Check paths
------------
+## Check paths
+
+[Activate this project][activate].
+
 ~~~ bash
 tool-check | less
 ~~~
 
-[activate]: ./HowTo-activate_this_project.md "HowTo activate this project"
+[activate]:    ./HowTo-activate_this_project.md "HowTo activate this project"
 [application]: ./HowTo-execute_application.md "HowTo execute application"
-[AWS CLI]: ./HowTo-setup-AWS_CLI.md "HowTo setup AWS CLI"
-[clone]: ./HowTo-setup-source_control.md "HowTo setup source control"
-[deploy]: ./HowTo-deploy-server.md "HowTo deploy server"
-[initiation]: ./project_initiation.md "How Rob initiated the project repository"
-[install]: ./HowTo-install-packages.md "HowTo install Ubuntu packages"
-[license]: ../LICENSE.md "License"
-[ReadMe]: ../README.md "ReadMe"
-[test]: ./HowTo-test.md "HowTo test"
-[venv]: ./HowTo-setup-Python_virtual_environment.md "HowTo setup Python virtual environment"
+[clone]:       ./HowTo-setup-source_control.md "HowTo setup source control"
+[initiation]:  ./project_initiation.md "How Rob initiated the project repository"
+[test]:        ./HowTo-test.md "HowTo test"
+[venv]:        ./HowTo-setup-Python_virtual_environment.md "HowTo setup Python virtual environment"
 [workstation]: ./HowTo-setup-workstation.md "HowTo setup workstation"
 

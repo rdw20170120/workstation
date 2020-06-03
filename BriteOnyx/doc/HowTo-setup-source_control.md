@@ -17,11 +17,12 @@ ls ~/.ssh
 
    which outputs these two new files:
 
-    id_rsa id_rsa.pub
+        id_rsa id_rsa.pub
 
-1. Add the new SSH public key file (id_rsa.pub) to your GitHub account.
+1. Add the new SSH public key file (`id_rsa.pub`) to your GitHub account.
 
 ## Configure SSH connection to GitHub
+
 1. Create (or edit) your SSH configuration file.
 
 ~~~ bash
@@ -30,12 +31,12 @@ vim ~/.ssh/config
 
 1. Add this content to the file:
 
-    Host MeAtGitHub
-        Compression yes
-        HostName github.com
-        IdentityFile ~/.ssh/id_rsa
-        StrictHostKeyChecking yes
-        User git
+        Host MeAtOptum
+            Compression yes
+            HostName github.optum.com
+            IdentityFile ~/.ssh/id_rsa
+            StrictHostKeyChecking yes
+            User git
 
 1. Save & exit vim by pressing `Escape :wq Enter`.
 1. Protect the new SSH files.
@@ -55,8 +56,7 @@ ssh -T MeAtGitHub
 1. If necessary, troubleshoot SSH issues and Git issues until it works.
 
 ## Clone project repository
-**NOTE**: We use `MeAtGitHub` now as our prefix for the repo URL to trigger the
-use of the settings in `~/.ssh/config` that we created above.
+**NOTE**: We use `MeAtGitHub` now as our prefix for the repo URL to trigger the use of the settings in `~/.ssh/config` that we created above.
 
 1. Open a BASH shell.
 
@@ -75,20 +75,20 @@ git config --list --show-origin
 
    which outputs something like this:
 
-    file:.git/config        core.repositoryformatversion=0
-    file:.git/config        core.filemode=true
-    file:.git/config        core.bare=false
-    file:.git/config        core.logallrefupdates=true
-    file:.git/config        remote.origin.url=MeAtGitHub:PROFILE/REPO.git
-    file:.git/config        remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
-    file:.git/config        branch.master.remote=origin
-    file:.git/config        branch.master.merge=refs/heads/master
+        file:.git/config        core.repositoryformatversion=0
+        file:.git/config        core.filemode=true
+        file:.git/config        core.bare=false
+        file:.git/config        core.logallrefupdates=true
+        file:.git/config        remote.origin.url=MeAtGitHub:PROFILE/REPO.git
+        file:.git/config        remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+        file:.git/config        branch.master.remote=origin
+        file:.git/config        branch.master.merge=refs/heads/master
 
    Upon initial install, this should output nothing about your GitHub user.
 
 1. Let's change that.
-   These commands will set your name and email address for only this project.
-   If you want to set them globally for this user account on this machine, then add the `--global` option to each command.
+These commands will set your name and email address for only this project.
+If you want to set them globally for this user account on this machine, then add the `--global` option to each command.
 
 ~~~ bash
 git config user.name 'Rob Williams'
@@ -109,35 +109,23 @@ git config --list --show-origin
 
    you should see the new settings.
 
-    file:.git/config        core.repositoryformatversion=0
-    file:.git/config        core.filemode=true
-    file:.git/config        core.bare=false
-    file:.git/config        core.logallrefupdates=true
-    file:.git/config        core.editor=vim
-    file:.git/config        remote.origin.url=MeAtGitHub:PROFILE/REPO.git
-    file:.git/config        remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
-    file:.git/config        branch.master.remote=origin
-    file:.git/config        branch.master.merge=refs/heads/master
-    file:.git/config        user.name=Rob Williams
-    file:.git/config        user.email=rob@refactory.biz
+        file:.git/config        core.repositoryformatversion=0
+        file:.git/config        core.filemode=true
+        file:.git/config        core.bare=false
+        file:.git/config        core.logallrefupdates=true
+        file:.git/config        core.editor=vim
+        file:.git/config        remote.origin.url=MeAtGitHub:PROFILE/REPO.git
+        file:.git/config        remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+        file:.git/config        branch.master.remote=origin
+        file:.git/config        branch.master.merge=refs/heads/master
+        file:.git/config        user.name=Rob Williams
+        file:.git/config        user.email=rob@refactory.biz
 
-TODO: Document how to change git remote URLs
-
-~~~ bash
-git remove -v
-git remote set-url origin https://github.com/PROFILE/REPOSITORY.git
-~~~
-
-[activate]: ./HowTo-activate_this_project.md "HowTo activate this project"
+[activate]:    ./HowTo-activate_this_project.md "HowTo activate this project"
 [application]: ./HowTo-execute_application.md "HowTo execute application"
-[AWS CLI]: ./HowTo-setup-AWS_CLI.md "HowTo setup AWS CLI"
-[clone]: ./HowTo-setup-source_control.md "HowTo setup source control"
-[deploy]: ./HowTo-deploy-server.md "HowTo deploy server"
-[initiation]: ./project_initiation.md "How Rob initiated the project repository"
-[install]: ./HowTo-install-packages.md "HowTo install Ubuntu packages"
-[license]: ../LICENSE.md "License"
-[ReadMe]: ../README.md "ReadMe"
-[test]: ./HowTo-test.md "HowTo test"
-[venv]: ./HowTo-setup-Python_virtual_environment.md "HowTo setup Python virtual environment"
+[clone]:       ./HowTo-setup-source_control.md "HowTo setup source control"
+[initiation]:  ./project_initiation.md "How Rob initiated the project repository"
+[test]:        ./HowTo-test.md "HowTo test"
+[venv]:        ./HowTo-setup-Python_virtual_environment.md "HowTo setup Python virtual environment"
 [workstation]: ./HowTo-setup-workstation.md "HowTo setup workstation"
 

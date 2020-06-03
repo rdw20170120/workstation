@@ -39,7 +39,7 @@ echo $cmd
 $cmd
 
 # Merge generated files into project directory
-# TODO: Research why Meld does not open a new tab on macOS
+# TODO: RESEARCH: why Meld does not open a new tab on macOS?
 cmd='meld --newtab'
 cmd+=" '$DirTgt' '$BO_Project'"
 cmd+=' >/dev/null 2>&1 &'
