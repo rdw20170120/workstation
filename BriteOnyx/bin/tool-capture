@@ -9,7 +9,7 @@ if [[ -z "$BO_Project" ]] ; then
     exit 1
 fi
 
-File=$BO_Project/cfg/tool.out
+File=$BO_Project/out/tool.out
 
 echo "INFO: Capturing tool dependencies to '$File'"
 tool-report > $File

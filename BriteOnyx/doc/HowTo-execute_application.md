@@ -3,7 +3,7 @@ This application is intended to be executed in a shell (on the command-line).
 
 This application is configured via a `context.bash` script that sets up the necessary execution environment via BASH environment variables, `$PATH`, etc.
 The [activate](../activate.bash) script will `source` the `context.bash` script, if it exists.
-You can create this script by copying the [cfg/sample_context] (../cfg/sample_context.bash) script as `context.bash` in the root of this repository.
+You can create this script by copying the [sample/context.bash](../sample/context.bash) script as `context.bash` in the root of this repository.
 **Note** that the copied script MUST NOT be checked into source control.
 
 ## Execute this application

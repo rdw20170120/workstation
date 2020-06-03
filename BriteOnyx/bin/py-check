@@ -10,7 +10,9 @@ if [[ -z "$BO_Project" ]] ; then
 fi
 
 clear
-python3 -m tabnanny -v $BO_Project/src >$BO_Project/cfg/tabnanny.out
-cat $BO_Project/cfg/tabnanny.out | grep -v 'listing directory' | grep -v 'Clean bill of health.'
+python3 -m tabnanny -v $BO_Project/src >$BO_Project/out/tabnanny.out
+cat $BO_Project/out/tabnanny.out \
+    | grep -v 'listing directory' \
+    | grep -v 'Clean bill of health.'
 echo 'INFO: No output means all Python code passes all checks'
 

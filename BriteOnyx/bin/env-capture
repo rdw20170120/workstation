@@ -9,7 +9,7 @@ if [[ -z "$BO_Project" ]] ; then
     exit 1
 fi
 
-File=$BO_Project/cfg/env.out
+File=$BO_Project/out/env.out
 
 echo "INFO: Capturing BASH environment to '$File'"
 env-report > $File
