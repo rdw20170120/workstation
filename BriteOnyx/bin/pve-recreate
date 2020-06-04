@@ -27,5 +27,5 @@ else
 fi
 
 pip3 install pip wheel --upgrade --upgrade-strategy=eager
-pip3 install logzero pytest
+pip3 install awscli boto3 logzero pytest
 
