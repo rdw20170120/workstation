@@ -3,7 +3,7 @@
 from pathlib import Path
 from sys     import maxsize
 
-from utility import my_environment
+from utility import environment
 
 
 class Config:
@@ -19,7 +19,7 @@ class Config:
         provides an advantage during development and testing.
         """
         try:
-            v = my_environment.get('Run')
+            v = environment.get('Run')
             return v.lower() == 'dry'
         except KeyError:
             return False
@@ -37,7 +37,7 @@ class Config:
         advantage during development and testing.
         """
         try:
-            v = my_environment.get('Run')
+            v = environment.get('Run')
             return v.lower() == 'force'
         except KeyError:
             return False
@@ -64,7 +64,7 @@ class Config:
         development and testing.
         """
         try:
-            return int(my_environment.get('Quick'))
+            return int(environment.get('Quick'))
         except KeyError:
             return maxsize
 
@@ -74,7 +74,7 @@ class Config:
 
     @property
     def project_directory(self):
-        return Path(my_environment.get('BO_Project'))
+        return Path(environment.get('BO_Project'))
     
     @property
     def should_fake_it(self):
@@ -88,12 +88,12 @@ class Config:
         the real data processing takes significant time.
         """
         try:
-            my_environment.get('FakeIt')
+            environment.get('FakeIt')
             return True
         except KeyError:
             return False
 
     @property
     def temporary_directory(self):
-        return Path(my_environment.get('TMPDIR'))
+        return Path(environment.get('TMPDIR'))
 

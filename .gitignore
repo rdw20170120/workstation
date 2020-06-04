@@ -2,10 +2,12 @@
 context.bash
 
 # Common files
+*.avro
 *.env
 *.list
 *.log
 *.out
+*.parquet
 *.pid
 *.txt
 log/

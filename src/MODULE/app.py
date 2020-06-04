@@ -1,9 +1,10 @@
 #!/bin/false
 # Intended to be executed as a Python module:  python3 -m MODULE
 
-from logging  import DEBUG
-from pathlib  import Path
+from logging import DEBUG
+from pathlib import Path
 
+from logzero import logfile
 from logzero import logger as log
 from logzero import loglevel
 
@@ -11,7 +12,9 @@ from utility.singleton_application import SingletonApplication
 
 from .config import Config
 
-
+c = Config()
+c.log_directory.mkdir(exist_ok=True)
+logfile(c.log_file, maxBytes=1e6, backupCount=9)
 loglevel(level=DEBUG)
 
 
