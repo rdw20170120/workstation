@@ -17,5 +17,5 @@ fi
 echo "INFO: Creating Python virtual environment directory '$PVE'"
 python3 -m venv $PVE
 
-echo "WARN: This new Python virtual environment has NOT been activated, so you should exit this shell and activate a new one"
+echo "WARN: This new Python virtual environment has NOT been activated, so you should `exit` this shell and activate a new one"
 

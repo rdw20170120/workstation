@@ -50,7 +50,7 @@ which pip
 /Users/rwill253/project/Rob/workstation/.PVE/bin/pip
 ##########
 python2 --version
-/Users/rwill253/project/Rob/workstation/BriteOnyx/bin/tool-report: line 12: python2: command not found
+/Users/rwill253/project/Rob/workstation/bin/tool-report: line 12: python2: command not found
 ##########
 type python2
 ##########
@@ -96,10 +96,13 @@ which py.test
 /Users/rwill253/project/Rob/workstation/.PVE/bin/py.test
 ##########
 aws --version
+aws-cli/1.18.72 Python/3.8.2 Darwin/18.7.0 botocore/1.16.22
 ##########
 type aws
+aws is hashed (/Users/rwill253/project/Rob/workstation/.PVE/bin/aws)
 ##########
 which aws
+/Users/rwill253/project/Rob/workstation/.PVE/bin/aws
 ##########
 git --version
 git version 2.20.1 (Apple Git-117)

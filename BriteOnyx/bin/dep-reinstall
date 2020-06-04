@@ -2,7 +2,7 @@
 set -e
 # This script is intended to be executed by a user in a BASH shell.
 
-# Install Python dependencies
+# Reinstall frozen Python dependencies
 
 if [[ -z "$BO_Project" ]] ; then
     echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
@@ -10,7 +10,6 @@ if [[ -z "$BO_Project" ]] ; then
 fi
 
 File=$BO_Project/cfg/requirements.txt
-
 if [[ ! -r "$File" ]] ; then
     echo "FATAL: Python requirements file '$File' is unreadable, aborting"
     exit 1

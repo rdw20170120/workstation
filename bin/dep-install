@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a BASH shell.
+set -e
+
+# Install Python dependencies
+
+if [[ -z "$BO_Project" ]] ; then
+    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
+    exit 1
+fi
+
+echo "INFO: Installing Python dependencies"
+
+pip3 install pip wheel --upgrade --upgrade-strategy=eager
+pip3 install awscli boto3 logzero pytest
+
