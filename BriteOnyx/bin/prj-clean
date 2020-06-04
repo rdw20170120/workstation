@@ -15,7 +15,7 @@ if [[ -z "$PVE" ]] ; then
     exit 1
 fi
 
-findAnd () {
+findAnd() {
     # Find and perform action $1 on files within directory $2 matching pattern $3
     # $1 = action to perform, either 'delete' or 'print'
     # $2 = directory in which to work

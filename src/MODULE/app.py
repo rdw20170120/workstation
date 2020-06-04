@@ -12,6 +12,7 @@ from utility.singleton_application import SingletonApplication
 
 from .config import Config
 
+
 c = Config()
 c.log_directory.mkdir(exist_ok=True)
 logfile(c.log_file, maxBytes=1e6, backupCount=9)
