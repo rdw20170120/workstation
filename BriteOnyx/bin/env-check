@@ -2,7 +2,7 @@
 set -e
 # This script is intended to be executed by a user in a BASH shell.
 
-# Check BASH environment
+# Check BASH environment status
 
 if [[ -z "$BO_Project" ]] ; then
     echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
@@ -12,10 +12,10 @@ fi
 File=$BO_Project/out/env.out
 
 if [[ ! -r "$File" ]] ; then
-    echo "FATAL: BASH environment file '$File' is unreadable, aborting"
+    echo "FATAL: BASH environment status file '$File' is unreadable, aborting"
     exit 1
 fi
 
-echo "INFO: Checking BASH environment against '$File'"
+echo "INFO: Checking BASH environment status against '$File'"
 env-report | diff - $File
 

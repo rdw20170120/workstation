@@ -2,7 +2,7 @@
 set -e
 # This script is intended to be executed by a user in a BASH shell.
 
-# Capture Python dependencies
+# Capture Python dependency status
 
 if [[ -z "$BO_Project" ]] ; then
     echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
@@ -11,6 +11,6 @@ fi
 
 File=$BO_Project/cfg/requirements.txt
 
-echo "INFO: Capturing Python dependencies to '$File'"
+echo "INFO: Capturing Python dependency status to '$File'"
 dep-report > $File
 

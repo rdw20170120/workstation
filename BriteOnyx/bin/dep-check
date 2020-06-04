@@ -2,7 +2,7 @@
 set -e
 # This script is intended to be executed by a user in a BASH shell.
 
-# Check Python dependencies
+# Check Python dependency status
 
 if [[ -z "$BO_Project" ]] ; then
     echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
@@ -12,10 +12,10 @@ fi
 File=$BO_Project/cfg/requirements.txt
 
 if [[ ! -r "$File" ]] ; then
-    echo "FATAL: Python dependencies file '$File' is unreadable, aborting"
+    echo "FATAL: Python dependency status file '$File' is unreadable, aborting"
     exit 1
 fi
 
-echo "INFO: Checking Python dependencies against '$File'"
+echo "INFO: Checking Python dependency status against '$File'"
 dep-report | diff - $File
 

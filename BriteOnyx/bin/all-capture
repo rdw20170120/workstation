@@ -2,7 +2,7 @@
 set -e
 # This script is intended to be executed by a user in a BASH shell.
 
-# Capture all
+# Capture all status
 
 if [[ -z "$BO_Project" ]] ; then
     echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
@@ -11,5 +11,6 @@ fi
 
 dep-capture
 env-capture
+py-capture
 tool-capture
 

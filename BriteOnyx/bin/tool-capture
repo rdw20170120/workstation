@@ -2,7 +2,7 @@
 set -e
 # This script is intended to be executed by a user in a BASH shell.
 
-# Capture tool dependencies
+# Capture tool status
 
 if [[ -z "$BO_Project" ]] ; then
     echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
@@ -11,6 +11,6 @@ fi
 
 File=$BO_Project/out/tool.out
 
-echo "INFO: Capturing tool dependencies to '$File'"
+echo "INFO: Capturing tool status to '$File'"
 tool-report > $File
 
