@@ -35,6 +35,9 @@ def squashed(value):
     if isinstance(value, dict):
         # print("squashed ended with: '{}'".format(value))
         return value
+    if isinstance(value, Enum):
+        # print("squashed ended with: '{}'".format(value))
+        return value
     if isinstance(value, Number):
         # print("squashed ended with: '{}'".format(value))
         return value
