@@ -1,8 +1,6 @@
 from .bash_script       import visitor_map
-from .content_structure import _ContentElement
 from .script_structure  import *
 from .script_structure  import _Command
-from .script_structure  import _Shebang
 
 
 ###############################################################################
@@ -45,9 +43,6 @@ def debugging_comment():
         comment(set_('-o', 'xtrace')),
     ]
 
-def disabled(*element):
-    return comment('DISABLED: ', element)
-
 def disabled_content_footer():
     return [
         line(),
@@ -56,28 +51,6 @@ def disabled_content_footer():
         line('DisabledContent'),
         line(),
     ]
-
-def fix(*element):
-    return todo('FIX: ', element)
-
-def no(*element):
-    return comment('NO: ', element)
-
-def note(*element):
-    return comment('NOTE: ', element)
-
-def rule():
-    # TODO: Make line length configurable
-    return line('#' * 79)
-
-def research(*element):
-    return todo('RESEARCH: ', element)
-
-def someday(*element):
-    return todo('SOMEDAY: ', element)
-
-def todo(*element):
-    return comment('TODO: ', element)
 
 ###############################################################################
 
@@ -126,30 +99,37 @@ def sourced_header():
 ###############################################################################
 
 
-class _Substitution(_Command):
-    def __init__(self, command, arguments, typename='_Substitution'):
-        super().__init__(command, arguments, typename)
+class _Substitution(object):
+    def __init__(self, command):
+        super().__init__()
+        assert isinstance(command, _Command)
+        self.command = command
+
+    def __repr__(self):
+        return "_Substitution({})".format(self.command)
 
 
 @visitor_map.register(_Substitution)
 def _visit_substitution(element, walker):
     walker.emit('$(')
     walker.walk(element.command)
-    walker.walk(element.arguments)
     walker.emit(')')
 
-def substitute(command, *argument):
-    return _Substitution(command, argument)
+def substitute(executable, *argument):
+    return _Substitution(command(executable, argument))
 
 ###############################################################################
 
 
-class _Assign(_ContentElement):
-    def __init__(self, variable, expressions, typename='_Assign'):
-        super().__init__(None, typename)
-        assert variable
-        self.expressions = expressions
-        self.variable = variable
+class _Assign(object):
+    def __init__(self, variable, *expression):
+        super().__init__()
+        self.variable = squashed(variable)
+        assert self.variable
+        self.expressions = squashed(expression)
+
+    def __repr__(self):
+        return "_Assign({}, {})".format(self.variable, self.expressions)
 
 
 @visitor_map.register(_Assign)
@@ -170,14 +150,8 @@ def export(variable, expression=None):
 
 ###############################################################################
 
-
-class _Condition(_Command):
-    def __init__(self, command, argument, typename='_Condition'):
-        super().__init__(command, argument, typename)
-
-
-def condition(command, *argument):
-    return _Condition(command, argument)
+def condition(executable, *argument):
+    return command(executable, argument)
 
 def directory_exists(directory_name):
     assert directory_name
@@ -223,20 +197,40 @@ def string_is_null(expression):
 
 ###############################################################################
 
+
+class _Else(object):
+    def __init__(self, *statement):
+        super().__init__()
+        self.statements = squashed(statement)
+        assert self.statements
+
+    def __repr__(self):
+        return "_Else({})".format(self.statements)
+
+
+@visitor_map.register(_Else)
+def _visit_else(element, walker):
+    walker.emit('else')
+    walker.walk(eol())
+    walker.walk(element.statements)
+
+
 def else_(*statement):
-    statement = squashed(statement)
-    assert statement
-    assert len(statement)
-    return _ContentElement(['else', eol(), statement])
+    return _Else(statement)
 
 ###############################################################################
 
 
-class _ElseIf(_Command):
-    def __init__(self, condition, statement, typename='_ElseIf'):
-        super().__init__(condition, statement, typename)
-        self.condition = condition
-        self.statements = statement
+class _ElseIf(object):
+    def __init__(self, condition, *statement):
+        super().__init__()
+        self.condition = squashed(condition)
+        assert self.condition
+        self.statements = squashed(statement)
+        assert self.statements
+
+    def __repr__(self):
+        return "_ElseIf({}, {})".format(self.condition, self.statements)
 
 
 @visitor_map.register(_ElseIf)
@@ -254,10 +248,18 @@ def elif_(condition, *statement):
 ###############################################################################
 
 
-class _Fi(_ContentElement):
-    def __init__(self, typename='_Fi'):
-        super().__init__(['fi', eol()], typename)
+class _Fi(object):
+    def __init__(self):
+        super().__init__()
 
+    def __repr__(self):
+        return "_Fi()"
+
+
+@visitor_map.register(_Fi)
+def _visit_fi(element, walker):
+    walker.emit('fi')
+    walker.walk(eol())
 
 def fi():
     return _Fi()
@@ -265,11 +267,16 @@ def fi():
 ###############################################################################
 
 
-class _If(_Command):
-    def __init__(self, condition, statement, typename='_If'):
-        super().__init__(condition, statement, typename)
-        self.condition = condition
-        self.statements = statement
+class _If(object):
+    def __init__(self, condition, *statement):
+        super().__init__()
+        self.condition = squashed(condition)
+        assert self.condition
+        self.statements = squashed(statement)
+        assert self.statements
+
+    def __repr__(self):
+        return "_If({}, {})".format(self.condition, self.statements)
 
 
 @visitor_map.register(_If)
@@ -294,13 +301,42 @@ def shebang_sourced():
 
 ###############################################################################
 
-def vn(variable_name):
-    assert variable_name
-    return _ContentElement(variable_name, typename='vn')
 
-def vr(variable_name):
-    assert variable_name
-    return _ContentElement(['$', variable_name], typename='vr')
+class _VariableName(object):
+    def __init__(self, name):
+        super().__init__()
+        self.name = squashed(name)
+        assert self.name
+
+    def __repr__(self):
+        return "_VariableName({})".format(self.name)
+
+
+@visitor_map.register(_VariableName)
+def _visit_variable_name(element, walker):
+    walker.walk(element.name)
+
+def vn(name):
+    return _VariableName(name)
+
+
+class _VariableReference(object):
+    def __init__(self, name):
+        super().__init__()
+        self.name = squashed(name)
+        assert self.name
+
+    def __repr__(self):
+        return "_VariableReference({})".format(self.name)
+
+
+@visitor_map.register(_VariableReference)
+def _visit_variable_reference(element, walker):
+    walker.emit('$')
+    walker.walk(element.name)
+
+def vr(name):
+    return _VariableReference(name)
 
 
 ''' Disabled content

@@ -268,7 +268,6 @@ def generate(target_directory):
         Path(), 'activate.bash'
         )
     content.generate(target_directory)
-    content.print()
 
 
 ''' Disabled content

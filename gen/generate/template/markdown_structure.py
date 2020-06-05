@@ -1,7 +1,6 @@
 from pathlib import Path
 
 from .content_structure import *
-from .content_structure import _ContentElement
 from .markdown          import visitor_map
 
 ###############################################################################
@@ -36,22 +35,29 @@ def s(sentence):
 ###############################################################################
 
 
-class _TableRow(_ContentElement):
-    def __init__(self, column, typename='_TableRow'):
-        super().__init__(column, typename)
-        assert self.content
+class _TableRow(object):
+    def __init__(self, *column):
+        super().__init__()
+        self.columns = squashed(column)
+        assert self.columns
+
+    def __repr__(self):
+        return "_TableRow({})".format(self.columns)
 
 
 @visitor_map.register(_TableRow)
 def _visit_table_row(element, walker):
-    as_list = element.content_as_list()
-    if as_list is not None:
-        for c in as_list:
-            if c is not None:
-                walker.emit('|')
-                walker.walk(c)
+    if is_nonstring_iterable(element.columns):
+        for c in element.columns:
+            walker.emit('|')
+            walker.walk(c)
+    elif element.columns is None:
+        pass
+    else:
         walker.emit('|')
-        walker.walk(eol())
+        walker.walk(element.columns)
+    walker.emit('|')
+    walker.walk(eol())
 
 def table_header(*column):
     assert column

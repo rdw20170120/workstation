@@ -15,6 +15,7 @@ from utility.singleton_application import SingletonApplication
 
 from .config                  import Config
 from .project_activate_script import generate as generate_project_activate_script
+from .python_scripts import generate as generate_python_scripts
 
 
 loglevel(level=DEBUG)
@@ -25,7 +26,8 @@ class ContentGeneratorApp(SingletonApplication):
         super().__init__(pid_file)
 
     def _generate(self):
-        generate_project_activate_script(self._target_directory)
+        # DISABLED: generate_project_activate_script(self._target_directory)
+        generate_python_scripts(self._target_directory)
 
     def _parse_args(self):
         parser = ArgumentParser()

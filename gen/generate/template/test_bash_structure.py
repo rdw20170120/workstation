@@ -106,9 +106,9 @@ def test_elif_():
     with raises(TypeError): elif_()
     with raises(AssertionError): elif_(None)
     with raises(AssertionError): elif_('')
-    assert s(elif_('Test')) == 'elif Test ; then\n'
-    assert s(elif_('Test', None)) == 'elif Test ; then\n'
-    assert s(elif_('Test', '')) == 'elif Test ; then\n'
+    with raises(AssertionError): elif_('Test')
+    with raises(AssertionError): elif_('Test', None)
+    with raises(AssertionError): elif_('Test', '')
     assert s(elif_('Test', '123')) == 'elif Test ; then\n123'
 
 def test_else_():
@@ -175,9 +175,9 @@ def test_if_():
     with raises(TypeError): if_()
     with raises(AssertionError): if_(None)
     with raises(AssertionError): if_('')
-    assert s(if_('Test')) == 'if Test ; then\n'
-    assert s(if_('Test', None)) == 'if Test ; then\n'
-    assert s(if_('Test', '')) == 'if Test ; then\n'
+    with raises(AssertionError): if_('Test')
+    with raises(AssertionError): if_('Test', None)
+    with raises(AssertionError): if_('Test', '')
     assert s(if_('Test', '123')) == 'if Test ; then\n123'
 
 def test_indent():

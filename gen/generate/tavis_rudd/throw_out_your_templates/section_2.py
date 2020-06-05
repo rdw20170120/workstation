@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from .section_1 import default_encoding
-from .section_1 import safe_unicode
+# from .section_1 import safe_unicode
 from .section_4 import default_visitor_map
 
 ################################################################################
@@ -17,13 +17,13 @@ class Serializer(object):
             visitor_map = default_visitor_map.copy()
         self.visitor_map = visitor_map
         self.input_encoding = (input_encoding or default_encoding)
-        self._safe_unicode_buffer = []
+        self._safe_buffer = []
 
     def serialize(self, obj):
         """Serialize an object, and its children, into sanitized unicode."""
-        self._safe_unicode_buffer = []
+        self._safe_buffer = []
         self.walk(obj)
-        return safe_unicode(''.join(self._safe_unicode_buffer))
+        return ''.join(self._safe_buffer)
 
     def walk(self, obj):
         """This method is called by visitors for anything they
@@ -31,6 +31,7 @@ class Serializer(object):
         """
         visitor = self.visitor_map.get_visitor(obj)
         if visitor:
+            print("Visitor '{}' is walking object '{}'".format(visitor, obj))
             visitor(obj, self) # ignore return value
         else:
             raise TypeError('No visitor found for %s'%repr(obj))
@@ -39,8 +40,12 @@ class Serializer(object):
         """This is called by visitors when they have escaped unicode
         to output.
         """
-        self._safe_unicode_buffer.append(escaped_unicode_output)
+        print("Emitting: {}".format(escaped_unicode_output))
+        self._safe_buffer.append(escaped_unicode_output)
 
     def emit_many(self, output_seq):
-        self._safe_unicode_buffer.extend(output_seq)
+        self._safe_buffer.extend(output_seq)
+
+''' Disabled content
+'''
 

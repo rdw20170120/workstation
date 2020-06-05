@@ -112,3 +112,6 @@ class _VisitorMapContextManager(object):
         if self.set_parent_map:
             self.vmap.parent_map = None
 
+''' Disabled content
+'''
+

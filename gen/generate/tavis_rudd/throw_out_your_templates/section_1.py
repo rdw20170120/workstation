@@ -7,6 +7,7 @@
 default_encoding = 'utf-8'
 
 
+''' Disabled content
 class safe_bytes(str):
     def decode(self, *args, **kws):
         return safe_unicode(super(safe_bytes, self).encode(*args, **kws))
@@ -29,4 +30,6 @@ class safe_unicode(str):
         res = super(safe_unicode, self).__add__(o)
         return (safe_unicode(res)
                 if isinstance(o, (safe_unicode, safe_bytes)) else res)
+
+'''
 
