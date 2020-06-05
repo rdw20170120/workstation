@@ -8,7 +8,11 @@ from .template.python_structure import *
 visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
 def _generate(target_directory, subdirectories, file_name):
-    content = PythonSource(build(), subdirectories, file_name)
+    content = PythonSource(
+        visitor_map,
+        subdirectories, file_name,
+        build()
+        )
     content.generate(target_directory)
 
 def build():

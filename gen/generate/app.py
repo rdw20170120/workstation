@@ -26,7 +26,7 @@ class ContentGeneratorApp(SingletonApplication):
         super().__init__(pid_file)
 
     def _generate(self):
-        # DISABLED: generate_project_activate_script(self._target_directory)
+        generate_project_activate_script(self._target_directory)
         generate_python_scripts(self._target_directory)
 
     def _parse_args(self):

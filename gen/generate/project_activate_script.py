@@ -264,8 +264,10 @@ def build():
     ]
 
 def generate(target_directory):
-    content = BriteOnyxScript(build(),
-        Path(), 'activate.bash'
+    content = BriteOnyxScript(
+        visitor_map,
+        Path(), 'activate.bash',
+        build()
         )
     content.generate(target_directory)
 

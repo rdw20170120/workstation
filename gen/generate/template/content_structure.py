@@ -21,27 +21,27 @@ def squashed(value):
     dictionaries) as a squashed list in which all items have been squashed.
     Assume no circular references.
     """
-    print("squashed began with: '{}'".format(value))
+#   print("squashed began with: '{}'".format(value))
     if value is None:
-        print("squashed ended with: '{}'".format(None))
+#       print("squashed ended with: '{}'".format(None))
         return None
     if value == '':
-        print("squashed ended with: '{}'".format(None))
+#       print("squashed ended with: '{}'".format(None))
         return None
     if value == ():
-        print("squashed ended with: '{}'".format(None))
+#       print("squashed ended with: '{}'".format(None))
         return None
     if value == []:
-        print("squashed ended with: '{}'".format(None))
+#       print("squashed ended with: '{}'".format(None))
         return None
     if isinstance(value, dict):
-        print("squashed ended with: '{}'".format(value))
+#       print("squashed ended with: '{}'".format(value))
         return value
-    if isinstance(value, str):
-        print("squashed ended with: '{}'".format(value))
-        return value
+#   if isinstance(value, str):
+#       print("squashed ended with: '{}'".format(value))
+#       return value
     if not is_nonstring_iterable(value):
-        print("squashed ended with: '{}'".format(value))
+#       print("squashed ended with: '{}'".format(value))
         return value
     else:
         result = []
@@ -50,7 +50,7 @@ def squashed(value):
             if j is not None: result.append(j)
         if len(result) == 0: result = None
         elif len(result) == 1: result = result[0]
-        print("squashed ended with: '{}'".format(result))
+#       print("squashed ended with: '{}'".format(result))
         return result
 
 ###############################################################################

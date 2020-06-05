@@ -9,8 +9,15 @@ visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
 
 class BashScript(Script):
-    def __init__(self, content, relative_directory, filename):
-        super().__init__(content, relative_directory, filename)
+    def __init__(self, visitor_map,
+        relative_directory, filename,
+        content
+        ):
+        super().__init__(
+            visitor_map,
+            relative_directory, filename,
+            content,
+            )
 
 
 ''' Disabled content

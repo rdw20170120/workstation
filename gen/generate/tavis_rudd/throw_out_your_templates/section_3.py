@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# DISABLED: Python2: from types import InstanceType
-
 ################################################################################
 # 3: VisitorMap
 
@@ -11,7 +9,7 @@ class VisitorMap(dict):
 
     A `VisitorMap` can be chained to a `parent_map` that it will
     fall-back to if it doesn't have a visitor registered for a
-    specific type (or one of that types base classes).
+    specific type (or one of that type's base classes).
     """
     def __init__(self, map_or_seq=(), parent_map=None):
         super(VisitorMap, self).__init__(map_or_seq)
@@ -30,8 +28,9 @@ class VisitorMap(dict):
         `None`.
         """
         py_type = type(obj)
-        result = (self.get(py_type)
-                  or self._get_parent_type_visitor(obj, py_type))
+        result = (
+            self.get(py_type) or self._get_parent_type_visitor(obj, py_type)
+            )
         if result:
             return result
         elif self.parent_map is not None:
@@ -43,15 +42,6 @@ class VisitorMap(dict):
         return result
 
     def _get_parent_type_visitor(self, obj, py_type):
-        """DISABLED:  Python2
-        if py_type is InstanceType: # support old-style classes
-            m = [t for t in self if isinstance(obj, t)]
-            for i, t in enumerate(m):
-                if not any(t2 for t2 in m[i+i:]
-                           if t2 is not t and issubclass(t2, t)):
-                    return self[t]
-        else: # newstyle type/class
-        """
         for base in py_type.__mro__:
             if base in self:
                 return self[base]
@@ -87,10 +77,6 @@ class VisitorMap(dict):
             return decorator
 
 
-class DEFAULT:
-    ">>> visitor_map[DEFAULT] = visitor # sets default fallback visitor"
-
-
 class _VisitorMapContextManager(object):
     """The `with` statement context manager returned by
     VisitorMap.as_context()"""
@@ -112,6 +98,9 @@ class _VisitorMapContextManager(object):
         if self.set_parent_map:
             self.vmap.parent_map = None
 
+
 ''' Disabled content
+class DEFAULT:
+    ">>> visitor_map[DEFAULT] = visitor # sets default fallback visitor"
 '''
 

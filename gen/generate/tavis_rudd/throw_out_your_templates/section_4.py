@@ -6,9 +6,6 @@ from types   import FunctionType
 from types   import GeneratorType
 from types   import MethodType
 
-# from .section_1 import safe_bytes
-# from .section_1 import safe_unicode
-from .section_3 import DEFAULT
 from .section_3 import VisitorMap
 
 
@@ -17,6 +14,35 @@ from .section_3 import VisitorMap
 
 # visitor signature = "f(obj_to_be_walked, walker)", return value ignored
 # o = obj_to_be_walked, w = walker (aka serializer)
+
+visitor_map = VisitorMap()
+
+@visitor_map.register(int)
+def _visit_int(element, walker):
+    walker.emit(str(element))
+
+@visitor_map.register(list)
+def _visit_list(element, walker):
+    for item in element: walker.walk(item)
+
+@visitor_map.register(type(None))
+def _visit_none(element, walker):
+    pass
+
+@visitor_map.register(str)
+def _visit_str(element, walker):
+    walker.emit(element)
+
+@visitor_map.register(tuple)
+def _visit_tuple(element, walker):
+    for item in element: walker.walk(item)
+
+
+''' Disabled content
+from .section_1 import safe_bytes
+from .section_1 import safe_unicode
+from .section_3 import DEFAULT
+
 default_visitor_map = VisitorMap({
 #   str: (lambda o, w: w.walk(str(o, w.input_encoding, 'strict'))),
     str: (lambda o, w: w.emit(o)),
@@ -27,8 +53,8 @@ default_visitor_map = VisitorMap({
     type: (lambda o, w: w.walk(str(o))),
     DEFAULT: (lambda o, w: w.walk(repr(o)))})
 
-number_types = (int, int, Decimal, float, complex)
 func_types = (FunctionType, BuiltinMethodType, MethodType)
+number_types = (int, int, Decimal, float, complex)
 sequence_types = (tuple, list, set, frozenset, range, GeneratorType)
 
 for typeset, visitor in (
@@ -37,7 +63,5 @@ for typeset, visitor in (
     (func_types, (lambda o, w: w.walk(o())))):
     for type_ in typeset:
         default_visitor_map[type_] = visitor
-
-''' Disabled content
 '''
 
