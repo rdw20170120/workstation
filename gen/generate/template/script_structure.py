@@ -34,6 +34,7 @@ def _visit_arguments(element, walker):
         walker.emit(' ')
         walker.walk(element.arguments)
 
+
 ###############################################################################
 
 
@@ -107,6 +108,33 @@ def someday(*element):
 
 def todo(*element):
     return comment('TODO: ', element)
+
+###############################################################################
+
+
+class _Expression(object):
+    def __init__(self, *elements):
+        super().__init__()
+        self.elements = squashed(elements)
+
+    def __repr__(self):
+        return "_Expression({})".format(self.elements)
+
+
+@visitor_map.register(_Expression)
+def _visit_expression(element, walker):
+    if is_nonstring_iterable(element.elements):
+        for e in element.elements:
+            if e is not None:
+                walker.walk(e)
+    elif element.elements is None:
+        pass
+    else:
+        walker.walk(element.elements)
+
+
+def x(*element):
+    return _Expression(element)
 
 ###############################################################################
 

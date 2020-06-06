@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# NOTE: Intended to be executed directly by the user.
 
 from argparse import ArgumentParser
 from argparse import FileType

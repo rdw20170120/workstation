@@ -30,10 +30,10 @@ def _activate_python_virtual_environment():
         _remember_system_path(),
         _remember_user_path(),
         _reset_path_for_pve(),
-        _capture_environment(vr('PWD'), 'PVE-prior'), eol(),
+        _capture_environment(x(vr('PWD'), '/out'), 'PVE-prior'), eol(),
         line(),
-        _source_script((vr('BO_Project'), '/bin/lib/pve-activate.bash')),
-        _capture_environment(vr('PWD'), 'PVE-after'), eol(),
+        _source_script((vr('BO_Project'), '/BriteOnyx/bin/lib/pve-activate.bash')),
+        _capture_environment(x(vr('PWD'), '/out'), 'PVE-after'), eol(),
         _remember_pve_path(),
         _remember_path(),
     ]
@@ -43,34 +43,53 @@ def _capture_environment(directory_name, file_name):
         line(),
         command('env'),
         pipe(),
-        command('sort', '>', directory_name, '/BO-', file_name, '.env'),
+        command('sort', '>', x(directory_name, '/BO-', file_name, '.env')),
     ]
 
 def _comments():
     return [
-        note(
-            'We MUST NOT EVER ',
-            sq(exit()),
-            ' during BriteOnyx bootstrap or activation'
-        ),
-        no(set_('-e')),
-        disabled(set_('-x')),
-        rule(),
         # TODO: Redesign to automatically wrap comment paragraphs at a set line length
         comment('Activate the BriteOnyx framework to manage this project directory tree'),
         comment(),
-        note('This script, and EVERY script that it calls, must NOT invoke ', sq(exit()), '!'),
-        comment('The user calling this script must be allowed to preserve their shell and'),
-        comment('every effort must be made to inform the user of problems while continuing'),
-        comment('execution where possible.  Terminating the shell robs the user of useful'),
-        comment('feedback and interrupts their work, which is unacceptable.  Instead, the BASH'),
-        comment(sq(return_()), ' statement should be invoked to end execution with an appropriate'),
-        comment('status code.'),
+        note('We MUST NOT EVER ', cc(exit()), ' during BriteOnyx activation!'),
+        comment(),
+        comment('This script, and EVERY script that it calls, must NOT invoke ',
+            cc(exit()), '!  The',
+        ),
+        comment('user calling this script must be allowed to preserve their shell and every'),
+        comment('effort must be made to inform the user of problems while continuing execution'),
+        comment('where possible.  Terminating the shell robs the user of useful feedback and'),
+        comment('interrupts their work, which is unacceptable.  Instead, the BASH ',
+            cc(return_()),
+        ),
+        comment('statement should be invoked to end execution with an appropriate status code.'),
+        comment(),
+        comment('Likewise, we must be very careful invoking special BASH options during'),
+        comment('BriteOnyx activation, particularly the ', cc(set_('-e')),
+            ' option.  The user is',
+        ),
+        comment('inheriting the shell that we are configuring, which they will then use for'),
+        comment('the rest of their session, each and every time they develop, test, etc.  It'),
+        comment('would be very disruptive for the shell to abort on every error raised by'),
+        comment('every part of every command that they execute.  If you are unclear about'),
+        comment('this, then please experiment by uncommenting the ',
+            cc(set_('-x')), ' command below and',
+        ),
+        comment("activating a new shell.  Having learned that lesson, let's never use ",
+            cc(set_('-x')),
+        ),
+        comment('in a BASH script intended to be ', cc(command('source')), 'd.  However, the ',
+            cc(set_('-e')), ' BASH option',
+        ),
+        comment('is a good default for all scripts invoked as commands in their own subshells.'),
+        rule(),
+        no(set_('-e')),
+        disabled(set_('-x')),
         rule(),
     ]
 
 def _create_random_tmpdir():
-    local = 'dir'
+    local = '_result'
     # TODO: Consider capturing this special variable
     tmpdir = 'TMPDIR'
     user = 'USER'
@@ -86,7 +105,6 @@ def _create_random_tmpdir():
             ), eol(),
         ),
         else_(
-            indent(), todo('FIX: for Linux'),
             indent(), assign(
                 vn(local),
                 substitute(
@@ -125,7 +143,7 @@ def _create_random_tmpdir():
 
 def _detect_operating_system():
     # TODO: Make appropriate constants
-    local = 'dir'
+    local = '_result'
     return [
         line(),
         comment('Detect operating system'),
@@ -151,6 +169,19 @@ def _detect_operating_system():
 def _remember_path():
     return [
         line(),
+        note('This specific ordering of PATH elements is REQUIRED.  The Python'),
+        comment('virtual environment MUST come first in order to override the system Python.'),
+        comment('For now, that PATH element also includes the system PATH element, which is'),
+        comment('repeated here for when that is eventually fixed.  They system PATH element'),
+        comment('MUST precede any user PATH elements in order to make collisions fail-fast'),
+        comment('and to defeat simple attempts at redirecting system commands as an attack'),
+        comment('vector.  Similarly, the project PATH element MUST precede the user PATH'),
+        comment('element to make collisions fail-fast.  This arrangement is best for ensuring'),
+        comment('consistent behavior of the Python virtual environment, the system, and the'),
+        comment('project.  It puts at-risk only those user-specific commands, tools, and'),
+        comment('scripts relevant to the current deployed environment--where the specific'),
+        comment('user is best positioned to address them and failures are most likely limited'),
+        comment('to affecting only them (as they should).'),
         export(vn('PATH'), (
             # PVE path must precede system path to override Python
             vr('BO_PathPve'),
@@ -163,17 +194,15 @@ def _remember_path():
         ), eol(),
     ]
 
-def _reset_path_for_pve():
-    return [
-        line(),
-        comment('Reset PATH before activating Python virtual environment'),
-        export(vn('PATH'), vr('BO_PathSystem')), eol(),
-    ]
-
 def _remember_project_path():
     return [
         line(),
-        export(vn('BO_PathProject'), (vr('BO_Project'), '/bin')), eol(),
+        note('BriteOnyx scripts must precede project-specific scripts so that'),
+        comment('collisions fail-fast.  Any collision should result in renaming the project-'),
+        comment('specific script to avoid it.'),
+        export(vn('BO_PathProject'), x(
+            vr('BO_Project'), '/BriteOnyx/bin', ':', vr('BO_Project'), '/bin'
+        )), eol(),
         echo_info(
             'Remembering ', vn('BO_PathProject'), '=', vr('BO_PathProject')
         ), eol(),
@@ -218,6 +247,13 @@ def _remember_user_path():
         ), eol(),
     ]
 
+def _reset_path_for_pve():
+    return [
+        line(),
+        comment('Reset PATH before activating Python virtual environment'),
+        export(vn('PATH'), vr('BO_PathSystem')), eol(),
+    ]
+
 # TODO: Make this reusable
 def _source_script(script):
     return [
@@ -241,9 +277,11 @@ def _source_script(script):
 def _source_supporting_scripts():
     return [
         line(),
-        _source_script((vr('BO_Project'), '/alias-git.bash')),
+        _source_script((vr('BO_Project'), '/BriteOnyx/bin/lib/alias-common.bash')),
         line(),
-        _source_script((vr('BO_Project'), '/alias-project.bash')),
+        _source_script((vr('BO_Project'), '/BriteOnyx/bin/lib/alias-git.bash')),
+        line(),
+        _source_script((vr('BO_Project'), '/alias.bash')),
         line(),
         _source_script((vr('BO_Project'), '/context.bash')),
     ]
@@ -253,13 +291,15 @@ def build():
         sourced_header(),
         _comments(),
         _abort_if_activated(),
-        _capture_environment(vr('PWD'), 'incoming'), eol(),
+        line(),
+        path_does_not_exist('out'), and_(), command('mkdir', 'out'), eol(),
+        _capture_environment(x(vr('PWD'), '/out'), 'incoming'), eol(),
         _remember_project_root(),
         _detect_operating_system(),
         _create_random_tmpdir(),
         _activate_python_virtual_environment(),
         _source_supporting_scripts(),
-        _capture_environment(vr('PWD'), 'outgoing'), eol(),
+        _capture_environment(x(vr('PWD'), '/out'), 'outgoing'), eol(),
         disabled_content_footer(),
     ]
 

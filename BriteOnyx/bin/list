@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf_8 -*-
+# NOTE: Intended to be executed directly by the user.
 
 """ Print list of files and directories within current directory, recursively."""
 

@@ -32,7 +32,7 @@ if [[ -n "$BO_Project" ]] ; then
     return 1  # Exit from the script, but not from the shell
 fi
 
-[[ ! -e out ]] && mkdir out
+[[ ! -e "out" ]] && mkdir out
 
 env | sort > $PWD/out/BO-incoming.env
 

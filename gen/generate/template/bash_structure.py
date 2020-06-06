@@ -36,6 +36,10 @@ def echo_warn(*element):
 
 ###############################################################################
 
+def cc(command_embedded_within_comment):
+    assert isinstance(command_embedded_within_comment, _Command)
+    return bt(command_embedded_within_comment)
+
 def debugging_comment():
     return [
         note('Uncomment the following two lines for debugging'),
@@ -91,7 +95,7 @@ def source(file_name):
 def sourced_header():
     return [
         shebang_sourced(),
-        note('Intended to be sourced into a BASH shell by the user.'),
+        comment('Intended to be `source`d into a BASH shell by the user.'),
 #       execution_trace(),
         rule(),
     ]
