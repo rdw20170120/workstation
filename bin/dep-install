@@ -12,5 +12,9 @@ fi
 echo "INFO: Installing Python dependencies"
 
 pip3 install pip wheel --upgrade --upgrade-strategy=eager
-pip3 install awscli boto3 logzero pytest
+pip3 install logzero pytest
+pip3 install awscli boto3
+
+# DISABLED: pip3 install avro-python3==1.9.1 
+# DISABLED: pip3 install pandas
 

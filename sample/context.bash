@@ -5,6 +5,11 @@
 # it into your current shell as a means to reset your execution context.
 
 # User/machine-specific context
+# See $BO_Project/src/MODULE/config.py for a description of each
+
+
+# NOTE:  This is a sample application context.
+# It is intended to be copied to $BO_Project/context.bash and edited as needed.
 
 # TODO: Implement
 
