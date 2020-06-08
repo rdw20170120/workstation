@@ -185,6 +185,18 @@
 '/Users/rwill253/project/Rob/workstation/src/MODULE/config.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/__init__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task': listing directory
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/queue.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/test_task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/scan_directory_task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/test_queue.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/delete_file_task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/mapping.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/first_task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/test_mapping.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/test_config.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/app.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/__main__.py': Clean bill of health.
