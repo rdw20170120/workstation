@@ -43,7 +43,7 @@ class Task:
             raise RuntimeError("Skipping for dry run")
 
     def _skip_for_lack_of_disk_space(self, needed_space_in_bytes):
-        du = disk_usage(c.intermediate_directory)
+        du = disk_usage(c.temporary_directory)
         if du.free < needed_space_in_bytes:
             raise RuntimeError("Skipping for lack of disk space")
 

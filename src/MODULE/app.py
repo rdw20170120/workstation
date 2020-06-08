@@ -2,7 +2,6 @@
 # Intended to be executed as a Python module:  python3 -m MODULE
 
 from logging import DEBUG
-from pathlib import Path
 
 from logzero import logfile
 from logzero import logger as log
@@ -10,7 +9,8 @@ from logzero import loglevel
 
 from utility.singleton_application import SingletonApplication
 
-from .config import Config
+from .config            import Config
+from .task.task_manager import TaskManager
 
 
 c = Config()
@@ -26,6 +26,7 @@ class MyApp(SingletonApplication):
     def _run(self):
         super()._run()
         log.info("Running application...")
+        TaskManager().run()
 
 
 def run():
