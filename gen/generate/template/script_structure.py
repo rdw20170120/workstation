@@ -34,7 +34,6 @@ def _visit_arguments(element, walker):
         walker.emit(' ')
         walker.walk(element.arguments)
 
-
 ###############################################################################
 
 
