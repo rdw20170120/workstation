@@ -9,6 +9,7 @@
 '/Users/rwill253/project/Rob/workstation/gen/generate': listing directory
 '/Users/rwill253/project/Rob/workstation/gen/generate/project_activate_script.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/gen/generate/config.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/python_scripts.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/gen/generate/template': listing directory
 '/Users/rwill253/project/Rob/workstation/gen/generate/template/script_structure.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/gen/generate/template/bash_structure.py': Clean bill of health.
@@ -27,6 +28,8 @@
 '/Users/rwill253/project/Rob/workstation/gen/generate/template/test_script_structure.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/gen/generate/template/briteonyx_structure.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/gen/generate/template/script.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/template/python_source.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/template/python_structure.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/gen/generate/template/test_bash_structure.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/gen/generate/__init__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/gen/generate/__pycache__': listing directory
@@ -68,22 +71,6 @@
 '/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/__init__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/__pycache__': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/mine': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pytest_tutorial': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pytest_tutorial/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pipeline': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pipeline/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pipeline/task': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pipeline/task/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pipeline/aws': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pipeline/aws/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pipeline/data': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pipeline/data/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pipeline/utility': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/pipeline/utility/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/potrero_cloud_lab/src/__pycache__': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/mine/sample_python': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/__init__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/__pycache__': listing directory
@@ -97,33 +84,6 @@
 '/Users/rwill253/project/Rob/workstation/lib/mine/.pytest_cache': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/mine/.pytest_cache/v': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/mine/.pytest_cache/v/cache': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/web': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/web/page': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/web/page/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/web/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/web/view': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/web/view/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/cherrypy': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/cherrypy/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/model': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/model/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/data': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/first/package/sandbox/sandbox/data/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/euler': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/euler/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/euler/src': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/euler/src/project_euler': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/euler/src/project_euler/test': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/euler/src/project_euler/test/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/euler/src/project_euler/solution': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/euler/src/project_euler/solution/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/lib/mine/euler/src/project_euler/__pycache__': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/mine/astech': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/mine/astech/bin': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/mine/astech/bin/files.py': Clean bill of health.

@@ -48,7 +48,7 @@ class Config:
 
     @property
     def log_file(self):
-        return self.log_directory / 'app.log'
+        return self.log_directory / 'MODULE.log'
 
     @property
     def quick_run_limit(self):
