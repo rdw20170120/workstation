@@ -2,7 +2,13 @@
 
 from .config import Config
 
+
 c = Config()
+
+def test_fake_file_extension():
+    v = c.fake_file_extension
+    assert v is not None
+    assert len(v) > 0
 
 def test_is_dry_run():
     v = c.is_dry_run
@@ -40,6 +46,16 @@ def test_quick_run_limit():
     v = c.quick_run_limit
     assert isinstance(v, int)
     assert v >= 0
+
+def test_reserved_disk_space_in_bytes():
+    v = c.reserved_disk_space_in_bytes
+    assert isinstance(v, float) or isinstance(v, int)
+    assert v >= 0
+
+def test_should_abort_on_task_failure():
+    v = c.should_abort_on_task_failure
+    assert v is not None
+    assert (v is True) or (v is False)
 
 def test_should_fake_it():
     v = c.should_fake_it

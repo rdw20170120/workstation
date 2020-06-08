@@ -116,6 +116,7 @@ class UnixTime:
     def as_datetime(self):
         return dt.datetime.fromtimestamp(self._float_seconds)
 
+
 def as_iso8601(value, timespec='auto'):
     assert isinstance(timespec, str)
     assert isinstance(value, dt.datetime)
@@ -218,4 +219,8 @@ def now_utc():
 def timedelta_as_hours(value):
     assert isinstance(value, dt.timedelta)
     return value / dt.timedelta(hours=1)
+
+def timedelta_as_seconds(value):
+    assert isinstance(value, dt.timedelta)
+    return value / dt.timedelta(seconds=1)
 
