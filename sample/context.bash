@@ -1,15 +1,16 @@
 #!/bin/false
 # NOTE: Intended to be sourced into a BASH shell
 
+# User/machine-specific context
+# BASH configuration specific to this copy of this project on this workstation
+# for this user.
 # This file is sourced by the 'activate.bash' script.  You can manually source
 # it into your current shell as a means to reset your execution context.
-
-# User/machine-specific context
 # See $BO_Project/src/MODULE/config.py for a description of each.
-
 
 # NOTE:  This is a sample application context.
 # It is intended to be copied to $BO_Project/context.bash and edited as needed.
+# NOTE: Do NOT commit $BO_Project/context.bash to source control.
 
 # TODO: Implement
 

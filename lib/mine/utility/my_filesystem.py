@@ -7,7 +7,6 @@ from pathlib import PurePath
 from shutil  import copy2
 from shutil  import rmtree
 
-# TODO: Convert to consistently use pathlib
 
 def clone_file(source_file, target_file):
     assert isinstance(source_file, Path)
