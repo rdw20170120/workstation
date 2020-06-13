@@ -2,8 +2,8 @@ from pathlib import Path
 
 from utility.my_system import maybe_create_directory
 
-from ..tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
-from ..tavis_rudd.throw_out_your_templates.section_4 import visitor_map as parent_visitor_map
+from throw_out_your_templates.section_3 import VisitorMap
+from throw_out_your_templates.section_4 import visitor_map as parent_visitor_map
 from .renderer                                       import Renderer
 
 

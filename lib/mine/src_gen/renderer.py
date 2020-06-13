@@ -1,8 +1,8 @@
 from logzero import logger as log
 
-from ..tavis_rudd.throw_out_your_templates.section_1 import default_encoding
-from ..tavis_rudd.throw_out_your_templates.section_2 import Serializer
-from ..tavis_rudd.throw_out_your_templates.section_4 import visitor_map as default_visitor_map
+from throw_out_your_templates.section_1 import default_encoding
+from throw_out_your_templates.section_2 import Serializer
+from throw_out_your_templates.section_4 import visitor_map as default_visitor_map
 
 
 class Renderer(object):

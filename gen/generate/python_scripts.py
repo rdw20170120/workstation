@@ -1,8 +1,8 @@
-from .tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
+from throw_out_your_templates.section_3 import VisitorMap
 
-from .template.python_source    import PythonSource
-from .template.python_source    import visitor_map as parent_visitor_map
-from .template.python_structure import *
+from src_gen.python_source    import PythonSource
+from src_gen.python_source    import visitor_map as parent_visitor_map
+from src_gen.python_structure import *
 
 
 visitor_map = VisitorMap(parent_map=parent_visitor_map)

@@ -1,8 +1,8 @@
-from .tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
+from throw_out_your_templates.section_3 import VisitorMap
 
-from .template.briteonyx_script    import BriteOnyxScript
-from .template.briteonyx_script    import visitor_map as parent_visitor_map
-from .template.briteonyx_structure import *
+from src_gen.briteonyx_script    import BriteOnyxScript
+from src_gen.briteonyx_script    import visitor_map as parent_visitor_map
+from src_gen.briteonyx_structure import *
 
 
 visitor_map = VisitorMap(parent_map=parent_visitor_map)

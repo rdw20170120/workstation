@@ -1,13 +1,13 @@
-from ..tavis_rudd.throw_out_your_templates.section_3 import VisitorMap
+from throw_out_your_templates.section_3 import VisitorMap
 
-from .content import Content
-from .content import visitor_map as parent_visitor_map
+from .bash_script import BashScript
+from .bash_script import visitor_map as parent_visitor_map
 
 
 visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
 
-class Script(Content):
+class BriteOnyxScript(BashScript):
     def __init__(self, visitor_map,
         relative_directory, filename,
         content
