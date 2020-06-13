@@ -31,17 +31,29 @@ def delete_file(file_path):
     assert isinstance(file_path, Path)
     remove(file_path)
 
-def file_size(file_path):
-    assert isinstance(file_path, Path)
-    return getsize(file_path)
-
-def name_has_extension(pathname, extension):
+def file_name_has_extension(pathname, extension):
     assert isinstance(extension, str)
     if isinstance(pathname, str): pathname = Path(pathname)
     if isinstance(pathname, Path) or isinstance(pathname, PurePath):
         return pathname.suffix == extension
     else:
-        raise ValueError("Cannot name_has_extension('{}')".format(file_path))
+        raise ValueError(
+            "Cannot file_name_has_extension('{}', '{}')".format(pathname, extension)
+            )
+
+def file_name_has_suffix(pathname, suffix):
+    assert isinstance(suffix, str)
+    if isinstance(pathname, str): pathname = Path(pathname)
+    if isinstance(pathname, Path) or isinstance(pathname, PurePath):
+        return str(pathname).endswith(suffix)
+    else:
+        raise ValueError(
+            "Cannot file_name_has_suffix('{}', '{}')".format(pathname, suffix)
+            )
+
+def file_size(file_path):
+    assert isinstance(file_path, Path)
+    return getsize(file_path)
 
 def split_file_name(file_path):
     if isinstance(file_path, str): file_path = PurePath(file_path)
@@ -66,4 +78,18 @@ def touch(file_path):
                 f.write('')
     else:
         raise ValueError("Cannot touch('{}')".format(file_path))
+
+def read_binary_from_file(file_path):
+    assert isinstance(file_path, Path)
+    with open(file_path, 'rb') as reader:
+        result = reader.read()
+        assert isinstance(result, bytes)
+    return result
+
+def write_binary_into_file(file_path, binary_content):
+    assert isinstance(file_path, Path)
+    assert isinstance(binary_content, bytes)
+    with open(file_path, 'wb') as writer:
+        count = writer.write(binary_content)
+        assert count == len(binary_content)
 

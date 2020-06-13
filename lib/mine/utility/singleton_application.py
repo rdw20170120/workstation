@@ -4,9 +4,9 @@ from pathlib import Path
 
 from logzero import logger as log
 
-from .my_processing import create_pid_file
-from .my_processing import delete_pid_file
-from .my_processing import get_pid
+from .processing import create_pid_file
+from .processing import delete_pid_file
+from .processing import get_pid
 
 
 class SingletonApplication(object):

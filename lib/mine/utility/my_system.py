@@ -1,3 +1,9 @@
+#!/bin/false
+"""My module for managing system functions.
+
+This module is being broken up into several modules for the filesystem, processing, etc.
+"""
+
 from os     import getcwd
 from os     import listdir
 from os     import makedirs
@@ -8,6 +14,7 @@ from shutil import rmtree
 from .my_assert import has_type
 from .my_assert import has_type_message
 from .my_time   import timestamp_as_datetime_utc
+
 
 def clone_files(source_directory, target_directory):
     assert directory_exists(source_directory), directory_exists_message(source_directory)

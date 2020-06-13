@@ -1,3 +1,6 @@
+#!/bin/false
+"""My module for managing assertions."""
+
 def has_type(actual_value, expected_type):
     """Return whether actual_value has expected_type"""
     return isinstance(actual_value, expected_type)

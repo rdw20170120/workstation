@@ -20,6 +20,7 @@
 # bytes that will be processed.
 export FakeIt=defined
 export Quick=1000000
+export ReservedDiskSpaceInBytes=100000000
 export Run=Dry
 
 # This block of settings can be selectively uncommented to relax the previous

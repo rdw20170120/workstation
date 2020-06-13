@@ -1,3 +1,6 @@
+#!/bin/false
+"""My module for managing time."""
+
 # TODO: SOMEDAY: Add tests for naive versus aware dates & times
 from datetime import datetime as dt_datetime
 
@@ -37,6 +40,7 @@ def timestamp_as_datetime_utc(timestamp):
         raise ValueError(unrecognized_message(timestamp, type(timestamp), 'type'))
     assert has_type(result, dt_datetime), has_type_message(result, dt_datetime)
     return result
+
 
 ''' Disabled content
 '''

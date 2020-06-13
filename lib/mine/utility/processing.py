@@ -1,16 +1,19 @@
 #!/bin/false
 
-import os
+from os import getpid as os_get_pid
 
 from .filesystem import delete_file
+
 
 def create_pid_file(pid_file):
     pid = get_pid()
     if pid_file.is_file():
         stored = read_pid_file(pid_file)
         if stored != pid:
+            m = "PID file '{}' contains '{}' instead of current process id '{}', "
+            m += "perhaps application is already running"
             raise RuntimeError(
-                "PID file '{}' contains '{}' instead of current process id '{}', perhaps application is already running".format(
+                m.format(
                 pid_file, stored, pid
                 ))
     write_pid_file(pid_file, pid)
@@ -24,15 +27,17 @@ def delete_pid_file(pid_file):
         if stored == pid:
             delete_file(pid_file)
         else:
+            m = "PID file '{}' contains '{}' instead of current process id '{}', "
+            m += "apparently PID file is corrupt"
             raise RuntimeError(
-                "PID file '{}' contains '{}' instead of current process id '{}', apparently PID file is corrupt".format(
+                m.format(
                 pid_file, stored, pid
                 ))
     else:
         raise RuntimeError("Missing PID file '{}'".format(pid_file))
 
 def get_pid():
-    return os.getpid()
+    return os_get_pid()
 
 def read_pid_file(pid_file):
     result = 0

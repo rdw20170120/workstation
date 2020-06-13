@@ -1,10 +1,10 @@
 #!/bin/false
 
-import os
+from os import environ
 
 def get(key):
-    return os.environ[key]
+    return environ[key]
 
 def put(key, value):
-    os.environ[key] = value
+    environ[key] = value
 
