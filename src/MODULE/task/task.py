@@ -1,6 +1,7 @@
 #!/bin/false
 
-from shutil import disk_usage
+from pathlib import Path
+from shutil  import disk_usage
 
 from logzero import logger as log
 
@@ -15,8 +16,12 @@ c = Config()
 
 class Task:
     """Base class for tasks."""
-    def __init__(self):
-        pass
+    def __init__(self, filesystem_location_to_watch=None):
+        # TODO: Consider refactoring `filesystem_location_to_watch` to a better location
+        if filesystem_location_to_watch is None:
+            filesystem_location_to_watch = c.temporary_directory
+        assert isinstance(filesystem_location_to_watch, Path)
+        self._filesystem_location_to_watch = filesystem_location_to_watch
 
     def _delete_directory_upon_exception(self, directory_path):
         log.warn(
@@ -38,17 +43,28 @@ class Task:
                 file_path
                 )
 
+    def _should_delete_file(self, file_path):
+        self._skip_for_dry_run()
+        if not file_path.exists(): return False
+        if not file_path.is_file(): return False
+        return True
+
+    def _should_write_file(self, file_path):
+        self._skip_for_dry_run()
+        if file_path.exists(): return False
+        return True
+
     def _skip_for_dry_run(self):
         if c.is_dry_run:
             raise RuntimeError("Skipping for dry run")
 
     def _skip_for_lack_of_disk_space(self, needed_space_in_bytes):
-        du = disk_usage(c.temporary_directory)
+        du = disk_usage(self._filesystem_location_to_watch)
         if du.free < needed_space_in_bytes:
             raise RuntimeError("Skipping for lack of disk space")
 
-    def _skip_for_quick_run(self, source_size):
-        if source_size > c.quick_run_limit:
+    def _skip_for_quick_run(self, disk_space_estimate):
+        if disk_space_estimate > c.quick_run_limit:
             raise RuntimeError("Skipping for quick run")
 
     def _skip_if_directory_already_exists(self, the_directory):

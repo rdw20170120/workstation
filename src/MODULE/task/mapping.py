@@ -7,7 +7,7 @@ from ..config import Config
 c = Config()
 
 
-class Mapping:
+class Mapping(object):
     """Mappings among filesystem pathnames."""
     pass
 

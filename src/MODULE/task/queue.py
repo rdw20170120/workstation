@@ -2,6 +2,8 @@
 
 from queue import Queue
 
+from logzero import logger as log
+
 
 class TaskQueue:
     """Queue to manage tasks.
@@ -16,8 +18,15 @@ class TaskQueue:
         return self._implementation.empty()
 
     def get(self):
-        return self._implementation.get(block=False)
+        result = self._implementation.get()
+        log.debug("Getting from the queue: %s", result)
+        return result
+
+    @property
+    def length(self):
+        return self._implementation.qsize()
 
     def put(self, task):
+        log.debug("Putting on the queue: %s", task)
         self._implementation.put_nowait(task)
 

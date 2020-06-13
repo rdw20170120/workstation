@@ -7,7 +7,7 @@ from utility.filesystem import delete_file
 from .task import Task
 
 
-class DeleteFileTask(Task):
+class DeleteFile(Task):
     """Delete the file."""
     def __init__(self, the_file):
         assert isinstance(the_file, Path)
@@ -15,11 +15,9 @@ class DeleteFileTask(Task):
         self._file = the_file
 
     def __str__(self):
-        return "DeleteFileTask for file '{}'".format(self._file)
+        return "DeleteFile for file '{}'".format(self._file)
 
     def execute(self):
         super().execute()
-        self._skip_for_dry_run()
-        self._skip_if_file_is_missing(self._file)
-        delete_file(self._file)
+        if self._should_delete_file(self._file): delete_file(self._file)
 
