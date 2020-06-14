@@ -38,6 +38,7 @@ def generate(directory):
     _generate(_document(), directory, sub, 'HowTo-execute_application.md')
     _generate(_document(), directory, sub, 'HowTo-install-packages.md')
     _generate(_document(), directory, sub, 'HowTo-setup-AWS_CLI.md')
+    _generate(_document(), directory, sub, 'HowTo-setup-Python_virtual_environment.md')
     _generate(_document(), directory, sub, 'HowTo-setup-source_control.md')
     _generate(_document(), directory, sub, 'HowTo-setup-workstation.md')
     _generate(_document(), directory, sub, 'HowTo-test.md')
