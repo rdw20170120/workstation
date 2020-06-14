@@ -2,9 +2,9 @@
 
 from pytest import raises
 
-from .renderer         import Renderer
-from .script           import visitor_map
-from .script_structure import * 
+from ..renderer import Renderer
+from .source    import visitor_map
+from .structure import * 
 
 
 # NOTE: There is little value in testing "composed" methods,

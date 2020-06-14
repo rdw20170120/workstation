@@ -1,6 +1,6 @@
-from .bash_script       import visitor_map
-from .script_structure  import *
-from .script_structure  import _Command
+from ..source    import visitor_map
+from ..structure import *
+from ..structure import _Command
 
 
 ###############################################################################

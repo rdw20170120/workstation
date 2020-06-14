@@ -4,7 +4,7 @@ from utility.my_system import maybe_create_directory
 
 from throw_out_your_templates.section_3 import VisitorMap
 from throw_out_your_templates.section_4 import visitor_map as parent_visitor_map
-from .renderer                                       import Renderer
+from .renderer                          import Renderer
 
 
 visitor_map = VisitorMap(parent_map=parent_visitor_map)

@@ -1,8 +1,10 @@
+from pathlib import Path
+
 from throw_out_your_templates.section_3 import VisitorMap
 
-from src_gen.python_source    import PythonSource
-from src_gen.python_source    import visitor_map as parent_visitor_map
-from src_gen.python_structure import *
+from src_gen.script.python.source    import PythonSource
+from src_gen.script.python.source    import visitor_map as parent_visitor_map
+from src_gen.script.python.structure import *
 
 
 visitor_map = VisitorMap(parent_map=parent_visitor_map)

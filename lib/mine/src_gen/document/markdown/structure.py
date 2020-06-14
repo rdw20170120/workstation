@@ -1,7 +1,8 @@
 from pathlib import Path
 
-from .content_structure import *
-from .markdown          import visitor_map
+from ...structure import *
+from .source      import visitor_map
+
 
 ###############################################################################
 

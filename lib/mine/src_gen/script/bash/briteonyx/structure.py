@@ -1,5 +1,5 @@
-from .bash_structure    import *
-from .briteonyx_script  import visitor_map
+from ..structure import *
+from .source     import visitor_map
 
 
 ###############################################################################

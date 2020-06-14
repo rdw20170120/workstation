@@ -13,9 +13,9 @@ from logzero import loglevel
 from utility.my_system             import recreate_directory
 from utility.singleton_application import SingletonApplication
 
-from .config                  import Config
-from .project_activate_script import generate as generate_project_activate_script
-from .python_scripts          import generate as generate_python_scripts
+from .config                              import Config
+from .script.bash.project_activate_script import generate as generate_project_activate_script
+from .script.python.all                   import generate as generate_python_scripts
 
 
 loglevel(level=DEBUG)
@@ -61,6 +61,7 @@ class ContentGeneratorApp(SingletonApplication):
 
 def run():
     ContentGeneratorApp(Config().pid_file).run()
+
 
 ''' Disabled content
 '''

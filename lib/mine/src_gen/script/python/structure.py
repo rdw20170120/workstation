@@ -1,5 +1,5 @@
-from .python_source    import visitor_map
-from .script_structure import *
+from .source     import visitor_map
+from ..structure import *
 
 
 ###############################################################################

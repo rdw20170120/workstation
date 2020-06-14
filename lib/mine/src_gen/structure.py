@@ -2,7 +2,7 @@ from enum    import Enum
 from numbers import Number
 from pathlib import Path
 
-from .content import visitor_map
+from .source import visitor_map
 
 
 ###############################################################################
