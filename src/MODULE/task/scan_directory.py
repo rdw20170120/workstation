@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from os      import walk
 from pathlib import Path
 from pathlib import PurePath as Filename
@@ -41,4 +42,7 @@ class ScanDirectory(QueuingTask):
         super().execute()
         self._skip_if_directory_is_missing(self._directory)
         self._scan(self._directory)
+
+'''DisabledContent
+'''
 

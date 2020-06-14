@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from throw_out_your_templates.section_3 import VisitorMap
 
 from src_gen.script.bash.briteonyx.source    import BriteOnyxScript
@@ -311,7 +314,6 @@ def generate(target_directory):
         )
     content.generate(target_directory)
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

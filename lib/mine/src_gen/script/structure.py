@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from pathlib import Path
 
 from ..structure import *
@@ -151,7 +154,6 @@ def shebang_thru_env(executable):
     assert executable
     return _shebang(_Command(Path('/usr/bin/env'), executable))
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

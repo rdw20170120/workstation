@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from os import getpid as os_get_pid
 
 from .filesystem import delete_file
@@ -53,4 +54,7 @@ def read_pid_file(pid_file):
 
 def write_pid_file(pid_file, pid):
     pid_file.write_text(str(pid))
+
+'''DisabledContent
+'''
 

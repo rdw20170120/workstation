@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from enum    import Enum
 from numbers import Number
 from pathlib import Path
@@ -128,9 +131,7 @@ def _visit_single_quoted(element, walker):
 def sq(*element):
     return _SingleQuoted(element)
 
-
-''' Disabled content
-
+'''DisabledContent
 class _ContentElement(object):
     def __init__(self, content, typename='_ContentElement'):
         super().__init__()
@@ -153,6 +154,5 @@ class _ContentElement(object):
 @visitor_map.register(_ContentElement)
 def _visit_content_element(element, walker):
     walker.walk(element.content)
-
 '''
 

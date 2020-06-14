@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*-
-
+#!/usr/bin/env false
+"""
+"""
 from decimal import Decimal
 from types   import BuiltinMethodType
 from types   import FunctionType
@@ -37,8 +38,7 @@ def _visit_str(element, walker):
 def _visit_tuple(element, walker):
     for item in element: walker.walk(item)
 
-
-''' Disabled content
+'''DisabledContent
 from .section_1 import safe_bytes
 from .section_1 import safe_unicode
 from .section_3 import DEFAULT

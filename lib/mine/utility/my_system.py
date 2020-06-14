@@ -1,9 +1,8 @@
-#!/bin/false
+#!/usr/bin/env false
 """My module for managing system functions.
 
 This module is being broken up into several modules for the filesystem, processing, etc.
 """
-
 from os     import getcwd
 from os     import listdir
 from os     import makedirs
@@ -116,7 +115,6 @@ def set_file_contents(path_name, contents):
     with open(path_name, 'w') as f:
         f.write(contents)
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

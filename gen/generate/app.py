@@ -1,6 +1,7 @@
-#!/bin/false
-# Intended to be executed as a Python module:  python3 -m MODULE
-
+#!/usr/bin/env false
+"""
+Intended to be executed as a Python module:  python3 -m MODULE
+"""
 import sys
 
 from argparse import ArgumentParser
@@ -68,7 +69,6 @@ class ContentGeneratorApp(SingletonApplication):
 def run():
     ContentGeneratorApp(Config().pid_file).run()
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

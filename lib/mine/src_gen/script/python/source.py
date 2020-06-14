@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from throw_out_your_templates.section_3 import VisitorMap
 
 from ..source    import Script
@@ -19,7 +22,6 @@ class PythonSource(Script):
             content,
             )
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

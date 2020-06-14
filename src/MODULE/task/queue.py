@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from queue import Queue
 
 from logzero import logger as log
@@ -29,4 +30,7 @@ class TaskQueue:
     def put(self, task):
         log.debug("Putting on the queue: %s", task)
         self._implementation.put_nowait(task)
+
+'''DisabledContent
+'''
 

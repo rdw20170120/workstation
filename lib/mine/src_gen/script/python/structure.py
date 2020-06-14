@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from .source     import visitor_map
 from ..structure import *
 
@@ -12,12 +15,31 @@ def disabled_content_footer():
         line(),
     ]
 
-def python_script_header():
+def library_module_header():
+    return [
+        shebang_false(),
+        '"""', eol(),
+        '"""', eol(),
+    ]
+
+def main_module_header():
+    return [
+        shebang_false(),
+        '"""', eol(),
+        '"""', eol(),
+    ]
+
+def package_module_header():
+    return [
+        shebang_false(),
+        line(),
+    ]
+
+def script_module_header():
     return [
         shebang_python3(),
         '"""', eol(),
         '"""', eol(),
-        line(),
     ]
 
 ###############################################################################
@@ -25,7 +47,6 @@ def python_script_header():
 def shebang_python3():
     return shebang_thru_env('python3')
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

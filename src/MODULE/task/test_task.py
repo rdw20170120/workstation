@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from pathlib import Path
 
 from .delete_file                  import DeleteFile
@@ -23,4 +24,7 @@ def test_scan_directory():
 
 def test_task():
     assert Task() is not None
+
+'''DisabledContent
+'''
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env false
-
+"""
+"""
 from pytest import raises
 
 from .source    import visitor_map
@@ -114,4 +115,7 @@ def test_squashed_18():
         for j in will_squash:
             assert squashed((i, j)) == i
             assert squashed([i, j]) == i
+
+'''DisabledContent
+'''
 

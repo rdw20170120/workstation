@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from logging import DEBUG
 
 from logzero import logger as log
@@ -35,7 +36,6 @@ class TaskManager(object):
             self._execute_task(q.get())
             log.debug("Queue contains about %d tasks", q.length)
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

@@ -1,2 +1,7 @@
-#!/bin/false
+#!/usr/bin/env false
+"""
+"""
+
+'''DisabledContent
+'''
 

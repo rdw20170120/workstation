@@ -1,9 +1,11 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from math import isnan
 
 from .math import Percentage
 from .math import Rate
+
 
 def test_percentage_01():
     v = Percentage(0, 1)
@@ -94,4 +96,7 @@ def test_rate_06():
     assert v.denominator_units == 'bottom'
     assert isnan(v.rate)
     assert v.rate_units == 'tpb'
+
+'''DisabledContent
+'''
 

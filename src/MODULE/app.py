@@ -1,5 +1,8 @@
-#!/bin/false
-# Intended to be executed as a Python module:  python3 -m MODULE
+#!/usr/bin/env false
+"""
+
+Intended to be executed as a Python module:  python3 -m MODULE
+"""
 
 import logging
 
@@ -40,8 +43,7 @@ def run():
     _configure_logging()
     MyApp(Config().pid_file).run()
 
-
-''' Disabled content
+'''DisabledContent
 for logzero.LogFormatter._colors
     DEFAULT_COLORS = {
         logging.DEBUG: Foreground.CYAN,

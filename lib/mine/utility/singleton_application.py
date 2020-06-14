@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from pathlib import Path
 
 from logzero import logger as log
@@ -40,6 +41,6 @@ class SingletonApplication(object):
             log.info("Ended process with pid '%d'", get_pid())
             self._shutdown()
 
-
-''' Disabled content
+'''DisabledContent
 '''
+

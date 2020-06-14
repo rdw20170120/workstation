@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from throw_out_your_templates.section_3 import VisitorMap
 
 from src_gen.document.markdown.source    import Markdown
@@ -21,20 +24,20 @@ def _build():
     ]
 
 def generate(target_directory):
-    sub = Path('')
+    sub = Path('.')
     _generate(_build(), target_directory, sub, 'README.md')
     _generate(_build(), target_directory, sub, 'TODO.md')
     sub = Path('BriteOnyx')
     _generate(_build(), target_directory, sub, 'README.md')
-    sub = Path('BriteOnyx/bin')
+    sub = Path('BriteOnyx', 'bin')
     _generate(_build(), target_directory, sub, 'README.md')
-    sub = Path('BriteOnyx/bin/lib')
+    sub = Path('BriteOnyx', 'bin', 'lib')
     _generate(_build(), target_directory, sub, 'README.md')
-    sub = Path('BriteOnyx/doc')
+    sub = Path('BriteOnyx', 'doc')
     _generate(_build(), target_directory, sub, 'README.md')
     sub = Path('bin')
     _generate(_build(), target_directory, sub, 'README.md')
-    sub = Path('bin/lib')
+    sub = Path('bin', 'lib')
     _generate(_build(), target_directory, sub, 'README.md')
     sub = Path('cfg')
     _generate(_build(), target_directory, sub, 'README.md')
@@ -44,9 +47,9 @@ def generate(target_directory):
     _generate(_build(), target_directory, sub, 'README.md')
     sub = Path('lib')
     _generate(_build(), target_directory, sub, 'README.md')
-    sub = Path('lib/mine')
+    sub = Path('lib', 'mine')
     _generate(_build(), target_directory, sub, 'README.md')
-    sub = Path('lib/third_party')
+    sub = Path('lib', 'third_party')
     _generate(_build(), target_directory, sub, 'README.md')
     sub = Path('out')
     _generate(_build(), target_directory, sub, 'README.md')
@@ -55,9 +58,8 @@ def generate(target_directory):
     sub = Path('src')
     _generate(_build(), target_directory, sub, 'README.md')
 
-
-''' Disabled content
-    sub = Path('')
+'''DisabledContent
+    sub = Path('.')
     _generate(_build(), target_directory, sub, '')
 '''
 

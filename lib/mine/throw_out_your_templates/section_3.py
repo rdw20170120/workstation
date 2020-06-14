@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*-
-
+#!/usr/bin/env false
+"""
+"""
 ################################################################################
 # 3: VisitorMap
 
@@ -98,8 +99,7 @@ class _VisitorMapContextManager(object):
         if self.set_parent_map:
             self.vmap.parent_map = None
 
-
-''' Disabled content
+'''DisabledContent
 class DEFAULT:
     ">>> visitor_map[DEFAULT] = visitor # sets default fallback visitor"
 '''

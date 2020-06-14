@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from throw_out_your_templates.section_3 import VisitorMap
 
 from src_gen.script.bash.briteonyx.source    import BriteOnyxScript
@@ -34,7 +37,7 @@ def _to_be_sourced():
     ]
 
 def generate(target_directory):
-    sub = Path('BriteOnyx/bin')
+    sub = Path('BriteOnyx', 'bin')
     _generate(_to_be_executed(), target_directory, sub, 'all-capture')
     _generate(_to_be_executed(), target_directory, sub, 'all-check')
     _generate(_to_be_executed(), target_directory, sub, 'dep-capture')
@@ -58,7 +61,7 @@ def generate(target_directory):
     _generate(_to_be_executed(), target_directory, sub, 'py-report')
     _generate(_to_be_executed(), target_directory, sub, 'tool-capture')
     _generate(_to_be_executed(), target_directory, sub, 'tool-check')
-    sub = Path('BriteOnyx/bin/lib')
+    sub = Path('BriteOnyx', 'bin', 'lib')
     _generate(_to_be_sourced(), target_directory, sub, 'configure-Python.bash')
     sub = Path('bin')
     _generate(_to_be_executed(), target_directory, sub, 'app-run')
@@ -67,9 +70,8 @@ def generate(target_directory):
     _generate(_to_be_executed(), target_directory, sub, 'test-run')
     _generate(_to_be_executed(), target_directory, sub, 'tool-report')
 
-
-''' Disabled content
-    sub = Path('')
+'''DisabledContent
+    sub = Path('.')
     _generate(_to_be_executed(), target_directory, sub, '')
 '''
 

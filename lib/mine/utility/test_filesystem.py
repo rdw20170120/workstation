@@ -1,10 +1,12 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from pathlib import Path
 
 from .filesystem import file_name_has_extension
 from .filesystem import file_name_has_suffix
 from .filesystem import split_file_name
+
 
 def test_file_name_has_extension():
     assert not file_name_has_extension('name', '.ext')
@@ -33,4 +35,7 @@ def test_split_file_name_missing_extension():
     n, e = split_file_name('name')
     assert n == 'name'
     assert e == ''
+
+'''DisabledContent
+'''
 

@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 import sys
 
 from pathlib import Path
@@ -24,4 +25,7 @@ def test_sys_stdin_encoding ():
 
 def test_sys_stdout_encoding ():
     assert sys.stdout.encoding == 'UTF8'
+
+'''DisabledContent
+'''
 

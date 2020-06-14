@@ -1,2 +1,2 @@
-#!/bin/false
+#!/usr/bin/env false
 

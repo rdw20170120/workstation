@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from ..source    import visitor_map
 from ..structure import *
 from ..structure import _Command
@@ -352,7 +355,6 @@ def _visit_variable_reference(element, walker):
 def vr(name):
     return _VariableReference(name)
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

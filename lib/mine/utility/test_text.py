@@ -1,8 +1,10 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from .text import dict_from_string
 from .text import string_without_prefix
 from .text import string_without_suffix
+
 
 def test_dict_from_string():
     # TODO: Test with other basic data types in list
@@ -56,4 +58,7 @@ def test_string_without_suffix_having_suffix():
 
 def test_string_without_suffix_missing_suffix():
     assert string_without_suffix('missing suffix on string', 'suffix') == 'missing suffix on string'
+
+'''DisabledContent
+'''
 

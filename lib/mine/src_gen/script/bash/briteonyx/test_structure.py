@@ -1,5 +1,6 @@
 #!/usr/bin/env false
-
+"""
+"""
 from .source     import visitor_map
 from .structure  import * 
 from ....renderer import Renderer
@@ -10,4 +11,7 @@ from ....renderer import Renderer
 # TODO: Generate tests
 
 s = Renderer(visitor_map)._serialize
+
+'''DisabledContent
+'''
 

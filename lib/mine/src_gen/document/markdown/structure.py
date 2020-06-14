@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from pathlib import Path
 
 from ...structure import *
@@ -72,6 +75,6 @@ def table_ruler(*column):
     assert column
     return _TableRow(column)
 
-
-''' Disabled content
+'''DisabledContent
 '''
+

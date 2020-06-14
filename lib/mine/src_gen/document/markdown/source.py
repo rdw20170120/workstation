@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from throw_out_your_templates.section_3 import VisitorMap
 
 from ...source import Content
@@ -18,7 +21,6 @@ class Markdown(Content):
             content,
             )
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

@@ -1,6 +1,8 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 import ast
+
 
 def dict_from_string(the_string):
     if the_string is None: return None
@@ -22,4 +24,7 @@ def string_without_suffix(the_string, the_suffix):
         length = len(the_string) - len(the_suffix)
         return the_string[0:length]
     else: return the_string
+
+'''DisabledContent
+'''
 

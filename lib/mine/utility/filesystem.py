@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from os      import remove
 from os.path import getsize
 from pathlib import Path
@@ -92,4 +93,7 @@ def write_binary_into_file(file_path, binary_content):
     with open(file_path, 'wb') as writer:
         count = writer.write(binary_content)
         assert count == len(binary_content)
+
+'''DisabledContent
+'''
 

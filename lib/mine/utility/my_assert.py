@@ -1,4 +1,4 @@
-#!/bin/false
+#!/usr/bin/env false
 """My module for managing assertions."""
 
 def has_type(actual_value, expected_type):
@@ -22,7 +22,6 @@ def unrecognized_message(actual_value, unexpected_kind, name):
     """Return message for unrecognized actual_value of unexpected_kind described by name"""
     return "Value '{0}' is an unrecognized {1} of '{2}'".format(actual_value, name, unexpected_kind)
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

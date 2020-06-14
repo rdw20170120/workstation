@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from ..config        import Config
 from .queue          import TaskQueue
 from .scan_directory import ScanDirectory
@@ -17,4 +18,7 @@ class Bootstrap(QueuingTask):
     def execute(self):
         super().execute()
         self._queue.put(ScanDirectory(self._queue, Config().temporary_directory))
+
+'''DisabledContent
+'''
 

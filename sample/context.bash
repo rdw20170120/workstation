@@ -1,6 +1,8 @@
-#!/bin/false
-# NOTE: Intended to be sourced into a BASH shell
-
+#!/usr/bin/env false
+# NO: set -e
+# DISABLED: set -x
+# Intended to be `source`d in a BASH shell by the user.
+###############################################################################
 # User/machine-specific context
 # BASH configuration specific to this copy of this project on this workstation
 # for this user.
@@ -32,4 +34,8 @@ export Run=Dry
 # unset FakeIt
 # unset Quick
 # unset Run
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

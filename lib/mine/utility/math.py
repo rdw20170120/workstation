@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from math import nan
 
 
@@ -53,4 +54,7 @@ class Rate(Percentage):
     @property
     def rate_units(self):
         return self._rate_units
+
+'''DisabledContent
+'''
 

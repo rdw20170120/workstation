@@ -1,4 +1,4 @@
-#!/bin/false
+#!/usr/bin/env false
 """My module for managing time."""
 
 # TODO: SOMEDAY: Add tests for naive versus aware dates & times
@@ -41,7 +41,6 @@ def timestamp_as_datetime_utc(timestamp):
     assert has_type(result, dt_datetime), has_type_message(result, dt_datetime)
     return result
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

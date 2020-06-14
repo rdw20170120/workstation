@@ -1,4 +1,8 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 # TODO: Write tests
+
+'''DisabledContent
+'''
 

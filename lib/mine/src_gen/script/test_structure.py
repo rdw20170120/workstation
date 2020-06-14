@@ -1,5 +1,6 @@
 #!/usr/bin/env false
-
+"""
+"""
 from pytest import raises
 
 from ..renderer import Renderer
@@ -63,4 +64,7 @@ def test_shebang_thru_env_02():
 
 def test_shebang_thru_env_03():
     assert s(shebang_thru_env('Test')) == '#!/usr/bin/env Test\n'
+
+'''DisabledContent
+'''
 

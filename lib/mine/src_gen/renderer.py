@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from logzero import logger as log
 
 from throw_out_your_templates.section_1 import default_encoding
@@ -30,7 +33,6 @@ class Renderer(object):
                 ) as f:
                 f.write(self._serialize(content))
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

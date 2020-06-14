@@ -1,5 +1,6 @@
 #!/usr/bin/env false
-
+"""
+"""
 from pytest import raises
 
 from .source     import visitor_map
@@ -394,4 +395,7 @@ def test_vr():
     with raises(AssertionError): vr('')
     assert s(vr('Test')) == '$Test'
     with raises(TypeError): vr('Test', None)
+
+'''DisabledContent
+'''
 

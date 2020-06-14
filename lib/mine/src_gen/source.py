@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from pathlib import Path
 
 from utility.my_system import maybe_create_directory
@@ -43,7 +46,6 @@ class Content(object):
 def _visit_content(content, walker):
     walker.walk(content._content)
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

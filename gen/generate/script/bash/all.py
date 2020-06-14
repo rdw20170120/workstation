@@ -1,3 +1,6 @@
+#!/usr/bin/env false
+"""
+"""
 from throw_out_your_templates.section_3 import VisitorMap
 
 from src_gen.script.bash.source    import BashScript
@@ -34,16 +37,18 @@ def _to_be_sourced():
     ]
 
 def generate(target_directory):
-    sub = Path('')
+    sub = Path('.')
     _generate(_to_be_sourced(), target_directory, sub, 'alias.bash')
-    sub = Path('BriteOnyx/bin/lib')
+    sub = Path('BriteOnyx', 'bin', 'lib')
     _generate(_to_be_sourced(), target_directory, sub, 'alias-common.bash')
     _generate(_to_be_sourced(), target_directory, sub, 'alias-git.bash')
     _generate(_to_be_sourced(), target_directory, sub, 'pve-activate.bash')
+    sub = Path('sample')
+    _generate(_to_be_sourced(), target_directory, sub, 'alias.bash')
+    _generate(_to_be_sourced(), target_directory, sub, 'context.bash')
 
-
-''' Disabled content
-    sub = Path('')
+'''DisabledContent
+    sub = Path('.')
     _generate(target_directory, sub, '')
 '''
 

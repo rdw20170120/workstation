@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
-
+#!/usr/bin/env false
+"""
+"""
 ################################################################################
 # 1: str/unicode wrappers used to prevent double-escaping. This is the
 # same concept as django.utils.safestring and webhelpers.html.literal
 
 default_encoding = 'utf-8'
 
-
-''' Disabled content
+'''DisabledContent
 class safe_bytes(str):
     def decode(self, *args, **kws):
         return safe_unicode(super(safe_bytes, self).encode(*args, **kws))

@@ -1,5 +1,6 @@
 #!/usr/bin/env false
-
+"""
+"""
 from pytest import raises
 
 from .source     import visitor_map
@@ -107,4 +108,7 @@ def test_table_ruler():
     assert s(table_ruler('Test', None)) == '|Test|\n'
     assert s(table_ruler('Test', '')) == '|Test|\n'
     assert s(table_ruler('Test', '123')) == '|Test|123|\n'
+
+'''DisabledContent
+'''
 

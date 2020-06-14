@@ -1,8 +1,6 @@
-#!/bin/false
-
-import datetime as dt
-
+#!/usr/bin/env false
 """Functionality to integrate eventually:
+
 datetime module
 date
   .date()              YES      construct from year, month, day
@@ -86,6 +84,7 @@ universal time.
 
 TODO: Refine ISO8601 output formats for compactness
 """
+import datetime as dt
 
 
 class ProlepticGregorianOrdinal():
@@ -223,4 +222,7 @@ def timedelta_as_hours(value):
 def timedelta_as_seconds(value):
     assert isinstance(value, dt.timedelta)
     return value / dt.timedelta(seconds=1)
+
+'''DisabledContent
+'''
 

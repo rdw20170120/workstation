@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 import datetime as dt
 
 from pytest import mark
@@ -15,6 +16,7 @@ from .time import now_utc
 from .time import timedelta_as_hours
 from .time import ProlepticGregorianOrdinal
 from .time import UnixTime
+
 
 # TODO: Consider splitting this module into one per imported module or class
 # TODO: Break up tests into individual test methods, so each failure is isolated
@@ -172,4 +174,7 @@ def test_proleptic_gregorian_ordinal():
     with raises(ValueError):
         ProlepticGregorianOrdinal(0)
     ProlepticGregorianOrdinal(1)
+
+'''DisabledContent
+'''
 

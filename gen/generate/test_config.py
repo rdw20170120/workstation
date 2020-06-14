@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from .config import Config
 
 c = Config()
@@ -51,4 +52,7 @@ def test_temporary_directory():
     assert v is not None
     assert v.is_absolute()
     assert v.is_dir()
+
+'''DisabledContent
+'''
 

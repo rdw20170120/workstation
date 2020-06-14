@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*-
-
+#!/usr/bin/env false
+"""
+"""
 from .section_1 import default_encoding
 from .section_4 import visitor_map as default_visitor_map
 
@@ -40,7 +41,6 @@ class Serializer(object):
 #       print("Emitting: {}".format(escaped_unicode_output))
         self._buffer.append(escaped_unicode_output)
 
-
-''' Disabled content
+'''DisabledContent
 '''
 

@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from pathlib import Path
 from sys     import maxsize
 
@@ -96,4 +97,7 @@ class Config:
     @property
     def temporary_directory(self):
         return Path(environment.get('TMPDIR'))
+
+'''DisabledContent
+'''
 

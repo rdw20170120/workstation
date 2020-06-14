@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from pathlib import Path
 
 from utility.filesystem import delete_file
@@ -20,4 +21,7 @@ class DeleteFile(Task):
     def execute(self):
         super().execute()
         if self._should_delete_file(self._file): delete_file(self._file)
+
+'''DisabledContent
+'''
 

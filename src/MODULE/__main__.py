@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from . import app
 
 def main():
@@ -7,4 +8,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+'''DisabledContent
+'''
 
