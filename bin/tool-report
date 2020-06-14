@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# NOT: set -e
-# This script is intended to be executed by a user in a BASH shell.
-
+set -e
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Report tool status
 
 Rule=##########
@@ -94,4 +95,8 @@ checkExecutable openssl
 # Ensure a successful script return
 echo "Tool report succeeded"
 exit 0
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

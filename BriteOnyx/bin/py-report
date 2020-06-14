@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# This script is intended to be executed by a user in a BASH shell.
 set -e
-
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Report Python code status
 
 if [[ -z "$BO_Project" ]] ; then
@@ -22,4 +23,8 @@ cat $BO_Project/out/tabnanny.out \
     | grep -v 'Clean bill of health.'
 
 echo 'INFO: No output means all Python code passes all TabNanny checks'
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

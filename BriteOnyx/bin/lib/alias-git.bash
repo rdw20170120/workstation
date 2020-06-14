@@ -1,6 +1,8 @@
-#!/bin/false
-# NOTE: Intended to be sourced into a BASH shell
-
+#!/usr/bin/env false
+# NO: set -e
+# DISABLED: set -x
+# Intended to be `source`d in a BASH shell by the user.
+###############################################################################
 # BASH alias definitions for source control
 
 alias add='git add .'
@@ -27,4 +29,8 @@ grep_options+=' --exclude="*.swp"'
 alias grep="grep $grep_options"
 
 alias todo='grep -ER TODO $BO_Project'
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

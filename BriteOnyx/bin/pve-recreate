@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
-# This script is intended to be executed by a user in a BASH shell.
-
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Recreate Python virtual environment directory
 
 if [[ -z "$BO_Project" ]] ; then
@@ -27,4 +28,8 @@ else
 fi
 
 dep-install
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

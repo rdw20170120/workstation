@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# This script is intended to be executed by a user in a BASH shell.
 set -e
 # DISABLED: set -x
-
+# Intended to be executed directly by the user.
+###############################################################################
 # Run application
 
 # Require activation
@@ -26,4 +26,8 @@ cmd='python3'
 cmd+=' -m MODULE'
 echo $cmd
 $cmd
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

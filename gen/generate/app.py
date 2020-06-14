@@ -15,6 +15,9 @@ from utility.singleton_application import SingletonApplication
 
 from .config                              import Config
 from .script.bash.project_activate_script import generate as generate_project_activate_script
+from .document.markdown.all               import generate as generate_markdown_documents
+from .script.bash.all                     import generate as generate_bash_scripts
+from .script.bash.briteonyx.all           import generate as generate_briteonyx_scripts
 from .script.python.all                   import generate as generate_python_scripts
 
 
@@ -27,6 +30,9 @@ class ContentGeneratorApp(SingletonApplication):
 
     def _generate(self):
         generate_project_activate_script(self._target_directory)
+        generate_bash_scripts(self._target_directory)
+        generate_briteonyx_scripts(self._target_directory)
+        generate_markdown_documents(self._target_directory)
         generate_python_scripts(self._target_directory)
 
     def _parse_args(self):

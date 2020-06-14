@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-# NOTE: Intended to be executed directly by the user.
+"""Print listing of current directory, recursively.
 
-""" Print list of files and directories within current directory, recursively."""
+Intended to be executed directly by the user.
+"""
 
 from os import walk
+
 
 def main():
    for aRoot, aDirectories, aFiles in walk("."):
@@ -13,4 +15,7 @@ def main():
 
 if __name__ == "__main__":
    main()
+
+'''DisabledContent
+'''
 

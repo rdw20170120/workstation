@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
-# NOTE: Intended to be executed directly by the user.
+"""Count file extensions within project directory, recursively.
 
-""" Count file extensions within project directory, recursively.
+Ignore source control subdirectories.
+Ignore Python virtual environment directory.
 
-Ignore source control subdirectories
-Ignore Python virtual environment directory
+TODO: Convert to use pathlib
+TODO: Enhance to take the directory as an argument
+TODO: Enhance to reference project environment variable $PVE
+
+Intended to be executed directly by the user.
 """
-
-# TODO: Convert to use pathlib
-# TODO: Enhance to take the directory as an argument
-# TODO: Enhance to reference project environment variable $PVE
 
 from os import environ
 from os import path
 from os import walk
 from re import match
+
 
 def prune(theDirectories, theFiles):
    remove(theDirectories, r".PVE")
@@ -28,7 +29,6 @@ def remove(theList, thePattern):
       if match(thePattern, aValue):
          theList.remove(aValue)
 
-###############################################################################
 def main():
    """Script entry point."""
    aCounts = {}
@@ -47,4 +47,7 @@ def main():
 
 if __name__ == "__main__":
    main()
+
+'''DisabledContent
+'''
 

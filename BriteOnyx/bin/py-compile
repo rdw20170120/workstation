@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
-# This script is intended to be executed by a user in a BASH shell.
-
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Compile all Python source
 
 if [[ -z "$BO_Project" ]] ; then
@@ -14,4 +15,8 @@ python3 -m compileall -f $BO_Project/bin
 python3 -m compileall -f $BO_Project/gen
 python3 -m compileall -f $BO_Project/lib
 python3 -m compileall -f $BO_Project/src
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

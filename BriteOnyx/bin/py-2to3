@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
-# This script is intended to be executed by a user in a BASH shell.
-
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Convert all Python source from Python2 to Python3
 
 if [[ -z "$BO_Project" ]] ; then
@@ -83,4 +84,8 @@ convert $BO_Project/bin
 convert $BO_Project/lib/mine
 convert $BO_Project/lib/third_party
 convert $BO_Project/src
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

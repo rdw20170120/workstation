@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# This script is intended to be executed by a user in a BASH shell.
 set -e
-
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Install Python dependencies
 
 if [[ -z "$BO_Project" ]] ; then
@@ -15,6 +16,9 @@ pip3 install pip wheel --upgrade --upgrade-strategy=eager
 pip3 install logzero pytest
 pip3 install awscli boto3
 
-# DISABLED: pip3 install avro-python3==1.9.1 
-# DISABLED: pip3 install pandas
+###############################################################################
+: << 'DisabledContent'
+pip3 install avro-python3==1.9.1 
+pip3 install pandas
+DisabledContent
 

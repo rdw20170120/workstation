@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
-# This script is intended to be executed by a user in a BASH shell.
-
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Wipe project directory, which is a deeper clean
 
 if [[ -z "$BO_Project" ]] ; then
@@ -22,4 +23,8 @@ rm -fr $BO_Project/log
 pve-rm
 
 # TODO: Wipe other caches such as for 'pip'
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

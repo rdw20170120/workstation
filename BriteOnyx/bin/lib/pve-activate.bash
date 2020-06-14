@@ -1,5 +1,9 @@
-#!/bin/false
-# NOTE: Intended to be sourced into a BASH shell by another script.
+#!/usr/bin/env false
+# NO: set -e
+# DISABLED: set -x
+# Intended to be `source`d in a BASH shell by the user.
+###############################################################################
+# Activate Python virtual environment (PVE)
 
 # Remember Python virtual environment directory
 export PVE=$BO_Project/.PVE
@@ -7,7 +11,7 @@ if [[ ! -d $PVE ]] ; then
     echo "WARN:  Python virtual environment directory '$PVE' is not found"
 fi
 
-# Source the Python virtual environment activation script
+# Source Python virtual environment activation script
 Script=$PVE/bin/activate
 if [[ -r "$Script" ]] ; then
     echo "INFO:  'source'ing script file '$Script'"
@@ -15,4 +19,8 @@ if [[ -r "$Script" ]] ; then
 else
     echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

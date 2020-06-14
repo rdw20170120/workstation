@@ -9,26 +9,29 @@ from src_gen.script.python.structure import *
 
 visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
-def _generate(target_directory, subdirectories, file_name):
-    content = PythonSource(
+def _generate(content, target_directory, subdirectories, file_name):
+    source = PythonSource(
         visitor_map,
         subdirectories, file_name,
-        build()
+        content
         )
-    content.generate(target_directory)
+    source.generate(target_directory)
 
-def build():
+def _to_be_executed():
     return [
         python_script_header(),
+        disabled_content_footer(),
     ]
 
 def generate(target_directory):
     sub = Path('BriteOnyx/bin')
-    _generate(target_directory, sub, 'avro-print')
-    _generate(target_directory, sub, 'extensions')
-    _generate(target_directory, sub, 'list')
+    _generate(_to_be_executed(), target_directory, sub, 'avro-print')
+    _generate(_to_be_executed(), target_directory, sub, 'extensions')
+    _generate(_to_be_executed(), target_directory, sub, 'list')
 
 
 ''' Disabled content
+    sub = Path('')
+    _generate(_to_be_executed(), target_directory, sub, '')
 '''
 

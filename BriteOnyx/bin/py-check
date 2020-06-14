@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# This script is intended to be executed by a user in a BASH shell.
 set -e
-
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Check Python status
 
 if [[ -z "$BO_Project" ]] ; then
@@ -18,4 +19,8 @@ fi
 
 echo "INFO: Checking Python status against '$File'"
 py-report | diff - $File
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

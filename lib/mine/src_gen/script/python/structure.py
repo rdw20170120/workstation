@@ -4,10 +4,20 @@ from ..structure import *
 
 ###############################################################################
 
+def disabled_content_footer():
+    return [
+        line(),
+        "'''", 'DisabledContent', eol(),
+        "'''", eol(),
+        line(),
+    ]
+
 def python_script_header():
     return [
         shebang_python3(),
-        note('Intended to be executed directly by the user.'),
+        '"""', eol(),
+        '"""', eol(),
+        line(),
     ]
 
 ###############################################################################

@@ -1,5 +1,7 @@
 #!/usr/bin/env false
-# Intended to be `source`d into a BASH shell by the user.
+# NO: set -e
+# DISABLED: set -x
+# Intended to be `source`d in a BASH shell by the user.
 ###############################################################################
 # Activate the BriteOnyx framework to manage this project directory tree
 #

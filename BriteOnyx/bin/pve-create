@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
-# This script is intended to be executed by a user in a BASH shell.
-
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Create (and activate) Python virtual environment directory
 
 if [[ -z "$BO_Project" ]] ; then
@@ -18,4 +19,8 @@ echo "INFO: Creating Python virtual environment directory '$PVE'"
 python3 -m venv $PVE
 
 echo 'WARN: This new Python virtual environment has NOT been activated, so you should `exit` this shell and activate a new one'
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

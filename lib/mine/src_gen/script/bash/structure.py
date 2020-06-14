@@ -88,20 +88,6 @@ def set_(argument):
 
 ###############################################################################
 
-def source(file_name):
-    assert file_name
-    return command('source', file_name)
-
-def sourced_header():
-    return [
-        shebang_sourced(),
-        comment('Intended to be `source`d into a BASH shell by the user.'),
-#       execution_trace(),
-        rule(),
-    ]
-
-###############################################################################
-
 
 class _Substitution(object):
     def __init__(self, command):
@@ -297,11 +283,35 @@ def if_(condition, *statement):
 
 ###############################################################################
 
+def executed_header():
+    return [
+        shebang_bash(),
+#       execution_trace(),
+        set_('-e'), eol(),
+        disabled(set_('-x')),
+        comment('Intended to be executed directly by the user.'),
+        rule(),
+    ]
+
 def shebang_bash():
     return shebang_thru_env('bash')
 
 def shebang_sourced():
     return shebang_false()
+
+def source(file_name):
+    assert file_name
+    return command('source', file_name)
+
+def sourced_header():
+    return [
+        shebang_sourced(),
+#       execution_trace(),
+        no(set_('-e')),
+        disabled(set_('-x')),
+        comment('Intended to be `source`d in a BASH shell by the user.'),
+        rule(),
+    ]
 
 ###############################################################################
 

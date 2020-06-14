@@ -7,23 +7,43 @@ from src_gen.script.bash.structure import *
 
 visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
-def _generate(target_directory, subdirectories, file_name):
-    content = BashScript(
+def _generate(content, target_directory, subdirectories, file_name):
+    source = BashScript(
         visitor_map,
         subdirectories, file_name,
-        build()
+        content
         )
-    content.generate(target_directory)
+    source.generate(target_directory)
 
-def build():
+def _to_be_executed():
     return [
-        bash_script_header(),
+        executed_header(),
+        todo('DESCRIPTION'),
+        line(),
+        todo('CONTENT'),
+        disabled_content_footer(),
+    ]
+
+def _to_be_sourced():
+    return [
+        sourced_header(),
+        todo('DESCRIPTION'),
+        line(),
+        todo('CONTENT'),
+        disabled_content_footer(),
     ]
 
 def generate(target_directory):
-    sub = Path('BriteOnyx/bin')
+    sub = Path('')
+    _generate(_to_be_sourced(), target_directory, sub, 'alias.bash')
+    sub = Path('BriteOnyx/bin/lib')
+    _generate(_to_be_sourced(), target_directory, sub, 'alias-common.bash')
+    _generate(_to_be_sourced(), target_directory, sub, 'alias-git.bash')
+    _generate(_to_be_sourced(), target_directory, sub, 'pve-activate.bash')
 
 
 ''' Disabled content
+    sub = Path('')
+    _generate(target_directory, sub, '')
 '''
 

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
-# This script is intended to be executed by a user in a BASH shell.
-
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Check tool status
 
 if [[ -z "$BO_Project" ]] ; then
@@ -18,4 +19,8 @@ fi
 
 echo "INFO: Checking tool status against '$File'"
 tool-report | diff - $File
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 

@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -e
-# This script is intended to be executed by a user in a BASH shell.
-
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
 # Clean project directory
+
 # TODO: Enhance to handle directories
 
 if [[ -z "$BO_Project" ]] ; then
@@ -52,4 +54,8 @@ findAnd print $BO_Project '*.log'
 findAnd print $BO_Project '*.pyc'
 findAnd print $BO_Project '.pytest_cache'
 findAnd print $BO_Project '__pycache__'
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
 
