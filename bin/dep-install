@@ -19,6 +19,7 @@ pip3 install awscli boto3
 ###############################################################################
 : << 'DisabledContent'
 pip3 install avro-python3==1.9.1 
+pip3 install cryptography pem pynacl pyopenssl twisted[tls]
 pip3 install pandas
 DisabledContent
 

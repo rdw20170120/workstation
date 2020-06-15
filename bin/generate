@@ -3,7 +3,7 @@ set -e
 # DISABLED: set -x
 # Intended to be executed directly by the user.
 ###############################################################################
-# Generate content
+# Generate source
 
 # Require activation
 if [[ -z "$BO_Project" ]] ; then

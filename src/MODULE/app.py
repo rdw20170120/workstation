@@ -3,7 +3,6 @@
 
 Intended to be executed as a Python module:  python3 -m MODULE
 """
-
 import logging
 
 from logzero        import logfile
