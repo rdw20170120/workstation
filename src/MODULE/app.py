@@ -8,6 +8,7 @@ import logging
 from logzero        import logfile
 from logzero        import logger as log
 from logzero        import loglevel
+from logzero        import setup_logger
 from logzero.colors import Fore as Foreground
 
 from utility.singleton_application import SingletonApplication
@@ -30,15 +31,25 @@ class MyApp(SingletonApplication):
 
 
 def _configure_logging():
+    # TODO: Write method to dump actual logging configuration
+    # TODO: Set file handler to DEBUG, but stderr handler to INFO
     # TODO: Adjust logging between dev & prd
-    logfile(
-        c.log_file, backupCount=9, maxBytes=1e6, 
-        disableStderrLogger=False,
-        loglevel=logging.DEBUG
-    )
+    c.log_directory.mkdir(exist_ok=True)
+    setup_logger(
+        logfile=c.log_file, backupCount=9, maxBytes=1e6, fileLoglevel=logging.DEBUG,
+        level=logging.INFO
+        )
+#   loglevel(logging.INFO)
+#   logfile(c.log_file, backupCount=9, maxBytes=1e6, loglevel=logging.DEBUG)
+    log.debug('This is a sample DEBUG message.')
+    log.info('This is a sample INFO message.')
+    log.warn('This is a sample WARNING message.')
+#   log.warning('This is a sample WARNING message.')
+    log.error('This is a sample ERROR message.')
+    log.critical('This is a sample CRITICAL message.')
+#   log.fatal('This is a sample CRITICAL message.')
 
 def run():
-    c.log_directory.mkdir(exist_ok=True)
     _configure_logging()
     MyApp(Config().pid_file).run()
 
