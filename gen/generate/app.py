@@ -31,6 +31,7 @@ class ContentGeneratorApp(SingletonApplication):
 
     def _generate(self):
         generate_project_activate_script(self._target_directory)
+
         generate_bash_scripts(self._target_directory)
         generate_briteonyx_scripts(self._target_directory)
         generate_markdown_documents(self._target_directory)
