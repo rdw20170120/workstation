@@ -19,9 +19,13 @@ def using_gnome():
         )
 
 def using_iterm2():
-    """Return whether we think that we are using an iTerm2 terminal."""
-    # TODO: Implement
-    return False
+    """Return whether we think that we are using an iTerm2 terminal.
+
+    TODO: Consider checking TERM_PROGRAM=iTerm.app and LC_TERMINAL=iTerm2
+    """
+    return (environment.has('ITERM_PROFILE')
+        or environment.has('ITERM_SESSION')
+        )
 
 '''DisabledContent
 logzero.colors.Fore:

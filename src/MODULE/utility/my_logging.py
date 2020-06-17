@@ -2,9 +2,8 @@
 """My module for managing logging.
 
 Target effective logging on my favorite development workstations:
-* Apple macOS 10.14.6 Mojave running iTerm2 TODO
-  with 'TODO' palette
-  and 'TODO' scheme
+* Apple macOS 10.14.6 Mojave running iTerm2 3.3.9
+  with 'Solarized Dark Higher Contrast' color preset
 * Linux Mint 19.3 Tricia Cinnamon running default Gnome Terminal
   with 'Solarized' palette
   and 'solarized dark' scheme
@@ -74,7 +73,11 @@ def _level_colors():
         return result
     elif using_iterm2():
         log.debug("Using iTerm2 terminal")
-        result[logging.CRITICAL] = Fore.WHITE
+        result[logging.DEBUG] = Fore.CYAN
+        result[logging.INFO] = Fore.LIGHTGREEN_EX
+        result[logging.WARNING] = Fore.LIGHTYELLOW_EX
+        result[logging.ERROR] = Fore.LIGHTRED_EX
+        result[logging.CRITICAL] = Fore.LIGHTWHITE_EX
         return result
     else:
         log.debug("Using unrecognized terminal")
@@ -137,22 +140,18 @@ def _visit_streamhandler(element, walker):
     walker.emit(')')
 
 def configure(config):
-    # TODO: Write method to dump actual logging configuration
-    # TODO: Set file handler to DEBUG, but stderr handler to INFO
     # TODO: Adjust logging between dev & prd
-#   _dump()
-
     config.log_directory.mkdir(exist_ok=True)
     formatter = logzero.LogFormatter(colors=_level_colors())
     global log
     log = logzero.logger = logzero.setup_logger(
-        level=logging.INFO, formatter=formatter,
+        level=logging.DEBUG, formatter=formatter,
         logfile=config.log_file, fileLoglevel=logging.DEBUG,
         backupCount=9, maxBytes=1e6
         )
 
-    _log_samples()
-    _dump()
+#   _dump()
+#   _log_samples()
 
 
 '''DisabledContent
