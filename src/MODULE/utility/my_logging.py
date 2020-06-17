@@ -69,7 +69,7 @@ def _level_colors():
     result = logzero.LogFormatter.DEFAULT_COLORS
     if using_gnome():
         log.debug("Using Gnome terminal")
-        result[logging.CRITICAL] = Fore.WHITE
+        result[logging.CRITICAL] = Fore.LIGHTWHITE_EX
         return result
     elif using_iterm2():
         log.debug("Using iTerm2 terminal")
@@ -149,7 +149,6 @@ def configure(config):
         logfile=config.log_file, fileLoglevel=logging.DEBUG,
         backupCount=9, maxBytes=1e6
         )
-
 #   _dump()
 #   _log_samples()
 
