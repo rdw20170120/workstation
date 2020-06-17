@@ -1,5 +1,6 @@
 #!/usr/bin/env false
 """
+TODO: REVIEW: how best to integrate logging into a library
 """
 from logzero import logger as log
 
@@ -23,15 +24,19 @@ class Renderer(object):
         return self._get_serializer().serialize(content)
 
     def render(self, content, file_path=None):
-        if file_path is None:
-            log.info("Printing rendered content to stdout")
-            print(self._serialize(content))
-        else:
-            log.info("Writing rendered content to file '%s'", file_path)
-            with open(file_path, mode='wt',
-                newline=None
-                ) as f:
-                f.write(self._serialize(content))
+        try:
+            if file_path is None:
+                log.info("Printing rendered content to stdout")
+                print(self._serialize(content))
+            else:
+                log.info("Writing rendered content to file '%s'", file_path)
+                with open(file_path, mode='wt',
+                    newline=None
+                    ) as f:
+                    f.write(self._serialize(content))
+        except TypeError as e:
+            log.error("TypeError: %s", e)
+        except Exception: raise
 
 '''DisabledContent
 '''

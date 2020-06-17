@@ -1,7 +1,7 @@
 #!/usr/bin/env false
 """
 """
-from ..source    import visitor_map
+from ..source    import my_visitor_map
 from ..structure import *
 from ..structure import _Command
 
@@ -102,7 +102,7 @@ class _Substitution(object):
         return "_Substitution({})".format(self.command)
 
 
-@visitor_map.register(_Substitution)
+@my_visitor_map.register(_Substitution)
 def _visit_substitution(element, walker):
     walker.emit('$(')
     walker.walk(element.command)
@@ -125,7 +125,7 @@ class _Assign(object):
         return "_Assign({}, {})".format(self.variable, self.expressions)
 
 
-@visitor_map.register(_Assign)
+@my_visitor_map.register(_Assign)
 def _visit_assign(element, walker):
     walker.walk(element.variable)
     walker.emit('=')
@@ -201,7 +201,7 @@ class _Else(object):
         return "_Else({})".format(self.statements)
 
 
-@visitor_map.register(_Else)
+@my_visitor_map.register(_Else)
 def _visit_else(element, walker):
     walker.emit('else')
     walker.walk(eol())
@@ -226,7 +226,7 @@ class _ElseIf(object):
         return "_ElseIf({}, {})".format(self.condition, self.statements)
 
 
-@visitor_map.register(_ElseIf)
+@my_visitor_map.register(_ElseIf)
 def _visit_elif(element, walker):
     walker.emit('elif ')
     walker.walk(element.condition)
@@ -249,7 +249,7 @@ class _Fi(object):
         return "_Fi()"
 
 
-@visitor_map.register(_Fi)
+@my_visitor_map.register(_Fi)
 def _visit_fi(element, walker):
     walker.emit('fi')
     walker.walk(eol())
@@ -272,7 +272,7 @@ class _If(object):
         return "_If({}, {})".format(self.condition, self.statements)
 
 
-@visitor_map.register(_If)
+@my_visitor_map.register(_If)
 def _visit_if(element, walker):
     walker.emit('if ')
     walker.walk(element.condition)
@@ -329,7 +329,7 @@ class _VariableName(object):
         return "_VariableName({})".format(self.name)
 
 
-@visitor_map.register(_VariableName)
+@my_visitor_map.register(_VariableName)
 def _visit_variable_name(element, walker):
     walker.walk(element.name)
 
@@ -347,7 +347,7 @@ class _VariableReference(object):
         return "_VariableReference({})".format(self.name)
 
 
-@visitor_map.register(_VariableReference)
+@my_visitor_map.register(_VariableReference)
 def _visit_variable_reference(element, walker):
     walker.emit('$')
     walker.walk(element.name)

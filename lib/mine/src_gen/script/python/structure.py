@@ -1,7 +1,7 @@
 #!/usr/bin/env false
 """
 """
-from .source     import visitor_map
+from .source     import my_visitor_map
 from ..structure import *
 
 

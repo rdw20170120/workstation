@@ -1,14 +1,9 @@
 #!/usr/bin/env false
 """
 """
-from throw_out_your_templates.section_3 import VisitorMap
-
-from src_gen.script.bash.briteonyx.source    import BriteOnyxScript
-from src_gen.script.bash.briteonyx.source    import visitor_map as parent_visitor_map
+from src_gen.script.bash.briteonyx.source    import generate as gen
 from src_gen.script.bash.briteonyx.structure import *
 
-
-visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
 def _abort_if_activated():
     return [
@@ -306,13 +301,9 @@ def build():
         disabled_content_footer(),
     ]
 
-def generate(target_directory):
-    content = BriteOnyxScript(
-        visitor_map,
-        Path(), 'activate.bash',
-        build()
-        )
-    content.generate(target_directory)
+def generate(directory):
+    sub = Path('.')
+    gen(build(), directory, sub, 'activate.bash')
 
 '''DisabledContent
 '''

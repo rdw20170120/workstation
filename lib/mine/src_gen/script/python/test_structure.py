@@ -4,7 +4,7 @@
 from pytest import raises
 
 from ...renderer import Renderer
-from ..source    import visitor_map
+from ..source    import my_visitor_map
 from ..structure import * 
 
 
@@ -13,7 +13,7 @@ from ..structure import *
 # TODO: Generate tests
 # TODO: Expand tests for full pattern
 
-s = Renderer(visitor_map)._serialize
+s = Renderer(my_visitor_map)._serialize
 
 def test_command_01():
     assert s(command('Test')) == 'Test'

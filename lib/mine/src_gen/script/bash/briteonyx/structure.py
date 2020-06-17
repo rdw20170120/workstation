@@ -2,7 +2,7 @@
 """
 """
 from ..structure import *
-from .source     import visitor_map
+from .source     import my_visitor_map
 
 
 '''DisabledContent

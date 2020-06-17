@@ -4,7 +4,7 @@
 from pathlib import Path
 
 from ...structure import *
-from .source      import visitor_map
+from .source      import my_visitor_map
 
 
 ###############################################################################
@@ -49,7 +49,7 @@ class _TableRow(object):
         return "_TableRow({})".format(self.columns)
 
 
-@visitor_map.register(_TableRow)
+@my_visitor_map.register(_TableRow)
 def _visit_table_row(element, walker):
     if is_nonstring_iterable(element.columns):
         for c in element.columns:

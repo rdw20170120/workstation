@@ -1,14 +1,9 @@
 #!/usr/bin/env false
 """
 """
-from throw_out_your_templates.section_3 import VisitorMap
-
-from src_gen.script.bash.briteonyx.source    import BriteOnyxScript
-from src_gen.script.bash.briteonyx.source    import visitor_map as parent_visitor_map
+from src_gen.script.bash.briteonyx.source    import generate as gen
 from src_gen.script.bash.briteonyx.structure import *
 
-
-visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
 def _executed():
     return [
@@ -18,14 +13,6 @@ def _executed():
         todo('CONTENT'),
         disabled_content_footer(),
     ]
-
-def _generate(content, directory, subdirectories, file_name):
-    source = BriteOnyxScript(
-        visitor_map,
-        subdirectories, file_name,
-        content
-        )
-    source.generate(directory)
 
 def _sourced():
     return [
@@ -38,37 +25,37 @@ def _sourced():
 
 def generate(directory):
     sub = Path('BriteOnyx', 'bin')
-    _generate(_executed(), directory, sub, 'all-capture')
-    _generate(_executed(), directory, sub, 'all-check')
-    _generate(_executed(), directory, sub, 'dep-capture')
-    _generate(_executed(), directory, sub, 'dep-check')
-    _generate(_executed(), directory, sub, 'dep-reinstall')
-    _generate(_executed(), directory, sub, 'dep-report')
-    _generate(_executed(), directory, sub, 'dep-upgrade')
-    _generate(_executed(), directory, sub, 'env-capture')
-    _generate(_executed(), directory, sub, 'env-check')
-    _generate(_executed(), directory, sub, 'env-report')
-    _generate(_executed(), directory, sub, 'prj-clean')
-    _generate(_executed(), directory, sub, 'prj-wipe')
-    _generate(_executed(), directory, sub, 'pve-create')
-    _generate(_executed(), directory, sub, 'pve-recreate')
-    _generate(_executed(), directory, sub, 'pve-reinstall')
-    _generate(_executed(), directory, sub, 'pve-rm')
-    _generate(_executed(), directory, sub, 'py-2to3')
-    _generate(_executed(), directory, sub, 'py-capture')
-    _generate(_executed(), directory, sub, 'py-check')
-    _generate(_executed(), directory, sub, 'py-compile')
-    _generate(_executed(), directory, sub, 'py-report')
-    _generate(_executed(), directory, sub, 'tool-capture')
-    _generate(_executed(), directory, sub, 'tool-check')
+    gen(_executed(), directory, sub, 'all-capture')
+    gen(_executed(), directory, sub, 'all-check')
+    gen(_executed(), directory, sub, 'dep-capture')
+    gen(_executed(), directory, sub, 'dep-check')
+    gen(_executed(), directory, sub, 'dep-reinstall')
+    gen(_executed(), directory, sub, 'dep-report')
+    gen(_executed(), directory, sub, 'dep-upgrade')
+    gen(_executed(), directory, sub, 'env-capture')
+    gen(_executed(), directory, sub, 'env-check')
+    gen(_executed(), directory, sub, 'env-report')
+    gen(_executed(), directory, sub, 'prj-clean')
+    gen(_executed(), directory, sub, 'prj-wipe')
+    gen(_executed(), directory, sub, 'pve-create')
+    gen(_executed(), directory, sub, 'pve-recreate')
+    gen(_executed(), directory, sub, 'pve-reinstall')
+    gen(_executed(), directory, sub, 'pve-rm')
+    gen(_executed(), directory, sub, 'py-2to3')
+    gen(_executed(), directory, sub, 'py-capture')
+    gen(_executed(), directory, sub, 'py-check')
+    gen(_executed(), directory, sub, 'py-compile')
+    gen(_executed(), directory, sub, 'py-report')
+    gen(_executed(), directory, sub, 'tool-capture')
+    gen(_executed(), directory, sub, 'tool-check')
     sub = Path('BriteOnyx', 'bin', 'lib')
-    _generate(_sourced(), directory, sub, 'configure-Python.bash')
+    gen(_sourced(), directory, sub, 'configure-Python.bash')
     sub = Path('bin')
-    _generate(_executed(), directory, sub, 'app-run')
-    _generate(_executed(), directory, sub, 'dep-install')
-    _generate(_executed(), directory, sub, 'generate')
-    _generate(_executed(), directory, sub, 'test-run')
-    _generate(_executed(), directory, sub, 'tool-report')
+    gen(_executed(), directory, sub, 'app-run')
+    gen(_executed(), directory, sub, 'dep-install')
+    gen(_executed(), directory, sub, 'generate')
+    gen(_executed(), directory, sub, 'test-run')
+    gen(_executed(), directory, sub, 'tool-report')
 
 '''DisabledContent
 '''

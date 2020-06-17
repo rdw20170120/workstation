@@ -1,5 +1,8 @@
 #!/usr/bin/env false
-"""My module for managing assertions."""
+"""My module for managing assertions.
+
+TODO: REVIEW: whether this module still has value in Python3
+"""
 
 def has_type(actual_value, expected_type):
     """Return whether actual_value has expected_type"""

@@ -1,7 +1,8 @@
 #!/usr/bin/env false
 """My module for managing system functions.
 
-This module is being broken up into several modules for the filesystem, processing, etc.
+TODO: REVIEW: this module against its siblings.
+TODO: This module is being broken up into several modules.
 """
 from os     import getcwd
 from os     import listdir

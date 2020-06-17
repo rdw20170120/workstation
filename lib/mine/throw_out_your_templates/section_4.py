@@ -7,6 +7,7 @@ from types   import FunctionType
 from types   import GeneratorType
 from types   import MethodType
 
+from .section_3 import DEFAULT
 from .section_3 import VisitorMap
 
 
@@ -17,6 +18,13 @@ from .section_3 import VisitorMap
 # o = obj_to_be_walked, w = walker (aka serializer)
 
 visitor_map = VisitorMap()
+
+@visitor_map.register(DEFAULT)
+def _visit_default(element, walker):
+    walker.emit('\n')
+    walker.emit('NO VISITOR FOR ')
+    walker.walk(repr(element))
+    walker.emit('\n')
 
 @visitor_map.register(int)
 def _visit_int(element, walker):
@@ -41,7 +49,6 @@ def _visit_tuple(element, walker):
 '''DisabledContent
 from .section_1 import safe_bytes
 from .section_1 import safe_unicode
-from .section_3 import DEFAULT
 
 default_visitor_map = VisitorMap({
 #   str: (lambda o, w: w.walk(str(o, w.input_encoding, 'strict'))),

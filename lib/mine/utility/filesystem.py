@@ -1,5 +1,6 @@
 #!/usr/bin/env false
 """
+TODO: REVIEW: this module against its siblings.
 """
 from os      import remove
 from os.path import getsize

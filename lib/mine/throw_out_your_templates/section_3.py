@@ -51,18 +51,18 @@ class VisitorMap(dict):
         return self.__class__(super(VisitorMap, self).copy())
 
     def as_context(self, walker, set_parent_map=True):
-        """Returns as context manager for use with 'with' statements
+        """Returns a context manager for use in 'with' statements
         inside visitor functions.
 
         It allows you to define a set of visitor mappings that only
         apply within the current visitor's context and have all other
         mappings looked up in the exising visitor_map.  See
-        `visit_xml_cdata` an example.
+        `visit_xml_cdata` for an example.
         """
         return _VisitorMapContextManager(self, walker, set_parent_map)
 
     def register(self, py_type, visitor=None):
-        """If both args are passed, this does `vmap[py_type] = visitor`.
+        """If both args are passed, this does `self[py_type] = visitor`.
         If only `py_type` is passed, it assumes you are decorating a
         visitor function definition:
           @vmap.register(some_type)
@@ -99,8 +99,10 @@ class _VisitorMapContextManager(object):
         if self.set_parent_map:
             self.vmap.parent_map = None
 
-'''DisabledContent
+
 class DEFAULT:
     ">>> visitor_map[DEFAULT] = visitor # sets default fallback visitor"
+
+'''DisabledContent
 '''
 

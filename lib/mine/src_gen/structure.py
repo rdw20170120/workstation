@@ -5,7 +5,7 @@ from enum    import Enum
 from numbers import Number
 from pathlib import Path
 
-from .source import visitor_map
+from .source import my_visitor_map
 
 
 ###############################################################################
@@ -40,9 +40,6 @@ def squashed(value):
     if isinstance(value, dict):
 #       print("squashed ended with: '{}'".format(value))
         return value
-#   if isinstance(value, str):
-#       print("squashed ended with: '{}'".format(value))
-#       return value
     if not is_nonstring_iterable(value):
 #       print("squashed ended with: '{}'".format(value))
         return value
@@ -74,7 +71,7 @@ class _BacktickQuoted(object):
         return "_BacktickQuoted({})".format(self.elements)
 
 
-@visitor_map.register(_BacktickQuoted)
+@my_visitor_map.register(_BacktickQuoted)
 def _visit_backtick_quoted(element, walker):
     walker.emit("`")
     walker.walk(element.elements)
@@ -95,7 +92,7 @@ class _DoubleQuoted(object):
         return "_DoubleQuoted({})".format(self.elements)
 
 
-@visitor_map.register(_DoubleQuoted)
+@my_visitor_map.register(_DoubleQuoted)
 def _visit_double_quoted(element, walker):
     walker.emit('"')
     walker.walk(element.elements)
@@ -106,7 +103,7 @@ def dq(*element):
 
 ###############################################################################
 
-@visitor_map.register(Enum)
+@my_visitor_map.register(Enum)
 def _visit_content(element, walker):
     walker.walk(element.value)
 
@@ -122,7 +119,7 @@ class _SingleQuoted(object):
         return "_SingleQuoted({})".format(self.elements)
 
 
-@visitor_map.register(_SingleQuoted)
+@my_visitor_map.register(_SingleQuoted)
 def _visit_single_quoted(element, walker):
     walker.emit("'")
     walker.walk(element.elements)
@@ -131,28 +128,29 @@ def _visit_single_quoted(element, walker):
 def sq(*element):
     return _SingleQuoted(element)
 
-'''DisabledContent
-class _ContentElement(object):
-    def __init__(self, content, typename='_ContentElement'):
+###############################################################################
+
+
+class _NameValuePair(object):
+    def __init__(self, name, value):
         super().__init__()
-        self.typename = typename
-        self.content = squashed(content)
+        self.name = squashed(name)
+        self.value = squashed(value)
+        assert self.name
 
     def __repr__(self):
-        return self.typename + '(' + repr(self.content) + ')'
-
-#   def __str__(self):
-#       return self.__repr__()
-
-    def content_as_list(self):
-        result = self.content
-        if not isinstance(result, list):
-            result = [result]
-        return result
+        return "_NameValuePair({}, {})".format(self.name, self.value)
 
 
-@visitor_map.register(_ContentElement)
-def _visit_content_element(element, walker):
-    walker.walk(element.content)
+@my_visitor_map.register(_NameValuePair)
+def _visit_name_value_pair(element, walker):
+    walker.walk(element.name)
+    walker.emit(' = ')
+    walker.walk(element.value)
+
+def nvp(name, value):
+    return _NameValuePair(name, sq(value))
+
+'''DisabledContent
 '''
 

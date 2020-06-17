@@ -4,11 +4,11 @@
 from pathlib import Path
 
 from ..structure import *
-from .source     import visitor_map
+from .source     import my_visitor_map
 
 ###############################################################################
 
-@visitor_map.register(Path)
+@my_visitor_map.register(Path)
 def _visit_path(element, walker):
     walker.walk(str(element))
 
@@ -24,7 +24,7 @@ class _Arguments(object):
         return "_Arguments({})".format(self.arguments)
 
 
-@visitor_map.register(_Arguments)
+@my_visitor_map.register(_Arguments)
 def _visit_arguments(element, walker):
     if is_nonstring_iterable(element.arguments):
         for a in element.arguments:
@@ -54,7 +54,7 @@ class _Command(object):
         return "_Command({}, {})".format(self.executable, self.arguments)
 
 
-@visitor_map.register(_Command)
+@my_visitor_map.register(_Command)
 def _visit_command(element, walker):
     walker.walk(element.executable)
     walker.walk(element.arguments)
@@ -76,7 +76,7 @@ class _Comment(object):
         return "_Comment({}, {})".format(self.tight, self.elements)
 
 
-@visitor_map.register(_Comment)
+@my_visitor_map.register(_Comment)
 def _visit_comment(element, walker):
     walker.emit('#')
     if not element.tight: walker.emit(' ')
@@ -123,7 +123,7 @@ class _Expression(object):
         return "_Expression({})".format(self.elements)
 
 
-@visitor_map.register(_Expression)
+@my_visitor_map.register(_Expression)
 def _visit_expression(element, walker):
     if is_nonstring_iterable(element.elements):
         for e in element.elements:
