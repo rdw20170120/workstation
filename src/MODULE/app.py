@@ -25,7 +25,7 @@ class MyApp(SingletonApplication):
 def run():
     c = Config()
     configure_logging(c)
-    MyApp(Config().pid_file).run()
+    MyApp(c.pid_file).run()
 
 '''DisabledContent
 '''

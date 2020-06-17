@@ -143,6 +143,8 @@ def generate(directory):
     gen(_library(), directory, sub, 'test_task.py')
     sub = Path('src', 'MODULE', 'utility')
     gen(_package(), directory, sub, '__init__.py')
+    gen(_library(), directory, sub, 'my_logging.py')
+    gen(_library(), directory, sub, 'my_terminal.py')
 
 '''DisabledContent
 '''

@@ -9,6 +9,10 @@ from utility import environment
 
 class Config:
     @property
+    def fake_file_extension(self):
+        return '.fake'
+
+    @property
     def is_dry_run(self):
         """Return whether we are performing a dry-run execution.
         
@@ -77,6 +81,22 @@ class Config:
     def project_directory(self):
         return Path(environment.get('BO_Project'))
     
+    @property
+    def reserved_disk_space_in_bytes(self):
+        """Return disk space to reserve in bytes.
+
+        In the absence of a defined value for the environment variable, we
+        use the maximum integer value as a default.
+        """
+        try:
+            return int(environment.get('ReservedDiskSpaceInBytes'))
+        except KeyError:
+            return maxsize
+
+    @property
+    def should_abort_on_task_failure(self):
+        return True
+ 
     @property
     def should_fake_it(self):
         """Return whether we should fake the data processing during execution.
