@@ -28,20 +28,20 @@ def _activate_python_virtual_environment():
         _remember_system_path(),
         _remember_user_path(),
         _reset_path_for_pve(),
-        _capture_environment(x(vr('PWD'), '/out'), 'PVE-prior'), eol(),
+        _capture_environment('PVE-prior'), eol(),
         line(),
         _source_script((vr('BO_Project'), '/BriteOnyx/bin/lib/pve-activate.bash')),
-        _capture_environment(x(vr('PWD'), '/out'), 'PVE-after'), eol(),
+        _capture_environment('PVE-after'), eol(),
         _remember_pve_path(),
         _remember_path(),
     ]
 
-def _capture_environment(directory_name, file_name):
+def _capture_environment(file_name):
     return [
         line(),
         command('env'),
         pipe(),
-        command('sort', '>', x(directory_name, '/BO-', file_name, '.env')),
+        command('sort', '>', x(vr('PWD'), '/BO-', file_name, '.env')),
     ]
 
 def _comments():
@@ -289,15 +289,13 @@ def build():
         sourced_header(),
         _comments(),
         _abort_if_activated(),
-        line(),
-        path_does_not_exist('out'), and_(), command('mkdir', 'out'), eol(),
-        _capture_environment(x(vr('PWD'), '/out'), 'incoming'), eol(),
+        _capture_environment('incoming'), eol(),
         _remember_project_root(),
         _detect_operating_system(),
         _create_random_tmpdir(),
         _activate_python_virtual_environment(),
         _source_supporting_scripts(),
-        _capture_environment(x(vr('PWD'), '/out'), 'outgoing'), eol(),
+        _capture_environment('outgoing'), eol(),
         disabled_content_footer(),
     ]
 
@@ -306,5 +304,7 @@ def generate(directory):
     gen(build(), directory, sub, 'activate.bash')
 
 '''DisabledContent
+        line(),
+        path_does_not_exist('out'), and_(), command('mkdir', 'out'), eol(),
 '''
 

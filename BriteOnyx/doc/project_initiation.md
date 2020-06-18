@@ -4,7 +4,7 @@ Rob based his approach on his pre-existing open-source project BriteOnyx, which 
 
 ## Install tools
 * Using Apple MacBook Pro
-* Running Apple macOS 10.14.6 Mojave 
+* Running Apple macOS 10.14.6 Mojave
 
 1. Install VMware Fusion 8.5.10.7527438
 1. Create Linux VM

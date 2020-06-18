@@ -56,7 +56,8 @@ ssh -T MeAtGitHub
 1. If necessary, troubleshoot SSH issues and Git issues until it works.
 
 ## Clone project repository
-**NOTE**: We use `MeAtGitHub` now as our prefix for the repo URL to trigger the use of the settings in `~/.ssh/config` that we created above.
+**NOTE**: We use `MeAtGitHub` now as our prefix for the repo URL to trigger the
+use of the settings in `~/.ssh/config` that we created above.
 
 1. Open a BASH shell.
 
@@ -87,8 +88,8 @@ git config --list --show-origin
    Upon initial install, this should output nothing about your GitHub user.
 
 1. Let's change that.
-These commands will set your name and email address for only this project.
-If you want to set them globally for this user account on this machine, then add the `--global` option to each command.
+   These commands will set your name and email address for only this project.
+   If you want to set them globally for this user account on this machine, then add the `--global` option to each command.
 
 ~~~ bash
 git config user.name 'Rob Williams'

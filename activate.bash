@@ -34,9 +34,7 @@ if [[ -n "$BO_Project" ]] ; then
     return 1  # Exit from the script, but not from the shell
 fi
 
-[[ ! -e "out" ]] && mkdir out
-
-env | sort > $PWD/out/BO-incoming.env
+env | sort > $PWD/BO-incoming.env
 
 echo "INFO:  Activating this directory '$PWD' as the current project"
 export BO_Project=$PWD
@@ -85,7 +83,7 @@ echo "INFO:  Remembering BO_PathProject=$BO_PathProject"
 # Reset PATH before activating Python virtual environment
 export PATH=$BO_PathSystem
 
-env | sort > $PWD/out/BO-PVE-prior.env
+env | sort > $PWD/BO-PVE-prior.env
 
 Script=$BO_Project/BriteOnyx/bin/lib/pve-activate.bash
 if [[ -r "$Script" ]] ; then
@@ -95,7 +93,7 @@ else
     echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi
 
-env | sort > $PWD/out/BO-PVE-after.env
+env | sort > $PWD/BO-PVE-after.env
 
 [[ -z "$BO_PathPve" ]] && \
     export BO_PathPve=$PATH && \
@@ -149,7 +147,7 @@ else
     echo "WARN:  Script file '$Script' is not readable, ignoring"
 fi
 
-env | sort > $PWD/out/BO-outgoing.env
+env | sort > $PWD/BO-outgoing.env
 
 ###############################################################################
 : << 'DisabledContent'
