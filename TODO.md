@@ -1,13 +1,14 @@
 # TODO items for this project repository
 These are outstanding items of work for us to do.
 Each item should be annotated to facilitate prioritization.
-Annotations should be specified as low (L), medium (M), or high (H) for the importance (I) and the urgency (U) of each item.
+Annotations should be specified as low (L), medium (M), or high (H)
+for the importance (I) and the urgency (U) of each item.
 Prioritizing can be accomplished by physically reordering the items in the list.
-Obviously (I hope), items with higher importance and/or higher urgency should be prioritized for earlier implementation.
+Obviously, items with higher importance and/or higher urgency should be prioritized for earlier implementation.
 Of course, ordering should also respect dependencies between items, when relevant.
 
 Items should be checked-off and perhaps moved to the bottom when completed.
-Items could also be struck-out if that is helpful.
+Items should be struck-out to indicate that they have been canceled, unless they should merely be deleted.
 
 1. [X] I/U = Item Description
 1. [ ] H/H - Implement full test suite for code generation functionality
