@@ -5,11 +5,11 @@ Intended to be executed as a Python module:  python3 -m MODULE
 """
 from logzero import logger as log
 
+from utility.my_logging            import configure as configure_logging
 from utility.singleton_application import SingletonApplication
 
 from .config             import Config
 from .task.task_manager  import TaskManager
-from .utility.my_logging import configure as configure_logging
 
 
 class MyApp(SingletonApplication):

@@ -62,10 +62,6 @@ def generate(directory):
     sub = Path('gen', 'generate', 'script', 'python')
     gen(_package(), directory, sub, '__init__.py')
     gen(_library(), directory, sub, 'all.py')
-    sub = Path('gen', 'generate', 'utility')
-    gen(_package(), directory, sub, '__init__.py')
-    gen(_library(), directory, sub, 'my_logging.py')
-    gen(_library(), directory, sub, 'my_terminal.py')
     sub = Path('lib', 'mine', 'src_gen')
     gen(_package(), directory, sub, '__init__.py')
     gen(_library(), directory, sub, 'renderer.py')
@@ -115,7 +111,9 @@ def generate(directory):
     gen(_library(), directory, sub, 'filesystem.py')
     gen(_library(), directory, sub, 'math.py')
     gen(_library(), directory, sub, 'my_assert.py')
+    gen(_library(), directory, sub, 'my_logging.py')
     gen(_library(), directory, sub, 'my_system.py')
+    gen(_library(), directory, sub, 'my_terminal.py')
     gen(_library(), directory, sub, 'my_time.py')
     gen(_library(), directory, sub, 'processing.py')
     gen(_library(), directory, sub, 'singleton_application.py')
@@ -145,10 +143,6 @@ def generate(directory):
     gen(_library(), directory, sub, 'test_mapping.py')
     gen(_library(), directory, sub, 'test_queue.py')
     gen(_library(), directory, sub, 'test_task.py')
-    sub = Path('src', 'MODULE', 'utility')
-    gen(_package(), directory, sub, '__init__.py')
-    gen(_library(), directory, sub, 'my_logging.py')
-    gen(_library(), directory, sub, 'my_terminal.py')
 
 '''DisabledContent
 '''

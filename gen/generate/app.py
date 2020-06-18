@@ -6,11 +6,11 @@ Intended to be executed as a Python module:  python3 -m MODULE
 import sys
 
 from argparse import ArgumentParser
-from logging  import DEBUG
 from pathlib  import Path
 
 from logzero import logger as log
 
+from utility.my_logging            import configure as configure_logging
 from utility.my_system             import recreate_directory
 from utility.singleton_application import SingletonApplication
 
@@ -20,7 +20,6 @@ from .document.markdown.all               import generate as generate_markdown_d
 from .script.bash.all                     import generate as generate_bash_scripts
 from .script.bash.briteonyx.all           import generate as generate_briteonyx_scripts
 from .script.python.all                   import generate as generate_python_scripts
-from .utility.my_logging                  import configure as configure_logging
 
 
 class ContentGeneratorApp(SingletonApplication):
