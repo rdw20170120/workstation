@@ -42,16 +42,6 @@ checkExecutable bash
 check 'git --version'
 checkExecutable git
 
-# OpenSSL 
-check 'openssl version -a'
-check 'openssl list-cipher-algorithms'
-check 'openssl list-cipher-commands'
-check 'openssl list-message-digest-algorithms'
-check 'openssl list-message-digest-commands'
-check 'openssl list-public-key-algorithms'
-check 'openssl list-standard-commands'
-checkExecutable openssl
-
 # Python shared
 check 'python --version'
 checkExecutable python
@@ -84,6 +74,22 @@ checkExecutable 2to3
 check 'py.test --version' 2>&1
 checkExecutable py.test
 
+# Ensure a successful script return
+echo "Tool report succeeded, though individual checks may fail"
+exit 0
+
+###############################################################################
+: << 'DisabledContent'
+# OpenSSL 
+check 'openssl version -a'
+check 'openssl list-cipher-algorithms'
+check 'openssl list-cipher-commands'
+check 'openssl list-message-digest-algorithms'
+check 'openssl list-message-digest-commands'
+check 'openssl list-public-key-algorithms'
+check 'openssl list-standard-commands'
+checkExecutable openssl
+
 # AWS CLI
 check 'aws --version'
 checkExecutable aws
@@ -91,11 +97,5 @@ checkExecutable aws
 # Python OpenSSL
 check 'python -m OpenSSL.debug'
 
-# Ensure a successful script return
-echo "Tool report succeeded, though individual checks may fail"
-exit 0
-
-###############################################################################
-: << 'DisabledContent'
 DisabledContent
 

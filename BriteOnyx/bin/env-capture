@@ -15,6 +15,9 @@ File=$BO_Project/out/env.out
 echo "INFO: Capturing BASH environment status to '$File'"
 env-report > $File
 
+# Capture activation output
+cp $BO_Project/*.env $BO_Project/out
+
 ###############################################################################
 : << 'DisabledContent'
 DisabledContent

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+# DISABLED: set -e
 # DISABLED: set -x
 # Intended to be executed directly by the user.
 ###############################################################################
