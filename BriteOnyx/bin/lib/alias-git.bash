@@ -32,5 +32,8 @@ alias todo='grep -ER TODO $BO_Project'
 
 ###############################################################################
 : << 'DisabledContent'
+# TODO: Create a script like BriteOnyx/bin/git-undelete
+git reset
+git ls-files -d -z | xargs -0 git checkout --
 DisabledContent
 
