@@ -5,6 +5,11 @@ set -e
 ###############################################################################
 # Run application
 
+# This is intended to be the single primary execution entry point for this
+# project.  Ideally, the user will invoke this script and everything else
+# will happen as needed.  If this script is unable to finish, then it should
+# abort after giving the user feedback about how they might proceed further.
+
 # Require activation
 if [[ -z "$BO_Project" ]] ; then
     echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"

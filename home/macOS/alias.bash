@@ -17,3 +17,5 @@ alias status='git status'
 
 alias workstation='cd ~/project/Rob/workstation'
 
+alias sync='meld ~/project/Rob/workstation'
+

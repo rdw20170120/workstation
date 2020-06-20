@@ -88,12 +88,26 @@ def read_binary_from_file(file_path):
         assert isinstance(result, bytes)
     return result
 
+def read_text_from_file(file_path):
+    assert isinstance(file_path, Path)
+    with open(file_path, 'rt', newline=None) as reader:
+        result = reader.read()
+        assert isinstance(result, bytes)
+    return result
+
 def write_binary_into_file(file_path, binary_content):
     assert isinstance(file_path, Path)
     assert isinstance(binary_content, bytes)
     with open(file_path, 'wb') as writer:
         count = writer.write(binary_content)
         assert count == len(binary_content)
+
+def write_text_into_file(file_path, text_content):
+    assert isinstance(file_path, Path)
+    assert isinstance(text_content, str)
+    with open(file_path, 'wt', newline=None) as writer:
+        count = writer.write(text_content)
+        assert count == len(text_content)
 
 '''DisabledContent
 '''

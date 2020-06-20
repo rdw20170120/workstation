@@ -1,7 +1,7 @@
 #!/bin/false
 # NOTE:  This file is intended to be executed as part of starting a BASH shell.
 
-export TERM=vt102
+export TERM=xterm
 export COLORTERM=truecolor
 
 [[ -z "$BO_PathOriginal" ]] && export BO_PathOriginal=$PATH

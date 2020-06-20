@@ -80,6 +80,10 @@ exit 0
 
 ###############################################################################
 : << 'DisabledContent'
+# AWS CLI
+check 'aws --version'
+checkExecutable aws
+
 # OpenSSL 
 check 'openssl version -a'
 check 'openssl list-cipher-algorithms'
@@ -90,9 +94,11 @@ check 'openssl list-public-key-algorithms'
 check 'openssl list-standard-commands'
 checkExecutable openssl
 
-# AWS CLI
-check 'aws --version'
-checkExecutable aws
+# Oracle Java
+check 'java --version'
+check 'keytool -showinfo -tls'
+checkExecutable java
+checkExecutable keytool
 
 # Python OpenSSL
 check 'python -m OpenSSL.debug'
