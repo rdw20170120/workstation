@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from pytest import raises
 
 from . import service
@@ -19,4 +20,7 @@ def test_init_rejects_profile_name_of_none():
 def test_init_rejects_profile_name_of_empty():
     with raises(ValueError, match='profile_name'):
         service.AwsService('RESOURCE', '')
+
+'''DisabledContent
+'''
 

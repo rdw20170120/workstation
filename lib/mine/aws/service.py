@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from boto3   import Session
 from logzero import logger as log
 
@@ -55,4 +56,7 @@ class AwsService:
     @property
     def session(self):
         return self._session
+
+'''DisabledContent
+'''
 

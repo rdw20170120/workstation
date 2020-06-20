@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 from os import path
 
 import boto3
@@ -100,4 +101,7 @@ class S3(AwsService):
                 assert p == prefix
                 if len(filename) > 0: result.append(obj)
         return result
+
+'''DisabledContent
+'''
 

@@ -3,7 +3,10 @@ These notes describe how Rob first initiated this project by preparing his devel
 Rob based his approach on his pre-existing open-source project BriteOnyx, which is likewise based on his many years of technical experience.
 
 ## Install tools
-* Using Apple MacBook Pro
+* Using Apple MacBook Pro (Retina, 15-inch, Late 2013)
+    * Processor: 2.3 GHz Intel Core i7
+    * Memory:    16 GB 1600 MHz DDR3
+    * Graphics:  NVIDIA GeForce GT 750M 2 GB & Intel Iris Pro 1536 MB
 * Running Apple macOS 10.14.6 Mojave
 
 1. Install VMware Fusion 8.5.10.7527438

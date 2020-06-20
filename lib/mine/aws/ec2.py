@@ -1,5 +1,6 @@
-#!/bin/false
-
+#!/usr/bin/env false
+"""
+"""
 import boto3
 
 from botocore.exceptions import ClientError
@@ -54,4 +55,7 @@ class EC2(AwsService):
         result = self._describe_availability_zones()
         log.debug("Region '%s' has availability zones: %r", self.region_name, result)
         return result
+
+'''DisabledContent
+'''
 

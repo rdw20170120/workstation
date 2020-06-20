@@ -1,8 +1,11 @@
 # HowTo setup Python virtual environment
-We are using dependencies documented in [cfg/requirements.txt](../cfg/requirements.txt) and tools documented in [cfg/tool.out](../cfg/tool.out).
+We are using
+dependencies documented in [cfg/requirements.txt](../cfg/requirements.txt)
+and tools documented in [cfg/tool.out](../cfg/tool.out).
 
 ## Recreate Python virtual environment
-This is needed the first time you build a working copy of this project, and then only rarely for troubleshooting later.
+This is needed the first time you build a working copy of this project,
+then only rarely for troubleshooting later.
 
 [Activate this project][activate].
 
@@ -12,7 +15,8 @@ pve-recreate
 
 ## Rebuild Python virtual environment
 If you need to rebuild the Python virtual environment at a more fundamental level, then do this.
-**NOTE**: It is wise to do this every once in a while just to be sure that it is up-to-date and completely accurate.
+**NOTE**: It is wise to do this every once in a while
+just to be sure that it is up-to-date and completely accurate.
 For example, the dependencies were incomplete the first time that I wrote and executed these scripts.
 
 [Activate this project][activate].
