@@ -4,8 +4,6 @@
 alias la='ls -Agl'
 alias ll='ls -gl'
 
-alias vim='nvim'
-
 alias add='git add .'
 alias commit='git commit'
 alias branches='git branch --list'
@@ -15,5 +13,11 @@ alias pull='git pull'
 alias push='git push'
 alias status='git status'
 
+alias fullscreen='~/.xprofile'
+
+alias vim='nvim'
+
 alias workstation='cd ~/project/Rob/workstation'
+
+alias sync='meld ~/project/Rob/workstation'
 

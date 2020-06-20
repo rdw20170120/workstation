@@ -2,6 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+export TERM=xterm
+export COLORTERM=truecolor
+
 [[ -z "$BO_PathOriginal" ]] && export BO_PathOriginal=$PATH
 export BO_PathHomebrew=/usr/local/bin
 export BO_PathSystem=/usr/bin:/bin:/usr/sbin

@@ -1,6 +1,6 @@
 " Rob Williams' Neovim initialization
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 Plug 'junegunn/vim-plug'
 
 Plug 'https://github.com/lifepillar/vim-solarized8'
@@ -11,7 +11,6 @@ Plug 'https://github.com/lifepillar/vim-solarized8'
 
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
-
 call plug#end()
 
 " https://github.com/junegunn/vim-plug
@@ -28,6 +27,7 @@ call plug#end()
 " Colors {{{
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
+set background=dark
 colorscheme solarized8
 set background=dark
 syntax enable
