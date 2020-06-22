@@ -1,6 +1,9 @@
 # Notes on project initiation
-These notes describe how Rob first initiated this project by preparing his development workstation and creating this source directory tree.
-Rob based his approach on his pre-existing open-source project BriteOnyx, which is likewise based on his many years of technical experience.
+These notes describe how Rob first initiated this project
+by preparing his development workstation
+and creating this source repository.
+Rob based his approach on his pre-existing open-source project BriteOnyx,
+which is likewise based on his many years of technical experience.
 
 ## Install tools
 * Using Apple MacBook Pro (Retina, 15-inch, Late 2013)

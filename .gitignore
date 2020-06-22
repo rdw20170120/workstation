@@ -15,7 +15,10 @@ log/
 # Apple macOS
 .DS_Store
 
-# Vim swap file
+# Oracle Java
+# *.class
+
+# Vim
 *.swp
 
 # Byte-compiled / optimized / DLL files
