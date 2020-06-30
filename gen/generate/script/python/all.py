@@ -1,43 +1,18 @@
 #!/usr/bin/env false
-"""
-"""
+"""Generate all Python scripts."""
 from pathlib import Path
 
 from src_gen.script.python.source    import generate as gen
 from src_gen.script.python.structure import *
 
 
-def _library():
-    return [
-        library_module_header(),
-        todo('CONTENT'),
-        disabled_content_footer(),
-    ]
-
-def _main():
-    return [
-        main_module_header(),
-        todo('CONTENT'),
-        disabled_content_footer(),
-    ]
-
-def _package():
-    return [
-        package_module_header(),
-    ]
-
-def _script():
-    return [
-        script_module_header(),
-        todo('CONTENT'),
-        disabled_content_footer(),
-    ]
-
-def generate(directory):
+def _generate_BriteOnyx(directory):
     sub = Path('BriteOnyx', 'bin')
     gen(_script(), directory, sub, 'avro-print')
     gen(_script(), directory, sub, 'extensions')
     gen(_script(), directory, sub, 'list')
+
+def _generate_gen(directory):
     sub = Path('gen', 'generate')
     gen(_package(), directory, sub, '__init__.py')
     gen(_main(), directory, sub, '__main__.py')
@@ -62,6 +37,14 @@ def generate(directory):
     sub = Path('gen', 'generate', 'script', 'python')
     gen(_package(), directory, sub, '__init__.py')
     gen(_library(), directory, sub, 'all.py')
+
+def _generate_lib(directory):
+    _generate_lib_aws(directory)
+    _generate_lib_src_gen(directory)
+    _generate_lib_task(directory)
+    _generate_lib_utility(directory)
+
+def _generate_lib_aws(directory):
     sub = Path('lib', 'mine', 'aws')
     gen(_package(), directory, sub, '__init__.py')
     gen(_library(), directory, sub, 'ec2.py')
@@ -70,6 +53,8 @@ def generate(directory):
     gen(_library(), directory, sub, 'test_ec2.py')
     gen(_library(), directory, sub, 'test_s3.py')
     gen(_library(), directory, sub, 'test_service.py')
+
+def _generate_lib_src_gen(directory):
     sub = Path('lib', 'mine', 'src_gen')
     gen(_package(), directory, sub, '__init__.py')
     gen(_library(), directory, sub, 'renderer.py')
@@ -113,8 +98,21 @@ def generate(directory):
     gen(_library(), directory, sub, 'test_section_2.py')
     gen(_library(), directory, sub, 'test_section_3.py')
     gen(_library(), directory, sub, 'test_section_4.py')
+
+def _generate_lib_task(directory):
+    sub = Path('lib', 'mine', 'task')
+    gen(_package(), directory, sub, '__init__.py')
+    gen(_library(), directory, sub, 'delete_file.py')
+    gen(_library(), directory, sub, 'queue.py')
+    gen(_library(), directory, sub, 'task.py')
+    gen(_library(), directory, sub, 'task_manager.py')
+    gen(_library(), directory, sub, 'test_queue.py')
+    gen(_library(), directory, sub, 'test_task.py')
+
+def _generate_lib_utility(directory):
     sub = Path('lib', 'mine', 'utility')
     gen(_package(), directory, sub, '__init__.py')
+    gen(_library(), directory, sub, 'config.py')
     gen(_library(), directory, sub, 'environment.py')
     gen(_library(), directory, sub, 'filesystem.py')
     gen(_library(), directory, sub, 'math.py')
@@ -125,6 +123,7 @@ def generate(directory):
     gen(_library(), directory, sub, 'my_time.py')
     gen(_library(), directory, sub, 'processing.py')
     gen(_library(), directory, sub, 'singleton_application.py')
+    gen(_library(), directory, sub, 'test_config.py')
     gen(_library(), directory, sub, 'test_environment.py')
     gen(_library(), directory, sub, 'test_filesystem.py')
     gen(_library(), directory, sub, 'test_math.py')
@@ -132,6 +131,8 @@ def generate(directory):
     gen(_library(), directory, sub, 'test_time.py')
     gen(_library(), directory, sub, 'text.py')
     gen(_library(), directory, sub, 'time.py')
+
+def _generate_src(directory):
     sub = Path('src', 'MODULE')
     gen(_package(), directory, sub, '__init__.py')
     gen(_main(), directory, sub, '__main__.py')
@@ -142,15 +143,42 @@ def generate(directory):
     sub = Path('src', 'MODULE', 'task')
     gen(_package(), directory, sub, '__init__.py')
     gen(_library(), directory, sub, 'bootstrap.py')
-    gen(_library(), directory, sub, 'delete_file.py')
     gen(_library(), directory, sub, 'mapping.py')
-    gen(_library(), directory, sub, 'queue.py')
     gen(_library(), directory, sub, 'scan_directory.py')
-    gen(_library(), directory, sub, 'task.py')
-    gen(_library(), directory, sub, 'task_manager.py')
     gen(_library(), directory, sub, 'test_mapping.py')
-    gen(_library(), directory, sub, 'test_queue.py')
     gen(_library(), directory, sub, 'test_task.py')
+
+def _library():
+    return [
+        library_module_header(),
+        todo('CONTENT'),
+        disabled_content_footer(),
+    ]
+
+def _main():
+    return [
+        main_module_header(),
+        todo('CONTENT'),
+        disabled_content_footer(),
+    ]
+
+def _package():
+    return [
+        package_module_header(),
+    ]
+
+def _script():
+    return [
+        script_module_header(),
+        todo('CONTENT'),
+        disabled_content_footer(),
+    ]
+
+def generate(directory):
+    _generate_BriteOnyx(directory)
+    _generate_gen(directory)
+    _generate_lib(directory)
+    _generate_src(directory)
 
 '''DisabledContent
 '''

@@ -1,23 +1,20 @@
 #!/usr/bin/env false
-"""
-"""
-from ..config        import Config
-from .queue          import TaskQueue
+"""Bootstrap by creating first tasks."""
+from task.task import PlainTask
+
 from .scan_directory import ScanDirectory
-from .task           import QueuingTask
 
 
-class Bootstrap(QueuingTask):
-    """First task to populate queue with starting tasks."""
-    def __init__(self, queue):
-        assert isinstance(queue, TaskQueue)
-        super().__init__(queue)
+class Bootstrap(PlainTask):
+    """First task that adds starting tasks."""
+    def __init__(self, task_manager):
+        super().__init__(task_manager)
 
     def __str__(self): return 'Bootstrap'
 
     def execute(self):
         super().execute()
-        self._queue.put(ScanDirectory(self._queue, Config().temporary_directory))
+        ScanDirectory(self._tm, self.config.temporary_directory)
 
 '''DisabledContent
 '''

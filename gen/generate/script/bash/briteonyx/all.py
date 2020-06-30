@@ -1,6 +1,5 @@
 #!/usr/bin/env false
-"""
-"""
+"""Generate all BriteOnyx BASH scripts."""
 from src_gen.script.bash.briteonyx.source    import generate as gen
 from src_gen.script.bash.briteonyx.structure import *
 
@@ -14,16 +13,7 @@ def _executed():
         disabled_content_footer(),
     ]
 
-def _sourced():
-    return [
-        sourced_header(),
-        todo('DESCRIPTION'),
-        line(),
-        todo('CONTENT'),
-        disabled_content_footer(),
-    ]
-
-def generate(directory):
+def _generate_BriteOnyx(directory):
     sub = Path('BriteOnyx', 'bin')
     gen(_executed(), directory, sub, 'all-capture')
     gen(_executed(), directory, sub, 'all-check')
@@ -50,12 +40,28 @@ def generate(directory):
     gen(_executed(), directory, sub, 'tool-check')
     sub = Path('BriteOnyx', 'bin', 'lib')
     gen(_sourced(), directory, sub, 'configure-Python.bash')
+
+def _generate_bin(directory):
     sub = Path('bin')
     gen(_executed(), directory, sub, 'app-run')
     gen(_executed(), directory, sub, 'dep-install')
     gen(_executed(), directory, sub, 'generate')
     gen(_executed(), directory, sub, 'test-run')
     gen(_executed(), directory, sub, 'tool-report')
+    sub = Path('bin', 'lib')
+
+def _sourced():
+    return [
+        sourced_header(),
+        todo('DESCRIPTION'),
+        line(),
+        todo('CONTENT'),
+        disabled_content_footer(),
+    ]
+
+def generate(directory):
+    _generate_BriteOnyx(directory)
+    _generate_bin(directory)
 
 '''DisabledContent
 '''

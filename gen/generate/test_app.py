@@ -1,6 +1,5 @@
 #!/usr/bin/env false
-"""
-"""
+"""Test application."""
 import sys
 
 from pathlib import Path

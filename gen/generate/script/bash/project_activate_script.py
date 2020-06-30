@@ -1,6 +1,5 @@
 #!/usr/bin/env false
-"""
-"""
+"""Generate script to activate project."""
 from src_gen.script.bash.briteonyx.source    import generate as gen
 from src_gen.script.bash.briteonyx.structure import *
 

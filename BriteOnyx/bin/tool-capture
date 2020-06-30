@@ -13,7 +13,7 @@ fi
 File=$BO_Project/out/tool.out
 
 echo "INFO: Capturing tool status to '$File'"
-tool-report > $File
+tool-report 2>&1 >$File
 
 ###############################################################################
 : << 'DisabledContent'

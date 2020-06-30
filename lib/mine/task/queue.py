@@ -1,6 +1,5 @@
 #!/usr/bin/env false
-"""
-"""
+"""Queue to manage tasks."""
 from queue import Queue
 
 from logzero import logger as log

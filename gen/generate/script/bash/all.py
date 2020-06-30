@@ -1,6 +1,5 @@
 #!/usr/bin/env false
-"""
-"""
+"""Generate all BASH scripts."""
 from src_gen.script.bash.source    import generate as gen
 from src_gen.script.bash.structure import *
 

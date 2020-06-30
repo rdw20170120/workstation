@@ -2,9 +2,8 @@
 """My module for managing time.
 
 TODO: REVIEW: this module against its siblings.
+TODO: SOMEDAY: Add tests for naive versus aware dates & times
 """
-
-# TODO: SOMEDAY: Add tests for naive versus aware dates & times
 from datetime import datetime as dt_datetime
 
 from .my_assert import has_type

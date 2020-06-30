@@ -5,11 +5,15 @@ Intended to be executed as a Python module:  python3 -m MODULE
 """
 from logzero import logger as log
 
+from task.task_manager             import TaskManager
 from utility.my_logging            import configure as configure_logging
 from utility.singleton_application import SingletonApplication
 
-from .config             import Config
-from .task.task_manager  import TaskManager
+from .config         import Config
+from .task.bootstrap import Bootstrap
+
+
+c = Config()
 
 
 class MyApp(SingletonApplication):
@@ -19,11 +23,12 @@ class MyApp(SingletonApplication):
     def _run(self):
         super()._run()
         log.info("Running application...")
-        TaskManager().run()
+        tm = TaskManager(c)
+        Bootstrap(tm)
+        tm.run()
 
 
 def run():
-    c = Config()
     configure_logging(c)
     MyApp(c.pid_file).run()
 
