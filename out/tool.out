@@ -1,6 +1,6 @@
 ##########
 uname -a
-Darwin LAMU02ZL33ZLVDQ.uhc.com. 18.7.0 Darwin Kernel Version 18.7.0: Mon Feb 10 21:08:45 PST 2020; root:xnu-4903.278.28~1/RELEASE_X86_64 x86_64
+Darwin LAMU02ZL33ZLVDQ.uhc.com. 18.7.0 Darwin Kernel Version 18.7.0: Mon Apr 27 20:09:39 PDT 2020; root:xnu-4903.278.35~1/RELEASE_X86_64 x86_64
 ##########
 type uname
 uname is hashed (/usr/bin/uname)

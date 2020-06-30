@@ -37,11 +37,6 @@
 '/Users/rwill253/project/Rob/workstation/gen/generate/app.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/gen/generate/__main__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/gen/generate/test_app.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/gen/generate/utility': listing directory
-'/Users/rwill253/project/Rob/workstation/gen/generate/utility/my_terminal.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/gen/generate/utility/__init__.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/gen/generate/utility/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/gen/generate/utility/my_logging.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/third_party': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd': listing directory
@@ -119,6 +114,15 @@
 '/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-overview.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/cert/__init__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/cert/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/task': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/queue.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/delete_file.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/test_task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/test_queue.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/task_manager.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/src_gen': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/test_structure.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/renderer.py': Clean bill of health.
@@ -200,6 +204,8 @@
 '/Users/rwill253/project/Rob/workstation/lib/mine/build/helper/Python/my_system.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility': listing directory
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/time.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/my_terminal.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/config.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/my_time.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/test_time.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/filesystem.py': Clean bill of health.
@@ -208,9 +214,11 @@
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/test_filesystem.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/test_text.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/text.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/test_config.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/environment.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/my_assert.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/singleton_application.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/my_logging.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/math.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/processing.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/lib/mine/utility/my_system.py': Clean bill of health.
@@ -226,14 +234,9 @@
 '/Users/rwill253/project/Rob/workstation/src/MODULE/__pycache__': listing directory
 '/Users/rwill253/project/Rob/workstation/src/MODULE/task': listing directory
 '/Users/rwill253/project/Rob/workstation/src/MODULE/task/bootstrap.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/src/MODULE/task/queue.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/src/MODULE/task/delete_file.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/src/MODULE/task/task.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/task/test_task.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/task/__init__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/task/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/src/MODULE/task/test_queue.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/src/MODULE/task/task_manager.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/task/scan_directory.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/task/mapping.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/task/test_mapping.py': Clean bill of health.
@@ -241,8 +244,3 @@
 '/Users/rwill253/project/Rob/workstation/src/MODULE/app.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/__main__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/MODULE/test_app.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/src/MODULE/utility': listing directory
-'/Users/rwill253/project/Rob/workstation/src/MODULE/utility/my_terminal.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/src/MODULE/utility/__init__.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/src/MODULE/utility/__pycache__': listing directory
-'/Users/rwill253/project/Rob/workstation/src/MODULE/utility/my_logging.py': Clean bill of health.
