@@ -1,6 +1,6 @@
 ##########
 uname -a
-Linux jabbah 5.3.0-61-generic #55~18.04.1-Ubuntu SMP Mon Jun 22 16:40:20 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+Linux jabbah 5.3.0-62-generic #56~18.04.1-Ubuntu SMP Wed Jun 24 16:17:03 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
 ##########
 type uname
 uname is hashed (/bin/uname)

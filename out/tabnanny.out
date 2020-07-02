@@ -232,8 +232,6 @@
 '/home/rob/project/workstation/src/MODULE/app.py': Clean bill of health.
 '/home/rob/project/workstation/src/MODULE/test_config.py': Clean bill of health.
 '/home/rob/project/workstation/src/MODULE/__main__.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/utility': listing directory
-'/home/rob/project/workstation/src/MODULE/utility/__pycache__': listing directory
 '/home/rob/project/workstation/src/MODULE/__pycache__': listing directory
 '/home/rob/project/workstation/src/MODULE/test_app.py': Clean bill of health.
 '/home/rob/project/workstation/src/.pytest_cache': listing directory
