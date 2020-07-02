@@ -98,7 +98,7 @@ class Config:
 
     @property
     def should_abort_upon_task_failure(self):
-        return True
+        return False
  
     @property
     def should_fake_it(self):

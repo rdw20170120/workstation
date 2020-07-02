@@ -11,6 +11,7 @@ def _generate_BriteOnyx(directory):
     gen(_script(), directory, sub, 'avro-print')
     gen(_script(), directory, sub, 'extensions')
     gen(_script(), directory, sub, 'list')
+    gen(_script(), directory, sub, 'parquet-print')
 
 def _generate_gen(directory):
     sub = Path('gen', 'generate')

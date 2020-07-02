@@ -20,8 +20,7 @@ class TaskManager(object):
         except NotImplementedError as e:
             log.warn(str(e))
         except RuntimeError as e:
-            if self._config.should_abort_upon_task_failure: raise
-            else: log.error(str(e))
+            log.error(str(e))
         except Exception as e:
             if self._config.should_abort_upon_task_failure: raise
             else: log.exception(e)

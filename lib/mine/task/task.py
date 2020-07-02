@@ -27,7 +27,7 @@ class BaseTask(object):
         return self._tm._config
 
     def execute(self):
-        log.debug("Executing: %s", self)
+        log.info("Executing: %s", self)
 
 
 class FileSystemTask(BaseTask):
@@ -39,50 +39,61 @@ class FileSystemTask(BaseTask):
 
     def _abort_for_dry_run(self):
         if self.config.is_dry_run:
-            raise RuntimeError("Skipping for dry run")
+            raise RuntimeError("Aborting for dry run")
 
     def _abort_for_lack_of_disk_space(self, needed_space_in_bytes):
         du = disk_usage(self.config.filesystem_to_watch)
         if du.free < needed_space_in_bytes:
-            raise RuntimeError("Skipping for lack of disk space")
+            raise RuntimeError("Aborting for lack of disk space")
 
     def _abort_for_quick_run(self, disk_space_estimate):
         if disk_space_estimate > self.config.quick_run_limit:
-            raise RuntimeError("Skipping for quick run")
+            raise RuntimeError("Aborting for quick run")
 
-    def _abort_if_source_is_missing(self):
-        if not len(self._sources):
-            raise RuntimeError("No sources registered")
-        for source in self._sources:
-            if not source.exists():
+    def _abort_if_any_are_missing(self, name, paths):
+        if not len(paths):
+            log.warn("No %s registered", name)
+        for path in paths:
+            if not path.exists():
                 raise RuntimeError(
-                    "Skipping since source '{}' is missing".format(source)
+                    "Aborting since {} '{}' is missing".format(name, path)
                     )
 
+    def _abort_if_source_is_missing(self):
+        self._abort_if_any_are_missing('source', self._sources)
+
+    def _abort_if_target_is_missing(self):
+        self._abort_if_any_are_missing('target', self._targets)
+
     def _delete_targets_upon_exception(self):
+        log.debug("Deleting targets upon exception")
         if self.config.should_leave_output_upon_task_failure: return
         for target in self._targets:
             if target.exists():
                 if target.is_dir():
                     log.warn(
-                        "Encountered exception, deleting target directory '%s'",
+                        "Encountered exception"
+                        + ", deleting target directory '%s'",
                         target
                         )
                     delete_directory_tree(target, force=True)
                 elif target.is_file():
                     log.warn(
-                        "Encountered exception, deleting target file '%s'",
+                        "Encountered exception"
+                        + ", deleting target file '%s'",
                         target
                         )
                     delete_file(target)
                 else:
                     log.error(
-                        "Encountered exception, cannot delete unrecognized target '%s'",
+                        "Encountered exception"
+                        + ", cannot delete unrecognized target '%s'",
                         target
                         )
             else:
                 log.debug(
-                    "Encountered exception, no need to delete absent target '%s'",
+                    "Encountered exception"
+                    + ", no need to delete absent target '%s'",
                     target
                     )
 
@@ -123,17 +134,31 @@ class FileSystemTask(BaseTask):
             return False
         return True
 
+    def _touch_targets(self):
+        for target in self._targets:
+            touch(target)
+
     def execute(self):
         """Should NOT be overridden in subclasses."""
         super().execute()
         self._abort_for_dry_run()
-        self._abort_for_lack_of_disk_space(self.config.reserved_disk_space_in_bytes)
+        self._abort_for_lack_of_disk_space(
+            self.config.reserved_disk_space_in_bytes
+            )
         self._register_sources()
         self._abort_if_source_is_missing()
+
         try:
-            self._execute()
-            if not len(self._targets): log.warn("No targets registered")
-        except Exception:
+            if self.config.should_fake_it:
+                log.warn("Executing task with FAKE file processing")
+                self._touch_targets()
+            else:
+                self._execute()
+            self._abort_if_target_is_missing()
+        except RuntimeError as e:
+            self._delete_targets_upon_exception()
+            raise
+        except BaseException as e:
             self._delete_targets_upon_exception()
             raise
 

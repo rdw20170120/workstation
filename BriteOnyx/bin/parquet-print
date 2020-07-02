@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+"""Print contents of a file in Apache Parquet format.
+
+Intended to be executed directly by the user.
+"""
+from argparse import ArgumentParser
+from argparse import FileType
+from sys      import stdout
+
+import pyarrow.parquet as pq
+
+
+def main():
+    parser = ArgumentParser(
+        description='Print a file stored in Apache Parquet format.'
+        )
+    parser.add_argument('infile', type=FileType('rb'))
+    parser.add_argument('outfile',
+            nargs='?', type=FileType('wt'), default=stdout)
+    args = parser.parse_args()
+
+    with args.outfile as writer:
+        parquet = pq.ParquetFile(args.infile)
+        writer.write('Parquet metadata:\n')
+        writer.write(str(parquet.metadata))
+        writer.write('\n')
+        writer.write('Parquet schema:\n')
+        writer.write(str(parquet.schema))
+        writer.write('\n')
+        x = pq.read_pandas(args.infile).to_pandas()
+        writer.write('Pandas DataFrame datatypes:\n')
+        writer.write(str(x.dtypes))
+        writer.write('\n')
+        writer.write('Pandas DataFrame Head:\n')
+        writer.write(str(x.head))
+        writer.write('\n')
+
+if __name__ == "__main__":
+    main()
+
+'''DisabledContent
+'''
+

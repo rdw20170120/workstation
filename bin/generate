@@ -43,7 +43,7 @@ $cmd
 cmd='meld --newtab'
 cmd+=" '$DirTgt' '$BO_Project'"
 cmd+=' >/dev/null 2>&1 &'
-echo "INFO: Use the following command to manually merge source updates:"
+echo "INFO: Use the following command to manually merge the generated source:"
 echo $cmd
 
 ###############################################################################

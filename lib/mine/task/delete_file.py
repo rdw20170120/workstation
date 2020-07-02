@@ -22,7 +22,7 @@ class DeleteFile(FileSystemTask):
             delete_file(self._file)
 
     def _register_sources(self):
-        self._the_file = self._register_source(self._the_file)
+        self._file = self._register_source(self._file)
 
 '''DisabledContent
 '''

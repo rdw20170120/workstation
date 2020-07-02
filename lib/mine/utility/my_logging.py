@@ -69,7 +69,11 @@ def _level_colors():
     result = logzero.LogFormatter.DEFAULT_COLORS
     if using_gnome():
         log.debug("Using Gnome terminal")
-        result[logging.CRITICAL] = Fore.LIGHTWHITE_EX
+        result[logging.DEBUG] = Fore.GREEN
+        result[logging.INFO] = Fore.CYAN
+        result[logging.WARNING] = Fore.YELLOW
+        result[logging.ERROR] = Fore.RED
+        result[logging.CRITICAL] = Fore.WHITE
         return result
     elif using_iterm2():
         log.debug("Using iTerm2 terminal")
@@ -81,6 +85,13 @@ def _level_colors():
         return result
     else:
         log.debug("Using unrecognized terminal")
+        # These are the logzero defaults
+        result[logging.DEBUG] = Fore.CYAN
+        result[logging.INFO] = Fore.GREEN
+        result[logging.WARNING] = Fore.YELLOW
+        result[logging.ERROR] = Fore.RED
+        # Except logzero has no default for CRITICAL
+        result[logging.CRITICAL] = Fore.WHITE
         return result
 
 def _log_samples():
