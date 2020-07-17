@@ -1,13 +1,18 @@
 #!/usr/bin/env false
-"""
+"""TODO: Write
+
 TODO: REVIEW: this module against its siblings.
 """
+# Internal packages  (absolute references, distributed with Python)
 from os      import remove
 from os.path import getsize
 from pathlib import Path
 from pathlib import PurePath
 from shutil  import copy2
 from shutil  import rmtree
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
+# Co-located modules (relative references, NOT packaged, in project)
 
 
 def clone_file(source_file, target_file):
@@ -29,13 +34,14 @@ def concatenate_text_file(source_file, target_file, encoding=None):
             for line in reader:
                 writer.write(line)
 
-def concatenate_text_files(target_file, *source_file, encoding=None):
+def concatenate_text_files(target_file, source_files, encoding=None):
     if encoding is None: encoding = 'utf_8'
     assert isinstance(target_file, Path)
+    assert isinstance(source_files, list)
     with target_file.open(
         encoding=encoding, mode='wt', newline=None
         ) as writer:
-        for s in source_file:
+        for s in source_files:
             assert isinstance(s, Path)
             with s.open(
                 encoding=encoding, mode='rt', newline=None
@@ -113,7 +119,7 @@ def read_text_from_file(file_path, encoding=None):
         file_path, encoding=encoding, mode='rt', newline=None
         ) as reader:
         result = reader.read()
-        assert isinstance(result, bytes)
+        assert isinstance(result, str)
     return result
 
 def write_binary_into_file(file_path, binary_content):

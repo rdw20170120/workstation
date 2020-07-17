@@ -1,8 +1,12 @@
 #!/usr/bin/env false
-"""My module for managing assertions.
+"""My module for assertions.
 
 TODO: REVIEW: whether this module still has value in Python3
 """
+# Internal packages  (absolute references, distributed with Python)
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
+# Co-located modules (relative references, NOT packaged, in project)
 
 def has_type(actual_value, expected_type):
     """Return whether actual_value has expected_type"""

@@ -1,11 +1,14 @@
 #!/usr/bin/env false
+"""TODO: Write
+
+# 2: Serializer
 """
-"""
+# Internal packages  (absolute references, distributed with Python)
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
+# Co-located modules (relative references, NOT packaged, in project)
 from .section_1 import default_encoding
 from .section_4 import visitor_map as default_visitor_map
-
-################################################################################
-# 2: Serializer
 
 
 class Serializer(object):

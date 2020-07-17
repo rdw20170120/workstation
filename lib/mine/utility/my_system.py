@@ -4,13 +4,16 @@
 TODO: REVIEW: this module against its siblings.
 TODO: This module is being broken up into several modules.
 """
+# Internal packages  (absolute references, distributed with Python)
 from os     import getcwd
 from os     import listdir
 from os     import makedirs
 from os     import path
 from re     import compile as re_compile
 from shutil import rmtree
-
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
+# Co-located modules (relative references, NOT packaged, in project)
 from .my_assert import has_type
 from .my_assert import has_type_message
 from .my_time   import timestamp_as_datetime_utc

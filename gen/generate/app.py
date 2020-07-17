@@ -3,17 +3,17 @@
 
 Intended to be executed as a Python module:  python3 -m MODULE
 """
+# Internal packages  (absolute references, distributed with Python)
+from   argparse import ArgumentParser
+from   pathlib  import Path
 import sys
-
-from argparse import ArgumentParser
-from pathlib  import Path
-
+# External packages  (absolute references, NOT distributed with Python)
 from logzero import logger as log
-
+# Library modules    (absolute references, NOT packaged, in project)
 from utility.my_logging            import configure as configure_logging
 from utility.my_system             import recreate_directory
 from utility.singleton_application import SingletonApplication
-
+# Co-located modules (relative references, NOT packaged, in project)
 from .config                              import Config
 from .script.bash.project_activate_script import generate as generate_project_activate_script
 from .document.markdown.all               import generate as generate_markdown_documents

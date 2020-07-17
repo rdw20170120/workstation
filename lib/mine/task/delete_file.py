@@ -1,9 +1,12 @@
 #!/usr/bin/env false
 """Delete file."""
+# Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
-
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
 from task.task          import FileSystemTask
 from utility.filesystem import delete_file
+# Co-located modules (relative references, NOT packaged, in project)
 
 
 class DeleteFile(FileSystemTask):

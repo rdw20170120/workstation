@@ -1,7 +1,11 @@
 #!/usr/bin/env false
 """Generate all BASH scripts."""
+# Internal packages  (absolute references, distributed with Python)
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
 from src_gen.script.bash.source    import generate as gen
 from src_gen.script.bash.structure import *
+# Co-located modules (relative references, NOT packaged, in project)
 
 
 def _sourced():

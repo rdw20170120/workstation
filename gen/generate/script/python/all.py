@@ -1,9 +1,12 @@
 #!/usr/bin/env false
 """Generate all Python scripts."""
+# Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
-
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
 from src_gen.script.python.source    import generate as gen
 from src_gen.script.python.structure import *
+# Co-located modules (relative references, NOT packaged, in project)
 
 
 def _generate_BriteOnyx(directory):
@@ -95,10 +98,6 @@ def _generate_lib_src_gen(directory):
     gen(_library(), directory, sub, 'section_2.py')
     gen(_library(), directory, sub, 'section_3.py')
     gen(_library(), directory, sub, 'section_4.py')
-    gen(_library(), directory, sub, 'test_section_1.py')
-    gen(_library(), directory, sub, 'test_section_2.py')
-    gen(_library(), directory, sub, 'test_section_3.py')
-    gen(_library(), directory, sub, 'test_section_4.py')
 
 def _generate_lib_task(directory):
     sub = Path('lib', 'mine', 'task')
@@ -125,7 +124,6 @@ def _generate_lib_utility(directory):
     gen(_library(), directory, sub, 'processing.py')
     gen(_library(), directory, sub, 'singleton_application.py')
     gen(_library(), directory, sub, 'test_config.py')
-    gen(_library(), directory, sub, 'test_environment.py')
     gen(_library(), directory, sub, 'test_filesystem.py')
     gen(_library(), directory, sub, 'test_math.py')
     gen(_library(), directory, sub, 'test_text.py')
@@ -166,6 +164,7 @@ def _main():
 def _package():
     return [
         package_module_header(),
+        line(),
     ]
 
 def _script():

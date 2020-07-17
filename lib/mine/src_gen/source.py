@@ -1,12 +1,14 @@
 #!/usr/bin/env false
+"""TODO: Write
 """
-"""
+# Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
-
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
 from throw_out_your_templates.section_3 import VisitorMap
 from throw_out_your_templates.section_4 import visitor_map as parent_visitor_map
 from utility.my_system                  import maybe_create_directory
-
+# Co-located modules (relative references, NOT packaged, in project)
 from .renderer import Renderer
 
 

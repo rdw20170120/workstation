@@ -22,5 +22,6 @@ pip3 install avro-python3==1.9.1
 pip3 install cryptography pem pynacl pyopenssl twisted[tls]
 pip3 install pandas
 pip3 install sh
+pip3 install strictyaml
 DisabledContent
 

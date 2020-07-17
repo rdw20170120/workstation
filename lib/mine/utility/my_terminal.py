@@ -9,7 +9,11 @@ Target effective recognition of my favorite development workstations:
   with 'Solarized' palette
   and 'solarized dark' scheme
 """
-from utility import environment
+# Internal packages  (absolute references, distributed with Python)
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
+# Co-located modules (relative references, NOT packaged, in project)
+from . import environment
 
 
 def using_gnome():

@@ -1,12 +1,16 @@
 #!/usr/bin/env false
-"""
+"""TODO: Write
+
 TODO: REVIEW: how best to integrate logging into a library
 """
+# Internal packages  (absolute references, distributed with Python)
+# External packages  (absolute references, NOT distributed with Python)
 from logzero import logger as log
-
+# Library modules    (absolute references, NOT packaged, in project)
 from throw_out_your_templates.section_1 import default_encoding
 from throw_out_your_templates.section_2 import Serializer
 from throw_out_your_templates.section_4 import visitor_map as default_visitor_map
+# Co-located modules (relative references, NOT packaged, in project)
 
 
 class Renderer(object):

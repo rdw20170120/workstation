@@ -1,11 +1,14 @@
 #!/usr/bin/env false
-"""My module for managing time.
+"""My module for time.
 
 TODO: REVIEW: this module against its siblings.
 TODO: SOMEDAY: Add tests for naive versus aware dates & times
 """
+# Internal packages  (absolute references, distributed with Python)
 from datetime import datetime as dt_datetime
-
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
+# Co-located modules (relative references, NOT packaged, in project)
 from .my_assert import has_type
 from .my_assert import has_type_message
 from .my_assert import unrecognized_message

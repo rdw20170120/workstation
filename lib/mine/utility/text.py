@@ -1,7 +1,11 @@
 #!/usr/bin/env false
+"""TODO: Write
 """
-"""
+# Internal packages  (absolute references, distributed with Python)
 import ast
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
+# Co-located modules (relative references, NOT packaged, in project)
 
 
 def dict_from_string(the_string):

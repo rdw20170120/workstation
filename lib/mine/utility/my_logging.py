@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-"""My module for managing logging.
+"""My module for logging.
 
 Target effective logging on my favorite development workstations:
 * Apple macOS 10.14.6 Mojave running iTerm2 3.3.9
@@ -8,16 +8,17 @@ Target effective logging on my favorite development workstations:
   with 'Solarized' palette
   and 'solarized dark' scheme
 """
+# Internal packages  (absolute references, distributed with Python)
 import logging
-
-import logzero
+# External packages  (absolute references, NOT distributed with Python)
 from   logzero.colors import Fore
-
+import logzero
+# Library modules    (absolute references, NOT packaged, in project)
 from src_gen.source                     import generate
 from src_gen.source                     import my_visitor_map as parent_visitor_map
 from src_gen.structure                  import *
 from throw_out_your_templates.section_3 import VisitorMap
-
+# Co-located modules (relative references, NOT packaged, in project)
 from .my_terminal import using_gnome
 from .my_terminal import using_iterm2
 

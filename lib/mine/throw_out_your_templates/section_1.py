@@ -1,9 +1,13 @@
 #!/usr/bin/env false
+"""TODO: Write
+
+1: str/unicode wrappers used to prevent double-escaping. This is the
+same concept as django.utils.safestring and webhelpers.html.literal
 """
-"""
-################################################################################
-# 1: str/unicode wrappers used to prevent double-escaping. This is the
-# same concept as django.utils.safestring and webhelpers.html.literal
+# Internal packages  (absolute references, distributed with Python)
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
+# Co-located modules (relative references, NOT packaged, in project)
 
 default_encoding = 'utf-8'
 

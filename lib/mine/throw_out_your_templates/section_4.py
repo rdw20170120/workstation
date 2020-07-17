@@ -1,18 +1,20 @@
 #!/usr/bin/env false
+"""TODO: Write
+
+# 4:  Default serialization visitors for standard Python types
 """
-"""
+# Internal packages  (absolute references, distributed with Python)
 from decimal import Decimal
 from types   import BuiltinMethodType
 from types   import FunctionType
 from types   import GeneratorType
 from types   import MethodType
-
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
+# Co-located modules (relative references, NOT packaged, in project)
 from .section_3 import DEFAULT
 from .section_3 import VisitorMap
 
-
-################################################################################
-# 4:  Default serialization visitors for standard Python types
 
 # visitor signature = "f(obj_to_be_walked, walker)", return value ignored
 # o = obj_to_be_walked, w = walker (aka serializer)

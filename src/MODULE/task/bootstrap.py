@@ -1,7 +1,10 @@
 #!/usr/bin/env false
 """Bootstrap by creating first tasks."""
+# Internal packages  (absolute references, distributed with Python)
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
 from task.task import PlainTask
-
+# Co-located modules (relative references, NOT packaged, in project)
 from .scan_directory import ScanDirectory
 
 

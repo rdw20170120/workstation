@@ -84,7 +84,11 @@ universal time.
 
 TODO: Refine ISO8601 output formats for compactness
 """
+# Internal packages  (absolute references, distributed with Python)
 import datetime as dt
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
+# Co-located modules (relative references, NOT packaged, in project)
 
 
 class ProlepticGregorianOrdinal():

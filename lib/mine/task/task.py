@@ -1,13 +1,14 @@
 #!/usr/bin/env false
 """Tasks managed by a TaskManager."""
+# Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
 from shutil  import disk_usage
-
+# External packages  (absolute references, NOT distributed with Python)
 from logzero import logger as log
-
+# Library modules    (absolute references, NOT packaged, in project)
 from utility.filesystem import delete_directory_tree
 from utility.filesystem import delete_file
-
+# Co-located modules (relative references, NOT packaged, in project)
 from .task_manager import TaskManager
 
 
@@ -20,11 +21,11 @@ class BaseTask(object):
         self._tm._add(self)
 
     def _not_implemented(self):
-        raise NotImplementedError("This task is not yet implemented")
+        raise NotImplementedError("{} is not yet implemented".format(self))
 
     @property
     def config(self):
-        return self._tm._config
+        return self._tm.config
 
     def execute(self):
         log.info("Executing: %s", self)
@@ -39,25 +40,26 @@ class FileSystemTask(BaseTask):
 
     def _abort_for_dry_run(self):
         if self.config.is_dry_run:
-            raise RuntimeError("Aborting for dry run")
+            raise RuntimeError("{} is aborting for dry run".format(self))
 
     def _abort_for_lack_of_disk_space(self, needed_space_in_bytes):
         du = disk_usage(self.config.filesystem_to_watch)
         if du.free < needed_space_in_bytes:
-            raise RuntimeError("Aborting for lack of disk space")
+            raise RuntimeError("{} is aborting for lack of disk space".format(self))
 
     def _abort_for_quick_run(self, disk_space_estimate):
         if disk_space_estimate > self.config.quick_run_limit:
-            raise RuntimeError("Aborting for quick run")
+            raise RuntimeError("{} is aborting for quick run".format(self))
 
     def _abort_if_any_are_missing(self, name, paths):
         if not len(paths):
-            log.warn("No %s registered", name)
+            log.warn("No %s registered in %s", name, self)
         for path in paths:
             if not path.exists():
                 raise RuntimeError(
-                    "Aborting since {} '{}' is missing".format(name, path)
-                    )
+                    "{} is aborting since {} '{}' is missing".format(
+                    self, name, path
+                    ))
 
     def _abort_if_source_is_missing(self):
         self._abort_if_any_are_missing('source', self._sources)
@@ -66,35 +68,35 @@ class FileSystemTask(BaseTask):
         self._abort_if_any_are_missing('target', self._targets)
 
     def _delete_targets_upon_exception(self):
-        log.debug("Deleting targets upon exception")
         if self.config.should_leave_output_upon_task_failure: return
+        log.debug("%s is deleting targets upon exception", self)
         for target in self._targets:
             if target.exists():
                 if target.is_dir():
                     log.warn(
-                        "Encountered exception"
+                        "%s encountered exception"
                         + ", deleting target directory '%s'",
-                        target
+                        self, target
                         )
                     delete_directory_tree(target, force=True)
                 elif target.is_file():
                     log.warn(
-                        "Encountered exception"
+                        "%s encountered exception"
                         + ", deleting target file '%s'",
-                        target
+                        self, target
                         )
                     delete_file(target)
                 else:
                     log.error(
-                        "Encountered exception"
+                        "%s encountered exception"
                         + ", cannot delete unrecognized target '%s'",
-                        target
+                        self, target
                         )
             else:
                 log.debug(
-                    "Encountered exception"
+                    "%s encountered exception"
                     + ", no need to delete absent target '%s'",
-                    target
+                    self, target
                     )
 
     def _execute(self):
@@ -130,7 +132,9 @@ class FileSystemTask(BaseTask):
     def _should_create_target(self, target):
         self._abort_for_dry_run()
         if target.exists():
-            log.warn("Skipping creation of existing target '%s'", target)
+            log.warn("%s is skipping creation of existing target '%s'",
+                self, target
+                )
             return False
         return True
 
@@ -150,7 +154,7 @@ class FileSystemTask(BaseTask):
 
         try:
             if self.config.should_fake_it:
-                log.warn("Executing task with FAKE file processing")
+                log.warn("Executing %s with FAKE file processing", self)
                 self._touch_targets()
             else:
                 self._execute()

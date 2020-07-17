@@ -3,12 +3,14 @@
 
 Intended to be executed as a Python module:  python3 -m MODULE
 """
+# Internal packages  (absolute references, distributed with Python)
+# External packages  (absolute references, NOT distributed with Python)
 from logzero import logger as log
-
+# Library modules    (absolute references, NOT packaged, in project)
 from task.task_manager             import TaskManager
 from utility.my_logging            import configure as configure_logging
 from utility.singleton_application import SingletonApplication
-
+# Co-located modules (relative references, NOT packaged, in project)
 from .config         import Config
 from .task.bootstrap import Bootstrap
 

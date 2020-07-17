@@ -1,239 +1,241 @@
-'/home/rob/project/workstation/BriteOnyx/bin': listing directory
-'/home/rob/project/workstation/BriteOnyx/bin/lib': listing directory
-'/home/rob/project/workstation/bin': listing directory
-'/home/rob/project/workstation/bin/lib': listing directory
-'/home/rob/project/workstation/gen': listing directory
-'/home/rob/project/workstation/gen/.pytest_cache': listing directory
-'/home/rob/project/workstation/gen/.pytest_cache/v': listing directory
-'/home/rob/project/workstation/gen/.pytest_cache/v/cache': listing directory
-'/home/rob/project/workstation/gen/generate': listing directory
-'/home/rob/project/workstation/gen/generate/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/config.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/script': listing directory
-'/home/rob/project/workstation/gen/generate/script/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/script/python': listing directory
-'/home/rob/project/workstation/gen/generate/script/python/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/script/python/all.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/script/python/__pycache__': listing directory
-'/home/rob/project/workstation/gen/generate/script/bash': listing directory
-'/home/rob/project/workstation/gen/generate/script/bash/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/script/bash/briteonyx': listing directory
-'/home/rob/project/workstation/gen/generate/script/bash/briteonyx/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/script/bash/briteonyx/all.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/script/bash/briteonyx/__pycache__': listing directory
-'/home/rob/project/workstation/gen/generate/script/bash/all.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/script/bash/project_activate_script.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/script/bash/__pycache__': listing directory
-'/home/rob/project/workstation/gen/generate/script/__pycache__': listing directory
-'/home/rob/project/workstation/gen/generate/app.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/document': listing directory
-'/home/rob/project/workstation/gen/generate/document/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/document/markdown': listing directory
-'/home/rob/project/workstation/gen/generate/document/markdown/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/document/markdown/all.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/document/markdown/__pycache__': listing directory
-'/home/rob/project/workstation/gen/generate/document/__pycache__': listing directory
-'/home/rob/project/workstation/gen/generate/test_config.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/__main__.py': Clean bill of health.
-'/home/rob/project/workstation/gen/generate/__pycache__': listing directory
-'/home/rob/project/workstation/gen/generate/test_app.py': Clean bill of health.
-'/home/rob/project/workstation/lib': listing directory
-'/home/rob/project/workstation/lib/third_party': listing directory
-'/home/rob/project/workstation/lib/third_party/tavis_rudd': listing directory
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates': listing directory
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_2.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_4.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_6.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_8.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/all.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_5.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_3.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_1.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/__main__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/__pycache__': listing directory
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_9.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_7.py': Clean bill of health.
-'/home/rob/project/workstation/lib/third_party/tavis_rudd/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/script/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/python': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/script/python/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/python/structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/python/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/script/python/test_structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/python/source.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/briteonyx': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/briteonyx/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/briteonyx/structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/briteonyx/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/briteonyx/test_structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/briteonyx/source.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/test_structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/bash/source.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/script/test_structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/script/source.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/renderer.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/document': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/document/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/document/markdown': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/document/markdown/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/document/markdown/structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/document/markdown/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/document/markdown/test_structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/document/markdown/source.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/document/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/src_gen/test_structure.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/src_gen/source.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build': listing directory
-'/home/rob/project/workstation/lib/mine/build/helper': listing directory
-'/home/rob/project/workstation/lib/mine/build/helper/Python': listing directory
-'/home/rob/project/workstation/lib/mine/build/helper/Python/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/helper/Python/my_assert.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/helper/Python/my_system.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/helper/Python/my_time.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/helper/Python/my_logging.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate': listing directory
-'/home/rob/project/workstation/lib/mine/build/generate/helper': listing directory
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_gradle_activate.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_briteonyx.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_briteonyx_environment.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/all_generate.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_user_environment.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_project_maybe_activate.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/renderer.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_project_activate.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_bash.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/structure_briteonyx.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_briteonyx_declare.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_python_activate.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_linux_activate.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/structure_bash.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_project_environment.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/build/generate/helper/script_briteonyx_bootstrap.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates': listing directory
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates/test_section_3.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates/section_2.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates/section_4.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates/test_section_4.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates/test_section_1.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates/test_section_2.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates/section_3.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates/section_1.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/throw_out_your_templates/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/astech': listing directory
-'/home/rob/project/workstation/lib/mine/astech/bin': listing directory
-'/home/rob/project/workstation/lib/mine/astech/bin/files.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/task': listing directory
-'/home/rob/project/workstation/lib/mine/task/task.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/task/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/task/delete_file.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/task/queue.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/task/test_task.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/task/task_manager.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/task/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/task/test_queue.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/sample_python': listing directory
-'/home/rob/project/workstation/lib/mine/sample_python/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/sample_python/src': listing directory
-'/home/rob/project/workstation/lib/mine/sample_python/src/example': listing directory
-'/home/rob/project/workstation/lib/mine/sample_python/src/example/test': listing directory
-'/home/rob/project/workstation/lib/mine/sample_python/src/example/test/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/sample_python/src/example/test/dummy_test.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/sample_python/src/example/test/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/sample_python/setup.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert': listing directory
-'/home/rob/project/workstation/lib/mine/cert/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin': listing directory
-'/home/rob/project/workstation/lib/mine/cert/bin/helper': listing directory
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python': listing directory
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/task.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/my_instruction.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/write-sudo.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/write-do_then_undo.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/write-session.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/write-ssh.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/my_unknown.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/my_couchbase.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/webpage.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/write-BASH.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/my_psutil.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/write-machine_naming.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/my_exception.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/tarball.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/write-cut_and_paste.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/write-focus.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/write-overview.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/my_system.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/my_configuration.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/write-UI.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/my_time.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/cert/bin/helper/Python/my_logging.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/.pytest_cache': listing directory
-'/home/rob/project/workstation/lib/mine/.pytest_cache/v': listing directory
-'/home/rob/project/workstation/lib/mine/.pytest_cache/v/cache': listing directory
-'/home/rob/project/workstation/lib/mine/utility': listing directory
-'/home/rob/project/workstation/lib/mine/utility/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/test_text.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/config.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/text.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/my_terminal.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/singleton_application.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/my_assert.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/test_time.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/test_config.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/environment.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/math.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/test_filesystem.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/test_math.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/processing.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/my_system.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/test_environment.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/filesystem.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/utility/my_time.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/my_logging.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/utility/time.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/aws': listing directory
-'/home/rob/project/workstation/lib/mine/aws/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/aws/test_service.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/aws/s3.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/aws/test_s3.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/aws/__pycache__': listing directory
-'/home/rob/project/workstation/lib/mine/aws/ec2.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/aws/test_ec2.py': Clean bill of health.
-'/home/rob/project/workstation/lib/mine/aws/service.py': Clean bill of health.
-'/home/rob/project/workstation/src': listing directory
-'/home/rob/project/workstation/src/MODULE': listing directory
-'/home/rob/project/workstation/src/MODULE/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/config.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/task': listing directory
-'/home/rob/project/workstation/src/MODULE/task/__init__.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/task/test_mapping.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/task/bootstrap.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/task/scan_directory.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/task/mapping.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/task/test_task.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/task/__pycache__': listing directory
-'/home/rob/project/workstation/src/MODULE/app.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/test_config.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/__main__.py': Clean bill of health.
-'/home/rob/project/workstation/src/MODULE/__pycache__': listing directory
-'/home/rob/project/workstation/src/MODULE/test_app.py': Clean bill of health.
-'/home/rob/project/workstation/src/.pytest_cache': listing directory
-'/home/rob/project/workstation/src/.pytest_cache/v': listing directory
-'/home/rob/project/workstation/src/.pytest_cache/v/cache': listing directory
+'/Users/rwill253/project/Rob/workstation/BriteOnyx/bin': listing directory
+'/Users/rwill253/project/Rob/workstation/BriteOnyx/bin/lib': listing directory
+'/Users/rwill253/project/Rob/workstation/bin': listing directory
+'/Users/rwill253/project/Rob/workstation/bin/lib': listing directory
+'/Users/rwill253/project/Rob/workstation/gen': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/.pytest_cache': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/.pytest_cache/v': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/.pytest_cache/v/cache': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/config.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/document': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/document/markdown': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/document/markdown/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/document/markdown/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/document/markdown/all.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/document/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/document/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/script': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/python': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/python/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/python/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/python/all.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/bash': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/bash/briteonyx': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/bash/briteonyx/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/bash/briteonyx/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/bash/briteonyx/all.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/bash/project_activate_script.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/bash/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/bash/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/gen/generate/script/bash/all.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/test_config.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/app.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/__main__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/gen/generate/test_app.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/third_party': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_5.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_1.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_4.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/all.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_9.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_8.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_3.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_7.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_6.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/__main__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/throw_out_your_templates/section_2.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/third_party/tavis_rudd/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/throw_out_your_templates': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/throw_out_your_templates/section_1.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/throw_out_your_templates/section_4.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/throw_out_your_templates/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/throw_out_your_templates/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/throw_out_your_templates/section_3.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/throw_out_your_templates/section_2.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/sample_python': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/setup.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/src': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/src/example': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/src/example/test': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/src/example/test/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/src/example/test/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/sample_python/src/example/test/dummy_test.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/.pytest_cache': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/.pytest_cache/v': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/.pytest_cache/v/cache': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/astech': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/astech/bin': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/astech/bin/files.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/astech/bin/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/my_unknown.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/my_time.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/webpage.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/my_psutil.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-ssh.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-do_then_undo.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/my_exception.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-sudo.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-BASH.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/my_couchbase.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-machine_naming.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-session.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-cut_and_paste.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-UI.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/my_configuration.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/my_instruction.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/my_logging.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/tarball.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-focus.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/my_system.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/bin/helper/Python/write-overview.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/cert/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/task': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/queue.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/delete_file.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/test_task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/test_queue.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/task/task_manager.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/test_structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/renderer.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/document': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/document/markdown': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/document/markdown/test_structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/document/markdown/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/document/markdown/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/document/markdown/structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/document/markdown/source.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/document/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/document/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/test_structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/python': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/python/test_structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/python/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/python/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/python/structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/python/source.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/briteonyx': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/briteonyx/test_structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/briteonyx/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/briteonyx/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/briteonyx/structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/briteonyx/source.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/test_structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/bash/source.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/script/source.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/structure.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/src_gen/source.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/aws': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/aws/service.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/aws/test_service.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/aws/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/aws/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/aws/ec2.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/aws/s3.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/aws/test_ec2.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/aws/test_s3.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_user_environment.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_briteonyx_bootstrap.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_project_activate.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/all_generate.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_bash.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/renderer.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/structure_bash.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_briteonyx_declare.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/structure_briteonyx.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_linux_activate.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_python_activate.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_project_maybe_activate.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_gradle_activate.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_briteonyx.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_briteonyx_environment.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/generate/helper/script_project_environment.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/helper': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/helper/Python': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/helper/Python/my_time.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/helper/Python/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/helper/Python/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/helper/Python/my_assert.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/helper/Python/my_logging.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/build/helper/Python/my_system.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/time.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/my_terminal.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/config.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/my_time.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/test_time.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/filesystem.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/test_filesystem.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/test_text.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/text.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/test_config.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/environment.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/my_assert.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/singleton_application.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/my_logging.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/math.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/processing.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/my_system.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/lib/mine/utility/test_math.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src': listing directory
+'/Users/rwill253/project/Rob/workstation/src/.pytest_cache': listing directory
+'/Users/rwill253/project/Rob/workstation/src/.pytest_cache/v': listing directory
+'/Users/rwill253/project/Rob/workstation/src/.pytest_cache/v/cache': listing directory
+'/Users/rwill253/project/Rob/workstation/src/MODULE': listing directory
+'/Users/rwill253/project/Rob/workstation/src/MODULE/config.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task': listing directory
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/bootstrap.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/test_task.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/__init__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/__pycache__': listing directory
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/scan_directory.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/mapping.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/task/test_mapping.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/test_config.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/app.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/__main__.py': Clean bill of health.
+'/Users/rwill253/project/Rob/workstation/src/MODULE/test_app.py': Clean bill of health.
