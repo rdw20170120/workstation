@@ -5,10 +5,10 @@ Intended to be executed as a Python module:  python3 -m MODULE
 """
 # Internal packages  (absolute references, distributed with Python)
 from   argparse import ArgumentParser
+from   logging  import getLogger
 from   pathlib  import Path
 import sys
 # External packages  (absolute references, NOT distributed with Python)
-from logzero import logger as log
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.my_logging            import configure as configure_logging
 from utility.my_system             import recreate_directory
@@ -20,6 +20,9 @@ from .document.markdown.all               import generate as generate_markdown_d
 from .script.bash.all                     import generate as generate_bash_scripts
 from .script.bash.briteonyx.all           import generate as generate_briteonyx_scripts
 from .script.python.all                   import generate as generate_python_scripts
+
+
+log = getLogger(__name__)
 
 
 class ContentGeneratorApp(SingletonApplication):

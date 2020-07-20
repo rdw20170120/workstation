@@ -9,6 +9,7 @@ same concept as django.utils.safestring and webhelpers.html.literal
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
 
+
 default_encoding = 'utf-8'
 
 '''DisabledContent

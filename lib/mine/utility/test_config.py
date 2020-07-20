@@ -10,6 +10,11 @@ from .config import Config
 
 c = Config()
 
+def test_application_name():
+    v = c.application_name
+    assert isinstance(v, str)
+    assert v == 'PleaseOverrideMe'
+
 def test_fake_file_extension():
     v = c.fake_file_extension
     assert v is not None
@@ -35,7 +40,7 @@ def test_log_directory():
     v = c.log_directory
     assert v is not None
     assert v.is_absolute()
-    assert v.is_dir()
+    if v.exists(): assert v.is_dir()
 
 def test_log_file():
     v = c.log_file

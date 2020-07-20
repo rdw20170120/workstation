@@ -7,8 +7,11 @@ Target effective logging on my favorite development workstations:
 * Linux Mint 19.3 Tricia Cinnamon running default Gnome Terminal
   with 'Solarized' palette
   and 'solarized dark' scheme
+
+TODO: Add visitors for other `logging` handlers
 """
 # Internal packages  (absolute references, distributed with Python)
+from   logging import getLogger
 import logging
 # External packages  (absolute references, NOT distributed with Python)
 from   logzero.colors import Fore
@@ -22,8 +25,11 @@ from throw_out_your_templates.section_3 import VisitorMap
 from .my_terminal import using_gnome
 from .my_terminal import using_iterm2
 
+_file_handler = None
+_root_logger = None
+_stderr_handler = None
 
-log = logzero.logger
+log = getLogger(__name__)
 my_visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
 def _ansi_color(name, index, codes):
@@ -57,35 +63,31 @@ def _ansi_colors():
     ]
 
 def _dump():
-    """Dump current logging (logzero) configuration."""
+    """Dump current `log` configuration."""
     content = [
         _ansi_colors(),
         nvp('my_terminal.using_gnome', using_gnome()), eol(),
         nvp('my_terminal.using_iterm2', using_iterm2()), eol(),
         nvp('logzero.logger', logzero.logger), eol(),
+        nvp('logging.getLogger()', logging.getLogger()), eol(),
     ]
     generate(content, visitor_map=my_visitor_map)
 
 def _level_colors():
     result = logzero.LogFormatter.DEFAULT_COLORS
     if using_gnome():
-        log.debug("Using Gnome terminal")
         result[logging.DEBUG] = Fore.GREEN
         result[logging.INFO] = Fore.CYAN
         result[logging.WARNING] = Fore.YELLOW
         result[logging.ERROR] = Fore.RED
         result[logging.CRITICAL] = Fore.WHITE
-        return result
     elif using_iterm2():
-        log.debug("Using iTerm2 terminal")
         result[logging.DEBUG] = Fore.CYAN
         result[logging.INFO] = Fore.LIGHTGREEN_EX
         result[logging.WARNING] = Fore.LIGHTYELLOW_EX
         result[logging.ERROR] = Fore.LIGHTRED_EX
         result[logging.CRITICAL] = Fore.LIGHTWHITE_EX
-        return result
     else:
-        log.debug("Using unrecognized terminal")
         # These are the logzero defaults
         result[logging.DEBUG] = Fore.CYAN
         result[logging.INFO] = Fore.GREEN
@@ -93,7 +95,7 @@ def _level_colors():
         result[logging.ERROR] = Fore.RED
         # Except logzero has no default for CRITICAL
         result[logging.CRITICAL] = Fore.WHITE
-        return result
+    return result
 
 def _log_samples():
     """Log samples of output at all severity levels."""
@@ -151,18 +153,47 @@ def _visit_streamhandler(element, walker):
 #   walker.walk(repr(dir(element)))
     walker.emit(')')
 
+def apply_verbose(verbose):
+    _file_handler.setLevel(logging.DEBUG)
+    if not verbose:
+        _root_logger.setLevel(logging.WARNING)
+        _stderr_handler.setLevel(logging.WARNING)
+    elif verbose == 1:
+        _root_logger.setLevel(logging.INFO)
+        _stderr_handler.setLevel(logging.INFO)
+    else:
+        _root_logger.setLevel(logging.DEBUG)
+        _stderr_handler.setLevel(logging.DEBUG)
+
 def configure(config):
     # TODO: Adjust logging between dev & prd
+    logzero.logger = None
     config.log_directory.mkdir(exist_ok=True)
-    formatter = logzero.LogFormatter(colors=_level_colors())
-    global log
-    log = logzero.logger = logzero.setup_logger(
-        level=logging.DEBUG, formatter=formatter,
-        logfile=config.log_file, fileLoglevel=logging.DEBUG,
+
+    global _root_logger
+    _root_logger = logging.getLogger()
+
+    global _file_handler
+    _file_handler = logging.handlers.RotatingFileHandler(
+        config.log_file, encoding='utf_8',
         backupCount=9, maxBytes=1e6
         )
-#   _dump()
-#   _log_samples()
+    _file_handler.setFormatter(
+        logzero.LogFormatter(color=False)
+        )
+    _root_logger.addHandler(_file_handler)
+
+    global _stderr_handler
+    _stderr_handler = logging.StreamHandler()
+    _stderr_handler.setFormatter(
+        logzero.LogFormatter(colors=_level_colors())
+        )
+    _root_logger.addHandler(_stderr_handler)
+    apply_verbose(0)
+
+def report_configuration():
+    _dump()
+    _log_samples()
 
 
 '''DisabledContent

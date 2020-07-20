@@ -7,14 +7,10 @@ from pathlib import Path
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
 from .delete_file  import DeleteFile
-from .task         import BaseTask
 from .task         import FileSystemTask
 from .task         import PlainTask
 from .task_manager import TaskManager
 
-
-def test_base_task():
-    assert BaseTask(TaskManager(None)) is not None
 
 def test_delete_file():
     assert DeleteFile(TaskManager(None), Path()) is not None

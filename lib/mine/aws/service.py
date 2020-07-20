@@ -2,11 +2,14 @@
 """TODO: Write
 """
 # Internal packages  (absolute references, distributed with Python)
+from logging import getLogger
 # External packages  (absolute references, NOT distributed with Python)
+from boto3 import Session
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
-from boto3   import Session
-from logzero import logger as log
+
+
+log = getLogger(__name__)
 
 
 class AwsService:

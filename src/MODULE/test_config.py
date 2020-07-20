@@ -10,6 +10,11 @@ from .config import Config
 
 c = Config()
 
+def test_application_name():
+    v = c.application_name
+    assert isinstance(v, str)
+    assert v != 'PleaseOverrideMe'
+
 '''DisabledContent
 '''
 

@@ -11,6 +11,10 @@ from . import environment
 
 class Config:
     @property
+    def application_name(self):
+        return 'PleaseOverrideMe'
+
+    @property
     def fake_file_extension(self):
         return '.fake'
 
@@ -59,7 +63,7 @@ class Config:
 
     @property
     def log_file(self):
-        return self.log_directory / 'app.log'
+        return self.log_directory / (self.application_name + '.log')
 
     @property
     def quick_run_limit(self):

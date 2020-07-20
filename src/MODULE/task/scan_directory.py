@@ -1,16 +1,18 @@
 #!/usr/bin/env false
 """Scan directory for files to process."""
+# Internal packages  (absolute references, distributed with Python)
+from logging import getLogger
 from os      import walk
 from pathlib import Path
 from pathlib import PurePath as Filename
-
-from logzero import logger as log
-
+# External packages  (absolute references, NOT distributed with Python)
+# Library modules    (absolute references, NOT packaged, in project)
 from task.task import FileSystemTask
-
+# Co-located modules (relative references, NOT packaged, in project)
 from .mapping import Mapping
 
 
+log = getLogger(__name__)
 m = Mapping()
 
 

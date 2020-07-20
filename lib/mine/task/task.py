@@ -1,10 +1,10 @@
 #!/usr/bin/env false
 """Tasks managed by a TaskManager."""
 # Internal packages  (absolute references, distributed with Python)
+from logging import getLogger
 from pathlib import Path
 from shutil  import disk_usage
 # External packages  (absolute references, NOT distributed with Python)
-from logzero import logger as log
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.filesystem import delete_directory_tree
 from utility.filesystem import delete_file
@@ -12,7 +12,10 @@ from utility.filesystem import delete_file
 from .task_manager import TaskManager
 
 
-class BaseTask(object):
+log = getLogger(__name__)
+
+
+class PlainTask(object):
     """Base class for tasks managed by a TaskManager."""
     def __init__(self, task_manager):
         super().__init__()
@@ -31,7 +34,7 @@ class BaseTask(object):
         log.info("Executing: %s", self)
 
 
-class FileSystemTask(BaseTask):
+class FileSystemTask(PlainTask):
     """Subclass for tasks that manipulate the filesystem."""
     def __init__(self, task_manager):
         super().__init__(task_manager)
@@ -120,17 +123,27 @@ class FileSystemTask(BaseTask):
     def _should_delete_directory(self, directory_path):
         self._abort_for_dry_run()
         if not directory_path.exists(): return False
-        if not directory_path.is_dir(): return False
+        if not directory_path.is_dir():
+            raise RuntimeError(
+                "Aborting delete of unexpected non-directory '{}'".format(
+                path
+                ))
         return True
 
     def _should_delete_file(self, file_path):
         self._abort_for_dry_run()
         if not file_path.exists(): return False
-        if not file_path.is_file(): return False
+        if not file_path.is_file():
+            raise RuntimeError(
+                "Aborting delete of unexpected non-file '{}'".format(
+                path
+                ))
         return True
 
-    def _should_create_target(self, target):
+    def _should_create_target(self, target, force=False):
         self._abort_for_dry_run()
+        if not force: force = self.config.is_forced_run
+        if force: return True
         if target.exists():
             log.warn("%s is skipping creation of existing target '%s'",
                 self, target
@@ -166,14 +179,6 @@ class FileSystemTask(BaseTask):
             self._delete_targets_upon_exception()
             raise
 
-
-class PlainTask(BaseTask):
-    """Subclass for plain tasks that only add more tasks."""
-    def __init__(self, task_manager):
-        super().__init__(task_manager)
-
-    def execute(self):
-        super().execute()
 
 '''DisabledContent
 '''

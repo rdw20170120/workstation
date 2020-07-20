@@ -2,13 +2,16 @@
 """TODO: Write
 """
 # Internal packages  (absolute references, distributed with Python)
+from logging import getLogger
 # External packages  (absolute references, NOT distributed with Python)
 from   botocore.exceptions import ClientError
-from   logzero             import logger as log
 import boto3
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
 from .service import AwsService
+
+
+log = getLogger(__name__)
 
 
 class EC2(AwsService):

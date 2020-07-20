@@ -2,14 +2,17 @@
 """TODO: Write
 """
 # Internal packages  (absolute references, distributed with Python)
+from logging import getLogger
 from pathlib import Path
 # External packages  (absolute references, NOT distributed with Python)
-from logzero import logger as log
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
 from .processing import create_pid_file
 from .processing import delete_pid_file
 from .processing import get_pid
+
+
+log = getLogger(__name__)
 
 
 class SingletonApplication(object):

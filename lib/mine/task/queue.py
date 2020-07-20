@@ -1,11 +1,14 @@
 #!/usr/bin/env false
 """Queue to manage tasks."""
 # Internal packages  (absolute references, distributed with Python)
-from queue import Queue
+from logging import getLogger
+from queue   import Queue
 # External packages  (absolute references, NOT distributed with Python)
-from logzero import logger as log
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
+
+
+log = getLogger(__name__)
 
 
 class TaskQueue:

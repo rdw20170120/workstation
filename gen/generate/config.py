@@ -10,7 +10,10 @@ from utility.config import Config as BaseConfig
 
 
 class Config(BaseConfig):
-    pass
+    @property
+    def application_name(self):
+        return 'generate'
+
 
 '''DisabledContent
 '''

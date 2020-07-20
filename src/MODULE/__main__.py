@@ -7,6 +7,7 @@
 # Co-located modules (relative references, NOT packaged, in project)
 from . import app
 
+
 def main():
     app.run()
 
