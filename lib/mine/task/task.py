@@ -56,7 +56,7 @@ class FileSystemTask(PlainTask):
 
     def _abort_if_any_are_missing(self, name, paths):
         if not len(paths):
-            log.warn("No %s registered in %s", name, self)
+            log.debug("No %s registered in %s", name, self)
         for path in paths:
             if not path.exists():
                 raise RuntimeError(
@@ -72,7 +72,7 @@ class FileSystemTask(PlainTask):
 
     def _delete_targets_upon_exception(self):
         if self.config.should_leave_output_upon_task_failure: return
-        log.debug("%s is deleting targets upon exception", self)
+        log.info("%s is deleting targets upon exception", self)
         for target in self._targets:
             if target.exists():
                 if target.is_dir():
@@ -120,6 +120,22 @@ class FileSystemTask(PlainTask):
         self._targets.append(target)
         return target
 
+    def _should_create_target(self, target, force=False):
+        self._abort_for_dry_run()
+        result = False
+        if not force: force = self.config.is_forced_run
+        if force: result = True
+        if target.exists():
+            if force:
+                # Delete target file, so it can be recreated
+                delete_file(target)
+            else:
+                log.warn("%s is skipping creation of existing target '%s'",
+                    self, target
+                    )
+        else: result = True
+        return result
+
     def _should_delete_directory(self, directory_path):
         self._abort_for_dry_run()
         if not directory_path.exists(): return False
@@ -138,17 +154,6 @@ class FileSystemTask(PlainTask):
                 "Aborting delete of unexpected non-file '{}'".format(
                 path
                 ))
-        return True
-
-    def _should_create_target(self, target, force=False):
-        self._abort_for_dry_run()
-        if not force: force = self.config.is_forced_run
-        if force: return True
-        if target.exists():
-            log.warn("%s is skipping creation of existing target '%s'",
-                self, target
-                )
-            return False
         return True
 
     def _touch_targets(self):

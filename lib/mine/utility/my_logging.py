@@ -191,6 +191,9 @@ def configure(config):
     _root_logger.addHandler(_stderr_handler)
     apply_verbose(0)
 
+def debug(logger, name, value):
+    logger.debug("%s = %s", name, value)
+
 def report_configuration():
     _dump()
     _log_samples()

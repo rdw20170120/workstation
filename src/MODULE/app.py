@@ -4,10 +4,10 @@
 Intended to be executed as a Python module:  python3 -m MODULE
 """
 # Internal packages  (absolute references, distributed with Python)
-# External packages  (absolute references, NOT distributed with Python)
 from   argparse import ArgumentParser
 from   logging  import getLogger
 import sys
+# External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from task.task_manager             import TaskManager
 from utility                       import my_logging
@@ -34,6 +34,11 @@ class MyApp(SingletonApplication):
 
 
 def _parse_args():
+    # TODO: Add dry run
+    # TODO: Add fake run?
+    # TODO: Add forced run
+    # TODO: Add quick run
+    # TODO: Configure for environments (dev, stg, prd, etc.)
     parser = ArgumentParser(
         description="Process Potrero Accuryn monitor data through pipeline",
         prog="python3 -m " + c.application_name
@@ -53,8 +58,10 @@ def _report_configuration():
     print("Reporting configuration...")
     _report_character_encoding_configuration()
     my_logging.report_configuration()
+    # TODO: Report application configuration
 
 def _report_character_encoding_configuration():
+    # TODO: Add to application configuration
     print("Character encoding configuration:")
     print("sys.getdefaultencoding()='%s'", sys.getdefaultencoding())
     print("sys.getfilesystemencoding()='%s'", sys.getfilesystemencoding())
