@@ -28,7 +28,7 @@ cd $BO_Project/src
 # Execute Python
 cmd='python3'
 # cmd+=' -bb'
-cmd+=' -m pipeline'
+cmd+=' -m MODULE'
 echo $cmd $@
 $cmd $@
 
