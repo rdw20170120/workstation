@@ -99,7 +99,9 @@ def touch(file_path):
     if isinstance(file_path, str): file_path = PurePath(file_path)
     if isinstance(file_path, Path) or isinstance(file_path, PurePath):
         if not file_path.exists(): 
-            with open(file_path, mode='wt') as f:
+            with open(file_path,
+                encoding=encoding, mode='wt', newline=None
+                ) as f:
                 f.write('')
         file_path.touch(exist_ok=True)
     else:
@@ -107,7 +109,7 @@ def touch(file_path):
 
 def read_binary_from_file(file_path):
     assert isinstance(file_path, Path)
-    with open(file_path, 'rb') as reader:
+    with open(file_path, mode='rb') as reader:
         result = reader.read()
         assert isinstance(result, bytes)
     return result
@@ -115,8 +117,8 @@ def read_binary_from_file(file_path):
 def read_text_from_file(file_path, encoding=None):
     if encoding is None: encoding = 'utf_8'
     assert isinstance(file_path, Path)
-    with open(
-        file_path, encoding=encoding, mode='rt', newline=None
+    with open(file_path,
+        encoding=encoding, mode='rt', newline=None
         ) as reader:
         result = reader.read()
         assert isinstance(result, str)
@@ -133,8 +135,8 @@ def write_text_into_file(file_path, text_content, encoding=None):
     if encoding is None: encoding = 'utf_8'
     assert isinstance(file_path, Path)
     assert isinstance(text_content, str)
-    with open(
-        file_path, encoding=encoding, mode='wt', newline=None
+    with open(file_path,
+        encoding=encoding, mode='wt', newline=None
         ) as writer:
         count = writer.write(text_content)
         assert count == len(text_content)

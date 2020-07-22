@@ -28,11 +28,9 @@ cd $BO_Project/src
 # Execute Python
 cmd='python3'
 # cmd+=' -bb'
-cmd+=' -m secrets'
-# TODO: Pass through other command-line arguments
-cmd+=' -vvv'
-echo $cmd
-$cmd
+cmd+=' -m pipeline'
+echo $cmd $@
+$cmd $@
 
 ###############################################################################
 : << 'DisabledContent'
