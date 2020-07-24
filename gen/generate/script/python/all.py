@@ -128,8 +128,10 @@ def _generate_lib_utility(directory):
     gen(_library(), directory, sub, 'test_math.py')
     gen(_library(), directory, sub, 'test_text.py')
     gen(_library(), directory, sub, 'test_time.py')
+    gen(_library(), directory, sub, 'test_tracked_path.py')
     gen(_library(), directory, sub, 'text.py')
     gen(_library(), directory, sub, 'time.py')
+    gen(_library(), directory, sub, 'tracked_path.py')
 
 def _generate_src(directory):
     sub = Path('src', 'MODULE')

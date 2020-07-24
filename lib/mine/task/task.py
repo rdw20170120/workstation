@@ -124,16 +124,23 @@ class FileSystemTask(PlainTask):
         self._abort_for_dry_run()
         result = False
         if not force: force = self.config.is_forced_run
-        if force: result = True
-        if target.exists():
-            if force:
-                # Delete target file, so it can be recreated
+        if not target.exists(): return True
+        if force:
+            result = True
+            if target.is_dir():
+                delete_directory_tree(target, force=True)
+            elif target.is_file():
                 delete_file(target)
             else:
-                log.warn("%s is skipping creation of existing target '%s'",
+                log.error(
+                    "Cannot delete unrecognized target '%s'",
                     self, target
                     )
-        else: result = True
+        if not result:
+            log.warn(
+                "%s is skipping creation of existing target '%s'",
+                self, target
+                )
         return result
 
     def _should_delete_directory(self, directory_path):
