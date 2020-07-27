@@ -15,8 +15,8 @@ def test_application_name():
     assert isinstance(v, str)
     assert v == 'PleaseOverrideMe'
 
-def test_fake_file_extension():
-    v = c.fake_file_extension
+def test_fake_file_suffix():
+    v = c.fake_file_suffix
     assert v is not None
     assert len(v) > 0
 

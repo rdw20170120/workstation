@@ -49,8 +49,9 @@ def _parse_args():
         action="store_true"
         )
     parser.add_argument(
-        "-v", "--verbose", action="count", default=0,
-        help="increase logging verbosity (repeatable)"
+        "-v", dest="verbosity",
+        help="increase logging verbosity (repeatable)",
+        action="count", default=0,
         )
     return parser.parse_args()
 
@@ -72,10 +73,10 @@ def _report_character_encoding_configuration():
 def run():
     my_logging.configure(c)
     args = _parse_args()
+    my_logging.apply_verbosity(args.verbosity)
     if args.configuration:
         _report_configuration()
     else:
-        my_logging.apply_verbose(args.verbose)
         MyApp(c.pid_file).run()
 
 '''DisabledContent

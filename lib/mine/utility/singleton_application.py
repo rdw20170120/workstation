@@ -18,7 +18,6 @@ log = getLogger(__name__)
 class SingletonApplication(object):
     def __init__(self, pid_file):
         super().__init__()
-        assert isinstance(pid_file, Path)
         self._pid_file = pid_file
 
     def _run(self):

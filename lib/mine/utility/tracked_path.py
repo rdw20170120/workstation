@@ -17,6 +17,8 @@ A primary metric is a record count, when relevant.
 
 Tracked paths have various helpers to ease use
 while enabling the consistent tracking of those metrics.
+
+TODO: Research how to best expose attributes of wrapped Path
 """
 # Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
@@ -26,45 +28,82 @@ from pathlib import Path
 
 
 class TrackedPath(object):
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return (other._name == self._name
+                and other._path == self._path)
+        elif isinstance(other, Path):
+            return other == self.path
+        else:
+            return False
+
     def __fspath__(self):
         return str(self._path)
 
-    def __init__(self, top_name, top_directory, relative_path):
+    def __getattr__(self, name):
+        return getattr(self._path, name)
+
+    def __init__(self, top_name, top_directory, relative_path=None):
+        self._name = top_name
+        self._relative = relative_path
+        self._top = top_directory
+
         super().__init__()
 
-        if isinstance(relative_path, str):
-            relative_path = Path(relative_path)
-        assert isinstance(relative_path, Path)
-        assert not relative_path.is_absolute()
-        self._relative = relative_path
+        assert isinstance(self._name, str)
 
-        if isinstance(top_directory, str):
-            top_directory = Path(top_directory)
-        assert isinstance(top_directory, Path)
-        if top_directory.exists(): assert top_directory.is_dir()
-        self._directory = top_directory
+        if isinstance(self._top, str):
+            self._top = Path(self._top)
+        assert self._top.is_absolute()
+        if self._top.exists(): assert self._top.is_dir()
 
-        assert isinstance(top_name, str)
-        self._name = top_name
-
-        self._path = self._directory / self._relative
+        if self._relative is None:
+            self._relative = Path('.')
+        else:
+            if isinstance(self._relative, str):
+                self._relative = Path(self._relative)
+            assert not self._relative.is_absolute()
+        self._path = self._top / self._relative
 
     def __repr__(self):
         return "{}({!r}, {!r}, {!r})".format(
             self.__class__.__name__,
-            self._name, self._directory, self._relative
+            self._name, self._top, self._relative
             )
 
     def __str__(self):
-        return self.__fspath__()
+        return "{} '{}'".format(self._name, self._relative)
+
+    def __truediv__(self, other):
+        other = self._path / other
+        return self.for_path(other)
+
+    def exists(self):
+        return self._path.exists()
+
+    def for_path(self, path):
+        if isinstance(path, str):
+            path = Path(path)
+        relative = path.relative_to(self._top)
+        return TrackedPath(self._name, self._top, relative)
+
+    def is_absolute(self):
+        return self._path.is_absolute()
+
+    def is_dir(self):
+        return self._path.is_dir()
+
+    def is_file(self):
+        return self._path.is_file()
 
     @property
-    def for_log(self):
-        return "{} path '{}'".format(self._name, self._relative)
+    def relative(self):
+        return self._relative
 
     @property
-    def for_ref(self):
-        return "{}".format(self._relative)
+    def path(self):
+        return self._path
+
 
 '''DisabledContent
 '''

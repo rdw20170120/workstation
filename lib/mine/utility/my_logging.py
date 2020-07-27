@@ -98,7 +98,7 @@ def _level_colors():
     return result
 
 def _log_samples():
-    """Log samples of output at all severity levels."""
+    """Samples of log output at each severity level."""
     log.debug('This is a sample DEBUG message.')
     log.info('This is a sample INFO message.')
     log.warn('This is a sample WARNING message.')
@@ -153,16 +153,18 @@ def _visit_streamhandler(element, walker):
 #   walker.walk(repr(dir(element)))
     walker.emit(')')
 
-def apply_verbose(verbose):
+def apply_verbosity(verbosity=0):
     _file_handler.setLevel(logging.DEBUG)
-    if not verbose:
-        _root_logger.setLevel(logging.WARNING)
+    _root_logger.setLevel(logging.DEBUG)
+    if not verbosity:
+        _stderr_handler.setLevel(logging.FATAL)
+    elif verbosity == 1:
+        _stderr_handler.setLevel(logging.ERROR)
+    elif verbosity == 2:
         _stderr_handler.setLevel(logging.WARNING)
-    elif verbose == 1:
-        _root_logger.setLevel(logging.INFO)
+    elif verbosity == 3:
         _stderr_handler.setLevel(logging.INFO)
     else:
-        _root_logger.setLevel(logging.DEBUG)
         _stderr_handler.setLevel(logging.DEBUG)
 
 def configure(config):
@@ -189,35 +191,17 @@ def configure(config):
         logzero.LogFormatter(colors=_level_colors())
         )
     _root_logger.addHandler(_stderr_handler)
-    apply_verbose(0)
+    apply_verbosity()
 
 def debug(logger, name, value):
     logger.debug("%s = %s", name, value)
 
 def report_configuration():
     _dump()
+    # TODO: Temporarily increase verbosity to show all samples
     _log_samples()
 
 
 '''DisabledContent
-# TODO: FIX: This does not work because visitor lookup fails
-@my_visitor_map.register(logzero.colors.AnsiCodes)
-def _visit_ansi_codes(element, walker):
-    for name in dir(element):
-        walker.walk(name)
-        walker.emit(' = ')
-        walker.walk(getattr(element, name))
-        walker.emit('\n')
-assert my_visitor_map.get_visitor(logzero.colors.Fore) == _visit_ansi_codes
-
-# TODO: FIX: This does not work because visitor lookup fails
-@my_visitor_map.register(logzero.colors.AnsiFore)
-def _visit_ansi_fore(element, walker):
-    for name in dir(element):
-        walker.walk(name)
-        walker.emit(' = ')
-        walker.walk(getattr(element, name))
-        walker.emit('\n')
-assert my_visitor_map.get_visitor(logzero.colors.Fore) == _visit_ansi_fore
 '''
 

@@ -5,6 +5,7 @@ from pathlib import Path
 from sys     import maxsize
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
+from utility.tracked_path import TrackedPath
 # Co-located modules (relative references, NOT packaged, in project)
 from . import environment
 
@@ -15,7 +16,7 @@ class Config:
         return 'PleaseOverrideMe'
 
     @property
-    def fake_file_extension(self):
+    def fake_file_suffix(self):
         return '.fake'
 
     @property
@@ -85,11 +86,11 @@ class Config:
 
     @property
     def pid_file(self):
-        return self.project_directory / 'app.pid'
+        return self.project_directory / (self.application_name + '.pid')
 
     @property
     def project_directory(self):
-        return Path(environment.get('BO_Project'))
+        return TrackedPath('project', environment.get('BO_Project'))
     
     @property
     def reserved_disk_space_in_bytes(self):
@@ -130,7 +131,7 @@ class Config:
  
     @property
     def temporary_directory(self):
-        return Path(environment.get('TMPDIR'))
+        return TrackedPath('temporary', environment.get('TMPDIR'))
 
 '''DisabledContent
 '''

@@ -19,7 +19,6 @@ class PlainTask(object):
     """Base class for tasks managed by a TaskManager."""
     def __init__(self, task_manager):
         super().__init__()
-        assert isinstance(task_manager, TaskManager)
         self._tm = task_manager
         self._tm._add(self)
 
@@ -60,7 +59,7 @@ class FileSystemTask(PlainTask):
         for path in paths:
             if not path.exists():
                 raise RuntimeError(
-                    "{} is aborting since {} '{}' is missing".format(
+                    "{} is aborting since {} {} is missing".format(
                     self, name, path
                     ))
 
@@ -78,27 +77,27 @@ class FileSystemTask(PlainTask):
                 if target.is_dir():
                     log.warn(
                         "%s encountered exception"
-                        + ", deleting target directory '%s'",
+                        + ", deleting target %s",
                         self, target
                         )
                     delete_directory_tree(target, force=True)
                 elif target.is_file():
                     log.warn(
                         "%s encountered exception"
-                        + ", deleting target file '%s'",
+                        + ", deleting target %s",
                         self, target
                         )
                     delete_file(target)
                 else:
                     log.error(
                         "%s encountered exception"
-                        + ", cannot delete unrecognized target '%s'",
+                        + ", cannot delete unrecognized target %s",
                         self, target
                         )
             else:
                 log.debug(
                     "%s encountered exception"
-                    + ", no need to delete absent target '%s'",
+                    + ", no need to delete absent target %s",
                     self, target
                     )
 
@@ -107,7 +106,6 @@ class FileSystemTask(PlainTask):
         pass
 
     def _register_source(self, source):
-        assert isinstance(source, Path)
         self._sources.append(source)
         return source
 
@@ -116,7 +114,6 @@ class FileSystemTask(PlainTask):
         pass
 
     def _register_target(self, target):
-        assert isinstance(target, Path)
         self._targets.append(target)
         return target
 
@@ -133,12 +130,12 @@ class FileSystemTask(PlainTask):
                 delete_file(target)
             else:
                 log.error(
-                    "Cannot delete unrecognized target '%s'",
+                    "Cannot delete unrecognized target %s",
                     self, target
                     )
         if not result:
             log.warn(
-                "%s is skipping creation of existing target '%s'",
+                "%s is skipping creation of existing target %s",
                 self, target
                 )
         return result
@@ -148,7 +145,7 @@ class FileSystemTask(PlainTask):
         if not directory_path.exists(): return False
         if not directory_path.is_dir():
             raise RuntimeError(
-                "Aborting delete of unexpected non-directory '{}'".format(
+                "Aborting delete of unexpected non-directory {}".format(
                 path
                 ))
         return True
@@ -158,7 +155,7 @@ class FileSystemTask(PlainTask):
         if not file_path.exists(): return False
         if not file_path.is_file():
             raise RuntimeError(
-                "Aborting delete of unexpected non-file '{}'".format(
+                "Aborting delete of unexpected non-file {}".format(
                 path
                 ))
         return True

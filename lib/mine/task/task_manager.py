@@ -39,7 +39,7 @@ class TaskManager(object):
         log.info("Running task manager...")
         while not self._q.empty():
             self._execute_task(self._q.get())
-            log.debug("Queue contains about %d tasks", self._q.length)
+            log.debug("Queue contains %d tasks", self._q.length)
 
 '''DisabledContent
 '''

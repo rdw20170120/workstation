@@ -25,7 +25,7 @@ class TaskQueue:
 
     def get(self):
         result = self._implementation.get()
-        log.debug("Getting from the queue: %s", result)
+        log.debug("Getting: %s", result)
         return result
 
     @property
@@ -33,7 +33,7 @@ class TaskQueue:
         return self._implementation.qsize()
 
     def put(self, task):
-        log.debug("Putting on the queue: %s", task)
+        log.debug("Putting: %s", task)
         self._implementation.put_nowait(task)
 
 '''DisabledContent
