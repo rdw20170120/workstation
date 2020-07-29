@@ -2,7 +2,6 @@
 """TODO: Write
 """
 # Internal packages  (absolute references, distributed with Python)
-from   pathlib import Path
 import sys
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
@@ -11,7 +10,7 @@ from .app import MyApp
 
 
 def test_MyApp():
-    assert MyApp(Path()) is not None
+    assert MyApp(None) is not None
 
 def test_sys_getdefaultencoding():
     assert sys.getdefaultencoding() == 'utf-8'

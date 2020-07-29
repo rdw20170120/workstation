@@ -15,6 +15,10 @@ from shutil  import rmtree
 # Co-located modules (relative references, NOT packaged, in project)
 
 
+def basename_has_suffix(pathname, suffix):
+    assert isinstance(suffix, str)
+    return str(pathname).endswith(suffix)
+
 def clone_file(source_file, target_file):
     actual = copy2(source_file, target_file)
     assert actual == target_file
@@ -49,38 +53,8 @@ def delete_directory_tree(directory_path, force=False):
 def delete_file(file_path):
     remove(file_path)
 
-def file_name_has_extension(pathname, extension):
-    assert isinstance(extension, str)
-    if isinstance(pathname, str): pathname = Path(pathname)
-    return pathname.suffix == extension
-
-def file_name_has_suffix(pathname, suffix):
-    assert isinstance(suffix, str)
-    if isinstance(pathname, str): pathname = Path(pathname)
-    return str(pathname).endswith(suffix)
-
 def file_size(file_path):
     return getsize(file_path)
-
-def split_file_name(file_path):
-    if isinstance(file_path, str): file_path = PurePath(file_path)
-    name = PurePath(file_path.name)
-    suffixes = ''
-    while True:
-        suffix, name = name.suffix, name.stem
-        if not suffix: break
-        suffixes = suffix + suffixes
-        name = PurePath(name)
-    return name, suffixes
-
-def touch(file_path):
-    if isinstance(file_path, str): file_path = PurePath(file_path)
-    if not file_path.exists(): 
-        with open(file_path,
-            encoding=encoding, mode='wt', newline=None
-            ) as f:
-            f.write('')
-    file_path.touch(exist_ok=True)
 
 def read_binary_from_file(file_path):
     with open(file_path, mode='rb') as reader:
@@ -96,6 +70,30 @@ def read_text_from_file(file_path, encoding=None):
         result = reader.read()
         assert isinstance(result, str)
     return result
+
+def split_basename(pathname):
+    parent, basename = split_pathname(pathname)
+    name = PurePath(basename)
+    suffixes = ''
+    while True:
+        suffix, name = name.suffix, name.stem
+        if not suffix: break
+        suffixes = suffix + suffixes
+        name = PurePath(name)
+    return str(name), suffixes
+
+def split_pathname(pathname):
+    if not isinstance(pathname, Path): pathname = PurePath(pathname)
+    return pathname.parent, pathname.name
+
+def touch(file_path):
+    if not isinstance(file_path, Path): file_path = PurePath(file_path)
+    if not file_path.exists(): 
+        with open(file_path,
+            encoding=encoding, mode='wt', newline=None
+            ) as f:
+            f.write('')
+    file_path.touch(exist_ok=True)
 
 def write_binary_into_file(file_path, binary_content):
     assert isinstance(binary_content, bytes)

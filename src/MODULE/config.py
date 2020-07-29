@@ -14,12 +14,12 @@ class Config(BaseConfig):
 
     @property
     def should_abort_upon_task_failure(self):
-        #NOTE: Overriding BaseConfig, should remove for production
+        # NOTE: Overriding BaseConfig, should remove for production
         return True
  
     @property
     def should_leave_output_upon_task_failure(self):
-        #NOTE: Overriding BaseConfig, should remove for production
+        # NOTE: Overriding BaseConfig, should remove for production
         return True
  
 

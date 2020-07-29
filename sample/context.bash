@@ -20,6 +20,7 @@
 # This block of settings are defaults for the safest execution mode.
 # 'Quick' can be edited to a different value, which is the maximum file size in
 # bytes that will be processed.
+
 export FakeIt=defined
 export Quick=1000000
 export ReservedDiskSpaceInBytes=100000000

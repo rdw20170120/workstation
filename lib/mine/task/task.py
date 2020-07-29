@@ -105,7 +105,10 @@ class FileSystemTask(PlainTask):
         """Intended to be overridden in subclasses."""
         pass
 
-    def _register_source(self, source):
+    def _register_source(self, source, directory=None):
+        if source is None: return None
+        if directory is not None: source = directory / source
+        log.debug("Registering source %s", source)
         self._sources.append(source)
         return source
 
@@ -113,7 +116,10 @@ class FileSystemTask(PlainTask):
         """Intended to be overridden in subclasses."""
         pass
 
-    def _register_target(self, target):
+    def _register_target(self, target, directory=None):
+        if target is None: return None
+        if directory is not None: target = directory / target
+        log.debug("Registering target %s", target)
         self._targets.append(target)
         return target
 

@@ -70,7 +70,11 @@ def test_tracked_path():
     assert a.__fspath__() == '/123'
     assert (repr(a)
         == "TrackedPath('Test', PosixPath('/123'), PosixPath('.'))")
-    assert str(a) == "Test '.'"
+    assert str(a) == a.__fspath__()
+    assert a.for_log() == "Test '.'"
+    assert a.top == a
+    assert a.subpath == Path('.')
+    assert a.basename == ''
 
     b = TrackedPath('Test', '/123', 'abc')
     assert b is not None
@@ -78,7 +82,11 @@ def test_tracked_path():
     assert b.__fspath__() == '/123/abc'
     assert (repr(b)
         == "TrackedPath('Test', PosixPath('/123'), PosixPath('abc'))")
-    assert str(b) == "Test 'abc'"
+    assert str(b) == b.__fspath__()
+    assert b.for_log() == "Test 'abc'"
+    assert b.top == a
+    assert b.subpath == Path('.')
+    assert b.basename == 'abc'
 
     c = Path('/123/abc/xyz')
     d = b.for_path(c)
@@ -87,7 +95,11 @@ def test_tracked_path():
     assert d.__fspath__() == '/123/abc/xyz'
     assert (repr(d)
         == "TrackedPath('Test', PosixPath('/123'), PosixPath('abc/xyz'))")
-    assert str(d) == "Test 'abc/xyz'"
+    assert str(d) == d.__fspath__()
+    assert d.for_log() == "Test 'abc/xyz'"
+    assert d.top == a
+    assert d.subpath == Path('abc')
+    assert d.basename == 'xyz'
 
     e = d / 'def.ghi'
     assert e is not None
@@ -95,7 +107,47 @@ def test_tracked_path():
     assert e.__fspath__() == '/123/abc/xyz/def.ghi'
     assert (repr(e) ==
         "TrackedPath('Test', PosixPath('/123'), PosixPath('abc/xyz/def.ghi'))")
-    assert str(e) == "Test 'abc/xyz/def.ghi'"
+    assert str(e) == e.__fspath__()
+    assert e.for_log() == "Test 'abc/xyz/def.ghi'"
+    assert e.top == a
+    assert e.subpath == Path('abc/xyz')
+    assert e.basename == 'def.ghi'
+
+    f = b / None
+    assert f is not None
+    assert f == PosixPath('/123/abc')
+    assert f.__fspath__() == '/123/abc'
+    assert (repr(f) ==
+        "TrackedPath('Test', PosixPath('/123'), PosixPath('abc'))")
+    assert str(f) == f.__fspath__()
+    assert f.for_log() == "Test 'abc'"
+    assert f.top == a
+    assert f.subpath == Path()
+    assert f.basename == 'abc'
+
+    g = b / ''
+    assert g is not None
+    assert g == PosixPath('/123/abc')
+    assert g.__fspath__() == '/123/abc'
+    assert (repr(g) ==
+        "TrackedPath('Test', PosixPath('/123'), PosixPath('abc'))")
+    assert str(g) == g.__fspath__()
+    assert g.for_log() == "Test 'abc'"
+    assert g.top == a
+    assert g.subpath == Path()
+    assert g.basename == 'abc'
+
+    h = b / Path()
+    assert h is not None
+    assert h == PosixPath('/123/abc')
+    assert h.__fspath__() == '/123/abc'
+    assert (repr(h) ==
+        "TrackedPath('Test', PosixPath('/123'), PosixPath('abc'))")
+    assert str(h) == h.__fspath__()
+    assert h.for_log() == "Test 'abc'"
+    assert h.top == a
+    assert h.subpath == Path()
+    assert h.basename == 'abc'
 
 '''DisabledContent
 '''

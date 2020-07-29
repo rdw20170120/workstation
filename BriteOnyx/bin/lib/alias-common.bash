@@ -5,7 +5,7 @@
 ###############################################################################
 # BASH alias definitions specific to this project
 
-alias cycle='clear ; test-run && generate && app-run -vv'
+alias cycle='clear ; test-run && generate && app-run -vvv'
 alias list-sort='sort -nr --key=5'
 
 ###############################################################################
