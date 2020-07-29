@@ -23,7 +23,7 @@
 
 export FakeIt=defined
 export Quick=1000000
-export ReservedDiskSpaceInBytes=100000000
+export ReservedDiskSpaceInBytes=$((10 * 1024 * 1024 * 1024))
 export Run=Dry
 
 # This block of settings can be selectively uncommented to relax the previous
