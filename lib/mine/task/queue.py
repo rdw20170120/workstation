@@ -8,9 +8,6 @@ from queue   import Queue
 # Co-located modules (relative references, NOT packaged, in project)
 
 
-log = getLogger(__name__)
-
-
 class TaskQueue:
     """Queue to manage tasks.
 
@@ -19,13 +16,14 @@ class TaskQueue:
     """
     def __init__(self):
         self._implementation = Queue() 
+        self._log = getLogger(self.__class__.__name__)
 
     def empty(self):
         return self._implementation.empty()
 
     def get(self):
         result = self._implementation.get()
-        log.debug("Getting: %s", result)
+        self._log.debug("Getting: %s", result)
         return result
 
     @property
@@ -33,7 +31,7 @@ class TaskQueue:
         return self._implementation.qsize()
 
     def put(self, task):
-        log.debug("Putting: %s", task)
+        self._log.debug("Putting: %s", task)
         self._implementation.put_nowait(task)
 
 '''DisabledContent

@@ -4,6 +4,7 @@
 TODO: REVIEW: this module against its siblings.
 """
 # Internal packages  (absolute references, distributed with Python)
+from logging import getLogger
 from os      import remove
 from os.path import getsize
 from pathlib import Path
@@ -15,6 +16,9 @@ from shutil  import rmtree
 # Co-located modules (relative references, NOT packaged, in project)
 
 
+log = getLogger(__name__)
+
+
 def basename_has_suffix(pathname, suffix):
     assert isinstance(suffix, str)
     return str(pathname).endswith(suffix)
@@ -23,7 +27,7 @@ def clone_file(source_file, target_file):
     actual = copy2(source_file, target_file)
     assert actual == target_file
 
-def concatenate_text_file(source_file, target_file, encoding=None):
+def concatenate_text_file(target_file, source_file, encoding=None):
     if encoding is None: encoding = 'utf_8'
     with target_file.open(
         encoding=encoding, mode='at', newline=None
@@ -32,6 +36,10 @@ def concatenate_text_file(source_file, target_file, encoding=None):
             encoding=encoding, mode='rt', newline=None
             ) as reader:
             for line in reader:
+                log.debug(
+                    "Concatenating to file '%s', encounter: %s",
+                    target_file, line
+                    )
                 writer.write(line)
 
 def concatenate_text_files(target_file, source_files, encoding=None):

@@ -10,11 +10,32 @@ Target effective recognition of my favorite development workstations:
   and 'solarized dark' scheme
 """
 # Internal packages  (absolute references, distributed with Python)
+try:
+    import curses
+except ImportError:
+    curses = None
+import sys
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
 from . import environment
 
+
+def stderr_supports_color():
+    """Return whether the stderr stream supports color.
+
+    Based on code in the `logzero` package, which imitates this code in
+    `Tornado`.
+    """
+    # Detect color support of stderr with curses (Linux/macOS)
+    if curses and hasattr(sys.stderr, 'isatty') and sys.stderr.isatty():
+        try:
+            curses.setupterm()
+            if curses.tigetnum("colors") > 0:
+                return True
+        except Exception:
+            pass
+    return False
 
 def using_gnome():
     """Return whether we think that we are using a Gnome terminal."""

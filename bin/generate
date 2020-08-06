@@ -35,8 +35,8 @@ cmd='python3'
 # cmd+=' -bb'
 cmd+=' -m generate'
 cmd+=" $DirTgt"
-echo $cmd
-$cmd
+echo $cmd $@
+$cmd $@
 
 # Merge generated files into project directory
 # TODO: RESEARCH: why Meld does not open a new tab on macOS?

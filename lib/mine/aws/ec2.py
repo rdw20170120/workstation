@@ -29,7 +29,7 @@ class EC2(AwsService):
                     self.profile_name, self.region_name, self.service_name,
                     'describe_availability_zones', e
                     )
-            else: raise
+            raise
         return result
 
     def _describe_regions(self, all=True):
@@ -43,7 +43,7 @@ class EC2(AwsService):
                     self.profile_name, self.region_name, self.service_name,
                     'describe_regions', e
                     )
-            else: raise
+            raise
         return result
 
     def get_all_regions(self):

@@ -22,8 +22,19 @@ from src_gen.source                     import my_visitor_map as parent_visitor_
 from src_gen.structure                  import *
 from throw_out_your_templates.section_3 import VisitorMap
 # Co-located modules (relative references, NOT packaged, in project)
-from .my_terminal import using_gnome
-from .my_terminal import using_iterm2
+from .color_log_formatter import ColorLogFormatter
+from .my_terminal         import using_gnome
+from .my_terminal         import using_iterm2
+
+
+DEFAULT_DATE_FORMAT = '%Y%m%dT%H%M%S'
+_levelname = '%(levelname)5s'
+# _location = '%(module)s:%(lineno)d'
+_location = '%(name)s:%(lineno)d'
+_message='%(message)s'
+_time = '%(asctime)s'
+_prefix = '[' + _levelname + ' ' + _time + ' ' + _location + ']'
+DEFAULT_FORMAT = _prefix + ' ' + _message
 
 _file_handler = None
 _root_logger = None
@@ -31,6 +42,7 @@ _stderr_handler = None
 
 log = getLogger(__name__)
 my_visitor_map = VisitorMap(parent_map=parent_visitor_map)
+
 
 def _ansi_color(name, index, codes):
     return [
@@ -73,8 +85,17 @@ def _dump():
     ]
     generate(content, visitor_map=my_visitor_map)
 
+def _formatter(for_stderr=False):
+    if for_stderr:
+        return ColorLogFormatter(colors=_level_colors())
+    else:
+        return logging.Formatter(
+            fmt=DEFAULT_FORMAT, datefmt=DEFAULT_DATE_FORMAT
+            )
+
 def _level_colors():
     result = logzero.LogFormatter.DEFAULT_COLORS
+    result[logging.NOTSET] = Fore.RESET
     if using_gnome():
         result[logging.DEBUG] = Fore.GREEN
         result[logging.INFO] = Fore.CYAN
@@ -180,16 +201,12 @@ def configure(config):
         config.log_file, encoding='utf_8',
         backupCount=9, maxBytes=1e6
         )
-    _file_handler.setFormatter(
-        logzero.LogFormatter(color=False)
-        )
+    _file_handler.setFormatter(_formatter(for_stderr=False))
     _root_logger.addHandler(_file_handler)
 
     global _stderr_handler
     _stderr_handler = logging.StreamHandler()
-    _stderr_handler.setFormatter(
-        logzero.LogFormatter(colors=_level_colors())
-        )
+    _stderr_handler.setFormatter(_formatter(for_stderr=True))
     _root_logger.addHandler(_stderr_handler)
     apply_verbosity()
 

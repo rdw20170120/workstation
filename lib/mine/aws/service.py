@@ -12,7 +12,7 @@ from boto3 import Session
 log = getLogger(__name__)
 
 
-class AwsService:
+class AwsService(object):
     def __init__(self, service_name, profile_name, region_name=None):
         if not service_name:
             raise ValueError("'service_name' has invalid value '{}'".format(service_name))

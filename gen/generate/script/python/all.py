@@ -112,6 +112,7 @@ def _generate_lib_task(directory):
 def _generate_lib_utility(directory):
     sub = Path('lib', 'mine', 'utility')
     gen(_package(), directory, sub, '__init__.py')
+    gen(_library(), directory, sub, 'color_log_formatter.py')
     gen(_library(), directory, sub, 'config.py')
     gen(_library(), directory, sub, 'environment.py')
     gen(_library(), directory, sub, 'filesystem.py')

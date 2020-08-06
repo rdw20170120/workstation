@@ -2,7 +2,6 @@
 """TODO: Write
 """
 # Internal packages  (absolute references, distributed with Python)
-from logging import getLogger
 from pathlib import Path
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
@@ -12,17 +11,16 @@ from .processing import delete_pid_file
 from .processing import get_pid
 
 
-log = getLogger(__name__)
-
-
 class SingletonApplication(object):
-    def __init__(self, pid_file):
-        super().__init__()
+    def __init__(self, logger, pid_file):
+        self._log = logger
         self._pid_file = pid_file
+        super().__init__()
 
     def _run(self):
-        """This method should be overridden in a subclass."""
-        pass
+        raise NotImplementedError(
+            "_run() should be overridden in subclasses"
+            )
 
     def _shutdown(self):
         delete_pid_file(self._pid_file)
@@ -31,18 +29,21 @@ class SingletonApplication(object):
         create_pid_file(self._pid_file)
 
     def run(self):
+        pid = get_pid()
         try:
-            log.info("Began process with pid '%d'", get_pid())
+            self._log.info("Began process with pid '%d'", pid)
             self._startup()
             self._run()
         except RuntimeError as e:
-            log.error(str(e))
-            log.fatal("Aborted process")
-        except Exception as e:
-            log.exception(e)
-            log.fatal("Aborted process")
+            self._log.debug("%s run() except 1", __name__)
+            self._log.error(e)
+            self._log.fatal("Aborted process with pid '%d'", pid)
+        except BaseException as e:
+            self._log.debug("%s run() except 2", __name__)
+            self._log.exception(e)
+            self._log.fatal("Aborted process with pid '%d'", pid)
         finally:
-            log.info("Ended process with pid '%d'", get_pid())
+            self._log.info("Ended process with pid '%d'", pid)
             self._shutdown()
 
 '''DisabledContent

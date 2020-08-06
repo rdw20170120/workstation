@@ -7,11 +7,11 @@ import sys
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
-from .app import ContentGeneratorApp
+from .app import MyApp
 
 
-def test_ContentGeneratorApp():
-    assert ContentGeneratorApp(Path()) is not None
+def test_app():
+    assert MyApp(Path(), Path()) is not None
 
 def test_sys_getdefaultencoding():
     assert sys.getdefaultencoding() == 'utf-8'

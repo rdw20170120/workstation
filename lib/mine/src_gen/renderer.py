@@ -13,16 +13,14 @@ from throw_out_your_templates.section_4 import visitor_map as default_visitor_ma
 # Co-located modules (relative references, NOT packaged, in project)
 
 
-log = getLogger(__name__)
-
-
 class Renderer(object):
     def __init__(
         self, visitor_map=default_visitor_map, encoding=default_encoding
         ):
-        object.__init__(self)
         self._encoding = encoding
+        self._log = getLogger(self.__class__.__name__)
         self._visitor_map = visitor_map
+        super().__init__()
 
     def _get_serializer(self):
         return Serializer(self._visitor_map)
@@ -33,16 +31,18 @@ class Renderer(object):
     def render(self, content, file_path=None):
         try:
             if file_path is None:
-                log.info("Printing rendered content to stdout")
+                self._log.info("Printing rendered content to stdout")
                 print(self._serialize(content))
             else:
-                log.info("Writing rendered content to file '%s'", file_path)
+                self._log.info(
+                    "Writing rendered content to file '%s'", file_path
+                    )
                 with open(file_path, mode='wt',
                     newline=None
                     ) as f:
                     f.write(self._serialize(content))
         except TypeError as e:
-            log.error("TypeError: %s", e)
+            self._log.error("TypeError: %s", e)
         except Exception: raise
 
 '''DisabledContent

@@ -32,7 +32,7 @@ class S3(AwsService):
                     self.profile_name, self.region_name, self.service_name,
                     'download_file', e
                     )
-            else: raise
+            raise
 
     def _list_bucket_common_prefixes(self, bucket_name):
         result = None
@@ -47,7 +47,7 @@ class S3(AwsService):
                     self.profile_name, self.region_name, self.service_name,
                     'list_objects_v2', e
                     )
-            else: raise
+            raise
         return result
 
     def _list_bucket_objects(self, bucket_name, prefix):
@@ -63,7 +63,7 @@ class S3(AwsService):
                     self.profile_name, self.region_name, self.service_name,
                     'list_objects_v2', e
                     )
-            else: raise
+            raise
         return result
 
     def download_object(self, bucket_name, key, file_path):
