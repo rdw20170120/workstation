@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-"""Manage configuration."""
+"""Configure application."""
 # Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
 from sys     import maxsize

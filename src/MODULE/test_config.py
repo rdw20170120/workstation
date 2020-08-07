@@ -8,12 +8,13 @@
 from .config import Config
 
 
-c = Config()
-
 def test_application_name():
-    v = c.application_name
+    v = Config().application_name
     assert isinstance(v, str)
     assert v != 'PleaseOverrideMe'
+
+def test_config():
+    assert Config() is not None
 
 '''DisabledContent
 '''

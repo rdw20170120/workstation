@@ -15,9 +15,10 @@ _levelname = '%(levelname)1.1s'
 _location = '%(name)s:%(lineno)d'
 _message='%(message)s'
 _time = '%(asctime)s'
-_prefix = ('%(color)s['
+_prefix = str('%(color)s['
     + _levelname + ' ' + _time + ' ' + _location
     + ']%(end_color)s')
+print('_prefix=' + repr(_prefix))
 DEFAULT_FORMAT = _prefix + ' ' + _message
 
 
@@ -29,9 +30,10 @@ class ColorLogFormatter(Formatter):
     """
     def __init__(self,
                  color=True,
-                 fmt=DEFAULT_FORMAT,
+                 colors=None,
                  datefmt=DEFAULT_DATE_FORMAT,
-                 colors=None):
+                 fmt=DEFAULT_FORMAT,
+                 ):
         r"""
         :arg bool color: Enables color support.
         :arg string fmt: Log message format.
@@ -43,7 +45,7 @@ class ColorLogFormatter(Formatter):
         :arg string datefmt: Datetime format.
           Used for formatting ``(asctime)`` placeholder in ``prefix_fmt``.
         """
-        super().__init__(self, datefmt=datefmt)
+        super().__init__(datefmt=datefmt, fmt=fmt)
 
         self._fmt = fmt
         self._colors = {}
