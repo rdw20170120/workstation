@@ -4,23 +4,23 @@
 Intended to be executed as a Python module:  python3 -m MODULE
 """
 # Internal packages  (absolute references, distributed with Python)
-from   argparse import ArgumentParser
-from   logging  import getLogger
-from   pathlib  import Path
-from   logging  import DEBUG, INFO, WARN, ERROR, FATAL
+from argparse import ArgumentParser
+from logging import DEBUG, INFO, WARN, ERROR, FATAL
+from logging import getLogger
+from pathlib import Path
 import sys
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility                       import my_logging
-from utility.my_system             import recreate_directory
+from utility import my_logging
+from utility.filesystem import recreate_directory
 from utility.singleton_application import SingletonApplication
 # Co-located modules (relative references, NOT packaged, in project)
-from .config                              import Config
+from .config import Config
 from .script.bash.project_activate_script import generate as generate_project_activate_script
-from .document.markdown.all               import generate as generate_markdown_documents
-from .script.bash.all                     import generate as generate_bash_scripts
-from .script.bash.briteonyx.all           import generate as generate_briteonyx_scripts
-from .script.python.all                   import generate as generate_python_scripts
+from .document.markdown.all import generate as generate_markdown_documents
+from .script.bash.all import generate as generate_bash_scripts
+from .script.bash.briteonyx.all import generate as generate_briteonyx_scripts
+from .script.python.all import generate as generate_python_scripts
 
 
 c = Config()
@@ -47,24 +47,19 @@ class MyApp(SingletonApplication):
 
 
 def _apply_verbosity(verbosity=0):
-    # Reference loggers for supporting code
-    utility_logger = getLogger('utility')
-
-    # Adjust logging from supporting code
+    background = [getLogger('utility'),]
     if verbosity <= 3:
-        utility_logger.setLevel(FATAL)
+        my_logging.set_log_level(background, FATAL)
     elif verbosity == 4:
-        utility_logger.setLevel(FATAL)
-    elif verbosity == 4:
-        utility_logger.setLevel(FATAL)
+        my_logging.set_log_level(background, FATAL)
     elif verbosity == 5:
-        utility_logger.setLevel(ERROR)
+        my_logging.set_log_level(background, ERROR)
     elif verbosity == 6:
-        utility_logger.setLevel(WARN)
+        my_logging.set_log_level(background, WARN)
     elif verbosity == 7:
-        utility_logger.setLevel(INFO)
+        my_logging.set_log_level(background, INFO)
     else:
-        utility_logger.setLevel(DEBUG)
+        my_logging.set_log_level(background, DEBUG)
 
 def _parse_args():
     # TODO: Add dry run

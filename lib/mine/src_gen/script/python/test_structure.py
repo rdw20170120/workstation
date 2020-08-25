@@ -10,63 +10,62 @@ e.g., those consisting of 'return [...]'.
 # External packages  (absolute references, NOT distributed with Python)
 from pytest import raises
 # Library modules    (absolute references, NOT packaged, in project)
+from utility.my_assert import assert_equal
 # Co-located modules (relative references, NOT packaged, in project)
 from ...renderer import Renderer
-from ..source    import my_visitor_map
+from ..source import my_visitor_map
 from ..structure import * 
 
 
 s = Renderer(my_visitor_map)._serialize
 
 def test_command_01():
-    assert s(command('Test')) == 'Test'
+    assert assert_equal(s(command('Test')), 'Test')
 
 def test_command_02():
-    assert s(command('Test', None)) == 'Test'
+    assert assert_equal(s(command('Test', None)), 'Test')
 
 def test_command_03():
-    assert s(command('Test', '')) == 'Test'
+    assert assert_equal(s(command('Test', '')), 'Test')
 
 def test_command_04():
-    assert s(command('Test', '123')) == 'Test 123'
+    assert assert_equal(s(command('Test', '123')), 'Test 123')
 
 def test_comment_01():
-    assert s(comment()) == '#\n'
+    assert assert_equal(s(comment()), '#\n')
 
 def test_comment_02():
-    assert s(comment(None)) == '#\n'
+    assert assert_equal(s(comment(None)), '#\n')
 
 def test_comment_03():
-    assert s(comment('')) == '#\n'
+    assert assert_equal(s(comment('')), '#\n')
 
 def test_comment_04():
-    assert s(comment('Test')) == '# Test\n'
+    assert assert_equal(s(comment('Test')), '# Test\n')
 
 def test_comment_05():
-    assert s(comment('Test', None)) == '# Test\n'
+    assert assert_equal(s(comment('Test', None)), '# Test\n')
 
 def test_comment_06():
-    assert s(comment('Test', '')) == '# Test\n'
+    assert assert_equal(s(comment('Test', '')), '# Test\n')
 
 def test_comment_06():
-    assert s(comment('Test', '123')) == '# Test123\n'
+    assert assert_equal(s(comment('Test', '123')), '# Test123\n')
 
 def test_shebang_cat():
-    assert s(shebang_cat()) == '#!/usr/bin/env cat\n'
+    assert assert_equal(s(shebang_cat()), '#!/usr/bin/env cat\n')
 
 def test_shebang_false():
-    assert s(shebang_false()) == '#!/usr/bin/env false\n'
+    assert assert_equal(s(shebang_false()), '#!/usr/bin/env false\n')
 
 def test_shebang_thru_env_01():
-    with raises(AssertionError):
-        shebang_thru_env(None)
+    with raises(AssertionError): shebang_thru_env(None)
 
 def test_shebang_thru_env_02():
-    with raises(AssertionError):
-        shebang_thru_env('')
+    assert assert_equal(s(shebang_thru_env('')), '#!/usr/bin/env\n')
 
 def test_shebang_thru_env_03():
-    assert s(shebang_thru_env('Test')) == '#!/usr/bin/env Test\n'
+    assert assert_equal(s(shebang_thru_env('Test')), '#!/usr/bin/env Test\n')
 
 '''DisabledContent
 '''

@@ -2,12 +2,21 @@
 """Tasks managed by a TaskManager."""
 # Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
-from shutil  import disk_usage
+from shutil import disk_usage
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.filesystem import delete_directory_tree
 from utility.filesystem import delete_file
+from utility.filesystem import touch
+from utility.my_assert import assert_absolute_directory
+from utility.my_assert import assert_existing_absolute_path
+from utility.my_assert import assert_absolute_file
+from utility.my_assert import assert_absolute_path
+from utility.my_assert import assert_instance
+from utility.my_logging import log_exception
+from utility.tracked_path import TrackedPath
 # Co-located modules (relative references, NOT packaged, in project)
+from .exception import Abort
 
 
 class PlainTask(object):
@@ -39,22 +48,24 @@ class FileSystemTask(PlainTask):
     def _abort_for_lack_of_disk_space(self, needed_space_in_bytes):
         du = disk_usage(self.config.filesystem_to_watch)
         if du.free < needed_space_in_bytes:
-            raise RuntimeError(
+            raise Abort(
                 "{} is aborting for lack of disk space".format(self)
                 )
 
     def _abort_for_quick_run(self, disk_space_estimate):
         if disk_space_estimate > self.config.quick_run_limit:
-            raise RuntimeError("{} is aborting for quick run".format(self))
+            raise Abort("{} is aborting for quick run".format(self))
 
     def _abort_if_any_are_missing(self, name, paths):
         if not len(paths):
             self._log.debug("No %s registered in %s", name, self)
         for path in paths:
+            assert assert_instance(path, TrackedPath)
+            assert assert_absolute_path(path)
             if not path.exists():
-                raise RuntimeError(
+                raise FileNotFoundError(
                     "{} is aborting since {} {} is missing".format(
-                    self, name, path
+                    self, name, path.for_log()
                     ))
 
     def _abort_if_source_is_missing(self):
@@ -67,6 +78,8 @@ class FileSystemTask(PlainTask):
         if self.config.should_leave_output_upon_task_failure: return
         self._log.info("%s is deleting targets upon exception", self)
         for target in self._targets:
+            assert assert_instance(target, TrackedPath)
+            assert assert_absolute_path(target)
             if target.exists():
                 if target.is_dir():
                     self._log.warn(
@@ -102,7 +115,11 @@ class FileSystemTask(PlainTask):
 
     def _register_source(self, source, directory=None):
         if source is None: return None
-        if directory is not None: source = directory / source
+        if directory is not None:
+            assert assert_absolute_directory(directory)
+            source = directory / source
+        assert assert_absolute_path(source)
+        assert assert_instance(source, TrackedPath)
         self._log.debug("Registering source %s", source.for_log())
         self._sources.append(source)
         return source
@@ -114,7 +131,11 @@ class FileSystemTask(PlainTask):
 
     def _register_target(self, target, directory=None):
         if target is None: return None
-        if directory is not None: target = directory / target
+        if directory is not None:
+            assert assert_absolute_directory(directory)
+            target = directory / target
+        assert assert_absolute_path(target)
+        assert assert_instance(target, TrackedPath)
         self._log.debug("Registering target %s", target.for_log())
         self._targets.append(target)
         return target
@@ -140,6 +161,8 @@ class FileSystemTask(PlainTask):
         if self.config.is_dry_run: return False
         if force is None: return True
         if not force: force = self.config.is_forced_run
+        assert assert_instance(target, TrackedPath)
+        assert assert_absolute_path(target)
         if not target.exists(): return True
         result = False
         if force:
@@ -167,28 +190,32 @@ class FileSystemTask(PlainTask):
         return result
 
     def _should_delete_directory(self, directory_path):
+        assert assert_absolute_path(directory_path)
         if self.config.is_dry_run: return False
         if not directory_path.exists(): return False
         if not directory_path.is_dir():
-            raise RuntimeError(
-                "Aborting delete of unexpected non-directory {}".format(
+            raise NotADirectoryError(
+                "Aborting deletion of unexpected non-directory {}".format(
                 path
                 ))
         return True
 
     def _should_delete_file(self, file_path):
+        assert assert_absolute_path(file_path)
         if self.config.is_dry_run: return False
         if not file_path.exists(): return False
         if not file_path.is_file():
-            raise RuntimeError(
-                "Aborting delete of unexpected non-file {}".format(
+            raise OSError(
+                "Aborting deletion of unexpected non-file {}".format(
                 path
                 ))
         return True
 
     def _touch_targets(self):
         for target in self._targets:
+            assert assert_absolute_path(target)
             touch(target)
+            assert assert_absolute_file(target)
 
     def execute(self):
         """Should NOT be overridden in subclasses."""
@@ -206,18 +233,32 @@ class FileSystemTask(PlainTask):
             else:
                 self._execute()
             self._abort_if_target_is_missing()
-        except BaseException as e:
-            self._log.debug("%s execute() except 1",
+        except Abort as e:
+            self._log.debug("From %s execute() except Abort",
                 self.__class__.__name__
                 )
+            self._log.warn(repr(e))
+            raise
+        except NotImplementedError as e:
+            self._log.debug("From %s execute() except NonImplementedError",
+                self.__class__.__name__
+                )
+            self._log.warn(repr(e))
+            raise
+        except BaseException as e:
+            self._log.debug("From %s execute() except outer BaseException",
+                self.__class__.__name__
+                )
+            log_exception(self._log, e)
             try:
                 self._delete_targets_upon_exception()
             except BaseException as f:
-                self._log.debug("%s execute() except 2",
+                self._log.debug("From %s execute() except inner BaseException",
                     self.__class__.__name__
                     )
-                raise f from e
-            raise e
+                log_exception(self._log, f)
+                raise
+            raise
 
 '''DisabledContent
 '''

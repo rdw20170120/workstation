@@ -5,14 +5,15 @@
 import ast
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
+from utility.my_assert import assert_instance
 # Co-located modules (relative references, NOT packaged, in project)
 
 
 def dict_from_string(the_string):
     if the_string is None: return None
-    assert isinstance(the_string, str)
+    assert assert_instance(the_string, str)
     result = ast.literal_eval(the_string)
-    assert isinstance(result, dict)
+    assert assert_instance(result, dict)
     return result
 
 def string_without_prefix(the_string, the_prefix):

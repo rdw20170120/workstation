@@ -11,14 +11,14 @@ Target effective recognition of my favorite development workstations:
 """
 # Internal packages  (absolute references, distributed with Python)
 try:
-    import curses
+ import curses
 except ImportError:
     curses = None
 import sys
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
+from utility import environment
 # Co-located modules (relative references, NOT packaged, in project)
-from . import environment
 
 
 def stderr_supports_color():

@@ -2,11 +2,12 @@
 """TODO: Write
 """
 # Internal packages  (absolute references, distributed with Python)
-from enum    import Enum
+from enum import Enum
 from numbers import Number
 from pathlib import Path
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
+from utility.my_assert import assert_not_none
 # Co-located modules (relative references, NOT packaged, in project)
 from .source import my_visitor_map
 
@@ -139,7 +140,7 @@ class _NameValuePair(object):
         super().__init__()
         self.name = squashed(name)
         self.value = squashed(value)
-        assert self.name
+        assert assert_not_none(self.name)
 
     def __repr__(self):
         return "_NameValuePair({}, {})".format(self.name, self.value)

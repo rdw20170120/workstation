@@ -5,16 +5,16 @@
 from pathlib import Path
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
+from utility.my_assert import assert_range
 # Co-located modules (relative references, NOT packaged, in project)
 from ...structure import *
-from .source      import my_visitor_map
+from .source import my_visitor_map
 
 
 ###############################################################################
 
 def header(title, level=1):
-    assert title
-    assert 1 <= level <= 6
+    assert assert_range(level, 1, 6)
     return line([level * '#', ' ', title])
 
 def h1(title): return header(title, level=1)
@@ -23,8 +23,7 @@ def h2(title): return header(title, level=2)
 
 def numbered_list_item(text, level=0):
     # TODO: Consider restructing this to compute final content upon rendering
-    assert text
-    assert 0 <= level <= 9
+    assert assert_range(level, 0, 9)
     prefix = '1. '
     indent = len(prefix) * ' '
     return line([level * indent, prefix, text])
@@ -32,11 +31,9 @@ def numbered_list_item(text, level=0):
 def nli0(text): return numbered_list_item(text, level=0)
 
 def note(sentence):
-    assert sentence
     return line(['NOTE: ', sentence])
 
 def s(sentence):
-    assert sentence
     return line(sentence)
 
 ###############################################################################
@@ -46,7 +43,6 @@ class _TableRow(object):
     def __init__(self, *column):
         super().__init__()
         self.columns = squashed(column)
-        assert self.columns
 
     def __repr__(self):
         return "_TableRow({})".format(self.columns)
@@ -58,8 +54,6 @@ def _visit_table_row(element, walker):
         for c in element.columns:
             walker.emit('|')
             walker.walk(c)
-    elif element.columns is None:
-        pass
     else:
         walker.emit('|')
         walker.walk(element.columns)
@@ -67,15 +61,12 @@ def _visit_table_row(element, walker):
     walker.walk(eol())
 
 def table_header(*column):
-    assert column
     return _TableRow(column)
 
 def table_row(*column):
-    assert column
     return _TableRow(column)
 
 def table_ruler(*column):
-    assert column
     return _TableRow(column)
 
 '''DisabledContent

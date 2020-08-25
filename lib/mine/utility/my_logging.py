@@ -11,20 +11,16 @@ Target effective logging on my favorite development workstations:
 TODO: Add visitors for other `logging` handlers
 """
 # Internal packages  (absolute references, distributed with Python)
-from   logging import getLogger
+from logging import getLogger
 import logging
 # External packages  (absolute references, NOT distributed with Python)
-from   logzero.colors import Fore
+from logzero.colors import Fore
 import logzero
 # Library modules    (absolute references, NOT packaged, in project)
-from src_gen.source                     import generate
-from src_gen.source                     import my_visitor_map as parent_visitor_map
-from src_gen.structure                  import *
-from throw_out_your_templates.section_3 import VisitorMap
+from utility.color_log_formatter import ColorLogFormatter
+from utility.my_terminal import using_gnome
+from utility.my_terminal import using_iterm2
 # Co-located modules (relative references, NOT packaged, in project)
-from .color_log_formatter import ColorLogFormatter
-from .my_terminal         import using_gnome
-from .my_terminal         import using_iterm2
 
 
 DEFAULT_DATE_FORMAT = '%Y%m%dT%H%M%S'
@@ -41,8 +37,6 @@ _root_logger = None
 _stderr_handler = None
 
 log = getLogger(__name__)
-my_visitor_map = VisitorMap(parent_map=parent_visitor_map)
-
 
 def _ansi_color(name, index, codes):
     return [
@@ -126,6 +120,68 @@ def _log_samples():
     log.error('This is a sample ERROR message.')
     log.fatal('This is a sample CRITICAL message.')
 
+def apply_verbosity(verbosity=0):
+    _file_handler.setLevel(logging.DEBUG)
+    _root_logger.setLevel(logging.DEBUG)
+    if not verbosity:
+        _stderr_handler.setLevel(logging.FATAL)
+    elif verbosity == 1:
+        _stderr_handler.setLevel(logging.ERROR)
+    elif verbosity == 2:
+        _stderr_handler.setLevel(logging.WARNING)
+    elif verbosity == 3:
+        _stderr_handler.setLevel(logging.INFO)
+    else:
+        _stderr_handler.setLevel(logging.DEBUG)
+
+def configure(config):
+    # TODO: Adjust logging between dev & prd
+    logzero.logger = None
+    config.log_directory.mkdir(exist_ok=True)
+
+    global _root_logger
+    _root_logger = logging.getLogger()
+
+    global _file_handler
+    _file_handler = logging.handlers.RotatingFileHandler(
+        config.log_file, encoding='utf_8',
+        backupCount=9, maxBytes=1e6
+        )
+    _file_handler.setFormatter(_formatter(for_stderr=False))
+    _root_logger.addHandler(_file_handler)
+
+    global _stderr_handler
+    _stderr_handler = logging.StreamHandler()
+    _stderr_handler.setFormatter(_formatter(for_stderr=True))
+    _root_logger.addHandler(_stderr_handler)
+    apply_verbosity()
+
+def debug(logger, name, value):
+    logger.debug("%s = %s", name, value)
+
+def log_exception(logger, exception, with_traceback=False):
+    if with_traceback:
+        logger.error('%r', exception, exc_info=exception)
+    else:
+        logger.error('%r', exception)
+
+def report_configuration():
+    _dump()
+    # TODO: Temporarily increase verbosity to show all samples
+    _log_samples()
+
+def set_log_level(loggers, log_level):
+    for logger in loggers:
+        logger.setLevel(log_level)
+
+'''DisabledContent
+from src_gen.source import generate
+from src_gen.source import my_visitor_map as parent_visitor_map
+from src_gen.structure import *
+from throw_out_your_templates.section_3 import VisitorMap
+
+my_visitor_map = VisitorMap(parent_map=parent_visitor_map)
+
 @my_visitor_map.register(logging.Formatter)
 def _visit_formatter(element, walker):
     walker.emit('Formatter(')
@@ -174,51 +230,5 @@ def _visit_streamhandler(element, walker):
 #   walker.walk(repr(dir(element)))
     walker.emit(')')
 
-def apply_verbosity(verbosity=0):
-    _file_handler.setLevel(logging.DEBUG)
-    _root_logger.setLevel(logging.DEBUG)
-    if not verbosity:
-        _stderr_handler.setLevel(logging.FATAL)
-    elif verbosity == 1:
-        _stderr_handler.setLevel(logging.ERROR)
-    elif verbosity == 2:
-        _stderr_handler.setLevel(logging.WARNING)
-    elif verbosity == 3:
-        _stderr_handler.setLevel(logging.INFO)
-    else:
-        _stderr_handler.setLevel(logging.DEBUG)
-
-def configure(config):
-    # TODO: Adjust logging between dev & prd
-    logzero.logger = None
-    config.log_directory.mkdir(exist_ok=True)
-
-    global _root_logger
-    _root_logger = logging.getLogger()
-
-    global _file_handler
-    _file_handler = logging.handlers.RotatingFileHandler(
-        config.log_file, encoding='utf_8',
-        backupCount=9, maxBytes=1e6
-        )
-    _file_handler.setFormatter(_formatter(for_stderr=False))
-    _root_logger.addHandler(_file_handler)
-
-    global _stderr_handler
-    _stderr_handler = logging.StreamHandler()
-    _stderr_handler.setFormatter(_formatter(for_stderr=True))
-    _root_logger.addHandler(_stderr_handler)
-    apply_verbosity()
-
-def debug(logger, name, value):
-    logger.debug("%s = %s", name, value)
-
-def report_configuration():
-    _dump()
-    # TODO: Temporarily increase verbosity to show all samples
-    _log_samples()
-
-
-'''DisabledContent
 '''
 

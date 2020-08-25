@@ -4,7 +4,7 @@
 from pathlib import Path
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from src_gen.script.python.source    import generate as gen
+from src_gen.script.python.source import generate as gen
 from src_gen.script.python.structure import *
 # Co-located modules (relative references, NOT packaged, in project)
 
@@ -102,6 +102,7 @@ def _generate_lib_src_gen(directory):
 def _generate_lib_task(directory):
     sub = Path('lib', 'mine', 'task')
     gen(_package(), directory, sub, '__init__.py')
+    gen(_library(), directory, sub, 'exception.py')
     gen(_library(), directory, sub, 'delete_file.py')
     gen(_library(), directory, sub, 'queue.py')
     gen(_library(), directory, sub, 'task.py')
@@ -119,7 +120,6 @@ def _generate_lib_utility(directory):
     gen(_library(), directory, sub, 'math.py')
     gen(_library(), directory, sub, 'my_assert.py')
     gen(_library(), directory, sub, 'my_logging.py')
-    gen(_library(), directory, sub, 'my_system.py')
     gen(_library(), directory, sub, 'my_terminal.py')
     gen(_library(), directory, sub, 'my_time.py')
     gen(_library(), directory, sub, 'processing.py')
@@ -127,11 +127,11 @@ def _generate_lib_utility(directory):
     gen(_library(), directory, sub, 'test_config.py')
     gen(_library(), directory, sub, 'test_filesystem.py')
     gen(_library(), directory, sub, 'test_math.py')
+    gen(_library(), directory, sub, 'test_my_assert.py')
+    gen(_library(), directory, sub, 'test_my_time.py')
     gen(_library(), directory, sub, 'test_text.py')
-    gen(_library(), directory, sub, 'test_time.py')
     gen(_library(), directory, sub, 'test_tracked_path.py')
     gen(_library(), directory, sub, 'text.py')
-    gen(_library(), directory, sub, 'time.py')
     gen(_library(), directory, sub, 'tracked_path.py')
 
 def _generate_src(directory):

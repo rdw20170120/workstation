@@ -5,10 +5,10 @@
 """
 # Internal packages  (absolute references, distributed with Python)
 from decimal import Decimal
-from types   import BuiltinMethodType
-from types   import FunctionType
-from types   import GeneratorType
-from types   import MethodType
+from types import BuiltinMethodType
+from types import FunctionType
+from types import GeneratorType
+from types import MethodType
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)

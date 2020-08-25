@@ -4,8 +4,10 @@
 # Internal packages  (absolute references, distributed with Python)
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
+from utility.my_assert import assert_instance
+from utility.my_assert import assert_not_none
 # Co-located modules (relative references, NOT packaged, in project)
-from ..source    import my_visitor_map
+from ..source import my_visitor_map
 from ..structure import *
 from ..structure import _Command
 
@@ -44,7 +46,7 @@ def echo_warn(*element):
 ###############################################################################
 
 def cc(command_embedded_within_comment):
-    assert isinstance(command_embedded_within_comment, _Command)
+    assert assert_instance(command_embedded_within_comment, _Command)
     return bt(command_embedded_within_comment)
 
 def debugging_comment():
@@ -99,7 +101,7 @@ def set_(argument):
 class _Substitution(object):
     def __init__(self, command):
         super().__init__()
-        assert isinstance(command, _Command)
+        assert assert_instance(command, _Command)
         self.command = command
 
     def __repr__(self):
@@ -122,7 +124,6 @@ class _Assign(object):
     def __init__(self, variable, *expression):
         super().__init__()
         self.variable = squashed(variable)
-        assert self.variable
         self.expressions = squashed(expression)
 
     def __repr__(self):
@@ -139,7 +140,6 @@ def assign(variable, *expression):
     return _Assign(variable, expression)
 
 def export(variable, expression=None):
-    assert variable
     if expression is None:
         return command('export', variable)
     else:
@@ -151,45 +151,33 @@ def condition(executable, *argument):
     return command(executable, argument)
 
 def directory_exists(directory_name):
-    assert directory_name
     return condition('[[', '-d', dq(directory_name), ']]')
 
 def file_exists(file_name):
-    assert file_name
     return condition('[[', '-f', dq(file_name), ']]')
 
 def file_is_readable(file_name):
-    assert file_name
     return condition('[[', '-r', dq(file_name), ']]')
 
 def integer_is_not_equal(left, right):
-    assert left
-    assert right is not None and right != ''
     return condition('[[', dq(left), '-ne', right, ']]')
 
 def path_does_not_exist(path_name):
-    assert path_name
     return condition('[[', '!', '-e', dq(path_name), ']]')
 
 def path_is_not_directory(path_name):
-    assert path_name
     return condition('[[', '!', '-d', dq(path_name), ']]')
 
 def path_is_not_file(path_name):
-    assert path_name
     return condition('[[', '!', '-f', dq(path_name), ']]')
 
 def string_equals(left, right):
-    assert left is not None and left != ''
-    assert right is not None and right != ''
     return condition('[[', dq(left), '==', dq(right), ']]')
 
 def string_is_not_null(expression):
-    assert expression
     return condition('[[', '-n', dq(expression), ']]')
 
 def string_is_null(expression):
-    assert expression
     return condition('[[', '-z', dq(expression), ']]')
 
 ###############################################################################
@@ -199,7 +187,7 @@ class _Else(object):
     def __init__(self, *statement):
         super().__init__()
         self.statements = squashed(statement)
-        assert self.statements
+        assert assert_not_none(self.statements)
 
     def __repr__(self):
         return "_Else({})".format(self.statements)
@@ -222,9 +210,9 @@ class _ElseIf(object):
     def __init__(self, condition, *statement):
         super().__init__()
         self.condition = squashed(condition)
-        assert self.condition
+        assert assert_not_none(self.condition)
         self.statements = squashed(statement)
-        assert self.statements
+        assert assert_not_none(self.statements)
 
     def __repr__(self):
         return "_ElseIf({}, {})".format(self.condition, self.statements)
@@ -268,9 +256,9 @@ class _If(object):
     def __init__(self, condition, *statement):
         super().__init__()
         self.condition = squashed(condition)
-        assert self.condition
+        assert assert_not_none(self.condition)
         self.statements = squashed(statement)
-        assert self.statements
+        assert assert_not_none(self.statements)
 
     def __repr__(self):
         return "_If({}, {})".format(self.condition, self.statements)
@@ -307,7 +295,6 @@ def shebang_sourced():
     return shebang_false()
 
 def source(file_name):
-    assert file_name
     return command('source', file_name)
 
 def sourced_header():
@@ -327,7 +314,6 @@ class _VariableName(object):
     def __init__(self, name):
         super().__init__()
         self.name = squashed(name)
-        assert self.name
 
     def __repr__(self):
         return "_VariableName({})".format(self.name)
@@ -345,7 +331,6 @@ class _VariableReference(object):
     def __init__(self, name):
         super().__init__()
         self.name = squashed(name)
-        assert self.name
 
     def __repr__(self):
         return "_VariableReference({})".format(self.name)

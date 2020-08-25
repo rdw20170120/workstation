@@ -10,8 +10,8 @@ e.g., those consisting of 'return [...]'.
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
 from ....renderer import Renderer
-from .source     import my_visitor_map
-from .structure  import *
+from .source import my_visitor_map
+from .structure import *
 
 
 s = Renderer(my_visitor_map)._serialize

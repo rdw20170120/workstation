@@ -6,7 +6,7 @@
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
 from ..structure import *
-from .source     import my_visitor_map
+from .source import my_visitor_map
 
 
 ###############################################################################

@@ -3,7 +3,7 @@
 # Internal packages  (absolute references, distributed with Python)
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from src_gen.document.markdown.source    import generate as gen
+from src_gen.document.markdown.source import generate as gen
 from src_gen.document.markdown.structure import *
 # Co-located modules (relative references, NOT packaged, in project)
 

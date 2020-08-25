@@ -2,6 +2,7 @@
 """TODO: Write
 """
 # Internal packages  (absolute references, distributed with Python)
+from math import isnan
 from math import nan
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
@@ -58,6 +59,17 @@ class Rate(Percentage):
     @property
     def rate_units(self):
         return self._rate_units
+
+
+def assert_nan(actual_value):
+    """Assert that actual_value is not-a-number (NaN)."""
+    result = isnan(actual_value)
+    if result: return result
+    else:
+        raise AssertionError(
+            "{!r} is NOT a not-a-number (NaN)".format(
+                actual_value
+            ))
 
 '''DisabledContent
 '''

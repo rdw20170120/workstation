@@ -23,6 +23,11 @@ from pathlib import Path
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.filesystem import split_pathname
+from utility.my_assert import assert_absolute_directory
+from utility.my_assert import assert_absolute_path
+from utility.my_assert import assert_instance
+from utility.my_assert import assert_not_instance
+from utility.my_assert import assert_relative_path
 # Co-located modules (relative references, NOT packaged, in project)
 
 
@@ -49,27 +54,28 @@ class TrackedPath(object):
 
         super().__init__()
 
-        assert isinstance(self._title, str)
+        assert assert_instance(self._title, str)
 
-        assert not self._top is None
-        assert not isinstance(self._top, self.__class__)
+        assert assert_not_instance(self._top, type(None))
+        assert assert_not_instance(self._top, self.__class__)
         if not isinstance(self._top, Path): self._top = Path(self._top)
-        assert isinstance(self._top, Path)
-        assert self._top.is_absolute()
-        if self._top.exists(): assert self._top.is_dir()
+        assert assert_instance(self._top, Path)
+        assert assert_absolute_path(self._top)
+        if self._top.exists(): assert assert_absolute_directory(self._top)
 
-        assert not isinstance(self._relative, self.__class__)
+        assert assert_not_instance(self._relative, self.__class__)
         if self._relative is None:
             # TODO: Use reference for current directory instead
             self._relative = Path('.')
         if not isinstance(self._relative, Path):
             self._relative = Path(self._relative)
-        assert isinstance(self._relative, Path)
-        assert not self._relative.is_absolute()
+        assert assert_instance(self._relative, Path)
+        assert assert_relative_path(self._relative)
         self._subpath, self._basename = split_pathname(self._relative)
 
         self._path = self._top / self._relative
-        assert isinstance(self._path, Path)
+        assert assert_instance(self._path, Path)
+        assert assert_absolute_path(self._path)
 
     def __repr__(self):
         return "{}({!r}, {!r}, {!r})".format(
@@ -90,7 +96,7 @@ class TrackedPath(object):
         return self._basename
 
     def for_log(self):
-        return "{} '{}'".format(self._title, self._relative)
+        return "'{}' path '{}'".format(self._title, self._relative)
 
     def for_path(self, path):
         if not isinstance(path, Path): path = Path(path)

@@ -10,6 +10,7 @@ from logging import getLogger
 from throw_out_your_templates.section_1 import default_encoding
 from throw_out_your_templates.section_2 import Serializer
 from throw_out_your_templates.section_4 import visitor_map as default_visitor_map
+from utility.my_logging import log_exception
 # Co-located modules (relative references, NOT packaged, in project)
 
 
@@ -42,7 +43,7 @@ class Renderer(object):
                     ) as f:
                     f.write(self._serialize(content))
         except TypeError as e:
-            self._log.error("TypeError: %s", e)
+            log_exception(self._log, e)
         except Exception: raise
 
 '''DisabledContent

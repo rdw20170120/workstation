@@ -4,17 +4,17 @@
 Intended to be executed as a Python module:  python3 -m MODULE
 """
 # Internal packages  (absolute references, distributed with Python)
-from   argparse import ArgumentParser
-from   logging  import getLogger
-from   logging  import DEBUG, INFO, WARN, ERROR, FATAL
+from argparse import ArgumentParser
+from logging import DEBUG, INFO, WARN, ERROR, FATAL
+from logging import getLogger
 import sys
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from task.task_manager             import TaskManager
-from utility                       import my_logging
+from task.task_manager import TaskManager
+from utility import my_logging
 from utility.singleton_application import SingletonApplication
 # Co-located modules (relative references, NOT packaged, in project)
-from .config         import Config
+from .config import Config
 from .task.bootstrap import Bootstrap
 
 
@@ -33,24 +33,21 @@ class MyApp(SingletonApplication):
 
 
 def _apply_verbosity(verbosity=0):
-    # Reference loggers for supporting code
-    utility_logger = getLogger('utility')
-
-    # Adjust logging from supporting code
+    background = [
+        getLogger('utility'),
+        ]
     if verbosity <= 3:
-        utility_logger.setLevel(FATAL)
+        my_logging.set_log_level(background, FATAL)
     elif verbosity == 4:
-        utility_logger.setLevel(FATAL)
-    elif verbosity == 4:
-        utility_logger.setLevel(FATAL)
+        my_logging.set_log_level(background, FATAL)
     elif verbosity == 5:
-        utility_logger.setLevel(ERROR)
+        my_logging.set_log_level(background, ERROR)
     elif verbosity == 6:
-        utility_logger.setLevel(WARN)
+        my_logging.set_log_level(background, WARN)
     elif verbosity == 7:
-        utility_logger.setLevel(INFO)
+        my_logging.set_log_level(background, INFO)
     else:
-        utility_logger.setLevel(DEBUG)
+        my_logging.set_log_level(background, DEBUG)
 
 def _parse_args():
     # TODO: Add dry run
