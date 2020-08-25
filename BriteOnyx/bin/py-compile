@@ -11,10 +11,11 @@ if [[ -z "$BO_Project" ]] ; then
 fi
 
 echo "INFO: Compiling Python source files..."
+python3 -m compileall -f $BO_Project/BriteOnyx/bin
 python3 -m compileall -f $BO_Project/bin
-python3 -m compileall -f $BO_Project/gen
-python3 -m compileall -f $BO_Project/lib
-python3 -m compileall -f $BO_Project/src
+python3 -m compileall -f $BO_Project/src/app
+python3 -m compileall -f $BO_Project/src/gen
+python3 -m compileall -f $BO_Project/src/lib
 
 ###############################################################################
 : << 'DisabledContent'

@@ -6,8 +6,8 @@
 # Configure Python
 
 # Configure Python path
-DirMine=$BO_Project/lib/mine
-DirThird=$BO_Project/lib/third_party
+DirMine=$BO_Project/src/lib/mine
+DirThird=$BO_Project/src/lib/third_party
 export PYTHONPATH=$PYTHONPATH:$DirThird:$DirMine
 echo "DEBUG: PYTHONPATH=$PYTHONPATH"
 

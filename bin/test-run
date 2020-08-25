@@ -17,15 +17,15 @@ else
     echo "WARN: Script file '$Script' is not readable"
 fi
 
-cd $BO_Project/lib/mine
+cd $BO_Project/src/lib/mine
 py.test --log-file=pytest.log
 # DISABLED: --show-capture=no
 
-cd $BO_Project/gen
+cd $BO_Project/src/gen
 py.test --log-file=pytest.log
 # DISABLED: --show-capture=no
 
-cd $BO_Project/src
+cd $BO_Project/src/app
 py.test --log-file=pytest.log
 # DISABLED: --show-capture=no
 

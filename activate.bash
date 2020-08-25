@@ -20,13 +20,11 @@
 # the rest of their session, each and every time they develop, test, etc.  It
 # would be very disruptive for the shell to abort on every error raised by
 # every part of every command that they execute.  If you are unclear about
-# this, then please experiment by uncommenting the `set -x` command below and
+# this, then please experiment by uncommenting the `set -x` command above and
 # activating a new shell.  Having learned that lesson, let's never use `set -x`
-# in a BASH script intended to be `source`d.  However, the `set -e` BASH option
-# is a good default for all scripts invoked as commands in their own subshells.
-###############################################################################
-# NO: set -e
-# DISABLED: set -x
+# in a BASH script intended to be `source`d.  Similarly, the `set -e` BASH
+# option is problematic because its haphazard behavior does not deliver on its
+# promised usefulness.
 ###############################################################################
 
 if [[ -n "$BO_Project" ]] ; then
@@ -102,7 +100,7 @@ env | sort > $PWD/BO-PVE-after.env
 # NOTE: This specific ordering of PATH elements is REQUIRED.  The Python
 # virtual environment MUST come first in order to override the system Python.
 # For now, that PATH element also includes the system PATH element, which is
-# repeated here for when that is eventually fixed.  They system PATH element
+# repeated here for when that is eventually fixed.  The system PATH element
 # MUST precede any user PATH elements in order to make collisions fail-fast
 # and to defeat simple attempts at redirecting system commands as an attack
 # vector.  Similarly, the project PATH element MUST precede the user PATH

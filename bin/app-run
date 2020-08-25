@@ -23,7 +23,7 @@ else
     echo "WARN: Script file '$Script' is not readable"
 fi
 
-cd $BO_Project/src
+cd $BO_Project/src/app
 
 # Execute Python
 cmd='python3'

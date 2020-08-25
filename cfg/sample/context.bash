@@ -8,7 +8,7 @@
 # for this user.
 # This file is sourced by the 'activate.bash' script.  You can manually source
 # it into your current shell as a means to reset your execution context.
-# See $BO_Project/src/MODULE/config.py for a description of each.
+# See $BO_Project/src/app/MODULE/config.py for a description of each.
 
 # NOTE:  This is a sample application context.
 # It is intended to be copied to $BO_Project/context.bash and edited as needed.

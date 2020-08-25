@@ -34,25 +34,26 @@ echo "INFO: Found these files..."
 findAnd print $BO_Project '*.bak'
 findAnd print $BO_Project '*.log'
 findAnd print $BO_Project '*.pyc'
-findAnd print $BO_Project '.pytest_cache'
 findAnd print $BO_Project '__pycache__'
 
 echo "INFO: Deleting files..."
 findAnd delete $BO_Project '*.bak'
 findAnd delete $BO_Project '*.pyc'
-findAnd delete $BO_Project '.pytest_cache'
 findAnd delete $BO_Project '__pycache__'
 
-_file=$BO_Project/src/pytest.log
-[[ -f "$_file" ]] \
-    && echo "INFO: Deleting file '$_file'" \
-    && rm $_file
+_file=$BO_Project/src/app/pytest.log
+[[ -f "$_file" ]] && echo "INFO: Deleting file '$_file'" && rm $_file
+_file=$BO_Project/src/gen/pytest.log
+[[ -f "$_file" ]] && echo "INFO: Deleting file '$_file'" && rm $_file
+_file=$BO_Project/src/lib/mine/pytest.log
+[[ -f "$_file" ]] && echo "INFO: Deleting file '$_file'" && rm $_file
+_file=$BO_Project/src/lib/third_party/pytest.log
+[[ -f "$_file" ]] && echo "INFO: Deleting file '$_file'" && rm $_file
 
 echo "WARN: Found these files REMAINING..."
 findAnd print $BO_Project '*.bak'
 findAnd print $BO_Project '*.log'
 findAnd print $BO_Project '*.pyc'
-findAnd print $BO_Project '.pytest_cache'
 findAnd print $BO_Project '__pycache__'
 
 ###############################################################################

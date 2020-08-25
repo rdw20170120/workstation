@@ -24,7 +24,7 @@ fi
 #  2.  Start by disabling (commenting out) writing back to the source files.
 #  3.  Disable the 'all' transformation.
 #  4.  Enable the '-p' print function transformation.
-#  5.  Disable every optional fix transformations.
+#  5.  Disable all optional fix transformations.
 #  6.  Look at the command output for problems, hunt them down in the Python2
 #      source files, and fix them.  Continue until the output is clean.  In
 #      particular, fix any 'ParseError's that arise.  It appears that only this
@@ -35,7 +35,7 @@ fi
 #  9.  Disable writing back to the source files again.
 # 10.  Enable the 'all' transformation.
 # 11.  Disable the '-p' print function transformation.
-# 12.  Disable the optional fix transformations.
+# 12.  Disable all optional fix transformations.
 # 13.  Look at the command output for problems, hunt them down in the Python2
 #      source files, and fix them.  Continue until the output is clean.  In
 #      particular, fix any 'ParseError's that arise.
@@ -79,11 +79,13 @@ convert () {
 }
 
 # These directories should have Python3 source files in them
-# But $BO_Project/lib/python2 should remain as Python2 source (until deleted)
+# But $BO_Project/src/lib/python2 should remain as Python2 source (until deleted)
+convert $BO_Project/BriteOnyx/bin
 convert $BO_Project/bin
-convert $BO_Project/lib/mine
-convert $BO_Project/lib/third_party
-convert $BO_Project/src
+convert $BO_Project/src/app
+convert $BO_Project/src/gen
+convert $BO_Project/src/lib/mine
+convert $BO_Project/src/lib/third_party
 
 ###############################################################################
 : << 'DisabledContent'

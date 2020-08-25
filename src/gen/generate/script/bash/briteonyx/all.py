@@ -49,7 +49,7 @@ def _generate_bin(directory):
     sub = Path('bin')
     gen(_executed(), directory, sub, 'app-run')
     gen(_executed(), directory, sub, 'dep-install')
-    gen(_executed(), directory, sub, 'generate')
+    gen(_executed(), directory, sub, 'gen-run')
     gen(_executed(), directory, sub, 'test-run')
     gen(_executed(), directory, sub, 'tool-report')
     sub = Path('bin', 'lib')

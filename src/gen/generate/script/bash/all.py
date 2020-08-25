@@ -24,7 +24,7 @@ def generate(directory):
     gen(_sourced(), directory, sub, 'alias-common.bash')
     gen(_sourced(), directory, sub, 'alias-git.bash')
     gen(_sourced(), directory, sub, 'pve-activate.bash')
-    sub = Path('sample')
+    sub = Path('cfg', 'sample')
     gen(_sourced(), directory, sub, 'alias.bash')
     gen(_sourced(), directory, sub, 'context.bash')
 

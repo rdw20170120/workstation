@@ -28,7 +28,7 @@ fi
 DirTgt=$TMPDIR/tgt
 
 echo "INFO: Generating content into directory '$DirTgt'"
-cd $BO_Project/gen
+cd $BO_Project/src/gen
 
 # Execute Python
 cmd='python3'
