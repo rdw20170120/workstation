@@ -38,9 +38,7 @@ class Renderer(object):
                 self._log.info(
                     "Writing rendered content to file '%s'", file_path
                     )
-                with open(file_path, mode='wt',
-                    newline=None
-                    ) as f:
+                with open(file_path, mode='wt', newline=None) as f:
                     f.write(self._serialize(content))
         except TypeError as e:
             log_exception(self._log, e)

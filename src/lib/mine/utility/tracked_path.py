@@ -20,11 +20,13 @@ while enabling the consistent tracking of those metrics.
 """
 # Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
+from shutil import rmtree
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.filesystem import split_pathname
 from utility.my_assert import assert_absolute_directory
 from utility.my_assert import assert_absolute_path
+from utility.my_assert import assert_contains
 from utility.my_assert import assert_instance
 from utility.my_assert import assert_not_instance
 from utility.my_assert import assert_relative_path
@@ -95,6 +97,20 @@ class TrackedPath(object):
     def basename(self):
         return self._basename
 
+    def delete(self, force=False):
+        if not self.exists(): return
+        if self.is_dir():
+            if force:
+                rmtree(str(self), ignore_errors=force)
+            else:
+                self.rmdir()
+        elif self.is_file():
+            self.unlink()
+        else:
+            raise NotImplementedError(
+                "Do not know how to delete {!r}".format(self)
+                )
+
     def for_log(self):
         return "'{}' path '{}'".format(self._title, self._relative)
 
@@ -103,6 +119,36 @@ class TrackedPath(object):
         relative = path.relative_to(self._top)
         return TrackedPath(self._title, self._top, relative)
 
+    def open_for_binary_read(self, buffering=-1):
+        return self._path.open(buffering=buffering, mode='br')
+
+    def open_for_binary_write(self, buffering=-1):
+        return self._path.open(buffering=buffering, mode='bw')
+
+    def open_for_text_read(self,
+        buffering=-1, encoding=None, errors=None, newline=None
+        ):
+        if encoding is None: encoding = 'utf_8'
+        return self._path.open(
+            buffering=buffering,
+            encoding=encoding,
+            errors=errors,
+            mode='rt',
+            newline=newline
+            )
+
+    def open_for_text_write(self,
+        buffering=-1, encoding=None, errors=None, newline=None
+        ):
+        if encoding is None: encoding = 'utf_8'
+        return self._path.open(
+            buffering=buffering,
+            encoding=encoding,
+            errors=errors,
+            mode='tw',
+            newline=newline
+            )
+
     @property
     def path(self):
         return self._path
@@ -110,6 +156,10 @@ class TrackedPath(object):
     @property
     def relative(self):
         return self._relative
+
+    @property
+    def size(self):
+        return self._path.stat().st_size
 
     @property
     def subpath(self):

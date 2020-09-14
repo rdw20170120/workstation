@@ -9,11 +9,10 @@ from boto3 import Session
 # Co-located modules (relative references, NOT packaged, in project)
 
 
-log = getLogger(__name__)
-
-
 class AwsService(object):
     def __init__(self, service_name, profile_name, region_name=None):
+        self._log = getLogger(self.__class__.__name__)
+
         if not service_name:
             raise ValueError("'service_name' has invalid value '{}'".format(service_name))
         self._service_name = service_name
@@ -27,7 +26,7 @@ class AwsService(object):
         else:
             self._region_name = region_name
 
-        log.debug(
+        self._log.debug(
             "Creating AWS session for profile '%s' and region '%s'",
             self._profile_name, self._region_name
             )

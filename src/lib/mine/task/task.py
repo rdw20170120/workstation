@@ -5,16 +5,12 @@ from pathlib import Path
 from shutil import disk_usage
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.filesystem import delete_directory_tree
-from utility.filesystem import delete_file
-from utility.filesystem import touch
 from utility.my_assert import assert_absolute_directory
 from utility.my_assert import assert_existing_absolute_path
 from utility.my_assert import assert_absolute_file
 from utility.my_assert import assert_absolute_path
 from utility.my_assert import assert_instance
 from utility.my_logging import log_exception
-from utility.tracked_path import TrackedPath
 # Co-located modules (relative references, NOT packaged, in project)
 from .exception import Abort
 
@@ -60,7 +56,6 @@ class FileSystemTask(PlainTask):
         if not len(paths):
             self._log.debug("No %s registered in %s", name, self)
         for path in paths:
-            assert assert_instance(path, TrackedPath)
             assert assert_absolute_path(path)
             if not path.exists():
                 raise FileNotFoundError(
@@ -78,7 +73,6 @@ class FileSystemTask(PlainTask):
         if self.config.should_leave_output_upon_task_failure: return
         self._log.info("%s is deleting targets upon exception", self)
         for target in self._targets:
-            assert assert_instance(target, TrackedPath)
             assert assert_absolute_path(target)
             if target.exists():
                 if target.is_dir():
@@ -87,14 +81,14 @@ class FileSystemTask(PlainTask):
                         + ", deleting target %s",
                         self, target.for_log()
                         )
-                    delete_directory_tree(target, force=True)
+                    target.delete(force=True)
                 elif target.is_file():
                     self._log.warn(
                         "%s encountered exception"
                         + ", deleting target %s",
                         self, target.for_log()
                         )
-                    delete_file(target)
+                    target.delete()
                 else:
                     self._log.error(
                         "%s encountered exception"
@@ -113,13 +107,9 @@ class FileSystemTask(PlainTask):
             "_execute() should be overridden in subclasses"
             )
 
-    def _register_source(self, source, directory=None):
+    def _register_source(self, source):
         if source is None: return None
-        if directory is not None:
-            assert assert_absolute_directory(directory)
-            source = directory / source
         assert assert_absolute_path(source)
-        assert assert_instance(source, TrackedPath)
         self._log.debug("Registering source %s", source.for_log())
         self._sources.append(source)
         return source
@@ -129,13 +119,9 @@ class FileSystemTask(PlainTask):
             "_register_sources() should be overridden in subclasses"
             )
 
-    def _register_target(self, target, directory=None):
+    def _register_target(self, target):
         if target is None: return None
-        if directory is not None:
-            assert assert_absolute_directory(directory)
-            target = directory / target
         assert assert_absolute_path(target)
-        assert assert_instance(target, TrackedPath)
         self._log.debug("Registering target %s", target.for_log())
         self._targets.append(target)
         return target
@@ -161,7 +147,6 @@ class FileSystemTask(PlainTask):
         if self.config.is_dry_run: return False
         if force is None: return True
         if not force: force = self.config.is_forced_run
-        assert assert_instance(target, TrackedPath)
         assert assert_absolute_path(target)
         if not target.exists(): return True
         result = False
@@ -171,12 +156,12 @@ class FileSystemTask(PlainTask):
                 self._log.warn('Target creation forced, deleting %s',
                     target.for_log()
                     )
-                delete_directory_tree(target, force=True)
+                target.delete(force=True)
             elif target.is_file():
                 self._log.warn('Target creation forced, deleting %s',
                     target.for_log()
                     )
-                delete_file(target)
+                target.delete()
             else:
                 self._log.error(
                     "Cannot delete unrecognized target %s",
@@ -196,7 +181,7 @@ class FileSystemTask(PlainTask):
         if not directory_path.is_dir():
             raise NotADirectoryError(
                 "Aborting deletion of unexpected non-directory {}".format(
-                path
+                directory_path.for_log()
                 ))
         return True
 
@@ -207,14 +192,14 @@ class FileSystemTask(PlainTask):
         if not file_path.is_file():
             raise OSError(
                 "Aborting deletion of unexpected non-file {}".format(
-                path
+                file_path.for_log()
                 ))
         return True
 
     def _touch_targets(self):
         for target in self._targets:
             assert assert_absolute_path(target)
-            touch(target)
+            target.touch()
             assert assert_absolute_file(target)
 
     def execute(self):

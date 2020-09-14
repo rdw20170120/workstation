@@ -62,8 +62,20 @@ def assert_absolute_path(path):
                 path
             ))
 
+def assert_contains(item, group):
+    """Assert that group contains item."""
+    result = (item in group)
+    if result: return result
+    else:
+        raise AssertionError(
+            "{!r} is NOT contained IN {!r}".format(
+                item, group
+            ))
+
 def assert_encoding_is_utf8(encoding):
-    result = (encoding in ('utf-8', 'UTF8'))
+    # TODO: Add tests for complete list of variants
+    # TODO: Add handling for both string and enum versions
+    result = (encoding in ('utf_8', 'utf-8', 'UTF8'))
     if result: return result
     else:
         raise AssertionError(
@@ -226,25 +238,5 @@ def assert_true(actual_value):
             ))
 
 '''DisabledContent
-# TODO: Rewrite following implementations in favor of new style above
-
-def has_type(actual_value, expected_type):
-    return isinstance(actual_value, expected_type)
-
-def has_type_message(actual_value, expected_type):
-    return "Value is of type '{0}', instead of type '{1}'".format(
-        type(actual_value), expected_type
-        )
-
-def assert_is_less_than(smallerName, smallerValue, biggerName, biggerValue):
-    return smallerValue <= biggerValue
-
-def assert_is_less_than_message(smallerName, smallerValue, biggerName, biggerValue):
-    return "{0} '{1}' must be less than (or equal to) {2} '{3}'".format(
-        smallerName, smallerValue, biggerName, biggerValue
-        )
-
-def unrecognized_message(actual_value, unexpected_kind, name):
-    return "Value '{0}' is an unrecognized {1} of '{2}'".format(actual_value, name, unexpected_kind)
 '''
 

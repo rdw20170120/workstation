@@ -12,13 +12,15 @@ from utility.my_assert import assert_not_none
 from .config import Config
 
 
+c = Config()
+
 def test_application_name():
-    v = Config().application_name
+    v = c.application_name
     assert assert_instance(v, str)
     assert assert_not_equal(v, 'PleaseOverrideMe')
 
 def test_config():
-    assert assert_not_none(Config())
+    assert assert_not_none(c)
 
 '''DisabledContent
 '''

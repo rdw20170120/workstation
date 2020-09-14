@@ -16,6 +16,7 @@ from utility.singleton_application import SingletonApplication
 # Co-located modules (relative references, NOT packaged, in project)
 from .config import Config
 from .task.bootstrap import Bootstrap
+from .task.mapping import Mapping
 
 
 c = Config()
@@ -27,7 +28,7 @@ class MyApp(SingletonApplication):
 
     def _run(self):
         self._log.info("Running application...")
-        tm = TaskManager(c)
+        tm = TaskManager(c, Mapping())
         Bootstrap(tm)
         tm.run()
 

@@ -9,10 +9,6 @@ from utility.config import Config as BaseConfig
 
 class Config(BaseConfig):
     @property
-    def application_name(self):
-        return 'MODULE'
-
-    @property
     def should_abort_upon_task_failure(self):
         # NOTE: Overriding BaseConfig, should remove for production
         return True
@@ -22,6 +18,9 @@ class Config(BaseConfig):
         # NOTE: Overriding BaseConfig, should remove for production
         return True
  
+    @property
+    def application_name(self):
+        return 'MODULE'
 
 '''DisabledContent
 '''
