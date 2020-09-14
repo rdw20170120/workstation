@@ -24,6 +24,7 @@ checkVariable() {
 }
 
 # operating system
+checkExecutable uname
 if [[ "$(uname)" -eq 'Darwin' ]] ; then
     # NOTE: This works on macOS
     check 'uname -a'
@@ -31,37 +32,42 @@ else
     # NOTE: This works on Ubuntu
     check 'uname --all'
 fi
-checkExecutable uname
 checkVariable PATH "$PATH"
 
 # BASH
-check 'bash --version'
 checkExecutable bash
+check 'bash --version'
 
 # Git
-check 'git --version'
 checkExecutable git
+check 'git --version'
+
+# Homebrew
+checkExecutable brew
+check 'brew --version'
+check 'brew list --full-name --versions --casks'
+check 'brew list --full-name --versions --formulae'
 
 # Python shared
-check 'python --version'
 checkExecutable python
+check 'python --version'
 checkVariable PYTHONPATH "$PYTHONPATH"
 
 # Python 2
-check 'pip --version'
-checkExecutable pip
-check 'python2 --version' 2>&1
 checkExecutable python2
+check 'python2 --version' 2>&1
+checkExecutable pip
+check 'pip --version'
 echo $Rule
 python2 -c 'import platform; print(platform.python_version())'
 echo $Rule
 python2 -c 'import os; print(os.sys.path)'
 
 # Python 3
-check 'pip3 --version'
-checkExecutable pip3
-check 'python3 --version'
 checkExecutable python3
+check 'python3 --version'
+checkExecutable pip3
+check 'pip3 --version'
 echo $Rule
 python3 -c 'import platform; print(platform.python_version())'
 echo $Rule
@@ -71,8 +77,8 @@ python3 -c 'import os; print(os.sys.path)'
 checkExecutable 2to3
 
 # Python testing
-check 'py.test --version' 2>&1
 checkExecutable py.test
+check 'py.test --version' 2>&1
 
 # Ensure a successful script return
 echo "Tool report succeeded, though individual checks may fail"
@@ -81,14 +87,15 @@ exit 0
 ###############################################################################
 : << 'DisabledContent'
 # AWS CLI
-check 'aws --version'
 checkExecutable aws
+check 'aws --version'
 
 # Kubernetes 
-check 'kubectl version'
 checkExecutable kubectl
+check 'kubectl version'
 
 # OpenSSL 
+checkExecutable openssl
 check 'openssl version -a'
 check 'openssl list-cipher-algorithms'
 check 'openssl list-cipher-commands'
@@ -96,15 +103,15 @@ check 'openssl list-message-digest-algorithms'
 check 'openssl list-message-digest-commands'
 check 'openssl list-public-key-algorithms'
 check 'openssl list-standard-commands'
-checkExecutable openssl
 
 # Oracle Java
-check 'java --version'
-check 'keytool -showinfo -tls'
 checkExecutable java
+check 'java --version'
 checkExecutable keytool
+check 'keytool -showinfo -tls'
 
 # Python OpenSSL
+checkExecutable python
 check 'python -m OpenSSL.debug'
 
 DisabledContent

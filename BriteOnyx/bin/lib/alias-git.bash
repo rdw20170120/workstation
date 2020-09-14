@@ -6,6 +6,7 @@
 # BASH alias definitions for source control
 
 alias add='git add .'
+alias branches='git branch --list -a'
 alias commit='git commit'
 alias ignored='git status --ignored'
 alias ignored='git status --ignored'

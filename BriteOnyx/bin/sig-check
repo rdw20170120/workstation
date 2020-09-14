@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
+# Check the signature file for directory $1
+
+dir=$1
+[[ -z "${dir}" ]] && dir=${PWD}
+
+file=shasum-256.sig
+
+echo "INFO:  Checking signature file ${dir}/${file}"
+cd ${dir}
+shasum -p -a 256 --warn --check ${file}
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
+

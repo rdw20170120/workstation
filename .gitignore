@@ -4,6 +4,7 @@ context.bash
 # Common files
 *.avro
 *.env
+*.json
 *.list
 *.log
 *.out
@@ -16,7 +17,8 @@ log/
 .DS_Store
 
 # Oracle Java
-# *.class
+*.class
+*.properties
 
 # Vim
 *.swp

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# DISABLED: set -x
+# Intended to be executed directly by the user.
+###############################################################################
+# Make a signature file for directory $1
+
+dir=$1
+[[ -z "${dir}" ]] && dir=${PWD}
+
+file=shasum-256.sig
+
+echo "INFO:  Making signature file ${dir}/${file}"
+cd ${dir}
+shasum -p -a 256 * 2>/dev/null | grep -v ${file} >${file}
+cat ${file}
+
+###############################################################################
+: << 'DisabledContent'
+DisabledContent
+
