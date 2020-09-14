@@ -11,9 +11,10 @@ from .queue import TaskQueue
 
 
 class TaskManager(object):
-    def __init__(self, config):
-        self._config = config
+    def __init__(self, config, mapping):
         self._log = getLogger(self.__class__.__name__)
+        self._config = config
+        self._mapping = mapping
         self._q = TaskQueue()
         super().__init__()
 
@@ -40,6 +41,10 @@ class TaskManager(object):
     @property
     def config(self):
         return self._config
+
+    @property
+    def mapping(self):
+        return self._mapping
 
     def run(self):
         self._log.info("Running task manager...")

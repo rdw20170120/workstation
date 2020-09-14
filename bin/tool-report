@@ -56,22 +56,18 @@ checkVariable PYTHONPATH "$PYTHONPATH"
 # Python 2
 checkExecutable python2
 check 'python2 --version' 2>&1
+python2 -c 'import platform; print(platform.python_version())'
+python2 -c 'import os; print(os.sys.path)'
 checkExecutable pip
 check 'pip --version'
-echo $Rule
-python2 -c 'import platform; print(platform.python_version())'
-echo $Rule
-python2 -c 'import os; print(os.sys.path)'
 
 # Python 3
 checkExecutable python3
 check 'python3 --version'
+python3 -c 'import platform; print(platform.python_version())'
+python3 -c 'import os; print(os.sys.path)'
 checkExecutable pip3
 check 'pip3 --version'
-echo $Rule
-python3 -c 'import platform; print(platform.python_version())'
-echo $Rule
-python3 -c 'import os; print(os.sys.path)'
 
 # Python 2to3
 checkExecutable 2to3

@@ -10,7 +10,7 @@ same concept as django.utils.safestring and webhelpers.html.literal
 # Co-located modules (relative references, NOT packaged, in project)
 
 
-default_encoding = 'utf-8'
+default_encoding = 'utf_8'
 
 '''DisabledContent
 class safe_bytes(str):

@@ -16,8 +16,7 @@ class Bootstrap(PlainTask):
 
     def __str__(self): return self.__class__.__name__
 
-    def execute(self):
-        super().execute()
+    def _execute(self):
         ScanDirectory(self._tm, self.config.temporary_directory)
 
 '''DisabledContent

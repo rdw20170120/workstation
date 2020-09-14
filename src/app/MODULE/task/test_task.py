@@ -10,12 +10,14 @@ from utility.my_assert import assert_not_none
 # Co-located modules (relative references, NOT packaged, in project)
 from ..config import Config
 from .bootstrap import Bootstrap
+from .mapping import Mapping
 from .scan_directory import ScanDirectory
 
 
 c = Config()
+m = Mapping()
 path = Path()
-tm = TaskManager(c)
+tm = TaskManager(c, m)
 
 def test_bootstrap():
     assert assert_not_none(Bootstrap(tm))

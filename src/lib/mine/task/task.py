@@ -17,6 +17,7 @@ from utility.my_assert import assert_instance
 from utility.my_logging import log_exception
 from utility.tracked_path import TrackedPath
 # Co-located modules (relative references, NOT packaged, in project)
+from .exception import Abort
 
 
 class PlainTask(object):
@@ -182,11 +183,8 @@ class FileSystemTask(PlainTask):
         self._register_sources()
         self._abort_if_source_is_missing()
 
-    def _register_source(self, source, directory=None):
+    def _register_source(self, source):
         if source is None: return None
-        if directory is not None:
-            assert assert_absolute_directory(directory)
-            source = directory / source
         assert assert_absolute_path(source)
         assert assert_instance(source, TrackedPath)
         self._log.debug("Registering source %s", source.for_log())
@@ -198,11 +196,8 @@ class FileSystemTask(PlainTask):
             "_register_sources() should be overridden in subclasses"
             )
 
-    def _register_target(self, target, directory=None):
+    def _register_target(self, target):
         if target is None: return None
-        if directory is not None:
-            assert assert_absolute_directory(directory)
-            target = directory / target
         assert assert_absolute_path(target)
         assert assert_instance(target, TrackedPath)
         self._log.debug("Registering target %s", target.for_log())
@@ -265,7 +260,7 @@ class FileSystemTask(PlainTask):
         if not directory_path.is_dir():
             raise NotADirectoryError(
                 "Aborting deletion of unexpected non-directory {}".format(
-                path
+                directory_path.for_log()
                 ))
         return True
 
@@ -276,7 +271,7 @@ class FileSystemTask(PlainTask):
         if not file_path.is_file():
             raise OSError(
                 "Aborting deletion of unexpected non-file {}".format(
-                path
+                file_path.for_log()
                 ))
         return True
 

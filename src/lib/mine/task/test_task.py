@@ -16,7 +16,7 @@ from .task_manager import TaskManager
 
 logger = None
 source = TrackedPath('title', '/top')
-tm = TaskManager(None)
+tm = TaskManager(None, None)
 
 def test_delete_file():
     assert assert_not_none(DeleteFile(tm, source))
