@@ -64,11 +64,15 @@ class Config:
 
     @property
     def log_file(self):
-        return self.log_directory / (self.log_name + '.log')
+        return self.log_directory / (self.log_name + self.log_suffix)
 
     @property
     def log_name(self):
         return 'app'
+
+    @property
+    def log_suffix(self):
+        return '.log'
 
     @property
     def quick_run_limit(self):
@@ -90,7 +94,11 @@ class Config:
 
     @property
     def pid_file(self):
-        return self.project_directory / (self.application_name + '.pid')
+        return self.project_directory / (self.application_name + self.pid_suffix)
+
+    @property
+    def pid_suffix(self):
+        return '.pid'
 
     @property
     def project_directory(self):

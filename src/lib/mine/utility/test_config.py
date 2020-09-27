@@ -50,9 +50,17 @@ def test_log_name():
     v = c.log_name
     assert assert_nonempty_string(v)
 
+def test_log_suffix():
+    v = c.log_suffix
+    assert assert_nonempty_string(v)
+
 def test_pid_file():
     v = c.pid_file
     assert assert_absolute_path(v)
+
+def test_pid_suffix():
+    v = c.pid_suffix
+    assert assert_nonempty_string(v)
 
 def test_project_directory():
     v = c.project_directory
