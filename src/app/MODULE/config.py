@@ -10,11 +10,13 @@ from utility.config import Config as BaseConfig
 class Config(BaseConfig):
     @property
     def should_abort_upon_task_failure(self):
+        # TODO: Enhance to override via environment variable and CLI argument
         # NOTE: Overriding BaseConfig, should remove for production
         return True
  
     @property
     def should_leave_output_upon_task_failure(self):
+        # TODO: Enhance to override via environment variable and CLI argument
         # NOTE: Overriding BaseConfig, should remove for production
         return True
  

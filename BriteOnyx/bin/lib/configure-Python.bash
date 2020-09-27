@@ -1,7 +1,7 @@
 #!/usr/bin/env false
 # NO: set -e
 # DISABLED: set -x
-# Intended to be `source`d in a BASH shell by the user.
+# Intended to be sourced in a BASH shell by the user.
 ###############################################################################
 # Configure Python
 

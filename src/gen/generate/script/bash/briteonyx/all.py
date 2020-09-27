@@ -40,6 +40,8 @@ def _generate_BriteOnyx(directory):
     gen(_executed(), directory, sub, 'py-check')
     gen(_executed(), directory, sub, 'py-compile')
     gen(_executed(), directory, sub, 'py-report')
+    gen(_executed(), directory, sub, 'sig-check')
+    gen(_executed(), directory, sub, 'sig-make')
     gen(_executed(), directory, sub, 'tool-capture')
     gen(_executed(), directory, sub, 'tool-check')
     sub = Path('BriteOnyx', 'bin', 'lib')

@@ -6,13 +6,14 @@
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.my_assert import assert_equal
 from utility.text import dict_from_string
+from utility.text import replace_last
 from utility.text import string_without_prefix
 from utility.text import string_without_suffix
 # Co-located modules (relative references, NOT packaged, in project)
 
 
 def test_dict_from_string():
-    # TODO: Test with other basic data types in list
+    # TODO: Test with other basic data types
     the_dict = {
         'first': -1.0, 'second': -1, 'third': 0, 'fourth': 1, 'fifth': 1.0,
         'sixth': False, 'seventh': True,
@@ -21,6 +22,23 @@ def test_dict_from_string():
         }
     the_string = str(the_dict)
     assert assert_equal(dict_from_string(the_string), the_dict)
+
+def test_replace_last():
+    assert assert_equal(replace_last(None, None, None), None)
+    assert assert_equal(replace_last(None, '', None), None)
+    assert assert_equal(replace_last(None, 'Test', None), None)
+    assert assert_equal(replace_last('', None, None), '')
+    assert assert_equal(replace_last('', '', None), '')
+    assert assert_equal(replace_last('', 'Test', None), '')
+    assert assert_equal(replace_last('Test', None, None), 'Test')
+    assert assert_equal(replace_last('Test', '', None), 'Test')
+    assert assert_equal(replace_last('Test', 'Test', None), '')
+    assert assert_equal(replace_last('Test', 'T', 'Z'), 'Zest')
+    assert assert_equal(replace_last('Test', 's', 'x'), 'Text')
+    assert assert_equal(replace_last('Test', 't', 's'), 'Tess')
+    assert assert_equal(replace_last('Test', 'Te', 'Li'), 'List')
+    assert assert_equal(replace_last('Test', 'es', 'ha'), 'That')
+    assert assert_equal(replace_last('Test', 'st', 'es'), 'Tees')
 
 def test_string_without_prefix_for_all_none():
     assert assert_equal(string_without_prefix(None, None), None)

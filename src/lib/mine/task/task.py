@@ -71,7 +71,7 @@ class PlainTask(object):
             self._log.warn(repr(e))
             raise
         except NotImplementedError as e:
-            self._log.debug("From %s execute() except NonImplementedError",
+            self._log.debug("From %s execute() except NotImplementedError",
                 self.__class__.__name__
                 )
             self._log.warn(repr(e))
@@ -207,20 +207,9 @@ class FileSystemTask(PlainTask):
     def _should_create_target(self, target, force=False):
         """ Return whether task should create target.
 
-        If the target does not exist,
-        then return True.
-        If force is True,
-        or we are configured for a forced run,
-        then return True
-        and delete the target first.
-        If force is False,
-        and we are NOT configured for a forced run,
-        then return False.
-        Note the special case:
-        if force is None,
-        then return True
-        but do NOT delete the target first
-        (which will allow concatenation to an existing file).
+        Logic supports calls that preceed 
+        concatenation to an existing file.
+        TODO: Add `concatenating` parameter
         """
         if self.config.is_dry_run: return False
         if force is None: return True

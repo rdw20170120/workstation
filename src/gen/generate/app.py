@@ -16,10 +16,11 @@ from utility.filesystem import recreate_directory
 from utility.singleton_application import SingletonApplication
 # Co-located modules (relative references, NOT packaged, in project)
 from .config import Config
-from .script.bash.project_activate_script import generate as generate_project_activate_script
 from .document.markdown.all import generate as generate_markdown_documents
+from .script.bash.activate import generate as generate_activate
 from .script.bash.all import generate as generate_bash_scripts
 from .script.bash.briteonyx.all import generate as generate_briteonyx_scripts
+from .script.bash.set_path import generate as generate_set_path
 from .script.python.all import generate as generate_python_scripts
 
 
@@ -32,11 +33,12 @@ class MyApp(SingletonApplication):
         super().__init__(getLogger(self.__class__.__name__), pid_file)
 
     def _generate(self):
-        generate_project_activate_script(self._target_directory)
+        generate_activate(self._target_directory)
         generate_bash_scripts(self._target_directory)
         generate_briteonyx_scripts(self._target_directory)
         generate_markdown_documents(self._target_directory)
         generate_python_scripts(self._target_directory)
+        generate_set_path(self._target_directory)
 
     def _run(self):
         self._log.info(

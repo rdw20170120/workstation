@@ -12,6 +12,9 @@ class Config(BaseConfig):
     def application_name(self):
         return 'generate'
 
+    @property
+    def log_name(self):
+        return 'gen'
 
 '''DisabledContent
 '''

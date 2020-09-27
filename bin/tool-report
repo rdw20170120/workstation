@@ -56,7 +56,9 @@ checkVariable PYTHONPATH "$PYTHONPATH"
 # Python 2
 checkExecutable python2
 check 'python2 --version' 2>&1
+echo $Rule
 python2 -c 'import platform; print(platform.python_version())'
+echo $Rule
 python2 -c 'import os; print(os.sys.path)'
 checkExecutable pip
 check 'pip --version'
@@ -64,7 +66,9 @@ check 'pip --version'
 # Python 3
 checkExecutable python3
 check 'python3 --version'
+echo $Rule
 python3 -c 'import platform; print(platform.python_version())'
+echo $Rule
 python3 -c 'import os; print(os.sys.path)'
 checkExecutable pip3
 check 'pip3 --version'
@@ -107,7 +111,6 @@ checkExecutable keytool
 check 'keytool -showinfo -tls'
 
 # Python OpenSSL
-checkExecutable python
 check 'python -m OpenSSL.debug'
 
 DisabledContent

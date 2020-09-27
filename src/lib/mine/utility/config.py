@@ -16,7 +16,7 @@ class Config:
         return 'PleaseOverrideMe'
 
     @property
-    def fake_file_suffix(self):
+    def fake_suffix(self):
         return '.fake'
 
     @property
@@ -64,7 +64,11 @@ class Config:
 
     @property
     def log_file(self):
-        return self.log_directory / (self.application_name + '.log')
+        return self.log_directory / (self.log_name + '.log')
+
+    @property
+    def log_name(self):
+        return 'app'
 
     @property
     def quick_run_limit(self):

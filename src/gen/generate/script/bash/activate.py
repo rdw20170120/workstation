@@ -36,7 +36,8 @@ def _activate_python_virtual_environment():
         _source_script((vr('BO_Project'), '/BriteOnyx/bin/lib/pve-activate.bash')),
         _capture_environment('PVE-after'), eol(),
         _remember_pve_path(),
-        _remember_path(),
+        line(),
+        _source_script((vr('BO_Project'), '/BriteOnyx/bin/lib/set_path.bash')),
     ]
 
 def _capture_environment(file_name):
@@ -158,41 +159,6 @@ def _detect_operating_system():
         echo_info('Remembering ', vn('BO_OS'), '=', sq(vr('BO_OS'))), eol(),
     ]
 
-# TODO: SOMEDAY: Rearrange PATH
-# so that the Python virtual environment directory is first,
-# followed by the system directories,
-# the project 'bin' directory is last,
-# links are replaced by the linked directory,
-# and duplicates are removed
-# while preserving the order of the system directories.
-def _remember_path():
-    return [
-        line(),
-        note('This specific ordering of PATH elements is REQUIRED.  The Python'),
-        comment('virtual environment MUST come first in order to override the system Python.'),
-        comment('For now, that PATH element also includes the system PATH element, which is'),
-        comment('repeated here for when that is eventually fixed.  The system PATH element'),
-        comment('MUST precede any user PATH elements in order to make collisions fail-fast'),
-        comment('and to defeat simple attempts at redirecting system commands as an attack'),
-        comment('vector.  Similarly, the project PATH element MUST precede the user PATH'),
-        comment('element to make collisions fail-fast.  This arrangement is best for ensuring'),
-        comment('consistent behavior of the Python virtual environment, the system, and the'),
-        comment('project.  It puts at-risk only those user-specific commands, tools, and'),
-        comment('scripts relevant to the current deployed environment--where the specific'),
-        comment('user is best positioned to address them and failures are most likely limited'),
-        comment('to affecting only them (as they should).'),
-        export(vn('PATH'), (
-            # PVE path must precede system path to override Python
-            vr('BO_PathPve'),
-            ':', vr('BO_PathSystem'),
-            ':', vr('BO_PathProject'),
-            ':', vr('BO_PathUser')
-        )), eol(),
-        echo_info(
-            'Remembering ', sq(vn('PATH')), ' as ', sq(vr('PATH'))
-        ), eol(),
-    ]
-
 def _remember_project_path():
     return [
         line(),
@@ -305,7 +271,5 @@ def generate(directory):
     gen(build(), directory, sub, 'activate.bash')
 
 '''DisabledContent
-        line(),
-        path_does_not_exist('out'), and_(), command('mkdir', 'out'), eol(),
 '''
 

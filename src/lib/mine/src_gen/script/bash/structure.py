@@ -282,7 +282,7 @@ def executed_header():
     return [
         shebang_bash(),
 #       execution_trace(),
-        set_('-e'), eol(),
+        no(set_('-e')),
         disabled(set_('-x')),
         comment('Intended to be executed directly by the user.'),
         rule(),
@@ -303,7 +303,7 @@ def sourced_header():
 #       execution_trace(),
         no(set_('-e')),
         disabled(set_('-x')),
-        comment('Intended to be `source`d in a BASH shell by the user.'),
+        comment('Intended to be sourced in a BASH shell by the user.'),
         rule(),
     ]
 

@@ -16,6 +16,18 @@ def dict_from_string(the_string):
     assert assert_instance(result, dict)
     return result
 
+def replace_last(the_string, find, replace):
+    if the_string is None: return None
+    if find is None: return the_string
+    result = the_string
+    i = the_string.rfind(find)
+    if i >= 0:
+        if replace is None:
+            result = the_string[0:i] + the_string[i + len(find):]
+        else:
+            result = the_string[0:i] + replace + the_string[i + len(find):]
+    return result
+
 def string_without_prefix(the_string, the_prefix):
     if the_string is None: return None
     if the_prefix is None: return the_string

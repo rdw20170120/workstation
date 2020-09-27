@@ -70,6 +70,7 @@ def test_tracked_path():
     assert assert_relative_path(a.subpath)
     assert assert_equal(a.subpath, Path('.'))
     assert assert_equal(a.basename, '')
+    with raises(ValueError): a.parent
 
     b = TrackedPath('Test', '/123', 'abc')
     assert assert_not_none(b)
@@ -83,6 +84,7 @@ def test_tracked_path():
     assert assert_relative_path(b.subpath)
     assert assert_equal(b.subpath, Path('.'))
     assert assert_equal(b.basename, 'abc')
+    assert assert_equal(b.parent, a)
 
     c = Path('/123/abc/xyz')
     d = b.for_path(c)
@@ -97,6 +99,7 @@ def test_tracked_path():
     assert assert_relative_path(d.subpath)
     assert assert_equal(d.subpath, Path('abc'))
     assert assert_equal(d.basename, 'xyz')
+    assert assert_equal(d.parent, b)
 
     e = d / 'def.ghi'
     assert assert_not_none(e)
@@ -110,6 +113,7 @@ def test_tracked_path():
     assert assert_relative_path(e.subpath)
     assert assert_equal(e.subpath, Path('abc/xyz'))
     assert assert_equal(e.basename, 'def.ghi')
+    assert assert_equal(e.parent, d)
 
     f = b / None
     assert assert_not_none(f)
@@ -123,6 +127,7 @@ def test_tracked_path():
     assert assert_relative_path(f.subpath)
     assert assert_equal(f.subpath, Path())
     assert assert_equal(f.basename, 'abc')
+    assert assert_equal(f.parent, a)
 
     g = b / ''
     assert assert_not_none(g)
@@ -136,6 +141,7 @@ def test_tracked_path():
     assert assert_relative_path(g.subpath)
     assert assert_equal(g.subpath, Path())
     assert assert_equal(g.basename, 'abc')
+    assert assert_equal(g.parent, a)
 
     h = b / Path()
     assert assert_not_none(h)
@@ -149,6 +155,7 @@ def test_tracked_path():
     assert assert_relative_path(h.subpath)
     assert assert_equal(h.subpath, Path())
     assert assert_equal(h.basename, 'abc')
+    assert assert_equal(h.parent, a)
 
 '''DisabledContent
 '''

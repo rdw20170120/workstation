@@ -1,7 +1,7 @@
 #!/usr/bin/env false
 # NO: set -e
 # DISABLED: set -x
-# Intended to be `source`d in a BASH shell by the user.
+# Intended to be sourced in a BASH shell by the user.
 ###############################################################################
 # BASH alias definitions specific to this project
 
@@ -18,8 +18,11 @@ grep_options+=' --exclude-dir=.PVE'
 # NOTE: For now, let's handle this by brute force
 grep_options+=' --exclude="*.pyc"'
 grep_options+=' --exclude="*.swp"'
-
 alias grep="grep $grep_options"
+
+alias list-sort-by_size='sort -nr --key=5'
+
+alias logs-reset='rm -fr ${BO_Project}/log ; mkdir ${BO_Project}/log'
 
 alias todo='grep -ER TODO $BO_Project | grep -v /log/'
 

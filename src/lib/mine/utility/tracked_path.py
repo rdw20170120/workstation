@@ -150,6 +150,10 @@ class TrackedPath(object):
             )
 
     @property
+    def parent(self):
+        return self.for_path(self._path.parent)
+
+    @property
     def path(self):
         return self._path
 
@@ -160,6 +164,9 @@ class TrackedPath(object):
     @property
     def size(self):
         return self._path.stat().st_size
+
+    def split_top(self):
+        return self.top, self.subpath, self.basename
 
     @property
     def subpath(self):

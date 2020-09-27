@@ -11,6 +11,7 @@ from utility.my_assert import assert_equal
 from utility.my_assert import assert_equal_or_greater
 from utility.my_assert import assert_greater
 from utility.my_assert import assert_instance
+from utility.my_assert import assert_nonempty_string
 # Co-located modules (relative references, NOT packaged, in project)
 
 
@@ -20,8 +21,8 @@ def test_application_name():
     v = c.application_name
     assert assert_equal(v, 'PleaseOverrideMe')
 
-def test_fake_file_suffix():
-    v = c.fake_file_suffix
+def test_fake_suffix():
+    v = c.fake_suffix
     assert assert_greater(len(v), 0)
 
 def test_filesystem_to_watch():
@@ -44,6 +45,10 @@ def test_log_directory():
 def test_log_file():
     v = c.log_file
     assert assert_absolute_path(v)
+
+def test_log_name():
+    v = c.log_name
+    assert assert_nonempty_string(v)
 
 def test_pid_file():
     v = c.pid_file
