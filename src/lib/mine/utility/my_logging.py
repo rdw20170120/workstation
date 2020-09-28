@@ -145,7 +145,7 @@ def configure(config):
     global _file_handler
     _file_handler = logging.handlers.RotatingFileHandler(
         config.log_file, encoding='utf_8',
-        backupCount=9, maxBytes=1e6
+        backupCount=99, maxBytes=1e6
         )
     _file_handler.setFormatter(_formatter(for_stderr=False))
     _root_logger.addHandler(_file_handler)
