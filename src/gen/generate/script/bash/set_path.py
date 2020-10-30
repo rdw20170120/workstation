@@ -59,7 +59,7 @@ def _remember_path():
 
 def build():
     return [
-        sourced_header(),
+        header_sourced(),
         _comments(),
         disabled_content_footer(),
     ]

@@ -253,7 +253,7 @@ def _source_supporting_scripts():
 
 def build():
     return [
-        sourced_header(),
+        header_sourced(),
         _comments(),
         _abort_if_activated(),
         _capture_environment('incoming'), eol(),

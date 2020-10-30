@@ -9,6 +9,7 @@ from os import makedirs
 from os import remove
 from os.path import getsize
 from os.path import isdir
+from os.path import isfile
 from pathlib import Path
 from pathlib import PurePath
 from shutil import copy2
@@ -27,7 +28,7 @@ def basename_has_suffix(pathname, suffix):
     assert assert_instance(suffix, str)
     return str(pathname).endswith(suffix)
 
-def clone_file(source_file, target_file):
+def clone_file(target_file, source_file):
     actual = copy2(source_file, target_file)
     assert assert_equal(actual, target_file)
 
@@ -73,6 +74,10 @@ def delete_file(file_path):
 
 def directory_exists(path_name):
     result = isdir(path_name)
+    return result
+
+def file_exists(path_name):
+    result = isfile(path_name)
     return result
 
 def file_size(file_path):

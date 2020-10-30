@@ -38,6 +38,10 @@ def _generate_bin(directory):
     sub = Path('bin', 'lib')
     gen(_document(), directory, sub, 'README.md')
 
+def _generate_doc(directory):
+    sub = Path('doc')
+    gen(_document(), directory, sub, 'README.md')
+
 def _generate_home(directory):
     sub = Path('home')
     gen(_document(), directory, sub, 'README.md')
@@ -56,8 +60,6 @@ def _generate_others(directory):
     sub = Path('cfg')
     gen(_document(), directory, sub, 'README.md')
     sub = Path('cfg', 'sample')
-    gen(_document(), directory, sub, 'README.md')
-    sub = Path('doc')
     gen(_document(), directory, sub, 'README.md')
     sub = Path('out')
     gen(_document(), directory, sub, 'README.md')
@@ -90,6 +92,7 @@ def _generate_src(directory):
 def generate(directory):
     _generate_BriteOnyx(directory)
     _generate_bin(directory)
+    _generate_doc(directory)
     _generate_home(directory)
     _generate_others(directory)
     _generate_project(directory)

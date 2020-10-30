@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
-set -e
-# DISABLED: set -x
-# Intended to be executed directly by the user.
+[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
+# NO: set -e
+# Intended to be executed in a BASH shell.
+
+report_status_and_exit() {
+    local -ir Status=$?
+    if [[ "${Status}" -eq 0 ]] ; then
+        echo "INFO:  ${0} exiting with status ${Status}"
+    else
+        echo "FATAL: ${0} exiting with status ${Status}"
+    fi
+    exit ${Status}
+}
+trap report_status_and_exit EXIT
 ###############################################################################
 # Install Python dependencies
 
@@ -17,11 +28,19 @@ pip3 install logzero pytest
 pip3 install awscli boto3
 
 ###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# set -o verbose
+# set -o xtrace
+# Code to debug...
+# set +o verbose
+# set +o xtrace
 : << 'DisabledContent'
+NO: pip3 install sh
 pip3 install avro-python3==1.9.1 
+pip3 install commandlib
 pip3 install cryptography pem pynacl pyopenssl twisted[tls]
 pip3 install pandas
-pip3 install sh
+pip3 install pytest-datafiles
 pip3 install strictyaml
 DisabledContent
 

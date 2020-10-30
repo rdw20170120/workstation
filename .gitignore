@@ -12,6 +12,7 @@ context.bash
 *.pid
 *.txt
 log/
+out/
 
 # Apple macOS
 .DS_Store
@@ -24,9 +25,9 @@ log/
 *.swp
 
 # Byte-compiled / optimized / DLL files
-# *$py.class
-*.py[cod]
-# __pycache__/
+*$py.class
+*.py[cdo]
+__pycache__/
 
 # C extensions
 # *.so

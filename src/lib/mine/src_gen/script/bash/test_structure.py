@@ -190,15 +190,15 @@ def test_indent():
     assert assert_equal(s(indent()), 4 * ' ')
     with raises(TypeError): indent(None)
 
-def test_integer_is_not_equal():
+def test_integer_not_equal():
     # TODO: Break up tests into individual test methods
-    with raises(TypeError): integer_is_not_equal()
-    with raises(TypeError): integer_is_not_equal(None)
-    with raises(TypeError): integer_is_not_equal('')
-    with raises(TypeError): integer_is_not_equal('Test')
-    assert assert_equal(s(integer_is_not_equal(None, 123)), '[[ "" -ne 123 ]]')
-    assert assert_equal(s(integer_is_not_equal('', 123)), '[[ "" -ne 123 ]]')
-    assert assert_equal(s(integer_is_not_equal('Test', 123)), '[[ "Test" -ne 123 ]]')
+    with raises(TypeError): integer_not_equal()
+    with raises(TypeError): integer_not_equal(None)
+    with raises(TypeError): integer_not_equal('')
+    with raises(TypeError): integer_not_equal('Test')
+    assert assert_equal(s(integer_not_equal(None, 123)), '[[ "" -ne 123 ]]')
+    assert assert_equal(s(integer_not_equal('', 123)), '[[ "" -ne 123 ]]')
+    assert assert_equal(s(integer_not_equal('Test', 123)), '[[ "Test" -ne 123 ]]')
 
 def test_no():
     # TODO: Break up tests into individual test methods
@@ -254,15 +254,10 @@ def test_pipe():
     assert assert_equal(s(pipe()), ' | ')
     with raises(TypeError): pipe(None)
 
-def test_remember_status():
+def test_remember_last_status():
     # TODO: Break up tests into individual test methods
-    assert assert_equal(s(remember_status()), 'Status=$?')
-    with raises(TypeError): remember_status(None)
-
-def test_report_exit_status():
-    # TODO: Break up tests into individual test methods
-    assert assert_equal(s(report_exit_status()), 'echo "FATAL: Script exited with \'$Status\'"')
-    with raises(TypeError): report_exit_status(None)
+    assert assert_equal(s(remember_last_status()), 'Status=$?')
+    with raises(TypeError): remember_last_status(None)
 
 def test_research():
     # TODO: Break up tests into individual test methods
@@ -287,10 +282,10 @@ def test_return_last_status():
     assert assert_equal(s(return_last_status()), 'return $?')
     with raises(TypeError): return_last_status(None)
 
-def test_return_status():
+def test_return_with_status():
     # TODO: Break up tests into individual test methods
-    assert assert_equal(s(return_status()), 'return $Status')
-    with raises(TypeError): return_status(None)
+    assert assert_equal(s(return_with_status()), 'return ${Status}')
+    with raises(TypeError): return_with_status(None)
 
 def test_rule():
     # TODO: Break up tests into individual test methods
@@ -304,11 +299,13 @@ def test_seq():
 
 def test_set_():
     # TODO: Break up tests into individual test methods
-    with raises(TypeError): set_()
+    with raises(AssertionError): set_()
     assert assert_equal(s(set_(None)), 'set')
     assert assert_equal(s(set_('')), 'set')
     assert assert_equal(s(set_('Test')), 'set Test')
-    with raises(TypeError): set_('Test', None)
+    assert assert_equal(s(set_('Test', None)), 'set Test')
+    assert assert_equal(s(set_('Test', '')), 'set Test')
+    assert assert_equal(s(set_('Test', 'Test')), 'set Test Test')
 
 def test_shebang_bash():
     # TODO: Break up tests into individual test methods
@@ -335,7 +332,7 @@ def test_source():
 
 def test_status_is_failure():
     # TODO: Break up tests into individual test methods
-    assert assert_equal(s(status_is_failure()), '[[ "$Status" -ne 0 ]]')
+    assert assert_equal(s(status_is_failure()), '[[ "${Status}" -ne 0 ]]')
     with raises(TypeError): status_is_failure(None)
 
 def test_string_equals():
@@ -395,9 +392,9 @@ def test_vn():
 def test_vr():
     # TODO: Break up tests into individual test methods
     with raises(TypeError): vr()
-    assert assert_equal(s(vr(None)), '$')
-    assert assert_equal(s(vr('')), '$')
-    assert assert_equal(s(vr('Test')), '$Test')
+    assert assert_equal(s(vr(None)), '${}')
+    assert assert_equal(s(vr('')), '${}')
+    assert assert_equal(s(vr('Test')), '${Test}')
     with raises(TypeError): vr('Test', None)
 
 '''DisabledContent

@@ -11,13 +11,13 @@ class Config(BaseConfig):
     @property
     def should_abort_upon_task_failure(self):
         # TODO: Enhance to override via environment variable and CLI argument
-        # NOTE: Overriding BaseConfig, should remove for production
-        return True
+        # TODO: Overriding BaseConfig, should remove for production
+        return False
  
     @property
     def should_leave_output_upon_task_failure(self):
         # TODO: Enhance to override via environment variable and CLI argument
-        # NOTE: Overriding BaseConfig, should remove for production
+        # TODO: Overriding BaseConfig, should remove for production
         return True
  
     @property

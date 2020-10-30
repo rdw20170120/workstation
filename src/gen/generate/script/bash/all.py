@@ -10,7 +10,7 @@ from src_gen.script.bash.structure import *
 
 def _sourced():
     return [
-        sourced_header(),
+        header_sourced(),
         todo('DESCRIPTION'),
         line(),
         todo('CONTENT'),
@@ -20,6 +20,7 @@ def _sourced():
 def generate(directory):
     sub = Path('.')
     gen(_sourced(), directory, sub, 'alias.bash')
+    gen(_sourced(), directory, sub, 'context.bash')
     sub = Path('BriteOnyx', 'bin', 'lib')
     gen(_sourced(), directory, sub, 'alias-common.bash')
     gen(_sourced(), directory, sub, 'alias-git.bash')

@@ -21,18 +21,6 @@ from .task.mapping import Mapping
 
 c = Config()
 
-
-class MyApp(SingletonApplication):
-    def __init__(self, pid_file):
-        super().__init__(getLogger(self.__class__.__name__), pid_file)
-
-    def _run(self):
-        self._log.info("Running application...")
-        tm = TaskManager(c, Mapping())
-        Bootstrap(tm)
-        tm.run()
-
-
 def _apply_verbosity(verbosity=0):
     background = [
         getLogger('utility'),
@@ -96,6 +84,17 @@ def run():
         _report_configuration()
     else:
         MyApp(c.pid_file).run()
+
+
+class MyApp(SingletonApplication):
+    def __init__(self, pid_file):
+        super().__init__(getLogger(self.__class__.__name__), pid_file)
+
+    def _run(self):
+        self._log.info("Running application...")
+        tm = TaskManager(c, Mapping())
+        Bootstrap(tm)
+        tm.run()
 
 '''DisabledContent
 '''

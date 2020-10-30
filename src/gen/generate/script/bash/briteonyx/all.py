@@ -10,10 +10,16 @@ from src_gen.script.bash.briteonyx.structure import *
 
 def _executed():
     return [
-        executed_header(),
+        header_executed(),
         todo('DESCRIPTION'),
         line(),
         todo('CONTENT'),
+        line(),
+        function_header('main'),
+            indent(), return_(0), eol(),
+        function_footer(),
+        line(),
+        line('main'),
         disabled_content_footer(),
     ]
 
@@ -58,7 +64,7 @@ def _generate_bin(directory):
 
 def _sourced():
     return [
-        sourced_header(),
+        header_sourced(),
         todo('DESCRIPTION'),
         line(),
         todo('CONTENT'),

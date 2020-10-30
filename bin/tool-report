@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
+[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
 # NO: set -e
-# DISABLED: set -x
-# Intended to be executed directly by the user.
+# Intended to be executed in a BASH shell.
+
+report_status_and_exit() {
+    local -ir Status=$?
+    if [[ "${Status}" -eq 0 ]] ; then
+        echo "INFO:  ${0} exiting with status ${Status}"
+    else
+        echo "FATAL: ${0} exiting with status ${Status}"
+    fi
+    exit ${Status}
+}
+trap report_status_and_exit EXIT
 ###############################################################################
 # Report tool status
 
@@ -37,6 +48,14 @@ checkVariable PATH "$PATH"
 # BASH
 checkExecutable bash
 check 'bash --version'
+
+# compgen
+check 'compgen -a'
+check 'compgen -b'
+check 'compgen -c'
+check 'compgen -e'
+check 'compgen -g'
+check 'compgen -k'
 
 # Git
 checkExecutable git
@@ -85,6 +104,12 @@ echo "Tool report succeeded, though individual checks may fail"
 exit 0
 
 ###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# set -o verbose
+# set -o xtrace
+# Code to debug...
+# set +o verbose
+# set +o xtrace
 : << 'DisabledContent'
 # AWS CLI
 checkExecutable aws

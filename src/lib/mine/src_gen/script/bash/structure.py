@@ -4,6 +4,7 @@
 # Internal packages  (absolute references, distributed with Python)
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
+from utility.my_assert import assert_equal_or_greater
 from utility.my_assert import assert_instance
 from utility.my_assert import assert_not_none
 # Co-located modules (relative references, NOT packaged, in project)
@@ -51,15 +52,19 @@ def cc(command_embedded_within_comment):
 
 def debugging_comment():
     return [
-        note('Uncomment the following two lines for debugging'),
+        note('Uncomment these lines for debugging, placed where needed'),
         comment(set_('-o', 'verbose')),
         comment(set_('-o', 'xtrace')),
+        comment('Code to debug...'),
+        comment(set_('+o', 'verbose')),
+        comment(set_('+o', 'xtrace')),
     ]
 
 def disabled_content_footer():
     return [
         line(),
         rule(),
+        debugging_comment(),
         command(':', '<<', sq('DisabledContent')), eol(),
         line('DisabledContent'),
         line(),
@@ -73,26 +78,34 @@ def exit(argument=None):
 def return_(argument=None):
     return command('return', argument)
 
-def return_last_status():
-    return return_('$?')
-
 ###############################################################################
 
-def remember_status():
+def exit_with_status():
+    return exit(status())
+
+def remember_last_status():
     return assign(vn('Status'), '$?')
 
-def report_exit_status():
-    return echo_fatal('Script exited with ', sq(vr('Status')))
+def return_last_status():
+    # TODO: Do I need this?
+    return return_('$?')
 
-def return_status():
-    return return_(vr('Status'))
+def return_with_status():
+    return return_(status())
+
+def status():
+    return vr('Status')
 
 def status_is_failure():
-    return integer_is_not_equal(vr('Status'), 0)
+    return integer_not_equal(status(), 0)
+
+def status_is_success():
+    return integer_equal(status(), 0)
 
 ###############################################################################
 
-def set_(argument):
+def set_(*argument):
+    assert assert_equal_or_greater(len(argument), 1)
     return command('set', argument)
 
 ###############################################################################
@@ -145,6 +158,19 @@ def export(variable, expression=None):
     else:
         return command('export', assign(variable, expression))
 
+def local(expression, integer=False, readonly=False):
+    # TODO: REFACTOR: Reduce redundancy
+    if integer:
+        if readonly:
+            return command('local', '-ir', expression)
+        else:
+            return command('local', '-i', expression)
+    else:
+        if readonly:
+            return command('local', '-r', expression)
+        else:
+            return command('local', expression)
+
 ###############################################################################
 
 def condition(executable, *argument):
@@ -159,7 +185,10 @@ def file_exists(file_name):
 def file_is_readable(file_name):
     return condition('[[', '-r', dq(file_name), ']]')
 
-def integer_is_not_equal(left, right):
+def integer_equal(left, right):
+    return condition('[[', dq(left), '-eq', right, ']]')
+
+def integer_not_equal(left, right):
     return condition('[[', dq(left), '-ne', right, ']]')
 
 def path_does_not_exist(path_name):
@@ -278,13 +307,31 @@ def if_(condition, *statement):
 
 ###############################################################################
 
-def executed_header():
+def trace_execution():
+    return [
+        string_is_not_null(vr('BO_Trace')), and_(),
+        echo_trace('Executing', vr('BASH_SOURCE')), eol(),
+    ]
+
+def header_executed():
     return [
         shebang_bash(),
-#       execution_trace(),
+        trace_execution(),
         no(set_('-e')),
-        disabled(set_('-x')),
-        comment('Intended to be executed directly by the user.'),
+        comment('Intended to be executed in a BASH shell.'),
+        line(),
+        trap_executed(),
+        rule(),
+    ]
+
+def header_sourced():
+    return [
+        shebang_sourced(),
+        trace_execution(),
+        no(set_('-e')),
+        comment('Intended to be sourced in a BASH shell.'),
+        line(),
+        trap_sourced(),
         rule(),
     ]
 
@@ -297,14 +344,45 @@ def shebang_sourced():
 def source(file_name):
     return command('source', file_name)
 
-def sourced_header():
+def trap(name, signal):
+    return command('trap', name, signal)
+
+def trap_executed():
+    # TODO: REFACTOR: Extract common method
+    name = 'report_status_and_exit'
     return [
-        shebang_sourced(),
-#       execution_trace(),
-        no(set_('-e')),
-        disabled(set_('-x')),
-        comment('Intended to be sourced in a BASH shell by the user.'),
-        rule(),
+        function_header(name),
+        indent(), local(remember_last_status(), integer=True, readonly=True), eol(),
+        indent(), if_(
+            status_is_success(),
+            indent(), indent(), echo_info(vr('0'), ' exiting with status ', status()), eol(),
+        ),
+        indent(), else_(
+            indent(), indent(), echo_fatal(vr('0'), ' exiting with status ', status()), eol(),
+        ),
+        indent(), fi(),
+        indent(), exit_with_status(), eol(),
+        function_footer(),
+        trap(name, 'EXIT'), eol(),
+    ]
+
+def trap_sourced():
+    # TODO: REFACTOR: Extract common method
+    name = 'report_status_and_return'
+    return [
+        function_header(name),
+        indent(), local(remember_last_status(), integer=True, readonly=True), eol(),
+        indent(), if_(
+            status_is_success(),
+            indent(), indent(), echo_info(vr('0'), ' returning with status ', status()), eol(),
+        ),
+        indent(), else_(
+            indent(), indent(), echo_fatal(vr('0'), ' returning with status ', status()), eol(),
+        ),
+        indent(), fi(),
+        indent(), return_with_status(), eol(),
+        function_footer(),
+        trap(name, 'EXIT'), eol(),
     ]
 
 ###############################################################################
@@ -338,11 +416,26 @@ class _VariableReference(object):
 
 @my_visitor_map.register(_VariableReference)
 def _visit_variable_reference(element, walker):
-    walker.emit('$')
+    walker.emit('${')
     walker.walk(element.name)
+    walker.emit('}')
 
 def vr(name):
     return _VariableReference(name)
+
+###############################################################################
+
+def function_footer():
+    # TODO: Consider converting to a function container
+    return [
+        '}', eol(),
+    ]
+
+def function_header(name):
+    # TODO: Consider converting to a function container
+    return [
+        name, '()', ' {', eol(),
+    ]
 
 '''DisabledContent
 '''

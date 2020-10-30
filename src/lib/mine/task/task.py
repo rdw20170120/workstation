@@ -14,6 +14,7 @@ from utility.my_assert import assert_absolute_file
 from utility.my_assert import assert_absolute_path
 from utility.my_assert import assert_existing_absolute_path
 from utility.my_assert import assert_instance
+from utility.my_assert import assert_not_none
 from utility.my_logging import log_exception
 from utility.tracked_path import TrackedPath
 # Co-located modules (relative references, NOT packaged, in project)
@@ -23,6 +24,8 @@ from .exception import Abort
 class PlainTask(object):
     """Base class for tasks managed by a TaskManager."""
     def __init__(self, logger, task_manager):
+        assert assert_not_none(logger)
+        assert assert_not_none(task_manager)
         super().__init__()
         self._log = logger
         self._tm = task_manager

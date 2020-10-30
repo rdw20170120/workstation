@@ -14,17 +14,36 @@ report_status_and_return() {
 }
 trap report_status_and_return EXIT
 ###############################################################################
-# BASH alias definitions for source control
+# Library of helpful common BASH functions
 
-alias add='git add .'
-alias branches='git branch --list -a'
-alias commit='git commit'
-alias ignored='git status --ignored'
-alias ignored='git status --ignored'
-alias log='git shortlog | tail -n -25'
-alias pull='git pull'
-alias push='git push'
-alias status='git status'
+delete_file() {
+    # Delete file $1
+    require_arguments $# 1
+    # $1 = file
+    rm "$1"
+    abort_on_fail $? "Could not delete file '$1'"
+    forbid_path "$1"
+} && export -f delete_file
+
+maybe_delete_file() {
+    # Delete file $1, if it exists
+    require_arguments $# 1
+    # $1 = file
+    if [[ -e "$1" ]] ; then
+        delete_file "$1"
+    fi
+    forbid_path "$1"
+} && export -f maybe_delete_file
+
+write_file() {
+    # Write content $2 to file $1
+    require_arguments $# 2
+    # $1 = target file
+    # $2 = source content
+    >$1 echo -n "$2"
+    abort_on_fail $? "Could not write file '$1'"
+    require_file "$1"
+} && export -f write_file
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
@@ -34,8 +53,5 @@ alias status='git status'
 # set +o verbose
 # set +o xtrace
 : << 'DisabledContent'
-# TODO: Create a script like BriteOnyx/bin/git-undelete
-git reset
-git ls-files -d -z | xargs -0 git checkout --
 DisabledContent
 
