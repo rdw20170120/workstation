@@ -20,7 +20,7 @@ class SingletonApplication(object):
 
     def _run(self):
         raise NotImplementedError(
-            "_run() should be overridden in subclasses"
+            "_run() MUST be overridden in subclasses"
             )
 
     def _shutdown(self):
@@ -35,8 +35,17 @@ class SingletonApplication(object):
             self._log.info("Began process with pid '%d'", pid)
             self._startup()
             self._run()
+        except KeyboardInterrupt as e:
+            self._log.debug(
+                "%s run() except KeyboardInterrupt",
+                __name__
+                )
+            self._log.fatal(repr(e))
         except BaseException as e:
-            self._log.debug("%s run() except BaseException", __name__)
+            self._log.debug(
+                "%s run() except BaseException",
+                __name__
+                )
             log_exception(self._log, e, with_traceback=True)
             self._log.fatal("Aborted process with pid '%d'", pid)
         finally:

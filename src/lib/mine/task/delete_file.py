@@ -14,22 +14,24 @@ from utility.tracked_path import TrackedPath
 
 class DeleteFile(FileSystemTask):
     """Delete file."""
-    def __init__(self, task_manager, source_file):
-        self._source_file = source_file
+    def __init__(self, task_manager, file_):
+        if not isinstance(file_, TrackedPath):
+            file_ = file_.tracked_path
+        assert assert_instance(file_, TrackedPath)
+        self._file = file_
         super().__init__(getLogger(self.__class__.__name__), task_manager)
-        assert assert_instance(self._source_file, TrackedPath)
 
     def __str__(self):
         return "{} for {}".format(
-            self.__class__.__name__, self._source_file.for_log(),
+            self.__class__.__name__, self._file.for_log(),
             )
 
     def _execute(self):
-        if self._should_delete_file(self._source_file):
-            delete_file(self._source_file)
+        if self._should_delete_file(self._file):
+            delete_file(self._file)
 
     def _register_sources(self):
-        self._register_source(self._source_file)
+        self._register_source(self._file)
 
 '''DisabledContent
 '''

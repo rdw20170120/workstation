@@ -5,6 +5,7 @@ TODO: REVIEW: this module against its siblings.
 """
 # Internal packages  (absolute references, distributed with Python)
 from logging import getLogger
+from os import link
 from os import makedirs
 from os import remove
 from os.path import getsize
@@ -16,7 +17,10 @@ from shutil import copy2
 from shutil import rmtree
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
+from utility.my_assert import assert_absolute_file
+from utility.my_assert import assert_absolute_path
 from utility.my_assert import assert_equal
+from utility.my_assert import assert_existing_absolute_path
 from utility.my_assert import assert_instance
 # Co-located modules (relative references, NOT packaged, in project)
 
@@ -24,15 +28,23 @@ from utility.my_assert import assert_instance
 log = getLogger(__name__)
 
 
-def basename_has_suffix(pathname, suffix):
+def basename_has_suffix(path_, suffix):
     assert assert_instance(suffix, str)
-    return str(pathname).endswith(suffix)
+    return str(path_).endswith(suffix)
 
-def clone_file(target_file, source_file):
-    actual = copy2(source_file, target_file)
-    assert assert_equal(actual, target_file)
+def clone_file(source_file, target_file):
+    assert assert_absolute_file(source_file)
+    try:
+        actual = copy2(str(source_file), str(target_file))
+        assert assert_equal(actual, target_file)
+    except BaseException:
+        log.error('Failed to clone file %s to %s',
+            source_file, target_file
+            )
+        raise
 
 def concatenate_text_file(target_file, source_file, encoding=None):
+    assert assert_absolute_file(source_file)
     if encoding is None: encoding = 'utf_8'
     with target_file.open(
         encoding=encoding, mode='at', newline=None
@@ -41,10 +53,6 @@ def concatenate_text_file(target_file, source_file, encoding=None):
             encoding=encoding, mode='rt', newline=None
             ) as reader:
             for line in reader:
-                log.debug(
-                    "Concatenating to file '%s', encounter: %s",
-                    target_file, line
-                    )
                 writer.write(line)
 
 def concatenate_text_files(target_file, source_files, encoding=None):
@@ -54,62 +62,88 @@ def concatenate_text_files(target_file, source_files, encoding=None):
         encoding=encoding, mode='wt', newline=None
         ) as writer:
         for s in source_files:
+            assert assert_absolute_file(s)
             with s.open(
                 encoding=encoding, mode='rt', newline=None
                 ) as reader:
                 for line in reader:
                     writer.write(line)
 
-def create_directory(path_name):
-    makedirs(path_name)
+def create_directory(path_):
+    try:
+        makedirs(path_)
+    except BaseException:
+        log.error('Failed to create directory %s', path_)
+        raise
 
-def delete_directory(path_name):
-    rmtree(path_name)
+def delete_directory(path_):
+    try:
+        rmtree(path_)
+    except BaseException:
+        log.error('Failed to delete directory %s', path_)
+        raise
 
-def delete_directory_tree(directory_path, force=False):
-    rmtree(directory_path, ignore_errors=force)
+def delete_directory_tree(path_, force=False):
+    try:
+        rmtree(path_, ignore_errors=force)
+    except BaseException:
+        log.error('Failed to delete directory tree %s', path_)
+        raise
 
-def delete_file(file_path):
-    remove(file_path)
+def delete_file(file_):
+    try:
+        remove(file_)
+    except BaseException:
+        log.error('Failed to delete directory tree %s', path_)
+        raise
 
-def directory_exists(path_name):
-    result = isdir(path_name)
+def directory_exists(path_):
+    result = isdir(path_)
     return result
 
 def file_exists(path_name):
     result = isfile(path_name)
     return result
 
-def file_size(file_path):
-    return getsize(file_path)
+def file_size(file_):
+    return getsize(file_)
 
-def maybe_create_directory(path_name):
-    if not directory_exists(path_name): create_directory(path_name)
+def make_hard_link(new_path, existing_path):
+    if isinstance(new_path, str): new_path = Path(new_path)
+    assert assert_instance(new_path, Path)
+    assert assert_absolute_path(new_path)
+    assert assert_existing_absolute_path(existing_path)
+    link(existing_path, new_path)
+    # TODO: Added in Python 3.8
+#   new_path.link_to(existing_path)
 
-def maybe_delete_directory(path_name):
-    if directory_exists(path_name): delete_directory(path_name)
+def maybe_create_directory(path_):
+    if not directory_exists(path_): create_directory(path_)
 
-def read_binary_from_file(file_path):
-    with open(file_path, mode='rb') as reader:
+def maybe_delete_directory(path_):
+    if directory_exists(path_): delete_directory(path_)
+
+def read_binary_from_file(file_):
+    with open(file_, mode='rb') as reader:
         result = reader.read()
         assert assert_instance(result, bytes)
     return result
 
-def read_text_from_file(file_path, encoding=None):
+def read_text_from_file(file_, encoding=None):
     if encoding is None: encoding = 'utf_8'
-    with open(file_path,
+    with open(file_,
         encoding=encoding, mode='rt', newline=None
         ) as reader:
         result = reader.read()
         assert assert_instance(result, str)
     return result
 
-def recreate_directory(path_name):
-    maybe_delete_directory(path_name)
-    create_directory(path_name)
+def recreate_directory(path_):
+    maybe_delete_directory(path_)
+    create_directory(path_)
 
-def split_basename(pathname):
-    parent, basename = split_pathname(pathname)
+def split_basename(path_):
+    parent, basename = split_path(path_)
     name = PurePath(basename)
     suffixes = ''
     while True:
@@ -119,25 +153,31 @@ def split_basename(pathname):
         name = PurePath(name)
     return str(name), suffixes
 
-def split_pathname(pathname):
-    if not isinstance(pathname, Path): pathname = PurePath(pathname)
-    return pathname.parent, pathname.name
+def split_path(path_):
+    if not isinstance(path_, Path): path_ = PurePath(path_)
+    return path_.parent, path_.name
 
-def touch(file_path):
-    if not isinstance(file_path, Path): file_path = Path(file_path)
-    if not file_path.exists(): write_text_into_file(file_path, '')
-    file_path.touch(exist_ok=True)
+def touch(file_):
+    try:
+        if not isinstance(file_, Path):
+            file_ = Path(file_)
+        if not file_.exists():
+            write_text_into_file(file_, '')
+        file_.touch(exist_ok=True)
+    except BaseException:
+        log.error('Failed to touch file %s', file_)
+        raise
 
-def write_binary_into_file(file_path, binary_content):
+def write_binary_into_file(file_, binary_content):
     assert assert_instance(binary_content, bytes)
-    with open(file_path, mode='wb') as writer:
+    with open(file_, mode='wb') as writer:
         count = writer.write(binary_content)
         assert assert_equal(len(binary_content), count)
 
-def write_text_into_file(file_path, text_content, encoding=None):
+def write_text_into_file(file_, text_content, encoding=None):
     if encoding is None: encoding = 'utf_8'
     assert assert_instance(text_content, str)
-    with open(file_path,
+    with open(file_,
         encoding=encoding, mode='wt', newline=None
         ) as writer:
         count = writer.write(text_content)

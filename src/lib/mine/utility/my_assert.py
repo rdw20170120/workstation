@@ -62,14 +62,14 @@ def assert_absolute_path(path):
                 path
             ))
 
-def assert_contains(item, group):
-    """Assert that group contains item."""
-    result = (item in group)
+def assert_at_least(actual_value, expected_value):
+    """Assert that actual_value is at least expected_value."""
+    result = (actual_value >= expected_value)
     if result: return result
     else:
         raise AssertionError(
-            "{!r} is NOT contained IN {!r}".format(
-                item, group
+            "{!r} is LESS than {!r}".format(
+                actual_value, expected_value
             ))
 
 def assert_encoding_is_utf8(encoding):
@@ -90,16 +90,6 @@ def assert_equal(actual_value, expected_value):
     else:
         raise AssertionError(
             "{!r} does NOT equal {!r}".format(
-                actual_value, expected_value
-            ))
-
-def assert_equal_or_greater(actual_value, expected_value):
-    """Assert that actual_value is equal to or greater than expected_value."""
-    result = (actual_value >= expected_value)
-    if result: return result
-    else:
-        raise AssertionError(
-            "{!r} is LESS than {!r}".format(
                 actual_value, expected_value
             ))
 
@@ -150,8 +140,8 @@ def assert_instance(actual_value, expected_types):
                 actual_value, expected_types
             ))
 
-def assert_integer_equal_or_greater(actual_value, expected_value):
-    """Assert that actual_value is an integer equal to or greater than expected_value."""
+def assert_integer_at_least(actual_value, expected_value):
+    """Assert that actual_value is an integer of at least expected_value."""
     result = isinstance(actual_value, int)
     if result: result = (actual_value >= expected_value)
     if result: return result

@@ -14,7 +14,7 @@ from .task import PlainTask
 from .task_manager import TaskManager
 
 
-logger = None
+logger = 'logger'
 source = TrackedPath('title', '/top')
 tm = TaskManager(None, None)
 

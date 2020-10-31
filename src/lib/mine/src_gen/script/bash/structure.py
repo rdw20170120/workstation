@@ -4,7 +4,7 @@
 # Internal packages  (absolute references, distributed with Python)
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.my_assert import assert_equal_or_greater
+from utility.my_assert import assert_at_least
 from utility.my_assert import assert_instance
 from utility.my_assert import assert_not_none
 # Co-located modules (relative references, NOT packaged, in project)
@@ -105,7 +105,7 @@ def status_is_success():
 ###############################################################################
 
 def set_(*argument):
-    assert assert_equal_or_greater(len(argument), 1)
+    assert assert_at_least(len(argument), 1)
     return command('set', argument)
 
 ###############################################################################

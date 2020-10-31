@@ -7,7 +7,7 @@ from pathlib import Path
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.filesystem import basename_has_suffix
 from utility.filesystem import split_basename
-from utility.filesystem import split_pathname
+from utility.filesystem import split_path
 from utility.my_assert import assert_equal
 from utility.my_assert import assert_false
 from utility.my_assert import assert_true
@@ -34,16 +34,16 @@ def test_split_basename():
     assert assert_equal(n, 'name')
     assert assert_equal(e, '.zzz.ext')
 
-def test_split_pathname():
-    p, b = split_pathname('')
+def test_split_path():
+    p, b = split_path('')
     assert assert_equal(p, Path('.'))
     assert assert_equal(b, '')
 
-    p, b = split_pathname('a/b/c')
+    p, b = split_path('a/b/c')
     assert assert_equal(p, Path('a/b'))
     assert assert_equal(b, 'c')
 
-    p, b = split_pathname('a/b/c/name.ext')
+    p, b = split_path('a/b/c/name.ext')
     assert assert_equal(p, Path('a/b/c'))
     assert assert_equal(b, 'name.ext')
 

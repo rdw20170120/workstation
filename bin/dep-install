@@ -36,7 +36,8 @@ pip3 install awscli boto3
 # set +o xtrace
 : << 'DisabledContent'
 NO: pip3 install sh
-pip3 install avro-python3==1.9.1 
+TODO: RESEARCH: Install python-snappy
+pip3 install avro-python3==1.9.1
 pip3 install commandlib
 pip3 install cryptography pem pynacl pyopenssl twisted[tls]
 pip3 install pandas

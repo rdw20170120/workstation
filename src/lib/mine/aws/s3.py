@@ -66,13 +66,25 @@ class S3(AwsService):
             raise
         return result
 
+    def _upload_object(self, bucket_name, key, file_path):
+        try:
+            self.client.upload_file(file_path, bucket_name, key)
+        except ClientError as e:
+            if 'AccessDenied' in str(e):
+                self._log.warn(
+                    "Profile '%s', region '%s', service '%s' failed to '%s': %s",
+                    self.profile_name, self.region_name, self.service_name,
+                    'upload_file', e
+                    )
+            raise
+
     def download_object(self, bucket_name, key, file_path):
         assert assert_instance(bucket_name, str)
         assert assert_instance(key, str)
         assert assert_instance(file_path, str)
         self._log.debug(
-            "Attempting to download object from bucket '%s' with key '%s' to file '%s'",
-            bucket_name, key, file_path
+            "Downloading key '%s' in bucket '%s' to file '%s'",
+            key, bucket_name, file_path
             )
         self._download_object(bucket_name, key, file_path)
 
@@ -80,7 +92,7 @@ class S3(AwsService):
         assert assert_instance(bucket_name, str)
         result = []
         self._log.debug(
-            "Attempting to get common prefixes for bucket '%s'",
+            "Getting common prefixes for bucket '%s'",
             bucket_name
             )
         for prefix in self._list_bucket_common_prefixes(bucket_name):
@@ -94,18 +106,25 @@ class S3(AwsService):
         assert assert_instance(prefix, str)
         result = []
         self._log.debug(
-            "Attempting to list objects in bucket '%s' with prefix '%s'",
+            "Listing objects in bucket '%s' with prefix '%s'",
             bucket_name, prefix
             )
         for obj in self._list_bucket_objects(bucket_name, prefix):
             if obj is None: self._log.debug("Found None")
             else:
                 self._log.debug("Bucket '%s' has object: %r", bucket_name, obj)
-                key = obj['Key']
-                p, filename = path.split(obj['Key'])
-                assert assert_equal(p, prefix)
-                if len(filename) > 0: result.append(obj)
+                result.append(obj)
         return result
+
+    def upload_object(self, bucket_name, key, file_path):
+        assert assert_instance(bucket_name, str)
+        assert assert_instance(key, str)
+        assert assert_instance(file_path, str)
+        self._log.debug(
+            "Uploading file '%s' to key '%s' in bucket '%s'",
+            file_path, key, bucket_name,
+            )
+        self._upload_object(bucket_name, key, file_path)
 
 '''DisabledContent
 '''

@@ -23,10 +23,10 @@ from pathlib import Path
 from shutil import rmtree
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.filesystem import split_pathname
+from utility.filesystem import split_path
 from utility.my_assert import assert_absolute_directory
 from utility.my_assert import assert_absolute_path
-from utility.my_assert import assert_contains
+from utility.my_assert import assert_in
 from utility.my_assert import assert_instance
 from utility.my_assert import assert_not_instance
 from utility.my_assert import assert_relative_path
@@ -73,7 +73,7 @@ class TrackedPath(object):
             self._relative = Path(self._relative)
         assert assert_instance(self._relative, Path)
         assert assert_relative_path(self._relative)
-        self._subpath, self._basename = split_pathname(self._relative)
+        self._subpath, self._basename = split_path(self._relative)
 
         self._path = self._top / self._relative
         assert assert_instance(self._path, Path)

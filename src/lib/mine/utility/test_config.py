@@ -8,7 +8,7 @@ from utility.config import Config
 from utility.my_assert import assert_absolute_directory
 from utility.my_assert import assert_absolute_path
 from utility.my_assert import assert_equal
-from utility.my_assert import assert_equal_or_greater
+from utility.my_assert import assert_at_least
 from utility.my_assert import assert_greater
 from utility.my_assert import assert_instance
 from utility.my_assert import assert_nonempty_string
@@ -68,11 +68,11 @@ def test_project_directory():
 
 def test_quick_run_limit():
     v = c.quick_run_limit
-    assert assert_equal_or_greater(v, 0)
+    assert assert_at_least(v, 0)
 
 def test_reserved_disk_space_in_bytes():
     v = c.reserved_disk_space_in_bytes
-    assert assert_equal_or_greater(v, 0)
+    assert assert_at_least(v, 0)
 
 def test_should_abort_upon_task_failure():
     v = c.should_abort_upon_task_failure
