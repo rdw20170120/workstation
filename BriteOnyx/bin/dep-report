@@ -21,7 +21,7 @@ if [[ -z "$BO_Project" ]] ; then
     exit 1
 fi
 
-pip3 freeze --all
+pip3 freeze --all | sort
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

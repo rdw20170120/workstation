@@ -72,6 +72,16 @@ def assert_at_least(actual_value, expected_value):
                 actual_value, expected_value
             ))
 
+def assert_at_most(actual_value, expected_value):
+    """Assert that actual_value is expected_value at most."""
+    result = (actual_value <= expected_value)
+    if result: return result
+    else:
+        raise AssertionError(
+            "{!r} is GREATER than {!r}".format(
+                actual_value, expected_value
+            ))
+
 def assert_encoding_is_utf8(encoding):
     # TODO: Add tests for complete list of variants
     # TODO: Add handling for both string and enum versions
@@ -196,6 +206,15 @@ def assert_not_equal(actual_value, expected_value):
         raise AssertionError(
             "{!r} EQUALS {!r}".format(
                 actual_value, expected_value
+            ))
+
+def assert_not_in(actual_value, expected_values):
+    result = (actual_value not in expected_values)
+    if result: return result
+    else:
+        raise AssertionError(
+            'Value is {!r}, IN {!r}'.format(
+                actual_value, expected_values
             ))
 
 def assert_not_instance(actual_value, expected_types):

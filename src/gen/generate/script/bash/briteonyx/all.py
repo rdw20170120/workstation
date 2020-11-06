@@ -52,6 +52,10 @@ def _generate_BriteOnyx(directory):
     gen(_executed(), directory, sub, 'tool-check')
     sub = Path('BriteOnyx', 'bin', 'lib')
     gen(_sourced(), directory, sub, 'configure-Python.bash')
+    gen(_sourced(), directory, sub, 'declare-base.bash')
+    gen(_sourced(), directory, sub, 'declare-common.bash')
+    gen(_sourced(), directory, sub, 'declare-require.bash')
+    gen(_sourced(), directory, sub, 'declare.bash')
 
 def _generate_bin(directory):
     sub = Path('bin')

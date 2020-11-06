@@ -22,7 +22,7 @@ trap report_status_and_return EXIT
 
 Script=${BO_Project}/bin/lib/declare-base.bash
 if [[ -r "${Script}" ]] ; then
-    echo "INFO:  Sourcing script ${Script}"
+#   echo "INFO:  Sourcing script ${Script}"
     source ${Script}
     status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
 else
@@ -32,7 +32,7 @@ fi
 
 Script=${BO_Project}/bin/lib/declare-require.bash
 if [[ -r "${Script}" ]] ; then
-    echo "INFO:  Sourcing script ${Script}"
+#   echo "INFO:  Sourcing script ${Script}"
     source ${Script}
     status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
 else

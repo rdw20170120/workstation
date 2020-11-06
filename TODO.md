@@ -15,10 +15,12 @@ when relevant.
 Items should be checked-off
 and perhaps moved to the bottom
 when completed.
-Items should be struck-out to indicate that they have been canceled,
+Items should be struck-out
+to indicate that they have been canceled,
 unless they should merely be deleted.
 
 1. [X] I/U = Item Description
+
 1. [ ] H/H - Implement full test suite for code generation functionality
 1. [ ] H/H - Fix broken code generation functionality
 1. [ ] H/H - Disable Python3 automatic encoding coercion between ASCII and Unicode

@@ -5,7 +5,6 @@
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.my_assert import assert_instance
-from utility.my_assert import assert_nonempty_string
 from utility.my_assert import assert_not_equal
 from utility.my_assert import assert_not_none
 # Co-located modules (relative references, NOT packaged, in project)
