@@ -8,44 +8,42 @@ from pathlib import Path
 from utility.filesystem import basename_has_suffix
 from utility.filesystem import split_basename
 from utility.filesystem import split_path
-from utility.my_assert import assert_equal
-from utility.my_assert import assert_false
-from utility.my_assert import assert_true
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 
 
 def test_basename_has_suffix():
-    assert assert_false(basename_has_suffix('name', '.ext'))
-    assert assert_true(basename_has_suffix('name.ext', '.ext'))
-    assert assert_false(basename_has_suffix(Path('name'), '.ext'))
-    assert assert_true(basename_has_suffix(Path('name.ext'), '.ext'))
-    assert assert_true(basename_has_suffix(Path('name-stuff.ext'), '-stuff.ext'))
+    assert is_.false(basename_has_suffix('name', '.ext'))
+    assert is_.true(basename_has_suffix('name.ext', '.ext'))
+    assert is_.false(basename_has_suffix(Path('name'), '.ext'))
+    assert is_.true(basename_has_suffix(Path('name.ext'), '.ext'))
+    assert is_.true(basename_has_suffix(Path('name-stuff.ext'), '-stuff.ext'))
 
 def test_split_basename():
     n, e = split_basename('name')
-    assert assert_equal(n, 'name')
-    assert assert_equal(e, '')
+    assert is_.equal(n, 'name')
+    assert is_.equal(e, '')
 
     n, e = split_basename('name.ext')
-    assert assert_equal(n, 'name')
-    assert assert_equal(e, '.ext')
+    assert is_.equal(n, 'name')
+    assert is_.equal(e, '.ext')
 
     n, e = split_basename('name.zzz.ext')
-    assert assert_equal(n, 'name')
-    assert assert_equal(e, '.zzz.ext')
+    assert is_.equal(n, 'name')
+    assert is_.equal(e, '.zzz.ext')
 
 def test_split_path():
     p, b = split_path('')
-    assert assert_equal(p, Path('.'))
-    assert assert_equal(b, '')
+    assert is_.equal(p, Path('.'))
+    assert is_.equal(b, '')
 
     p, b = split_path('a/b/c')
-    assert assert_equal(p, Path('a/b'))
-    assert assert_equal(b, 'c')
+    assert is_.equal(p, Path('a/b'))
+    assert is_.equal(b, 'c')
 
     p, b = split_path('a/b/c/name.ext')
-    assert assert_equal(p, Path('a/b/c'))
-    assert assert_equal(b, 'name.ext')
+    assert is_.equal(p, Path('a/b/c'))
+    assert is_.equal(b, 'name.ext')
 
 '''DisabledContent
 '''

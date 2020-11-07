@@ -8,8 +8,7 @@ from pathlib import Path
 from throw_out_your_templates.section_3 import VisitorMap
 from throw_out_your_templates.section_4 import visitor_map as parent_visitor_map
 from utility.filesystem import maybe_create_directory
-from utility.my_assert import assert_absolute_directory
-from utility.my_assert import assert_instance
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 from .renderer import Renderer
 
@@ -20,7 +19,7 @@ my_visitor_map = VisitorMap(parent_map=parent_visitor_map)
 class Content(object):
     def __init__(self, visitor_map, content):
         super().__init__()
-        assert assert_instance(visitor_map, VisitorMap)
+        assert is_.instance(visitor_map, VisitorMap)
         self._content = content
         self._visitor_map = visitor_map
 
@@ -48,8 +47,8 @@ def generate(content,
     if directory is None: source.generate()
     elif filename is None: source.generate()
     else:
-        assert assert_instance(directory, Path)
-        assert assert_absolute_directory(directory)
+        assert is_.instance(directory, Path)
+        assert is_.absolute_directory(directory)
         directory = directory / subdirectories
         maybe_create_directory(directory)
         source.generate(directory / filename)

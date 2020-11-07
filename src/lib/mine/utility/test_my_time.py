@@ -10,11 +10,7 @@ import datetime as dt
 from pytest import mark
 from pytest import raises
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.my_assert import assert_equal
-from utility.my_assert import assert_false
-from utility.my_assert import assert_instance
-from utility.my_assert import assert_not_none
-from utility.my_assert import assert_true
+from utility import my_assert as is_
 from utility.my_time import as_iso8601_MM
 from utility.my_time import as_iso8601_SS
 from utility.my_time import datetime_as_int_seconds
@@ -33,11 +29,11 @@ epoch_as_int_seconds = 1589155503
 
 def test_as_iso8601_MM():
     v = as_iso8601_MM(epoch_as_datetime)
-    assert assert_equal(v, '2020-05-10T20:05')
+    assert is_.equal(v, '2020-05-10T20:05')
 
 def test_as_iso8601_SS():
     v = as_iso8601_SS(epoch_as_datetime)
-    assert assert_equal(v, '2020-05-10T20:05:03')
+    assert is_.equal(v, '2020-05-10T20:05:03')
 
 def test_date_current():
     dt.date.today()
@@ -65,17 +61,17 @@ def test_date_fromordinal():
 
 def test_timedelta_as_hours():
     v = timedelta_as_hours(dt.timedelta(hours=0))
-    assert assert_equal(v, 0)
+    assert is_.equal(v, 0)
     v = timedelta_as_hours(dt.timedelta(hours=1))
-    assert assert_equal(v, 1)
+    assert is_.equal(v, 1)
     v = timedelta_as_hours(dt.timedelta(hours=100))
-    assert assert_equal(v, 100)
+    assert is_.equal(v, 100)
     v = timedelta_as_hours(dt.timedelta(hours=-1))
-    assert assert_equal(v, -1)
+    assert is_.equal(v, -1)
 
 def test_datetime_as_int_seconds():
     v = datetime_as_int_seconds(epoch_as_datetime)
-    assert assert_equal(v, epoch_as_int_seconds)
+    assert is_.equal(v, epoch_as_int_seconds)
 
 @mark.xfail(raises=NotImplementedError, strict=True)
 def test_datetime_combine():
@@ -94,7 +90,7 @@ def test_datetime_current():
 
 def test_datetime_from_int_seconds():
     v = datetime_from_int_seconds(epoch_as_int_seconds)
-    assert assert_equal(v, epoch_as_datetime)
+    assert is_.equal(v, epoch_as_datetime)
 
 @mark.xfail(raises=NotImplementedError, strict=True)
 def test_date_fromtimestamp():
@@ -123,59 +119,59 @@ def test_datetime_minimum():
     # TODO: dt.datetime.utcfromtimestamp(0.0)
 
 def test_is_aware():
-    assert assert_false(is_aware(0))
-    assert assert_false(is_aware(0.0))
-    assert assert_false(is_aware(dt.date.today()))
-    assert assert_false(is_aware(dt.date(dt.MAXYEAR, 12, 31)))
-    assert assert_false(is_aware(dt.date(dt.MINYEAR, 1, 1)))
-    assert assert_false(is_aware(dt.date.fromordinal(1)))
-    assert assert_false(is_aware(dt.date.fromtimestamp(0)))
-    assert assert_false(is_aware(dt.date.fromtimestamp(0.0)))
-    assert assert_false(is_aware(dt.datetime.now()))
-    assert assert_false(is_aware(dt.datetime.today()))
-    assert assert_false(is_aware(dt.datetime.utcnow()))
-    assert assert_false(is_aware(dt.datetime(dt.MAXYEAR, 12, 31, 23, 59, 59, 999999)))
-    assert assert_false(is_aware(dt.datetime.max))
-    assert assert_false(is_aware(dt.datetime(dt.MINYEAR, 1, 1, 0, 0, 0, 0)))
-    assert assert_false(is_aware(dt.datetime.fromordinal(1)))
-    assert assert_false(is_aware(dt.datetime.min))
-    assert assert_false(is_aware(ProlepticGregorianOrdinal(1)))
+    assert is_.false(is_aware(0))
+    assert is_.false(is_aware(0.0))
+    assert is_.false(is_aware(dt.date.today()))
+    assert is_.false(is_aware(dt.date(dt.MAXYEAR, 12, 31)))
+    assert is_.false(is_aware(dt.date(dt.MINYEAR, 1, 1)))
+    assert is_.false(is_aware(dt.date.fromordinal(1)))
+    assert is_.false(is_aware(dt.date.fromtimestamp(0)))
+    assert is_.false(is_aware(dt.date.fromtimestamp(0.0)))
+    assert is_.false(is_aware(dt.datetime.now()))
+    assert is_.false(is_aware(dt.datetime.today()))
+    assert is_.false(is_aware(dt.datetime.utcnow()))
+    assert is_.false(is_aware(dt.datetime(dt.MAXYEAR, 12, 31, 23, 59, 59, 999999)))
+    assert is_.false(is_aware(dt.datetime.max))
+    assert is_.false(is_aware(dt.datetime(dt.MINYEAR, 1, 1, 0, 0, 0, 0)))
+    assert is_.false(is_aware(dt.datetime.fromordinal(1)))
+    assert is_.false(is_aware(dt.datetime.min))
+    assert is_.false(is_aware(ProlepticGregorianOrdinal(1)))
 
 def test_is_naive():
-    assert assert_true(is_naive(0))
-    assert assert_true(is_naive(0.0))
-    assert assert_true(is_naive(dt.date.today()))
-    assert assert_true(is_naive(dt.date(dt.MAXYEAR, 12, 31)))
-    assert assert_true(is_naive(dt.date(dt.MINYEAR, 1, 1)))
-    assert assert_true(is_naive(dt.date.fromordinal(1)))
-    assert assert_true(is_naive(dt.date.fromtimestamp(0)))
-    assert assert_true(is_naive(dt.date.fromtimestamp(0.0)))
-    assert assert_true(is_naive(dt.datetime.now()))
-    assert assert_true(is_naive(dt.datetime.today()))
-    assert assert_true(is_naive(dt.datetime.utcnow()))
-    assert assert_true(is_naive(dt.datetime(dt.MAXYEAR, 12, 31, 23, 59, 59, 999999)))
-    assert assert_true(is_naive(dt.datetime.max))
-    assert assert_true(is_naive(dt.datetime(dt.MINYEAR, 1, 1, 0, 0, 0, 0)))
-    assert assert_true(is_naive(dt.datetime.fromordinal(1)))
-    assert assert_true(is_naive(dt.datetime.min))
-    assert assert_true(is_naive(ProlepticGregorianOrdinal(1)))
+    assert is_.true(is_naive(0))
+    assert is_.true(is_naive(0.0))
+    assert is_.true(is_naive(dt.date.today()))
+    assert is_.true(is_naive(dt.date(dt.MAXYEAR, 12, 31)))
+    assert is_.true(is_naive(dt.date(dt.MINYEAR, 1, 1)))
+    assert is_.true(is_naive(dt.date.fromordinal(1)))
+    assert is_.true(is_naive(dt.date.fromtimestamp(0)))
+    assert is_.true(is_naive(dt.date.fromtimestamp(0.0)))
+    assert is_.true(is_naive(dt.datetime.now()))
+    assert is_.true(is_naive(dt.datetime.today()))
+    assert is_.true(is_naive(dt.datetime.utcnow()))
+    assert is_.true(is_naive(dt.datetime(dt.MAXYEAR, 12, 31, 23, 59, 59, 999999)))
+    assert is_.true(is_naive(dt.datetime.max))
+    assert is_.true(is_naive(dt.datetime(dt.MINYEAR, 1, 1, 0, 0, 0, 0)))
+    assert is_.true(is_naive(dt.datetime.fromordinal(1)))
+    assert is_.true(is_naive(dt.datetime.min))
+    assert is_.true(is_naive(ProlepticGregorianOrdinal(1)))
 
 def test_now_utc():
     v = now_utc()
-    assert assert_not_none(v)
-    assert assert_instance(v, dt.datetime)
-    assert assert_equal(v.tzinfo, dt.timezone.utc)
-    assert assert_equal(v.tzinfo.utcoffset(v), dt.timedelta(0))
+    assert is_.not_none(v)
+    assert is_.instance(v, dt.datetime)
+    assert is_.equal(v.tzinfo, dt.timezone.utc)
+    assert is_.equal(v.tzinfo.utcoffset(v), dt.timedelta(0))
 
 @mark.xfail(raises=AssertionError, strict=True,
     reason='This makes no sense, what am I doing wrong?')
 def test_now_utc_is_aware():
-    assert assert_true(is_aware(now_utc()))
+    assert is_.true(is_aware(now_utc()))
 
 @mark.xfail(raises=AssertionError, strict=True,
     reason='This makes no sense, what am I doing wrong?')
 def test_now_utc_not_is_naive():
-    assert assert_false(is_naive(now_utc()))
+    assert is_.false(is_naive(now_utc()))
 
 def test_proleptic_gregorian_ordinal():
     with raises(ValueError):

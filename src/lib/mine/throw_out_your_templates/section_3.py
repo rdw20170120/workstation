@@ -6,7 +6,7 @@
 # Internal packages  (absolute references, distributed with Python)
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.my_assert import assert_none
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 
 
@@ -95,7 +95,7 @@ class _VisitorMapContextManager(object):
     def __enter__(self):
         self.original_map = self.walker.visitor_map
         if self.set_parent_map:
-            assert assert_none(self.vmap.parent_map)
+            assert is_.none(self.vmap.parent_map)
             self.vmap.parent_map = self.original_map
         self.walker.visitor_map = self.vmap
 

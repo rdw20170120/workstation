@@ -90,7 +90,7 @@ TODO: Refine ISO8601 output formats for compactness
 import datetime as dt
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.my_assert import assert_instance
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 
 
@@ -124,8 +124,8 @@ class UnixTime:
 
 
 def as_iso8601(value, timespec='auto'):
-    assert assert_instance(timespec, str)
-    assert assert_instance(value, dt.datetime)
+    assert is_.instance(timespec, str)
+    assert is_.instance(value, dt.datetime)
     return value.isoformat(timespec=timespec)
 
 def as_iso8601_HH(value):
@@ -138,7 +138,7 @@ def as_iso8601_mmmmmm(value):
     return as_iso8601(value, timespec='microseconds')
 
 def as_iso8601_SS(value):
-    assert assert_instance(value, dt.datetime)
+    assert is_.instance(value, dt.datetime)
     if value.tzinfo == dt.timezone.utc:
         return value.strftime('%Y%m%dT%H%M%SZ')
     else:
@@ -153,15 +153,15 @@ def date_from(value):
 def date_from_ordinal(value):
     if isinstance(value, int):
         value = ProlepticGregorianOrdinal(value)
-    assert assert_instance(value, ProlepticGregorianOrdinal)
+    assert is_.instance(value, ProlepticGregorianOrdinal)
     return value.as_date()
 
 def date_from_datetime(value):
-    assert assert_instance(value, dt.datetime)
+    assert is_.instance(value, dt.datetime)
     return None
 
 def datetime_as_float_seconds(value):
-    assert assert_instance(value, dt.datetime)
+    assert is_.instance(value, dt.datetime)
     return value.timestamp()
 
 def datetime_as_int_seconds(value):
@@ -170,19 +170,19 @@ def datetime_as_int_seconds(value):
 def datetime_from_ordinal(value):
     if isinstance(value, int):
         value = ProlepticGregorianOrdinal(value)
-    assert assert_instance(value, ProlepticGregorianOrdinal)
+    assert is_.instance(value, ProlepticGregorianOrdinal)
     return datetime_from_date(value.as_date())
 
 def datetime_from_float_seconds(value):
     if isinstance(value, float):
         value = UnixTime(value)
-    assert assert_instance(value, UnixTime)
+    assert is_.instance(value, UnixTime)
     return value.as_datetime()
 
 def datetime_from_int_seconds(value):
     if isinstance(value, int):
         value = UnixTime(value)
-    assert assert_instance(value, UnixTime)
+    assert is_.instance(value, UnixTime)
     return value.as_datetime()
 
 def is_aware(value):
@@ -223,11 +223,11 @@ def now_utc():
     return dt.datetime.now(dt.timezone.utc)
 
 def timedelta_as_hours(value):
-    assert assert_instance(value, dt.timedelta)
+    assert is_.instance(value, dt.timedelta)
     return value / dt.timedelta(hours=1)
 
 def timedelta_as_seconds(value):
-    assert assert_instance(value, dt.timedelta)
+    assert is_.instance(value, dt.timedelta)
     return value / dt.timedelta(seconds=1)
 
 '''DisabledContent

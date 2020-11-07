@@ -24,12 +24,7 @@ from shutil import rmtree
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.filesystem import split_path
-from utility.my_assert import assert_absolute_directory
-from utility.my_assert import assert_absolute_path
-from utility.my_assert import assert_in
-from utility.my_assert import assert_instance
-from utility.my_assert import assert_not_instance
-from utility.my_assert import assert_relative_path
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 
 
@@ -40,6 +35,8 @@ class TrackedPath(object):
                 and other._path == self._path)
         elif isinstance(other, Path):
             return other == self.path
+        elif isinstance(other, str):
+            return other == str(self)
         else:
             return False
 
@@ -56,28 +53,28 @@ class TrackedPath(object):
 
         super().__init__()
 
-        assert assert_instance(self._title, str)
+        assert is_.instance(self._title, str)
 
-        assert assert_not_instance(self._top, type(None))
-        assert assert_not_instance(self._top, self.__class__)
+        assert is_.not_instance(self._top, type(None))
+        assert is_.not_instance(self._top, self.__class__)
         if not isinstance(self._top, Path): self._top = Path(self._top)
-        assert assert_instance(self._top, Path)
-        assert assert_absolute_path(self._top)
-        if self._top.exists(): assert assert_absolute_directory(self._top)
+        assert is_.instance(self._top, Path)
+        assert is_.absolute_path(self._top)
+        if self._top.exists(): assert is_.absolute_directory(self._top)
 
-        assert assert_not_instance(self._relative, self.__class__)
+        assert is_.not_instance(self._relative, self.__class__)
         if self._relative is None:
             # TODO: Use reference for current directory instead
             self._relative = Path('.')
         if not isinstance(self._relative, Path):
             self._relative = Path(self._relative)
-        assert assert_instance(self._relative, Path)
-        assert assert_relative_path(self._relative)
+        assert is_.instance(self._relative, Path)
+        assert is_.relative_path(self._relative)
         self._subpath, self._basename = split_path(self._relative)
 
         self._path = self._top / self._relative
-        assert assert_instance(self._path, Path)
-        assert assert_absolute_path(self._path)
+        assert is_.instance(self._path, Path)
+        assert is_.absolute_path(self._path)
 
     def __repr__(self):
         return "{}({!r}, {!r}, {!r})".format(

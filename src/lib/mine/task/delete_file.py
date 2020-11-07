@@ -7,7 +7,7 @@ from pathlib import Path
 # Library modules    (absolute references, NOT packaged, in project)
 from task.task import FileSystemTask
 from utility.filesystem import delete_file
-from utility.my_assert import assert_instance
+from utility import my_assert as is_
 from utility.tracked_path import TrackedPath
 # Co-located modules (relative references, NOT packaged, in project)
 
@@ -17,7 +17,7 @@ class DeleteFile(FileSystemTask):
     def __init__(self, task_manager, file_):
         if not isinstance(file_, TrackedPath):
             file_ = file_.tracked_path
-        assert assert_instance(file_, TrackedPath)
+        assert is_.instance(file_, TrackedPath)
         self._file = file_
         super().__init__(getLogger(self.__class__.__name__), task_manager)
 

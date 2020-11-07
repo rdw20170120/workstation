@@ -10,11 +10,10 @@ from os import path
 from botocore.exceptions import ClientError
 import boto3
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.my_assert import assert_equal
-from utility.my_assert import assert_instance
+from aws.service import AwsService
+from utility import my_assert as is_
 from utility.text import string_without_prefix
 # Co-located modules (relative references, NOT packaged, in project)
-from .service import AwsService
 
 
 class S3(AwsService):

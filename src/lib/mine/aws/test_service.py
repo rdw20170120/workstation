@@ -5,8 +5,8 @@
 # External packages  (absolute references, NOT distributed with Python)
 from pytest import raises
 # Library modules    (absolute references, NOT packaged, in project)
+from aws import service
 # Co-located modules (relative references, NOT packaged, in project)
-from . import service
 
 
 def test_init_rejects_service_name_of_none():

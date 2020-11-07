@@ -8,7 +8,7 @@ then the resulting AssertionError
 has an empty message that completely fails to communicate.
 I want messages on EVERY assertion
 that consistently match the assertion logic,
-so I choose to refactor the assertions implementation.
+so I chose to refactor the assertions implementation.
 However, it appears that I cannot return both
 the conditional logic test result (bool) and
 the failed assertion message (str)
@@ -33,7 +33,7 @@ all of these helper functions can still be optimized away.
 # Co-located modules (relative references, NOT packaged, in project)
 
 
-def assert_absolute_directory(path):
+def absolute_directory(path):
     result = path.is_absolute()
     if result: result = path.is_dir()
     if result: return result
@@ -43,7 +43,7 @@ def assert_absolute_directory(path):
                 path
             ))
 
-def assert_absolute_file(path):
+def absolute_file(path):
     result = path.is_absolute()
     if result: result = path.is_file()
     if result: return result
@@ -53,7 +53,7 @@ def assert_absolute_file(path):
                 path
             ))
 
-def assert_absolute_path(path):
+def absolute_path(path):
     result = path.is_absolute()
     if result: return result
     else:
@@ -62,7 +62,7 @@ def assert_absolute_path(path):
                 path
             ))
 
-def assert_at_least(actual_value, expected_value):
+def at_least(actual_value, expected_value):
     """Assert that actual_value is at least expected_value."""
     result = (actual_value >= expected_value)
     if result: return result
@@ -72,7 +72,7 @@ def assert_at_least(actual_value, expected_value):
                 actual_value, expected_value
             ))
 
-def assert_at_most(actual_value, expected_value):
+def at_most(actual_value, expected_value):
     """Assert that actual_value is expected_value at most."""
     result = (actual_value <= expected_value)
     if result: return result
@@ -82,7 +82,7 @@ def assert_at_most(actual_value, expected_value):
                 actual_value, expected_value
             ))
 
-def assert_encoding_is_utf8(encoding):
+def encoding_is_utf8(encoding):
     # TODO: Add tests for complete list of variants
     # TODO: Add handling for both string and enum versions
     result = (encoding in ('utf_8', 'utf-8', 'UTF8'))
@@ -93,7 +93,7 @@ def assert_encoding_is_utf8(encoding):
                 encoding
             ))
 
-def assert_equal(actual_value, expected_value):
+def equal(actual_value, expected_value):
     """Assert that actual_value is equal to expected_value."""
     result = (actual_value == expected_value)
     if result: return result
@@ -103,7 +103,7 @@ def assert_equal(actual_value, expected_value):
                 actual_value, expected_value
             ))
 
-def assert_existing_absolute_path(path):
+def existing_absolute_path(path):
     result = path.is_absolute()
     if result: result = path.exists()
     if result: return result
@@ -113,7 +113,7 @@ def assert_existing_absolute_path(path):
                 path
             ))
 
-def assert_false(actual_value):
+def false(actual_value):
     result = not bool(actual_value)
     if result: return result
     else:
@@ -122,7 +122,7 @@ def assert_false(actual_value):
                 actual_value, False
             ))
 
-def assert_greater(actual_value, lower_limit):
+def greater(actual_value, lower_limit):
     """Assert that actual_value is greater than lower_limit."""
     result = (actual_value > lower_limit)
     if result: return result
@@ -132,7 +132,17 @@ def assert_greater(actual_value, lower_limit):
                 actual_value, lower_limit
             ))
 
-def assert_in(actual_value, expected_values):
+def identical(actual_value, expected_value):
+    """Assert that actual_value is identical to expected_value."""
+    result = (actual_value is expected_value)
+    if result: return result
+    else:
+        raise AssertionError(
+            "{!r} is NOT identical to {!r}".format(
+                actual_value, expected_value
+            ))
+
+def in_(actual_value, expected_values):
     result = (actual_value in expected_values)
     if result: return result
     else:
@@ -141,7 +151,7 @@ def assert_in(actual_value, expected_values):
                 actual_value, expected_values
             ))
 
-def assert_instance(actual_value, expected_types):
+def instance(actual_value, expected_types):
     result = isinstance(actual_value, expected_types)
     if result: return result
     else:
@@ -150,7 +160,7 @@ def assert_instance(actual_value, expected_types):
                 actual_value, expected_types
             ))
 
-def assert_integer_at_least(actual_value, expected_value):
+def integer_at_least(actual_value, expected_value):
     """Assert that actual_value is an integer of at least expected_value."""
     result = isinstance(actual_value, int)
     if result: result = (actual_value >= expected_value)
@@ -161,7 +171,7 @@ def assert_integer_at_least(actual_value, expected_value):
                 actual_value, expected_value
             ))
 
-def assert_integer_greater(actual_value, lower_limit):
+def integer_greater(actual_value, lower_limit):
     """Assert that actual_value is an integer greater than lower_limit."""
     result = isinstance(actual_value, int)
     if result: result = (actual_value > lower_limit)
@@ -172,23 +182,13 @@ def assert_integer_greater(actual_value, lower_limit):
                 actual_value, lower_limit
             ))
 
-def assert_is(actual_value, expected_value):
-    """Assert that actual_value is identical to expected_value."""
-    result = (actual_value is expected_value)
-    if result: return result
-    else:
-        raise AssertionError(
-            "{!r} is NOT identical to {!r}".format(
-                actual_value, expected_value
-            ))
+def none(value):
+    return identical(value, None)
 
-def assert_none(value):
-    return assert_is(value, None)
+def nonempty_string(value):
+    return instance(value, str) and not_equal(value, '')
 
-def assert_nonempty_string(value):
-    return assert_instance(value, str) and assert_not_equal(value, '')
-
-def assert_not(actual_value, expected_value):
+def not_(actual_value, expected_value):
     """Assert that actual_value is NOT identical to expected_value."""
     result = (actual_value is not expected_value)
     if result: return result
@@ -198,7 +198,7 @@ def assert_not(actual_value, expected_value):
                 actual_value, expected_value
             ))
 
-def assert_not_equal(actual_value, expected_value):
+def not_equal(actual_value, expected_value):
     """Assert that actual_value is NOT equal to expected_value."""
     result = (actual_value != expected_value)
     if result: return result
@@ -208,7 +208,7 @@ def assert_not_equal(actual_value, expected_value):
                 actual_value, expected_value
             ))
 
-def assert_not_in(actual_value, expected_values):
+def not_in(actual_value, expected_values):
     result = (actual_value not in expected_values)
     if result: return result
     else:
@@ -217,7 +217,7 @@ def assert_not_in(actual_value, expected_values):
                 actual_value, expected_values
             ))
 
-def assert_not_instance(actual_value, expected_types):
+def not_instance(actual_value, expected_types):
     result = not isinstance(actual_value, expected_types)
     if result: return result
     else:
@@ -226,10 +226,10 @@ def assert_not_instance(actual_value, expected_types):
                 actual_value, expected_types
             ))
 
-def assert_not_none(value):
-    return assert_not(value, None)
+def not_none(value):
+    return not_(value, None)
 
-def assert_relative_path(path):
+def relative_path(path):
     result = not path.is_absolute()
     if result: return result
     else:
@@ -238,7 +238,7 @@ def assert_relative_path(path):
                 path
             ))
 
-def assert_range(actual_value, lower_limit, higher_limit):
+def range(actual_value, lower_limit, higher_limit):
     """Assert that actual_value is within range (inclusive)."""
     result = (lower_limit <= actual_value <= higher_limit)
     if result: return result
@@ -248,7 +248,7 @@ def assert_range(actual_value, lower_limit, higher_limit):
                 actual_value, lower_limit, higher_limit
             ))
 
-def assert_true(actual_value):
+def true(actual_value):
     result = bool(actual_value)
     if result: return result
     else:

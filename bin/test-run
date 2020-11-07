@@ -16,10 +16,9 @@ trap report_status_and_exit EXIT
 ###############################################################################
 # Run tests
 
-if [[ -z "$BO_Project" ]] ; then
-    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
-    exit 1
-fi
+[[ -z "${BO_Project}" ]] &&
+    echo "FATAL: 'BO_Project' is undefined, aborting" &&
+    exit 20
 
 Script=$BO_Project/BriteOnyx/bin/lib/configure-Python.bash
 if [[ -r $Script ]] ; then
@@ -29,16 +28,28 @@ else
 fi
 
 cd $BO_Project/src/lib/mine
-py.test --log-file=pytest.log
+status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
 # DISABLED: --show-capture=no
+py.test --log-file=pytest.log
+status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
 
 cd $BO_Project/src/gen
-py.test --log-file=pytest.log
+status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
 # DISABLED: --show-capture=no
+py.test --log-file=pytest.log
+status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
 
 cd $BO_Project/src/app
-py.test --log-file=pytest.log
+status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
 # DISABLED: --show-capture=no
+py.test --log-file=pytest.log
+status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
+
+main() {
+    return 0
+}
+
+main
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

@@ -4,9 +4,7 @@
 # Internal packages  (absolute references, distributed with Python)
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.my_assert import assert_at_least
-from utility.my_assert import assert_instance
-from utility.my_assert import assert_not_none
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 from ..source import my_visitor_map
 from ..structure import *
@@ -47,7 +45,7 @@ def echo_warn(*element):
 ###############################################################################
 
 def cc(command_embedded_within_comment):
-    assert assert_instance(command_embedded_within_comment, _Command)
+    assert is_.instance(command_embedded_within_comment, _Command)
     return bt(command_embedded_within_comment)
 
 def debugging_comment():
@@ -105,7 +103,7 @@ def status_is_success():
 ###############################################################################
 
 def set_(*argument):
-    assert assert_at_least(len(argument), 1)
+    assert is_.at_least(len(argument), 1)
     return command('set', argument)
 
 ###############################################################################
@@ -114,7 +112,7 @@ def set_(*argument):
 class _Substitution(object):
     def __init__(self, command):
         super().__init__()
-        assert assert_instance(command, _Command)
+        assert is_.instance(command, _Command)
         self.command = command
 
     def __repr__(self):
@@ -216,7 +214,7 @@ class _Else(object):
     def __init__(self, *statement):
         super().__init__()
         self.statements = squashed(statement)
-        assert assert_not_none(self.statements)
+        assert is_.not_none(self.statements)
 
     def __repr__(self):
         return "_Else({})".format(self.statements)
@@ -239,9 +237,9 @@ class _ElseIf(object):
     def __init__(self, condition, *statement):
         super().__init__()
         self.condition = squashed(condition)
-        assert assert_not_none(self.condition)
+        assert is_.not_none(self.condition)
         self.statements = squashed(statement)
-        assert assert_not_none(self.statements)
+        assert is_.not_none(self.statements)
 
     def __repr__(self):
         return "_ElseIf({}, {})".format(self.condition, self.statements)
@@ -285,9 +283,9 @@ class _If(object):
     def __init__(self, condition, *statement):
         super().__init__()
         self.condition = squashed(condition)
-        assert assert_not_none(self.condition)
+        assert is_.not_none(self.condition)
         self.statements = squashed(statement)
-        assert assert_not_none(self.statements)
+        assert is_.not_none(self.statements)
 
     def __repr__(self):
         return "_If({}, {})".format(self.condition, self.statements)

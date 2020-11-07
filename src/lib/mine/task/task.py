@@ -10,12 +10,7 @@ from task.exception import Skip
 from utility.filesystem import delete_directory_tree
 from utility.filesystem import delete_file
 from utility.filesystem import touch
-from utility.my_assert import assert_absolute_directory
-from utility.my_assert import assert_absolute_file
-from utility.my_assert import assert_absolute_path
-from utility.my_assert import assert_existing_absolute_path
-from utility.my_assert import assert_instance
-from utility.my_assert import assert_not_none
+from utility import my_assert as is_
 from utility.my_logging import log_exception
 # Co-located modules (relative references, NOT packaged, in project)
 
@@ -23,8 +18,8 @@ from utility.my_logging import log_exception
 class PlainTask(object):
     """Base class for tasks managed by a TaskManager."""
     def __init__(self, logger, task_manager):
-        assert assert_not_none(logger)
-        assert assert_not_none(task_manager)
+        assert is_.not_none(logger)
+        assert is_.not_none(task_manager)
         self._log = logger
         self._tm = task_manager
         self._tm._add(self)
@@ -138,7 +133,7 @@ class FileSystemTask(PlainTask):
         if not len(paths):
             self._log.debug("No %s registered in %s", name, self)
         for path in paths:
-            assert assert_absolute_path(path)
+            assert is_.absolute_path(path)
             if not path.exists():
                 raise FileNotFoundError(
                     "{} is aborting since {} {} is missing".format(
@@ -157,7 +152,7 @@ class FileSystemTask(PlainTask):
         if self.config.should_leave_output_upon_task_failure: return
         self._log.debug("%s is deleting targets upon exception", self)
         for target in self._targets:
-            assert assert_absolute_path(target)
+            assert is_.absolute_path(target)
             if target.exists():
                 if target.is_dir():
                     self._log.warn(
@@ -207,7 +202,7 @@ class FileSystemTask(PlainTask):
 
     def _register_source(self, source):
         if source is None: return None
-        assert assert_absolute_path(source)
+        assert is_.absolute_path(source)
         self._log.debug("Registering source %s", source.for_log())
         self._sources.append(source)
         return source
@@ -219,7 +214,7 @@ class FileSystemTask(PlainTask):
 
     def _register_target(self, target):
         if target is None: return None
-        assert assert_absolute_path(target)
+        assert is_.absolute_path(target)
         self._log.debug("Registering target %s", target.for_log())
         self._targets.append(target)
         return target
@@ -234,7 +229,7 @@ class FileSystemTask(PlainTask):
         if self.config.is_dry_run: return False
         if force is None: return True
         if not force: force = self.config.is_forced_run
-        assert assert_absolute_path(target)
+        assert is_.absolute_path(target)
         if not target.exists(): return True
         result = False
         if force:
@@ -262,7 +257,7 @@ class FileSystemTask(PlainTask):
         return result
 
     def _should_delete_directory(self, directory_path):
-        assert assert_absolute_path(directory_path)
+        assert is_.absolute_path(directory_path)
         if self.config.is_dry_run: return False
         if not directory_path.exists(): return False
         if not directory_path.is_dir():
@@ -273,7 +268,7 @@ class FileSystemTask(PlainTask):
         return True
 
     def _should_delete_file(self, file_path):
-        assert assert_absolute_path(file_path)
+        assert is_.absolute_path(file_path)
         if self.config.is_dry_run: return False
         if not file_path.exists(): return False
         if not file_path.is_file():
@@ -285,9 +280,9 @@ class FileSystemTask(PlainTask):
 
     def _touch_targets(self):
         for target in self._targets:
-            assert assert_absolute_path(target)
+            assert is_.absolute_path(target)
             touch(target)
-            assert assert_absolute_file(target)
+            assert is_.absolute_file(target)
 
 '''DisabledContent
 '''

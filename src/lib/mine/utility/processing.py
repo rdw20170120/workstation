@@ -8,7 +8,7 @@ from os import getpid as os_get_pid
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.filesystem import delete_file
-from utility.my_assert import assert_equal
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 
 
@@ -25,7 +25,7 @@ def create_pid_file(pid_file):
                 ))
     write_pid_file(pid_file, pid)
     stored = read_pid_file(pid_file)
-    assert assert_equal(stored, pid)
+    assert is_.equal(stored, pid)
 
 def delete_pid_file(pid_file):
     if pid_file.is_file():

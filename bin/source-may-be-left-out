@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
+# NO: set -e
+# Intended to be executed in a BASH shell.
+
+report_status_and_exit() {
+    local -ir Status=$?
+    if [[ "${Status}" -eq 0 ]] ; then
+        echo "INFO:  ${0} exiting with status ${Status}"
+    else
+        echo "FATAL: ${0} exiting with status ${Status}"
+    fi
+    exit ${Status}
+}
+trap report_status_and_exit EXIT
+###############################################################################
+
+main() {
+    # List files that are ignored by source control but may be wrongly left out
+    git status --ignored |
+        grep -v \.class |
+        grep -v \.DS_Store |
+        grep -v \.PVE |
+        grep -v \.pytest_cache |
+        grep -v __pycache__ |
+        grep -v BO-incoming\.env |
+        grep -v BO-outgoing\.env |
+        grep -v log\/ |
+        grep -v pytest\.log
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# set -o verbose
+# set -o xtrace
+# Code to debug...
+# set +o verbose
+# set +o xtrace
+: << 'DisabledContent'
+DisabledContent
+

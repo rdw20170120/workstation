@@ -17,11 +17,7 @@ from shutil import copy2
 from shutil import rmtree
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.my_assert import assert_absolute_file
-from utility.my_assert import assert_absolute_path
-from utility.my_assert import assert_equal
-from utility.my_assert import assert_existing_absolute_path
-from utility.my_assert import assert_instance
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 
 
@@ -29,14 +25,14 @@ log = getLogger(__name__)
 
 
 def basename_has_suffix(path_, suffix):
-    assert assert_instance(suffix, str)
+    assert is_.instance(suffix, str)
     return str(path_).endswith(suffix)
 
 def clone_file(source_file, target_file):
-    assert assert_absolute_file(source_file)
+    assert is_.absolute_file(source_file)
     try:
         actual = copy2(str(source_file), str(target_file))
-        assert assert_equal(actual, target_file)
+        assert is_.equal(actual, target_file)
     except BaseException:
         log.error('Failed to clone file %s to %s',
             source_file, target_file
@@ -44,7 +40,7 @@ def clone_file(source_file, target_file):
         raise
 
 def concatenate_text_file(target_file, source_file, encoding=None):
-    assert assert_absolute_file(source_file)
+    assert is_.absolute_file(source_file)
     if encoding is None: encoding = 'utf_8'
     with target_file.open(
         encoding=encoding, mode='at', newline=None
@@ -57,12 +53,12 @@ def concatenate_text_file(target_file, source_file, encoding=None):
 
 def concatenate_text_files(target_file, source_files, encoding=None):
     if encoding is None: encoding = 'utf_8'
-    assert assert_instance(source_files, list)
+    assert is_.instance(source_files, list)
     with target_file.open(
         encoding=encoding, mode='wt', newline=None
         ) as writer:
         for s in source_files:
-            assert assert_absolute_file(s)
+            assert is_.absolute_file(s)
             with s.open(
                 encoding=encoding, mode='rt', newline=None
                 ) as reader:
@@ -110,9 +106,9 @@ def file_size(file_):
 
 def make_hard_link(new_path, existing_path):
     if isinstance(new_path, str): new_path = Path(new_path)
-    assert assert_instance(new_path, Path)
-    assert assert_absolute_path(new_path)
-    assert assert_existing_absolute_path(existing_path)
+    assert is_.instance(new_path, Path)
+    assert is_.absolute_path(new_path)
+    assert is_.existing_absolute_path(existing_path)
     link(existing_path, new_path)
     # TODO: Added in Python 3.8
 #   new_path.link_to(existing_path)
@@ -123,10 +119,13 @@ def maybe_create_directory(path_):
 def maybe_delete_directory(path_):
     if directory_exists(path_): delete_directory(path_)
 
+def maybe_delete_file(path_):
+    if file_exists(path_): delete_file(path_)
+
 def read_binary_from_file(file_):
     with open(file_, mode='rb') as reader:
         result = reader.read()
-        assert assert_instance(result, bytes)
+        assert is_.instance(result, bytes)
     return result
 
 def read_text_from_file(file_, encoding=None):
@@ -135,7 +134,7 @@ def read_text_from_file(file_, encoding=None):
         encoding=encoding, mode='rt', newline=None
         ) as reader:
         result = reader.read()
-        assert assert_instance(result, str)
+        assert is_.instance(result, str)
     return result
 
 def recreate_directory(path_):
@@ -169,19 +168,19 @@ def touch(file_):
         raise
 
 def write_binary_into_file(file_, binary_content):
-    assert assert_instance(binary_content, bytes)
+    assert is_.instance(binary_content, bytes)
     with open(file_, mode='wb') as writer:
         count = writer.write(binary_content)
-        assert assert_equal(len(binary_content), count)
+        assert is_.equal(len(binary_content), count)
 
 def write_text_into_file(file_, text_content, encoding=None):
     if encoding is None: encoding = 'utf_8'
-    assert assert_instance(text_content, str)
+    assert is_.instance(text_content, str)
     with open(file_,
         encoding=encoding, mode='wt', newline=None
         ) as writer:
         count = writer.write(text_content)
-        assert assert_equal(len(text_content), count)
+        assert is_.equal(len(text_content), count)
 
 '''DisabledContent
 '''

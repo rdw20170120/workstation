@@ -5,15 +5,15 @@
 import ast
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.my_assert import assert_instance
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 
 
 def dict_from_string(the_string):
     if the_string is None: return None
-    assert assert_instance(the_string, str)
+    assert is_.instance(the_string, str)
     result = ast.literal_eval(the_string)
-    assert assert_instance(result, dict)
+    assert is_.instance(result, dict)
     return result
 
 def replace_last(the_string, find, replace):

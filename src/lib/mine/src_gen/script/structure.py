@@ -5,8 +5,7 @@
 from pathlib import Path
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.my_assert import assert_instance
-from utility.my_assert import assert_not_none
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 from ..structure import *
 from .source import my_visitor_map
@@ -49,7 +48,7 @@ class _Command(object):
     def __init__(self, executable, *arguments):
         super().__init__()
         self.executable = squashed(executable)
-        assert assert_not_none(self.executable)
+        assert is_.not_none(self.executable)
         if isinstance(arguments, _Arguments):
             self.arguments = arguments
         else:
@@ -146,7 +145,7 @@ def x(*element):
 ###############################################################################
 
 def _shebang(command):
-    assert assert_instance(command, _Command)
+    assert is_.instance(command, _Command)
     return _Comment('!', command, tight=True)
 
 def shebang_cat():
@@ -156,7 +155,7 @@ def shebang_false():
     return shebang_thru_env('false')
 
 def shebang_thru_env(executable):
-    assert assert_not_none(executable)
+    assert is_.not_none(executable)
     return _shebang(_Command(Path('/usr/bin/env'), executable))
 
 '''DisabledContent

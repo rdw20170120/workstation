@@ -5,7 +5,7 @@
 from pathlib import Path
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
-from utility.my_assert import assert_range
+from utility import my_assert as is_
 # Co-located modules (relative references, NOT packaged, in project)
 from ...structure import *
 from .source import my_visitor_map
@@ -14,7 +14,7 @@ from .source import my_visitor_map
 ###############################################################################
 
 def header(title, level=1):
-    assert assert_range(level, 1, 6)
+    assert is_.range(level, 1, 6)
     return line([level * '#', ' ', title])
 
 def h1(title): return header(title, level=1)
@@ -23,7 +23,7 @@ def h2(title): return header(title, level=2)
 
 def numbered_list_item(text, level=0):
     # TODO: Consider restructing this to compute final content upon rendering
-    assert assert_range(level, 0, 9)
+    assert is_.range(level, 0, 9)
     prefix = '1. '
     indent = len(prefix) * ' '
     return line([level * indent, prefix, text])

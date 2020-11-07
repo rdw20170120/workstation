@@ -7,8 +7,8 @@ from logging import getLogger
 from botocore.exceptions import ClientError
 import boto3
 # Library modules    (absolute references, NOT packaged, in project)
+from aws.service import AwsService
 # Co-located modules (relative references, NOT packaged, in project)
-from .service import AwsService
 
 
 class EC2(AwsService):
