@@ -37,12 +37,13 @@
 '/home/rob/project/Rob/workstation/src/gen/generate/script/python/__pycache__': listing directory
 '/home/rob/project/Rob/workstation/src/gen/generate/script/bash': listing directory
 '/home/rob/project/Rob/workstation/src/gen/generate/script/bash/__init__.py': Clean bill of health.
+'/home/rob/project/Rob/workstation/src/gen/generate/script/bash/set_path.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/gen/generate/script/bash/briteonyx': listing directory
 '/home/rob/project/Rob/workstation/src/gen/generate/script/bash/briteonyx/__init__.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/gen/generate/script/bash/briteonyx/all.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/gen/generate/script/bash/briteonyx/__pycache__': listing directory
 '/home/rob/project/Rob/workstation/src/gen/generate/script/bash/all.py': Clean bill of health.
-'/home/rob/project/Rob/workstation/src/gen/generate/script/bash/project_activate_script.py': Clean bill of health.
+'/home/rob/project/Rob/workstation/src/gen/generate/script/bash/activate.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/gen/generate/script/bash/__pycache__': listing directory
 '/home/rob/project/Rob/workstation/src/gen/generate/script/__pycache__': listing directory
 '/home/rob/project/Rob/workstation/src/gen/generate/app.py': Clean bill of health.
@@ -223,6 +224,7 @@
 '/home/rob/project/Rob/workstation/src/lib/mine/utility/test_my_assert.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/lib/mine/utility/my_time.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/lib/mine/utility/my_logging.py': Clean bill of health.
+'/home/rob/project/Rob/workstation/src/lib/mine/utility/test_python.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/lib/mine/utility/tracked_path.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/lib/mine/aws': listing directory
 '/home/rob/project/Rob/workstation/src/lib/mine/aws/__init__.py': Clean bill of health.

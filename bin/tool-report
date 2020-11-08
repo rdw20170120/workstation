@@ -92,10 +92,10 @@ python3 -c 'import os; print(os.sys.path)'
 checkExecutable pip3
 check 'pip3 --version'
 
-# Python 2to3
+# Python tools
+checkExecutable black
+check 'black --version'
 checkExecutable 2to3
-
-# Python testing
 checkExecutable py.test
 check 'py.test --version' 2>&1
 
