@@ -18,7 +18,7 @@ class Config(BaseConfig):
     def should_leave_output_upon_task_failure(self):
         # TODO: Enhance to override via environment variable and CLI argument
         # TODO: Overriding BaseConfig, should remove for production
-        return True
+        return False
  
     @property
     def application_name(self):

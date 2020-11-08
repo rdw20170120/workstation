@@ -31,7 +31,7 @@ class PlainTask(object):
 
     def _disabled(self):
         raise Skip(
-            "{} is skipping because disabled".format(self)
+            "{} is disabled".format(self)
             )
     def _execute(self):
         """MUST be overridden in subclasses, WITHOUT a call to super()."""
@@ -48,7 +48,7 @@ class PlainTask(object):
 
     def _post_execute(self):
         """MAY be overridden in subclasses, starting with call to super()."""
-        self._log.info("Done: %s", self)
+        self._log.debug("Done: %s", self)
 
     def _pre_execute(self):
         """MAY be overridden in subclasses, starting with call to super()."""

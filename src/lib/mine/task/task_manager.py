@@ -49,7 +49,7 @@ class TaskManager(object):
                 "From %s _execute_task() except Skip",
                 __name__
                 )
-            self._log.debug(repr(e))
+            self._log.info(repr(e))
         except BaseException as e:
             self._log.debug(
                 "From %s _execute_task() except BaseException",
