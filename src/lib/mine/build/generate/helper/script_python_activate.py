@@ -14,9 +14,10 @@ class Script(script_briteonyx.Script):
 
 
 def build():
-    return Script([
-        source_header(),
-        '''# NOTE: We MUST NOT EVER 'exit' during BriteOnyx bootstrap or activation
+    return Script(
+        [
+            source_header(),
+            """# NOTE: We MUST NOT EVER 'exit' during BriteOnyx bootstrap or activation
 ####################################################################################################
 # NOTE: Uncomment the following two lines for debugging
 # set -o verbose
@@ -112,10 +113,11 @@ export PYTHONHOME=$VIRTUAL_ENV
 
 echo "INFO: Activated Python virtual environment (PVE) in '${DirPVE}'"
 echo "INFO: Found '$(python --version 2>&1)' at '$(which python)'"
-''',
-        disabled_content_footer(),
-    ])
-    
+""",
+            disabled_content_footer(),
+        ]
+    )
+
 
 VISITOR_MAP = VisitorMap(parent_map=script_bash.VISITOR_MAP)
 
@@ -126,4 +128,3 @@ def render(target_directory, target_file):
 
 """ Disabled content
 """
-

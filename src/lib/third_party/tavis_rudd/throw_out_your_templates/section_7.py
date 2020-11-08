@@ -12,16 +12,19 @@ from .section_6 import xml_default_visitors_map
 
 examples_vmap = xml_default_visitors_map.copy()
 
+
 @examples_vmap.register(XmlElement)
 def pprint_visit_xml_element(elem, walker):
     visit_xml_element(elem, walker)
-    walker.emit('\n') # easier to read example output
+    walker.emit("\n")  # easier to read example output
+
 
 class Example(object):
-    all_examples = [] #class attr
-    def __init__(self, name, content,
-                 visitor_map=examples_vmap,
-                 input_encoding='utf-8'):
+    all_examples = []  # class attr
+
+    def __init__(
+        self, name, content, visitor_map=examples_vmap, input_encoding="utf-8"
+    ):
         self.name = name
         self.content = content
         self.visitor_map = visitor_map
@@ -29,12 +32,12 @@ class Example(object):
         Example.all_examples.append(self)
 
     def show(self):
-        print(('-'*80))
-        print(('## Output from example:', self.name))
+        print(("-" * 80))
+        print(("## Output from example:", self.name))
         print()
-        output = Serializer(
-            self.visitor_map,
-            self.input_encoding).serialize(self.content)
+        output = Serializer(self.visitor_map, self.input_encoding).serialize(
+            self.content
+        )
         print((output.encode(get_default_encoding())))
 
 
@@ -46,21 +49,22 @@ class _GetAttrDict(dict):
             return self[k]
         except KeyError:
             raise AttributeError(k)
+
+
 htmltags = _GetAttrDict(htmltags)
-meta   = htmltags.meta
-html   = htmltags.html
-head   = htmltags.head
+meta = htmltags.meta
+html = htmltags.html
+head = htmltags.head
 script = htmltags.script
-title  = htmltags.title
-body   = htmltags.body
-div    = htmltags.div
-span   = htmltags.span
-h1     = htmltags.h1
-h2     = htmltags.h2
-ul     = htmltags.ul
-li     = htmltags.li
+title = htmltags.title
+body = htmltags.body
+div = htmltags.div
+span = htmltags.span
+h1 = htmltags.h1
+h2 = htmltags.h2
+ul = htmltags.ul
+li = htmltags.li
 ## could also say:
-#for k, v in htmltags.iteritems():
+# for k, v in htmltags.iteritems():
 #    exec '%s = htmltags["%s"]'%(k, k)
 ## but then my pyflakes/flymake setup complains about undefined vars ...
-

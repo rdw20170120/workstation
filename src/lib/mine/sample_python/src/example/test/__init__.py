@@ -1,1 +1,1 @@
-'''Marks a Python package'''
+"""Marks a Python package"""

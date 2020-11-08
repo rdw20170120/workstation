@@ -6,41 +6,44 @@ Intended to be executed directly by the user.
 # Internal packages  (absolute references, distributed with Python)
 from argparse import ArgumentParser
 from argparse import FileType
-from sys      import stdout
+from sys import stdout
+
 # External packages  (absolute references, NOT distributed with Python)
 import pyarrow.parquet as pq
+
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
 
 
 def main():
     parser = ArgumentParser(
-        description='Print a file stored in Apache Parquet format.'
-        )
-    parser.add_argument('infile', type=FileType('rb'))
-    parser.add_argument('outfile',
-            nargs='?', type=FileType('wt'), default=stdout)
+        description="Print a file stored in Apache Parquet format."
+    )
+    parser.add_argument("infile", type=FileType("rb"))
+    parser.add_argument(
+        "outfile", nargs="?", type=FileType("wt"), default=stdout
+    )
     args = parser.parse_args()
 
     with args.outfile as writer:
         parquet = pq.ParquetFile(args.infile)
-        writer.write('Parquet metadata:\n')
+        writer.write("Parquet metadata:\n")
         writer.write(str(parquet.metadata))
-        writer.write('\n')
-        writer.write('Parquet schema:\n')
+        writer.write("\n")
+        writer.write("Parquet schema:\n")
         writer.write(str(parquet.schema))
-        writer.write('\n')
+        writer.write("\n")
         x = pq.read_pandas(args.infile).to_pandas()
-        writer.write('Pandas DataFrame datatypes:\n')
+        writer.write("Pandas DataFrame datatypes:\n")
         writer.write(str(x.dtypes))
-        writer.write('\n')
-        writer.write('Pandas DataFrame Head:\n')
+        writer.write("\n")
+        writer.write("Pandas DataFrame Head:\n")
         writer.write(str(x.head))
-        writer.write('\n')
+        writer.write("\n")
+
 
 if __name__ == "__main__":
     main()
 
-'''DisabledContent
-'''
-
+"""DisabledContent
+"""

@@ -3,18 +3,22 @@
 """
 # Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+
 # Co-located modules (relative references, NOT packaged, in project)
 from ..structure import *
 from .source import my_visitor_map
 
 ###############################################################################
 
+
 @my_visitor_map.register(Path)
 def _visit_path(element, walker):
     walker.walk(str(element))
+
 
 ###############################################################################
 
@@ -33,13 +37,14 @@ def _visit_arguments(element, walker):
     if is_nonstring_iterable(element.arguments):
         for a in element.arguments:
             if a is not None:
-                walker.emit(' ')
+                walker.emit(" ")
                 walker.walk(a)
     elif element.arguments is None:
         pass
     else:
-        walker.emit(' ')
+        walker.emit(" ")
         walker.walk(element.arguments)
+
 
 ###############################################################################
 
@@ -63,8 +68,10 @@ def _visit_command(element, walker):
     walker.walk(element.executable)
     walker.walk(element.arguments)
 
+
 def command(executable, *argument):
     return _Command(executable, argument)
+
 
 ###############################################################################
 
@@ -73,7 +80,8 @@ class _Comment(object):
     def __init__(self, *elements, tight=False):
         super().__init__()
         self.elements = squashed(elements)
-        if not self.elements: tight = True
+        if not self.elements:
+            tight = True
         self.tight = tight
 
     def __repr__(self):
@@ -82,38 +90,49 @@ class _Comment(object):
 
 @my_visitor_map.register(_Comment)
 def _visit_comment(element, walker):
-    walker.emit('#')
-    if not element.tight: walker.emit(' ')
+    walker.emit("#")
+    if not element.tight:
+        walker.emit(" ")
     walker.walk(element.elements)
     walker.walk(eol())
+
 
 def comment(*element):
     return _Comment(element)
 
+
 def disabled(*element):
-    return comment('DISABLED: ', element)
+    return comment("DISABLED: ", element)
+
 
 def fix(*element):
-    return todo('FIX: ', element)
+    return todo("FIX: ", element)
+
 
 def no(*element):
-    return comment('NO: ', element)
+    return comment("NO: ", element)
+
 
 def note(*element):
-    return comment('NOTE: ', element)
+    return comment("NOTE: ", element)
+
 
 def rule():
     # TODO: Make line length configurable
-    return line('#' * 79)
+    return line("#" * 79)
+
 
 def research(*element):
-    return todo('RESEARCH: ', element)
+    return todo("RESEARCH: ", element)
+
 
 def someday(*element):
-    return todo('SOMEDAY: ', element)
+    return todo("SOMEDAY: ", element)
+
 
 def todo(*element):
-    return comment('TODO: ', element)
+    return comment("TODO: ", element)
+
 
 ###############################################################################
 
@@ -142,22 +161,27 @@ def _visit_expression(element, walker):
 def x(*element):
     return _Expression(element)
 
+
 ###############################################################################
+
 
 def _shebang(command):
     assert is_.instance(command, _Command)
-    return _Comment('!', command, tight=True)
+    return _Comment("!", command, tight=True)
+
 
 def shebang_cat():
-    return shebang_thru_env('cat')
+    return shebang_thru_env("cat")
+
 
 def shebang_false():
-    return shebang_thru_env('false')
+    return shebang_thru_env("false")
+
 
 def shebang_thru_env(executable):
     assert is_.not_none(executable)
-    return _shebang(_Command(Path('/usr/bin/env'), executable))
+    return _shebang(_Command(Path("/usr/bin/env"), executable))
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

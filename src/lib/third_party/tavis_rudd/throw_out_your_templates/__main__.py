@@ -14,10 +14,9 @@ import throw_out_your_templates_9_example_extended
 from throw_out_your_templates_7_example_helpers import Example
 
 ################################################################################
-if __name__ == '__main__':
+if __name__ == "__main__":
     for example in Example.all_examples:
         example.show()
 
 """ Disabled content
 """
-

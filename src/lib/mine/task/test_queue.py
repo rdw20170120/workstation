@@ -5,6 +5,7 @@
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+
 # Co-located modules (relative references, NOT packaged, in project)
 from .queue import TaskQueue
 
@@ -12,6 +13,6 @@ from .queue import TaskQueue
 def test_queue():
     assert is_.not_none(TaskQueue())
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

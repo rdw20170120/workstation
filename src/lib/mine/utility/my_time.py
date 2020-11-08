@@ -88,19 +88,25 @@ TODO: Refine ISO8601 output formats for compactness
 """
 # Internal packages  (absolute references, distributed with Python)
 import datetime as dt
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+
 # Co-located modules (relative references, NOT packaged, in project)
 
 
-class ProlepticGregorianOrdinal():
+class ProlepticGregorianOrdinal:
     def __init__(self, value):
         if isinstance(value, int):
-            if value <= 0: raise ValueError("'{}' is <= 0".format(value))
+            if value <= 0:
+                raise ValueError("'{}' is <= 0".format(value))
             self._ordinal = value
-        else: raise ValueError(
-            "Cannot handle value '{}' of type '{}'".format(value, type(value))
+        else:
+            raise ValueError(
+                "Cannot handle value '{}' of type '{}'".format(
+                    value, type(value)
+                )
             )
 
     def as_date(self):
@@ -112,43 +118,54 @@ class ProlepticGregorianOrdinal():
 
 class UnixTime:
     def __init__(self, value):
-        if isinstance(value, int): value = float(value)
+        if isinstance(value, int):
+            value = float(value)
         if isinstance(value, float):
             self._float_seconds = value
-        else: raise ValueError(
-            "Cannot handle value '{}' of type '{}'".format(value, type(value))
+        else:
+            raise ValueError(
+                "Cannot handle value '{}' of type '{}'".format(
+                    value, type(value)
+                )
             )
 
     def as_datetime(self):
         return dt.datetime.fromtimestamp(self._float_seconds)
 
 
-def as_iso8601(value, timespec='auto'):
+def as_iso8601(value, timespec="auto"):
     assert is_.instance(timespec, str)
     assert is_.instance(value, dt.datetime)
     return value.isoformat(timespec=timespec)
 
+
 def as_iso8601_HH(value):
-    return as_iso8601(value, timespec='hours')
+    return as_iso8601(value, timespec="hours")
+
 
 def as_iso8601_MM(value):
-    return as_iso8601(value, timespec='minutes')
+    return as_iso8601(value, timespec="minutes")
+
 
 def as_iso8601_mmmmmm(value):
-    return as_iso8601(value, timespec='microseconds')
+    return as_iso8601(value, timespec="microseconds")
+
 
 def as_iso8601_SS(value):
     assert is_.instance(value, dt.datetime)
     if value.tzinfo == dt.timezone.utc:
-        return value.strftime('%Y%m%dT%H%M%SZ')
+        return value.strftime("%Y%m%dT%H%M%SZ")
     else:
-        return as_iso8601(value, timespec='seconds')
+        return as_iso8601(value, timespec="seconds")
+
 
 def as_iso8601_sss(value):
-    return as_iso8601(value, timespec='milliseconds')
+    return as_iso8601(value, timespec="milliseconds")
+
 
 def date_from(value):
     return None
+
 
 def date_from_ordinal(value):
     if isinstance(value, int):
@@ -156,16 +173,20 @@ def date_from_ordinal(value):
     assert is_.instance(value, ProlepticGregorianOrdinal)
     return value.as_date()
 
+
 def date_from_datetime(value):
     assert is_.instance(value, dt.datetime)
     return None
+
 
 def datetime_as_float_seconds(value):
     assert is_.instance(value, dt.datetime)
     return value.timestamp()
 
+
 def datetime_as_int_seconds(value):
     return int(datetime_as_float_seconds(value))
+
 
 def datetime_from_ordinal(value):
     if isinstance(value, int):
@@ -173,11 +194,13 @@ def datetime_from_ordinal(value):
     assert is_.instance(value, ProlepticGregorianOrdinal)
     return datetime_from_date(value.as_date())
 
+
 def datetime_from_float_seconds(value):
     if isinstance(value, float):
         value = UnixTime(value)
     assert is_.instance(value, UnixTime)
     return value.as_datetime()
+
 
 def datetime_from_int_seconds(value):
     if isinstance(value, int):
@@ -185,51 +208,78 @@ def datetime_from_int_seconds(value):
     assert is_.instance(value, UnixTime)
     return value.as_datetime()
 
+
 def is_aware(value):
-    if isinstance(value, float): return False
-    elif isinstance(value, int): return False
-    elif isinstance(value, ProlepticGregorianOrdinal): return False
-    elif isinstance(value, dt.date): return False
+    if isinstance(value, float):
+        return False
+    elif isinstance(value, int):
+        return False
+    elif isinstance(value, ProlepticGregorianOrdinal):
+        return False
+    elif isinstance(value, dt.date):
+        return False
     elif isinstance(value, dt.datetime):
-        if value.tzinfo is None: return False
-        elif value.tzinfo.utcoffset(value) is None: return False
-        else: return True
+        if value.tzinfo is None:
+            return False
+        elif value.tzinfo.utcoffset(value) is None:
+            return False
+        else:
+            return True
     elif isinstance(value, dt.time):
-        if value.tzinfo is None: return False
-        elif value.tzinfo.utcoffset(value) is None: return False
-        else: return True
-    else: raise ValueError(
-        "Irrelevant for value '{}' of type '{}'".format(value, type(value))
+        if value.tzinfo is None:
+            return False
+        elif value.tzinfo.utcoffset(value) is None:
+            return False
+        else:
+            return True
+    else:
+        raise ValueError(
+            "Irrelevant for value '{}' of type '{}'".format(value, type(value))
         )
 
+
 def is_naive(value):
-    if isinstance(value, float): return True
-    elif isinstance(value, int): return True
-    elif isinstance(value, ProlepticGregorianOrdinal): return True
-    elif isinstance(value, dt.date): return True
+    if isinstance(value, float):
+        return True
+    elif isinstance(value, int):
+        return True
+    elif isinstance(value, ProlepticGregorianOrdinal):
+        return True
+    elif isinstance(value, dt.date):
+        return True
     elif isinstance(value, dt.datetime):
-        if value.tzinfo is None: return True
-        elif value.tzinfo.utcoffset(value) is None: return True
-        else: return False
+        if value.tzinfo is None:
+            return True
+        elif value.tzinfo.utcoffset(value) is None:
+            return True
+        else:
+            return False
     elif isinstance(value, dt.time):
-        if value.tzinfo is None: return True
-        elif value.tzinfo.utcoffset(value) is None: return True
-        else: return False
-    else: raise ValueError(
-        "Irrelevant for value '{}' of type '{}'".format(value, type(value))
+        if value.tzinfo is None:
+            return True
+        elif value.tzinfo.utcoffset(value) is None:
+            return True
+        else:
+            return False
+    else:
+        raise ValueError(
+            "Irrelevant for value '{}' of type '{}'".format(value, type(value))
         )
+
 
 def now_utc():
     return dt.datetime.now(dt.timezone.utc)
+
 
 def timedelta_as_hours(value):
     assert is_.instance(value, dt.timedelta)
     return value / dt.timedelta(hours=1)
 
+
 def timedelta_as_seconds(value):
     assert is_.instance(value, dt.timedelta)
     return value / dt.timedelta(seconds=1)
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

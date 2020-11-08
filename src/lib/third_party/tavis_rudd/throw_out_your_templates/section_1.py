@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+
 def get_default_encoding():
-    return 'utf-8'
+    return "utf-8"
+
 
 ################################################################################
 # 1: str/unicode wrappers used to prevent double-escaping. This is the
 # same concept as django.utils.safestring and webhelpers.html.literal
+
 
 class safe_bytes(str):
     def decode(self, *args, **kws):
@@ -20,12 +23,15 @@ class safe_bytes(str):
         else:
             return res
 
+
 class safe_unicode(str):
     def encode(self, *args, **kws):
         return safe_bytes(super(safe_unicode, self).encode(*args, **kws))
 
     def __add__(self, o):
         res = super(safe_unicode, self).__add__(o)
-        return (safe_unicode(res)
-                if isinstance(o, (safe_unicode, safe_bytes)) else res)
-
+        return (
+            safe_unicode(res)
+            if isinstance(o, (safe_unicode, safe_bytes))
+            else res
+        )

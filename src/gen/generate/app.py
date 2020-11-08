@@ -9,11 +9,13 @@ from logging import DEBUG, INFO, WARN, ERROR, FATAL
 from logging import getLogger
 from pathlib import Path
 import sys
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility import my_logging
 from utility.filesystem import recreate_directory
 from utility.singleton_application import SingletonApplication
+
 # Co-located modules (relative references, NOT packaged, in project)
 from .config import Config
 from .document.markdown.all import generate as generate_markdown_documents
@@ -43,13 +45,15 @@ class MyApp(SingletonApplication):
     def _run(self):
         self._log.info(
             "Generating content into directory '%s'", self._target_directory
-            )
+        )
         recreate_directory(self._target_directory)
         self._generate()
 
 
 def _apply_verbosity(verbosity=0):
-    background = [getLogger('utility'),]
+    background = [
+        getLogger("utility"),
+    ]
     if verbosity <= 3:
         my_logging.set_log_level(background, FATAL)
     elif verbosity == 4:
@@ -63,6 +67,7 @@ def _apply_verbosity(verbosity=0):
     else:
         my_logging.set_log_level(background, DEBUG)
 
+
 def _parse_args():
     # TODO: Add dry run
     # TODO: Add fake run?
@@ -71,28 +76,32 @@ def _parse_args():
     # TODO: Configure for environments (dev, stg, prd, etc.)
     parser = ArgumentParser(
         description="Generate source for various project files",
-        prog="python3 -m " + c.application_name
-        )
+        prog="python3 -m " + c.application_name,
+    )
     parser.add_argument(
-        'target_directory', help='into which to generate output'
-        )
+        "target_directory", help="into which to generate output"
+    )
     parser.add_argument(
         "--configuration",
         help="report configuration and exit",
-        action="store_true"
-        )
+        action="store_true",
+    )
     parser.add_argument(
-        "-v", dest="verbosity",
+        "-v",
+        dest="verbosity",
         help="increase logging verbosity (repeatable)",
-        action="count", default=0,
-        )
+        action="count",
+        default=0,
+    )
     return parser.parse_args()
+
 
 def _report_configuration():
     print("Reporting configuration...")
     _report_character_encoding_configuration()
     my_logging.report_configuration()
     # TODO: Report application configuration
+
 
 def _report_character_encoding_configuration():
     # TODO: Add to application configuration
@@ -102,6 +111,7 @@ def _report_character_encoding_configuration():
     print("sys.stderr.encoding='%s'", sys.stderr.encoding)
     print("sys.stdin.encoding='%s'", sys.stdin.encoding)
     print("sys.stdout.encoding='%s'", sys.stdout.encoding)
+
 
 def run():
     my_logging.configure(c)
@@ -113,6 +123,6 @@ def run():
     else:
         MyApp(c.pid_file, Path(args.target_directory)).run()
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

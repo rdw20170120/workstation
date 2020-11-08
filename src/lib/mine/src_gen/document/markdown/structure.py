@@ -3,9 +3,11 @@
 """
 # Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+
 # Co-located modules (relative references, NOT packaged, in project)
 from ...structure import *
 from .source import my_visitor_map
@@ -13,28 +15,39 @@ from .source import my_visitor_map
 
 ###############################################################################
 
+
 def header(title, level=1):
     assert is_.range(level, 1, 6)
-    return line([level * '#', ' ', title])
+    return line([level * "#", " ", title])
 
-def h1(title): return header(title, level=1)
 
-def h2(title): return header(title, level=2)
+def h1(title):
+    return header(title, level=1)
+
+
+def h2(title):
+    return header(title, level=2)
+
 
 def numbered_list_item(text, level=0):
     # TODO: Consider restructing this to compute final content upon rendering
     assert is_.range(level, 0, 9)
-    prefix = '1. '
-    indent = len(prefix) * ' '
+    prefix = "1. "
+    indent = len(prefix) * " "
     return line([level * indent, prefix, text])
 
-def nli0(text): return numbered_list_item(text, level=0)
+
+def nli0(text):
+    return numbered_list_item(text, level=0)
+
 
 def note(sentence):
-    return line(['NOTE: ', sentence])
+    return line(["NOTE: ", sentence])
+
 
 def s(sentence):
     return line(sentence)
+
 
 ###############################################################################
 
@@ -52,23 +65,26 @@ class _TableRow(object):
 def _visit_table_row(element, walker):
     if is_nonstring_iterable(element.columns):
         for c in element.columns:
-            walker.emit('|')
+            walker.emit("|")
             walker.walk(c)
     else:
-        walker.emit('|')
+        walker.emit("|")
         walker.walk(element.columns)
-    walker.emit('|')
+    walker.emit("|")
     walker.walk(eol())
+
 
 def table_header(*column):
     return _TableRow(column)
 
+
 def table_row(*column):
     return _TableRow(column)
+
 
 def table_ruler(*column):
     return _TableRow(column)
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

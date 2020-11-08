@@ -9,6 +9,7 @@ from types import BuiltinMethodType
 from types import FunctionType
 from types import GeneratorType
 from types import MethodType
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
@@ -21,34 +22,43 @@ from .section_3 import VisitorMap
 
 visitor_map = VisitorMap()
 
+
 @visitor_map.register(DEFAULT)
 def _visit_default(element, walker):
-    walker.emit('\n')
-    walker.emit('NO VISITOR FOR ')
+    walker.emit("\n")
+    walker.emit("NO VISITOR FOR ")
     walker.walk(repr(element))
-    walker.emit('\n')
+    walker.emit("\n")
+
 
 @visitor_map.register(int)
 def _visit_int(element, walker):
     walker.emit(str(element))
 
+
 @visitor_map.register(list)
 def _visit_list(element, walker):
-    for item in element: walker.walk(item)
+    for item in element:
+        walker.walk(item)
+
 
 @visitor_map.register(type(None))
 def _visit_none(element, walker):
     pass
 
+
 @visitor_map.register(str)
 def _visit_str(element, walker):
     walker.emit(element)
 
+
 @visitor_map.register(tuple)
 def _visit_tuple(element, walker):
-    for item in element: walker.walk(item)
+    for item in element:
+        walker.walk(item)
 
-'''DisabledContent
+
+"""DisabledContent
 from .section_1 import safe_bytes
 from .section_1 import safe_unicode
 
@@ -72,5 +82,4 @@ for typeset, visitor in (
     (func_types, (lambda o, w: w.walk(o())))):
     for type_ in typeset:
         default_visitor_map[type_] = visitor
-'''
-
+"""

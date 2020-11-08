@@ -16,6 +16,7 @@ class Serializer(object):
 
     Uses the Visitor design pattern to manage the walk.
     """
+
     def __init__(self, visitor_map=None):
         if visitor_map is None:
             visitor_map = default_visitor_map.copy()
@@ -26,7 +27,7 @@ class Serializer(object):
         """Serialize an object, and its children, into Unicode."""
         self._buffer = []
         self.walk(obj)
-        return ''.join(self._buffer)
+        return "".join(self._buffer)
 
     def walk(self, obj):
         """This method is called by visitors for anything they
@@ -34,16 +35,16 @@ class Serializer(object):
         """
         visitor = self.visitor_map.get_visitor(obj)
         if visitor:
-#           print("Visitor '{}' is walking object '{}'".format(visitor, obj))
-            visitor(obj, self) # ignore return value
+            #           print("Visitor '{}' is walking object '{}'".format(visitor, obj))
+            visitor(obj, self)  # ignore return value
         else:
-            raise TypeError('No visitor found for {}'.format(repr(obj)))
+            raise TypeError("No visitor found for {}".format(repr(obj)))
 
     def emit(self, escaped_unicode_output):
         """This is called by visitors when they have direct output."""
-#       print("Emitting: {}".format(escaped_unicode_output))
+        #       print("Emitting: {}".format(escaped_unicode_output))
         self._buffer.append(escaped_unicode_output)
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

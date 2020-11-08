@@ -14,18 +14,18 @@ report_status_and_exit() {
 }
 trap report_status_and_exit EXIT
 ###############################################################################
-# Install Python dependencies
+# Reformat Python code using Black
 
 if [[ -z "$BO_Project" ]] ; then
     echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
     exit 1
 fi
 
-echo "INFO: Installing Python dependencies"
+# Temporarily override user setting to keep Black's cache under BO_Project
+export XDG_CACHE_HOME=${BO_Project}/.cache
 
-pip3 install pip wheel --upgrade --upgrade-strategy=eager
-pip3 install black logzero pytest
-pip3 install awscli boto3
+echo "INFO: Reformatting Python code using Black"
+black --config ${BO_Project}/cfg/pyproject.toml ${BO_Project}
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
@@ -35,13 +35,5 @@ pip3 install awscli boto3
 # set +o verbose
 # set +o xtrace
 : << 'DisabledContent'
-NO: pip3 install sh
-TODO: RESEARCH: Install python-snappy
-pip3 install avro-python3==1.9.1
-pip3 install commandlib
-pip3 install cryptography pem pynacl pyopenssl twisted[tls]
-pip3 install pandas
-pip3 install pytest-datafiles
-pip3 install strictyaml
 DisabledContent
 

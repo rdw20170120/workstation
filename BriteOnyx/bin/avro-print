@@ -6,31 +6,34 @@ Intended to be executed directly by the user.
 # Internal packages  (absolute references, distributed with Python)
 from argparse import ArgumentParser
 from argparse import FileType
-from sys      import stdout
+from sys import stdout
+
 # External packages  (absolute references, NOT distributed with Python)
 from avro.datafile import DataFileReader
-from avro.io       import DatumReader
+from avro.io import DatumReader
+
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
 
 
 def main():
     parser = ArgumentParser(
-        description='Print a file stored in Apache Avro format.'
-        )
-    parser.add_argument('infile', type=FileType('rb'))
-    parser.add_argument('outfile',
-            nargs='?', type=FileType('wt'), default=stdout)
+        description="Print a file stored in Apache Avro format."
+    )
+    parser.add_argument("infile", type=FileType("rb"))
+    parser.add_argument(
+        "outfile", nargs="?", type=FileType("wt"), default=stdout
+    )
     args = parser.parse_args()
 
     with args.outfile as writer:
         with DataFileReader(args.infile, DatumReader()) as reader:
             for r in reader:
-                writer.write(str(r) + '\n')
+                writer.write(str(r) + "\n")
+
 
 if __name__ == "__main__":
     main()
 
-'''DisabledContent
-'''
-
+"""DisabledContent
+"""

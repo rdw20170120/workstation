@@ -14,9 +14,10 @@ class Script(script_briteonyx.Script):
 
 
 def build():
-    return Script([
-        source_header(),
-        '''# NOTE: Assumes this project has been activated using the BriteOnyx framework.
+    return Script(
+        [
+            source_header(),
+            """# NOTE: Assumes this project has been activated using the BriteOnyx framework.
 # NOTE: We MUST NOT EVER 'exit' during BriteOnyx bootstrap or activation
 ####################################################################################################
 # NOTE: Uncomment the following two lines for debugging
@@ -266,10 +267,11 @@ boExecute () {
 ####################################################################################################
 # Successfully 'return', but do NOT 'exit'
 return 0
-''',
-        disabled_content_footer(),
-    ])
-    
+""",
+            disabled_content_footer(),
+        ]
+    )
+
 
 VISITOR_MAP = VisitorMap(parent_map=script_bash.VISITOR_MAP)
 
@@ -280,4 +282,3 @@ def render(target_directory, target_file):
 
 """ Disabled content
 """
-

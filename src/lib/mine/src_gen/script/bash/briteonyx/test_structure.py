@@ -16,6 +16,5 @@ from .structure import *
 
 s = Renderer(my_visitor_map)._serialize
 
-'''DisabledContent
-'''
-
+"""DisabledContent
+"""

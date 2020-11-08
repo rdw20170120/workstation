@@ -11,6 +11,5 @@ from .mapping import Mapping
 
 c, m = Config(), Mapping()
 
-'''DisabledContent
-'''
-
+"""DisabledContent
+"""

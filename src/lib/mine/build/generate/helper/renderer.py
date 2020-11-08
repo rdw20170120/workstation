@@ -1,10 +1,14 @@
 from throw_out_your_templates_1_core_wrappers import get_default_encoding
 from throw_out_your_templates_2_core_serializer import Serializer
-from throw_out_your_templates_4_core_default_visitors import default_visitors_map
+from throw_out_your_templates_4_core_default_visitors import (
+    default_visitors_map,
+)
 
 
 class Renderer(object):
-    def __init__(self, visitor_map=default_visitors_map, encoding=get_default_encoding()):
+    def __init__(
+        self, visitor_map=default_visitors_map, encoding=get_default_encoding()
+    ):
         object.__init__(self)
         self._encoding = encoding
         self._visitor_map = visitor_map
@@ -22,10 +26,9 @@ class Renderer(object):
         if file_name is None:
             self._print_output(self._get_output(content))
         else:
-            with open(file_name, 'w') as f:
+            with open(file_name, "w") as f:
                 f.write(self._get_output(content).encode(self._encoding))
 
 
 """ Disabled content
 """
-

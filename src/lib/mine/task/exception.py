@@ -9,12 +9,15 @@
 
 class Abort(Exception):
     """Exception about aborting a task."""
+
     pass
+
 
 class Skip(Exception):
     """Exception about skipping a task."""
+
     pass
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

@@ -21,18 +21,19 @@ while enabling the consistent tracking of those metrics.
 # Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
 from shutil import rmtree
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility.filesystem import split_path
 from utility import my_assert as is_
+
 # Co-located modules (relative references, NOT packaged, in project)
 
 
 class TrackedPath(object):
     def __eq__(self, other):
         if isinstance(other, self.__class__):
-            return (other._title == self._title
-                and other._path == self._path)
+            return other._title == self._title and other._path == self._path
         elif isinstance(other, Path):
             return other == self.path
         elif isinstance(other, str):
@@ -57,15 +58,17 @@ class TrackedPath(object):
 
         assert is_.not_instance(self._top, type(None))
         assert is_.not_instance(self._top, self.__class__)
-        if not isinstance(self._top, Path): self._top = Path(self._top)
+        if not isinstance(self._top, Path):
+            self._top = Path(self._top)
         assert is_.instance(self._top, Path)
         assert is_.absolute_path(self._top)
-        if self._top.exists(): assert is_.absolute_directory(self._top)
+        if self._top.exists():
+            assert is_.absolute_directory(self._top)
 
         assert is_.not_instance(self._relative, self.__class__)
         if self._relative is None:
             # TODO: Use reference for current directory instead
-            self._relative = Path('.')
+            self._relative = Path(".")
         if not isinstance(self._relative, Path):
             self._relative = Path(self._relative)
         assert is_.instance(self._relative, Path)
@@ -78,15 +81,15 @@ class TrackedPath(object):
 
     def __repr__(self):
         return "{}({!r}, {!r}, {!r})".format(
-            self.__class__.__name__,
-            self._title, self._top, self._relative
-            )
+            self.__class__.__name__, self._title, self._top, self._relative
+        )
 
     def __str__(self):
         return self.__fspath__()
 
     def __truediv__(self, other):
-        if other is None: other = Path()
+        if other is None:
+            other = Path()
         other = self._path / other
         return self.for_path(other)
 
@@ -95,7 +98,8 @@ class TrackedPath(object):
         return self._basename
 
     def delete(self, force=False):
-        if not self.exists(): return
+        if not self.exists():
+            return
         if self.is_dir():
             if force:
                 rmtree(str(self), ignore_errors=force)
@@ -106,45 +110,48 @@ class TrackedPath(object):
         else:
             raise NotImplementedError(
                 "Do not know how to delete {!r}".format(self)
-                )
+            )
 
     def for_log(self):
         return "'{}' path '{}'".format(self._title, self._relative)
 
     def for_path(self, path):
-        if not isinstance(path, Path): path = Path(path)
+        if not isinstance(path, Path):
+            path = Path(path)
         relative = path.relative_to(self._top)
         return TrackedPath(self._title, self._top, relative)
 
     def open_for_binary_read(self, buffering=-1):
-        return self._path.open(buffering=buffering, mode='br')
+        return self._path.open(buffering=buffering, mode="br")
 
     def open_for_binary_write(self, buffering=-1):
-        return self._path.open(buffering=buffering, mode='bw')
+        return self._path.open(buffering=buffering, mode="bw")
 
-    def open_for_text_read(self,
-        buffering=-1, encoding=None, errors=None, newline=None
-        ):
-        if encoding is None: encoding = 'utf_8'
+    def open_for_text_read(
+        self, buffering=-1, encoding=None, errors=None, newline=None
+    ):
+        if encoding is None:
+            encoding = "utf_8"
         return self._path.open(
             buffering=buffering,
             encoding=encoding,
             errors=errors,
-            mode='rt',
-            newline=newline
-            )
+            mode="rt",
+            newline=newline,
+        )
 
-    def open_for_text_write(self,
-        buffering=-1, encoding=None, errors=None, newline=None
-        ):
-        if encoding is None: encoding = 'utf_8'
+    def open_for_text_write(
+        self, buffering=-1, encoding=None, errors=None, newline=None
+    ):
+        if encoding is None:
+            encoding = "utf_8"
         return self._path.open(
             buffering=buffering,
             encoding=encoding,
             errors=errors,
-            mode='tw',
-            newline=newline
-            )
+            mode="tw",
+            newline=newline,
+        )
 
     @property
     def parent(self):
@@ -173,6 +180,6 @@ class TrackedPath(object):
     def top(self):
         return TrackedPath(self._title, self._top)
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

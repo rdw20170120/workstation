@@ -1,7 +1,12 @@
 # Files and directories within THIS project
 context.bash
 
-# Common files
+# Common directories
+.cache/
+log/
+out/
+
+# Common file suffixes
 *.avro
 *.env
 *.json
@@ -11,15 +16,12 @@ context.bash
 *.parquet
 *.pid
 *.txt
-log/
-out/
 
 # Apple macOS
 .DS_Store
 
 # Oracle Java
 *.class
-*.properties
 
 # Vim
 *.swp
@@ -65,7 +67,6 @@ __pycache__/
 # Unit test / coverage reports
 # *.cover
 # *.py,cover
-# .cache
 # .coverage
 # .coverage.*
 # .hypothesis/

@@ -7,6 +7,7 @@
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+
 # Co-located modules (relative references, NOT packaged, in project)
 
 
@@ -17,6 +18,7 @@ class VisitorMap(dict):
     fall-back to if it doesn't have a visitor registered for a
     specific type (or one of that type's base classes).
     """
+
     def __init__(self, map_or_seq=(), parent_map=None):
         super(VisitorMap, self).__init__(map_or_seq)
         self.parent_map = parent_map
@@ -34,9 +36,9 @@ class VisitorMap(dict):
         `None`.
         """
         py_type = type(obj)
-        result = (
-            self.get(py_type) or self._get_parent_type_visitor(obj, py_type)
-            )
+        result = self.get(py_type) or self._get_parent_type_visitor(
+            obj, py_type
+        )
         if result:
             return result
         elif self.parent_map is not None:
@@ -77,15 +79,18 @@ class VisitorMap(dict):
         if visitor:
             self[py_type] = visitor
         else:
+
             def decorator(f):
                 self[py_type] = f
                 return f
+
             return decorator
 
 
 class _VisitorMapContextManager(object):
     """The `with` statement context manager returned by
     VisitorMap.as_context()"""
+
     def __init__(self, vmap, walker, set_parent_map=True):
         self.vmap = vmap
         self.original_map = None
@@ -108,6 +113,6 @@ class _VisitorMapContextManager(object):
 class DEFAULT:
     ">>> visitor_map[DEFAULT] = visitor # sets default fallback visitor"
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

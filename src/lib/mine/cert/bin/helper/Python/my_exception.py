@@ -10,4 +10,3 @@ class UnrecognizedValueError(ValueError):
 
 """ Disabled content
 """
-

@@ -5,6 +5,7 @@
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+
 # Co-located modules (relative references, NOT packaged, in project)
 from ..source import my_visitor_map
 from ..structure import *
@@ -13,98 +14,135 @@ from ..structure import _Command
 
 ###############################################################################
 
-def and_(): return ' && '
 
-def bs(): return ['\\', eol()]
+def and_():
+    return " && "
 
-def indent(): return '    '
 
-def or_(): return ' || '
+def bs():
+    return ["\\", eol()]
 
-def pipe(): return ' | '
 
-def seq(): return ' ; '
+def indent():
+    return "    "
+
+
+def or_():
+    return " || "
+
+
+def pipe():
+    return " | "
+
+
+def seq():
+    return " ; "
+
 
 ###############################################################################
+
 
 def echo(*argument):
-    return command('echo', argument)
+    return command("echo", argument)
+
 
 def echo_fatal(*element):
-    return echo(dq('FATAL: ', element))
+    return echo(dq("FATAL: ", element))
+
 
 def echo_info(*element):
-    return echo(dq('INFO:  ', element))
+    return echo(dq("INFO:  ", element))
+
 
 def echo_trace(*element):
-    return echo(dq('TRACE: ', element))
+    return echo(dq("TRACE: ", element))
+
 
 def echo_warn(*element):
-    return echo(dq('WARN:  ', element))
+    return echo(dq("WARN:  ", element))
+
 
 ###############################################################################
+
 
 def cc(command_embedded_within_comment):
     assert is_.instance(command_embedded_within_comment, _Command)
     return bt(command_embedded_within_comment)
 
+
 def debugging_comment():
     return [
-        note('Uncomment these lines for debugging, placed where needed'),
-        comment(set_('-o', 'verbose')),
-        comment(set_('-o', 'xtrace')),
-        comment('Code to debug...'),
-        comment(set_('+o', 'verbose')),
-        comment(set_('+o', 'xtrace')),
+        note("Uncomment these lines for debugging, placed where needed"),
+        comment(set_("-o", "verbose")),
+        comment(set_("-o", "xtrace")),
+        comment("Code to debug..."),
+        comment(set_("+o", "verbose")),
+        comment(set_("+o", "xtrace")),
     ]
+
 
 def disabled_content_footer():
     return [
         line(),
         rule(),
         debugging_comment(),
-        command(':', '<<', sq('DisabledContent')), eol(),
-        line('DisabledContent'),
+        command(":", "<<", sq("DisabledContent")),
+        eol(),
+        line("DisabledContent"),
         line(),
     ]
 
+
 ###############################################################################
+
 
 def exit(argument=None):
-    return command('exit', argument)
+    return command("exit", argument)
+
 
 def return_(argument=None):
-    return command('return', argument)
+    return command("return", argument)
+
 
 ###############################################################################
+
 
 def exit_with_status():
     return exit(status())
 
+
 def remember_last_status():
-    return assign(vn('Status'), '$?')
+    return assign(vn("Status"), "$?")
+
 
 def return_last_status():
     # TODO: Do I need this?
-    return return_('$?')
+    return return_("$?")
+
 
 def return_with_status():
     return return_(status())
 
+
 def status():
-    return vr('Status')
+    return vr("Status")
+
 
 def status_is_failure():
     return integer_not_equal(status(), 0)
 
+
 def status_is_success():
     return integer_equal(status(), 0)
 
+
 ###############################################################################
+
 
 def set_(*argument):
     assert is_.at_least(len(argument), 1)
-    return command('set', argument)
+    return command("set", argument)
+
 
 ###############################################################################
 
@@ -121,12 +159,14 @@ class _Substitution(object):
 
 @my_visitor_map.register(_Substitution)
 def _visit_substitution(element, walker):
-    walker.emit('$(')
+    walker.emit("$(")
     walker.walk(element.command)
-    walker.emit(')')
+    walker.emit(")")
+
 
 def substitute(executable, *argument):
     return _Substitution(command(executable, argument))
+
 
 ###############################################################################
 
@@ -144,68 +184,85 @@ class _Assign(object):
 @my_visitor_map.register(_Assign)
 def _visit_assign(element, walker):
     walker.walk(element.variable)
-    walker.emit('=')
+    walker.emit("=")
     walker.walk(element.expressions)
+
 
 def assign(variable, *expression):
     return _Assign(variable, expression)
 
+
 def export(variable, expression=None):
     if expression is None:
-        return command('export', variable)
+        return command("export", variable)
     else:
-        return command('export', assign(variable, expression))
+        return command("export", assign(variable, expression))
+
 
 def local(expression, integer=False, readonly=False):
     # TODO: REFACTOR: Reduce redundancy
     if integer:
         if readonly:
-            return command('local', '-ir', expression)
+            return command("local", "-ir", expression)
         else:
-            return command('local', '-i', expression)
+            return command("local", "-i", expression)
     else:
         if readonly:
-            return command('local', '-r', expression)
+            return command("local", "-r", expression)
         else:
-            return command('local', expression)
+            return command("local", expression)
+
 
 ###############################################################################
+
 
 def condition(executable, *argument):
     return command(executable, argument)
 
+
 def directory_exists(directory_name):
-    return condition('[[', '-d', dq(directory_name), ']]')
+    return condition("[[", "-d", dq(directory_name), "]]")
+
 
 def file_exists(file_name):
-    return condition('[[', '-f', dq(file_name), ']]')
+    return condition("[[", "-f", dq(file_name), "]]")
+
 
 def file_is_readable(file_name):
-    return condition('[[', '-r', dq(file_name), ']]')
+    return condition("[[", "-r", dq(file_name), "]]")
+
 
 def integer_equal(left, right):
-    return condition('[[', dq(left), '-eq', right, ']]')
+    return condition("[[", dq(left), "-eq", right, "]]")
+
 
 def integer_not_equal(left, right):
-    return condition('[[', dq(left), '-ne', right, ']]')
+    return condition("[[", dq(left), "-ne", right, "]]")
+
 
 def path_does_not_exist(path_name):
-    return condition('[[', '!', '-e', dq(path_name), ']]')
+    return condition("[[", "!", "-e", dq(path_name), "]]")
+
 
 def path_is_not_directory(path_name):
-    return condition('[[', '!', '-d', dq(path_name), ']]')
+    return condition("[[", "!", "-d", dq(path_name), "]]")
+
 
 def path_is_not_file(path_name):
-    return condition('[[', '!', '-f', dq(path_name), ']]')
+    return condition("[[", "!", "-f", dq(path_name), "]]")
+
 
 def string_equals(left, right):
-    return condition('[[', dq(left), '==', dq(right), ']]')
+    return condition("[[", dq(left), "==", dq(right), "]]")
+
 
 def string_is_not_null(expression):
-    return condition('[[', '-n', dq(expression), ']]')
+    return condition("[[", "-n", dq(expression), "]]")
+
 
 def string_is_null(expression):
-    return condition('[[', '-z', dq(expression), ']]')
+    return condition("[[", "-z", dq(expression), "]]")
+
 
 ###############################################################################
 
@@ -222,13 +279,14 @@ class _Else(object):
 
 @my_visitor_map.register(_Else)
 def _visit_else(element, walker):
-    walker.emit('else')
+    walker.emit("else")
     walker.walk(eol())
     walker.walk(element.statements)
 
 
 def else_(*statement):
     return _Else(statement)
+
 
 ###############################################################################
 
@@ -247,15 +305,17 @@ class _ElseIf(object):
 
 @my_visitor_map.register(_ElseIf)
 def _visit_elif(element, walker):
-    walker.emit('elif ')
+    walker.emit("elif ")
     walker.walk(element.condition)
     walker.walk(seq())
-    walker.emit('then')
+    walker.emit("then")
     walker.walk(eol())
     walker.walk(element.statements)
 
+
 def elif_(condition, *statement):
     return _ElseIf(condition, statement)
+
 
 ###############################################################################
 
@@ -270,11 +330,13 @@ class _Fi(object):
 
 @my_visitor_map.register(_Fi)
 def _visit_fi(element, walker):
-    walker.emit('fi')
+    walker.emit("fi")
     walker.walk(eol())
+
 
 def fi():
     return _Fi()
+
 
 ###############################################################################
 
@@ -293,95 +355,137 @@ class _If(object):
 
 @my_visitor_map.register(_If)
 def _visit_if(element, walker):
-    walker.emit('if ')
+    walker.emit("if ")
     walker.walk(element.condition)
     walker.walk(seq())
-    walker.emit('then')
+    walker.emit("then")
     walker.walk(eol())
     walker.walk(element.statements)
+
 
 def if_(condition, *statement):
     return _If(condition, statement)
 
+
 ###############################################################################
+
 
 def trace_execution():
     return [
-        string_is_not_null(vr('BO_Trace')), and_(),
-        echo_trace('Executing', vr('BASH_SOURCE')), eol(),
+        string_is_not_null(vr("BO_Trace")),
+        and_(),
+        echo_trace("Executing", vr("BASH_SOURCE")),
+        eol(),
     ]
+
 
 def header_executed():
     return [
         shebang_bash(),
         trace_execution(),
-        no(set_('-e')),
-        comment('Intended to be executed in a BASH shell.'),
+        no(set_("-e")),
+        comment("Intended to be executed in a BASH shell."),
         line(),
         trap_executed(),
         rule(),
     ]
 
+
 def header_sourced():
     return [
         shebang_sourced(),
         trace_execution(),
-        no(set_('-e')),
-        comment('Intended to be sourced in a BASH shell.'),
+        no(set_("-e")),
+        comment("Intended to be sourced in a BASH shell."),
         line(),
         trap_sourced(),
         rule(),
     ]
 
+
 def shebang_bash():
-    return shebang_thru_env('bash')
+    return shebang_thru_env("bash")
+
 
 def shebang_sourced():
     return shebang_false()
 
+
 def source(file_name):
-    return command('source', file_name)
+    return command("source", file_name)
+
 
 def trap(name, signal):
-    return command('trap', name, signal)
+    return command("trap", name, signal)
+
 
 def trap_executed():
     # TODO: REFACTOR: Extract common method
-    name = 'report_status_and_exit'
+    name = "report_status_and_exit"
     return [
         function_header(name),
-        indent(), local(remember_last_status(), integer=True, readonly=True), eol(),
-        indent(), if_(
+        indent(),
+        local(remember_last_status(), integer=True, readonly=True),
+        eol(),
+        indent(),
+        if_(
             status_is_success(),
-            indent(), indent(), echo_info(vr('0'), ' exiting with status ', status()), eol(),
+            indent(),
+            indent(),
+            echo_info(vr("0"), " exiting with status ", status()),
+            eol(),
         ),
-        indent(), else_(
-            indent(), indent(), echo_fatal(vr('0'), ' exiting with status ', status()), eol(),
+        indent(),
+        else_(
+            indent(),
+            indent(),
+            echo_fatal(vr("0"), " exiting with status ", status()),
+            eol(),
         ),
-        indent(), fi(),
-        indent(), exit_with_status(), eol(),
+        indent(),
+        fi(),
+        indent(),
+        exit_with_status(),
+        eol(),
         function_footer(),
-        trap(name, 'EXIT'), eol(),
+        trap(name, "EXIT"),
+        eol(),
     ]
+
 
 def trap_sourced():
     # TODO: REFACTOR: Extract common method
-    name = 'report_status_and_return'
+    name = "report_status_and_return"
     return [
         function_header(name),
-        indent(), local(remember_last_status(), integer=True, readonly=True), eol(),
-        indent(), if_(
+        indent(),
+        local(remember_last_status(), integer=True, readonly=True),
+        eol(),
+        indent(),
+        if_(
             status_is_success(),
-            indent(), indent(), echo_info(vr('0'), ' returning with status ', status()), eol(),
+            indent(),
+            indent(),
+            echo_info(vr("0"), " returning with status ", status()),
+            eol(),
         ),
-        indent(), else_(
-            indent(), indent(), echo_fatal(vr('0'), ' returning with status ', status()), eol(),
+        indent(),
+        else_(
+            indent(),
+            indent(),
+            echo_fatal(vr("0"), " returning with status ", status()),
+            eol(),
         ),
-        indent(), fi(),
-        indent(), return_with_status(), eol(),
+        indent(),
+        fi(),
+        indent(),
+        return_with_status(),
+        eol(),
         function_footer(),
-        trap(name, 'EXIT'), eol(),
+        trap(name, "EXIT"),
+        eol(),
     ]
+
 
 ###############################################################################
 
@@ -399,6 +503,7 @@ class _VariableName(object):
 def _visit_variable_name(element, walker):
     walker.walk(element.name)
 
+
 def vn(name):
     return _VariableName(name)
 
@@ -414,27 +519,35 @@ class _VariableReference(object):
 
 @my_visitor_map.register(_VariableReference)
 def _visit_variable_reference(element, walker):
-    walker.emit('${')
+    walker.emit("${")
     walker.walk(element.name)
-    walker.emit('}')
+    walker.emit("}")
+
 
 def vr(name):
     return _VariableReference(name)
 
+
 ###############################################################################
+
 
 def function_footer():
     # TODO: Consider converting to a function container
     return [
-        '}', eol(),
+        "}",
+        eol(),
     ]
+
 
 def function_header(name):
     # TODO: Consider converting to a function container
     return [
-        name, '()', ' {', eol(),
+        name,
+        "()",
+        " {",
+        eol(),
     ]
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

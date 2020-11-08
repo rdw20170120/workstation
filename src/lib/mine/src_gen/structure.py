@@ -5,19 +5,25 @@
 from enum import Enum
 from numbers import Number
 from pathlib import Path
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+
 # Co-located modules (relative references, NOT packaged, in project)
 from .source import my_visitor_map
 
 
 ###############################################################################
 
+
 def is_nonstring_iterable(value):
-    if isinstance(value, str): return False
-    if hasattr(value, '__iter__'): return True
+    if isinstance(value, str):
+        return False
+    if hasattr(value, "__iter__"):
+        return True
     return False
+
 
 def squashed(value):
     """Return `value`, having squashed all empty contents to `None`.
@@ -28,40 +34,49 @@ def squashed(value):
     dictionaries) as a squashed list in which all items have been squashed.
     Assume no circular references.
     """
-#   print("squashed began with: '{}'".format(value))
+    #   print("squashed began with: '{}'".format(value))
     if value is None:
-#       print("squashed ended with: '{}'".format(None))
+        #       print("squashed ended with: '{}'".format(None))
         return None
-    if value == '':
-#       print("squashed ended with: '{}'".format(None))
+    if value == "":
+        #       print("squashed ended with: '{}'".format(None))
         return None
     if value == ():
-#       print("squashed ended with: '{}'".format(None))
+        #       print("squashed ended with: '{}'".format(None))
         return None
     if value == []:
-#       print("squashed ended with: '{}'".format(None))
+        #       print("squashed ended with: '{}'".format(None))
         return None
     if isinstance(value, dict):
-#       print("squashed ended with: '{}'".format(value))
+        #       print("squashed ended with: '{}'".format(value))
         return value
     if not is_nonstring_iterable(value):
-#       print("squashed ended with: '{}'".format(value))
+        #       print("squashed ended with: '{}'".format(value))
         return value
     else:
         result = []
         for i in value:
             j = squashed(i)
-            if j is not None: result.append(j)
-        if len(result) == 0: result = None
-        elif len(result) == 1: result = result[0]
-#       print("squashed ended with: '{}'".format(result))
+            if j is not None:
+                result.append(j)
+        if len(result) == 0:
+            result = None
+        elif len(result) == 1:
+            result = result[0]
+        #       print("squashed ended with: '{}'".format(result))
         return result
+
 
 ###############################################################################
 
-def eol(): return '\n'
 
-def line(*text): return [text, eol()]
+def eol():
+    return "\n"
+
+
+def line(*text):
+    return [text, eol()]
+
 
 ###############################################################################
 
@@ -81,8 +96,10 @@ def _visit_backtick_quoted(element, walker):
     walker.walk(element.elements)
     walker.emit("`")
 
+
 def bt(*element):
     return _BacktickQuoted(element)
+
 
 ###############################################################################
 
@@ -102,14 +119,18 @@ def _visit_double_quoted(element, walker):
     walker.walk(element.elements)
     walker.emit('"')
 
+
 def dq(*element):
     return _DoubleQuoted(element)
 
+
 ###############################################################################
+
 
 @my_visitor_map.register(Enum)
 def _visit_content(element, walker):
     walker.walk(element.value)
+
 
 ###############################################################################
 
@@ -129,8 +150,10 @@ def _visit_single_quoted(element, walker):
     walker.walk(element.elements)
     walker.emit("'")
 
+
 def sq(*element):
     return _SingleQuoted(element)
+
 
 ###############################################################################
 
@@ -149,12 +172,13 @@ class _NameValuePair(object):
 @my_visitor_map.register(_NameValuePair)
 def _visit_name_value_pair(element, walker):
     walker.walk(element.name)
-    walker.emit(' = ')
+    walker.emit(" = ")
     walker.walk(element.value)
+
 
 def nvp(name, value):
     return _NameValuePair(name, sq(value))
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

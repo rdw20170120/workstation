@@ -10,9 +10,9 @@ same concept as django.utils.safestring and webhelpers.html.literal
 # Co-located modules (relative references, NOT packaged, in project)
 
 
-default_encoding = 'utf_8'
+default_encoding = "utf_8"
 
-'''DisabledContent
+"""DisabledContent
 class safe_bytes(str):
     def decode(self, *args, **kws):
         return safe_unicode(super(safe_bytes, self).encode(*args, **kws))
@@ -36,5 +36,4 @@ class safe_unicode(str):
         return (safe_unicode(res)
                 if isinstance(o, (safe_unicode, safe_bytes)) else res)
 
-'''
-
+"""

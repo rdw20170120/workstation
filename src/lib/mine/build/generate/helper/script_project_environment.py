@@ -14,15 +14,17 @@ class Script(script_briteonyx.Script):
 
 
 def build():
-    return Script([
-        source_header(),
-        comment('Configure this project'),
-        line(),
-        comment('TODO: Implement'),
-        line('export BO_ProjectName=TODO'),
-        disabled_content_footer(),
-    ])
-    
+    return Script(
+        [
+            source_header(),
+            comment("Configure this project"),
+            line(),
+            comment("TODO: Implement"),
+            line("export BO_ProjectName=TODO"),
+            disabled_content_footer(),
+        ]
+    )
+
 
 VISITOR_MAP = VisitorMap(parent_map=script_bash.VISITOR_MAP)
 
@@ -33,4 +35,3 @@ def render(target_directory, target_file):
 
 """ Disabled content
 """
-

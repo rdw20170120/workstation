@@ -13,4 +13,3 @@ VISITOR_MAP = VisitorMap(parent_map=script_bash.VISITOR_MAP)
 
 """ Disabled content
 """
-

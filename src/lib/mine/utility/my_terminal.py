@@ -11,13 +11,15 @@ Target effective recognition of my favorite development workstations:
 """
 # Internal packages  (absolute references, distributed with Python)
 try:
- import curses
+    import curses
 except ImportError:
     curses = None
 import sys
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility import environment
+
 # Co-located modules (relative references, NOT packaged, in project)
 
 
@@ -28,7 +30,7 @@ def stderr_supports_color():
     `Tornado`.
     """
     # Detect color support of stderr with curses (Linux/macOS)
-    if curses and hasattr(sys.stderr, 'isatty') and sys.stderr.isatty():
+    if curses and hasattr(sys.stderr, "isatty") and sys.stderr.isatty():
         try:
             curses.setupterm()
             if curses.tigetnum("colors") > 0:
@@ -37,22 +39,23 @@ def stderr_supports_color():
             pass
     return False
 
+
 def using_gnome():
     """Return whether we think that we are using a Gnome terminal."""
-    return (environment.has('GNOME_TERMINAL_SCREEN')
-        or environment.has('GNOME_TERMINAL_SERVICE')
-        )
+    return environment.has("GNOME_TERMINAL_SCREEN") or environment.has(
+        "GNOME_TERMINAL_SERVICE"
+    )
+
 
 def using_iterm2():
     """Return whether we think that we are using an iTerm2 terminal.
 
     TODO: Consider checking TERM_PROGRAM=iTerm.app and LC_TERMINAL=iTerm2
     """
-    return (environment.has('ITERM_PROFILE')
-        or environment.has('ITERM_SESSION')
-        )
+    return environment.has("ITERM_PROFILE") or environment.has("ITERM_SESSION")
 
-'''DisabledContent
+
+"""DisabledContent
 logzero.colors.Fore:
 BLACK = 30
 RED = 31
@@ -71,5 +74,4 @@ LIGHTBLUE_EX = 94
 LIGHTMAGENTA_EX = 95
 LIGHTCYAN_EX = 96
 LIGHTWHITE_EX = 97
-'''
-
+"""

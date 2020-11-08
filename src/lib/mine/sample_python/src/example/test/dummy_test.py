@@ -1,10 +1,12 @@
-''' Dummy tests
-'''
+""" Dummy tests
+"""
+
 
 def test_pass():
-    '''Test nothing at all (well, "pass" anyway).'''
+    """Test nothing at all (well, "pass" anyway)."""
     pass
 
+
 def test_true():
-    '''Test True.'''
+    """Test True."""
     assert True

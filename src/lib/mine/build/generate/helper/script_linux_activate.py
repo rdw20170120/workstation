@@ -14,8 +14,9 @@ class Script(script_briteonyx.Script):
 
 
 def build():
-    return Script([
-        '''#!/bin/cat
+    return Script(
+        [
+            """#!/bin/cat
 [[ -n "$BO_Trace" ]] && echo "TRACE: Executing '$BASH_SOURCE'"
 ####################################################################################################
 # NOTE: We MUST NOT EVER 'exit' during BriteOnyx bootstrap or activation
@@ -92,9 +93,10 @@ alias todo='grep -Einrw TODO . --include=*.bash --include=*.src --include=*.txt 
 ####################################################################################################
 : <<'DisabledContent'
 DisabledContent
-''',
-    ])
-    
+""",
+        ]
+    )
+
 
 VISITOR_MAP = VisitorMap(parent_map=script_bash.VISITOR_MAP)
 
@@ -105,4 +107,3 @@ def render(target_directory, target_file):
 
 """ Disabled content
 """
-

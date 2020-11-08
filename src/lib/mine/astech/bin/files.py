@@ -6,8 +6,11 @@ import glob
 import os
 import shutil
 
+
 class FileManager(object):
-    def copy_directory(self, source, target, pattern=None, flatten=False, maybe=False):
+    def copy_directory(
+        self, source, target, pattern=None, flatten=False, maybe=False
+    ):
         # TODO: FIX: implement use of glob pattern
         for name in self.names_in_directory(source):
             next_source = os.path.join(source, name)
@@ -17,14 +20,19 @@ class FileManager(object):
                     if flatten:
                         next_target = target
                     self.create_directory(next_target)
-                    self.copy_directory(next_source, next_target, pattern, flatten, maybe)
+                    self.copy_directory(
+                        next_source, next_target, pattern, flatten, maybe
+                    )
                 else:
                     if self.name_matches(next_source, pattern):
                         self.copy_file(next_source, next_target, maybe)
             except (IOError, os.error) as e:
-                print(('Cannot copy "%s"\n  to "%s"\n  because %s' % (
-                    source, target, e
-                )))
+                print(
+                    (
+                        'Cannot copy "%s"\n  to "%s"\n  because %s'
+                        % (source, target, e)
+                    )
+                )
 
     def copy_file(self, source, target, maybe=False):
         skip = maybe
@@ -36,15 +44,15 @@ class FileManager(object):
 
     def create_directory(self, directory):
         if not os.path.exists(directory):
-            print(('Creating directory "%s"' % (directory, )))
+            print(('Creating directory "%s"' % (directory,)))
             os.mkdir(directory)
 
     def list(self, directory, pattern=None):
         # TODO: FIX: implement use of glob pattern
         for current, directories, files in os.walk(directory):
-            print(('Current ', current))
-            print(('  Subdirectories', directories))
-            print(('  Files', files))
+            print(("Current ", current))
+            print(("  Subdirectories", directories))
+            print(("  Files", files))
 
     def names_in_directory(self, directory):
         return os.listdir(directory)
@@ -55,33 +63,32 @@ class FileManager(object):
         else:
             return fnmatch.fnmatch(name, pattern)
 
-if __name__ == '__main__':
-    def check_argument_count(
-        arguments, minimum_count, maximum_count=None
-    ):
+
+if __name__ == "__main__":
+
+    def check_argument_count(arguments, minimum_count, maximum_count=None):
         try:
             if maximum_count is None:
                 maximum_count = minimum_count
             count = len(arguments)
             if count < minimum_count:
                 raise ValueError(
-                    'Argument count "%d" is less than minimum "%d"!' % (
-                        count, minimum_count
-                    )
+                    'Argument count "%d" is less than minimum "%d"!'
+                    % (count, minimum_count)
                 )
             if count > maximum_count:
                 raise ValueError(
-                    'Argument count "%d" is more than maximum "%d"!' % (
-                        count, maximum_count
-                    )
+                    'Argument count "%d" is more than maximum "%d"!'
+                    % (count, maximum_count)
                 )
         except ValueError:
-            print('Command-line arguments:')
+            print("Command-line arguments:")
             print((sys.argv))
             raise
 
     def help():
-        print('''
+        print(
+            """
 Available commands:
     copy_flat <source> <target> [<glob>]
         Copy source directory tree flattened into single target directory
@@ -100,19 +107,21 @@ Available commands:
         Maybe copy source directory tree to target
         Optionally filtering with glob pattern (see Python glob module)
         Skip existing files
-''')
+"""
+        )
 
     import sys
+
     mgr = FileManager()
     check_argument_count(sys.argv, 2, 5)
     command = sys.argv[1]
-    if 'help' == command:
+    if "help" == command:
         help()
-    elif 'copy_flat' == command:
+    elif "copy_flat" == command:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=str(sys.argv[4])
+            pattern = str(sys.argv[4])
         mgr.copy_directory(
             source=str(sys.argv[2]),
             target=str(sys.argv[3]),
@@ -120,11 +129,11 @@ Available commands:
             flatten=True,
             maybe=False,
         )
-    elif 'copy_tree' == command:
+    elif "copy_tree" == command:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=str(sys.argv[4])
+            pattern = str(sys.argv[4])
         mgr.copy_directory(
             source=str(sys.argv[2]),
             target=str(sys.argv[3]),
@@ -132,20 +141,20 @@ Available commands:
             flatten=False,
             maybe=False,
         )
-    elif 'list' == command:
+    elif "list" == command:
         check_argument_count(sys.argv, 3, 4)
         pattern = None
         if len(sys.argv) == 4:
-            pattern=str(sys.argv[3])
+            pattern = str(sys.argv[3])
         mgr.list(
             directory=str(sys.argv[2]),
             pattern=pattern,
         )
-    elif 'maybe_copy_flat' == command:
+    elif "maybe_copy_flat" == command:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=str(sys.argv[4])
+            pattern = str(sys.argv[4])
         mgr.copy_directory(
             source=str(sys.argv[2]),
             target=str(sys.argv[3]),
@@ -153,11 +162,11 @@ Available commands:
             flatten=True,
             maybe=True,
         )
-    elif 'maybe_copy_tree' == command:
+    elif "maybe_copy_tree" == command:
         check_argument_count(sys.argv, 4, 5)
         pattern = None
         if len(sys.argv) == 5:
-            pattern=str(sys.argv[4])
+            pattern = str(sys.argv[4])
         mgr.copy_directory(
             source=str(sys.argv[2]),
             target=str(sys.argv[3]),
@@ -167,5 +176,5 @@ Available commands:
         )
     else:
         raise ValueError(
-            'Command "%s" is unrecognized, try "help"!' % (command, )
+            'Command "%s" is unrecognized, try "help"!' % (command,)
         )

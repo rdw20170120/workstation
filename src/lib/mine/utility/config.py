@@ -3,21 +3,23 @@
 # Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
 from sys import maxsize
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from utility import environment
 from utility.tracked_path import TrackedPath
+
 # Co-located modules (relative references, NOT packaged, in project)
 
 
 class Config:
     @property
     def application_name(self):
-        return 'PleaseOverrideMe'
+        return "PleaseOverrideMe"
 
     @property
     def fake_suffix(self):
-        return '.fake'
+        return ".fake"
 
     @property
     def filesystem_to_watch(self):
@@ -26,7 +28,7 @@ class Config:
     @property
     def is_dry_run(self):
         """Return whether we are performing a dry-run execution.
-        
+
         This setting is configured in each deployment by the absence or the
         value of the environment variable.  By default, the variable is
         undefined.  As a consequence, execution is NOT a dry-run.  If the
@@ -35,15 +37,15 @@ class Config:
         provides an advantage during development and testing.
         """
         try:
-            v = environment.get('Run')
-            return v.lower() == 'dry'
+            v = environment.get("Run")
+            return v.lower() == "dry"
         except KeyError:
             return False
 
     @property
     def is_forced_run(self):
         """Return whether we are performing a forced-run execution.
-        
+
         This setting is configured in each deployment by the absence or the
         value of the environment variable.  By default, the variable is
         undefined.  As a consequence, execution is NOT a forced-run.  If the
@@ -53,14 +55,14 @@ class Config:
         advantage during development and testing.
         """
         try:
-            v = environment.get('Run')
-            return v.lower() == 'force'
+            v = environment.get("Run")
+            return v.lower() == "force"
         except KeyError:
             return False
 
     @property
     def log_directory(self):
-        return self.project_directory / 'log'
+        return self.project_directory / "log"
 
     @property
     def log_file(self):
@@ -68,16 +70,16 @@ class Config:
 
     @property
     def log_name(self):
-        return 'app'
+        return "app"
 
     @property
     def log_suffix(self):
-        return '.log'
+        return ".log"
 
     @property
     def quick_run_limit(self):
         """Return quick run file size limit, if any.
-        
+
         This setting is configured in each deployment by the absence or the
         value of the environment variable.  By default, the variable is
         undefined.  As a consequence, execution is NOT limited to a quick run.
@@ -88,22 +90,24 @@ class Config:
         development and testing.
         """
         try:
-            return int(environment.get('Quick'))
+            return int(environment.get("Quick"))
         except KeyError:
             return maxsize
 
     @property
     def pid_file(self):
-        return self.project_directory / (self.application_name + self.pid_suffix)
+        return self.project_directory / (
+            self.application_name + self.pid_suffix
+        )
 
     @property
     def pid_suffix(self):
-        return '.pid'
+        return ".pid"
 
     @property
     def project_directory(self):
-        return TrackedPath('project', environment.get('BO_Project'))
-    
+        return TrackedPath("project", environment.get("BO_Project"))
+
     @property
     def reserved_disk_space_in_bytes(self):
         """Return disk space to reserve in bytes.
@@ -112,18 +116,18 @@ class Config:
         use the maximum integer value as a default.
         """
         try:
-            return int(environment.get('ReservedDiskSpaceInBytes'))
+            return int(environment.get("ReservedDiskSpaceInBytes"))
         except KeyError:
             return maxsize
 
     @property
     def should_abort_upon_task_failure(self):
         return False
- 
+
     @property
     def should_fake_it(self):
         """Return whether we should fake the data processing during execution.
-        
+
         This setting is configured in each deployment by the absence or
         presence of the environment variable.  By default, the variable is
         undefined.  As a consequence, execution performs real data processing.
@@ -132,7 +136,7 @@ class Config:
         the real data processing takes significant time.
         """
         try:
-            environment.get('FakeIt')
+            environment.get("FakeIt")
             return True
         except KeyError:
             return False
@@ -140,11 +144,11 @@ class Config:
     @property
     def should_leave_output_upon_task_failure(self):
         return False
- 
+
     @property
     def temporary_directory(self):
-        return TrackedPath('temporary', environment.get('TMPDIR'))
+        return TrackedPath("temporary", environment.get("TMPDIR"))
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

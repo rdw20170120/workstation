@@ -35,228 +35,263 @@ all of these helper functions can still be optimized away.
 
 def absolute_directory(path):
     result = path.is_absolute()
-    if result: result = path.is_dir()
-    if result: return result
+    if result:
+        result = path.is_dir()
+    if result:
+        return result
     else:
-        raise AssertionError(
-            '{!r} is NOT an absolute directory'.format(
-                path
-            ))
+        raise AssertionError("{!r} is NOT an absolute directory".format(path))
+
 
 def absolute_file(path):
     result = path.is_absolute()
-    if result: result = path.is_file()
-    if result: return result
+    if result:
+        result = path.is_file()
+    if result:
+        return result
     else:
-        raise AssertionError(
-            '{!r} is NOT an absolute file'.format(
-                path
-            ))
+        raise AssertionError("{!r} is NOT an absolute file".format(path))
+
 
 def absolute_path(path):
     result = path.is_absolute()
-    if result: return result
+    if result:
+        return result
     else:
-        raise AssertionError(
-            '{!r} is NOT an absolute path'.format(
-                path
-            ))
+        raise AssertionError("{!r} is NOT an absolute path".format(path))
+
 
 def at_least(actual_value, expected_value):
     """Assert that actual_value is at least expected_value."""
-    result = (actual_value >= expected_value)
-    if result: return result
+    result = actual_value >= expected_value
+    if result:
+        return result
     else:
         raise AssertionError(
-            "{!r} is LESS than {!r}".format(
-                actual_value, expected_value
-            ))
+            "{!r} is LESS than {!r}".format(actual_value, expected_value)
+        )
+
 
 def at_most(actual_value, expected_value):
     """Assert that actual_value is expected_value at most."""
-    result = (actual_value <= expected_value)
-    if result: return result
+    result = actual_value <= expected_value
+    if result:
+        return result
     else:
         raise AssertionError(
-            "{!r} is GREATER than {!r}".format(
-                actual_value, expected_value
-            ))
+            "{!r} is GREATER than {!r}".format(actual_value, expected_value)
+        )
+
 
 def encoding_is_utf8(encoding):
     # TODO: Add tests for complete list of variants
     # TODO: Add handling for both string and enum versions
-    result = (encoding in ('utf_8', 'utf-8', 'UTF8'))
-    if result: return result
+    result = encoding in ("utf_8", "utf-8", "UTF8")
+    if result:
+        return result
     else:
         raise AssertionError(
-            "Encoding {!r} is NOT a variant of UTF8".format(
-                encoding
-            ))
+            "Encoding {!r} is NOT a variant of UTF8".format(encoding)
+        )
+
 
 def equal(actual_value, expected_value):
     """Assert that actual_value is equal to expected_value."""
-    result = (actual_value == expected_value)
-    if result: return result
+    result = actual_value == expected_value
+    if result:
+        return result
     else:
         raise AssertionError(
-            "{!r} does NOT equal {!r}".format(
-                actual_value, expected_value
-            ))
+            "{!r} does NOT equal {!r}".format(actual_value, expected_value)
+        )
+
 
 def existing_absolute_path(path):
     result = path.is_absolute()
-    if result: result = path.exists()
-    if result: return result
+    if result:
+        result = path.exists()
+    if result:
+        return result
     else:
         raise AssertionError(
-            '{!r} is NOT an existing absolute path'.format(
-                path
-            ))
+            "{!r} is NOT an existing absolute path".format(path)
+        )
+
 
 def false(actual_value):
     result = not bool(actual_value)
-    if result: return result
+    if result:
+        return result
     else:
         raise AssertionError(
-            'Value is {!r}, INSTEAD of {!r}'.format(
-                actual_value, False
-            ))
+            "Value is {!r}, INSTEAD of {!r}".format(actual_value, False)
+        )
+
 
 def greater(actual_value, lower_limit):
     """Assert that actual_value is greater than lower_limit."""
-    result = (actual_value > lower_limit)
-    if result: return result
+    result = actual_value > lower_limit
+    if result:
+        return result
     else:
         raise AssertionError(
             "{!r} is LESS than or EQUAL to {!r}".format(
                 actual_value, lower_limit
-            ))
+            )
+        )
+
 
 def identical(actual_value, expected_value):
     """Assert that actual_value is identical to expected_value."""
-    result = (actual_value is expected_value)
-    if result: return result
+    result = actual_value is expected_value
+    if result:
+        return result
     else:
         raise AssertionError(
             "{!r} is NOT identical to {!r}".format(
                 actual_value, expected_value
-            ))
+            )
+        )
+
 
 def in_(actual_value, expected_values):
-    result = (actual_value in expected_values)
-    if result: return result
+    result = actual_value in expected_values
+    if result:
+        return result
     else:
         raise AssertionError(
-            'Value is {!r}, NOT IN {!r}'.format(
-                actual_value, expected_values
-            ))
+            "Value is {!r}, NOT IN {!r}".format(actual_value, expected_values)
+        )
+
 
 def instance(actual_value, expected_types):
     result = isinstance(actual_value, expected_types)
-    if result: return result
+    if result:
+        return result
     else:
         raise AssertionError(
-            'Value is {!r}, INSTEAD of {!r}'.format(
+            "Value is {!r}, INSTEAD of {!r}".format(
                 actual_value, expected_types
-            ))
+            )
+        )
+
 
 def integer_at_least(actual_value, expected_value):
     """Assert that actual_value is an integer of at least expected_value."""
     result = isinstance(actual_value, int)
-    if result: result = (actual_value >= expected_value)
-    if result: return result
+    if result:
+        result = actual_value >= expected_value
+    if result:
+        return result
     else:
         raise AssertionError(
             "{!r} is NOT an INTEGER, or is LESS than {!r}".format(
                 actual_value, expected_value
-            ))
+            )
+        )
+
 
 def integer_greater(actual_value, lower_limit):
     """Assert that actual_value is an integer greater than lower_limit."""
     result = isinstance(actual_value, int)
-    if result: result = (actual_value > lower_limit)
-    if result: return result
+    if result:
+        result = actual_value > lower_limit
+    if result:
+        return result
     else:
         raise AssertionError(
             "{!r} is NOT an INTEGER, or is LESS than or EQUAL to {!r}".format(
                 actual_value, lower_limit
-            ))
+            )
+        )
+
 
 def none(value):
     return identical(value, None)
 
+
 def nonempty_string(value):
-    return instance(value, str) and not_equal(value, '')
+    return instance(value, str) and not_equal(value, "")
+
 
 def not_(actual_value, expected_value):
     """Assert that actual_value is NOT identical to expected_value."""
-    result = (actual_value is not expected_value)
-    if result: return result
+    result = actual_value is not expected_value
+    if result:
+        return result
     else:
         raise AssertionError(
-            "{!r} is IDENTICAL to {!r}".format(
-                actual_value, expected_value
-            ))
+            "{!r} is IDENTICAL to {!r}".format(actual_value, expected_value)
+        )
+
 
 def not_equal(actual_value, expected_value):
     """Assert that actual_value is NOT equal to expected_value."""
-    result = (actual_value != expected_value)
-    if result: return result
+    result = actual_value != expected_value
+    if result:
+        return result
     else:
         raise AssertionError(
-            "{!r} EQUALS {!r}".format(
-                actual_value, expected_value
-            ))
+            "{!r} EQUALS {!r}".format(actual_value, expected_value)
+        )
+
 
 def not_in(actual_value, expected_values):
-    result = (actual_value not in expected_values)
-    if result: return result
+    result = actual_value not in expected_values
+    if result:
+        return result
     else:
         raise AssertionError(
-            'Value is {!r}, IN {!r}'.format(
-                actual_value, expected_values
-            ))
+            "Value is {!r}, IN {!r}".format(actual_value, expected_values)
+        )
+
 
 def not_instance(actual_value, expected_types):
     result = not isinstance(actual_value, expected_types)
-    if result: return result
+    if result:
+        return result
     else:
         raise AssertionError(
-            'Value is {!r}, which is one of DISALLOWED {!r}'.format(
+            "Value is {!r}, which is one of DISALLOWED {!r}".format(
                 actual_value, expected_types
-            ))
+            )
+        )
+
 
 def not_none(value):
     return not_(value, None)
 
+
 def relative_path(path):
     result = not path.is_absolute()
-    if result: return result
+    if result:
+        return result
     else:
-        raise AssertionError(
-            '{!r} is NOT a relative path'.format(
-                path
-            ))
+        raise AssertionError("{!r} is NOT a relative path".format(path))
+
 
 def range(actual_value, lower_limit, higher_limit):
     """Assert that actual_value is within range (inclusive)."""
-    result = (lower_limit <= actual_value <= higher_limit)
-    if result: return result
+    result = lower_limit <= actual_value <= higher_limit
+    if result:
+        return result
     else:
         raise AssertionError(
             "{!r} is OUTSIDE RANGE of {!r} to {!r} inclusive".format(
                 actual_value, lower_limit, higher_limit
-            ))
+            )
+        )
+
 
 def true(actual_value):
     result = bool(actual_value)
-    if result: return result
+    if result:
+        return result
     else:
         raise AssertionError(
-            'Value is {!r}, INSTEAD of {!r}'.format(
-                actual_value, True
-            ))
+            "Value is {!r}, INSTEAD of {!r}".format(actual_value, True)
+        )
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

@@ -9,8 +9,9 @@
 
 class Mapping(object):
     """Mappings among filesystem pathnames."""
+
     pass
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

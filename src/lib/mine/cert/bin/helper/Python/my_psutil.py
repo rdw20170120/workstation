@@ -12,6 +12,7 @@ from my_time import timestamp_as_datetime_utc
 def get_connected_sessions():
     return psutil.users()
 
+
 def get_uptime():
     """Return system uptime in seconds."""
     bootTimestamp = psutil.boot_time()
@@ -21,15 +22,25 @@ def get_uptime():
     assert has_type(result, FloatType), has_type_message(result, FloatType)
     return result
 
+
 def process_is_running(pid):
-    return (psutil.Process(pid).is_running() if psutil.pid_exists(pid) else False)
+    return (
+        psutil.Process(pid).is_running() if psutil.pid_exists(pid) else False
+    )
+
 
 def report_process(pid=None):
     p = psutil.Process(pid)
     print(("Reporting process pid {0}:".format(pid)))
     with p.oneshot():
         print(("cmdline: {0}".format(p.cmdline())))
-        print(("create_time: {0}".format(timestamp_as_datetime_utc(p.create_time()))))
+        print(
+            (
+                "create_time: {0}".format(
+                    timestamp_as_datetime_utc(p.create_time())
+                )
+            )
+        )
         print(("cwd: {0}".format(p.cwd())))
         print(("exe: {0}".format(p.exe())))
         print(("hash: {0}".format(hash(p))))
@@ -52,4 +63,3 @@ def report_process(pid=None):
     else:
         return False
 """
-

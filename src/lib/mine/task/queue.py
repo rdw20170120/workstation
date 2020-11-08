@@ -3,6 +3,7 @@
 # Internal packages  (absolute references, distributed with Python)
 from logging import getLogger
 from queue import Queue
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 # Co-located modules (relative references, NOT packaged, in project)
@@ -14,8 +15,9 @@ class TaskQueue:
     Wrap a private implementation to isolate the application from the
     architectural choice.
     """
+
     def __init__(self):
-        self._implementation = Queue() 
+        self._implementation = Queue()
         self._log = getLogger(self.__class__.__name__)
 
     def empty(self):
@@ -34,6 +36,6 @@ class TaskQueue:
         self._log.debug("Putting: %s", task)
         self._implementation.put_nowait(task)
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""

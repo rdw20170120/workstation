@@ -14,9 +14,10 @@ class Script(script_briteonyx.Script):
 
 
 def build():
-    return Script([
-        source_header(),
-        '''# Configure BriteOnyx deployment
+    return Script(
+        [
+            source_header(),
+            """# Configure BriteOnyx deployment
 # TODO: SOMEDAY: Keep BO_Version updated to latest published revision
 
 [[ -z "$BO_Parent"  ]] && export BO_Parent=$HOME/.BO
@@ -24,9 +25,10 @@ def build():
 [[ -z "$BO_Home"    ]] && export BO_Home=$BO_Parent/$BO_Version
 
 alias functions='declare -F | sort'
-''',
-        disabled_content_footer(),
-    ])
+""",
+            disabled_content_footer(),
+        ]
+    )
 
 
 VISITOR_MAP = VisitorMap(parent_map=script_bash.VISITOR_MAP)
@@ -38,4 +40,3 @@ def render(target_directory, target_file):
 
 """ Disabled content
 """
-

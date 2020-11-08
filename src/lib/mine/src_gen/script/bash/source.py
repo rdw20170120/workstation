@@ -3,11 +3,13 @@
 """
 # Internal packages  (absolute references, distributed with Python)
 from pathlib import Path
+
 # External packages  (absolute references, NOT distributed with Python)
 # Library modules    (absolute references, NOT packaged, in project)
 from throw_out_your_templates.section_3 import VisitorMap
 from utility.filesystem import maybe_create_directory
 from utility import my_assert as is_
+
 # Co-located modules (relative references, NOT packaged, in project)
 from ..source import Script
 from ..source import my_visitor_map as parent_visitor_map
@@ -22,14 +24,20 @@ class BashScript(Script):
         super().__init__(visitor_map, content)
 
 
-def generate(content,
-    directory=None, subdirectories=None, filename=None,
-    visitor_map=None
-    ):
-    if visitor_map is None: visitor_map = my_visitor_map
+def generate(
+    content,
+    directory=None,
+    subdirectories=None,
+    filename=None,
+    visitor_map=None,
+):
+    if visitor_map is None:
+        visitor_map = my_visitor_map
     source = BashScript(visitor_map, content)
-    if directory is None: source.generate()
-    elif filename is None: source.generate()
+    if directory is None:
+        source.generate()
+    elif filename is None:
+        source.generate()
     else:
         assert is_.instance(directory, Path)
         assert is_.absolute_directory(directory)
@@ -37,6 +45,6 @@ def generate(content,
         maybe_create_directory(directory)
         source.generate(directory / filename)
 
-'''DisabledContent
-'''
 
+"""DisabledContent
+"""
