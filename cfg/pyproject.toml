@@ -43,6 +43,7 @@ force-exclude = '''
   | \.c$
   | \.cfg$
   | \.md$
+  | \.java$
   | \.profile$
   | \.rst$
   | \.sig$
@@ -51,6 +52,7 @@ force-exclude = '''
   | \.txt$
   | \.vim$
   | \.xprofile$
+  | \.yaml$
   # By more interesting patterns
 )
 '''

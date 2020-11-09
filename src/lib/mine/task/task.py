@@ -50,7 +50,7 @@ class PlainTask(object):
 
     def _post_execute(self):
         """MAY be overridden in subclasses, starting with call to super()."""
-        self._log.debug("Done: %s", self)
+        self._log.info("Done: %s", self)
 
     def _pre_execute(self):
         """MAY be overridden in subclasses, starting with call to super()."""

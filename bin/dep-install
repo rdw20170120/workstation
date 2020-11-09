@@ -25,9 +25,9 @@ echo "INFO: Installing Python dependencies"
 
 pip3 install pip wheel --upgrade --upgrade-strategy=eager
 pip3 install \
-    black \
     boto3 awscli \
     logzero \
+    black \
     pytest \
     pytest-cov coverage[toml] \
     pytest-html ansi2html \
@@ -42,6 +42,11 @@ pip3 install \
 # set +o verbose
 # set +o xtrace
 : << 'DisabledContent'
+    commandlib \
+    cryptography \
+    pem twisted[tls] \
+    pyopenssl \
+    strictyaml \
 NO: pip3 install sh
 TODO: RESEARCH: Consider pytest-benchmark
 TODO: RESEARCH: Consider pytest-clarity
@@ -60,10 +65,5 @@ TODO: RESEARCH: Consider pytest-socket
 TODO: RESEARCH: Consider pytest-timeout
 TODO: RESEARCH: Consider pytest-xdist
 TODO: RESEARCH: Consider python-snappy
-pip3 install avro-python3==1.9.1
-pip3 install commandlib
-pip3 install cryptography pem pynacl pyopenssl twisted[tls]
-pip3 install pandas
-pip3 install strictyaml
 DisabledContent
 
