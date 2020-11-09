@@ -16,18 +16,17 @@ trap report_status_and_exit EXIT
 ###############################################################################
 # Capture BASH environment status
 
-if [[ -z "$BO_Project" ]] ; then
-    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
-    exit 1
-fi
+[[ -z "${BO_Project}" ]] &&
+    echo "FATAL: 'BO_Project' is undefined, aborting" &&
+    exit 20
 
-File=$BO_Project/out/env.out
+File=${BO_Project}/out/env.out
 
-echo "INFO: Capturing BASH environment status to '$File'"
-env-report > $File
+echo "INFO:  Capturing BASH environment status to '${File}'"
+>${File} 2>&1 env-report
 
 # Capture activation output
-cp $BO_Project/*.env $BO_Project/out
+cp ${BO_Project}/*.env ${BO_Project}/out
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

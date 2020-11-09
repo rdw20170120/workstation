@@ -14,42 +14,49 @@ report_status_and_exit() {
 }
 trap report_status_and_exit EXIT
 ###############################################################################
-# Run tests
 
 [[ -z "${BO_Project}" ]] &&
     echo "FATAL: 'BO_Project' is undefined, aborting" &&
     exit 20
 
-Script=$BO_Project/BriteOnyx/bin/lib/configure-Python.bash
-if [[ -r $Script ]] ; then
-    source $Script
+Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
+if [[ -r ${Script} ]] ; then
+    source ${Script}
 else
-    echo "WARN: Script file '$Script' is not readable"
+    echo "WARN: Script file '${Script}' is not readable"
 fi
 
-cd $BO_Project/src/lib/mine
-status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
-# DISABLED: --show-capture=no
-py.test --log-file=pytest.log
-status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
-
-cd $BO_Project/src/gen
-status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
-# DISABLED: --show-capture=no
-py.test --log-file=pytest.log
-status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
-
-cd $BO_Project/src/app
-status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
-# DISABLED: --show-capture=no
-py.test --log-file=pytest.log
-status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
+run_pytest() {
+    # Run pytest on test suite known as $1 in directory $2
+    # $1 = test suite name
+    # $2 = test suite parent directory
+    local -i Status
+    cd $2
+    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+    pytest \
+	--cov=$2 \
+	--cov-branch \
+	--cov-config=${BO_Project}/cfg/.coveragerc \
+	--cov-report=html \
+        --html=${BO_Project}/out/pytest-$1.html \
+        --log-file=${BO_Project}/log/pytest-$1.log \
+	--no-cov-on-fail \
+	--self-contained-html
+    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+}
 
 main() {
+    # Run Python test suites
+    # TODO: Separate coverage generation into consolidated step
+    run_pytest mine ${BO_Project}/src/lib/mine
+    run_pytest gen  ${BO_Project}/src/gen
+    run_pytest app  ${BO_Project}/src/app
+    coverage report --rcfile=${BO_Project}/cfg/.coveragerc
+    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
     return 0
 }
 
-main
+main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
@@ -59,5 +66,6 @@ main
 # set +o verbose
 # set +o xtrace
 : << 'DisabledContent'
+--show-capture=no
 DisabledContent
 

@@ -24,8 +24,15 @@ fi
 echo "INFO: Installing Python dependencies"
 
 pip3 install pip wheel --upgrade --upgrade-strategy=eager
-pip3 install black logzero pytest
-pip3 install awscli boto3
+pip3 install \
+    black \
+    boto3 awscli \
+    logzero \
+    pytest \
+    pytest-cov coverage[toml] \
+    pytest-html ansi2html \
+    pytest-icdiff \
+    pytest-sugar
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
@@ -36,12 +43,27 @@ pip3 install awscli boto3
 # set +o xtrace
 : << 'DisabledContent'
 NO: pip3 install sh
-TODO: RESEARCH: Install python-snappy
+TODO: RESEARCH: Consider pytest-benchmark
+TODO: RESEARCH: Consider pytest-clarity
+TODO: RESEARCH: Consider pytest-datafiles
+TODO: RESEARCH: Consider pytest-deadfixtures
+TODO: RESEARCH: Consider pytest-freezegun
+TODO: RESEARCH: Consider pytest-instafail
+TODO: RESEARCH: Consider pytest-lazy-fixtures
+TODO: RESEARCH: Consider pytest-leaks
+TODO: RESEARCH: Consider pytest-parallel
+TODO: RESEARCH: Consider pytest-picked
+TODO: RESEARCH: Consider pytest-random-order
+TODO: RESEARCH: Consider pytest-randomly
+TODO: RESEARCH: Consider pytest-rng
+TODO: RESEARCH: Consider pytest-socket
+TODO: RESEARCH: Consider pytest-timeout
+TODO: RESEARCH: Consider pytest-xdist
+TODO: RESEARCH: Consider python-snappy
 pip3 install avro-python3==1.9.1
 pip3 install commandlib
 pip3 install cryptography pem pynacl pyopenssl twisted[tls]
 pip3 install pandas
-pip3 install pytest-datafiles
 pip3 install strictyaml
 DisabledContent
 

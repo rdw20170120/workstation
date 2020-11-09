@@ -16,15 +16,14 @@ trap report_status_and_exit EXIT
 ###############################################################################
 # Capture Python dependency status
 
-if [[ -z "$BO_Project" ]] ; then
-    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
-    exit 1
-fi
+[[ -z "${BO_Project}" ]] &&
+    echo "FATAL: 'BO_Project' is undefined, aborting" &&
+    exit 20
 
 File=$BO_Project/cfg/requirements.txt
 
-echo "INFO: Capturing Python dependency status to '$File'"
-dep-report > $File
+echo "INFO:  Capturing Python dependency status to '${File}'"
+>${File} 2>&1 dep-report
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

@@ -16,15 +16,14 @@ trap report_status_and_exit EXIT
 ###############################################################################
 # Capture Python status
 
-if [[ -z "$BO_Project" ]] ; then
-    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
-    exit 1
-fi
+[[ -z "${BO_Project}" ]] &&
+    echo "FATAL: 'BO_Project' is undefined, aborting" &&
+    exit 20
 
-File=$BO_Project/out/python.out
+File=${BO_Project}/out/python.out
 
-echo "INFO: Capturing Python status to '$File'"
-py-report > $File
+echo "INFO:  Capturing Python status to '${File}'"
+>${File} py-report
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

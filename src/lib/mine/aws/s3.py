@@ -93,9 +93,9 @@ class S3(AwsService):
             raise
 
     def download_object(self, bucket_name, key, file_path):
-        assert assert_instance(bucket_name, str)
-        assert assert_instance(key, str)
-        assert assert_instance(file_path, str)
+        assert is_.instance(bucket_name, str)
+        assert is_.instance(key, str)
+        assert is_.instance(file_path, str)
         self._log.debug(
             "Downloading key '%s' in bucket '%s' to file '%s'",
             key,
@@ -105,7 +105,7 @@ class S3(AwsService):
         self._download_object(bucket_name, key, file_path)
 
     def get_bucket_prefixes(self, bucket_name):
-        assert assert_instance(bucket_name, str)
+        assert is_.instance(bucket_name, str)
         result = []
         self._log.debug("Getting common prefixes for bucket '%s'", bucket_name)
         for prefix in self._list_bucket_common_prefixes(bucket_name):
@@ -119,8 +119,8 @@ class S3(AwsService):
         return result
 
     def list_bucket_objects(self, bucket_name, prefix):
-        assert assert_instance(bucket_name, str)
-        assert assert_instance(prefix, str)
+        assert is_.instance(bucket_name, str)
+        assert is_.instance(prefix, str)
         result = []
         self._log.debug(
             "Listing objects in bucket '%s' with prefix '%s'",
@@ -136,9 +136,9 @@ class S3(AwsService):
         return result
 
     def upload_object(self, bucket_name, key, file_path):
-        assert assert_instance(bucket_name, str)
-        assert assert_instance(key, str)
-        assert assert_instance(file_path, str)
+        assert is_.instance(bucket_name, str)
+        assert is_.instance(key, str)
+        assert is_.instance(file_path, str)
         self._log.debug(
             "Uploading file '%s' to key '%s' in bucket '%s'",
             file_path,

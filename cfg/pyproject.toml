@@ -1,59 +1,60 @@
-# Black configuration file
-# TODO: REFACTOR: Move to pyproject.toml
-
 [tool.black]
 # check = true
 exclude = '''
 (
-  PLACEHOLDER$
-# By parent directory
-# By specific pathname
-| bin/secure$
-| source-may-be-left-out$
-# By file suffix
-# By more interesting patterns
-| bin/.*-run$
-| bin/all-.*$
-| bin/dep-.*$
-| bin/env-.*$
-| bin/git-.*$
-| bin/prj-.*$
-| bin/pve-.*$
-| bin/py-.*$
-| bin/sig-.*$
-| bin/tool-.*$
+    PLACEHOLDER$
+  # By parent directory
+  # By specific pathname
+  | bin/secure$
+  | source-may-be-left-out$
+  # By file suffix
+  # By more interesting patterns
+  | bin/.*-run$
+  | bin/all-.*$
+  | bin/dep-.*$
+  | bin/env-.*$
+  | bin/git-.*$
+  | bin/prj-.*$
+  | bin/pve-.*$
+  | bin/py-.*$
+  | bin/sig-.*$
+  | bin/tool-.*$
 )
 '''
 force-exclude = '''
 (
-# By parent directory
-  \.PVE/.*$
-| \.git/.*$
-| \.pytest_cache/.*$
-| \.ssh/.*$
-# By specific pathname
-| \.gitignore$
-| \.grep-exclude-from$
-| \.mailmap$
-# By file suffix
-| \.bash$
-| \.bash_logout$
-| \.bash_profile$
-| \.bashrc$
-| \.cfg$
-| \.md$
-| \.profile$
-| \.rst$
-| \.sig$
-| \.toml$
-| \.txt$
-| \.vim$
-| \.xprofile$
-# By more interesting patterns
+  # By parent directory
+    \.PVE/.*$
+  | \.git/.*$
+  | \.pytest_cache/.*$
+  | \.ssh/.*$
+  # By specific pathname
+  | \.coverage$
+  | \.coveragerc$
+  | \.gitignore$
+  | \.grep-exclude-from$
+  | \.mailmap$
+  | parse_accuryn_data_file$
+  # By file suffix
+  | \.bash$
+  | \.bash_logout$
+  | \.bash_profile$
+  | \.bashrc$
+  | \.c$
+  | \.cfg$
+  | \.md$
+  | \.profile$
+  | \.rst$
+  | \.sig$
+  | \.sql$
+  | \.toml$
+  | \.txt$
+  | \.vim$
+  | \.xprofile$
+  # By more interesting patterns
 )
 '''
 include = ''
-
 line-length = 79
 target-version = ['py36']
 # verbose = true

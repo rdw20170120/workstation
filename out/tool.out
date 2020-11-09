@@ -178,14 +178,17 @@ unalias
 unset
 wait
 pyrsa-encrypt
+ansi2html
 jp.py
 easy_install
 blackd
 rst2man.py
 python
+icdiff
 rstpep2html.py
 rst2pseudoxml.py
 pyrsa-priv2pub
+coverage-3.6
 aws_completer
 py.test
 pytest
@@ -197,8 +200,11 @@ pyrsa-decrypt
 wheel
 pyrsa-sign
 rst2html.py
+pypprint
 aws.cmd
+coverage3
 aws_bash_completer
+git-icdiff
 rst2xetex.py
 pip3
 rst2s5.py
@@ -210,6 +216,7 @@ rst2xml.py
 black-primer
 easy_install-3.6
 rst2latex.py
+coverage
 pyrsa-verify
 pip3.6
 aws
@@ -4560,14 +4567,18 @@ git --version
 git version 2.17.1
 ##########
 type brew
+/home/rob/project/Rob/workstation/bin/tool-report: line 24: type: brew: not found
 ##########
 which brew
 ##########
 brew --version
+/home/rob/project/Rob/workstation/bin/tool-report: line 24: brew: command not found
 ##########
 brew list --full-name --versions --casks
+/home/rob/project/Rob/workstation/bin/tool-report: line 24: brew: command not found
 ##########
 brew list --full-name --versions --formulae
+/home/rob/project/Rob/workstation/bin/tool-report: line 24: brew: command not found
 ##########
 type python
 python is /home/rob/project/Rob/workstation/.PVE/bin/python
@@ -4624,6 +4635,11 @@ which pip3
 pip3 --version
 pip 20.2.4 from /home/rob/project/Rob/workstation/.PVE/lib/python3.6/site-packages/pip (python 3.6)
 ##########
+type 2to3
+/home/rob/project/Rob/workstation/bin/tool-report: line 24: type: 2to3: not found
+##########
+which 2to3
+##########
 type black
 black is /home/rob/project/Rob/workstation/.PVE/bin/black
 ##########
@@ -4633,9 +4649,15 @@ which black
 black --version
 black, version 20.8b1
 ##########
-type 2to3
+type coverage
+coverage is /home/rob/project/Rob/workstation/.PVE/bin/coverage
 ##########
-which 2to3
+which coverage
+/home/rob/project/Rob/workstation/.PVE/bin/coverage
+##########
+coverage --version
+Coverage.py, version 5.3 with C extension
+Full documentation is at https://coverage.readthedocs.io
 ##########
 type py.test
 py.test is /home/rob/project/Rob/workstation/.PVE/bin/py.test
@@ -4643,7 +4665,13 @@ py.test is /home/rob/project/Rob/workstation/.PVE/bin/py.test
 which py.test
 /home/rob/project/Rob/workstation/.PVE/bin/py.test
 ##########
-py.test --version
+type pytest
+pytest is /home/rob/project/Rob/workstation/.PVE/bin/pytest
+##########
+which pytest
+/home/rob/project/Rob/workstation/.PVE/bin/pytest
+##########
+pytest --version
 pytest 6.1.2
 Tool report succeeded, though individual checks may fail
 INFO:  /home/rob/project/Rob/workstation/bin/tool-report exiting with status 0

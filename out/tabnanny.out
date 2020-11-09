@@ -19,10 +19,12 @@
 '/home/rob/project/Rob/workstation/src/app/MODULE/__main__.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/app/MODULE/__pycache__': listing directory
 '/home/rob/project/Rob/workstation/src/app/MODULE/test_app.py': Clean bill of health.
+'/home/rob/project/Rob/workstation/src/app/htmlcov': listing directory
 '/home/rob/project/Rob/workstation/src/app/.pytest_cache': listing directory
 '/home/rob/project/Rob/workstation/src/app/.pytest_cache/v': listing directory
 '/home/rob/project/Rob/workstation/src/app/.pytest_cache/v/cache': listing directory
 '/home/rob/project/Rob/workstation/src/gen': listing directory
+'/home/rob/project/Rob/workstation/src/gen/htmlcov': listing directory
 '/home/rob/project/Rob/workstation/src/gen/.pytest_cache': listing directory
 '/home/rob/project/Rob/workstation/src/gen/.pytest_cache/v': listing directory
 '/home/rob/project/Rob/workstation/src/gen/.pytest_cache/v/cache': listing directory
@@ -172,6 +174,7 @@
 '/home/rob/project/Rob/workstation/src/lib/mine/sample_python/src/example/test/dummy_test.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/lib/mine/sample_python/src/example/test/__pycache__': listing directory
 '/home/rob/project/Rob/workstation/src/lib/mine/sample_python/setup.py': Clean bill of health.
+'/home/rob/project/Rob/workstation/src/lib/mine/htmlcov': listing directory
 '/home/rob/project/Rob/workstation/src/lib/mine/cert': listing directory
 '/home/rob/project/Rob/workstation/src/lib/mine/cert/__init__.py': Clean bill of health.
 '/home/rob/project/Rob/workstation/src/lib/mine/cert/bin': listing directory

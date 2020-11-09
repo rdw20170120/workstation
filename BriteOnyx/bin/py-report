@@ -16,24 +16,25 @@ trap report_status_and_exit EXIT
 ###############################################################################
 # Report Python code status
 
-if [[ -z "$BO_Project" ]] ; then
-    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
-    exit 1
-fi
+[[ -z "${BO_Project}" ]] &&
+    echo "FATAL: 'BO_Project' is undefined, aborting" &&
+    exit 20
 
 clear
 
-python3 -m tabnanny -v $BO_Project/BriteOnyx/bin >$BO_Project/out/tabnanny.out
-python3 -m tabnanny -v $BO_Project/bin          >>$BO_Project/out/tabnanny.out
-python3 -m tabnanny -v $BO_Project/src/app      >>$BO_Project/out/tabnanny.out
-python3 -m tabnanny -v $BO_Project/src/gen      >>$BO_Project/out/tabnanny.out
-python3 -m tabnanny -v $BO_Project/src/lib      >>$BO_Project/out/tabnanny.out
-
-cat $BO_Project/out/tabnanny.out \
+Out=${BO_Project}/out/tabnanny.out
+ >${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/BriteOnyx/bin
+>>${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/bin
+>>${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/src/app
+>>${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/src/gen
+>>${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/src/lib
+cat ${Out} \
     | grep -v 'listing directory' \
     | grep -v 'Clean bill of health.'
-
 echo 'INFO: No output means all Python code passes all TabNanny checks'
+
+Out=${BO_Project}/out/py-reformat.out
+>${Out} 2>&1 py-reformat
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

@@ -16,15 +16,14 @@ trap report_status_and_exit EXIT
 ###############################################################################
 # Capture tool status
 
-if [[ -z "$BO_Project" ]] ; then
-    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
-    exit 1
-fi
+[[ -z "${BO_Project}" ]] &&
+    echo "FATAL: 'BO_Project' is undefined, aborting" &&
+    exit 20
 
 File=$BO_Project/out/tool.out
 
-echo "INFO: Capturing tool status to '$File'"
-tool-report 2>&1 >$File
+echo "INFO:  Capturing tool status to '${File}'"
+>${File} 2>&1 tool-report
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

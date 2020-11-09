@@ -16,15 +16,20 @@ trap report_status_and_exit EXIT
 ###############################################################################
 
 main() {
-    # List files that are ignored by source control but may be wrongly left out
+    # List files that are ignored by source control but MAY be wrongly left out
     git status --ignored |
-        grep -v \.class |
-        grep -v \.DS_Store |
-        grep -v \.PVE |
-        grep -v \.pytest_cache |
-        grep -v __pycache__ |
         grep -v BO-incoming\.env |
         grep -v BO-outgoing\.env |
+        grep -v \.DS_Store |
+        grep -v \.PVE |
+        grep -v \.cache\/ |
+        grep -v \.class |
+        grep -v \.html |
+        grep -v \.pytest_cache |
+        grep -v __pycache__ |
+        grep -v cfg\/\.coverage |
+        grep -v context\.bash |
+        grep -v htmlcov\/ |
         grep -v log\/ |
         grep -v pytest\.log
 }

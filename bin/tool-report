@@ -93,11 +93,14 @@ checkExecutable pip3
 check 'pip3 --version'
 
 # Python tools
+checkExecutable 2to3
 checkExecutable black
 check 'black --version'
-checkExecutable 2to3
+checkExecutable coverage
+check 'coverage --version'
 checkExecutable py.test
-check 'py.test --version' 2>&1
+checkExecutable pytest
+check 'pytest --version' 2>&1
 
 # Ensure a successful script return
 echo "Tool report succeeded, though individual checks may fail"

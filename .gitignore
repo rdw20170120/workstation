@@ -9,6 +9,7 @@ out/
 # Common file suffixes
 *.avro
 *.env
+*.html
 *.json
 *.list
 *.log
@@ -26,10 +27,11 @@ out/
 # Vim
 *.swp
 
-# Byte-compiled / optimized / DLL files
-*$py.class
+# Python
 *.py[cdo]
+.coverage
 __pycache__/
+htmlcov/
 
 # C extensions
 # *.so
@@ -67,7 +69,6 @@ __pycache__/
 # Unit test / coverage reports
 # *.cover
 # *.py,cover
-# .coverage
 # .coverage.*
 # .hypothesis/
 # .nox/
