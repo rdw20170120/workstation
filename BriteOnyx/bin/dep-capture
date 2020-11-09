@@ -5,9 +5,7 @@
 
 report_status_and_exit() {
     local -ir Status=$?
-    if [[ "${Status}" -eq 0 ]] ; then
-        echo "INFO:  ${0} exiting with status ${Status}"
-    else
+    if [[ "${Status}" -ne 0 ]] ; then
         echo "FATAL: ${0} exiting with status ${Status}"
     fi
     exit ${Status}
@@ -23,7 +21,7 @@ trap report_status_and_exit EXIT
 File=$BO_Project/cfg/requirements.txt
 
 echo "INFO:  Capturing Python dependency status to '${File}'"
->${File} 2>&1 dep-report
+>${File} dep-report
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

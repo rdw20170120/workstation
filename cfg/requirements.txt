@@ -45,4 +45,4 @@ typing-extensions==3.7.4.3
 urllib3==1.25.11
 wheel==0.35.1
 zipp==3.4.0
-INFO:  /home/rob/project/Rob/workstation/BriteOnyx/bin/dep-report exiting with status 0
+
