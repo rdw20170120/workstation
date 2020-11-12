@@ -46,20 +46,27 @@ def echo(*argument):
     return command("echo", argument)
 
 
-def echo_fatal(*element):
-    return echo(dq("FATAL: ", element))
+def log(*argument):
+    return [
+        "1>&2 ",
+        command("echo", argument),
+    ]
 
 
-def echo_info(*element):
-    return echo(dq("INFO:  ", element))
+def log_debug(*element):
+    return log(dq("DEBUG: ", element))
 
 
-def echo_trace(*element):
-    return echo(dq("TRACE: ", element))
+def log_fatal(*element):
+    return log(dq("FATAL: ", element))
 
 
-def echo_warn(*element):
-    return echo(dq("WARN:  ", element))
+def log_info(*element):
+    return log(dq("INFO:  ", element))
+
+
+def log_warn(*element):
+    return log(dq("WARN:  ", element))
 
 
 ###############################################################################
@@ -341,6 +348,33 @@ def fi():
 ###############################################################################
 
 
+class _Function(object):
+    def __init__(self, name, *statement):
+        super().__init__()
+        self.name = squashed(name)
+        self.statements = squashed(statement)
+        assert is_.not_none(self.statements)
+
+    def __repr__(self):
+        return "_Function({})".format(self.statements)
+
+
+@my_visitor_map.register(_Function)
+def _visit_function(element, walker):
+    walker.emit(element.name)
+    walker.emit("() {")
+    walker.walk(eol())
+    walker.walk(element.statements)
+    walker.emit("}")
+
+
+def function(name, *statement):
+    return _Function(name, statement)
+
+
+###############################################################################
+
+
 class _If(object):
     def __init__(self, condition, *statement):
         super().__init__()
@@ -372,9 +406,9 @@ def if_(condition, *statement):
 
 def trace_execution():
     return [
-        string_is_not_null(vr("BO_Trace")),
+        string_is_not_null(vr("BO_Debug")),
         and_(),
-        echo_trace("Executing", vr("BASH_SOURCE")),
+        log_debug("Executing ", vr("BASH_SOURCE")),
         eol(),
     ]
 
@@ -403,6 +437,17 @@ def header_sourced():
     ]
 
 
+def maybe_source(file_name):
+    return [
+        file_is_readable(file_name),
+        and_(),
+        eol(),
+        indent(),
+        source(file_name),
+        eol(),
+    ]
+
+
 def shebang_bash():
     return shebang_thru_env("bash")
 
@@ -423,31 +468,26 @@ def trap_executed():
     # TODO: REFACTOR: Extract common method
     name = "report_status_and_exit"
     return [
-        function_header(name),
-        indent(),
-        local(remember_last_status(), integer=True, readonly=True),
-        eol(),
-        indent(),
-        if_(
-            status_is_success(),
-            indent(),
-            indent(),
-            echo_info(vr("0"), " exiting with status ", status()),
-            eol(),
+        function(
+            name,
+            [
+                indent(),
+                local(remember_last_status(), integer=True, readonly=True),
+                eol(),
+                indent(),
+                status_is_failure(),
+                and_(),
+                eol(),
+                indent(),
+                indent(),
+                log_fatal(vr("0"), " exiting with status ", status()),
+                eol(),
+                indent(),
+                exit_with_status(),
+                eol(),
+            ],
         ),
-        indent(),
-        else_(
-            indent(),
-            indent(),
-            echo_fatal(vr("0"), " exiting with status ", status()),
-            eol(),
-        ),
-        indent(),
-        fi(),
-        indent(),
-        exit_with_status(),
         eol(),
-        function_footer(),
         trap(name, "EXIT"),
         eol(),
     ]
@@ -457,31 +497,26 @@ def trap_sourced():
     # TODO: REFACTOR: Extract common method
     name = "report_status_and_return"
     return [
-        function_header(name),
-        indent(),
-        local(remember_last_status(), integer=True, readonly=True),
-        eol(),
-        indent(),
-        if_(
-            status_is_success(),
-            indent(),
-            indent(),
-            echo_info(vr("0"), " returning with status ", status()),
-            eol(),
+        function(
+            name,
+            [
+                indent(),
+                local(remember_last_status(), integer=True, readonly=True),
+                eol(),
+                indent(),
+                status_is_failure(),
+                and_(),
+                eol(),
+                indent(),
+                indent(),
+                log_fatal(vr("0"), " returning with status ", status()),
+                eol(),
+                indent(),
+                return_with_status(),
+                eol(),
+            ],
         ),
-        indent(),
-        else_(
-            indent(),
-            indent(),
-            echo_fatal(vr("0"), " returning with status ", status()),
-            eol(),
-        ),
-        indent(),
-        fi(),
-        indent(),
-        return_with_status(),
         eol(),
-        function_footer(),
         trap(name, "EXIT"),
         eol(),
     ]
@@ -529,24 +564,6 @@ def vr(name):
 
 
 ###############################################################################
-
-
-def function_footer():
-    # TODO: Consider converting to a function container
-    return [
-        "}",
-        eol(),
-    ]
-
-
-def function_header(name):
-    # TODO: Consider converting to a function container
-    return [
-        name,
-        "()",
-        " {",
-        eol(),
-    ]
 
 
 """DisabledContent

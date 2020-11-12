@@ -19,17 +19,34 @@ def _sourced():
     ]
 
 
-def generate(directory):
-    sub = Path(".")
-    gen(_sourced(), directory, sub, "alias.bash")
-    gen(_sourced(), directory, sub, "context.bash")
+def _generate_briteonyx(dir_):
     sub = Path("BriteOnyx", "bin", "lib")
-    gen(_sourced(), directory, sub, "alias-common.bash")
-    gen(_sourced(), directory, sub, "alias-git.bash")
-    gen(_sourced(), directory, sub, "pve-activate.bash")
+    gen(_sourced(), dir_, sub, "alias-common.bash")
+    gen(_sourced(), dir_, sub, "alias-git.bash")
+    gen(_sourced(), dir_, sub, "configure-Python.bash")
+    gen(_sourced(), dir_, sub, "declare-base.bash")
+    gen(_sourced(), dir_, sub, "declare-common.bash")
+    gen(_sourced(), dir_, sub, "declare-require.bash")
+    gen(_sourced(), dir_, sub, "declare.bash")
+    gen(_sourced(), dir_, sub, "pve-activate.bash")
+
+
+def _generate_cfg(dir_):
     sub = Path("cfg", "sample")
-    gen(_sourced(), directory, sub, "alias.bash")
-    gen(_sourced(), directory, sub, "context.bash")
+    gen(_sourced(), dir_, sub, "alias.bash")
+    gen(_sourced(), dir_, sub, "context.bash")
+
+
+def _generate_project(dir_):
+    sub = Path(".")
+    gen(_sourced(), dir_, sub, "alias.bash")
+    gen(_sourced(), dir_, sub, "context.bash")
+
+
+def generate(directory):
+    _generate_briteonyx(directory)
+    _generate_cfg(directory)
+    _generate_project(directory)
 
 
 """DisabledContent

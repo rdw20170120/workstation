@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
 
 report_status_and_exit() {
     local -ir Status=$?
-    if [[ "${Status}" -eq 0 ]] ; then
-        echo "INFO:  ${0} exiting with status ${Status}"
-    else
-        echo "FATAL: ${0} exiting with status ${Status}"
-    fi
+    [[ "${Status}" -ne 0 ]] && 
+        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
     exit ${Status}
 }
 trap report_status_and_exit EXIT
@@ -21,18 +18,9 @@ trap report_status_and_exit EXIT
 # will happen as needed.  If this script is unable to finish, then it should
 # abort after giving the user feedback about how they might proceed further.
 
-# Require activation
-if [[ -z "$BO_Project" ]] ; then
-    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
-    exit 1
-fi
-
-Script=$BO_Project/BriteOnyx/bin/lib/configure-Python.bash
-if [[ -r $Script ]] ; then
-    source $Script
-else
-    echo "WARN: Script file '$Script' is not readable"
-fi
+[[ -z "${BO_Project}" ]] && 
+    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
+    exit 99
 
 cd $BO_Project/src/app
 
@@ -42,6 +30,16 @@ cmd='python3'
 cmd+=' -m MODULE'
 echo $cmd $@
 $cmd $@
+
+main() {
+    # TODO: DESCRIPTION
+
+    # TODO: CONTENT
+
+    return 0
+}
+
+main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

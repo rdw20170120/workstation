@@ -1,15 +1,12 @@
 #!/usr/bin/env false
-[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be sourced in a BASH shell.
 
 report_status_and_return() {
     local -ir Status=$?
-    if [[ "${Status}" -eq 0 ]] ; then
-        echo "INFO:  ${0} returning with status ${Status}"
-    else
-        echo "FATAL: ${0} returning with status ${Status}"
-    fi
+    [[ "${Status}" -ne 0 ]] && 
+        1>&2 echo "FATAL: ${0} returning with status ${Status}"
     return ${Status}
 }
 trap report_status_and_return EXIT

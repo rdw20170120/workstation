@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
 
 report_status_and_exit() {
     local -ir Status=$?
-    if [[ "${Status}" -eq 0 ]] ; then
-        echo "INFO:  ${0} exiting with status ${Status}"
-    else
-        echo "FATAL: ${0} exiting with status ${Status}"
-    fi
+    [[ "${Status}" -ne 0 ]] && 
+        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
     exit ${Status}
 }
 trap report_status_and_exit EXIT
 ###############################################################################
 # Check the signature file for directory $1
+
+[[ -z "${BO_Project}" ]] && 
+    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
+    exit 99
 
 dir=$1
 [[ -z "${dir}" ]] && dir=${PWD}
@@ -24,6 +25,16 @@ file=shasum-256.sig
 echo "INFO:  Checking signature file ${dir}/${file}"
 cd ${dir}
 shasum -p -a 256 --warn --check ${file}
+
+main() {
+    # TODO: DESCRIPTION
+
+    # TODO: CONTENT
+
+    return 0
+}
+
+main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

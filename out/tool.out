@@ -104,10 +104,32 @@ time
 !
 [[
 ]]
+abort_on_fail
+abort_on_fail_with_output
 check
 checkExecutable
 checkVariable
+delete_file
+forbid_path
+log_debug
+log_error
+log_fatal
+log_info
+log_warn
+maybe_delete_file
+report_on_fail
 report_status_and_exit
+require_arguments
+require_command
+require_directory
+require_directory_in_variable
+require_file
+require_file_in_variable
+require_function
+require_script
+require_value
+require_variable
+write_file
 .
 :
 [
@@ -2687,18 +2709,21 @@ parquet-print
 pve-rm
 avro-print
 py-check
+py-reformat
 py-compile
 py-report
 tool-capture
 prj-wipe
 all-check
 extensions
+gen-run
 pve-recreate
 sig-make
 sig-check
 all-capture
 list
 prj-clean
+test-run
 pve-create
 dep-reinstall
 env-report
@@ -2710,11 +2735,8 @@ dep-report
 dep-capture
 tool-check
 tool-report
-py-reformat
 app-run
 source-may-be-left-out
-gen-run
-test-run
 dep-install
 lzmainfo
 pip3.9
@@ -2836,8 +2858,10 @@ LOGNAME
 PATH
 PVE
 PWD
-ReservedDiskSpaceInBytes
-Run
+PYTHONCOERCELOCALE
+PYTHONIOENCODING
+PYTHONPATH
+PYTHONUTF8
 SHELL
 SHLVL
 SSH_AUTH_SOCK
@@ -2982,8 +3006,6 @@ _distnote
 _qtss
 _locationd
 _appserveradm
-MS\Domain Users
-MS\audit
 nobody
 nogroup
 wheel
@@ -3187,19 +3209,19 @@ which python
 python --version
 Python 3.8.6
 ##########
-PYTHONPATH=
+PYTHONPATH=:/Users/rwill253/project/Rob/workstation/src/lib/third_party:/Users/rwill253/project/Rob/workstation/src/lib/mine
 ##########
 type python2
-/Users/rwill253/project/Rob/workstation/bin/tool-report: line 24: type: python2: not found
+/Users/rwill253/project/Rob/workstation/bin/tool-report: line 25: type: python2: not found
 ##########
 which python2
 ##########
 python2 --version
-/Users/rwill253/project/Rob/workstation/bin/tool-report: line 24: python2: command not found
+/Users/rwill253/project/Rob/workstation/bin/tool-report: line 25: python2: command not found
 ##########
-/Users/rwill253/project/Rob/workstation/bin/tool-report: line 79: python2: command not found
+/Users/rwill253/project/Rob/workstation/bin/tool-report: line 80: python2: command not found
 ##########
-/Users/rwill253/project/Rob/workstation/bin/tool-report: line 81: python2: command not found
+/Users/rwill253/project/Rob/workstation/bin/tool-report: line 82: python2: command not found
 ##########
 type pip
 pip is /Users/rwill253/project/Rob/workstation/.PVE/bin/pip
@@ -3221,7 +3243,7 @@ Python 3.8.6
 ##########
 3.8.6
 ##########
-['', '/usr/local/Cellar/python@3.8/3.8.6/Frameworks/Python.framework/Versions/3.8/lib/python38.zip', '/usr/local/Cellar/python@3.8/3.8.6/Frameworks/Python.framework/Versions/3.8/lib/python3.8', '/usr/local/Cellar/python@3.8/3.8.6/Frameworks/Python.framework/Versions/3.8/lib/python3.8/lib-dynload', '/Users/rwill253/project/Rob/workstation/.PVE/lib/python3.8/site-packages']
+['', '/Users/rwill253/project/Rob/workstation', '/Users/rwill253/project/Rob/workstation/src/lib/third_party', '/Users/rwill253/project/Rob/workstation/src/lib/mine', '/usr/local/Cellar/python@3.8/3.8.6/Frameworks/Python.framework/Versions/3.8/lib/python38.zip', '/usr/local/Cellar/python@3.8/3.8.6/Frameworks/Python.framework/Versions/3.8/lib/python3.8', '/usr/local/Cellar/python@3.8/3.8.6/Frameworks/Python.framework/Versions/3.8/lib/python3.8/lib-dynload', '/Users/rwill253/project/Rob/workstation/.PVE/lib/python3.8/site-packages']
 ##########
 type pip3
 pip3 is /Users/rwill253/project/Rob/workstation/.PVE/bin/pip3
@@ -3271,5 +3293,3 @@ which pytest
 ##########
 pytest --version
 pytest 6.1.2
-Tool report succeeded, though individual checks may fail
-INFO:  /Users/rwill253/project/Rob/workstation/bin/tool-report exiting with status 0

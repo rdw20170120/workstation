@@ -177,7 +177,7 @@ def _visit_name_value_pair(element, walker):
 
 
 def nvp(name, value):
-    return _NameValuePair(name, sq(value))
+    return _NameValuePair(name, value)
 
 
 """DisabledContent

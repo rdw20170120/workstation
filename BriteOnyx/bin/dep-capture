@@ -1,27 +1,35 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
 
 report_status_and_exit() {
     local -ir Status=$?
-    if [[ "${Status}" -ne 0 ]] ; then
-        echo "FATAL: ${0} exiting with status ${Status}"
-    fi
+    [[ "${Status}" -ne 0 ]] && 
+        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
     exit ${Status}
 }
 trap report_status_and_exit EXIT
 ###############################################################################
-# Capture Python dependency status
 
-[[ -z "${BO_Project}" ]] &&
-    echo "FATAL: 'BO_Project' is undefined, aborting" &&
-    exit 20
+[[ -z "${BO_Project}" ]] && 
+    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
+    exit 99
 
 File=$BO_Project/cfg/requirements.txt
 
 echo "INFO:  Capturing Python dependency status to '${File}'"
 >${File} dep-report
+
+main() {
+    # Capture Python dependency status
+
+    # TODO: CONTENT
+
+    return 0
+}
+
+main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

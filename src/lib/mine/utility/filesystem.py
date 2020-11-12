@@ -31,7 +31,7 @@ def basename_has_suffix(path_, suffix):
     return str(path_).endswith(suffix)
 
 
-def clone_file(source_file, target_file):
+def clone_file(target_file, source_file):
     assert is_.absolute_file(source_file)
     try:
         actual = copy2(str(source_file), str(target_file))

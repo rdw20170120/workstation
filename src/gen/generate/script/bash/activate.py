@@ -15,14 +15,14 @@ def _abort_if_activated():
         if_(
             string_is_not_null(vr("BO_Project")),
             indent(),
-            echo_fatal(
+            log_fatal(
                 "This project is already activated as ",
                 sq(vr("BO_Project")),
                 ", aborting",
             ),
             eol(),
             indent(),
-            return_(1),
+            return_(99),
             "  ",
             comment("Exit from the script, but not from the shell"),
         ),
@@ -35,27 +35,23 @@ def _activate_python_virtual_environment():
         _remember_project_path(),
         _remember_system_path(),
         _remember_user_path(),
-        _reset_path_for_pve(),
+        comment("Reset PATH before activating Python virtual environment"),
+        export(vn("PATH"), vr("BO_PathSystem")),
+        eol(),
         _capture_environment("PVE-prior"),
+        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/pve-activate.bash")),
         eol(),
-        line(),
-        _source_script(
-            (vr("BO_Project"), "/BriteOnyx/bin/lib/pve-activate.bash")
-        ),
         _capture_environment("PVE-after"),
-        eol(),
         _remember_pve_path(),
-        line(),
-        _source_script((vr("BO_Project"), "/BriteOnyx/bin/lib/set_path.bash")),
     ]
 
 
 def _capture_environment(file_name):
     return [
-        line(),
         command("env"),
         pipe(),
         command("sort", ">", x(vr("PWD"), "/BO-", file_name, ".env")),
+        eol(),
     ]
 
 
@@ -68,68 +64,7 @@ def _comments():
         comment(),
         note("We MUST NOT EVER ", cc(exit()), " during BriteOnyx activation!"),
         comment(),
-        comment(
-            "This script, and EVERY script that it calls, must NOT invoke ",
-            cc(exit()),
-            "!  The",
-        ),
-        comment(
-            "user calling this script must be allowed to preserve their shell and every"
-        ),
-        comment(
-            "effort must be made to inform the user of problems while continuing execution"
-        ),
-        comment(
-            "where possible.  Terminating the shell robs the user of useful feedback and"
-        ),
-        comment(
-            "interrupts their work, which is unacceptable.  Instead, the BASH ",
-            cc(return_()),
-        ),
-        comment(
-            "statement should be invoked to end execution with an appropriate status code."
-        ),
-        comment(),
-        comment(
-            "Likewise, we must be very careful invoking special BASH options during"
-        ),
-        comment(
-            "BriteOnyx activation, particularly the ",
-            cc(set_("-e")),
-            " option.  The user is",
-        ),
-        comment(
-            "inheriting the shell that we are configuring, which they will then use for"
-        ),
-        comment(
-            "the rest of their session, each and every time they develop, test, etc.  It"
-        ),
-        comment(
-            "would be very disruptive for the shell to abort on every error raised by"
-        ),
-        comment(
-            "every part of every command that they execute.  If you are unclear about"
-        ),
-        comment(
-            "this, then please experiment by uncommenting the ",
-            cc(set_("-x")),
-            " command above and",
-        ),
-        comment(
-            "activating a new shell.  Having learned that lesson, let's never use ",
-            cc(set_("-x")),
-        ),
-        comment(
-            "in a BASH script intended to be ",
-            cc(command("source")),
-            "d.  Similarly, the ",
-            cc(set_("-e")),
-            " BASH",
-        ),
-        comment(
-            "option is problematic because its haphazard behavior does not deliver on its"
-        ),
-        comment("promised usefulness."),
+        comment("Please see HowTo-use_this_project.md for details."),
         rule(),
     ]
 
@@ -169,14 +104,14 @@ def _create_random_tmpdir():
             assign(vn(tmpdir), vr(local)),
             eol(),
             indent(),
-            echo_info("Temporary directory ", sq(vr(tmpdir)), " created"),
+            log_info("Temporary directory ", sq(vr(tmpdir)), " created"),
             eol(),
         ),
         fi(),
         if_(
             directory_exists(vr(tmpdir)),
             indent(),
-            echo_info("Remembering ", vn(tmpdir), "=", sq(vr(tmpdir))),
+            _remembering(tmpdir),
             eol(),
             indent(),
             export(vn(tmpdir)),
@@ -184,7 +119,7 @@ def _create_random_tmpdir():
         ),
         else_(
             indent(),
-            echo_fatal(
+            log_fatal(
                 "Failed to establish temporary directory ",
                 sq(vr(tmpdir)),
                 ", aborting",
@@ -219,7 +154,7 @@ def _detect_operating_system():
             eol(),
         ),
         fi(),
-        echo_info("Remembering ", vn("BO_OS"), "=", sq(vr("BO_OS"))),
+        _remembering("BO_OS"),
         eol(),
     ]
 
@@ -227,13 +162,12 @@ def _detect_operating_system():
 def _remember_project_path():
     return [
         line(),
-        note(
-            "BriteOnyx scripts must precede project-specific scripts so that"
-        ),
-        comment(
-            "collisions fail-fast.  Any collision should result in renaming the project-"
-        ),
-        comment("specific script to avoid it."),
+        note("BriteOnyx scripts"),
+        comment("must precede project-specific scripts"),
+        comment("so that collisions fail-fast."),
+        comment("Any collision should be resolved"),
+        comment("by renaming the project- specific script"),
+        comment("to avoid that collision."),
         export(
             vn("BO_PathProject"),
             x(
@@ -245,9 +179,7 @@ def _remember_project_path():
             ),
         ),
         eol(),
-        echo_info(
-            "Remembering ", vn("BO_PathProject"), "=", vr("BO_PathProject")
-        ),
+        _remembering("BO_PathProject"),
         eol(),
     ]
 
@@ -255,7 +187,7 @@ def _remember_project_path():
 def _remember_project_root():
     return [
         line(),
-        echo_info(
+        log_info(
             "Activating this directory ",
             sq(vr("PWD")),
             " as the current project",
@@ -277,7 +209,7 @@ def _remember_pve_path():
         and_(),
         bs(),
         indent(),
-        echo_info("Remembering ", vn("BO_PathPve"), "=", sq(vr("BO_PathPve"))),
+        _remembering("BO_PathPve"),
         eol(),
     ]
 
@@ -293,9 +225,7 @@ def _remember_system_path():
         and_(),
         bs(),
         indent(),
-        echo_info(
-            "Remembering ", vn("BO_PathSystem"), "=", sq(vr("BO_PathSystem"))
-        ),
+        _remembering("BO_PathSystem"),
         eol(),
     ]
 
@@ -311,61 +241,35 @@ def _remember_user_path():
         and_(),
         bs(),
         indent(),
-        echo_info(
-            "Remembering ", vn("BO_PathUser"), "=", sq(vr("BO_PathUser"))
-        ),
+        _remembering("BO_PathUser"),
         eol(),
     ]
 
 
-def _reset_path_for_pve():
-    return [
-        line(),
-        comment("Reset PATH before activating Python virtual environment"),
-        export(vn("PATH"), vr("BO_PathSystem")),
-        eol(),
-    ]
-
-
-# TODO: Make this reusable
-def _source_script(script):
-    return [
-        assign(vn("Script"), script),
-        eol(),
-        if_(
-            file_is_readable(vr("Script")),
-            indent(),
-            echo_info(sq("source"), "ing script file ", sq(vr("Script"))),
-            eol(),
-            indent(),
-            source(vr("Script")),
-            eol(),
-        ),
-        else_(
-            indent(),
-            echo_warn(
-                "Script file ", sq(vr("Script")), " is not readable, ignoring"
-            ),
-            eol(),
-        ),
-        fi(),
-    ]
+def _remembering(variable_name):
+    return log_info(
+        "Remembering ", nvp(vn(variable_name), sq(vr(variable_name)))
+    )
 
 
 def _source_supporting_scripts():
     return [
-        line(),
-        _source_script(
-            (vr("BO_Project"), "/BriteOnyx/bin/lib/alias-common.bash")
+        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/set_path.bash")),
+        eol(),
+        source(
+            x(vr("BO_Project"), "/BriteOnyx/bin/lib/configure-Python.bash")
         ),
+        eol(),
+        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/declare.bash")),
+        eol(),
+        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/alias-common.bash")),
+        eol(),
+        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/alias-git.bash")),
+        eol(),
         line(),
-        _source_script(
-            (vr("BO_Project"), "/BriteOnyx/bin/lib/alias-git.bash")
-        ),
-        line(),
-        _source_script((vr("BO_Project"), "/alias.bash")),
-        line(),
-        _source_script((vr("BO_Project"), "/context.bash")),
+        maybe_source(x(vr("BO_Project"), "/bin/lib/declare.bash")),
+        maybe_source(x(vr("BO_Project"), "/context.bash")),
+        maybe_source(x(vr("BO_Project"), "/alias.bash")),
     ]
 
 
@@ -374,15 +278,16 @@ def build():
         header_sourced(),
         _comments(),
         _abort_if_activated(),
+        line(),
         _capture_environment("incoming"),
-        eol(),
         _remember_project_root(),
         _detect_operating_system(),
         _create_random_tmpdir(),
         _activate_python_virtual_environment(),
+        line(),
         _source_supporting_scripts(),
+        line(),
         _capture_environment("outgoing"),
-        eol(),
         disabled_content_footer(),
     ]
 

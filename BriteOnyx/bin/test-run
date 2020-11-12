@@ -1,30 +1,20 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
 
 report_status_and_exit() {
     local -ir Status=$?
-    if [[ "${Status}" -eq 0 ]] ; then
-        echo "INFO:  ${0} exiting with status ${Status}"
-    else
-        echo "FATAL: ${0} exiting with status ${Status}"
-    fi
+    [[ "${Status}" -ne 0 ]] && 
+        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
     exit ${Status}
 }
 trap report_status_and_exit EXIT
 ###############################################################################
 
-[[ -z "${BO_Project}" ]] &&
-    echo "FATAL: 'BO_Project' is undefined, aborting" &&
-    exit 20
-
-Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
-if [[ -r ${Script} ]] ; then
-    source ${Script}
-else
-    echo "WARN: Script file '${Script}' is not readable"
-fi
+[[ -z "${BO_Project}" ]] && 
+    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
+    exit 99
 
 run_pytest() {
     # Run pytest on test suite known as $1 in directory $2
@@ -48,11 +38,13 @@ run_pytest() {
 main() {
     # Run Python test suites
     # TODO: Separate coverage generation into consolidated step
+
     run_pytest mine ${BO_Project}/src/lib/mine
     run_pytest gen  ${BO_Project}/src/gen
     run_pytest app  ${BO_Project}/src/app
     coverage report --rcfile=${BO_Project}/cfg/.coveragerc
     Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+
     return 0
 }
 

@@ -9,5 +9,23 @@ from ..structure import *
 from .source import my_visitor_map
 
 
+def abort_if_not_activated():
+    return [
+        line(),
+        string_is_null(vr("BO_Project")),
+        and_(),
+        eol(),
+        indent(),
+        log_fatal(
+            "This project is NOT ACTIVATED, aborting",
+        ),
+        and_(),
+        eol(),
+        indent(),
+        exit(99),
+        eol(),
+    ]
+
+
 """DisabledContent
 """

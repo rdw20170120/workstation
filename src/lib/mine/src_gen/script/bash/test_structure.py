@@ -80,50 +80,6 @@ def test_echo():
     assert is_.equal(s(echo("Test", "123")), "echo Test 123")
 
 
-def test_echo_fatal():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(echo_fatal()), 'echo "FATAL: "')
-    assert is_.equal(s(echo_fatal(None)), 'echo "FATAL: "')
-    assert is_.equal(s(echo_fatal("")), 'echo "FATAL: "')
-    assert is_.equal(s(echo_fatal("Test")), 'echo "FATAL: Test"')
-    assert is_.equal(s(echo_fatal("Test", None)), 'echo "FATAL: Test"')
-    assert is_.equal(s(echo_fatal("Test", "")), 'echo "FATAL: Test"')
-    assert is_.equal(s(echo_fatal("Test", "123")), 'echo "FATAL: Test123"')
-
-
-def test_echo_info():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(echo_info()), 'echo "INFO:  "')
-    assert is_.equal(s(echo_info(None)), 'echo "INFO:  "')
-    assert is_.equal(s(echo_info("")), 'echo "INFO:  "')
-    assert is_.equal(s(echo_info("Test")), 'echo "INFO:  Test"')
-    assert is_.equal(s(echo_info("Test", None)), 'echo "INFO:  Test"')
-    assert is_.equal(s(echo_info("Test", "")), 'echo "INFO:  Test"')
-    assert is_.equal(s(echo_info("Test", "123")), 'echo "INFO:  Test123"')
-
-
-def test_echo_trace():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(echo_trace()), 'echo "TRACE: "')
-    assert is_.equal(s(echo_trace(None)), 'echo "TRACE: "')
-    assert is_.equal(s(echo_trace("")), 'echo "TRACE: "')
-    assert is_.equal(s(echo_trace("Test")), 'echo "TRACE: Test"')
-    assert is_.equal(s(echo_trace("Test", None)), 'echo "TRACE: Test"')
-    assert is_.equal(s(echo_trace("Test", "")), 'echo "TRACE: Test"')
-    assert is_.equal(s(echo_trace("Test", "123")), 'echo "TRACE: Test123"')
-
-
-def test_echo_warn():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(echo_warn()), 'echo "WARN:  "')
-    assert is_.equal(s(echo_warn(None)), 'echo "WARN:  "')
-    assert is_.equal(s(echo_warn("")), 'echo "WARN:  "')
-    assert is_.equal(s(echo_warn("Test")), 'echo "WARN:  Test"')
-    assert is_.equal(s(echo_warn("Test", None)), 'echo "WARN:  Test"')
-    assert is_.equal(s(echo_warn("Test", "")), 'echo "WARN:  Test"')
-    assert is_.equal(s(echo_warn("Test", "123")), 'echo "WARN:  Test123"')
-
-
 def test_elif_():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
@@ -254,6 +210,50 @@ def test_integer_not_equal():
     assert is_.equal(s(integer_not_equal(None, 123)), '[[ "" -ne 123 ]]')
     assert is_.equal(s(integer_not_equal("", 123)), '[[ "" -ne 123 ]]')
     assert is_.equal(s(integer_not_equal("Test", 123)), '[[ "Test" -ne 123 ]]')
+
+
+def test_log_debug():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(log_debug()), '1>&2 echo "DEBUG: "')
+    assert is_.equal(s(log_debug(None)), '1>&2 echo "DEBUG: "')
+    assert is_.equal(s(log_debug("")), '1>&2 echo "DEBUG: "')
+    assert is_.equal(s(log_debug("Test")), '1>&2 echo "DEBUG: Test"')
+    assert is_.equal(s(log_debug("Test", None)), '1>&2 echo "DEBUG: Test"')
+    assert is_.equal(s(log_debug("Test", "")), '1>&2 echo "DEBUG: Test"')
+    assert is_.equal(s(log_debug("Test", "123")), '1>&2 echo "DEBUG: Test123"')
+
+
+def test_log_fatal():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(log_fatal()), '1>&2 echo "FATAL: "')
+    assert is_.equal(s(log_fatal(None)), '1>&2 echo "FATAL: "')
+    assert is_.equal(s(log_fatal("")), '1>&2 echo "FATAL: "')
+    assert is_.equal(s(log_fatal("Test")), '1>&2 echo "FATAL: Test"')
+    assert is_.equal(s(log_fatal("Test", None)), '1>&2 echo "FATAL: Test"')
+    assert is_.equal(s(log_fatal("Test", "")), '1>&2 echo "FATAL: Test"')
+    assert is_.equal(s(log_fatal("Test", "123")), '1>&2 echo "FATAL: Test123"')
+
+
+def test_log_info():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(log_info()), '1>&2 echo "INFO:  "')
+    assert is_.equal(s(log_info(None)), '1>&2 echo "INFO:  "')
+    assert is_.equal(s(log_info("")), '1>&2 echo "INFO:  "')
+    assert is_.equal(s(log_info("Test")), '1>&2 echo "INFO:  Test"')
+    assert is_.equal(s(log_info("Test", None)), '1>&2 echo "INFO:  Test"')
+    assert is_.equal(s(log_info("Test", "")), '1>&2 echo "INFO:  Test"')
+    assert is_.equal(s(log_info("Test", "123")), '1>&2 echo "INFO:  Test123"')
+
+
+def test_log_warn():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(log_warn()), '1>&2 echo "WARN:  "')
+    assert is_.equal(s(log_warn(None)), '1>&2 echo "WARN:  "')
+    assert is_.equal(s(log_warn("")), '1>&2 echo "WARN:  "')
+    assert is_.equal(s(log_warn("Test")), '1>&2 echo "WARN:  Test"')
+    assert is_.equal(s(log_warn("Test", None)), '1>&2 echo "WARN:  Test"')
+    assert is_.equal(s(log_warn("Test", "")), '1>&2 echo "WARN:  Test"')
+    assert is_.equal(s(log_warn("Test", "123")), '1>&2 echo "WARN:  Test123"')
 
 
 def test_no():

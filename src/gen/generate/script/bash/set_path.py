@@ -69,7 +69,7 @@ def _remember_path():
             ),
         ),
         eol(),
-        echo_info("Remembering ", sq(vn("PATH")), " as ", sq(vr("PATH"))),
+        log_info("Remembering ", sq(vn("PATH")), " as ", sq(vr("PATH"))),
         eol(),
     ]
 

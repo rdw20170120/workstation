@@ -1,15 +1,12 @@
 #!/usr/bin/env false
-[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be sourced in a BASH shell.
 
 report_status_and_return() {
     local -ir Status=$?
-    if [[ "${Status}" -eq 0 ]] ; then
-        echo "INFO:  ${0} returning with status ${Status}"
-    else
-        echo "FATAL: ${0} returning with status ${Status}"
-    fi
+    [[ "${Status}" -ne 0 ]] && 
+        1>&2 echo "FATAL: ${0} returning with status ${Status}"
     return ${Status}
 }
 trap report_status_and_return EXIT
@@ -18,29 +15,29 @@ trap report_status_and_return EXIT
 
 [[ -z "${BO_Project}" ]] &&
     echo "FATAL: 'BO_Project' is undefined, aborting" &&
-    exit 20
+    return 20
 
-Script=${BO_Project}/bin/lib/declare-base.bash
+Script=${BO_Project}/BriteOnyx/bin/lib/declare-base.bash
 if [[ -r "${Script}" ]] ; then
 #   echo "INFO:  Sourcing script ${Script}"
     source ${Script}
-    status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
+    status=$? ; [[ ${status} -ne 0 ]] && return ${status}
 else
     echo "FATAL: Script file ${Script} is not readable, aborting"
-    exit 23
+    return 23
 fi
 
-Script=${BO_Project}/bin/lib/declare-require.bash
+Script=${BO_Project}/BriteOnyx/bin/lib/declare-require.bash
 if [[ -r "${Script}" ]] ; then
 #   echo "INFO:  Sourcing script ${Script}"
     source ${Script}
-    status=$? ; [[ ${status} -ne 0 ]] && exit ${status}
+    status=$? ; [[ ${status} -ne 0 ]] && return ${status}
 else
     echo "FATAL: Script file ${Script} is not readable, aborting"
-    exit 23
+    return 23
 fi
 
-Script=${BO_Project}/bin/lib/declare-common.bash
+Script=${BO_Project}/BriteOnyx/bin/lib/declare-common.bash
 require_script "${Script}"
 source "${Script}"
 abort_on_fail $? "Failed to source script '${Script}'"

@@ -1,33 +1,21 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
 
 report_status_and_exit() {
     local -ir Status=$?
-    if [[ "${Status}" -eq 0 ]] ; then
-        echo "INFO:  ${0} exiting with status ${Status}"
-    else
-        echo "FATAL: ${0} exiting with status ${Status}"
-    fi
+    [[ "${Status}" -ne 0 ]] && 
+        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
     exit ${Status}
 }
 trap report_status_and_exit EXIT
 ###############################################################################
 # Generate source
 
-# Require activation
-if [[ -z "$BO_Project" ]] ; then
-    echo "FATAL: Environment variable 'BO_Project' is undefined, aborting"
-    exit 1
-fi
-
-Script=$BO_Project/BriteOnyx/bin/lib/configure-Python.bash
-if [[ -r $Script ]] ; then
-    source $Script
-else
-    echo "WARN: Script file '$Script' is not readable"
-fi
+[[ -z "${BO_Project}" ]] && 
+    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
+    exit 99
 
 # Require TMPDIR
 if [[ -z "$TMPDIR" ]] ; then
@@ -48,6 +36,7 @@ cmd+=' -m generate'
 cmd+=" $DirTgt"
 echo $cmd $@
 $cmd $@
+abort_on_fail $? "Source generation failed"
 
 # Merge generated files into project directory
 # TODO: RESEARCH: why Meld does not open a new tab on macOS?
@@ -56,6 +45,16 @@ cmd+=" '$DirTgt' '$BO_Project'"
 cmd+=' >/dev/null 2>&1 &'
 echo "INFO: Use the following command to manually merge the generated source:"
 echo $cmd
+
+main() {
+    # TODO: DESCRIPTION
+
+    # TODO: CONTENT
+
+    return 0
+}
+
+main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

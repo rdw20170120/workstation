@@ -15,10 +15,10 @@ from .source import my_visitor_map
 def disabled_content_footer():
     return [
         line(),
-        "'''",
+        '"""',
         "DisabledContent",
         eol(),
-        "'''",
+        '"""',
         eol(),
         line(),
     ]
@@ -43,7 +43,7 @@ def imports():
     ]
 
 
-def library_module_header():
+def library_header():
     return [
         shebang_false(),
         '"""TODO: Write',
@@ -54,7 +54,7 @@ def library_module_header():
     ]
 
 
-def main_module_header():
+def main_header():
     return [
         shebang_false(),
         '"""TODO: Write',
@@ -65,17 +65,19 @@ def main_module_header():
     ]
 
 
-def package_module_header():
+def package_header():
     return [
         shebang_false(),
     ]
 
 
-def script_module_header():
+def script_header():
     return [
         shebang_python3(),
         '"""TODO: Write',
         eol(),
+        line(),
+        line("Intended to be executed directly by the user."),
         '"""',
         eol(),
         imports(),

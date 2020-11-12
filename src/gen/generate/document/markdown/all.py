@@ -15,97 +15,97 @@ def _document():
     ]
 
 
-def _generate_BriteOnyx(directory):
+def _generate_bin(dir_):
+    sub = Path("bin")
+    gen(_document(), dir_, sub, "README.md")
+    sub = Path("bin", "lib")
+    gen(_document(), dir_, sub, "README.md")
+
+
+def _generate_briteonyx(dir_):
     sub = Path("BriteOnyx")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("BriteOnyx", "bin")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("BriteOnyx", "bin", "lib")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("BriteOnyx", "doc")
-    gen(_document(), directory, sub, "HowTo-activate_this_project.md")
-    gen(_document(), directory, sub, "HowTo-execute_application.md")
-    gen(_document(), directory, sub, "HowTo-install-packages.md")
-    gen(_document(), directory, sub, "HowTo-setup-AWS_CLI.md")
+    gen(_document(), dir_, sub, "HowTo-activate_this_project.md")
+    gen(_document(), dir_, sub, "HowTo-execute_application.md")
+    gen(_document(), dir_, sub, "HowTo-install-packages.md")
+    gen(_document(), dir_, sub, "HowTo-setup-AWS_CLI.md")
     gen(
         _document(),
-        directory,
+        dir_,
         sub,
         "HowTo-setup-Python_virtual_environment.md",
     )
-    gen(_document(), directory, sub, "HowTo-setup-source_control.md")
-    gen(_document(), directory, sub, "HowTo-setup-workstation.md")
-    gen(_document(), directory, sub, "HowTo-test.md")
-    gen(_document(), directory, sub, "README.md")
-    gen(_document(), directory, sub, "project_initiation.md")
+    gen(_document(), dir_, sub, "HowTo-setup-source_control.md")
+    gen(_document(), dir_, sub, "HowTo-setup-workstation.md")
+    gen(_document(), dir_, sub, "HowTo-test.md")
+    gen(_document(), dir_, sub, "README.md")
+    gen(_document(), dir_, sub, "project_initiation.md")
 
 
-def _generate_bin(directory):
-    sub = Path("bin")
-    gen(_document(), directory, sub, "README.md")
-    sub = Path("bin", "lib")
-    gen(_document(), directory, sub, "README.md")
-
-
-def _generate_doc(directory):
+def _generate_doc(dir_):
     sub = Path("doc")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
 
 
-def _generate_home(directory):
+def _generate_home(dir_):
     sub = Path("home")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("home", ".ssh")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("home", "Linux")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("home", "bin")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("home", "bin", "lib")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("home", "macOS")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
 
 
-def _generate_others(directory):
+def _generate_others(dir_):
     sub = Path("cfg")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("cfg", "sample")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("out")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
 
 
-def _generate_project(directory):
+def _generate_project(dir_):
     sub = Path(".")
-    gen(_document(), directory, sub, "README.md")
-    gen(_document(), directory, sub, "TODO.md")
+    gen(_document(), dir_, sub, "README.md")
+    gen(_document(), dir_, sub, "TODO.md")
 
 
-def _generate_src(directory):
+def _generate_src(dir_):
     sub = Path("src")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("src", "app")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("src", "gen")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("src", "lib")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("src", "lib", "mine")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("src", "lib", "mine", "src_gen")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("src", "lib", "mine", "throw_out_your_templates")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("src", "lib", "mine", "utility")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
     sub = Path("src", "lib", "third_party")
-    gen(_document(), directory, sub, "README.md")
+    gen(_document(), dir_, sub, "README.md")
 
 
 def generate(directory):
-    _generate_BriteOnyx(directory)
     _generate_bin(directory)
+    _generate_briteonyx(directory)
     _generate_doc(directory)
     _generate_home(directory)
     _generate_others(directory)

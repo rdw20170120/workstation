@@ -1,4 +1,5 @@
 INFO: Reformatting Python code using Black
+reformatted /Users/rwill253/project/Rob/workstation/src/gen/generate/script/bash/activate.py
+reformatted /Users/rwill253/project/Rob/workstation/src/lib/mine/src_gen/script/bash/structure.py
 All done! ✨ 🍰 ✨
-165 files left unchanged.
-INFO:  /Users/rwill253/project/Rob/workstation/bin/py-reformat exiting with status 0
+2 files reformatted, 163 files left unchanged.
