@@ -55,6 +55,7 @@ check 'compgen -a'
 check 'compgen -b'
 check 'compgen -c'
 check 'compgen -e'
+# TODO: RESEARCH:  Why is this call so time-consuming on some machines?
 check 'compgen -g'
 check 'compgen -k'
 

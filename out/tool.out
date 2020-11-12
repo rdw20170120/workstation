@@ -3219,9 +3219,9 @@ which python2
 python2 --version
 /Users/rwill253/project/Rob/workstation/bin/tool-report: line 25: python2: command not found
 ##########
-/Users/rwill253/project/Rob/workstation/bin/tool-report: line 80: python2: command not found
+/Users/rwill253/project/Rob/workstation/bin/tool-report: line 81: python2: command not found
 ##########
-/Users/rwill253/project/Rob/workstation/bin/tool-report: line 82: python2: command not found
+/Users/rwill253/project/Rob/workstation/bin/tool-report: line 83: python2: command not found
 ##########
 type pip
 pip is /Users/rwill253/project/Rob/workstation/.PVE/bin/pip
