@@ -22,15 +22,41 @@ delete_file() {
     forbid_path "$1"
 } && export -f delete_file
 
+expect_failure() {
+    # Expect failure as actual status $1
+    require_arguments $# 1
+    # $1 = actual status code (from last command)
+    require_value "$1" ; local -ir Actual=$1
+    [[ "${Actual}" -eq 0 ]] &&
+        log_error "Expected failure, but instead got status ${Actial}" &&
+        exit 86
+} && export -f expect_failure
+
+expect_success() {
+    # Expect success as actual status $1
+    require_arguments $# 1
+    # $1 = actual status code (from last command)
+    require_value "$1" ; local -ir Actual=$1
+    [[ "${Actual}" -ne 0 ]] &&
+        log_error "Expected success, but instead got status ${Actial}" &&
+        exit 86
+} && export -f expect_success
+
 maybe_delete_file() {
     # Delete file $1, if it exists
     require_arguments $# 1
     # $1 = file
-    if [[ -e "$1" ]] ; then
-        delete_file "$1"
-    fi
+    [[ -e "$1" ]] && delete_file "$1"
     forbid_path "$1"
 } && export -f maybe_delete_file
+
+status_invert() {
+    # Return inverse of status $1
+    require_arguments $# 1
+    # $1 = exit status from previous command (from $?)
+    [[ "$1" -eq 0 ]] && return 1
+    return 0
+} && export -f status_invert
 
 write_file() {
     # Write content $2 to file $1
@@ -41,6 +67,16 @@ write_file() {
     abort_on_fail $? "Could not write file '$1'"
     require_file "$1"
 } && export -f write_file
+
+status_invert   0 ; [[ $? -eq 1 ]] ; abort_on_fail $? "status_invert test 1 failed"
+status_invert   1 ; [[ $? -eq 0 ]] ; abort_on_fail $? "status_invert test 2 failed"
+status_invert   2 ; [[ $? -eq 0 ]] ; abort_on_fail $? "status_invert test 3 failed"
+status_invert 127 ; [[ $? -eq 0 ]] ; abort_on_fail $? "status_invert test 4 failed"
+status_invert 128 ; [[ $? -eq 0 ]] ; abort_on_fail $? "status_invert test 5 failed"
+status_invert 129 ; [[ $? -eq 0 ]] ; abort_on_fail $? "status_invert test 6 failed"
+status_invert 254 ; [[ $? -eq 0 ]] ; abort_on_fail $? "status_invert test 7 failed"
+status_invert 255 ; [[ $? -eq 0 ]] ; abort_on_fail $? "status_invert test 8 failed"
+status_invert 256 ; [[ $? -eq 0 ]] ; abort_on_fail $? "status_invert test 9 failed"
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

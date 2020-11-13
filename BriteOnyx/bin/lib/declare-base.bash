@@ -51,39 +51,46 @@ abort_on_fail_with_output() {
     abort_on_fail ${status} "$3"
 } && export -f abort_on_fail_with_output
 
+_log() {
+    # Log message $1 to STDERR
+    require_arguments $# 1
+    # $1 = message
+    >&2 echo "$1"
+} && export -f _log
+
 log_debug() {
     # Log a message with DEBUG severity
     require_arguments $# 1
     # $1 = message
-    echo "DEBUG: $1"
+    _log "DEBUG: $1"
 } && export -f log_debug
 
 log_error() {
     # Log a message with ERROR severity
     require_arguments $# 1
     # $1 = message
-    echo "ERROR: $1"
+    _log "ERROR: $1"
 } && export -f log_error
 
 log_fatal() {
     # Log a message with FATAL severity
     require_arguments $# 1
     # $1 = message
-    echo "FATAL: $1"
+    _log "FATAL: $1"
 } && export -f log_fatal
 
 log_info() {
     # Log a message with INFO severity
     require_arguments $# 1
     # $1 = message
-    echo "INFO:  $1"
+    _log "INFO:  $1"
 } && export -f log_info
 
 log_warn() {
     # Log a message with WARN severity
     require_arguments $# 1
     # $1 = message
-    echo "WARN:  $1"
+    _log "WARN:  $1"
 } && export -f log_warn
 
 report_on_fail() {
@@ -107,24 +114,6 @@ require_arguments() {
     [[ "$1" -eq $2 ]]
     abort_on_fail $? "Requires $2 arguments instead of $1"
 } && export -f require_arguments
-
-status_invert() {
-    # Return inverse of status $1
-    require_arguments $# 1
-    # $1 = exit status from previous command (from $?)
-    [[ "$1" -eq 0 ]] && return 1
-    return 0
-}
-
-status_invert   0 ; [[ $? -eq 1 ]] ; abort_on_fail $? "Test 1 failed"
-status_invert   1 ; [[ $? -eq 0 ]] ; abort_on_fail $? "Test 2 failed"
-status_invert   2 ; [[ $? -eq 0 ]] ; abort_on_fail $? "Test 3 failed"
-status_invert 127 ; [[ $? -eq 0 ]] ; abort_on_fail $? "Test 4 failed"
-status_invert 128 ; [[ $? -eq 0 ]] ; abort_on_fail $? "Test 5 failed"
-status_invert 129 ; [[ $? -eq 0 ]] ; abort_on_fail $? "Test 6 failed"
-status_invert 254 ; [[ $? -eq 0 ]] ; abort_on_fail $? "Test 7 failed"
-status_invert 255 ; [[ $? -eq 0 ]] ; abort_on_fail $? "Test 8 failed"
-status_invert 256 ; [[ $? -eq 0 ]] ; abort_on_fail $? "Test 9 failed"
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
