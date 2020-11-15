@@ -1,12 +1,12 @@
 #!/usr/bin/env false
 """Queue to manage tasks."""
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from logging import getLogger
 from queue import Queue
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
-# Co-located modules (relative references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 class TaskQueue:

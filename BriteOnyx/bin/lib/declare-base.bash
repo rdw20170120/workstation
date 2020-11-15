@@ -115,6 +115,17 @@ require_arguments() {
     abort_on_fail $? "Requires $2 arguments instead of $1"
 } && export -f require_arguments
 
+require_arguments_at_least() {
+    # Require that caller received at least expected number of arguments
+    [[ "$#" -ne 2 ]] &&
+        echo "FATAL: Requires 2 argument(s) instead of $#" &&
+        exit 127
+    # $1 = actual number of arguments (from $#) received by caller
+    # $2 = expected minimum number of arguments
+    [[ "$1" -ge "$2" ]]
+    abort_on_fail $? "Requires at least $2 arguments instead of $1"
+} && export -f require_arguments_at_least
+
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
 # set -o verbose

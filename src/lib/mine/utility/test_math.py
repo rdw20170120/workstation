@@ -1,17 +1,17 @@
 #!/usr/bin/env false
 """TODO: Write
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from math import isnan
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
 from utility.math import Percentage
 from utility.math import Rate
 from utility.math import assert_nan
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 def test_percentage_01():

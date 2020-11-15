@@ -1,5 +1,7 @@
 # Activate BriteOnyx framework
-BriteOnyx is Rob Williams' open-source framework
+BriteOnyx
+is Rob Williams'
+open-source framework
 to manage a project's source directory tree
 during development and testing.
 

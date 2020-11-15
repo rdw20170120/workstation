@@ -1,17 +1,17 @@
 #!/usr/bin/env false
 """TODO: Write
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from enum import Enum
 from numbers import Number
 from pathlib import Path
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+from src_gen.source import my_visitor_map
 
-# Co-located modules (relative references, NOT packaged, in project)
-from .source import my_visitor_map
+# Project modules   (relative references, NOT packaged, in project)
 
 
 ###############################################################################

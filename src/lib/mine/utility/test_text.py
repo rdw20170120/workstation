@@ -1,16 +1,16 @@
 #!/usr/bin/env false
 """TODO: Write
 """
-# Internal packages  (absolute references, distributed with Python)
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# Internal packages (absolute references, distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
 from utility.text import dict_from_string
 from utility.text import replace_last
 from utility.text import string_without_prefix
 from utility.text import string_without_suffix
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 def test_dict_from_string():

@@ -1,20 +1,20 @@
 #!/usr/bin/env false
 """TODO: Write
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from pathlib import Path
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from throw_out_your_templates.section_3 import VisitorMap
 from throw_out_your_templates.section_4 import (
     visitor_map as parent_visitor_map,
 )
 from utility.filesystem import maybe_create_directory
 from utility import my_assert as is_
+from src_gen.renderer import Renderer
 
-# Co-located modules (relative references, NOT packaged, in project)
-from .renderer import Renderer
+# Project modules   (relative references, NOT packaged, in project)
 
 
 my_visitor_map = VisitorMap(parent_map=parent_visitor_map)
@@ -46,7 +46,6 @@ def _visit_content(content, walker):
 def generate(
     content,
     directory=None,
-    subdirectories=None,
     filename=None,
     visitor_map=None,
 ):
@@ -59,8 +58,6 @@ def generate(
         source.generate()
     else:
         assert is_.instance(directory, Path)
-        assert is_.absolute_directory(directory)
-        directory = directory / subdirectories
         maybe_create_directory(directory)
         source.generate(directory / filename)
 

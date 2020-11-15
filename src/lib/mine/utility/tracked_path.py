@@ -18,16 +18,16 @@ A primary metric is a record count, when relevant.
 Tracked paths have various helpers to ease use
 while enabling the consistent tracking of those metrics.
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from pathlib import Path
 from shutil import rmtree
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility.filesystem import split_path
 from utility import my_assert as is_
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 class TrackedPath(object):

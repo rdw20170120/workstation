@@ -1,12 +1,9 @@
 #!/usr/bin/env false
-"""TODO: Write
-
-# 2: Serializer
-"""
-# Internal packages  (absolute references, distributed with Python)
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
-# Co-located modules (relative references, NOT packaged, in project)
+"""2: Serializer"""
+# Internal packages (absolute references, distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 from .section_1 import default_encoding
 from .section_4 import visitor_map as default_visitor_map
 
@@ -35,14 +32,14 @@ class Serializer(object):
         """
         visitor = self.visitor_map.get_visitor(obj)
         if visitor:
-            #           print("Visitor '{}' is walking object '{}'".format(visitor, obj))
+            # print("Visitor '{}' is walking object '{}'".format(visitor, obj))
             visitor(obj, self)  # ignore return value
         else:
             raise TypeError("No visitor found for {}".format(repr(obj)))
 
     def emit(self, escaped_unicode_output):
         """This is called by visitors when they have direct output."""
-        #       print("Emitting: {}".format(escaped_unicode_output))
+        # print("Emitting: {}".format(escaped_unicode_output))
         self._buffer.append(escaped_unicode_output)
 
 

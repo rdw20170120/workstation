@@ -1,16 +1,16 @@
 #!/usr/bin/env false
 """Manage tasks."""
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from logging import getLogger
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from task.exception import Abort
 from task.exception import Skip
 from task.queue import TaskQueue
 from utility.my_logging import log_exception
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 class TaskManager(object):

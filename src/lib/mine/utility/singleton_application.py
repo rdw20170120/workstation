@@ -1,17 +1,17 @@
 #!/usr/bin/env false
 """TODO: Write
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from pathlib import Path
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility.my_logging import log_exception
 from utility.processing import create_pid_file
 from utility.processing import delete_pid_file
 from utility.processing import get_pid
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 class SingletonApplication(object):

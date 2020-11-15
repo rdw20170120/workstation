@@ -1,16 +1,16 @@
 #!/usr/bin/env false
 """TODO: Write
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from pathlib import Path
 
-# External packages  (absolute references, NOT distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
 from pytest import raises
 
-# Library modules    (absolute references, NOT packaged, in project)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 this_file = Path(__file__)

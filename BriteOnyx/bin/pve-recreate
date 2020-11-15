@@ -25,15 +25,7 @@ fi
 echo "INFO: Recreating Python virtual environment directory '$PVE'"
 prj-wipe
 pve-create
-
-# Source Python virtual environment activation script (indirectly)
-Script=$BO_Project/BriteOnyx/bin/lib/pve-activate.bash
-if [[ -r $Script ]] ; then
-    source $Script
-else
-    echo "WARN: Script file '$Script' is not readable"
-fi
-
+source $BO_Project/BriteOnyx/bin/lib/pve-activate.bash
 dep-install
 
 main() {

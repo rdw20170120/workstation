@@ -1,11 +1,12 @@
 #!/usr/bin/env false
 """Configure application."""
-# Internal packages  (absolute references, distributed with Python)
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# Internal packages (absolute references, distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
+from utility import environment
 from utility.config import Config as BaseConfig
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 class Config(BaseConfig):

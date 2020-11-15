@@ -17,30 +17,9 @@ trap report_status_and_return EXIT
     echo "FATAL: 'BO_Project' is undefined, aborting" &&
     return 20
 
-Script=${BO_Project}/BriteOnyx/bin/lib/declare-base.bash
-if [[ -r "${Script}" ]] ; then
-#   echo "INFO:  Sourcing script ${Script}"
-    source ${Script}
-    status=$? ; [[ ${status} -ne 0 ]] && return ${status}
-else
-    echo "FATAL: Script file ${Script} is not readable, aborting"
-    return 23
-fi
-
-Script=${BO_Project}/BriteOnyx/bin/lib/declare-require.bash
-if [[ -r "${Script}" ]] ; then
-#   echo "INFO:  Sourcing script ${Script}"
-    source ${Script}
-    status=$? ; [[ ${status} -ne 0 ]] && return ${status}
-else
-    echo "FATAL: Script file ${Script} is not readable, aborting"
-    return 23
-fi
-
-Script=${BO_Project}/BriteOnyx/bin/lib/declare-common.bash
-require_script "${Script}"
-source "${Script}"
-abort_on_fail $? "Failed to source script '${Script}'"
+source ${BO_Project}/BriteOnyx/bin/lib/declare-base.bash
+source ${BO_Project}/BriteOnyx/bin/lib/declare-require.bash
+source ${BO_Project}/BriteOnyx/bin/lib/declare-common.bash
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

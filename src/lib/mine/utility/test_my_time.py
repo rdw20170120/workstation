@@ -4,14 +4,14 @@
 TODO: Consider splitting this module into one per imported module or class
 TODO: Break up tests into individual test methods, so each failure is isolated
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 import datetime as dt
 
-# External packages  (absolute references, NOT distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
 from pytest import mark
 from pytest import raises
 
-# Library modules    (absolute references, NOT packaged, in project)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
 from utility.my_time import as_iso8601_MM
 from utility.my_time import as_iso8601_SS
@@ -24,7 +24,7 @@ from utility.my_time import timedelta_as_hours
 from utility.my_time import ProlepticGregorianOrdinal
 from utility.my_time import UnixTime
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 epoch_as_datetime = dt.datetime(2020, 5, 10, 20, 5, 3)

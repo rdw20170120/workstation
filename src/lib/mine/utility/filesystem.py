@@ -3,7 +3,7 @@
 
 TODO: REVIEW: this module against its siblings.
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from logging import getLogger
 from os import link
 from os import makedirs
@@ -16,11 +16,11 @@ from pathlib import PurePath
 from shutil import copy2
 from shutil import rmtree
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 log = getLogger(__name__)

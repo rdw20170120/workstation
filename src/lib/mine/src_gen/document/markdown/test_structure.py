@@ -5,17 +5,17 @@ TODO: Generate tests
 NOTE: There is little value in testing "composed" methods,
 e.g., those consisting of 'return [...]'.
 """
-# Internal packages  (absolute references, distributed with Python)
-# External packages  (absolute references, NOT distributed with Python)
+# Internal packages (absolute references, distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
 from pytest import raises
 
-# Library modules    (absolute references, NOT packaged, in project)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+from src_gen.renderer import Renderer
+from src_gen.document.markdown.source import my_visitor_map
+from src_gen.document.markdown.structure import *
 
-# Co-located modules (relative references, NOT packaged, in project)
-from .source import my_visitor_map
-from .structure import *
-from ...renderer import Renderer
+# Project modules   (relative references, NOT packaged, in project)
 
 
 s = Renderer(my_visitor_map)._serialize

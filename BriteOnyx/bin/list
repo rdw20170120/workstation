@@ -3,19 +3,19 @@
 
 Intended to be executed directly by the user.
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from os import walk
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
-# Co-located modules (relative references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 def main():
-    for aRoot, aDirectories, aFiles in walk("."):
-        print("Directory '%s'" % aRoot)
-        for aFile in aFiles:
-            print("File '%s/%s'" % (aRoot, aFile))
+    for top, directories, files in walk("."):
+        print("Directory '%s'" % top)
+        for file_ in files:
+            print("File '%s/%s'" % (top, file_))
 
 
 if __name__ == "__main__":

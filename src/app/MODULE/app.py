@@ -3,19 +3,19 @@
 
 Intended to be executed as a Python module:  python3 -m MODULE
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from argparse import ArgumentParser
 from logging import DEBUG, INFO, WARN, ERROR, FATAL
 from logging import getLogger
 import sys
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from task.task_manager import TaskManager
 from utility import my_logging
 from utility.singleton_application import SingletonApplication
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 from .config import Config
 from .task.bootstrap import Bootstrap
 from .task.mapping import Mapping

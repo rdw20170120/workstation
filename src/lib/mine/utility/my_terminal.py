@@ -9,18 +9,18 @@ Target effective recognition of my favorite development workstations:
   with 'Solarized' palette
   and 'solarized dark' scheme
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 try:
     import curses
 except ImportError:
     curses = None
 import sys
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import environment
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 def stderr_supports_color():

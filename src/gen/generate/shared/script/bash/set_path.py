@@ -1,12 +1,12 @@
 #!/usr/bin/env false
 """Generate script to set PATH."""
-# Internal packages  (absolute references, distributed with Python)
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# Internal packages (absolute references, distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.bash.briteonyx.source import generate as gen
 from src_gen.script.bash.briteonyx.structure import *
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 def _comments():
@@ -83,8 +83,7 @@ def build():
 
 
 def generate(directory):
-    sub = Path("BriteOnyx", "bin", "lib")
-    gen(build(), directory, sub, "set_path.bash")
+    gen(build(), directory, "set_path.bash")
 
 
 """DisabledContent

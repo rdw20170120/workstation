@@ -10,20 +10,20 @@ Target effective logging on my favorite development workstations:
 
 TODO: Add visitors for other `logging` handlers
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from logging import getLogger
 import logging
 
-# External packages  (absolute references, NOT distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
 from logzero.colors import Fore
 import logzero
 
-# Library modules    (absolute references, NOT packaged, in project)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility.color_log_formatter import ColorLogFormatter
 from utility.my_terminal import using_gnome
 from utility.my_terminal import using_iterm2
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 DEFAULT_DATE_FORMAT = "%Y%m%dT%H%M%S"

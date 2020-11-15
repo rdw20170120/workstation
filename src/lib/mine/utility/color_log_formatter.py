@@ -1,14 +1,14 @@
 #!/usr/bin/env false
 """A logging formatter with color capability."""
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from logging import Formatter
 from logging import NOTSET
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility.my_terminal import stderr_supports_color
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 DEFAULT_DATE_FORMAT = "%y%m%dT%H%M%S"

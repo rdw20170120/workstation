@@ -1,15 +1,15 @@
 #!/usr/bin/env false
 """TODO: Write
 """
-# Internal packages  (absolute references, distributed with Python)
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# Internal packages (absolute references, distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+from src_gen.script.source import my_visitor_map
+from src_gen.script.structure import *
+from src_gen.script.structure import _Command
 
-# Co-located modules (relative references, NOT packaged, in project)
-from ..source import my_visitor_map
-from ..structure import *
-from ..structure import _Command
+# Project modules   (relative references, NOT packaged, in project)
 
 
 ###############################################################################

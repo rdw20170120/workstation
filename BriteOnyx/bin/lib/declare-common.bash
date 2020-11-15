@@ -22,13 +22,24 @@ delete_file() {
     forbid_path "$1"
 } && export -f delete_file
 
+execute_script() {
+    # Execute script $1
+    require_arguments_at_least $# 1
+    # $1 = script file to execute
+    # Additional optional arguments are passed to script
+    require_script "$1" ; local -r Script=$1
+    shift 1
+    ${Script} $@
+    abort_on_fail $? "Failed to execute script ${Script}"
+} && export -f execute_script
+
 expect_failure() {
     # Expect failure as actual status $1
     require_arguments $# 1
     # $1 = actual status code (from last command)
     require_value "$1" ; local -ir Actual=$1
     [[ "${Actual}" -eq 0 ]] &&
-        log_error "Expected failure, but instead got status ${Actial}" &&
+        log_error "Expected failure, but instead got status ${Actual}" &&
         exit 86
 } && export -f expect_failure
 
@@ -38,7 +49,7 @@ expect_success() {
     # $1 = actual status code (from last command)
     require_value "$1" ; local -ir Actual=$1
     [[ "${Actual}" -ne 0 ]] &&
-        log_error "Expected success, but instead got status ${Actial}" &&
+        log_error "Expected success, but instead got status ${Actual}" &&
         exit 86
 } && export -f expect_success
 
@@ -64,7 +75,7 @@ write_file() {
     # $1 = target file
     # $2 = source content
     >$1 echo -n "$2"
-    abort_on_fail $? "Could not write file '$1'"
+    abort_on_fail $? "Failed to write file '$1'"
     require_file "$1"
 } && export -f write_file
 

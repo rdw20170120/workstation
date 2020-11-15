@@ -1,12 +1,12 @@
 #!/usr/bin/env false
 """Generate script to activate project."""
-# Internal packages  (absolute references, distributed with Python)
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# Internal packages (absolute references, distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.bash.briteonyx.source import generate as gen
 from src_gen.script.bash.briteonyx.structure import *
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 def _abort_if_activated():
@@ -293,8 +293,7 @@ def build():
 
 
 def generate(directory):
-    sub = Path(".")
-    gen(build(), directory, sub, "activate.bash")
+    gen(build(), directory, "activate.bash")
 
 
 """DisabledContent

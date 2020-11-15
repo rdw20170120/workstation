@@ -1,17 +1,17 @@
 #!/usr/bin/env false
 """TODO: Write
 """
-# Internal packages  (absolute references, distributed with Python)
-# External packages  (absolute references, NOT distributed with Python)
+# Internal packages (absolute references, distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
 from pytest import raises
 
-# Library modules    (absolute references, NOT packaged, in project)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+from src_gen.renderer import Renderer
+from src_gen.script.bash.source import my_visitor_map
+from src_gen.script.bash.structure import *
 
-# Co-located modules (relative references, NOT packaged, in project)
-from ...renderer import Renderer
-from .source import my_visitor_map
-from .structure import *
+# Project modules   (relative references, NOT packaged, in project)
 
 
 # NOTE: There is little value in testing "composed" methods,

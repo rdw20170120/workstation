@@ -1,12 +1,13 @@
 #!/usr/bin/env false
 """TODO: Write
 """
-# Internal packages  (absolute references, distributed with Python)
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
-# Co-located modules (relative references, NOT packaged, in project)
-from ..structure import *
-from .source import my_visitor_map
+# Internal packages (absolute references, distributed with Python)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
+from src_gen.script.bash.structure import *
+from src_gen.script.bash.briteonyx.source import my_visitor_map
+
+# Project modules   (relative references, NOT packaged, in project)
 
 
 def abort_if_not_activated():

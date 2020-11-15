@@ -13,8 +13,6 @@ trap report_status_and_return EXIT
 ###############################################################################
 # Common BASH alias definitions
 
-alias cycle='clear ; test-run && gen-run -vvv && app-run -vvv'
-
 # TODO: Consider augmenting the other forms of 'grep' too
 grep_options='--color=auto'
 grep_options+=' --exclude-dir=.git'
@@ -28,10 +26,10 @@ grep_options+=' --exclude="*.pyc"'
 grep_options+=' --exclude="*.swp"'
 alias grep="grep $grep_options"
 
+alias cycle='clear ; test-run && gen-run -vvv && app-run -vvv'
 alias list-sort-by_size='sort -nr --key=5'
-
 alias logs-reset='rm -fr ${BO_Project}/log ; mkdir ${BO_Project}/log'
-
+alias sync-generate='meld src/gen/generate/custom src/gen/generate/shared'
 alias todo='grep -ER TODO $BO_Project | grep -v /log/'
 
 ###############################################################################

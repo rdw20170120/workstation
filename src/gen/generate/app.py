@@ -3,27 +3,23 @@
 
 Intended to be executed as a Python module:  python3 -m MODULE
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from argparse import ArgumentParser
 from logging import DEBUG, INFO, WARN, ERROR, FATAL
 from logging import getLogger
 from pathlib import Path
 import sys
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from utility import my_logging
 from utility.filesystem import recreate_directory
 from utility.singleton_application import SingletonApplication
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 from .config import Config
-from .document.markdown.all import generate as generate_markdown_documents
-from .script.bash.activate import generate as generate_activate
-from .script.bash.all import generate as generate_bash_scripts
-from .script.bash.briteonyx.all import generate as generate_briteonyx_scripts
-from .script.bash.set_path import generate as generate_set_path
-from .script.python.all import generate as generate_python_scripts
+from .custom.all import generate as generate_all_custom
+from .shared.all import generate as generate_all_shared
 
 
 c = Config()
@@ -34,20 +30,13 @@ class MyApp(SingletonApplication):
         self._target_directory = target_directory
         super().__init__(getLogger(self.__class__.__name__), pid_file)
 
-    def _generate(self):
-        generate_activate(self._target_directory)
-        generate_bash_scripts(self._target_directory)
-        generate_briteonyx_scripts(self._target_directory)
-        generate_markdown_documents(self._target_directory)
-        generate_python_scripts(self._target_directory)
-        generate_set_path(self._target_directory)
-
     def _run(self):
         self._log.info(
             "Generating content into directory '%s'", self._target_directory
         )
         recreate_directory(self._target_directory)
-        self._generate()
+        generate_all_custom(self._target_directory)
+        generate_all_shared(self._target_directory)
 
 
 def _apply_verbosity(verbosity=0):

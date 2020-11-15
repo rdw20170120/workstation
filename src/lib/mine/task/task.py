@@ -1,11 +1,11 @@
 #!/usr/bin/env false
 """Tasks managed by a TaskManager."""
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from pathlib import Path
 from shutil import disk_usage
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from task.exception import Abort
 from task.exception import Skip
 from utility.filesystem import delete_directory_tree
@@ -14,7 +14,7 @@ from utility.filesystem import touch
 from utility import my_assert as is_
 from utility.my_logging import log_exception
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 class PlainTask(object):

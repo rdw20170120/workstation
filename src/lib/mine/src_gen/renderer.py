@@ -3,11 +3,11 @@
 
 TODO: REVIEW: how best to integrate logging into a library
 """
-# Internal packages  (absolute references, distributed with Python)
+# Internal packages (absolute references, distributed with Python)
 from logging import getLogger
 
-# External packages  (absolute references, NOT distributed with Python)
-# Library modules    (absolute references, NOT packaged, in project)
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
 from throw_out_your_templates.section_1 import default_encoding
 from throw_out_your_templates.section_2 import Serializer
 from throw_out_your_templates.section_4 import (
@@ -15,7 +15,7 @@ from throw_out_your_templates.section_4 import (
 )
 from utility.my_logging import log_exception
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
 
 class Renderer(object):
