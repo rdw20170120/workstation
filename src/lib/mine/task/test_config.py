@@ -6,7 +6,9 @@
 # Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
 from utility.test_config import *
+
 # Project modules   (relative references, NOT packaged, in project)
+
 
 def test_fake_suffix(config):
     v = config.fake_suffix

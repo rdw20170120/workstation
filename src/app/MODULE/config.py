@@ -5,7 +5,9 @@
 # Library modules   (absolute references, NOT packaged, in project)
 from utility import environment
 from task.config import Config as BaseConfig
+
 # Project modules   (relative references, NOT packaged, in project)
+
 
 class Config(BaseConfig):
     @property
@@ -19,6 +21,7 @@ class Config(BaseConfig):
         # TODO: Enhance to override via environment variable and CLI argument
         # TODO: Overriding BaseConfig, should remove for production
         return False
+
 
 """DisabledContent
 """

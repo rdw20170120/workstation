@@ -12,7 +12,9 @@ from src_gen.script.python.complete import generate_package as package
 from src_gen.script.python.complete import generate_script as script
 from src_gen.script.python.complete import generate_test as test
 from utility.config import Config
+
 # Project modules   (relative references, NOT packaged, in project)
+
 
 def _generate_briteonyx(dir_):
     sub = dir_ / "bin"

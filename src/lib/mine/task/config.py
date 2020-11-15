@@ -110,5 +110,6 @@ class Config(BaseConfig):
     def should_leave_output_upon_task_failure(self):
         return False
 
+
 """DisabledContent
 """

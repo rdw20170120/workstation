@@ -2844,6 +2844,7 @@ prj-grep
 ##########
 compgen -e
 Apple_PubSub_Socket_Render
+BO_NameApp
 BO_OS
 BO_PathHomebrew
 BO_PathOriginal
@@ -2868,6 +2869,7 @@ PYTHONCOERCELOCALE
 PYTHONIOENCODING
 PYTHONPATH
 PYTHONUTF8
+ReservedDiskSpaceInBytes
 SHELL
 SHLVL
 SSH_AUTH_SOCK
@@ -3012,6 +3014,11 @@ _distnote
 _qtss
 _locationd
 _appserveradm
+MS\EUTS_UMO_AD_Mgmt
+MS\Domain Users
+MS\IMASCOMPACCTMGMT
+MS\Machine_Creators_AAA
+MS\Mac_Admin
 nobody
 nogroup
 wheel

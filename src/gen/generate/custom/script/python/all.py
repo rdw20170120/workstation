@@ -10,7 +10,9 @@ from src_gen.script.python.complete import generate_library as library
 from src_gen.script.python.complete import generate_package as package
 from src_gen.script.python.complete import generate_test as test
 from utility.config import Config
+
 # Project modules   (relative references, NOT packaged, in project)
+
 
 def _generate_bin(dir_):
     sub = dir_
