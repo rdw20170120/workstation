@@ -9,7 +9,7 @@ from queue import Queue
 # Project modules   (relative references, NOT packaged, in project)
 
 
-class TaskQueue:
+class TaskQueue(object):
     """Queue to manage tasks.
 
     Wrap a private implementation to isolate the application from the

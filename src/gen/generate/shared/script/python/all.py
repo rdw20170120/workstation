@@ -11,9 +11,8 @@ from src_gen.script.python.complete import generate_main as main
 from src_gen.script.python.complete import generate_package as package
 from src_gen.script.python.complete import generate_script as script
 from src_gen.script.python.complete import generate_test as test
-
+from utility.config import Config
 # Project modules   (relative references, NOT packaged, in project)
-
 
 def _generate_briteonyx(dir_):
     sub = dir_ / "bin"
@@ -25,7 +24,7 @@ def _generate_briteonyx(dir_):
 
 def _generate_src(dir_):
     sub = dir_
-    _generate_src_app(sub / "app" / "MODULE")
+    _generate_src_app(sub / "app" / Config().application_name)
     _generate_src_gen(sub / "gen" / "generate")
     _generate_src_lib(sub / "lib")
 
@@ -36,6 +35,7 @@ def _generate_src_app(dir_):
     main(sub, "__main__.py")
     library(sub, "app.py")
     library(sub, "config.py")
+    test(sub, "conftest.py")
     test(sub, "test_app.py")
     test(sub, "test_config.py")
 
@@ -46,6 +46,7 @@ def _generate_src_gen(dir_):
     main(sub, "__main__.py")
     library(sub, "app.py")
     library(sub, "config.py")
+    test(sub, "conftest.py")
     test(sub, "test_app.py")
     test(sub, "test_config.py")
     _generate_src_gen_custom(sub / "custom")
@@ -176,11 +177,14 @@ def _generate_src_lib_src_gen(dir_):
 def _generate_src_lib_task(dir_):
     sub = dir_
     package(sub, "__init__.py")
+    library(sub, "config.py")
+    test(sub, "conftest.py")
     library(sub, "exception.py")
     library(sub, "delete_file.py")
     library(sub, "queue.py")
     library(sub, "task.py")
     library(sub, "task_manager.py")
+    test(sub, "test_config.py")
     test(sub, "test_exception.py")
     test(sub, "test_queue.py")
     test(sub, "test_task.py")
@@ -205,6 +209,7 @@ def _generate_src_lib_utility(dir_):
     package(sub, "__init__.py")
     library(sub, "color_log_formatter.py")
     library(sub, "config.py")
+    test(sub, "conftest.py")
     library(sub, "environment.py")
     library(sub, "filesystem.py")
     library(sub, "math.py")

@@ -22,12 +22,14 @@ trap report_status_and_exit EXIT
     1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
     exit 99
 
+require_variable BO_NameApp
+
 cd $BO_Project/src/app
 
 # Execute Python
 cmd='python3'
 # cmd+=' -bb'
-cmd+=' -m MODULE'
+cmd+=" -m ${BO_NameApp}"
 echo $cmd $@
 $cmd $@
 

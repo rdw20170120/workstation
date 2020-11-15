@@ -1,7 +1,7 @@
 #!/usr/bin/env false
 """Application for TODO.
 
-Intended to be executed as a Python module:  python3 -m MODULE
+Intended to be executed as a Python module:  python3 -m ${BO_NameApp}
 """
 # Internal packages (absolute references, distributed with Python)
 from argparse import ArgumentParser

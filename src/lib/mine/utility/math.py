@@ -10,7 +10,18 @@ from math import nan
 # Project modules   (relative references, NOT packaged, in project)
 
 
-class Percentage:
+def assert_nan(actual_value):
+    """Assert that actual_value is not-a-number (NaN)."""
+    result = isnan(actual_value)
+    if result:
+        return result
+    else:
+        raise AssertionError(
+            "{!r} is NOT a not-a-number (NaN)".format(actual_value)
+        )
+
+
+class Percentage(object):
     def __init__(self, numerator, denominator):
         self._denominator = denominator
         self._numerator = numerator
@@ -65,17 +76,6 @@ class Rate(Percentage):
     @property
     def rate_units(self):
         return self._rate_units
-
-
-def assert_nan(actual_value):
-    """Assert that actual_value is not-a-number (NaN)."""
-    result = isnan(actual_value)
-    if result:
-        return result
-    else:
-        raise AssertionError(
-            "{!r} is NOT a not-a-number (NaN)".format(actual_value)
-        )
 
 
 """DisabledContent

@@ -107,7 +107,7 @@ class _VisitorMapContextManager(object):
             self.vmap.parent_map = None
 
 
-class DEFAULT:
+class DEFAULT(object):
     ">>> visitor_map[DEFAULT] = visitor # sets default fallback visitor"
 
 

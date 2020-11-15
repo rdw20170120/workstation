@@ -96,43 +96,6 @@ from utility import my_assert as is_
 # Project modules   (relative references, NOT packaged, in project)
 
 
-class ProlepticGregorianOrdinal:
-    def __init__(self, value):
-        if isinstance(value, int):
-            if value <= 0:
-                raise ValueError("'{}' is <= 0".format(value))
-            self._ordinal = value
-        else:
-            raise ValueError(
-                "Cannot handle value '{}' of type '{}'".format(
-                    value, type(value)
-                )
-            )
-
-    def as_date(self):
-        return dt.date.fromordinal(self._ordinal)
-
-    def as_int(self):
-        return self._ordinal
-
-
-class UnixTime:
-    def __init__(self, value):
-        if isinstance(value, int):
-            value = float(value)
-        if isinstance(value, float):
-            self._float_seconds = value
-        else:
-            raise ValueError(
-                "Cannot handle value '{}' of type '{}'".format(
-                    value, type(value)
-                )
-            )
-
-    def as_datetime(self):
-        return dt.datetime.fromtimestamp(self._float_seconds)
-
-
 def as_iso8601(value, timespec="auto"):
     assert is_.instance(timespec, str)
     assert is_.instance(value, dt.datetime)
@@ -279,6 +242,43 @@ def timedelta_as_hours(value):
 def timedelta_as_seconds(value):
     assert is_.instance(value, dt.timedelta)
     return value / dt.timedelta(seconds=1)
+
+
+class ProlepticGregorianOrdinal(object):
+    def __init__(self, value):
+        if isinstance(value, int):
+            if value <= 0:
+                raise ValueError("'{}' is <= 0".format(value))
+            self._ordinal = value
+        else:
+            raise ValueError(
+                "Cannot handle value '{}' of type '{}'".format(
+                    value, type(value)
+                )
+            )
+
+    def as_date(self):
+        return dt.date.fromordinal(self._ordinal)
+
+    def as_int(self):
+        return self._ordinal
+
+
+class UnixTime(object):
+    def __init__(self, value):
+        if isinstance(value, int):
+            value = float(value)
+        if isinstance(value, float):
+            self._float_seconds = value
+        else:
+            raise ValueError(
+                "Cannot handle value '{}' of type '{}'".format(
+                    value, type(value)
+                )
+            )
+
+    def as_datetime(self):
+        return dt.datetime.fromtimestamp(self._float_seconds)
 
 
 """DisabledContent
