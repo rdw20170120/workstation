@@ -1,11 +1,14 @@
+[html]
+directory = ${BO_Project?}/out/coverage
+
 [json]
 pretty_print = true
 
 [report]
-show_missing = true
+show_missing = false
 skip_covered = true
 skip_empty = true
-sort = Name
+sort = Cover
 
 [run]
 branch = true

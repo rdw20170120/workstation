@@ -1,49 +1,75 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Trace}" ]] && echo "TRACE: Executing${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
 
 report_status_and_exit() {
     local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
+    if [[ "${Status}" -eq 0 ]] ; then
+        echo "INFO:  ${0} exiting with status ${Status}"
+    else
+        echo "FATAL: ${0} exiting with status ${Status}"
+    fi
     exit ${Status}
 }
 trap report_status_and_exit EXIT
 ###############################################################################
 
-[[ -z "${BO_Project}" ]] && 
-    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
-    exit 99
+[[ -z "${BO_Project}" ]] &&
+    echo "FATAL: 'BO_Project' is undefined, aborting" &&
+    exit 20
+
+Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
+if [[ -r ${Script} ]] ; then
+    source ${Script}
+else
+    echo "WARN: Script file '${Script}' is not readable"
+fi
+
+run_coverage() {
+    # Run Python coverage on previous pytest data
+    # $1 = Python coverage configuration file
+    local -i Status
+
+    coverage3 html --rcfile=$1
+    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+    coverage3 report --rcfile=$1
+    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+}
 
 run_pytest() {
     # Run pytest on test suite known as $1 in directory $2
-    # $1 = test suite name
-    # $2 = test suite parent directory
+    # $1 = Python coverage configuration file
+    # $2 = test suite name
+    # $3 = test suite parent directory
     local -i Status
-    cd $2
+
+    cd $3
     Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+
     pytest \
-	--cov=$2 \
-	--cov-branch \
-	--cov-config=${BO_Project}/cfg/.coveragerc \
-	--cov-report=html \
-        --html=${BO_Project}/out/pytest-$1.html \
-        --log-file=${BO_Project}/log/pytest-$1.log \
-	--no-cov-on-fail \
-	--self-contained-html
+	--cov=$3 \
+	--cov-append \
+	--cov-config=$1 \
+	--cov-report= \
+        --log-file=${BO_Project}/log/pytest-$2.log
     Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
 }
 
 main() {
     # Run Python test suites
-    # TODO: Separate coverage generation into consolidated step
+    local -r Config=${BO_Project}/cfg/.coveragerc
 
-    run_pytest mine ${BO_Project}/src/lib/mine
-    run_pytest gen  ${BO_Project}/src/gen
-    run_pytest app  ${BO_Project}/src/app
-    coverage report --rcfile=${BO_Project}/cfg/.coveragerc
+    coverage3 erase --rcfile=${Config}
     Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+
+    run_pytest   ${Config} mine ${BO_Project}/src/lib/mine
+    run_pytest   ${Config} gen  ${BO_Project}/src/gen
+    run_pytest   ${Config} app  ${BO_Project}/src/app
+
+    cd ${BO_Project}/src
+    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+    run_coverage ${Config}
 
     return 0
 }
@@ -58,6 +84,9 @@ main $@
 # set +o verbose
 # set +o xtrace
 : << 'DisabledContent'
---show-capture=no
+	--cov-report=html \
+        --html=${BO_Project}/out/pytest-$2.html \
+	--no-cov-on-fail \
+	--self-contained-html
 DisabledContent
 

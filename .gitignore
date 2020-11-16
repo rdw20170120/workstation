@@ -3,6 +3,7 @@ context.bash
 
 # Common directories
 .cache/
+coverage/
 log/
 out/
 

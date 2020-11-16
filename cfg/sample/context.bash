@@ -26,7 +26,7 @@ trap report_status_and_return EXIT
 # See ${BO_Project}/src/app/${BO_NameApp}/config.py
 # for a description of each environment variable used.
 
-# NOTE:  This is a sample application context.
+# This is a sample application context.
 # It is intended
 # to be copied to ${BO_Project}/context.bash
 # and edited as needed.

@@ -37,6 +37,7 @@ force-exclude = '''
   | \.mailmap$
   | parse_accuryn_data_file$
   # By file suffix
+  | \.avsc$
   | \.bash$
   | \.bash_logout$
   | \.bash_profile$

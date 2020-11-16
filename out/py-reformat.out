@@ -1,17 +1,3 @@
 INFO: Reformatting Python code using Black
-reformatted /Users/rwill253/project/Rob/workstation/src/app/MODULE/test_config.py
-reformatted /Users/rwill253/project/Rob/workstation/src/app/MODULE/conftest.py
-reformatted /Users/rwill253/project/Rob/workstation/src/app/MODULE/config.py
-reformatted /Users/rwill253/project/Rob/workstation/src/gen/generate/conftest.py
-reformatted /Users/rwill253/project/Rob/workstation/src/gen/generate/config.py
-reformatted /Users/rwill253/project/Rob/workstation/src/lib/mine/task/conftest.py
-reformatted /Users/rwill253/project/Rob/workstation/src/gen/generate/test_config.py
-reformatted /Users/rwill253/project/Rob/workstation/src/lib/mine/utility/conftest.py
-reformatted /Users/rwill253/project/Rob/workstation/src/gen/generate/custom/script/python/all.py
-reformatted /Users/rwill253/project/Rob/workstation/src/lib/mine/task/test_config.py
-reformatted /Users/rwill253/project/Rob/workstation/src/lib/mine/utility/config.py
-reformatted /Users/rwill253/project/Rob/workstation/src/lib/mine/utility/test_config.py
-reformatted /Users/rwill253/project/Rob/workstation/src/lib/mine/task/config.py
-reformatted /Users/rwill253/project/Rob/workstation/src/gen/generate/shared/script/python/all.py
 All done! ✨ 🍰 ✨
-14 files reformatted, 199 files left unchanged.
+213 files left unchanged.
