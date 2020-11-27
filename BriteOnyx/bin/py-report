@@ -1,23 +1,12 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
-
-report_status_and_exit() {
-    local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
-    exit ${Status}
-}
-trap report_status_and_exit EXIT
+trap warn_on_error EXIT
 ###############################################################################
-# Report Python code status
-
-[[ -z "${BO_Project}" ]] && 
-    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
+[[ -z "${BO_Project}" ]] &&
+    log_error "Aborting, this project is NOT ACTIVATED" &&
     exit 99
-
-clear
 
 Out=${BO_Project}/out/tabnanny.out
  >${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/BriteOnyx/bin
@@ -28,13 +17,13 @@ Out=${BO_Project}/out/tabnanny.out
 cat ${Out} \
     | grep -v 'listing directory' \
     | grep -v 'Clean bill of health.'
-echo 'INFO: No output means all Python code passes all TabNanny checks'
+log_debug "No output means all Python code passes all TabNanny checks"
 
 Out=${BO_Project}/out/py-reformat.out
->${Out} 2>&1 py-reformat
+&>${Out} py-reformat
 
 main() {
-    # TODO: DESCRIPTION
+    # Report Python code status
 
     # TODO: CONTENT
 
@@ -45,11 +34,9 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# set -o verbose
-# set -o xtrace
+# export PS4='$ ' ; set -o verbose ; set -o xtrace
 # Code to debug...
-# set +o verbose
-# set +o xtrace
+# set +o verbose ; set +o xtrace
 : << 'DisabledContent'
 DisabledContent
 

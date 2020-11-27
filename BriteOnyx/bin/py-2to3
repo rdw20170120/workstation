@@ -1,20 +1,11 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
-
-report_status_and_exit() {
-    local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
-    exit ${Status}
-}
-trap report_status_and_exit EXIT
+trap warn_on_error EXIT
 ###############################################################################
-# Convert all Python source from Python2 to Python3
-
-[[ -z "${BO_Project}" ]] && 
-    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
+[[ -z "${BO_Project}" ]] &&
+    log_error "Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
 # NOTE: Apparently, it is not possible to run Python3 code exclusively with the
@@ -76,13 +67,14 @@ convert () {
 #   cmd+=" --fix=set_literal"
 #   cmd+=" --fix=ws_comma"
     # Execute tool, but filter out the noise
-    $cmd $1 2>&1 \
-        | grep -v 'Adding transformation' \
-        | grep -v 'Descending into' \
-        | grep -v 'No changes' \
-        | grep -v 'Refactoring ' \
-        | grep -v 'write-unchanged-files' \
-        | grep -v 'Wrote changes'
+    2>&1 \
+        $cmd $1 |
+        grep -v 'Adding transformation' |
+        grep -v 'Descending into' |
+        grep -v 'No changes' |
+        grep -v 'Refactoring ' |
+        grep -v 'write-unchanged-files' |
+        grep -v 'Wrote changes'
 }
 
 # These directories should have Python3 source files in them
@@ -95,7 +87,7 @@ convert $BO_Project/src/lib/mine
 convert $BO_Project/src/lib/third_party
 
 main() {
-    # TODO: DESCRIPTION
+    # Convert all Python source from Python2 to Python3
 
     # TODO: CONTENT
 
@@ -106,11 +98,9 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# set -o verbose
-# set -o xtrace
+# export PS4='$ ' ; set -o verbose ; set -o xtrace
 # Code to debug...
-# set +o verbose
-# set +o xtrace
+# set +o verbose ; set +o xtrace
 : << 'DisabledContent'
 DisabledContent
 

@@ -1,20 +1,11 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
-
-report_status_and_exit() {
-    local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
-    exit ${Status}
-}
-trap report_status_and_exit EXIT
+trap warn_on_error EXIT
 ###############################################################################
-# Report tool status
-
-[[ -z "${BO_Project}" ]] && 
-    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
+[[ -z "${BO_Project}" ]] &&
+    log_error "Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
 Rule=##########
@@ -56,7 +47,7 @@ check 'compgen -b'
 check 'compgen -c'
 check 'compgen -e'
 # TODO: RESEARCH:  Why is this call so time-consuming on some machines?
-check 'compgen -g'
+# check 'compgen -g'
 check 'compgen -k'
 
 # Git
@@ -76,7 +67,7 @@ checkVariable PYTHONPATH "$PYTHONPATH"
 
 # Python 2
 checkExecutable python2
-check 'python2 --version' 2>&1
+2>&1 check 'python2 --version'
 echo $Rule
 python2 -c 'import platform; print(platform.python_version())'
 echo $Rule
@@ -102,10 +93,10 @@ checkExecutable coverage
 check 'coverage --version'
 checkExecutable py.test
 checkExecutable pytest
-check 'pytest --version' 2>&1
+2>&1 check 'pytest --version'
 
 main() {
-    # TODO: DESCRIPTION
+    # Report tool status
 
     # TODO: CONTENT
 
@@ -116,11 +107,9 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# set -o verbose
-# set -o xtrace
+# export PS4='$ ' ; set -o verbose ; set -o xtrace
 # Code to debug...
-# set +o verbose
-# set +o xtrace
+# set +o verbose ; set +o xtrace
 : << 'DisabledContent'
 # AWS CLI
 checkExecutable aws

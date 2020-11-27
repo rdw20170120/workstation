@@ -23,7 +23,7 @@ s = Renderer(my_visitor_map)._serialize
 
 def test_and_():
     # TODO: Break up tests into individual test methods
-    assert is_.equal(s(and_()), " && ")
+    assert is_.equal(s(and_()), " &&")
     with raises(TypeError):
         and_(None)
 
@@ -51,9 +51,9 @@ def test_directory_exists():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
         directory_exists()
-    assert is_.equal(s(directory_exists(None)), '[[ -d "" ]]')
-    assert is_.equal(s(directory_exists("")), '[[ -d "" ]]')
-    assert is_.equal(s(directory_exists("Test")), '[[ -d "Test" ]]')
+    assert is_.equal(s(directory_exists(None)), "[[ -d ]]")
+    assert is_.equal(s(directory_exists("")), "[[ -d ]]")
+    assert is_.equal(s(directory_exists("Test")), "[[ -d Test ]]")
     with raises(TypeError):
         directory_exists("Test", None)
 
@@ -78,6 +78,54 @@ def test_echo():
     assert is_.equal(s(echo("Test", None)), "echo Test")
     assert is_.equal(s(echo("Test", "")), "echo Test")
     assert is_.equal(s(echo("Test", "123")), "echo Test 123")
+
+
+def test_echo_debug():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(echo_debug()), '1>&2 echo "DEBUG: "')
+    assert is_.equal(s(echo_debug(None)), '1>&2 echo "DEBUG: "')
+    assert is_.equal(s(echo_debug("")), '1>&2 echo "DEBUG: "')
+    assert is_.equal(s(echo_debug("Test")), '1>&2 echo "DEBUG: Test"')
+    assert is_.equal(s(echo_debug("Test", None)), '1>&2 echo "DEBUG: Test"')
+    assert is_.equal(s(echo_debug("Test", "")), '1>&2 echo "DEBUG: Test"')
+    assert is_.equal(
+        s(echo_debug("Test", "123")), '1>&2 echo "DEBUG: Test123"'
+    )
+
+
+def test_echo_error():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(echo_error()), '1>&2 echo "ERROR: "')
+    assert is_.equal(s(echo_error(None)), '1>&2 echo "ERROR: "')
+    assert is_.equal(s(echo_error("")), '1>&2 echo "ERROR: "')
+    assert is_.equal(s(echo_error("Test")), '1>&2 echo "ERROR: Test"')
+    assert is_.equal(s(echo_error("Test", None)), '1>&2 echo "ERROR: Test"')
+    assert is_.equal(s(echo_error("Test", "")), '1>&2 echo "ERROR: Test"')
+    assert is_.equal(
+        s(echo_error("Test", "123")), '1>&2 echo "ERROR: Test123"'
+    )
+
+
+def test_echo_info():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(echo_info()), '1>&2 echo "INFO:  "')
+    assert is_.equal(s(echo_info(None)), '1>&2 echo "INFO:  "')
+    assert is_.equal(s(echo_info("")), '1>&2 echo "INFO:  "')
+    assert is_.equal(s(echo_info("Test")), '1>&2 echo "INFO:  Test"')
+    assert is_.equal(s(echo_info("Test", None)), '1>&2 echo "INFO:  Test"')
+    assert is_.equal(s(echo_info("Test", "")), '1>&2 echo "INFO:  Test"')
+    assert is_.equal(s(echo_info("Test", "123")), '1>&2 echo "INFO:  Test123"')
+
+
+def test_echo_warn():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(echo_warn()), '1>&2 echo "WARN:  "')
+    assert is_.equal(s(echo_warn(None)), '1>&2 echo "WARN:  "')
+    assert is_.equal(s(echo_warn("")), '1>&2 echo "WARN:  "')
+    assert is_.equal(s(echo_warn("Test")), '1>&2 echo "WARN:  Test"')
+    assert is_.equal(s(echo_warn("Test", None)), '1>&2 echo "WARN:  Test"')
+    assert is_.equal(s(echo_warn("Test", "")), '1>&2 echo "WARN:  Test"')
+    assert is_.equal(s(echo_warn("Test", "123")), '1>&2 echo "WARN:  Test123"')
 
 
 def test_elif_():
@@ -144,9 +192,9 @@ def test_file_exists():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
         file_exists()
-    assert is_.equal(s(file_exists(None)), '[[ -f "" ]]')
-    assert is_.equal(s(file_exists("")), '[[ -f "" ]]')
-    assert is_.equal(s(file_exists("Test")), '[[ -f "Test" ]]')
+    assert is_.equal(s(file_exists(None)), "[[ -f ]]")
+    assert is_.equal(s(file_exists("")), "[[ -f ]]")
+    assert is_.equal(s(file_exists("Test")), "[[ -f Test ]]")
     with raises(TypeError):
         file_exists("Test", None)
 
@@ -155,9 +203,9 @@ def test_file_is_readable():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
         file_is_readable()
-    assert is_.equal(s(file_is_readable(None)), '[[ -r "" ]]')
-    assert is_.equal(s(file_is_readable("")), '[[ -r "" ]]')
-    assert is_.equal(s(file_is_readable("Test")), '[[ -r "Test" ]]')
+    assert is_.equal(s(file_is_readable(None)), "[[ -r ]]")
+    assert is_.equal(s(file_is_readable("")), "[[ -r ]]")
+    assert is_.equal(s(file_is_readable("Test")), "[[ -r Test ]]")
     with raises(TypeError):
         file_is_readable("Test", None)
 
@@ -195,6 +243,11 @@ def test_indent():
     assert is_.equal(s(indent()), 4 * " ")
     with raises(TypeError):
         indent(None)
+    assert is_.equal(s(indent(-1)), -1 * 4 * " ")
+    assert is_.equal(s(indent(0)), 0 * 4 * " ")
+    assert is_.equal(s(indent(1)), 1 * 4 * " ")
+    assert is_.equal(s(indent(2)), 2 * 4 * " ")
+    assert is_.equal(s(indent(9)), 9 * 4 * " ")
 
 
 def test_integer_not_equal():
@@ -207,53 +260,64 @@ def test_integer_not_equal():
         integer_not_equal("")
     with raises(TypeError):
         integer_not_equal("Test")
-    assert is_.equal(s(integer_not_equal(None, 123)), '[[ "" -ne 123 ]]')
-    assert is_.equal(s(integer_not_equal("", 123)), '[[ "" -ne 123 ]]')
-    assert is_.equal(s(integer_not_equal("Test", 123)), '[[ "Test" -ne 123 ]]')
+    assert is_.equal(s(integer_not_equal(None, 123)), "[[ -ne 123 ]]")
+    assert is_.equal(s(integer_not_equal("", 123)), "[[ -ne 123 ]]")
+    assert is_.equal(s(integer_not_equal("Test", 123)), "[[ Test -ne 123 ]]")
 
 
 def test_log_debug():
     # TODO: Break up tests into individual test methods
-    assert is_.equal(s(log_debug()), '1>&2 echo "DEBUG: "')
-    assert is_.equal(s(log_debug(None)), '1>&2 echo "DEBUG: "')
-    assert is_.equal(s(log_debug("")), '1>&2 echo "DEBUG: "')
-    assert is_.equal(s(log_debug("Test")), '1>&2 echo "DEBUG: Test"')
-    assert is_.equal(s(log_debug("Test", None)), '1>&2 echo "DEBUG: Test"')
-    assert is_.equal(s(log_debug("Test", "")), '1>&2 echo "DEBUG: Test"')
-    assert is_.equal(s(log_debug("Test", "123")), '1>&2 echo "DEBUG: Test123"')
+    assert is_.equal(s(log_debug()), 'log_debug ""')
+    assert is_.equal(s(log_debug(None)), 'log_debug ""')
+    assert is_.equal(s(log_debug("")), 'log_debug ""')
+    assert is_.equal(s(log_debug("Test")), 'log_debug "Test"')
+    assert is_.equal(s(log_debug("Test", None)), 'log_debug "Test"')
+    assert is_.equal(s(log_debug("Test", "")), 'log_debug "Test"')
+    assert is_.equal(s(log_debug("Test", "123")), 'log_debug "Test123"')
 
 
-def test_log_fatal():
+def test_log_error():
     # TODO: Break up tests into individual test methods
-    assert is_.equal(s(log_fatal()), '1>&2 echo "FATAL: "')
-    assert is_.equal(s(log_fatal(None)), '1>&2 echo "FATAL: "')
-    assert is_.equal(s(log_fatal("")), '1>&2 echo "FATAL: "')
-    assert is_.equal(s(log_fatal("Test")), '1>&2 echo "FATAL: Test"')
-    assert is_.equal(s(log_fatal("Test", None)), '1>&2 echo "FATAL: Test"')
-    assert is_.equal(s(log_fatal("Test", "")), '1>&2 echo "FATAL: Test"')
-    assert is_.equal(s(log_fatal("Test", "123")), '1>&2 echo "FATAL: Test123"')
+    assert is_.equal(s(log_error()), 'log_error ""')
+    assert is_.equal(s(log_error(None)), 'log_error ""')
+    assert is_.equal(s(log_error("")), 'log_error ""')
+    assert is_.equal(s(log_error("Test")), 'log_error "Test"')
+    assert is_.equal(s(log_error("Test", None)), 'log_error "Test"')
+    assert is_.equal(s(log_error("Test", "")), 'log_error "Test"')
+    assert is_.equal(s(log_error("Test", "123")), 'log_error "Test123"')
+
+
+def test_log_good():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(log_good()), 'log_good ""')
+    assert is_.equal(s(log_good(None)), 'log_good ""')
+    assert is_.equal(s(log_good("")), 'log_good ""')
+    assert is_.equal(s(log_good("Test")), 'log_good "Test"')
+    assert is_.equal(s(log_good("Test", None)), 'log_good "Test"')
+    assert is_.equal(s(log_good("Test", "")), 'log_good "Test"')
+    assert is_.equal(s(log_good("Test", "123")), 'log_good "Test123"')
 
 
 def test_log_info():
     # TODO: Break up tests into individual test methods
-    assert is_.equal(s(log_info()), '1>&2 echo "INFO:  "')
-    assert is_.equal(s(log_info(None)), '1>&2 echo "INFO:  "')
-    assert is_.equal(s(log_info("")), '1>&2 echo "INFO:  "')
-    assert is_.equal(s(log_info("Test")), '1>&2 echo "INFO:  Test"')
-    assert is_.equal(s(log_info("Test", None)), '1>&2 echo "INFO:  Test"')
-    assert is_.equal(s(log_info("Test", "")), '1>&2 echo "INFO:  Test"')
-    assert is_.equal(s(log_info("Test", "123")), '1>&2 echo "INFO:  Test123"')
+    assert is_.equal(s(log_info()), 'log_info ""')
+    assert is_.equal(s(log_info(None)), 'log_info ""')
+    assert is_.equal(s(log_info("")), 'log_info ""')
+    assert is_.equal(s(log_info("Test")), 'log_info "Test"')
+    assert is_.equal(s(log_info("Test", None)), 'log_info "Test"')
+    assert is_.equal(s(log_info("Test", "")), 'log_info "Test"')
+    assert is_.equal(s(log_info("Test", "123")), 'log_info "Test123"')
 
 
 def test_log_warn():
     # TODO: Break up tests into individual test methods
-    assert is_.equal(s(log_warn()), '1>&2 echo "WARN:  "')
-    assert is_.equal(s(log_warn(None)), '1>&2 echo "WARN:  "')
-    assert is_.equal(s(log_warn("")), '1>&2 echo "WARN:  "')
-    assert is_.equal(s(log_warn("Test")), '1>&2 echo "WARN:  Test"')
-    assert is_.equal(s(log_warn("Test", None)), '1>&2 echo "WARN:  Test"')
-    assert is_.equal(s(log_warn("Test", "")), '1>&2 echo "WARN:  Test"')
-    assert is_.equal(s(log_warn("Test", "123")), '1>&2 echo "WARN:  Test123"')
+    assert is_.equal(s(log_warn()), 'log_warn ""')
+    assert is_.equal(s(log_warn(None)), 'log_warn ""')
+    assert is_.equal(s(log_warn("")), 'log_warn ""')
+    assert is_.equal(s(log_warn("Test")), 'log_warn "Test"')
+    assert is_.equal(s(log_warn("Test", None)), 'log_warn "Test"')
+    assert is_.equal(s(log_warn("Test", "")), 'log_warn "Test"')
+    assert is_.equal(s(log_warn("Test", "123")), 'log_warn "Test123"')
 
 
 def test_no():
@@ -289,9 +353,9 @@ def test_path_does_not_exist():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
         path_does_not_exist()
-    assert is_.equal(s(path_does_not_exist(None)), '[[ ! -e "" ]]')
-    assert is_.equal(s(path_does_not_exist("")), '[[ ! -e "" ]]')
-    assert is_.equal(s(path_does_not_exist("Test")), '[[ ! -e "Test" ]]')
+    assert is_.equal(s(path_does_not_exist(None)), "[[ ! -e ]]")
+    assert is_.equal(s(path_does_not_exist("")), "[[ ! -e ]]")
+    assert is_.equal(s(path_does_not_exist("Test")), "[[ ! -e Test ]]")
     with raises(TypeError):
         path_does_not_exist("Test", None)
 
@@ -300,9 +364,9 @@ def test_path_is_not_directory():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
         path_is_not_directory()
-    assert is_.equal(s(path_is_not_directory(None)), '[[ ! -d "" ]]')
-    assert is_.equal(s(path_is_not_directory("")), '[[ ! -d "" ]]')
-    assert is_.equal(s(path_is_not_directory("Test")), '[[ ! -d "Test" ]]')
+    assert is_.equal(s(path_is_not_directory(None)), "[[ ! -d ]]")
+    assert is_.equal(s(path_is_not_directory("")), "[[ ! -d ]]")
+    assert is_.equal(s(path_is_not_directory("Test")), "[[ ! -d Test ]]")
     with raises(TypeError):
         path_is_not_directory("Test", None)
 
@@ -311,9 +375,9 @@ def test_path_is_not_file():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
         path_is_not_file()
-    assert is_.equal(s(path_is_not_file(None)), '[[ ! -f "" ]]')
-    assert is_.equal(s(path_is_not_file("")), '[[ ! -f "" ]]')
-    assert is_.equal(s(path_is_not_file("Test")), '[[ ! -f "Test" ]]')
+    assert is_.equal(s(path_is_not_file(None)), "[[ ! -f ]]")
+    assert is_.equal(s(path_is_not_file("")), "[[ ! -f ]]")
+    assert is_.equal(s(path_is_not_file("Test")), "[[ ! -f Test ]]")
     with raises(TypeError):
         path_is_not_file("Test", None)
 
@@ -424,7 +488,7 @@ def test_source():
 
 def test_status_is_failure():
     # TODO: Break up tests into individual test methods
-    assert is_.equal(s(status_is_failure()), '[[ "${Status}" -ne 0 ]]')
+    assert is_.equal(s(status_is_failure()), "[[ ${Status} -ne 0 ]]")
     with raises(TypeError):
         status_is_failure(None)
 
@@ -439,9 +503,9 @@ def test_string_equals():
         string_equals("")
     with raises(TypeError):
         string_equals("Test")
-    assert is_.equal(s(string_equals("Test", None)), '[[ "Test" == "" ]]')
-    assert is_.equal(s(string_equals("Test", "")), '[[ "Test" == "" ]]')
-    assert is_.equal(s(string_equals("Test", "123")), '[[ "Test" == "123" ]]')
+    assert is_.equal(s(string_equals("Test", None)), "[[ Test == ]]")
+    assert is_.equal(s(string_equals("Test", "")), "[[ Test == ]]")
+    assert is_.equal(s(string_equals("Test", "123")), "[[ Test == 123 ]]")
 
 
 def test_string_is_not_null():

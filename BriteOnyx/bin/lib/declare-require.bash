@@ -1,15 +1,8 @@
 #!/usr/bin/env false
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be sourced in a BASH shell.
-
-report_status_and_return() {
-    local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} returning with status ${Status}"
-    return ${Status}
-}
-trap report_status_and_return EXIT
+# Intended to be sourced in a BASH shell during activation.
+# NO: trap ... EXIT
 ###############################################################################
 # Library of helpful BASH functions to express requirements
 
@@ -27,7 +20,7 @@ require_command() {
     require_arguments $# 1
     # $1 = command that is required
     require_value "$1"
-    which $1 >/dev/null 2>&1
+    &>/dev/null which $1
     abort_on_fail $? "Missing command '$1'"
 } && export -f require_command
 
@@ -72,7 +65,7 @@ require_function() {
     require_arguments $# 1
     # $1 = function that is required
     require_value "$1"
-    >/dev/null 2>&1 \
+    &>/dev/null \
         declare -f $1
     abort_on_fail $? "Missing function '$1'"
 } && export -f require_function
@@ -106,11 +99,9 @@ require_variable() {
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# set -o verbose
-# set -o xtrace
+# export PS4='$ ' ; set -o verbose ; set -o xtrace
 # Code to debug...
-# set +o verbose
-# set +o xtrace
+# set +o verbose ; set +o xtrace
 : << 'DisabledContent'
 DisabledContent
 

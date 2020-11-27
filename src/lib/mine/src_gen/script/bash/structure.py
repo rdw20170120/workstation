@@ -16,15 +16,11 @@ from src_gen.script.structure import _Command
 
 
 def and_():
-    return " && "
+    return " &&"
 
 
 def bs():
     return ["\\", eol()]
-
-
-def indent():
-    return "    "
 
 
 def or_():
@@ -46,27 +42,50 @@ def echo(*argument):
     return command("echo", argument)
 
 
-def log(*argument):
+def echo_with_level(*argument):
     return [
         "1>&2 ",
-        command("echo", argument),
+        command("echo", dq(argument)),
     ]
 
 
+def echo_debug(*element):
+    return echo_with_level("DEBUG: ", element)
+
+
+def echo_error(*element):
+    return echo_with_level("ERROR: ", element)
+
+
+def echo_info(*element):
+    return echo_with_level("INFO:  ", element)
+
+
+def echo_warn(*element):
+    return echo_with_level("WARN:  ", element)
+
+
+###############################################################################
+
+
 def log_debug(*element):
-    return log(dq("DEBUG: ", element))
+    return command("log_debug", dq(element))
 
 
-def log_fatal(*element):
-    return log(dq("FATAL: ", element))
+def log_error(*element):
+    return command("log_error", dq(element))
+
+
+def log_good(*element):
+    return command("log_good", dq(element))
 
 
 def log_info(*element):
-    return log(dq("INFO:  ", element))
+    return command("log_info", dq(element))
 
 
 def log_warn(*element):
-    return log(dq("WARN:  ", element))
+    return command("log_warn", dq(element))
 
 
 ###############################################################################
@@ -80,11 +99,15 @@ def cc(command_embedded_within_comment):
 def debugging_comment():
     return [
         note("Uncomment these lines for debugging, placed where needed"),
-        comment(set_("-o", "verbose")),
-        comment(set_("-o", "xtrace")),
+        comment(
+            export("PS4", sq("$ ")),
+            seq(),
+            set_("-o", "verbose"),
+            seq(),
+            set_("-o", "xtrace"),
+        ),
         comment("Code to debug..."),
-        comment(set_("+o", "verbose")),
-        comment(set_("+o", "xtrace")),
+        comment(set_("+o", "verbose"), seq(), set_("+o", "xtrace")),
     ]
 
 
@@ -199,11 +222,11 @@ def assign(variable, *expression):
     return _Assign(variable, expression)
 
 
-def export(variable, expression=None):
+def export(variable, expression=None, options=None):
     if expression is None:
-        return command("export", variable)
+        return command("export", options, variable)
     else:
-        return command("export", assign(variable, expression))
+        return command("export", options, assign(variable, expression))
 
 
 def local(expression, integer=False, readonly=False):
@@ -220,6 +243,12 @@ def local(expression, integer=False, readonly=False):
             return command("local", expression)
 
 
+def remembering(name):
+    return [
+        command("remembering", name),
+    ]
+
+
 ###############################################################################
 
 
@@ -228,39 +257,39 @@ def condition(executable, *argument):
 
 
 def directory_exists(directory_name):
-    return condition("[[", "-d", dq(directory_name), "]]")
+    return condition("[[", "-d", directory_name, "]]")
 
 
 def file_exists(file_name):
-    return condition("[[", "-f", dq(file_name), "]]")
+    return condition("[[", "-f", file_name, "]]")
 
 
 def file_is_readable(file_name):
-    return condition("[[", "-r", dq(file_name), "]]")
+    return condition("[[", "-r", file_name, "]]")
 
 
 def integer_equal(left, right):
-    return condition("[[", dq(left), "-eq", right, "]]")
+    return condition("[[", left, "-eq", right, "]]")
 
 
 def integer_not_equal(left, right):
-    return condition("[[", dq(left), "-ne", right, "]]")
+    return condition("[[", left, "-ne", right, "]]")
 
 
 def path_does_not_exist(path_name):
-    return condition("[[", "!", "-e", dq(path_name), "]]")
+    return condition("[[", "!", "-e", path_name, "]]")
 
 
 def path_is_not_directory(path_name):
-    return condition("[[", "!", "-d", dq(path_name), "]]")
+    return condition("[[", "!", "-d", path_name, "]]")
 
 
 def path_is_not_file(path_name):
-    return condition("[[", "!", "-f", dq(path_name), "]]")
+    return condition("[[", "!", "-f", path_name, "]]")
 
 
 def string_equals(left, right):
-    return condition("[[", dq(left), "==", dq(right), "]]")
+    return condition("[[", left, "==", right, "]]")
 
 
 def string_is_not_null(expression):
@@ -372,6 +401,16 @@ def function(name, *statement):
     return _Function(name, statement)
 
 
+def exported_function(name, *statement):
+    return [
+        function(name, *statement),
+        and_(),
+        " ",
+        export(name, options="-f"),
+        eol(),
+    ]
+
+
 ###############################################################################
 
 
@@ -408,8 +447,20 @@ def trace_execution():
     return [
         string_is_not_null(vr("BO_Debug")),
         and_(),
-        log_debug("Executing ", vr("BASH_SOURCE")),
+        " 1>&2 ",
+        echo(dq("Executing ", vr("BASH_SOURCE"))),
         eol(),
+    ]
+
+
+def header_activation():
+    return [
+        shebang_sourced(),
+        trace_execution(),
+        no(set_("-e")),
+        comment("Intended to be sourced in a BASH shell during activation."),
+        no(trap("...", "EXIT")),
+        rule(),
     ]
 
 
@@ -419,8 +470,8 @@ def header_executed():
         trace_execution(),
         no(set_("-e")),
         comment("Intended to be executed in a BASH shell."),
-        line(),
-        trap_executed(),
+        trap("warn_on_error", "EXIT"),
+        eol(),
         rule(),
     ]
 
@@ -431,8 +482,7 @@ def header_sourced():
         trace_execution(),
         no(set_("-e")),
         comment("Intended to be sourced in a BASH shell."),
-        line(),
-        trap_sourced(),
+        no(trap("...", "EXIT")),
         rule(),
     ]
 
@@ -462,64 +512,6 @@ def source(file_name):
 
 def trap(name, signal):
     return command("trap", name, signal)
-
-
-def trap_executed():
-    # TODO: REFACTOR: Extract common method
-    name = "report_status_and_exit"
-    return [
-        function(
-            name,
-            [
-                indent(),
-                local(remember_last_status(), integer=True, readonly=True),
-                eol(),
-                indent(),
-                status_is_failure(),
-                and_(),
-                eol(),
-                indent(),
-                indent(),
-                log_fatal(vr("0"), " exiting with status ", status()),
-                eol(),
-                indent(),
-                exit_with_status(),
-                eol(),
-            ],
-        ),
-        eol(),
-        trap(name, "EXIT"),
-        eol(),
-    ]
-
-
-def trap_sourced():
-    # TODO: REFACTOR: Extract common method
-    name = "report_status_and_return"
-    return [
-        function(
-            name,
-            [
-                indent(),
-                local(remember_last_status(), integer=True, readonly=True),
-                eol(),
-                indent(),
-                status_is_failure(),
-                and_(),
-                eol(),
-                indent(),
-                indent(),
-                log_fatal(vr("0"), " returning with status ", status()),
-                eol(),
-                indent(),
-                return_with_status(),
-                eol(),
-            ],
-        ),
-        eol(),
-        trap(name, "EXIT"),
-        eol(),
-    ]
 
 
 ###############################################################################

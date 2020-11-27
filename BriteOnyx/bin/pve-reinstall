@@ -1,35 +1,26 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
-
-report_status_and_exit() {
-    local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
-    exit ${Status}
-}
-trap report_status_and_exit EXIT
+trap warn_on_error EXIT
 ###############################################################################
-# Reinstall Python virtual environment directory
-
-[[ -z "${BO_Project}" ]] && 
-    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
+[[ -z "${BO_Project}" ]] &&
+    log_error "Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
 if [[ -z "$PVE" ]] ; then
-    echo "FATAL: Environment variable 'PVE' is undefined, aborting"
+    log_error "Environment variable 'PVE' is undefined, aborting"
     exit 1
 fi
 
-echo "INFO: Reinstalling Python virtual environment directory '$PVE'"
+log_debug "Reinstalling Python virtual environment directory '$PVE'"
 pve-rm
 pve-create
 source $BO_Project/BriteOnyx/bin/lib/pve-activate.bash
 dep-install
 
 main() {
-    # TODO: DESCRIPTION
+    # Reinstall Python virtual environment directory
 
     # TODO: CONTENT
 
@@ -40,11 +31,9 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# set -o verbose
-# set -o xtrace
+# export PS4='$ ' ; set -o verbose ; set -o xtrace
 # Code to debug...
-# set +o verbose
-# set +o xtrace
+# set +o verbose ; set +o xtrace
 : << 'DisabledContent'
 DisabledContent
 

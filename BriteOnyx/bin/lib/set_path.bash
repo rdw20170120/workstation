@@ -1,15 +1,8 @@
 #!/usr/bin/env false
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be sourced in a BASH shell.
-
-report_status_and_return() {
-    local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} returning with status ${Status}"
-    return ${Status}
-}
-trap report_status_and_return EXIT
+# Intended to be sourced in a BASH shell during activation.
+# NO: trap ... EXIT
 ###############################################################################
 # Set PATH for project
 #
@@ -35,15 +28,13 @@ trap report_status_and_return EXIT
 # and failures are most likely limited to affecting only them (as they should).
 
 export PATH=${BO_PathPve}:${BO_PathSystem}:${BO_PathProject}:${BO_PathUser}
-1>&2 echo "INFO:  Remembering 'PATH' as '${PATH}'"
+remembering PATH
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# set -o verbose
-# set -o xtrace
+# export PS4='$ ' ; set -o verbose ; set -o xtrace
 # Code to debug...
-# set +o verbose
-# set +o xtrace
+# set +o verbose ; set +o xtrace
 : << 'DisabledContent'
 DisabledContent
 

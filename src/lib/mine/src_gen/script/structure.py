@@ -13,6 +13,11 @@ from src_gen.source import my_visitor_map
 # Project modules   (relative references, NOT packaged, in project)
 
 ###############################################################################
+def indent(count=1):
+    return count * "    "
+
+
+###############################################################################
 
 
 @my_visitor_map.register(Path)

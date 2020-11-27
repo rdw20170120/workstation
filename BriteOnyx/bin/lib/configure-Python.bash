@@ -1,15 +1,8 @@
 #!/usr/bin/env false
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be sourced in a BASH shell.
-
-report_status_and_return() {
-    local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} returning with status ${Status}"
-    return ${Status}
-}
-trap report_status_and_return EXIT
+# Intended to be sourced in a BASH shell during activation.
+# NO: trap ... EXIT
 ###############################################################################
 # Configure Python
 
@@ -17,7 +10,7 @@ trap report_status_and_return EXIT
 DirMine=$BO_Project/src/lib/mine
 DirThird=$BO_Project/src/lib/third_party
 export PYTHONPATH=$PYTHONPATH:$DirThird:$DirMine
-echo "DEBUG: PYTHONPATH=$PYTHONPATH"
+remembering PYTHONPATH
 
 export PYTHONCOERCELOCALE=warn
 
@@ -34,11 +27,9 @@ export PYTHONUTF8=1
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# set -o verbose
-# set -o xtrace
+# export PS4='$ ' ; set -o verbose ; set -o xtrace
 # Code to debug...
-# set +o verbose
-# set +o xtrace
+# set +o verbose ; set +o xtrace
 : << 'DisabledContent'
 DisabledContent
 

@@ -1,24 +1,15 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
 # Intended to be executed in a BASH shell.
-
-report_status_and_exit() {
-    local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} exiting with status ${Status}"
-    exit ${Status}
-}
-trap report_status_and_exit EXIT
+trap warn_on_error EXIT
 ###############################################################################
-# Clean project directory
-
-[[ -z "${BO_Project}" ]] && 
-    1>&2 echo "FATAL: This project is NOT ACTIVATED, aborting" && 
+[[ -z "${BO_Project}" ]] &&
+    log_error "Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
 if [[ -z "$PVE" ]] ; then
-    echo "FATAL: Environment variable 'PVE' is undefined, aborting"
+    log_error "Environment variable 'PVE' is undefined, aborting"
     exit 1
 fi
 
@@ -35,34 +26,34 @@ findAnd() {
 	-$1
 }
 
-echo "INFO: Found these files..."
+log_debug "Found these files..."
 findAnd print $BO_Project '*.bak'
 findAnd print $BO_Project '*.log'
 findAnd print $BO_Project '*.pyc'
 findAnd print $BO_Project '__pycache__'
 
-echo "INFO: Deleting files..."
+log_debug "Deleting files..."
 findAnd delete $BO_Project '*.bak'
 findAnd delete $BO_Project '*.pyc'
 findAnd delete $BO_Project '__pycache__'
 
 _file=$BO_Project/src/app/pytest.log
-[[ -f "$_file" ]] && echo "INFO: Deleting file '$_file'" && rm $_file
+[[ -f "$_file" ]] && log_debug "Deleting file '$_file'" && rm $_file
 _file=$BO_Project/src/gen/pytest.log
-[[ -f "$_file" ]] && echo "INFO: Deleting file '$_file'" && rm $_file
+[[ -f "$_file" ]] && log_debug "Deleting file '$_file'" && rm $_file
 _file=$BO_Project/src/lib/mine/pytest.log
-[[ -f "$_file" ]] && echo "INFO: Deleting file '$_file'" && rm $_file
+[[ -f "$_file" ]] && log_debug "Deleting file '$_file'" && rm $_file
 _file=$BO_Project/src/lib/third_party/pytest.log
-[[ -f "$_file" ]] && echo "INFO: Deleting file '$_file'" && rm $_file
+[[ -f "$_file" ]] && log_debug "Deleting file '$_file'" && rm $_file
 
-echo "WARN: Found these files REMAINING..."
+log_warn "Found these files REMAINING..."
 findAnd print $BO_Project '*.bak'
 findAnd print $BO_Project '*.log'
 findAnd print $BO_Project '*.pyc'
 findAnd print $BO_Project '__pycache__'
 
 main() {
-    # TODO: DESCRIPTION
+    # Clean project directory
 
     # TODO: CONTENT
 
@@ -73,11 +64,9 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# set -o verbose
-# set -o xtrace
+# export PS4='$ ' ; set -o verbose ; set -o xtrace
 # Code to debug...
-# set +o verbose
-# set +o xtrace
+# set +o verbose ; set +o xtrace
 : << 'DisabledContent'
 DisabledContent
 

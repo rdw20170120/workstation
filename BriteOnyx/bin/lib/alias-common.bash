@@ -1,15 +1,8 @@
 #!/usr/bin/env false
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be sourced in a BASH shell.
-
-report_status_and_return() {
-    local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} returning with status ${Status}"
-    return ${Status}
-}
-trap report_status_and_return EXIT
+# Intended to be sourced in a BASH shell during activation.
+# NO: trap ... EXIT
 ###############################################################################
 # Common BASH alias definitions
 
@@ -18,6 +11,7 @@ grep_options='--color=auto'
 grep_options+=' --exclude-dir=.git'
 grep_options+=' --exclude-dir=.pytest_cache'
 grep_options+=' --exclude-dir=.PVE'
+grep_options+=' --exclude-dir=out/coverage'
 # TODO: It appears that '--exclude-from' is not supported on macOS Mojave 10.14.6
 # TODO: Perhaps I should consider installing a compatible 'grep' using Homebrew
 # grep_options+=' --exclude-from=$BO_Project/.grep-exclude-from'
@@ -27,18 +21,16 @@ grep_options+=' --exclude="*.swp"'
 alias grep="grep $grep_options"
 
 alias cycle='clear ; test-run && gen-run -vvv && app-run -vvv'
-alias list-sort-by_size='sort -nr --key=5'
-alias logs-reset='rm -fr ${BO_Project}/log ; mkdir ${BO_Project}/log'
-alias sync-generate='meld src/gen/generate/custom src/gen/generate/shared'
+alias list_sort_by_size='sort -nr --key=5'
+alias logs_reset='rm -fr ${BO_Project}/log ; mkdir ${BO_Project}/log'
+alias sync_generate='meld src/gen/generate/custom src/gen/generate/shared'
 alias todo='grep -ER TODO $BO_Project | grep -v /log/'
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# set -o verbose
-# set -o xtrace
+# export PS4='$ ' ; set -o verbose ; set -o xtrace
 # Code to debug...
-# set +o verbose
-# set +o xtrace
+# set +o verbose ; set +o xtrace
 : << 'DisabledContent'
 DisabledContent
 

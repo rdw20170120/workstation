@@ -10,6 +10,16 @@ from src_gen.script.bash.structure import *
 # Project modules   (relative references, NOT packaged, in project)
 
 
+def _activation():
+    return [
+        header_activation(),
+        todo("DESCRIPTION"),
+        line(),
+        todo("CONTENT"),
+        disabled_content_footer(),
+    ]
+
+
 def _sourced():
     return [
         header_sourced(),
@@ -18,6 +28,10 @@ def _sourced():
         todo("CONTENT"),
         disabled_content_footer(),
     ]
+
+
+def generate_activation(directory, filename):
+    generate(_activation(), directory, filename)
 
 
 def generate_sourced(directory, filename):

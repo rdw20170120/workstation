@@ -107,22 +107,10 @@ def _generate_src_gen_shared(dir_):
 
 def _generate_src_lib(dir_):
     sub = dir_ / "mine"
-    _generate_src_lib_aws(sub / "aws")
     _generate_src_lib_src_gen(sub / "src_gen")
     _generate_src_lib_task(sub / "task")
     _generate_src_lib_templates(sub / "throw_out_your_templates")
     _generate_src_lib_utility(sub / "utility")
-
-
-def _generate_src_lib_aws(dir_):
-    sub = dir_
-    package(sub, "__init__.py")
-    library(sub, "ec2.py")
-    library(sub, "s3.py")
-    library(sub, "service.py")
-    test(sub, "test_ec2.py")
-    test(sub, "test_s3.py")
-    test(sub, "test_service.py")
 
 
 def _generate_src_lib_src_gen(dir_):

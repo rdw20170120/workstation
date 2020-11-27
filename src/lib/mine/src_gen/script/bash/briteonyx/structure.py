@@ -12,14 +12,11 @@ from src_gen.script.bash.briteonyx.source import my_visitor_map
 
 def abort_if_not_activated():
     return [
-        line(),
         string_is_null(vr("BO_Project")),
         and_(),
         eol(),
         indent(),
-        log_fatal(
-            "This project is NOT ACTIVATED, aborting",
-        ),
+        log_error("Aborting, this project is NOT ACTIVATED"),
         and_(),
         eol(),
         indent(),

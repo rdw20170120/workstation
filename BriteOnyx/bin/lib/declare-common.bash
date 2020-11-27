@@ -1,15 +1,8 @@
 #!/usr/bin/env false
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "DEBUG: Executing ${BASH_SOURCE}"
+[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be sourced in a BASH shell.
-
-report_status_and_return() {
-    local -ir Status=$?
-    [[ "${Status}" -ne 0 ]] && 
-        1>&2 echo "FATAL: ${0} returning with status ${Status}"
-    return ${Status}
-}
-trap report_status_and_return EXIT
+# Intended to be sourced in a BASH shell during activation.
+# NO: trap ... EXIT
 ###############################################################################
 # Library of helpful common BASH functions
 
@@ -34,24 +27,43 @@ execute_script() {
 } && export -f execute_script
 
 expect_failure() {
-    # Expect failure as actual status $1
-    require_arguments $# 1
+    # Expect failure as actual status $1 regarding context $2
+    require_arguments $# 2
     # $1 = actual status code (from last command)
+    # $2 = context
     require_value "$1" ; local -ir Actual=$1
-    [[ "${Actual}" -eq 0 ]] &&
-        log_error "Expected failure, but instead got status ${Actual}" &&
+    require_value "$2" ; local -r  Context=$2
+    if [[ "${Actual}" -eq 0 ]] ; then
+        log_error "Expected failure, but instead got success status ${Actual} for ${Context}"
         exit 86
+    else
+        log_good "Expected failure, got status ${Actual} for ${Context}"
+    fi
+    return 0
 } && export -f expect_failure
 
 expect_success() {
-    # Expect success as actual status $1
-    require_arguments $# 1
+    # Expect success as actual status $1 regarding context $2
+    require_arguments $# 2
     # $1 = actual status code (from last command)
+    # $2 = context
     require_value "$1" ; local -ir Actual=$1
-    [[ "${Actual}" -ne 0 ]] &&
-        log_error "Expected success, but instead got status ${Actual}" &&
+    require_value "$2" ; local -r  Context=$2
+    if [[ "${Actual}" -eq 0 ]] ; then
+        log_good "Expected success, got status ${Actual} for ${Context}"
+    else
+        log_error "Expected success, but instead got failure status ${Actual} for ${Context}"
         exit 86
+    fi
+    return 0
 } && export -f expect_success
+
+maybe_create_directories() {
+    # Create directory $1, if it does not already exist, including parents
+    require_arguments $# 1
+    [[ ! -e "$1" ]] && mkdir -p "$1"
+    require_directory "$1"
+} && export -f maybe_create_directories
 
 maybe_delete_file() {
     # Delete file $1, if it exists
@@ -91,11 +103,9 @@ status_invert 256 ; [[ $? -eq 0 ]] ; abort_on_fail $? "status_invert test 9 fail
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# set -o verbose
-# set -o xtrace
+# export PS4='$ ' ; set -o verbose ; set -o xtrace
 # Code to debug...
-# set +o verbose
-# set +o xtrace
+# set +o verbose ; set +o xtrace
 : << 'DisabledContent'
 DisabledContent
 

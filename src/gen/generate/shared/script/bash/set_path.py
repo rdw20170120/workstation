@@ -69,14 +69,14 @@ def _remember_path():
             ),
         ),
         eol(),
-        log_info("Remembering ", sq(vn("PATH")), " as ", sq(vr("PATH"))),
+        remembering("PATH"),
         eol(),
     ]
 
 
 def build():
     return [
-        header_sourced(),
+        header_activation(),
         _comments(),
         disabled_content_footer(),
     ]
