@@ -23,7 +23,6 @@
 '/Users/rwill253/project/Rob/workstation/src/app/MODULE/app.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/app/MODULE/__main__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/app/MODULE/test_app.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/src/app/htmlcov': listing directory
 '/Users/rwill253/project/Rob/workstation/src/gen': listing directory
 '/Users/rwill253/project/Rob/workstation/src/gen/.pytest_cache': listing directory
 '/Users/rwill253/project/Rob/workstation/src/gen/.pytest_cache/v': listing directory
@@ -69,6 +68,7 @@
 '/Users/rwill253/project/Rob/workstation/src/gen/generate/custom/__init__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/gen/generate/custom/document': listing directory
 '/Users/rwill253/project/Rob/workstation/src/gen/generate/custom/document/markdown': listing directory
+'/Users/rwill253/project/Rob/workstation/src/gen/generate/custom/document/markdown/tasks.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/gen/generate/custom/document/markdown/__init__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/gen/generate/custom/document/markdown/__pycache__': listing directory
 '/Users/rwill253/project/Rob/workstation/src/gen/generate/custom/document/markdown/all.py': Clean bill of health.
@@ -95,7 +95,6 @@
 '/Users/rwill253/project/Rob/workstation/src/gen/generate/custom/script/bash/all.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/gen/generate/__main__.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/gen/generate/test_app.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/src/gen/htmlcov': listing directory
 '/Users/rwill253/project/Rob/workstation/src/lib': listing directory
 '/Users/rwill253/project/Rob/workstation/src/lib/third_party': listing directory
 '/Users/rwill253/project/Rob/workstation/src/lib/mine': listing directory
@@ -192,7 +191,6 @@
 '/Users/rwill253/project/Rob/workstation/src/lib/mine/aws/s3.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/lib/mine/aws/test_ec2.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/lib/mine/aws/test_s3.py': Clean bill of health.
-'/Users/rwill253/project/Rob/workstation/src/lib/mine/htmlcov': listing directory
 '/Users/rwill253/project/Rob/workstation/src/lib/mine/utility': listing directory
 '/Users/rwill253/project/Rob/workstation/src/lib/mine/utility/test_my_assert.py': Clean bill of health.
 '/Users/rwill253/project/Rob/workstation/src/lib/mine/utility/test_my_time.py': Clean bill of health.
