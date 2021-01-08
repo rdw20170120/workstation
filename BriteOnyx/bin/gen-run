@@ -5,7 +5,7 @@
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
-    log_error "Aborting, this project is NOT ACTIVATED" &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
 main() {
@@ -29,12 +29,11 @@ main() {
     abort_on_fail $? "Source generation failed"
 
     log_debug "Use the following command to manually merge the generated source:"
-    # TODO: RESEARCH: why Meld does not open a new tab on macOS?
     Cmd='&>/dev/null'
     Cmd+=' meld'
     Cmd+=' ${BO_Project}'
     # TODO: Unify this reference with the other
-    Cmd+=' $TMPDIR/tgt'
+    Cmd+=' ${TMPDIR}/tgt'
     Cmd+=' &'
     log_info "${Cmd}"
 

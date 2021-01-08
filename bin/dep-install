@@ -5,21 +5,21 @@
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
-    log_error "Aborting, this project is NOT ACTIVATED" &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
 log_debug "Installing Python dependencies"
 
 pip3 install pip wheel --upgrade --upgrade-strategy=eager
 pip3 install \
-    boto3 awscli \
-    logzero \
     black \
     pytest \
     pytest-cov coverage[toml] \
     pytest-html ansi2html \
     pytest-icdiff \
-    pytest-sugar
+    pytest-sugar \
+    awscli boto3 \
+    logzero
 
 main() {
     # Install Python dependencies

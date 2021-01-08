@@ -7,7 +7,7 @@
 # Declare other BASH function libraries 
 
 [[ -z "${BO_Project}" ]] &&
-    log_error "'BO_Project' is undefined, aborting" &&
+    1>&2 echo "'BO_Project' is undefined, aborting" &&
     return 20
 
 source ${BO_Project}/BriteOnyx/bin/lib/declare-base.bash

@@ -51,7 +51,7 @@ report_on_fail() {
     # $2 = message to print on fail
     local -ir status=$1
     [[ ${status} -ne 0 ]] &&
-        log_error "Status ${status}: Last command failed: $2"
+        log_warn "Status ${status}: Last command failed: $2"
     return 0
 } && export -f report_on_fail
 

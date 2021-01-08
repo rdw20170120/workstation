@@ -5,7 +5,7 @@
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
-    log_error "Aborting, this project is NOT ACTIVATED" &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
 Rule=##########
@@ -57,8 +57,10 @@ check 'git --version'
 # Homebrew
 checkExecutable brew
 check 'brew --version'
-check 'brew list --full-name --versions --casks'
-check 'brew list --full-name --versions --formulae'
+check 'brew list --full-name --casks'
+check 'brew list --versions --casks'
+check 'brew list --full-name --formulae'
+check 'brew list --versions --formulae'
 
 # Python shared
 checkExecutable python
@@ -89,8 +91,8 @@ check 'pip3 --version'
 checkExecutable 2to3
 checkExecutable black
 check 'black --version'
-checkExecutable coverage
-check 'coverage --version'
+checkExecutable coverage3
+check 'coverage3 --version'
 checkExecutable py.test
 checkExecutable pytest
 2>&1 check 'pytest --version'

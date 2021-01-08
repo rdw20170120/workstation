@@ -4,16 +4,9 @@
 # Intended to be sourced in a BASH shell during activation.
 # NO: trap ... EXIT
 ###############################################################################
-# BASH alias definitions for source control
+# Git alias definitions
 
-alias src_add='git add .'
-alias src_branches='git branch --list -a'
-alias src_commit='git commit'
-alias src_ignored='git status --ignored'
-alias src_log='git shortlog | tail -n -25'
-alias src_pull='git pull'
-alias src_push='git push'
-alias src_status='git status'
+# TODO: Implement
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

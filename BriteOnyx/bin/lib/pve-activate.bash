@@ -6,14 +6,17 @@
 ###############################################################################
 # Activate Python virtual environment (PVE)
 
-export PVE=$BO_Project/.PVE
-remembering PVE
-if [[ ! -d $PVE ]] ; then
-    log_warn "Missing Python virtual environment directory '$PVE'"
+export BO_PVE=${BO_Project}/.PVE
+remembering BO_PVE
+if [[ ! -d ${BO_PVE} ]] ; then
+    log_warn "Missing Python virtual environment directory '${BO_PVE}'"
 fi
 
-Script=$PVE/bin/activate
-if [[ -r "$Script" ]] ; then
+export BO_PathPve=${BO_PVE}/bin
+remembering BO_PathPve
+
+Script=${BO_PathPve}/activate
+if [[ -r "${Script}" ]] ; then
     log_debug "Sourcing script '${Script}'"
     source ${Script}
 else

@@ -30,14 +30,14 @@ which is likewise based on his many years of technical experience.
 
 ~~~ bash
 pve-create
-source $PVE/bin/activate
+source $BO\_PVE/bin/activate
 pip3 install wheel
 dep-capture
 tool-capture
 exit
 ~~~
 
-Create [activate.bash](../activate.bash) to source `$PVE/bin/activate`.
+Create [activate.bash](../activate.bash) to source `$BO_PVE/bin/activate`.
 
 TODO: Add link references
 

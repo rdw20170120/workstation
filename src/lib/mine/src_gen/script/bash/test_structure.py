@@ -349,15 +349,15 @@ def test_or_():
         or_(None)
 
 
-def test_path_does_not_exist():
+def test_path_not_exists():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
-        path_does_not_exist()
-    assert is_.equal(s(path_does_not_exist(None)), "[[ ! -e ]]")
-    assert is_.equal(s(path_does_not_exist("")), "[[ ! -e ]]")
-    assert is_.equal(s(path_does_not_exist("Test")), "[[ ! -e Test ]]")
+        path_not_exists()
+    assert is_.equal(s(path_not_exists(None)), "[[ ! -e ]]")
+    assert is_.equal(s(path_not_exists("")), "[[ ! -e ]]")
+    assert is_.equal(s(path_not_exists("Test")), "[[ ! -e Test ]]")
     with raises(TypeError):
-        path_does_not_exist("Test", None)
+        path_not_exists("Test", None)
 
 
 def test_path_is_not_directory():

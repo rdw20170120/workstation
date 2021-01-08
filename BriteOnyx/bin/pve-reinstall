@@ -5,15 +5,15 @@
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
-    log_error "Aborting, this project is NOT ACTIVATED" &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-if [[ -z "$PVE" ]] ; then
-    log_error "Environment variable 'PVE' is undefined, aborting"
+if [[ -z "$BO_PVE" ]] ; then
+    log_error "Environment variable 'BO_PVE' is undefined, aborting"
     exit 1
 fi
 
-log_debug "Reinstalling Python virtual environment directory '$PVE'"
+log_debug "Reinstalling Python virtual environment directory '$BO_PVE'"
 pve-rm
 pve-create
 source $BO_Project/BriteOnyx/bin/lib/pve-activate.bash

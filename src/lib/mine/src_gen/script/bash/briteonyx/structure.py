@@ -16,7 +16,7 @@ def abort_if_not_activated():
         and_(),
         eol(),
         indent(),
-        log_error("Aborting, this project is NOT ACTIVATED"),
+        echo_error("Aborting, this project is NOT ACTIVATED"),
         and_(),
         eol(),
         indent(),

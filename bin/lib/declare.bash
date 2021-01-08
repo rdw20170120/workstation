@@ -1,27 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env false
 [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be executed in a BASH shell.
-trap warn_on_error EXIT
+# Intended to be sourced in a BASH shell.
+# NO: trap ... EXIT
 ###############################################################################
-[[ -z "${BO_Project}" ]] &&
-    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
-    exit 99
+# Declare other BASH function libraries 
 
-File=$BO_Project/out/tool.out
-
-log_debug "Capturing tool status to '${File}'"
-&>${File} tool-report
-
-main() {
-    # Capture tool status
-
-    # TODO: CONTENT
-
-    return 0
-}
-
-main $@
+# TODO: CONTENT
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
@@ -29,5 +14,8 @@ main $@
 # Code to debug...
 # set +o verbose ; set +o xtrace
 : << 'DisabledContent'
+
+source ${BO_Project}/bin/lib/declare-NAME.bash  ; abort_on_fail $? "Failed to source script"
+
 DisabledContent
 
