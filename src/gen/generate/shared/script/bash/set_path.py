@@ -30,7 +30,9 @@ def _comments():
         comment("in order to make collisions fail-fast."),
         comment("This arrangement is best"),
         comment("for ensuring consistent behavior"),
-        comment("of the Python virtual environment, the system, and the project."),
+        comment(
+            "of the Python virtual environment, the system, and the project."
+        ),
         comment("It puts at-risk"),
         comment("only those user-specific commands, tools, and scripts"),
         comment("relevant to the current deployed environment--"),

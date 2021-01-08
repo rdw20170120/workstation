@@ -246,8 +246,10 @@ def _remember_system_path():
 
 def _remember_tool_path():
     return [
-        export(vn("BO_PathTool"), vr("BO_PathPve")), eol(),
-        remembering("BO_PathTool"), eol(),
+        export(vn("BO_PathTool"), vr("BO_PathPve")),
+        eol(),
+        remembering("BO_PathTool"),
+        eol(),
     ]
 
 
@@ -268,11 +270,18 @@ def _remember_user_path():
 
 def _source_supporting_scripts():
     return [
-        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/set_path.bash")), eol(),
-        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/configure-Python.bash")), eol(),
-        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/declare.bash")), eol(),
-        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/alias-common.bash")), eol(),
-        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/alias-git.bash")), eol(),
+        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/set_path.bash")),
+        eol(),
+        source(
+            x(vr("BO_Project"), "/BriteOnyx/bin/lib/configure-Python.bash")
+        ),
+        eol(),
+        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/declare.bash")),
+        eol(),
+        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/alias-common.bash")),
+        eol(),
+        source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/alias-git.bash")),
+        eol(),
         line(),
         maybe_copy_file(
             x(vr("BO_Project"), "/alias.bash"),

@@ -489,8 +489,12 @@ def header_sourced():
 
 def maybe_copy_file(target, source):
     return [
-        path_not_exists(target), and_(), eol(),
-        indent(), command("cp", source, target), eol(),
+        path_not_exists(target),
+        and_(),
+        eol(),
+        indent(),
+        command("cp", source, target),
+        eol(),
     ]
 
 
