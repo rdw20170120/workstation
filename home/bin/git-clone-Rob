@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script is intended to be executed by a user in a BASH shell.
+# This script is intended to be executed by a user in a Bash shell.
 set -ex
 
 # Clone git repositories, if they have not been cloned already.

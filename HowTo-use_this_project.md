@@ -6,25 +6,25 @@ to manage a project's source directory tree
 during development and testing.
 
 This activation is focused
-on working within a BASH shell,
+on working within a Bash shell,
 also known as a terminal
 or command-line interface (CLI).
 The intent is to facilitate
 the user's activities
 while managing and working around
 various characteristics
-of BASH.
+of Bash.
 Some of the main features
 of the BriteOnyx framework
 include:
 
 * Empower the user
-  to safely and effectively use BASH
+  to safely and effectively use Bash
 * Manage the project's software configuration (SCM)
 * Ensure consistent execution
   under all invocation scenarios
-* Elevate the user's BASH scripting
-  well above BASH's low-level quirkiness
+* Elevate the user's Bash scripting
+  well above Bash's low-level quirkiness
 
 NOTE: We **MUST NOT EVER** `exit` during BriteOnyx activation!
 
@@ -41,13 +41,13 @@ robs the user of useful feedback and
 interrupts their work,
 which is unacceptable.
 Instead of `exit`,
-the BASH `return` statement should be invoked
+the Bash `return` statement should be invoked
 to terminate execution
 with an appropriate status code.
 
 Likewise,
 we must be very careful
-invoking special BASH options
+invoking special Bash options
 during BriteOnyx activation,
 particularly the `set -e` option.
 The user is inheriting the shell
@@ -67,11 +67,11 @@ at the beginning of the script,
 then activate new shell.
 Having learned that lesson,
 let's never use `set -x`
-in a BASH script
+in a Bash script
 intended to be `source`d
 (except by the user while troubleshooting).
 Similarly,
-the `set -e` BASH option is problematic
+the `set -e` Bash option is problematic
 because its haphazard behavior
 does not deliver
 on its promised usefulness.
@@ -89,5 +89,5 @@ to visualize the execution.
 NOTE: Rob Williams is now investigating
 Fish--the friendly interactive shell--
 as a complete replacement
-for BASH.
+for Bash.
 

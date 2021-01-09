@@ -1,5 +1,5 @@
 #!/bin/false
-# NOTE:  This file is intended to be sourced into a BASH shell.
+# NOTE:  This file is intended to be sourced into a Bash shell.
 
 alias la='ls -Agl'
 alias ll='ls -gl'

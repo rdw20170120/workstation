@@ -1,5 +1,5 @@
 #!/bin/false
-# NOTE:  This file is intended to be executed as part of starting a BASH shell.
+# NOTE:  This file is intended to be executed as part of starting a Bash shell.
 
 umask 077
 

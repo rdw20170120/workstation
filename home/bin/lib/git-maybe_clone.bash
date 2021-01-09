@@ -1,5 +1,5 @@
 #!/bin/false
-# This script is intended to be sourced into another script within BASH.
+# This script is intended to be sourced into another script within Bash.
 set -ex
 
 maybe_clone() {

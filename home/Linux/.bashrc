@@ -110,7 +110,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Define BASH aliases
+# Define Bash aliases
 [[ -r alias.bash ]] && source alias.bash
 
 # enable programmable completion features (you don't need to enable

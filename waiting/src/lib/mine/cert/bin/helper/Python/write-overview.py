@@ -89,7 +89,7 @@ take this exam.""",
             htmltags.li[
                 link(css_class, PAGE_CUT_AND_PASTE, "HowTo:  cut and paste")
             ],
-            htmltags.li[link(css_class, PAGE_BASH, "HowTo:  leverage BASH")],
+            htmltags.li[link(css_class, PAGE_Bash, "HowTo:  leverage Bash")],
             htmltags.li[
                 link(css_class, PAGE_UNDO, "Why:  do and then undo tasks")
             ],

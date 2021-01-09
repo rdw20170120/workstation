@@ -15,7 +15,7 @@ visitor_map = throw_out_your_templates.xml_default_visitors_map.copy()
 PAGE_DOC_4_6 = "https://developer.couchbase.com/documentation/server/4.6/introduction/intro.html"
 PAGE_EXAMPLE_COM = "http://example.com"
 
-PAGE_BASH = "support/HowTo-BASH.html"
+PAGE_Bash = "support/HowTo-Bash.html"
 PAGE_CUT_AND_PASTE = "support/HowTo-cut_and_paste.html"
 PAGE_FOCUS = "support/HowTo-manage_keyboard_focus.html"
 PAGE_MACHINE = "support/machine_naming.html"

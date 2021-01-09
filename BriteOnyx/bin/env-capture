@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be executed in a BASH shell.
+# Intended to be executed in a Bash shell.
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
@@ -10,7 +10,7 @@ trap warn_on_error EXIT
 
 File=${BO_Project}/out/env.out
 
-log_debug "Capturing BASH environment status to '${File}'"
+log_debug "Capturing Bash environment status to '${File}'"
 &>${File} \
     env-report
 
@@ -18,7 +18,7 @@ log_debug "Capturing BASH environment status to '${File}'"
 cp ${BO_Project}/*.env ${BO_Project}/out
 
 main() {
-    # Capture BASH environment status
+    # Capture Bash environment status
 
     # TODO: CONTENT
 

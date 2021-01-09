@@ -1,5 +1,5 @@
 # HowTo activate this project repository (directory)
-This project is designed to be developed and executed in a BASH shell running on Ubuntu.
+This project is designed to be developed and executed in a Bash shell running on Ubuntu.
 It should work on Ubuntu and derivatives.
 It may be possible to adapt it to run in other shells and/or on other operating systems.
 
@@ -30,7 +30,7 @@ This approach is motivated by two primary factors:
 ## Activate this project in a shell
 **NOTE**: You must first have [setup your workstation][workstation].
 
-1. Open a new BASH shell, then:
+1. Open a new Bash shell, then:
 
 ~~~ bash
 cd PROJECT-ROOT-DIRECTORY

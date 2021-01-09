@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be executed in a BASH shell.
+# Intended to be executed in a Bash shell.
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
@@ -11,15 +11,15 @@ trap warn_on_error EXIT
 File=$BO_Project/out/env.out
 
 if [[ ! -r "$File" ]] ; then
-    log_error "BASH environment status file '$File' is unreadable, aborting"
+    log_error "Bash environment status file '$File' is unreadable, aborting"
     exit 1
 fi
 
-log_debug "Checking BASH environment status against '$File'"
+log_debug "Checking Bash environment status against '$File'"
 env-report | diff - $File
 
 main() {
-    # Check BASH environment status
+    # Check Bash environment status
 
     # TODO: CONTENT
 

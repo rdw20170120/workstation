@@ -1,5 +1,5 @@
 #!/bin/false
-# NOTE:  This file is intended to be executed as part of starting a BASH shell.
+# NOTE:  This file is intended to be executed as part of starting a Bash shell.
 
 export TERM=xterm
 export COLORTERM=truecolor
@@ -109,7 +109,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Define BASH aliases
+# Define Bash aliases
 [[ -r alias.bash ]] && source alias.bash
 
 # enable programmable completion features (you don't need to enable

@@ -1,10 +1,10 @@
 #!/usr/bin/env false
 [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be sourced in a BASH shell.
+# Intended to be sourced in a Bash shell.
 # NO: trap ... EXIT
 ###############################################################################
-# Declare other BASH function libraries 
+# Declare other Bash function libraries 
 
 # TODO: CONTENT
 
