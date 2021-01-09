@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # This script is intended to be executed by a user in a Bash shell.
-set -ex
 
 # Search for phrase $1 in projects (checked out git repositories)
 # 1=search phrase
@@ -10,5 +9,10 @@ if [[ -z "$1" ]] ; then
   return
 fi
 
-grep -EiR $1 --exclude-dir=.git --files-with-matches ~/project
+grep -EiR $1 \
+    --exclude-dir=.git \
+    --exclude-dir=.PVE \
+    --files-with-matches \
+    ~/project |
+    sort
 

@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 # This script is intended to be executed by a user in a Bash shell.
-set -ex
 
 # Clone git repositories, if they have not been cloned already.
 # NOTE that I reference my special SSH configuration to handle the connection.
 
 source ~/bin/lib/git-maybe_clone.bash
 
-UrlPrefix=OptumGitHub:DataExternalization
+UrlPrefix=MeAtOptum:DataExternalization
 Dir=~/project/KaaS/DataExternalization
 
 maybe_clone $Dir $UrlPrefix aks_kafka_exporter
