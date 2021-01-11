@@ -1,15 +1,15 @@
 #!/usr/bin/env false
 [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be sourced in a BASH shell during activation.
+# Intended to be sourced in a Bash shell during activation.
 # NO: trap ... EXIT
 ###############################################################################
 # Configure Python
 
 # Configure Python path
-DirMine=$BO_Project/src/lib/mine
-DirThird=$BO_Project/src/lib/third_party
-export PYTHONPATH=$PYTHONPATH:$DirThird:$DirMine
+DirMine=${BO_Project}/src/lib/mine
+DirThird=${BO_Project}/src/lib/third_party
+export PYTHONPATH=${PYTHONPATH}:${DirThird}:${DirMine}
 remembering PYTHONPATH
 
 export PYTHONCOERCELOCALE=warn

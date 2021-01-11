@@ -1,14 +1,16 @@
 # Files and directories within THIS project
-context.bash
+/alias.bash
+/context.bash
+/BO-*.env
 
 # Common directories
 .cache/
 coverage/
-log/
-out/
+/log/
 
 # Common file suffixes
 *.avro
+*.bak
 *.env
 *.html
 *.json
@@ -17,7 +19,6 @@ out/
 *.out
 *.parquet
 *.pid
-*.txt
 
 # Apple macOS
 .DS_Store

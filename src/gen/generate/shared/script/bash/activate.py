@@ -51,7 +51,7 @@ def _activate_python_virtual_environment():
         source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/pve-activate.bash")),
         eol(),
         _capture_environment("PVE-after"),
-        _remember_pve_path(),
+        _remember_tool_path(),
     ]
 
 
@@ -229,21 +229,6 @@ def _remember_project_root():
     ]
 
 
-def _remember_pve_path():
-    return [
-        string_is_null(vr("BO_PathPve")),
-        and_(),
-        eol(),
-        indent(),
-        export(vn("BO_PathPve"), vr("PATH")),
-        and_(),
-        eol(),
-        indent(),
-        remembering("BO_PathPve"),
-        eol(),
-    ]
-
-
 def _remember_system_path():
     return [
         string_is_null(vr("BO_PathSystem")),
@@ -255,6 +240,15 @@ def _remember_system_path():
         eol(),
         indent(),
         remembering("BO_PathSystem"),
+        eol(),
+    ]
+
+
+def _remember_tool_path():
+    return [
+        export(vn("BO_PathTool"), vr("BO_PathPve")),
+        eol(),
+        remembering("BO_PathTool"),
         eol(),
     ]
 
@@ -289,9 +283,18 @@ def _source_supporting_scripts():
         source(x(vr("BO_Project"), "/BriteOnyx/bin/lib/alias-git.bash")),
         eol(),
         line(),
+        maybe_copy_file(
+            x(vr("BO_Project"), "/alias.bash"),
+            x(vr("BO_Project"), "/cfg/sample/alias.bash"),
+        ),
+        maybe_copy_file(
+            x(vr("BO_Project"), "/context.bash"),
+            x(vr("BO_Project"), "/cfg/sample/context.bash"),
+        ),
+        line(),
         maybe_source(x(vr("BO_Project"), "/bin/lib/declare.bash")),
-        maybe_source(x(vr("BO_Project"), "/context.bash")),
         maybe_source(x(vr("BO_Project"), "/alias.bash")),
+        maybe_source(x(vr("BO_Project"), "/context.bash")),
     ]
 
 
@@ -305,7 +308,7 @@ def build():
         source(x(vr("PWD"), "/BriteOnyx/bin/lib/declare-log4bash.bash")),
         eol(),
         log_info(
-            "Activating this directory ",
+            "Activating ",
             sq(vr("PWD")),
             " as the current project",
         ),
@@ -327,6 +330,8 @@ def build():
         line(),
         _capture_environment("outgoing"),
         log_good("BriteOnyx has successfully activated this project"),
+        eol(),
+        log_info("To get started, try executing the 'cycle' alias..."),
         eol(),
         disabled_content_footer(),
     ]

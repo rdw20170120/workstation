@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-"""Generate all BriteOnyx BASH scripts."""
+"""Generate all BriteOnyx Bash scripts."""
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
@@ -18,6 +18,7 @@ def _generate_bin(dir_):
 
 def _generate_bin_lib(dir_):
     sub = dir_
+    sourced(sub, "declare.bash")
 
 
 def generate(directory):

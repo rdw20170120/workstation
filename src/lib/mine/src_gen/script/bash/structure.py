@@ -276,12 +276,12 @@ def integer_not_equal(left, right):
     return condition("[[", left, "-ne", right, "]]")
 
 
-def path_does_not_exist(path_name):
-    return condition("[[", "!", "-e", path_name, "]]")
-
-
 def path_is_not_directory(path_name):
     return condition("[[", "!", "-d", path_name, "]]")
+
+
+def path_not_exists(path_name):
+    return condition("[[", "!", "-e", path_name, "]]")
 
 
 def path_is_not_file(path_name):
@@ -458,7 +458,7 @@ def header_activation():
         shebang_sourced(),
         trace_execution(),
         no(set_("-e")),
-        comment("Intended to be sourced in a BASH shell during activation."),
+        comment("Intended to be sourced in a Bash shell during activation."),
         no(trap("...", "EXIT")),
         rule(),
     ]
@@ -469,7 +469,7 @@ def header_executed():
         shebang_bash(),
         trace_execution(),
         no(set_("-e")),
-        comment("Intended to be executed in a BASH shell."),
+        comment("Intended to be executed in a Bash shell."),
         trap("warn_on_error", "EXIT"),
         eol(),
         rule(),
@@ -481,9 +481,20 @@ def header_sourced():
         shebang_sourced(),
         trace_execution(),
         no(set_("-e")),
-        comment("Intended to be sourced in a BASH shell."),
+        comment("Intended to be sourced in a Bash shell."),
         no(trap("...", "EXIT")),
         rule(),
+    ]
+
+
+def maybe_copy_file(target, source):
+    return [
+        path_not_exists(target),
+        and_(),
+        eol(),
+        indent(),
+        command("cp", source, target),
+        eol(),
     ]
 
 

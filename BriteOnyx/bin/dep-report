@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be executed in a BASH shell.
+# Intended to be executed in a Bash shell.
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
-    log_error "Aborting, this project is NOT ACTIVATED" &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
 pip3 freeze --all | sort

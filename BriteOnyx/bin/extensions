@@ -6,7 +6,7 @@ Ignore Python virtual environment directory.
 
 TODO: Convert to use pathlib
 TODO: Enhance to take the directory as an argument
-TODO: Enhance to reference project environment variable $PVE
+TODO: Enhance to reference project environment variable $BO_PVE
 
 Intended to be executed directly by the user.
 """

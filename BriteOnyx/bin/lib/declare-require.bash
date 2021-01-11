@@ -1,10 +1,10 @@
 #!/usr/bin/env false
 [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be sourced in a BASH shell during activation.
+# Intended to be sourced in a Bash shell during activation.
 # NO: trap ... EXIT
 ###############################################################################
-# Library of helpful BASH functions to express requirements
+# Library of helpful Bash functions to express requirements
 
 forbid_path() {
     # Forbid path $1

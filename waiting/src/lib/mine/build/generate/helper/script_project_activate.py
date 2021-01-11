@@ -59,7 +59,7 @@ def comments():
             "  of problems while continuing execution where possible.  Terminating the shell robs the user of"
         ),
         comment(
-            "  useful feedback and interrupts their work, which is unacceptable.  Instead, the BASH 'return'"
+            "  useful feedback and interrupts their work, which is unacceptable.  Instead, the Bash 'return'"
         ),
         comment(
             "  statement should be invoked to end execution with an appropriate status code."
@@ -84,7 +84,7 @@ def capture_environment(directory_name, file_name):
 def capture_incoming_environment():
     return [
         line(),
-        comment("Capture incoming BASH environment"),
+        comment("Capture incoming Bash environment"),
         if_(
             string_is_not_null(vr("TMPDIR")),
             "  ",
@@ -109,7 +109,7 @@ def capture_incoming_environment():
 def capture_outgoing_environment():
     return [
         line(),
-        comment("Capture outgoing BASH environment"),
+        comment("Capture outgoing Bash environment"),
         if_(
             string_is_not_null(vr("TMPDIR")),
             "  ",
@@ -282,12 +282,12 @@ def copy_starter_files():
         command("mkdir", "-p", vr("DirTgt")),
         eol(),
         line(),
-        assign(vn("FileTgt"), path(vr("DirTgt"), "declare-BASH.src")),
+        assign(vn("FileTgt"), path(vr("DirTgt"), "declare-Bash.src")),
         eol(),
         path_is_not_file(vr("FileTgt")),
         and_(),
         command(
-            "cp", path(vr("DirSrc"), "project-declare-BASH.src"), vr("FileTgt")
+            "cp", path(vr("DirSrc"), "project-declare-Bash.src"), vr("FileTgt")
         ),
         eol(),
         line("DisabledContent"),

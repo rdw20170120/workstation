@@ -1,7 +1,7 @@
 #!/usr/bin/env false
 [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be sourced in a BASH shell during activation.
+# Intended to be sourced in a Bash shell during activation.
 # NO: trap ... EXIT
 ###############################################################################
 # Activate the BriteOnyx framework to manage this project directory tree
@@ -22,7 +22,7 @@ fi
 
 env | sort > ${PWD}/BO-incoming.env
 source ${PWD}/BriteOnyx/bin/lib/declare-log4bash.bash
-log_info "Activating this directory '${PWD}' as the current project"
+log_info "Activating '${PWD}' as the current project"
 
 remembering() {
     # Log that we are remembering variable $1
@@ -87,9 +87,8 @@ export PATH=${BO_PathSystem}
 env | sort > ${PWD}/BO-PVE-prior.env
 source ${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
 env | sort > ${PWD}/BO-PVE-after.env
-[[ -z "${BO_PathPve}" ]] &&
-    export BO_PathPve=${PATH} &&
-    remembering BO_PathPve
+export BO_PathTool=${BO_PathPve}
+remembering BO_PathTool
 
 source ${BO_Project}/BriteOnyx/bin/lib/set_path.bash
 source ${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
@@ -97,15 +96,21 @@ source ${BO_Project}/BriteOnyx/bin/lib/declare.bash
 source ${BO_Project}/BriteOnyx/bin/lib/alias-common.bash
 source ${BO_Project}/BriteOnyx/bin/lib/alias-git.bash
 
+[[ ! -e ${BO_Project}/alias.bash ]] &&
+    cp ${BO_Project}/cfg/sample/alias.bash ${BO_Project}/alias.bash
+[[ ! -e ${BO_Project}/context.bash ]] &&
+    cp ${BO_Project}/cfg/sample/context.bash ${BO_Project}/context.bash
+
 [[ -r ${BO_Project}/bin/lib/declare.bash ]] &&
     source ${BO_Project}/bin/lib/declare.bash
-[[ -r ${BO_Project}/context.bash ]] &&
-    source ${BO_Project}/context.bash
 [[ -r ${BO_Project}/alias.bash ]] &&
     source ${BO_Project}/alias.bash
+[[ -r ${BO_Project}/context.bash ]] &&
+    source ${BO_Project}/context.bash
 
 env | sort > ${PWD}/BO-outgoing.env
 log_good "BriteOnyx has successfully activated this project"
+log_info "To get started, try executing the 'cycle' alias..."
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

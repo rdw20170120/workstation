@@ -1,7 +1,7 @@
 # `bin`
 This is the `bin` directory for the user home directory on the workstation.
 This directory should be included on the shell's PATH in the login scripts.
-This directory tends to contain mostly BASH scripts, though I am leaning more
+This directory tends to contain mostly Bash scripts, though I am leaning more
 towards using Python for simple scripts.
 These scripts are designed to be invoked directly by the user in the shell.
 Therefore, these scripts should have proper shebangs and proper file

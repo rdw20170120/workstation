@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# DISABLED: set -e
+# NO: set -e
 ###############################################################################
 # Secure parts of user home directory
 
@@ -27,7 +27,7 @@ if [[ -d $dir ]] ; then
   chmod u=rw,g=,o= $dir/*
 fi
 
-# Secure projects (GitHub repository checkouts)
+# Secure projects (Git working directories)
 dir=~/project
 if [[ -d $dir ]] ; then
   chmod -R g=,o= $dir

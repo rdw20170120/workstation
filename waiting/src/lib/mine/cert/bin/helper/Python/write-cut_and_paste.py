@@ -33,7 +33,7 @@ to protect the integrity of the exam.""",
     page.add(
         htmltags.p[
             """TODO: Cut-and-paste is mostly unnecessary for a system administrator since they routinely
-make use of appropriate features of such tools as BASH and SSH.  The entire exam can be completed
+make use of appropriate features of such tools as Bash and SSH.  The entire exam can be completed
 using the web browser and terminal of the client machine, without directly logging in to any of the
 server consoles (use SSH from a client shell instead).""",
         ],

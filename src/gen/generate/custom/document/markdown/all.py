@@ -10,7 +10,10 @@ from src_gen.document.markdown.complete import generate_document as document
 
 def _generate_doc(dir_):
     sub = dir_
-    generate_tasks(sub)
+    document(sub, "HowTo-install-OpenJDK-15.md")
+    document(sub, "HowTo-use_Venafi-to_create_TLS_certificate.md")
+    document(sub, "HowTo-use_Venafi-to_download_TLS_certificate.md")
+    document(sub, "testssl.md")
 
 
 def generate(directory):

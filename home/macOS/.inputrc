@@ -1,0 +1,52 @@
+# Custom readline configuration
+# by Rob Williams
+
+set bell-style audible
+set completion-query-items 25
+set editing-mode vi
+set keymap vi
+set mark-directories On
+
+# Interesting commands
+# beginning-of-line
+# end-of-line
+# forward-word
+# backward-word
+# clear-screen
+# redraw-current-line
+# accept-line
+# beginning-of-history
+# end-of-history
+# reverse-search-history (incremental)
+# forward-search-history (incremental)
+# history-search-forward (non-incremental)
+# history-search-backward (non-incremental)
+# yank-nth-arg
+# yank-last-arg
+# shell-expand-line
+# history-expand-line
+# magic-space
+# alias-expand-line
+# history-and-alias-expand-line
+# edit-and-execute-command
+# overwrite-mode
+# kill-line
+# backward-kill-line
+# kill-whole-line
+# kill-region
+# universal-argument
+# complete
+# possible-completions
+# insert-completions
+# menu-complete
+# complete-filename
+# dynamic-complete-history
+# complete-into-braces
+# Keyboard Macros
+# re-read-init-file
+# abort
+# undo
+# revert-line
+# set-mark
+# exchange-point-and-mark
+

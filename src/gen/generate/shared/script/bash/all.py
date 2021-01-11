@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-"""Generate all BASH scripts."""
+"""Generate all Bash scripts."""
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)

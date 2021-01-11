@@ -9,13 +9,13 @@ from webpage import Html5
 
 def main():
     css_class = "support"
-    page = Html5(css_class, "HowTo use BASH")
+    page = Html5(css_class, "HowTo use Bash")
     page.add(
         htmltags.p[
-            "TODO: Describe how to use BASH command-line completion, editing, and history",
+            "TODO: Describe how to use Bash command-line completion, editing, and history",
         ],
     )
-    page.render(PAGE_BASH)
+    page.render(PAGE_Bash)
 
 
 if __name__ == "__main__":

@@ -1,25 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env false
 [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be executed in a Bash shell.
-trap warn_on_error EXIT
+# Intended to be sourced in a Bash shell.
+# NO: trap ... EXIT
 ###############################################################################
-[[ -z "${BO_Project}" ]] &&
-    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
-    exit 99
+# Declare other Bash function libraries 
 
-main() {
-    # Check all project configuration status
-
-    dep-check
-    env-check
-    py-check
-    tool-check
-
-    return 0
-}
-
-main $@
+# TODO: CONTENT
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
@@ -27,5 +14,8 @@ main $@
 # Code to debug...
 # set +o verbose ; set +o xtrace
 : << 'DisabledContent'
+
+source ${BO_Project}/bin/lib/declare-NAME.bash  ; abort_on_fail $? "Failed to source script"
+
 DisabledContent
 

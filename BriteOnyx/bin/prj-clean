@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
 # NO: set -e
-# Intended to be executed in a BASH shell.
+# Intended to be executed in a Bash shell.
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
-    log_error "Aborting, this project is NOT ACTIVATED" &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-if [[ -z "$PVE" ]] ; then
-    log_error "Environment variable 'PVE' is undefined, aborting"
+if [[ -z "$BO_PVE" ]] ; then
+    log_error "Environment variable 'BO_PVE' is undefined, aborting"
     exit 1
 fi
 
@@ -19,8 +19,8 @@ findAnd() {
     # $2 = directory in which to work
     # $3 = filename pattern to match
     find $2 \
-	-not -path "$BO_Project/.git/*" \
-	-and -not -path "$PVE/*" \
+	-not -path "${BO_Project}/.git/*" \
+	-and -not -path "${BO_PVE}/*" \
 	-and -name "$3" \
 	-and -type f \
 	-$1

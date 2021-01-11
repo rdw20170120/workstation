@@ -1,21 +1,29 @@
 #!/usr/bin/env bash
-# This script is intended to be executed by a user in a BASH shell.
-set -ex
+# This script is intended to be executed by a user in a Bash shell.
 
 # Clone git repositories, if they have not been cloned already.
 # NOTE that I reference my special SSH configuration to handle the connection.
 
 source ~/bin/lib/git-maybe_clone.bash
 
-UrlPrefix=OptumGitHub:optumcaredataplatform
-Dir=~/project/OCDP
+UrlPrefix=MeAtOptum:optumcaredataplatform
 
-maybe_clone $Dir $UrlPrefix OCDP_build_orchestration
-maybe_clone $Dir $UrlPrefix acr_push_charts
-maybe_clone $Dir $UrlPrefix azure-bitnami-charts
+Dir=~/project/OCDP/deploy
 maybe_clone $Dir $UrlPrefix azure-dpaas-client-deploy
-maybe_clone $Dir $UrlPrefix azure-dpaas-client-pre-requisites
-maybe_clone $Dir $UrlPrefix azure_aks_provision
+maybe_clone $Dir $UrlPrefix blobwriter_deploy
+maybe_clone $Dir $UrlPrefix cmak-deploy
+maybe_clone $Dir $UrlPrefix connect_deploy
+maybe_clone $Dir $UrlPrefix k8s-connect-deploy
+maybe_clone $Dir $UrlPrefix k8s_kafka_deploy
+maybe_clone $Dir $UrlPrefix kafka-configurator-deploy
+maybe_clone $Dir $UrlPrefix kafka_deploy
+maybe_clone $Dir $UrlPrefix kube-state-metrics-deploy
+maybe_clone $Dir $UrlPrefix nginix-ingress-deploy
+maybe_clone $Dir $UrlPrefix oauth2-proxy-deploy
+maybe_clone $Dir $UrlPrefix prometheus_grafana_deploy
+maybe_clone $Dir $UrlPrefix schema-deploy
+
+Dir=~/project/OCDP/Docker
 maybe_clone $Dir $UrlPrefix bitnami-docker-alertmanager
 maybe_clone $Dir $UrlPrefix bitnami-docker-configmap-reload
 maybe_clone $Dir $UrlPrefix bitnami-docker-grafana
@@ -26,25 +34,85 @@ maybe_clone $Dir $UrlPrefix bitnami-docker-kube-state-metrics
 maybe_clone $Dir $UrlPrefix bitnami-docker-node-exporter
 maybe_clone $Dir $UrlPrefix bitnami-docker-prometheus
 maybe_clone $Dir $UrlPrefix bitnami-docker-prometheus-operator
+maybe_clone $Dir $UrlPrefix bitnami-docker-thanos
 maybe_clone $Dir $UrlPrefix bitnami-docker-zookeeper
-maybe_clone $Dir $UrlPrefix blobwriter
-maybe_clone $Dir $UrlPrefix blobwriter_deploy
-maybe_clone $Dir $UrlPrefix cdc-setup-supportfiles
-maybe_clone $Dir $UrlPrefix cloud_architecture_docs
-maybe_clone $Dir $UrlPrefix connect_deploy
+maybe_clone $Dir $UrlPrefix confluentinc-common-docker
+maybe_clone $Dir $UrlPrefix cp-docker-kafka-connect
+maybe_clone $Dir $UrlPrefix cp-docker-schema-registry
+maybe_clone $Dir $UrlPrefix cp-kafka-connect-base-images
+maybe_clone $Dir $UrlPrefix debezium-docker-images
+maybe_clone $Dir $UrlPrefix ex-docker-exist
+maybe_clone $Dir $UrlPrefix nginix-ingress-docker
+maybe_clone $Dir $UrlPrefix oauth2-proxy-docker
+maybe_clone $Dir $UrlPrefix yahoo-docker-cmak
+
+Dir=~/project/OCDP/Helm
+maybe_clone $Dir $UrlPrefix acr_push_charts
+maybe_clone $Dir $UrlPrefix azure-bitnami-charts
+maybe_clone $Dir $UrlPrefix cmak-helm-chart
 maybe_clone $Dir $UrlPrefix cp-helm-charts
-maybe_clone $Dir $UrlPrefix deidentify-smt
-maybe_clone $Dir $UrlPrefix dpaas-kafka-streams
-maybe_clone $Dir $UrlPrefix entity-builder-templates-ocd
-maybe_clone $Dir $UrlPrefix helm-schema-registry
-maybe_clone $Dir $UrlPrefix kafka-blob-storage
-maybe_clone $Dir $UrlPrefix kafka_deploy
+maybe_clone $Dir $UrlPrefix exist-helm-chart
+maybe_clone $Dir $UrlPrefix nginix-ingress-helm-chart
+maybe_clone $Dir $UrlPrefix oauth2-proxy-helm-chart
+
+Dir=~/project/OCDP/special
+maybe_clone $Dir $UrlPrefix OCDP_build_orchestration
+maybe_clone $Dir $UrlPrefix cloud_architecture_docs
+maybe_clone $Dir $UrlPrefix git-warden
+maybe_clone $Dir $UrlPrefix grafana-dashboard
 maybe_clone $Dir $UrlPrefix on-boarding_teammates
-maybe_clone $Dir $UrlPrefix prometheus_grafana_deploy
-maybe_clone $Dir $UrlPrefix readnfs
 maybe_clone $Dir $UrlPrefix secrets-management
+
+Dir=~/project/OCDP/unknown
+maybe_clone $Dir $UrlPrefix AKS-version-outdate-notify
+maybe_clone $Dir $UrlPrefix Kubernetes-Test-Suite
+maybe_clone $Dir $UrlPrefix azure-dpaas-client-pre-requisites
+maybe_clone $Dir $UrlPrefix azure-fhir-proxy
+maybe_clone $Dir $UrlPrefix azure-vm-update-status-check
+maybe_clone $Dir $UrlPrefix azure_aks_provision
+maybe_clone $Dir $UrlPrefix cdc-setup-supportfiles
+maybe_clone $Dir $UrlPrefix connect_install_connectors
+maybe_clone $Dir $UrlPrefix debezium-kubernetes
+maybe_clone $Dir $UrlPrefix dpaas-kafka-streams
+maybe_clone $Dir $UrlPrefix dpaas-schema-tokenization
+maybe_clone $Dir $UrlPrefix jenkins_kafka_configurator_slave
+maybe_clone $Dir $UrlPrefix k8s-prometheus-thanos
+maybe_clone $Dir $UrlPrefix k8s_connect_install_connectors-
+maybe_clone $Dir $UrlPrefix kaas-alpha
+maybe_clone $Dir $UrlPrefix kafka-blob-connector
+maybe_clone $Dir $UrlPrefix kafka-blob-storage
+maybe_clone $Dir $UrlPrefix kafka-connect-azure-synapse
+maybe_clone $Dir $UrlPrefix kafka-connect-fhir-sink-connector
+maybe_clone $Dir $UrlPrefix kafka-connect-tactical-acceleration
+maybe_clone $Dir $UrlPrefix kafka-consumer-mapr-hbase
+maybe_clone $Dir $UrlPrefix kafka-smoke-test
+maybe_clone $Dir $UrlPrefix kafka-stream-schema-normalizer
+maybe_clone $Dir $UrlPrefix kafka-streams-dpaas
+maybe_clone $Dir $UrlPrefix kafka-streams-schema
+maybe_clone $Dir $UrlPrefix patient-profile-service
+maybe_clone $Dir $UrlPrefix python_blob
+maybe_clone $Dir $UrlPrefix readnfs
+maybe_clone $Dir $UrlPrefix snowflake-kafka-template
+maybe_clone $Dir $UrlPrefix tactical_acceleration_phase1
 maybe_clone $Dir $UrlPrefix templates
 maybe_clone $Dir $UrlPrefix terraform-aks
 maybe_clone $Dir $UrlPrefix tf_azure_cosmos_account
 maybe_clone $Dir $UrlPrefix tf_azure_infra
+maybe_clone $Dir $UrlPrefix upgrade_kubernetes_version
+maybe_clone $Dir $UrlPrefix web-inspect_docs
+
+# This is what I am actually working on (Work In Progress)
+# COPIED here from above
+Dir=~/project/WIP
+maybe_clone $Dir $UrlPrefix secrets-management
+
+Dir=~/project/WIP/lab
+maybe_clone $Dir $UrlPrefix azure-bitnami-charts
+maybe_clone $Dir $UrlPrefix bitnami-docker-kafka
+maybe_clone $Dir $UrlPrefix confluentinc-common-docker
+maybe_clone $Dir $UrlPrefix connect_deploy
+maybe_clone $Dir $UrlPrefix cp-docker-kafka-connect
+maybe_clone $Dir $UrlPrefix cp-helm-charts
+maybe_clone $Dir $UrlPrefix cp-kafka-connect-base-images
+maybe_clone $Dir $UrlPrefix kafka_deploy
 

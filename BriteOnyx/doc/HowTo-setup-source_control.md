@@ -5,7 +5,7 @@ Use your own GitHub PROFILE name and REPO name below as appropriate.
 ## Generate a new SSH key
 **NOTE**:  Do not bother with `ssh-agent`, if your new key has no passphrase.
 
-1. Open a BASH shell as the target user account on a machine running Ubuntu Linux.
+1. Open a Bash shell as the target user account on a machine running Ubuntu Linux.
 
 ~~~ bash
 ssh-keygen
@@ -59,7 +59,7 @@ ssh -T MeAtGitHub
 **NOTE**: We use `MeAtGitHub` now as our prefix for the repo URL to trigger the
 use of the settings in `~/.ssh/config` that we created above.
 
-1. Open a BASH shell.
+1. Open a Bash shell.
 
 ~~~ bash
 mkdir ~/project

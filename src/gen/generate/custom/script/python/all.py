@@ -32,6 +32,20 @@ def _generate_src_gen(dir_):
     sub = dir_
 
 
+def _generate_src_app_task(dir_):
+    sub = dir_
+    package(sub, "__init__.py")
+    library(sub, "bootstrap.py")
+    library(sub, "mapping.py")
+    library(sub, "scan_directory.py")
+    test(sub, "test_mapping.py")
+    test(sub, "test_task.py")
+
+
+def _generate_src_gen(dir_):
+    sub = dir_ / "custom" / "document" / "markdown"
+
+
 def generate(directory):
     _generate_bin(directory / "bin")
     _generate_src(directory / "src")

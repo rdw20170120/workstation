@@ -1,3 +1,7 @@
-[1;34m[20201127 030756Z D] Reformatting Python code using Black[0m
-All done! ✨ 🍰 ✨
-214 files left unchanged.
+[1;34m[20210108 221432Z D] Reformatting Python code using Black[0m
+error: cannot format /Users/rwill253/project/WIP/workstation/bin/show_maybe_missed_source: Cannot parse: 2:6: [[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
+reformatted /Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/set_path.py
+reformatted /Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/activate.py
+reformatted /Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/structure.py
+Oh no! 💥 💔 💥
+3 files reformatted, 210 files left unchanged, 1 file failed to reformat.
