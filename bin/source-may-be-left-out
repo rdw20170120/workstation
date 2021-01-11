@@ -24,6 +24,7 @@ main() {
         grep -v context\.bash |
         grep -v htmlcov\/ |
         grep -v log\/ |
+        grep -v out\/coverage |
         grep -v pytest\.log
 
     return 0

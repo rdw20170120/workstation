@@ -54,12 +54,6 @@ check 'compgen -k'
 checkExecutable git
 check 'git --version'
 
-# Homebrew
-checkExecutable brew
-check 'brew --version'
-check 'brew list --full-name --versions --casks'
-check 'brew list --full-name --versions --formulae'
-
 # Python shared
 checkExecutable python
 check 'python --version'
@@ -114,6 +108,12 @@ main $@
 # AWS CLI
 checkExecutable aws
 check 'aws --version'
+
+# Homebrew
+checkExecutable brew
+check 'brew --version'
+check 'brew list --full-name --versions --casks'
+check 'brew list --full-name --versions --formulae'
 
 # Kubernetes 
 checkExecutable kubectl
