@@ -21,6 +21,8 @@ exclude = '''
   | home/\.ssh/.*$
   | home/bin/git-.*$
   | home/bin/secure$
+  | home/macOS/.config/.*$
+  | home/macOS/.inputrc$
   | \.bash_logout$
   | \.bash_profile$
   | \.bashrc$
