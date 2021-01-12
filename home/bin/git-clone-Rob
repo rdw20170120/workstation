@@ -7,12 +7,15 @@
 source ~/bin/lib/git-maybe_clone.bash
 
 UrlPrefix=https://github.com/rdw20170120
+UrlPrefix=MeAtGitHub:rdw20170120
 
 Dir=~/project/Rob
+# These are reference copies
 maybe_clone $Dir $UrlPrefix workstation
 
-# This is what I am actually working on (Work In Progress)
+# These are what I am actually working on (Work In Progress)
 Dir=~/project/WIP
+maybe_clone $Dir $UrlPrefix trading
 maybe_clone $Dir $UrlPrefix workstation
 
 : << 'DisabledContent'

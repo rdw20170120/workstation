@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# TODO: FIX: Adjust logic to skip duplicate creation of new mode
-# if xrandr | grep FullScreen ; then
-    xrandr --newmode FullScreen 419.47 2880 3096 3416 3952 1710 1711 1714 1769 -HSync +Vsync
-    xrandr --addmode Virtual-1 FullScreen
-# fi
-xrandr --output Virtual-1 --mode FullScreen
-

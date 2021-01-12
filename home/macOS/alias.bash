@@ -17,6 +17,7 @@ alias vim='nvim'
 
 alias jump_workstation='cd ~/project/WIP/workstation'
 
+# For working with ~/.inputrc
 alias configure_readline_from='bind -f'
 alias show_readline_keymap_current='bind -p'
 alias show_readline_keymap_emacs-ctlx='bind -pm emacs-ctlx'

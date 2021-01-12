@@ -1,23 +1,35 @@
 #!/bin/false
 # NOTE:  This file is intended to be sourced into a Bash shell.
 
-alias la='ls -Agl'
-alias ll='ls -gl'
+# Add an "alert" alias for long running commands.  Use like so:
+# sleep 10; alert
+# alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias add='git add .'
-alias commit='git commit'
-alias branches='git branch --list'
-alias ignored='git status --ignored'
-alias log='git shortlog'
-alias pull='git pull'
-alias push='git push'
-alias status='git status'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
 
-alias fullscreen='~/.xprofile'
+alias la='ls -Alo'
+alias lB='ls -Aln'
+alias ll='ls -lo'
+alias lL='ls -Lln'
 
 alias vim='nvim'
 
-alias workstation='cd ~/project/Rob/workstation'
+alias jump_workstation='cd ~/project/Rob/workstation'
 
-alias sync='meld ~/project/Rob/workstation'
+# For working with ~/.inputrc
+alias configure_readline_from='bind -f'
+alias show_readline_keymap_current='bind -p'
+alias show_readline_keymap_emacs-ctlx='bind -pm emacs-ctlx'
+alias show_readline_keymap_emacs-meta='bind -pm emacs-meta'
+alias show_readline_keymap_emacs-standard='bind -pm emacs-standard'
+alias show_readline_keymap_vi-command='bind -pm vi-command'
+alias show_readline_keymap_vi-insert='bind -pm vi-insert'
+alias show_readline_keymap_vi-move='bind -pm vi-move'
+alias show_readline_macros='bind -s'
+alias show_readline_variables='bind -v'
+
+# For Linux Mint development VM
+alias fullscreen='~/MANUAL.xprofile'
+alias jump_potrero='cd ~/project/potrero-cloud-lab'
 

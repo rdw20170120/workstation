@@ -1,6 +1,10 @@
 #!/bin/false
 # NOTE:  This file is intended to be executed as part of starting a Bash shell.
 
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
 [[ -z "$BO_PathOriginal" ]] && export BO_PathOriginal=$PATH
 export BO_PathHomebrew=/usr/local/bin
 export BO_PathSystem=/usr/bin:/bin:/usr/sbin
@@ -109,7 +113,9 @@ fi
 # into a separate file like ~/.bash_aliases,
 # instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-[[ -r ~/alias.bash ]] && source ~/alias.bash
+
+# Define Bash aliases
+[[ -r alias.bash ]] && source alias.bash
 
 # Enable programmable completion features
 # You don't need to enable this 
