@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-"""Generate all BriteOnyx Bash scripts."""
+"""Generate all shared BriteOnyx Bash scripts."""
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)

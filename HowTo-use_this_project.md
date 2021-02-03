@@ -3,7 +3,7 @@ BriteOnyx
 is Rob Williams'
 open-source framework
 to manage a project's source directory tree
-during development and testing.
+during development, testing, and production.
 
 This activation is focused
 on working within a Bash shell,
@@ -64,14 +64,15 @@ then please experiment
 by editing `activate.bash`
 to invoke `set -x`
 at the beginning of the script,
-then activate new shell.
+then activate a new shell.
 Having learned that lesson,
 let's never use `set -x`
 in a Bash script
 intended to be `source`d
 (except by the user while troubleshooting).
 Similarly,
-the `set -e` Bash option is problematic
+the `set -e` Bash option
+is problematic
 because its haphazard behavior
 does not deliver
 on its promised usefulness.
@@ -82,11 +83,13 @@ with BriteOnyx activation
 is to invoke `bash activate.bash`
 instead of invoking `source activate.bash`.
 It is also very helpful
-to `export BO_Debug=defined` and
-perhaps `set -o xtrace`
+to `export BO_Trace=defined` and
+perhaps `set -vx`
 to visualize the execution.
 
-NOTE: Rob Williams is now investigating
+NOTE:
+Rob Williams
+is now investigating
 Fish--the friendly interactive shell--
 as a complete replacement
 for Bash.

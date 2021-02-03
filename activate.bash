@@ -1,7 +1,7 @@
 #!/usr/bin/env false
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be sourced in a Bash shell during activation.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
 # Activate the BriteOnyx framework to manage this project directory tree
@@ -20,8 +20,18 @@ if [[ -n "${BO_Project}" ]] ; then
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 fi
 
-env | sort > ${PWD}/BO-incoming.env
-source ${PWD}/BriteOnyx/bin/lib/declare-log4bash.bash
+if [[ -z "${PWD}" ]] ; then
+    1>&2 echo "Aborting, missing environment variable 'PWD'"
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+fi
+
+(set -o posix ; set) | sort > ${PWD}/BO-incoming.env
+
+_Script=${PWD}/BriteOnyx/bin/lib/declare-log4bash.bash
+source ${_Script} ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
 log_info "Activating '${PWD}' as the current project"
 
 remembering() {
@@ -37,10 +47,41 @@ export BO_Project=${PWD}
 remembering BO_Project
 remembering INTERACTIVE_MODE
 
+_Script=${BO_Project}/BriteOnyx/bin/lib/declare.bash
+source ${_Script} ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
+# NOTE: We can now use BriteOnyx Bash functionality.
+
+# BriteOnyx scripts
+# must precede
+# project-specific scripts
+# on the PATH
+# so that collisions fail fast.
+# Any collision should be resolved
+# by renaming
+# the project-specific script
+# to avoid that collision.
+
+export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
+
+[[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}
+[[ -z "${BO_PathUser}" ]] && export BO_PathUser=${HOME}/bin
+
+remembering BO_PathProject
+remembering BO_PathSystem
+remembering BO_PathUser
+
+_Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
+source ${_Script} ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
 # Detect operating system
 # TODO: Write as function
-_result=$(uname)
 # TODO: Add detection of various Linux, when we care
+_result=$(uname)
 if [[ "${_result}" == Darwin ]] ; then
     export BO_OS=macOS
 else
@@ -66,57 +107,51 @@ else
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 fi
 
-# NOTE: BriteOnyx scripts
-# must precede project-specific scripts
-# so that collisions fail fast.
-# Any collision should be resolved
-# by renaming the project-specific script
-# to avoid that collision.
-export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
-remembering BO_PathProject
+maybe_create_directory_tree ${BO_Project}/log
 
-[[ -z "${BO_PathSystem}" ]] &&
-    export BO_PathSystem=${PATH} &&
-    remembering BO_PathSystem
-[[ -z "${BO_PathUser}" ]] &&
-    export BO_PathUser=${HOME}/bin &&
-    remembering BO_PathUser
+# Activate Python virtual environment (PVE)
+(set -o posix ; set) | sort > ${PWD}/BO-PVE-prior.env
+_Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
+source ${_Script} ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+(set -o posix ; set) | sort > ${PWD}/BO-PVE-after.env
 
-# Reset PATH before activating Python virtual environment
-export PATH=${BO_PathSystem}
-env | sort > ${PWD}/BO-PVE-prior.env
-source ${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
-env | sort > ${PWD}/BO-PVE-after.env
-export BO_PathTool=${BO_PathPve}
-remembering BO_PathTool
+maybe_copy_file ${BO_Project}/cfg/sample/alias.bash ${BO_Project}/alias.bash
+maybe_copy_file ${BO_Project}/cfg/sample/context.bash ${BO_Project}/context.bash
 
-source ${BO_Project}/BriteOnyx/bin/lib/set_path.bash
-source ${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
-source ${BO_Project}/BriteOnyx/bin/lib/declare.bash
-source ${BO_Project}/BriteOnyx/bin/lib/alias-common.bash
-source ${BO_Project}/BriteOnyx/bin/lib/alias-git.bash
+_Script=${BO_Project}/bin/lib/declare.bash
+if [[ -r ${_Script} ]] ; then
+    source ${_Script} ; _Status=$?
+    [[ ${_Status} -ne 0 ]] &&
+        kill -INT $$  # Kill the executing script, but not the shell (terminal)
+fi
 
-[[ ! -e ${BO_Project}/alias.bash ]] &&
-    cp ${BO_Project}/cfg/sample/alias.bash ${BO_Project}/alias.bash
-[[ ! -e ${BO_Project}/context.bash ]] &&
-    cp ${BO_Project}/cfg/sample/context.bash ${BO_Project}/context.bash
+_Script=${BO_Project}/context.bash
+source ${_Script} ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-[[ -r ${BO_Project}/bin/lib/declare.bash ]] &&
-    source ${BO_Project}/bin/lib/declare.bash
-[[ -r ${BO_Project}/alias.bash ]] &&
-    source ${BO_Project}/alias.bash
-[[ -r ${BO_Project}/context.bash ]] &&
-    source ${BO_Project}/context.bash
+_Script=${BO_Project}/BriteOnyx/bin/lib/alias.bash
+source ${_Script} ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-env | sort > ${PWD}/BO-outgoing.env
+_Script=${BO_Project}/alias.bash
+source ${_Script} ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
+(set -o posix ; set) | sort > ${PWD}/BO-outgoing.env
 log_good "BriteOnyx has successfully activated this project"
 log_info "To get started, try executing the 'cycle' alias..."
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 DisabledContent
 

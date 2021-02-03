@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
@@ -26,36 +26,31 @@ findAnd() {
 	-$1
 }
 
-log_debug "Found these files..."
-findAnd print $BO_Project '*.bak'
-findAnd print $BO_Project '*.log'
-findAnd print $BO_Project '*.pyc'
-findAnd print $BO_Project '__pycache__'
-
-log_debug "Deleting files..."
-findAnd delete $BO_Project '*.bak'
-findAnd delete $BO_Project '*.pyc'
-findAnd delete $BO_Project '__pycache__'
-
-_file=$BO_Project/src/app/pytest.log
-[[ -f "$_file" ]] && log_debug "Deleting file '$_file'" && rm $_file
-_file=$BO_Project/src/gen/pytest.log
-[[ -f "$_file" ]] && log_debug "Deleting file '$_file'" && rm $_file
-_file=$BO_Project/src/lib/mine/pytest.log
-[[ -f "$_file" ]] && log_debug "Deleting file '$_file'" && rm $_file
-_file=$BO_Project/src/lib/third_party/pytest.log
-[[ -f "$_file" ]] && log_debug "Deleting file '$_file'" && rm $_file
-
-log_warn "Found these files REMAINING..."
-findAnd print $BO_Project '*.bak'
-findAnd print $BO_Project '*.log'
-findAnd print $BO_Project '*.pyc'
-findAnd print $BO_Project '__pycache__'
-
 main() {
     # Clean project directory
+    require_arguments $# 0
 
-    # TODO: CONTENT
+    log_debug "Found these files..."
+    findAnd print $BO_Project '*.bak'
+    findAnd print $BO_Project '*.log'
+    findAnd print $BO_Project '*.pyc'
+    findAnd print $BO_Project '__pycache__'
+
+    log_debug "Deleting files..."
+    findAnd delete $BO_Project '*.bak'
+    findAnd delete $BO_Project '*.pyc'
+    findAnd delete $BO_Project '__pycache__'
+ 
+    maybe_delete_file $BO_Project/src/app/pytest.log
+    maybe_delete_file $BO_Project/src/gen/pytest.log
+    maybe_delete_file $BO_Project/src/lib/mine/pytest.log
+    maybe_delete_file $BO_Project/src/lib/third_party/pytest.log
+
+    log_warn "Found these files REMAINING..."
+    findAnd print $BO_Project '*.bak'
+    findAnd print $BO_Project '*.log'
+    findAnd print $BO_Project '*.pyc'
+    findAnd print $BO_Project '__pycache__'
 
     return 0
 }
@@ -64,9 +59,10 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 DisabledContent
 

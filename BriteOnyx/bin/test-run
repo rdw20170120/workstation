@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
@@ -11,12 +11,14 @@ trap warn_on_error EXIT
 run_coverage() {
     # Run Python coverage on previous pytest data
     # $1 = Python coverage configuration file
-    local -i Status
+    require_file "$1"
 
-    coverage3 html --rcfile=$1
-    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
-    coverage3 report --rcfile=$1
-    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+    require_command python3
+
+    python3 -m coverage html --rcfile=$1
+    abort_on_fail $? "from python3 -m coverage html ..."
+    python3 -m coverage report --rcfile=$1
+    abort_on_fail $? "from python3 -m coverage report ..."
 }
 
 run_pytest() {
@@ -24,34 +26,40 @@ run_pytest() {
     # $1 = Python coverage configuration file
     # $2 = test suite name
     # $3 = test suite parent directory
-    local -i Status
+    require_file "$1"
+    require_value "$2"
+    require_directory "$3"
 
-    cd $3
-    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+    cd $3 ; abort_on_fail $? "from cd"
 
-    pytest \
+    require_command python3
+
+    python3 -m pytest \
 	--cov=$3 \
 	--cov-append \
 	--cov-config=$1 \
 	--cov-report= \
         --log-file=${BO_Project}/log/pytest-$2.log
-    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+    abort_on_fail $? "from python3 -m pytest ..."
 }
 
 main() {
     # Run Python test suites
     local -r Config=${BO_Project}/cfg/.coveragerc
 
-    coverage3 erase --rcfile=${Config}
-    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
+    require_command python3
+
+    python3 -m coverage erase --rcfile=${Config}
+    abort_on_fail $? "from python3 -m coverage erase ..."
 
     run_pytest   ${Config} mine ${BO_Project}/src/lib/mine
     run_pytest   ${Config} gen  ${BO_Project}/src/gen
     run_pytest   ${Config} app  ${BO_Project}/src/app
 
-    cd ${BO_Project}/src
-    Status=$? ; [[ ${Status} -ne 0 ]] && exit ${Status}
-    run_coverage ${Config}
+    if [[ -z "${BO_RunningHumanless}" ]] ; then
+        cd ${BO_Project}/src ; abort_on_fail $? "from cd"
+        run_coverage ${Config}
+    fi
 
     return 0
 }
@@ -60,9 +68,10 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 DisabledContent
 

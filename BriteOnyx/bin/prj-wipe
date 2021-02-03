@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
@@ -13,19 +13,16 @@ if [[ -z "$BO_PVE" ]] ; then
     exit 1
 fi
 
-prj-clean
-
-log_debug "Wiping (cleaning deeper)..."
-rm -fr $BO_Project/.pytest_cache 
-rm -fr $BO_Project/log 
-pve-rm
-
-# TODO: Wipe other caches such as for 'pip'
-
 main() {
     # Wipe project directory, which is a deeper clean
+    # TODO: Wipe other caches such as for 'pip'
+    require_arguments $# 0
 
-    # TODO: CONTENT
+    prj-clean
+    log_debug "Wiping (cleaning deeper)..."
+    maybe_delete_directory_tree ${BO_Project}/.pytest_cache 
+    maybe_delete_directory_tree  ${BO_Project}/log 
+    pve-rm
 
     return 0
 }
@@ -34,9 +31,10 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 DisabledContent
 

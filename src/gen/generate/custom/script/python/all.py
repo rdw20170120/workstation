@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-"""Generate all Python scripts."""
+"""Generate all custom Python scripts."""
 # TODO: Add method for test module
 # TODO: Add method for module to generate one source file
 # TODO: Add method for module to generate many source files
@@ -26,10 +26,7 @@ def _generate_src(dir_):
 
 def _generate_src_app(dir_):
     sub = dir_
-
-
-def _generate_src_gen(dir_):
-    sub = dir_
+    _generate_src_app_utility(sub / "utility")
 
 
 def _generate_src_app_task(dir_):
@@ -40,6 +37,14 @@ def _generate_src_app_task(dir_):
     library(sub, "scan_directory.py")
     test(sub, "test_mapping.py")
     test(sub, "test_task.py")
+
+
+def _generate_src_app_utility(dir_):
+    sub = dir_
+
+
+def _generate_src_gen(dir_):
+    sub = dir_
 
 
 def _generate_src_gen(dir_):

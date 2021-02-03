@@ -1,27 +1,22 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-File=$BO_Project/cfg/requirements.txt
-
-if [[ ! -r "$File" ]] ; then
-    log_error "Python dependency status file '$File' is unreadable, aborting"
-    exit 1
-fi
-
-log_debug "Checking Python dependency status against '$File'"
-dep-report | diff - $File
-
 main() {
     # Check Python dependency status
+    require_arguments $# 0
 
-    # TODO: CONTENT
+    local -r File=$BO_Project/cfg/requirements.txt
+    
+    log_debug "Checking Python dependency status against '$File'"
+    require_file "${File}"
+    dep-report | diff - ${File}
 
     return 0
 }
@@ -30,9 +25,10 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 DisabledContent
 

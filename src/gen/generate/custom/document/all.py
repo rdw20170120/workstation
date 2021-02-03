@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-"""Generate all source contained in this directory tree."""
+"""Generate all custom source contained in this directory tree."""
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)

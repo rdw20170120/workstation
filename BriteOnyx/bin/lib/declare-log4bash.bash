@@ -1,28 +1,34 @@
 #!/usr/bin/env false
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be sourced in a Bash shell during activation.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 # NO: trap ... EXIT
+###############################################################################
+# Copied from https://github.com/fredpalmer/log4bash/blob/master/log4bash.sh
+# on 24-Nov-2020
+# by Rob Williams <rob.williams@optum.com>
 #--------------------------------------------------------------------------------------------------
 # log4bash - Makes logging in Bash scripting suck less
 # Copyright (c) Fred Palmer
 # Licensed under the MIT license
 # http://github.com/fredpalmer/log4bash
 #--------------------------------------------------------------------------------------------------
-# Copied from https://github.com/fredpalmer/log4bash/blob/master/log4bash.sh
-# on 24-Nov-2020
-# by Rob Williams <rob.williams@optum.com>
-#--------------------------------------------------------------------------------------------------
-
 # This should probably be the right way - didn't have time to experiment though
 # TODO: Implement this properly, if there is a real need to ever have color disabled.
-# declare -r INTERACTIVE_MODE="$([ tty --silent ] && echo on || echo off)"
-# declare -rx INTERACTIVE_MODE=$([ "$(uname)" == "Darwin" ] && echo "on" || echo "off")
-declare -rx INTERACTIVE_MODE=on
+# INTERACTIVE_MODE="$([ tty --silent ] && echo on || echo off)"
+# INTERACTIVE_MODE=$([[ "$(uname)" == "Darwin" ]] && echo "on" || echo "off")
+
+declare -x INTERACTIVE_MODE=OFF
+[[ -n "${TERM}" ]] &&
+    [[ "${TERM}" != "dumb" ]] &&
+    INTERACTIVE_MODE=${TERM}
+[[ -n "${COLORTERM}" ]] &&
+    INTERACTIVE_MODE=${COLORTERM}
 
 #--------------------------------------------------------------------------------------------------
 # Begin Logging Section
-if [[ "${INTERACTIVE_MODE}" == "off" ]] ; then
+
+if [[ "${INTERACTIVE_MODE}" == "OFF" ]] ; then
     # Then we don't care about log colors
     declare -rx LOG_DEFAULT_COLOR=""
     declare -rx LOG_DEBUG_COLOR=""
@@ -49,6 +55,7 @@ log_() {
     [[ -z ${color} ]] && color="${LOG_INFO_COLOR}"
 
     1>&2 echo -e "${color}[$(date -u +"%Y%m%d %H%M%SZ") ${level}] ${text}${LOG_DEFAULT_COLOR}"
+
     return 0
 } && export -f log_
 
@@ -80,18 +87,19 @@ scrubbed() {
     sed "s/[[:cntrl:]]\[[0-9;]*m//g"
 } && export -f scrubbed
 
-log_debug "This is a debug message."
-log_info  "This is an informational message."
-log_warn  "This is a warning message."
-log_error "This is an error message."
-log_good  "This is a good message."
+log_debug 'This is a debug message.'
+log_info  'This is an informational message.'
+log_warn  'This is a warning message.'
+log_error 'This is an error message.'
+log_good  'This is a good message.'
 
 # End Logging Section
 #--------------------------------------------------------------------------------------------------
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 # Useful global variables that users may wish to reference
 SCRIPT_ARGS="$@"

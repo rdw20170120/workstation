@@ -1,30 +1,77 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-log_debug "Installing Python dependencies"
+pip_install() {
+    # Install Python dependencies using PIP, smartly
+    # TODO: REFACTOR: to avoid duplication
+    # Arguments are passed through
 
-pip3 install pip wheel --upgrade --upgrade-strategy=eager
-pip3 install \
-    black \
-    pytest \
-    pytest-cov coverage[toml] \
-    pytest-html ansi2html \
-    pytest-icdiff \
-    pytest-sugar \
-    awscli boto3 \
-    logzero
+    require_command python3
+
+    if [[ -n "${BO_RunningHumanless}" ]] ; then
+        # Install WITHOUT a Python virtual environment (PVE),
+        # but with user isolation
+        python3 -m pip install --user $@
+        abort_on_fail $? "from python3 -m pip install --user ..."
+    else
+        # Install WITH a Python virtual environment (PVE)
+        python3 -m pip install $@
+        abort_on_fail $? "from python3 -m pip install ..."
+    fi
+
+    return 0
+}
 
 main() {
     # Install Python dependencies
+    require_arguments $# 0
 
-    # TODO: CONTENT
+    local Packages
+
+    require_command python3
+
+    python3 -m pip --version
+    abort_on_fail $? "from python3 -m pip --version"
+
+    pip_install --upgrade pip wheel
+
+    python3 -m pip --version
+    abort_on_fail $? "from python3 -m pip --version"
+
+    log_debug "Installing Python dependencies"
+
+    # NOTE: Install Python dependencies required for code and tests
+    Packages=
+    # Needed for testing
+    Packages+=' pytest'
+    Packages+=' pytest-cov coverage[toml]'
+    # Needed for utilities
+    Packages+=' logzero'
+    # Needed for application
+    Packages+=' awscli boto3'
+#   Packages+=' commandlib'
+#   Packages+=' cryptography'
+#   Packages+=' pem twisted[tls]'
+#   Packages+=' pyopenssl'
+#   Packages+=' strictyaml'
+    pip_install ${Packages}
+
+    if [[ -z "${BO_RunningHumanless}" ]] ; then
+        # NOTE: Install Python dependencies only needed for developer experience
+        Packages=
+        Packages+=' black'
+        Packages+=' pytest-html ansi2html'
+        Packages+=' pytest-icdiff'
+        Packages+=' pytest-sugar'
+        pip_install ${Packages}
+    fi
 
     return 0
 }
@@ -33,16 +80,12 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
-    commandlib \
-    cryptography \
-    pem twisted[tls] \
-    pyopenssl \
-    strictyaml \
-NO: pip3 install sh
+NO: sh
 TODO: RESEARCH: Consider pytest-benchmark
 TODO: RESEARCH: Consider pytest-clarity
 TODO: RESEARCH: Consider pytest-datafiles

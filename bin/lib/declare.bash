@@ -1,7 +1,7 @@
 #!/usr/bin/env false
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
+# Intended to be sourced in a Bash shell during activation.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
-# Intended to be sourced in a Bash shell.
 # NO: trap ... EXIT
 ###############################################################################
 # Declare other Bash function libraries 
@@ -10,12 +10,12 @@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
-
-source ${BO_Project}/bin/lib/declare-NAME.bash  ; abort_on_fail $? "Failed to source script"
-
+_Script=${BO_Project}/bin/lib/declare-NAME.bash
+source ${_Script} ; abort_on_fail $? "from ${_Script}"
 DisabledContent
 

@@ -19,6 +19,7 @@ coverage/
 *.out
 *.parquet
 *.pid
+*.sig
 
 # Apple macOS
 .DS_Store

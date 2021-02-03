@@ -1,0 +1,43 @@
+#!/usr/bin/env groovy
+@Library("LIBRARY") _
+
+properties([
+  buildDiscarder(logRotator(numToKeepStr: '7')),
+])
+
+pipeline {
+  agent {
+    node {label 'SLAVE'}
+  } // agent
+
+  environment {
+    // BO_Trace = 'defined'
+    PYTHON_VERSION='3.7'
+  } // environment
+
+  stages {
+    stage('checkout') {
+      steps {checkout scm}
+    } // stage checkout
+
+    stage('run') {
+      steps {
+        script {
+          try {
+            sh """
+              source /etc/profile.d/jenkins.sh
+              ./Jenkins/run
+            """
+          } catch(Error) {
+            echo "${Error}"
+            sh "exit 1"
+          } // try
+        } // script
+      } // steps
+    } // stage prototype
+  } // stages
+} // pipeline
+
+/* DisabledContent
+*/
+

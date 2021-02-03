@@ -99,23 +99,17 @@ def cc(command_embedded_within_comment):
 def debugging_comment():
     return [
         note("Uncomment these lines for debugging, placed where needed"),
-        comment(
-            export("PS4", sq("$ ")),
-            seq(),
-            set_("-o", "verbose"),
-            seq(),
-            set_("-o", "xtrace"),
-        ),
+        comment(export("PS4", sq("$ ")), seq(), set_("-vx")),
         comment("Code to debug..."),
-        comment(set_("+o", "verbose"), seq(), set_("+o", "xtrace")),
+        comment(set_("+vx")),
     ]
 
 
 def disabled_content_footer():
     return [
-        line(),
         rule(),
         debugging_comment(),
+        line(),
         command(":", "<<", sq("DisabledContent")),
         eol(),
         line("DisabledContent"),
@@ -124,6 +118,14 @@ def disabled_content_footer():
 
 
 ###############################################################################
+
+
+def abort_script():
+    return [
+        command("kill", "-INT", "$$"),
+        "  ",
+        comment("Kill the executing script, but not the shell (terminal)"),
+    ]
 
 
 def exit(argument=None):
@@ -137,40 +139,30 @@ def return_(argument=None):
 ###############################################################################
 
 
-def exit_with_status():
-    return exit(status())
+def exit_with_status(variable="Status"):
+    return exit(vr(variable))
 
 
-def remember_last_status():
-    return assign(vn("Status"), "$?")
+def remember_last_status(variable="Status"):
+    return assign(vn(variable), "$?")
 
 
-def return_last_status():
-    # TODO: Do I need this?
-    return return_("$?")
+def return_with_status(variable="Status"):
+    return return_(vr(variable))
 
 
-def return_with_status():
-    return return_(status())
+def status_is_failure(variable="Status"):
+    return integer_not_equal(vr(variable), 0)
 
 
-def status():
-    return vr("Status")
-
-
-def status_is_failure():
-    return integer_not_equal(status(), 0)
-
-
-def status_is_success():
-    return integer_equal(status(), 0)
+def status_is_success(variable="Status"):
+    return integer_equal(vr(variable), 0)
 
 
 ###############################################################################
 
 
 def set_(*argument):
-    assert is_.at_least(len(argument), 1)
     return command("set", argument)
 
 
@@ -227,6 +219,15 @@ def export(variable, expression=None, options=None):
         return command("export", options, variable)
     else:
         return command("export", options, assign(variable, expression))
+
+
+def export_if_null(variable, expression):
+    return [
+        string_is_null(dq(vr(variable))),
+        and_(),
+        " ",
+        export(vn(variable), expression),
+    ]
 
 
 def local(expression, integer=False, readonly=False):
@@ -293,11 +294,15 @@ def string_equals(left, right):
 
 
 def string_is_not_null(expression):
-    return condition("[[", "-n", dq(expression), "]]")
+    return condition("[[", "-n", expression, "]]")
 
 
 def string_is_null(expression):
-    return condition("[[", "-z", dq(expression), "]]")
+    return condition("[[", "-z", expression, "]]")
+
+
+def string_not_equal(left, right):
+    return condition("[[", left, "!=", right, "]]")
 
 
 ###############################################################################
@@ -442,13 +447,31 @@ def if_(condition, *statement):
 
 ###############################################################################
 
+trace_variable = "BO_Trace"
+trace_minimal = "TRACE"
+trace_maximal = "DEEP"
 
-def trace_execution():
+
+def disable_tracing_unless_maximal():
+    return []
+
+
+def enable_tracing_unless_minimal():
+    return []
+
+
+def tracing_in_header():
     return [
-        string_is_not_null(vr("BO_Debug")),
+        string_is_not_null(dq(vr(trace_variable))),
         and_(),
         " 1>&2 ",
         echo(dq("Executing ", vr("BASH_SOURCE"))),
+        and_(),
+        " ",
+        string_not_equal(dq(vr(trace_variable)), sq(trace_minimal)),
+        and_(),
+        " ",
+        set_("-vx"),
         eol(),
     ]
 
@@ -456,9 +479,9 @@ def trace_execution():
 def header_activation():
     return [
         shebang_sourced(),
-        trace_execution(),
-        no(set_("-e")),
         comment("Intended to be sourced in a Bash shell during activation."),
+        tracing_in_header(),
+        no(set_("-e")),
         no(trap("...", "EXIT")),
         rule(),
     ]
@@ -467,9 +490,9 @@ def header_activation():
 def header_executed():
     return [
         shebang_bash(),
-        trace_execution(),
-        no(set_("-e")),
         comment("Intended to be executed in a Bash shell."),
+        tracing_in_header(),
+        no(set_("-e")),
         trap("warn_on_error", "EXIT"),
         eol(),
         rule(),
@@ -479,33 +502,51 @@ def header_executed():
 def header_sourced():
     return [
         shebang_sourced(),
-        trace_execution(),
-        no(set_("-e")),
         comment("Intended to be sourced in a Bash shell."),
+        tracing_in_header(),
+        no(set_("-e")),
         no(trap("...", "EXIT")),
         rule(),
     ]
 
 
-def maybe_copy_file(target, source):
+def maybe_copy_file(source, target):
     return [
-        path_not_exists(target),
+        command("maybe_copy_file", source, target),
+    ]
+
+
+def maybe_source(file_):
+    return [
+        file_is_readable(file_),
         and_(),
         eol(),
         indent(),
-        command("cp", source, target),
+        source(file_),
         eol(),
     ]
 
 
-def maybe_source(file_name):
+def maybe_source_or_abort(file_, script, status):
     return [
-        file_is_readable(file_name),
-        and_(),
+        assign(vn(script), file_),
         eol(),
-        indent(),
-        source(file_name),
-        eol(),
+        if_(
+            file_is_readable(vr(script)),
+            indent(),
+            source(vr(script)),
+            seq(),
+            remember_last_status(status),
+            eol(),
+            indent(),
+            status_is_failure(status),
+            and_(),
+            eol(),
+            indent(),
+            indent(),
+            abort_script(),
+        ),
+        fi(),
     ]
 
 
@@ -519,6 +560,22 @@ def shebang_sourced():
 
 def source(file_name):
     return command("source", file_name)
+
+
+def source_or_abort(file_, script="Script", status="Status"):
+    return [
+        assign(vn(script), file_),
+        eol(),
+        source(vr(script)),
+        seq(),
+        remember_last_status(status),
+        eol(),
+        status_is_failure(status),
+        and_(),
+        eol(),
+        indent(),
+        abort_script(),
+    ]
 
 
 def trap(name, signal):

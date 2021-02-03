@@ -1,6 +1,5 @@
 #!/usr/bin/env false
-"""TODO: Write
-"""
+"""Test Python fundamentals."""
 # Internal packages (absolute references, distributed with Python)
 from keyword import kwlist
 from sys import version_info
@@ -19,10 +18,11 @@ def test_python_version():
 
 
 def test_kwlist_len():
-    # For Python 3.6.9
     assert is_.equal(version_info.major, 3)
     if version_info.minor == 6:
         assert is_.equal(len(kwlist), 33)
+    elif version_info.minor == 7:
+        assert is_.equal(len(kwlist), 35)
     elif version_info.minor == 8:
         assert is_.equal(len(kwlist), 35)
     else:

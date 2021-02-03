@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
@@ -16,23 +16,22 @@ main() {
     require_directory_in_variable TMPDIR
 
     # Recreate target directory (handled within Python)
-    # TODO: Unify this reference with the other
     local -r DirTgt=$TMPDIR/tgt
 
-    log_debug "Generating source into directory '$DirTgt'"
+    log_info "Generating source into directory '$DirTgt'"
     cd ${BO_Project}/src/gen ; abort_on_fail $?
     Cmd='python3'
     # Cmd+=' -bb'
     Cmd+=' -m generate'
     Cmd+=" ${DirTgt}"
+    log_debug "${Cmd} $@"
     ${Cmd} $@
     abort_on_fail $? "Source generation failed"
 
-    log_debug "Use the following command to manually merge the generated source:"
+    log_info "Use the following command to manually merge the generated source:"
     Cmd='&>/dev/null'
     Cmd+=' meld'
     Cmd+=' ${BO_Project}'
-    # TODO: Unify this reference with the other
     Cmd+=' ${TMPDIR}/tgt'
     Cmd+=' &'
     log_info "${Cmd}"
@@ -44,9 +43,10 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 DisabledContent
 

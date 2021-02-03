@@ -1,24 +1,29 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-file=shasum-256.sig
-
-log_debug "Making signature file ${dir}/${file}"
-cd ${dir}
-shasum -p -a 256 * 2>/dev/null | grep -v ${file} >${file}
-cat ${file}
-
 main() {
     # Make signature file for directory $1
+    local Directory=$1
+    [[ -z "${Directory}" ]] && Directory=${PWD}
+    require_directory "${Directory}"
 
-    # TODO: CONTENT
+    local -r Signature=shasum-a256-p.sig
+ 
+    log_debug "Making SHA256 signature ${Directory}/${Signature}"
+    cd ${Directory}
+    abort_on_fail $? "Failed to cd '${Directory}'"
+    shasum --algorithm 256 --portable * |
+        grep -v ${Signature} |
+        sort --key=2 --output=${Signature}
+    cat ${Signature}
+    abort_on_fail $? "Failed to cat '${Directory}/${Signature}'"
 
     return 0
 }
@@ -27,9 +32,10 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 DisabledContent
 

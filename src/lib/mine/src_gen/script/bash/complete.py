@@ -14,8 +14,11 @@ def _activation():
     return [
         header_activation(),
         todo("DESCRIPTION"),
+        disable_tracing_unless_maximal(),
         line(),
         todo("CONTENT"),
+        line(),
+        enable_tracing_unless_minimal(),
         disabled_content_footer(),
     ]
 

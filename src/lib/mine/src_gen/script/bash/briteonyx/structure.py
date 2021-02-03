@@ -12,7 +12,7 @@ from src_gen.script.bash.briteonyx.source import my_visitor_map
 
 def abort_if_not_activated():
     return [
-        string_is_null(vr("BO_Project")),
+        string_is_null(dq(vr("BO_Project"))),
         and_(),
         eol(),
         indent(),

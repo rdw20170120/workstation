@@ -10,6 +10,14 @@ from src_gen.script.python.structure import *
 # Project modules   (relative references, NOT packaged, in project)
 
 
+def _generator():
+    return [
+        generator_header(),
+        todo("CONTENT"),
+        disabled_content_footer(),
+    ]
+
+
 def _library():
     return [
         library_header(),
@@ -46,6 +54,10 @@ def _test():
         todo("CONTENT"),
         disabled_content_footer(),
     ]
+
+
+def generate_generator(directory, filename):
+    generate(_generator(), directory, filename)
 
 
 def generate_library(directory, filename):

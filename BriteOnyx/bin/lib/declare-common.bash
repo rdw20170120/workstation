@@ -1,10 +1,21 @@
 #!/usr/bin/env false
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be sourced in a Bash shell during activation.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
 # Library of helpful common Bash functions
+
+copy_file() {
+    # Copy file $1 to $2
+    require_arguments $# 2
+    # $1 = source file
+    # $2 = target file
+    require_file "$1"
+    cp "$1" "$2"
+    abort_on_fail $? "Could not copy file '$1' to '$2'"
+    require_file "$2"
+} && export -f copy_file
 
 delete_file() {
     # Delete file $1
@@ -20,8 +31,13 @@ execute_script() {
     require_arguments_at_least $# 1
     # $1 = script file to execute
     # Additional optional arguments are passed to script
-    require_script "$1" ; local -r Script=$1
+    # TODO: Use `which` to allow searching PATH for script
+    local Script
+    Script=$1
+    Script=$(which ${Script})
+    require_script "${Script}"
     shift 1
+    log_debug "Executing script ${Script}"
     ${Script} $@
     abort_on_fail $? "Failed to execute script ${Script}"
 } && export -f execute_script
@@ -58,12 +74,27 @@ expect_success() {
     return 0
 } && export -f expect_success
 
-maybe_create_directories() {
+maybe_copy_file() {
+    # Copy file $1 to $2, if $2 does not already exist
+    require_arguments $# 2
+    require_file "$1"
+    [[ ! -e "$2" ]] && cp $1 $2
+    require_file "$2"
+} && export -f maybe_copy_file
+
+maybe_create_directory_tree() {
     # Create directory $1, if it does not already exist, including parents
     require_arguments $# 1
     [[ ! -e "$1" ]] && mkdir -p "$1"
     require_directory "$1"
-} && export -f maybe_create_directories
+} && export -f maybe_create_directory_tree
+
+maybe_delete_directory_tree() {
+    # Delete directory $1, if it exists, including children
+    require_arguments $# 1
+    [[ -d "$1" ]] && rm -fr "$1"
+    forbid_path "$1"
+} && export -f maybe_delete_directory_tree
 
 maybe_delete_file() {
     # Delete file $1, if it exists
@@ -103,9 +134,10 @@ status_invert 256 ; [[ $? -eq 0 ]] ; abort_on_fail $? "status_invert test 9 fail
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 DisabledContent
 

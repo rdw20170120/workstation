@@ -1,7 +1,7 @@
 #!/usr/bin/env false
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be sourced in a Bash shell during activation.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
 # Common Bash alias definitions
@@ -23,14 +23,16 @@ alias grep="grep ${grep_options}"
 alias cycle='clear ; test-run && gen-run -vvv && app-run -vvv'
 alias list_sort_by_size='sort -nr --key=5'
 alias logs_reset='rm -fr ${BO_Project}/log ; mkdir ${BO_Project}/log'
+alias redeclare='source ${BO_Project}/BriteOnyx/bin/lib/declare.bash'
 alias sync_generate='meld src/gen/generate/custom src/gen/generate/shared'
-alias todo='grep -ER TODO ${BO_Project} | grep -v /log/'
+alias todo='grep -FR TODO ${BO_Project} | grep -Fv .log | grep -Fv .out'
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 DisabledContent
 

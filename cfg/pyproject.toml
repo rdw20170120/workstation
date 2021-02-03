@@ -18,25 +18,33 @@ exclude = '''
   | bin/sig-.*$
   | bin/tool-.*$
   # Project-specific
+  | Jenkins/run$
+  | bin/diff_.*$
+  | bin/filter_.*$
+  | cfg/DESIRED/.*$
   | home/\.ssh/.*$
   | home/bin/git-.*$
   | home/bin/secure$
-  | home/macOS/.config/.*$
-  | home/macOS/.inputrc$
+  | home/Linux/\.config/.*$
+  | home/macOS/\.config/.*$
+  | home/macOS/\.inputrc$
+)
+'''
+force-exclude = '''
+(
+    PLACEHOLDER$
+  # By parent directory
+  | \.PVE/.*$
+  | \.git/.*$
+  | \.pytest_cache/.*$
+  # By specific pathname
   | \.bash_logout$
   | \.bash_profile$
   | \.bashrc$
   | \.profile$
   | \.xprofile$
-)
-'''
-force-exclude = '''
-(
-  # By parent directory
-    \.PVE/.*$
-  | \.git/.*$
-  | \.pytest_cache/.*$
-  # By specific pathname
+  | Dockerfile$
+  | Jenkinsfile$
   | \.coverage$
   | \.coveragerc$
   | \.gitignore$
@@ -54,6 +62,7 @@ force-exclude = '''
   | \.out$
   | \.properties$
   | \.rst$
+  | \.sh$
   | \.sig$
   | \.sql$
   | \.toml$

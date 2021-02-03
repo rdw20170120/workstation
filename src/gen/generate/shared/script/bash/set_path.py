@@ -3,8 +3,8 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.script.bash.briteonyx.source import generate as gen
-from src_gen.script.bash.briteonyx.structure import *
+from src_gen.script.bash.source import generate as gen
+from src_gen.script.bash.structure import *
 
 # Project modules   (relative references, NOT packaged, in project)
 
@@ -79,6 +79,7 @@ def build():
     return [
         header_activation(),
         _comments(),
+        line(),
         disabled_content_footer(),
     ]
 

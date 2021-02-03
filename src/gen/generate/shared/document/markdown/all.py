@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-"""Generate all Markdown documents."""
+"""Generate all shared Markdown documents."""
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)

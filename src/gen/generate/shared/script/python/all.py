@@ -1,11 +1,12 @@
 #!/usr/bin/env false
-"""Generate all Python scripts."""
+"""Generate all custom Python scripts."""
 # TODO: Add method for test module
 # TODO: Add method for module to generate one source file
 # TODO: Add method for module to generate many source files
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.script.python.complete import generate_generator as generator
 from src_gen.script.python.complete import generate_library as library
 from src_gen.script.python.complete import generate_main as main
 from src_gen.script.python.complete import generate_package as package
@@ -92,15 +93,35 @@ def _generate_src_gen_shared(dir_):
     sub = dir_ / "script"
     package(sub, "__init__.py")
     library(sub, "all.py")
-    sub = dir_ / "script" / "bash"
+    _generate_src_gen_shared_bash(sub / "bash")
+    _generate_src_gen_shared_briteonyx(sub / "bash" / "briteonyx")
+    _generate_src_gen_shared_python(sub / "python")
+
+
+def _generate_src_gen_shared_bash(dir_):
+    sub = dir_
     package(sub, "__init__.py")
-    library(sub, "activate.py")
-    library(sub, "all.py")
-    library(sub, "set_path.py")
-    sub = dir_ / "script" / "bash" / "briteonyx"
+    generator(sub, "activate.py")
+    generator(sub, "pve_activate.py")
+    generator(sub, "alias.py")
+    generator(sub, "all.py")
+    generator(sub, "configure_python.py")
+    generator(sub, "declare.py")
+    generator(sub, "declare_base.py")
+    generator(sub, "declare_common.py")
+    generator(sub, "declare_log4bash.py")
+    generator(sub, "declare_require.py")
+    generator(sub, "set_path.py")
+
+
+def _generate_src_gen_shared_briteonyx(dir_):
+    sub = dir_
     package(sub, "__init__.py")
     library(sub, "all.py")
-    sub = dir_ / "script" / "python"
+
+
+def _generate_src_gen_shared_python(dir_):
+    sub = dir_
     package(sub, "__init__.py")
     library(sub, "all.py")
 

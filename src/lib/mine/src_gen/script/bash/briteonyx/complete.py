@@ -32,6 +32,7 @@ def _executed():
         eol(),
         line(),
         line("main $@"),
+        line(),
         disabled_content_footer(),
     ]
 

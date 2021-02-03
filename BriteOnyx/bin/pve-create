@@ -1,27 +1,38 @@
 #!/usr/bin/env bash
-[[ -n "${BO_Debug}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}"
-# NO: set -e
 # Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-if [[ -z "$BO_PVE" ]] ; then
-    log_error "Environment variable 'BO_PVE' is undefined, aborting"
-    exit 1
-fi
-
-log_debug "Creating Python virtual environment directory '$BO_PVE'"
-python3 -m venv $BO_PVE
-
-echo 'WARN: This new Python virtual environment has NOT been activated, so you should `exit` this shell and activate a new one'
-
 main() {
     # Create (and activate) Python virtual environment directory
+    require_arguments $? 0
 
-    # TODO: CONTENT
+    require_command python3
+    require_variable BO_PVE
+
+    log_debug "Creating Python virtual environment directory '${BO_PVE}'"
+
+    # TODO: How do we get the version of venv?
+
+    python3 -m venv ${BO_PVE}
+    abort_on_fail $? "from python3 -m venv ..."
+
+    local -r Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
+    log_debug "Sourcing script '${Script}'"
+    source ${Script} ; abort_on_fail $? "from ${Script}"
+
+    log_warn 'This new Python virtual environment'
+    log_warn 'MAY NOT have been activated yet'
+    log_warn 'in your current Bash shell.'
+    log_warn 'You should either'
+    log_warn 'activate it here'
+    log_warn 'or `exit` this shell'
+    log_warn 'and activate a new one'
 
     return 0
 }
@@ -30,9 +41,10 @@ main $@
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose ; set -o xtrace
+# export PS4='$ ' ; set -vx
 # Code to debug...
-# set +o verbose ; set +o xtrace
+# set +vx
+
 : << 'DisabledContent'
 DisabledContent
 

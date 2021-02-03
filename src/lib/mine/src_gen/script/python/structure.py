@@ -147,6 +147,19 @@ def disabled_content_footer():
     ]
 
 
+def generator_header():
+    return [
+        shebang_false(),
+        '"""Generate script to TODO',
+        eol(),
+        '"""',
+        eol(),
+        empty_imports(),
+        line(),
+        line(),
+    ]
+
+
 def library_header():
     return [
         shebang_false(),

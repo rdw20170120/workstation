@@ -392,8 +392,9 @@ def test_pipe():
 def test_remember_last_status():
     # TODO: Break up tests into individual test methods
     assert is_.equal(s(remember_last_status()), "Status=$?")
-    with raises(TypeError):
-        remember_last_status(None)
+    assert is_.equal(s(remember_last_status(None)), "=$?")
+    assert is_.equal(s(remember_last_status("")), "=$?")
+    assert is_.equal(s(remember_last_status("Test")), "Test=$?")
 
 
 def test_research():
@@ -417,18 +418,12 @@ def test_return_():
         return_("Test", None)
 
 
-def test_return_last_status():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(return_last_status()), "return $?")
-    with raises(TypeError):
-        return_last_status(None)
-
-
 def test_return_with_status():
     # TODO: Break up tests into individual test methods
     assert is_.equal(s(return_with_status()), "return ${Status}")
-    with raises(TypeError):
-        return_with_status(None)
+    assert is_.equal(s(return_with_status(None)), "return ${}")
+    assert is_.equal(s(return_with_status("")), "return ${}")
+    assert is_.equal(s(return_with_status("Test")), "return ${Test}")
 
 
 def test_rule():
@@ -447,8 +442,7 @@ def test_seq():
 
 def test_set_():
     # TODO: Break up tests into individual test methods
-    with raises(AssertionError):
-        set_()
+    assert is_.equal(s(set_()), "set")
     assert is_.equal(s(set_(None)), "set")
     assert is_.equal(s(set_("")), "set")
     assert is_.equal(s(set_("Test")), "set Test")
@@ -489,8 +483,9 @@ def test_source():
 def test_status_is_failure():
     # TODO: Break up tests into individual test methods
     assert is_.equal(s(status_is_failure()), "[[ ${Status} -ne 0 ]]")
-    with raises(TypeError):
-        status_is_failure(None)
+    assert is_.equal(s(status_is_failure(None)), "[[ ${} -ne 0 ]]")
+    assert is_.equal(s(status_is_failure("")), "[[ ${} -ne 0 ]]")
+    assert is_.equal(s(status_is_failure("Test")), "[[ ${Test} -ne 0 ]]")
 
 
 def test_string_equals():
@@ -512,9 +507,9 @@ def test_string_is_not_null():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
         string_is_not_null()
-    assert is_.equal(s(string_is_not_null(None)), '[[ -n "" ]]')
-    assert is_.equal(s(string_is_not_null("")), '[[ -n "" ]]')
-    assert is_.equal(s(string_is_not_null("Test")), '[[ -n "Test" ]]')
+    assert is_.equal(s(string_is_not_null(None)), "[[ -n ]]")
+    assert is_.equal(s(string_is_not_null("")), "[[ -n ]]")
+    assert is_.equal(s(string_is_not_null("Test")), "[[ -n Test ]]")
     with raises(TypeError):
         string_is_not_null("Test", None)
 
@@ -523,9 +518,9 @@ def test_string_is_null():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
         string_is_null()
-    assert is_.equal(s(string_is_null(None)), '[[ -z "" ]]')
-    assert is_.equal(s(string_is_null("")), '[[ -z "" ]]')
-    assert is_.equal(s(string_is_null("Test")), '[[ -z "Test" ]]')
+    assert is_.equal(s(string_is_null(None)), "[[ -z ]]")
+    assert is_.equal(s(string_is_null("")), "[[ -z ]]")
+    assert is_.equal(s(string_is_null("Test")), "[[ -z Test ]]")
     with raises(TypeError):
         string_is_null("Test", None)
 
