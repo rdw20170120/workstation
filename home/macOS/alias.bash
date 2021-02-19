@@ -15,6 +15,8 @@ alias lL='ls -Lln'
 
 alias vim='nvim'
 
+alias jump_kafka='cd ~/project/WIP/lab/kafka_deploy'
+alias jump_secrets='cd ~/project/WIP/secrets-management'
 alias jump_workstation='cd ~/project/WIP/workstation'
 
 # For working with ~/.inputrc

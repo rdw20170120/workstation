@@ -113,9 +113,7 @@ fi
 # into a separate file like ~/.bash_aliases,
 # instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-# Define Bash aliases
-[[ -r alias.bash ]] && source alias.bash
+[[ -r ~/alias.bash ]] && source ~/alias.bash
 
 # Enable programmable completion features
 # You don't need to enable this 
