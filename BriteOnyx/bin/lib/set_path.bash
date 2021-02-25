@@ -32,7 +32,7 @@
 # to affecting only them
 # (as they should).
 
-export PATH=${BO_PathTool}:${BO_PathSystem}:${BO_PathProject}:${BO_PathUser}
+export PATH=${BO_PathTool}:${BO_PathNative}:${BO_PathProject}:${BO_PathUser}
 remembering PATH
 
 ###############################################################################

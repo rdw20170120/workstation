@@ -101,7 +101,7 @@ export BO_PathTestSSL=${BO_DirHomeTestSSL}
 # Then move ${BO_PathPve} before ${BO_PathJava}
 export BO_PathTool=${BO_PathJava}:${BO_PathConfluent}:${BO_PathTestSSL}:${BO_PathTool}
 
-source ${BO_Project}/BriteOnyx/bin/lib/set_path.bash
+source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
 
 DisabledContent
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env false
+#!/usr/bin/env bash
 # Intended to be executed in a Bash shell.
 [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
@@ -13,14 +13,6 @@ warn_on_error() {
 trap warn_on_error EXIT
 ###############################################################################
 
-explore() {
-    # Explore pathname $1
-    # $1 = path to explore
-    readlink --canonicalize "$1"
-    realpath -s "$1"
-    ls -Al "$1"
-}
-
 maybe_copy_file() {
     # Copy file $1 to $2, if $2 is missing
     # $1 = source file
@@ -28,96 +20,18 @@ maybe_copy_file() {
     [[ ! -e "$2" ]] && cp $1 $2
 }
 
-mosey() {
-    # Mosey around a bit to learn the build slave landscape
-    (set -o posix ; set) | sort
-    pwd
-    echo "Script name = $0"
-
-#   explore .
-#   explore "${HOME}"
-#   explore "${HOME}/.local/bin"
-#   explore "${HOME}/workspace"
-#   explore "${HOME}/workspace/${JOB_NAME}"
-#   explore "${JAVA_HOME}"
-#   explore "${KUBECTL_HOME}"
-#   explore "${WORKSPACE}"
-
-    explore /tools
-    explore /tools/helm
-    explore /tools/java
-    explore /tools/kubectl
-    explore /tools/python
-    explore /usr/bin
-    explore /usr/local/bin
-
-    return 0
-}
-
-try_cd() {
-    # Try changing to a valid relative directory
-    cd BriteOnyx
-    explore .
-
-    # Try going back up 
-    cd ..
-    explore .
-    explore ./activate.bash
-
-    # Try changing to a valid absolute directory
-    cd "${HOME}/workspace/${JOB_NAME}"
-    explore .
-
-    return 0
-}
-
 main() {
-    mosey
-#   try_cd
-
-    # The environment
-    # inherited from
-    # the Jenkinsfile
-    # and
-    # docker-secrets-management-slave
-    # contains a PATH
-    # with these entries (in order):
-    # /tools/python/python3.7/bin
-    # /tools/kubectl/kubectl-1.15.3
-    # /tools/java/jdk11.0/bin
-    # /tools/helm/helm-3.0.2/linux-amd64
-    # /tools/python/python2.7/bin
-    # /tools/kubectl/kubectl-1.18.5
-    # /tools/java/jdk11.0/bin
-    # /tools/helm/helm-3.4.0/linux-amd64
-    # /usr/local/bin
-    # /usr/bin
-    #
-    # NOTE the duplication here.
-    # We do not need most of this.
-    # Indeed, let us
-    # reset the PATH
-    # to a reasonable starting value
-    # then rebuild it properly
-    # during activation.
-    export PATH=/usr/local/bin:/usr/bin
-
-    # Activate this project using BriteOnyx
     maybe_copy_file Jenkins/alias.bash   ./alias.bash
     maybe_copy_file Jenkins/context.bash ./context.bash
 
-    local Script=activate.bash
-    if [[ -r "${Script}" ]] ; then
-        source "${Script}" ; abort_on_fail $? "from ${Script}"
-    else
-        1>&2 echo "Aborting, missing script '${Script}'"
-        exit 99
-    fi
+    local Cmd='echo Hello world'
+    Cmd+=' && echo $PATH'
+#   Cmd+=' && execute_script tool-report'
+#   Cmd+=' && execute_script all-check'
+#   Cmd+=' && execute_script test-run'
+#   Cmd+=' && execute_script app-run -vvvv'
 
-    execute_script tool-report
-#   execute_script all-check
-    execute_script test-run
-    execute_script app-run -vvvv
+    nix-shell --keep BO_PathNative --pure --run "${Cmd}"
 
     return 0
 }

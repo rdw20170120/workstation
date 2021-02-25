@@ -45,7 +45,7 @@ remembering() {
 
 export BO_Project=${PWD}
 remembering BO_Project
-remembering INTERACTIVE_MODE
+remembering BO_Interactive
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/declare.bash
 source "${_Script}" ; _Status=$?
@@ -64,16 +64,17 @@ source "${_Script}" ; _Status=$?
 # the project-specific script
 # to avoid that collision.
 
-export BO_PathProject="${BO_Project}/BriteOnyx/bin:${BO_Project}/bin"
+export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
 
 [[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}
 [[ -z "${BO_PathUser}" ]] && export BO_PathUser=${HOME}/bin
 
+remembering BO_PathNative
 remembering BO_PathProject
 remembering BO_PathSystem
 remembering BO_PathUser
 
-_Script="${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
+_Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
@@ -91,7 +92,9 @@ remembering BO_OS
 
 # Create random temporary directory
 if [[ "${BO_OS}" == macOS ]] ; then
-    _result=$(mktemp -d -t "BO-${USER}")
+    _result=$(mktemp -d -t "BO-${USER}-XXXXXXX")
+# TODO: Did I mix these up, so this belongs on Linux?
+#   _result=$(mktemp -d -t "BO-${USER}")
 else
     _result=$(mktemp -d -t "BO-${USER}-XXXXXXX")
 fi

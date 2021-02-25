@@ -15,60 +15,65 @@
 #--------------------------------------------------------------------------------------------------
 # This should probably be the right way - didn't have time to experiment though
 # TODO: Implement this properly, if there is a real need to ever have color disabled.
-# INTERACTIVE_MODE="$([ tty --silent ] && echo on || echo off)"
-# INTERACTIVE_MODE=$([[ "$(uname)" == "Darwin" ]] && echo "on" || echo "off")
+# BO_Interactive="$([ tty --silent ] && echo on || echo off)"
+# BO_Interactive=$([[ "$(uname)" == "Darwin" ]] && echo "on" || echo "off")
 
-declare -x INTERACTIVE_MODE=OFF
+declare -x BO_Interactive=OFF
 [[ -n "${TERM}" ]] &&
     [[ "${TERM}" != "dumb" ]] &&
-    INTERACTIVE_MODE=${TERM}
+    BO_Interactive=${TERM}
 [[ -n "${COLORTERM}" ]] &&
-    INTERACTIVE_MODE=${COLORTERM}
+    BO_Interactive=${COLORTERM}
 
 #--------------------------------------------------------------------------------------------------
 # Begin Logging Section
 
-if [[ "${INTERACTIVE_MODE}" == "OFF" ]] ; then
-    # Then we don't care about log colors
-    declare -rx LOG_DEFAULT_COLOR=""
-    declare -rx LOG_DEBUG_COLOR=""
-    declare -rx LOG_ERROR_COLOR=""
-    declare -rx LOG_INFO_COLOR=""
-    declare -rx LOG_WARN_COLOR=""
-    declare -rx LOG_GOOD_COLOR=""
+if [[ "${BO_Interactive}" == "OFF" ]] ; then
+    declare -rx BO_LogColorDefault=
+    declare -rx BO_LogColorDebug=
+    declare -rx BO_LogColorError=
+    declare -rx BO_LogColorInfo=
+    declare -rx BO_LogColorWarn=
+    declare -rx BO_LogColorGood=
 else
-    declare -rx LOG_DEFAULT_COLOR="\033[0m"
-    declare -rx LOG_DEBUG_COLOR="\033[1;34m"
-    declare -rx LOG_ERROR_COLOR="\033[1;31m"
-    declare -rx LOG_INFO_COLOR="\033[1m"
-    declare -rx LOG_WARN_COLOR="\033[1;33m"
-    declare -rx LOG_GOOD_COLOR="\033[1;32m"
+    declare -rx BO_LogColorDefault="\033[0m"
+    declare -rx BO_LogColorDebug="\033[0;34m"
+    declare -rx BO_LogColorError="\033[1;31m"
+    declare -rx BO_LogColorInfo="\033[1;37m"
+    declare -rx BO_LogColorWarn="\033[0;33m"
+    declare -rx BO_LogColorGood="\033[0;32m"
 fi
 
+echo_with_color() {
+    local -r Color="$1"
+    local -r Text="$2"
+
+    echo -e "${Color}${Text}${BO_LogColorDefault}"
+} && export -f echo_with_color
+
 log_() {
-    local text="$1"
-    local level="$2"
-    local color="$3"
+    local -r Text="$1"
+    local Level="$2"
+    local Color="$3"
+    local -r Timestamp=$(date -u +"%Y%m%d %H%M%SZ")
 
-    # Default level to "info"
-    [[ -z ${level} ]] && level=I
-    [[ -z ${color} ]] && color="${LOG_INFO_COLOR}"
+    # Default Level to "info"
+    [[ -z ${Level} ]] && Level=I
+    [[ -z ${Color} ]] && Color="${BO_LogColorInfo}"
 
-    1>&2 echo -e "${color}[$(date -u +"%Y%m%d %H%M%SZ") ${level}] ${text}${LOG_DEFAULT_COLOR}"
-
-    return 0
+    1>&2 echo_with_color "${Color}" "[${Timestamp} ${Level}] ${Text}"
 } && export -f log_
 
 log_debug() {
-    log_ "$1" D "${LOG_DEBUG_COLOR}"
+    log_ "$1" D "${BO_LogColorDebug}"
 } && export -f log_debug
 
 log_error() {
-    log_ "$1" E "${LOG_ERROR_COLOR}"
+    log_ "$1" E "${BO_LogColorError}"
 } && export -f log_error
 
 log_good() {
-    log_ "$1" G "${LOG_GOOD_COLOR}"
+    log_ "$1" G "${BO_LogColorGood}"
 } && export -f log_good
 
 log_info() {
@@ -76,7 +81,7 @@ log_info() {
 } && export -f log_info
 
 log_warn() {
-    log_ "$1" W "${LOG_WARN_COLOR}"
+    log_ "$1" W "${BO_LogColorWarn}"
 } && export -f log_warn
 
 # This function scrubs the output of any control characters used in colorized output
@@ -87,11 +92,36 @@ scrubbed() {
     sed "s/[[:cntrl:]]\[[0-9;]*m//g"
 } && export -f scrubbed
 
-log_debug 'This is a debug message.'
-log_info  'This is an informational message.'
-log_warn  'This is a warning message.'
-log_error 'This is an error message.'
-log_good  'This is a good message.'
+log_sample_messages() {
+    log_debug 'This is a debug message.'
+    log_info  'This is an informational message.'
+    log_warn  'This is a warning message.'
+    log_error 'This is an error message.'
+    log_good  'This is a good message.'
+} && export -f log_sample_messages
+
+show_color_swatches() {
+    # ANSI color sequences
+    echo_with_color "\033[0;30m" "0;30 Black"
+    echo_with_color "\033[0;31m" "0;31 Red"
+    echo_with_color "\033[0;32m" "0;32 Green"
+    echo_with_color "\033[0;33m" "0;33 Brown/Orange"
+    echo_with_color "\033[0;34m" "0;34 Blue"
+    echo_with_color "\033[0;35m" "0;35 Purple"
+    echo_with_color "\033[0;36m" "0;36 Cyan"
+    echo_with_color "\033[0;37m" "0;37 Light Gray"
+    echo_with_color "\033[1;30m" "1;30 Dark Gray"
+    echo_with_color "\033[1;31m" "1;31 Light Red"
+    echo_with_color "\033[1;32m" "1;32 Light Green"
+    echo_with_color "\033[1;33m" "1;33 Yellow"
+    echo_with_color "\033[1;34m" "1;34 Light Blue"
+    echo_with_color "\033[1;35m" "1;35 Light Purple"
+    echo_with_color "\033[1;36m" "1;36 Light Cyan"
+    echo_with_color "\033[1;37m" "1;37 White"
+} && export -f show_color_swatches
+
+# show_color_swatches
+log_sample_messages
 
 # End Logging Section
 #--------------------------------------------------------------------------------------------------
