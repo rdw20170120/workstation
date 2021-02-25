@@ -14,7 +14,7 @@ grep_options+=' --exclude-dir=.PVE'
 grep_options+=' --exclude-dir=coverage'
 # TODO: It appears that '--exclude-from' is not supported on macOS Mojave 10.14.6
 # TODO: Perhaps I should consider installing a compatible 'grep' using Homebrew
-# grep_options+=' --exclude-from=${BO_Project}/.grep-exclude-from'
+# grep_options+=' --exclude-from="${BO_Project}/.grep-exclude-from"'
 # NOTE: For now, let's handle this by brute force
 grep_options+=' --exclude="*.pyc"'
 grep_options+=' --exclude="*.swp"'
@@ -22,10 +22,10 @@ alias grep="grep ${grep_options}"
 
 alias cycle='clear ; test-run && gen-run -vvv && app-run -vvv'
 alias list_sort_by_size='sort -nr --key=5'
-alias logs_reset='rm -fr ${BO_Project}/log ; mkdir ${BO_Project}/log'
-alias redeclare='source ${BO_Project}/BriteOnyx/bin/lib/declare.bash'
+alias logs_reset='rm -fr "${BO_Project}/log" ; mkdir "${BO_Project}/log"'
+alias redeclare='source "${BO_Project}/BriteOnyx/bin/lib/declare.bash"'
 alias sync_generate='meld src/gen/generate/custom src/gen/generate/shared'
-alias todo='grep -FR TODO ${BO_Project} | grep -Fv .log | grep -Fv .out'
+alias todo='grep -FR TODO "${BO_Project}" | grep -Fv .log | grep -Fv .out'
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

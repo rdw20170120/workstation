@@ -49,12 +49,12 @@ export BO_PathPython=${BO_DirHomePython}/bin:${HOME}/.local/bin
 export BO_PathTool=${BO_PathPython}:${BO_PathTool}
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
-source ${_Script} ; abort_on_fail $? "from ${_Script}"
+source "${_Script}" ; abort_on_fail $? "from ${_Script}"
 
 execute_script dep-install
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
-source ${_Script} ; abort_on_fail $? "from ${_Script}"
+source "${_Script}" ; abort_on_fail $? "from ${_Script}"
 
 # Establish Java
 
@@ -65,7 +65,7 @@ export BO_PathTool=${BO_PathJava}:${BO_PathTool}
 export BO_PathTool=${BO_PathPython}:${BO_PathJava}
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
-source ${_Script} ; abort_on_fail $? "from ${_Script}"
+source "${_Script}" ; abort_on_fail $? "from ${_Script}"
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

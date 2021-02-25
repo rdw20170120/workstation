@@ -10,13 +10,13 @@
     return 20
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/declare-base.bash
-source ${_Script} ; abort_on_fail $? "from ${_Script}"
+source "${_Script}" ; abort_on_fail $? "from ${_Script}"
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/declare-require.bash
-source ${_Script} ; abort_on_fail $? "from ${_Script}"
+source "${_Script}" ; abort_on_fail $? "from ${_Script}"
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/declare-common.bash
-source ${_Script} ; abort_on_fail $? "from ${_Script}"
+source "${_Script}" ; abort_on_fail $? "from ${_Script}"
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

@@ -22,11 +22,11 @@ if [[ -r "${_Script}" ]] ; then
     export PATH=${BO_PathSystem}:${BO_PathPve}:${BO_PathProject}
 
     log_debug "Sourcing script '${_Script}'"
-    source ${_Script} ; abort_on_fail $? "from ${_Script}"
+    source "${_Script}" ; abort_on_fail $? "from ${_Script}"
 
     _Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
     log_debug "Sourcing script '${_Script}'"
-    source ${_Script} ; abort_on_fail $? "from ${_Script}"
+    source "${_Script}" ; abort_on_fail $? "from ${_Script}"
 else
     log_warn "Ignoring, script '${_Script}' is unreadable"
 fi

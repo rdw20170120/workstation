@@ -8,17 +8,6 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-require_variable BO_NameApp
-
-cd $BO_Project/src/app
-
-# Execute Python
-cmd='python3'
-# cmd+=' -bb'
-cmd+=" -m ${BO_NameApp}"
-echo $cmd $@
-$cmd $@
-
 main() {
     # Run application
 
@@ -33,7 +22,16 @@ main() {
     # after giving the user feedback
     # about how they might proceed further.
 
-    # TODO: CONTENT
+    require_variable BO_NameApp
+    
+    cd "$BO_Project/src/app" ; abort_on_fail $? "from cd"
+    
+    # Execute Python
+    cmd='python3'
+    # cmd+=' -bb'
+    cmd+=" -m ${BO_NameApp}"
+    echo $cmd $@
+    $cmd $@
 
     return 0
 }

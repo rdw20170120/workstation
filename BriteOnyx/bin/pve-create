@@ -24,7 +24,7 @@ main() {
 
     local -r Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
     log_debug "Sourcing script '${Script}'"
-    source ${Script} ; abort_on_fail $? "from ${Script}"
+    source "${Script}" ; abort_on_fail $? "from ${Script}"
 
     log_warn 'This new Python virtual environment'
     log_warn 'MAY NOT have been activated yet'

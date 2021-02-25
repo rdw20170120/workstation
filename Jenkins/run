@@ -108,7 +108,7 @@ main() {
 
     local Script=activate.bash
     if [[ -r "${Script}" ]] ; then
-        source ${Script} ; abort_on_fail $? "from ${Script}"
+        source "${Script}" ; abort_on_fail $? "from ${Script}"
     else
         1>&2 echo "Aborting, missing script '${Script}'"
         exit 99

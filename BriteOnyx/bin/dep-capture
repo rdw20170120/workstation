@@ -12,7 +12,7 @@ main() {
     # Capture Python dependency status
     require_arguments $# 0
 
-    local -r File=$BO_Project/cfg/requirements.txt
+    local -r File="${BO_Project}/cfg/requirements.txt"
     
     log_debug "Capturing Python dependency status to '${File}'"
     >${File} dep-report

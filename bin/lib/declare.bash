@@ -16,6 +16,6 @@
 
 : << 'DisabledContent'
 _Script=${BO_Project}/bin/lib/declare-NAME.bash
-source ${_Script} ; abort_on_fail $? "from ${_Script}"
+source "${_Script}" ; abort_on_fail $? "from ${_Script}"
 DisabledContent
 

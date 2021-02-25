@@ -9,7 +9,7 @@
 # Configure Python path
 DirMine=${BO_Project}/src/lib/mine
 DirThird=${BO_Project}/src/lib/third_party
-export PYTHONPATH=${PYTHONPATH}:${DirThird}:${DirMine}
+export PYTHONPATH=${PYTHONPATH}:"${DirThird}":"${DirMine}"
 remembering PYTHONPATH
 
 export PYTHONCOERCELOCALE=warn

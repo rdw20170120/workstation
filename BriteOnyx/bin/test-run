@@ -15,9 +15,9 @@ run_coverage() {
 
     require_command python3
 
-    python3 -m coverage html --rcfile=$1
+    python3 -m coverage html --rcfile="$1"
     abort_on_fail $? "from python3 -m coverage html ..."
-    python3 -m coverage report --rcfile=$1
+    python3 -m coverage report --rcfile="$1"
     abort_on_fail $? "from python3 -m coverage report ..."
 }
 
@@ -30,16 +30,16 @@ run_pytest() {
     require_value "$2"
     require_directory "$3"
 
-    cd $3 ; abort_on_fail $? "from cd"
+    cd "$3" ; abort_on_fail $? "from cd"
 
     require_command python3
 
     python3 -m pytest \
-	--cov=$3 \
+	--cov="$3" \
 	--cov-append \
-	--cov-config=$1 \
+	--cov-config="$1" \
 	--cov-report= \
-        --log-file=${BO_Project}/log/pytest-$2.log
+        --log-file="${BO_Project}/log/pytest-$2.log"
     abort_on_fail $? "from python3 -m pytest ..."
 }
 
@@ -49,16 +49,16 @@ main() {
 
     require_command python3
 
-    python3 -m coverage erase --rcfile=${Config}
+    python3 -m coverage erase --rcfile="${Config}"
     abort_on_fail $? "from python3 -m coverage erase ..."
 
-    run_pytest   ${Config} mine ${BO_Project}/src/lib/mine
-    run_pytest   ${Config} gen  ${BO_Project}/src/gen
-    run_pytest   ${Config} app  ${BO_Project}/src/app
+    run_pytest "${Config}" mine "${BO_Project}/src/lib/mine"
+    run_pytest "${Config}" gen  "${BO_Project}/src/gen"
+    run_pytest "${Config}" app  "${BO_Project}/src/app"
 
     if [[ -z "${BO_RunningHumanless}" ]] ; then
-        cd ${BO_Project}/src ; abort_on_fail $? "from cd"
-        run_coverage ${Config}
+        cd "${BO_Project}/src" ; abort_on_fail $? "from cd"
+        run_coverage "${Config}"
     fi
 
     return 0

@@ -38,7 +38,7 @@ execute_script() {
     require_script "${Script}"
     shift 1
     log_debug "Executing script ${Script}"
-    ${Script} $@
+    "${Script}" $@
     abort_on_fail $? "Failed to execute script ${Script}"
 } && export -f execute_script
 
@@ -78,7 +78,7 @@ maybe_copy_file() {
     # Copy file $1 to $2, if $2 does not already exist
     require_arguments $# 2
     require_file "$1"
-    [[ ! -e "$2" ]] && cp $1 $2
+    [[ ! -e "$2" ]] && cp "$1" "$2"
     require_file "$2"
 } && export -f maybe_copy_file
 
@@ -117,7 +117,7 @@ write_file() {
     require_arguments $# 2
     # $1 = target file
     # $2 = source content
-    >$1 echo -n "$2"
+    > "$1" echo -n "$2"
     abort_on_fail $? "Failed to write file '$1'"
     require_file "$1"
 } && export -f write_file

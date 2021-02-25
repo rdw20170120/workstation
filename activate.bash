@@ -25,10 +25,10 @@ if [[ -z "${PWD}" ]] ; then
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 fi
 
-(set -o posix ; set) | sort > ${PWD}/BO-incoming.env
+(set -o posix ; set) | sort > "${PWD}/BO-incoming.env"
 
 _Script=${PWD}/BriteOnyx/bin/lib/declare-log4bash.bash
-source ${_Script} ; _Status=$?
+source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
@@ -48,7 +48,7 @@ remembering BO_Project
 remembering INTERACTIVE_MODE
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/declare.bash
-source ${_Script} ; _Status=$?
+source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
@@ -64,7 +64,7 @@ source ${_Script} ; _Status=$?
 # the project-specific script
 # to avoid that collision.
 
-export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
+export BO_PathProject="${BO_Project}/BriteOnyx/bin:${BO_Project}/bin"
 
 [[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}
 [[ -z "${BO_PathUser}" ]] && export BO_PathUser=${HOME}/bin
@@ -73,8 +73,8 @@ remembering BO_PathProject
 remembering BO_PathSystem
 remembering BO_PathUser
 
-_Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
-source ${_Script} ; _Status=$?
+_Script="${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
+source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
@@ -107,42 +107,42 @@ else
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 fi
 
-maybe_create_directory_tree ${BO_Project}/log
+maybe_create_directory_tree "${BO_Project}/log"
 
 # Activate Python virtual environment (PVE)
-(set -o posix ; set) | sort > ${PWD}/BO-PVE-prior.env
+(set -o posix ; set) | sort > "${PWD}/BO-PVE-prior.env"
 _Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
-source ${_Script} ; _Status=$?
+source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
-(set -o posix ; set) | sort > ${PWD}/BO-PVE-after.env
+(set -o posix ; set) | sort > "${PWD}/BO-PVE-after.env"
 
-maybe_copy_file ${BO_Project}/cfg/sample/alias.bash ${BO_Project}/alias.bash
-maybe_copy_file ${BO_Project}/cfg/sample/context.bash ${BO_Project}/context.bash
+maybe_copy_file "${BO_Project}/cfg/sample/alias.bash" "${BO_Project}/alias.bash"
+maybe_copy_file "${BO_Project}/cfg/sample/context.bash" "${BO_Project}/context.bash"
 
 _Script=${BO_Project}/bin/lib/declare.bash
 if [[ -r ${_Script} ]] ; then
-    source ${_Script} ; _Status=$?
+    source "${_Script}" ; _Status=$?
     [[ ${_Status} -ne 0 ]] &&
         kill -INT $$  # Kill the executing script, but not the shell (terminal)
 fi
 
 _Script=${BO_Project}/context.bash
-source ${_Script} ; _Status=$?
+source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/alias.bash
-source ${_Script} ; _Status=$?
+source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
 _Script=${BO_Project}/alias.bash
-source ${_Script} ; _Status=$?
+source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-(set -o posix ; set) | sort > ${PWD}/BO-outgoing.env
+(set -o posix ; set) | sort > "${PWD}/BO-outgoing.env"
 log_good "BriteOnyx has successfully activated this project"
 log_info "To get started, try executing the 'cycle' alias..."
 
