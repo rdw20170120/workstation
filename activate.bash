@@ -67,11 +67,13 @@ source "${_Script}" ; _Status=$?
 export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
 
 [[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}
+export BO_PathTool=
 [[ -z "${BO_PathUser}" ]] && export BO_PathUser=${HOME}/bin
 
 remembering BO_PathNative
 remembering BO_PathProject
 remembering BO_PathSystem
+remembering BO_PathTool
 remembering BO_PathUser
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
@@ -112,14 +114,6 @@ fi
 
 maybe_create_directory_tree "${BO_Project}/log"
 
-# Activate Python virtual environment (PVE)
-(set -o posix ; set) | sort > "${PWD}/BO-PVE-prior.env"
-_Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
-source "${_Script}" ; _Status=$?
-[[ ${_Status} -ne 0 ]] &&
-    kill -INT $$  # Kill the executing script, but not the shell (terminal)
-(set -o posix ; set) | sort > "${PWD}/BO-PVE-after.env"
-
 maybe_copy_file "${BO_Project}/cfg/sample/alias.bash" "${BO_Project}/alias.bash"
 maybe_copy_file "${BO_Project}/cfg/sample/context.bash" "${BO_Project}/context.bash"
 
@@ -156,5 +150,13 @@ log_info "To get started, try executing the 'cycle' alias..."
 # set +vx
 
 : << 'DisabledContent'
+# Activate Python virtual environment (PVE)
+(set -o posix ; set) | sort > "${PWD}/BO-PVE-prior.env"
+_Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
+source "${_Script}" ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+(set -o posix ; set) | sort > "${PWD}/BO-PVE-after.env"
+
 DisabledContent
 

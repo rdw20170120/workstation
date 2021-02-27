@@ -13,25 +13,23 @@ warn_on_error() {
 trap warn_on_error EXIT
 ###############################################################################
 
-maybe_copy_file() {
-    # Copy file $1 to $2, if $2 is missing
-    # $1 = source file
-    # $2 = target file
-    [[ ! -e "$2" ]] && cp $1 $2
-}
-
 main() {
-    maybe_copy_file Jenkins/alias.bash   ./alias.bash
-    maybe_copy_file Jenkins/context.bash ./context.bash
+    # Presumes executing
+    # with ${PWD}
+    # set to
+    # the project root directory
+    cp Jenkins/alias.bash   ./alias.bash
+    cp Jenkins/context.bash ./context.bash
 
-    local Cmd='echo Hello world'
-    Cmd+=' && echo $PATH'
-#   Cmd+=' && execute_script tool-report'
+    local Cmd='echo ${PATH}'
+    Cmd+=' && execute_script tool-report'
 #   Cmd+=' && execute_script all-check'
 #   Cmd+=' && execute_script test-run'
 #   Cmd+=' && execute_script app-run -vvvv'
 
-    nix-shell --keep BO_PathNative --pure --run "${Cmd}"
+    nix-shell \
+        --pure \
+        --run "${Cmd}"
 
     return 0
 }

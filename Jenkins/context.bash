@@ -22,7 +22,7 @@ export BO_RunningHumanless=defined
 
 # This file
 # should be copied into place
-# by `Jenkins/run_for_Jenkins`
+# by `Jenkins/run`
 # so that BriteOnyx activation
 # is satisfied.
 
@@ -39,6 +39,21 @@ export BO_RunningHumanless=defined
 # used.
 
 export BO_NameApp=NAME
+
+# Since this script is
+# executing under `Jenkins/run`,
+# it will be affected by
+# `nix-shell`
+# to have `BO_PathSystem`
+# set for our packages
+# installed by `shell.nix`.
+# Therefore, we must
+# capture that path
+# into this new environment.
+export BO_PathNix=${BO_PathSystem}
+export BO_PathTool=${BO_PathNix}
+
+source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

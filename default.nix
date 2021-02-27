@@ -1,13 +1,16 @@
-{ pkgs ? import <nixpkgs> {} }:
-pkgs.mkShell {
-  nativeBuildInputs = [
-    pkgs.python39
-  ];
-  shellHook = ''
-    BO_PathNix=${PATH}
-    source activate.bash
-  '';
-}
+{ nixpkgs ? import (import ./pinned.nix).nixpkgs }:
+let
+    pkgs = [
+        nixpkgs.python39
+        nixpkgs.which
+    ];
+in
+    nixpkgs.stdenv.mkShell {
+        nativeBuildInputs = pkgs;
+        shellHook = ''
+            source activate.bash
+        '';
+    }
 
 # python3.9-pytest-6.1.2
 # python3.9-coverage-5.3
@@ -20,3 +23,4 @@ pkgs.mkShell {
 # python3.9-black-20.8b1
 # python3.9-pytest-html-3.1.1
 # python3.9-pytest-sugar-0.9.4
+

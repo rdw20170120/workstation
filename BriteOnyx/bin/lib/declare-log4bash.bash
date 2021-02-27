@@ -36,6 +36,10 @@ if [[ "${BO_Interactive}" == "OFF" ]] ; then
     declare -rx BO_LogColorWarn=
     declare -rx BO_LogColorGood=
 else
+    # NOTE: These have been configured
+    # using the built-in `Solarized Dark` color preset
+    # for iTerm2 3.3.20210223
+    # running on Apple macOS 11.0.1 (Big Sur)
     declare -rx BO_LogColorDefault="\033[0m"
     declare -rx BO_LogColorDebug="\033[0;34m"
     declare -rx BO_LogColorError="\033[1;31m"
