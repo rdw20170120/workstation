@@ -42,7 +42,7 @@ export BO_NameApp=MODULE
 
 # TODO: Implement
 
-require_directory_in_variable HOME
+require_directory_in HOME
 
 # NOTE: Use the following settings
 # to activate special task execution modes
@@ -79,16 +79,16 @@ export Run=Dry
 : << 'DisabledContent'
 
 export BO_DirHomeConfluent=/opt/Confluent/confluent-5.5.1
-require_directory_in_variable BO_DirHomeConfluent
+require_directory_in BO_DirHomeConfluent
 export BO_PathConfluent=${BO_DirHomeConfluent}/bin
 
 export BO_DirHomeJava=/opt/OpenJDK/jdk-15.jdk/Contents/Home
-require_directory_in_variable BO_DirHomeJava
+require_directory_in BO_DirHomeJava
 export BO_PathJava=${BO_DirHomeJava}/bin
 export JAVA_HOME=${BO_DirHomeJava}
 
 export BO_DirHomeTestSSL=${HOME}/tool/testssl.sh-3.0
-require_directory_in_variable BO_DirHomeTestSSL
+require_directory_in BO_DirHomeTestSSL
 export BO_PathTestSSL=${BO_DirHomeTestSSL}
 
 # Java should preceed Confluent

@@ -13,17 +13,17 @@ pip_install() {
     # TODO: REFACTOR: to avoid duplication
     # Arguments are passed through
 
-    require_command python3
+    require_command_in pip
 
     if [[ -n "${BO_RunningHumanless}" ]] ; then
         # Install WITHOUT a Python virtual environment (PVE),
         # but with user isolation
-        python3 -m pip install --user $@
-        abort_on_fail $? "from python3 -m pip install --user ..."
+        ${pip} install --user $@
+        abort_on_fail $? "from ${pip} install --user ..."
     else
         # Install WITH a Python virtual environment (PVE)
-        python3 -m pip install $@
-        abort_on_fail $? "from python3 -m pip install ..."
+        ${pip} install $@
+        abort_on_fail $? "from ${pip} install ..."
     fi
 
     return 0
@@ -34,18 +34,18 @@ main() {
     # TODO: Enhance to allow reinstalling only essential dependencies
     require_arguments $# 0
 
+    require_command_in pip
+
     local -r File=$BO_Project/cfg/requirements.txt
 
-    require_command python3
-
-    python3 -m pip --version
-    abort_on_fail $? "from python3 -m pip --version"
+    ${pip} --version
+    abort_on_fail $? "from ${pip} --version"
 
     # --upgrade-strategy=eager
     pip_install --upgrade pip wheel
 
-    python3 -m pip --version
-    abort_on_fail $? "from python3 -m pip --version"
+    ${pip} --version
+    abort_on_fail $? "from ${pip} --version"
 
     log_debug "Installing Python dependencies from '${File}'"
     require_file "${File}"

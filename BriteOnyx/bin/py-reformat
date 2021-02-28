@@ -8,16 +8,16 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-# Temporarily override user setting to keep Black's cache under BO_Project
-export XDG_CACHE_HOME=${BO_Project}/.cache
-
-log_debug "Reformatting Python code using Black"
-black --config ${BO_Project}/cfg/pyproject.toml ${BO_Project}
-
 main() {
     # Reformat Python code using Black
 
-    # TODO: CONTENT
+    require_command_in black
+
+    # Temporarily override user setting to keep Black's cache under BO_Project
+    export XDG_CACHE_HOME=${BO_Project}/.cache
+
+    log_debug "Reformatting Python code using Black"
+    ${black} --config ${BO_Project}/cfg/pyproject.toml ${BO_Project}
 
     return 0
 }

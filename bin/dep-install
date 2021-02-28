@@ -8,72 +8,14 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-pip_install() {
-    # Install Python dependencies using PIP, smartly
-    # TODO: REFACTOR: to avoid duplication
-    # Arguments are passed through
-
-    require_command python3
-
-    if [[ -n "${BO_RunningHumanless}" ]] ; then
-        # Install WITHOUT a Python virtual environment (PVE),
-        # but with user isolation
-        python3 -m pip install --user $@
-        abort_on_fail $? "from python3 -m pip install --user ..."
-    else
-        # Install WITH a Python virtual environment (PVE)
-        python3 -m pip install $@
-        abort_on_fail $? "from python3 -m pip install ..."
-    fi
-
-    return 0
-}
-
 main() {
     # Install Python dependencies
     require_arguments $# 0
 
-    local Packages
-
-    require_command python3
-
-    python3 -m pip --version
-    abort_on_fail $? "from python3 -m pip --version"
-
-    pip_install --upgrade pip wheel
-
-    python3 -m pip --version
-    abort_on_fail $? "from python3 -m pip --version"
+    require_command nix-env
 
     log_debug "Installing Python dependencies"
 
-    # NOTE: Install Python dependencies required for code and tests
-    Packages=
-    # Needed for testing
-    Packages+=' pytest'
-    Packages+=' pytest-cov coverage[toml]'
-    # Needed for utilities
-    Packages+=' logzero'
-    # Needed for application
-    Packages+=' awscli boto3'
-#   Packages+=' commandlib'
-#   Packages+=' cryptography'
-#   Packages+=' pem twisted[tls]'
-#   Packages+=' pyopenssl'
-#   Packages+=' strictyaml'
-    pip_install ${Packages}
-
-    if [[ -z "${BO_RunningHumanless}" ]] ; then
-        # NOTE: Install Python dependencies only needed for developer experience
-        Packages=
-        Packages+=' black'
-        Packages+=' pytest-html ansi2html'
-        Packages+=' pytest-icdiff'
-        Packages+=' pytest-sugar'
-        pip_install ${Packages}
-    fi
-
-    return 0
 }
 
 main $@
@@ -85,6 +27,28 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+    local Packages
+    # NOTE: Install Python dependencies required for code and tests
+    Packages='python3-3.9.1'
+    # Needed for testing
+    Packages+=' python3.9-coverage-5.3'
+    Packages+=' python3.9-pytest-6.1.2'
+    Packages+=' python3.9-pytest-cov-2.10.1'
+    # Needed for utilities
+    Packages+=' python3.9-logzero-1.6.3'
+    # Needed for application
+    Packages+=' awscli-1.19.5'
+    Packages+=' python3.9-boto3-1.17.5'
+    # NOTE: Install Python dependencies only needed for developer experience
+    Packages+=' icdiff-1.9.5'
+    Packages+=' python3.9-ansi2html-1.6.0'
+    Packages+=' python3.9-black-20.8b1'
+    Packages+=' python3.9-pytest-html-3.1.1'
+    Packages+=' python3.9-pytest-sugar-0.9.4'
+
+    nix-env -i ${Packages}
+    abort_on_fail $? "from nix-env"
+
 NO: sh
 TODO: RESEARCH: Consider pytest-benchmark
 TODO: RESEARCH: Consider pytest-clarity

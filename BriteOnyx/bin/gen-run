@@ -12,8 +12,8 @@ main() {
     # Generate source
     local Cmd
     
-    require_directory_in_variable BO_Project
-    require_directory_in_variable TMPDIR
+    require_directory_in BO_Project
+    require_directory_in TMPDIR
 
     # Recreate target directory (handled within Python)
     local -r DirTgt=$TMPDIR/tgt

@@ -13,10 +13,10 @@ main() {
     # TODO: Enhance to accept argument for output file
     require_arguments $# 0
 
-    require_command python3
+    require_command_in pip
 
-    python3 -m pip freeze --all | sort
-    abort_on_fail $? "from python3 -m pip freeze ... | sort"
+    ${pip} freeze --all | sort
+    abort_on_fail $? "from ${pip} freeze ... | sort"
 
     return 0
 }

@@ -8,12 +8,14 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
+require_command_in compileall
+
 log_debug "Compiling Python source files..."
-python3 -m compileall -f $BO_Project/BriteOnyx/bin
-python3 -m compileall -f $BO_Project/bin
-python3 -m compileall -f $BO_Project/src/app
-python3 -m compileall -f $BO_Project/src/gen
-python3 -m compileall -f $BO_Project/src/lib
+${compileall} -f $BO_Project/BriteOnyx/bin
+${compileall} -f $BO_Project/bin
+${compileall} -f $BO_Project/src/app
+${compileall} -f $BO_Project/src/gen
+${compileall} -f $BO_Project/src/lib
 
 main() {
     # Compile all Python source

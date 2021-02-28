@@ -24,6 +24,15 @@ require_command() {
     abort_on_fail $? "Missing command '$1'"
 } && export -f require_command
 
+require_command_in() {
+    # Require command referenced in variable $1
+    require_arguments $# 1
+    # $1 = variable holding reference to command that is required
+    require_variable "$1"
+    local -r Name=$1
+    require_command "${!Name}"
+} && export -f require_command_in
+
 require_directory() {
     # Require directory $1
     require_arguments $# 1
@@ -33,14 +42,14 @@ require_directory() {
     abort_on_fail $? "Missing directory '$1'"
 } && export -f require_directory
 
-require_directory_in_variable() {
-    # Require directory referenced from variable $1
+require_directory_in() {
+    # Require directory referenced in variable $1
     require_arguments $# 1
     # $1 = variable holding reference to directory that is required
     require_variable "$1"
     local -r Name=$1
     require_directory "${!Name}"
-} && export -f require_directory_in_variable
+} && export -f require_directory
 
 require_file() {
     # Require file $1
@@ -51,14 +60,14 @@ require_file() {
     abort_on_fail $? "Missing file '$1'"
 } && export -f require_file
 
-require_file_in_variable() {
-    # Require file referenced from variable $1
+require_file_in() {
+    # Require file referenced in variable $1
     require_arguments $# 1
     # $1 = variable holding reference to file that is required
     require_variable "$1"
     local -r Name=$1
     require_file "${!Name}"
-} && export -f require_file_in_variable
+} && export -f require_file_in
 
 require_function() {
     # Require function $1

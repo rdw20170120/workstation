@@ -53,6 +53,8 @@ convert () {
     # Convert Python2 source files to Python3 within directory $1
     # $1 = directory within which to work
 
+    require_command 2to3
+
     local cmd="2to3"
     # NO: cmd+=" --add-suffix=3"
     cmd+=" --verbose"

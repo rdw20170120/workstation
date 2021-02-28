@@ -13,7 +13,7 @@ grep_options+=' --exclude-dir=.pytest_cache'
 grep_options+=' --exclude-dir=.PVE'
 grep_options+=' --exclude-dir=coverage'
 # TODO: It appears that '--exclude-from' is not supported on macOS Mojave 10.14.6
-# TODO: Perhaps I should consider installing a compatible 'grep' using Homebrew
+# TODO: Perhaps I should consider installing a compatible `grep`
 # grep_options+=' --exclude-from="${BO_Project}/.grep-exclude-from"'
 # NOTE: For now, let's handle this by brute force
 grep_options+=' --exclude="*.pyc"'

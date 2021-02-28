@@ -8,12 +8,14 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
+require_command_in tabnanny
+
 Out=${BO_Project}/out/tabnanny.out
- >${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/BriteOnyx/bin
->>${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/bin
->>${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/src/app
->>${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/src/gen
->>${Out} 2>&1 python3 -m tabnanny -v ${BO_Project}/src/lib
+ >${Out} 2>&1 ${tabnanny} -v ${BO_Project}/BriteOnyx/bin
+>>${Out} 2>&1 ${tabnanny} -v ${BO_Project}/bin
+>>${Out} 2>&1 ${tabnanny} -v ${BO_Project}/src/app
+>>${Out} 2>&1 ${tabnanny} -v ${BO_Project}/src/gen
+>>${Out} 2>&1 ${tabnanny} -v ${BO_Project}/src/lib
 cat ${Out} \
     | grep -v 'listing directory' \
     | grep -v 'Clean bill of health.'

@@ -1,16 +1,30 @@
-{ nixpkgs ? import (import ./pinned.nix).nixpkgs }:
+# TODO: How do I pin Nix repository version?
+with import <nixpkgs> {};
 let
-    pkgs = [
-        nixpkgs.python39
-        nixpkgs.which
+    # TODO: These two are not Python libraries,
+    # so how do I include them?
+    # awscli
+    # icdiff
+    pythonEnv = python39.withPackages (ps: [
+        # TODO: How do I pin library versions?
+        ps.ansi2html
+        ps.black
+        ps.boto3
+        ps.coverage
+        ps.logzero
+        ps.pytest
+        ps.pytest-cov
+        ps.pytest-html
+        ps.pytest-sugar
+    ]);
+in mkShell {
+    buildInputs = [
+        pythonEnv
     ];
-in
-    nixpkgs.stdenv.mkShell {
-        nativeBuildInputs = pkgs;
-        shellHook = ''
-            source activate.bash
-        '';
-    }
+    shellHook = ''
+        source activate.bash
+    '';
+}
 
 # python3.9-pytest-6.1.2
 # python3.9-coverage-5.3

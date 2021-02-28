@@ -50,10 +50,19 @@ export BO_NameApp=NAME
 # Therefore, we must
 # capture that path
 # into this new environment.
+require_variable BO_PathNative
 export BO_PathNix=${BO_PathSystem}
 export BO_PathTool=${BO_PathNix}
-
+export BO_PathSystem=${BO_PathNative}
 source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
+
+export black=$(which black)
+export compileall=$(which compileall)
+export coverage=$(which coverage)
+export pip=$(which pip)
+export pytest=$(which pytest)
+export tabnanny=$(which tabnanny)
+export venv=$(which venv)
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

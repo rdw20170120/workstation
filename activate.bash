@@ -129,6 +129,11 @@ source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
+_Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
+source "${_Script}" ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
 _Script=${BO_Project}/BriteOnyx/bin/lib/alias.bash
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&

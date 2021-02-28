@@ -10,19 +10,21 @@ trap warn_on_error EXIT
 
 run_coverage() {
     # Run Python coverage on previous pytest data
+    require_arguments $# 1
     # $1 = Python coverage configuration file
     require_file "$1"
 
-    require_command python3
+    require_command_in coverage
 
-    python3 -m coverage html --rcfile="$1"
-    abort_on_fail $? "from python3 -m coverage html ..."
-    python3 -m coverage report --rcfile="$1"
-    abort_on_fail $? "from python3 -m coverage report ..."
+    ${coverage} html --rcfile="$1"
+    abort_on_fail $? "from ${coverage} html ..."
+    ${coverage} report --rcfile="$1"
+    abort_on_fail $? "from ${coverage} report ..."
 }
 
 run_pytest() {
     # Run pytest on test suite known as $1 in directory $2
+    require_arguments $# 3
     # $1 = Python coverage configuration file
     # $2 = test suite name
     # $3 = test suite parent directory
@@ -30,27 +32,29 @@ run_pytest() {
     require_value "$2"
     require_directory "$3"
 
+    require_command_in pytest
+
     cd "$3" ; abort_on_fail $? "from cd"
 
-    require_command python3
-
-    python3 -m pytest \
+    ${pytest} \
 	--cov="$3" \
 	--cov-append \
 	--cov-config="$1" \
 	--cov-report= \
         --log-file="${BO_Project}/log/pytest-$2.log"
-    abort_on_fail $? "from python3 -m pytest ..."
+    abort_on_fail $? "from ${pytest} ..."
 }
 
 main() {
     # Run Python test suites
+    require_arguments $# 0
+
     local -r Config=${BO_Project}/cfg/.coveragerc
 
-    require_command python3
+    require_command_in coverage
 
-    python3 -m coverage erase --rcfile="${Config}"
-    abort_on_fail $? "from python3 -m coverage erase ..."
+    ${coverage} erase --rcfile="${Config}"
+    abort_on_fail $? "from ${coverage} erase ..."
 
     run_pytest "${Config}" mine "${BO_Project}/src/lib/mine"
     run_pytest "${Config}" gen  "${BO_Project}/src/gen"
@@ -64,6 +68,7 @@ main() {
     return 0
 }
 
+echo "In test-run, PATH=${PATH}"
 main $@
 
 ###############################################################################
