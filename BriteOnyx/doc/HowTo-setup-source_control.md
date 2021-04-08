@@ -31,9 +31,9 @@ vim ~/.ssh/config
 
 1. Add this content to the file:
 
-        Host MeAtOptum
+        Host MeAtGitHub
             Compression yes
-            HostName github.optum.com
+            HostName github.com
             IdentityFile ~/.ssh/id_rsa
             StrictHostKeyChecking yes
             User git
@@ -88,37 +88,34 @@ git config --list --show-origin
    Upon initial install, this should output nothing about your GitHub user.
 
 1. Let's change that.
-   These commands will set your name and email address for only this project.
-   If you want to set them globally for this user account on this machine, then add the `--global` option to each command.
+   These commands will set
+   your name and email address.
+   If you do not want
+   to set these globally
+   for this user account on this machine,
+   then drop the `--global` option
+   on each command.
 
 ~~~ bash
-git config user.name 'Rob Williams'
-git config user.email rob@refactory.biz
+git config --global user.name 'Rob Williams'
+git config --global user.email rob@refactory.biz
 ~~~
 
 1. You may also configure an editor for git to use:
 
 ~~~ bash
-git config core.editor vim
+git config --global core.editor vim
 ~~~
 
-1. Now, when you repeat the command above:
+1. Now, when you repeat the (modified) command above:
 
 ~~~ bash
-git config --list --show-origin
+git config --global --list --show-origin
 ~~~
 
    you should see the new settings.
 
-        file:.git/config        core.repositoryformatversion=0
-        file:.git/config        core.filemode=true
-        file:.git/config        core.bare=false
-        file:.git/config        core.logallrefupdates=true
         file:.git/config        core.editor=vim
-        file:.git/config        remote.origin.url=MeAtGitHub:PROFILE/REPO.git
-        file:.git/config        remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
-        file:.git/config        branch.master.remote=origin
-        file:.git/config        branch.master.merge=refs/heads/master
         file:.git/config        user.name=Rob Williams
         file:.git/config        user.email=rob@refactory.biz
 
