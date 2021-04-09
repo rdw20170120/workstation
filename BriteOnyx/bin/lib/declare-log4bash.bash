@@ -6,7 +6,7 @@
 ###############################################################################
 # Copied from https://github.com/fredpalmer/log4bash/blob/master/log4bash.sh
 # on 24-Nov-2020
-# by Rob Williams <rob.williams@optum.com>
+# by Rob Williams <rob@refactory.biz>
 #--------------------------------------------------------------------------------------------------
 # log4bash - Makes logging in Bash scripting suck less
 # Copyright (c) Fred Palmer
