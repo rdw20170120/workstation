@@ -32,6 +32,8 @@
 # to affecting only them
 # (as they should).
 
+require_variable BO_PathProject
+[[ -z "${BO_PathNative}" ]] && export BO_PathNative=${PATH}
 export PATH=${BO_PathTool}:${BO_PathNative}:${BO_PathProject}:${BO_PathUser}
 remembering PATH
 
