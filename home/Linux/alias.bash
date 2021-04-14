@@ -15,7 +15,7 @@ alias lL='ls -Lln'
 
 alias vim='nvim'
 
-alias jump_workstation='cd ~/project/Rob/workstation'
+alias jump_workstation='cd ~/project/WIP/workstation'
 
 # For working with ~/.inputrc
 alias configure_readline_from='bind -f'
@@ -31,5 +31,4 @@ alias show_readline_variables='bind -v'
 
 # For Linux Mint development VM
 alias fullscreen='~/MANUAL.xprofile'
-alias jump_potrero='cd ~/project/potrero-cloud-lab'
 

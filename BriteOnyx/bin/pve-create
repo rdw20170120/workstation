@@ -12,15 +12,15 @@ main() {
     # Create (and activate) Python virtual environment directory
     require_arguments $? 0
 
-    require_command_in venv
+    require_command_in python3
     require_variable BO_PVE
 
     log_debug "Creating Python virtual environment directory '${BO_PVE}'"
 
     # TODO: How do we get the version of venv?
 
-    ${venv} ${BO_PVE}
-    abort_on_fail $? "from ${venv} ..."
+    ${python3} -m venv ${BO_PVE}
+    abort_on_fail $? "from ${python3} -m venv ..."
 
     local -r Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
     log_debug "Sourcing script '${Script}'"
@@ -32,7 +32,7 @@ main() {
     log_warn 'You should either'
     log_warn 'activate it here'
     log_warn 'or `exit` this shell'
-    log_warn 'and activate a new one'
+    log_warn 'and activate a new one.'
 
     return 0
 }

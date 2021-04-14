@@ -12,8 +12,6 @@ main() {
     # Install Python dependencies
     require_arguments $# 0
 
-    require_command nix-env
-
     log_debug "Installing Python dependencies"
 
 }
@@ -27,6 +25,8 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+    require_command nix-env
+
     local Packages
     # NOTE: Install Python dependencies required for code and tests
     Packages='python3-3.9.1'

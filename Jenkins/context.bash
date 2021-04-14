@@ -59,10 +59,8 @@ source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
 export black=$(which black)
 export compileall=$(which compileall)
 export coverage=$(which coverage)
-export pip=$(which pip)
 export pytest=$(which pytest)
 export tabnanny=$(which tabnanny)
-export venv=$(which venv)
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

@@ -124,12 +124,20 @@ if [[ -r ${_Script} ]] ; then
         kill -INT $$  # Kill the executing script, but not the shell (terminal)
 fi
 
-_Script=${BO_Project}/context.bash
+# Activate Python virtual environment (PVE)
+(set -o posix ; set) | sort > "${PWD}/BO-PVE-prior.env"
+_Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
+source "${_Script}" ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+(set -o posix ; set) | sort > "${PWD}/BO-PVE-after.env"
+
+_Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-_Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
+_Script=${BO_Project}/context.bash
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
@@ -155,13 +163,5 @@ log_info "To get started, try executing the 'cycle' alias..."
 # set +vx
 
 : << 'DisabledContent'
-# Activate Python virtual environment (PVE)
-(set -o posix ; set) | sort > "${PWD}/BO-PVE-prior.env"
-_Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash
-source "${_Script}" ; _Status=$?
-[[ ${_Status} -ne 0 ]] &&
-    kill -INT $$  # Kill the executing script, but not the shell (terminal)
-(set -o posix ; set) | sort > "${PWD}/BO-PVE-after.env"
-
 DisabledContent
 

@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+trap warn_on_error EXIT
+###############################################################################
+[[ -z "${BO_Project}" ]] &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    exit 99
+
+merge_directory() {
+    # Merge directory trees
+    require_arguments $# 2
+    local -r DirSource=${BO_Project}/home/$2
+    local -r DirTarget=${HOME}/$1
+
+    maybe_create_directory_tree "${DirTarget}"
+    $merge "${DirTarget}" "${DirSource}"
+}
+
+merge_file() {
+    # Merge file
+    require_arguments $# 3
+    local -r DirSource=${BO_Project}/home/$2
+    local -r DirTarget=${HOME}/$1
+    local -r File=$3
+
+    maybe_create_directory_tree "${DirTarget}"
+    # NOTE: Needed only for `diffmerge`?
+    # [[ ! -e "${DirTarget}/${File}" ]] && touch "${DirTarget}/${File}"
+    $merge "${DirTarget}/${File}" "${DirSource}/${File}"
+}
+
+main() {
+    # Merge relevant files
+    # against home directory tree
+    # on Apple macOS
+
+    require_command_in merge
+    merge_directory .ssh .ssh
+    merge_directory bin  bin
+    merge_directory .config macOS/.config
+    merge_file . macOS .bash_profile
+    merge_file . macOS .bashrc
+    merge_file . macOS .inputrc
+    merge_file . macOS alias.bash
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+
