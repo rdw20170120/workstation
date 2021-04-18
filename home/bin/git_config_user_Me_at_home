@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a Bash shell.
+
+# Configure Me@home as the current user in the current Git repository
+git config user.email rob@refactory.biz
+git config user.name 'Rob Williams'
+
+: << 'DisabledContent'
+DisabledContent
+

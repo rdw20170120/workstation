@@ -20,9 +20,9 @@ esac
 
 # Environment
 export CLICOLOR=true
-export EDITOR=vim
+export EDITOR=nvim
 export GREP_OPTIONS='--color=auto'
-export PAGER=vimpager
+export PAGER=less
 
 # These are handled by Apple macOS
 # LANG

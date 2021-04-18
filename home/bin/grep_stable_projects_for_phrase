@@ -13,6 +13,6 @@ grep -EiR $1 \
     --exclude-dir=.git \
     --exclude-dir=.PVE \
     --files-with-matches \
-    ~/project |
+    ~/project/stable |
     sort
 

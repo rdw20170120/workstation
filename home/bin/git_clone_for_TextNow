@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a Bash shell.
+
+# Clone git repositories, if they have not been cloned already.
+# NOTE that I reference my special SSH configuration to handle the connection.
+
+source ~/bin/lib/declare-git.bash
+
+UrlPrefix=MeAtGitHub:Enflick
+
+# These are reference copies (kept on `master` branch or equivalent)
+Dir=~/project/stable/TextNow
+maybe_clone $Dir $UrlPrefix ansible
+maybe_clone $Dir $UrlPrefix kubernetes
+maybe_clone $Dir $UrlPrefix puppet
+maybe_clone $Dir $UrlPrefix server-tooling
+maybe_clone $Dir $UrlPrefix terraform
+
+# These are my Work In Progress (typically never on `master` branch or equivalent)
+# COPIED here from above
+Dir=~/project/WIP
+maybe_clone $Dir $UrlPrefix ansible
+maybe_clone $Dir $UrlPrefix kubernetes
+maybe_clone $Dir $UrlPrefix puppet
+maybe_clone $Dir $UrlPrefix server-tooling
+maybe_clone $Dir $UrlPrefix terraform
+
+: << 'DisabledContent'
+DisabledContent
+

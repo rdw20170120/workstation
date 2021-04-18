@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # This script is intended to be executed by a user in a Bash shell.
 
-# Hunt for interesting content in git repositories checked out here
+# Hunt for all interesting phrases in stable project directories
 
-script=$(which prj-grep)
+script=$(which grep_stable_projects_for_phrase)
 if [[ -z "$script" ]] ; then
   echo "FATAL: Missing script '$script', aborting"
   exit
@@ -49,23 +49,19 @@ hunt $out staging
 hunt $out stg
 
 # Environment variable
-hunt $out EXTRA_ARG
-hunt $out KAFKA_CFG
-hunt $out KAFKA_LOG4J
-hunt $out KAFKA_OPT
 
 # secret
 hunt $out cert
-hunt $out kafka-cert-stores
 hunt $out password
 hunt $out secret
 hunt $out SSL
 hunt $out TLS
 
-# tool
+# tools and vendors
+hunt $out Amazon
 hunt $out Apache
-hunt $out Azure
-hunt $out Connect
+hunt $out AWS
+hunt $out Dell
 hunt $out Hashicorp 
 hunt $out Helm
 hunt $out Java
@@ -75,14 +71,14 @@ hunt $out Kafka
 hunt $out kubectl
 hunt $out Kubernetes
 hunt $out Microsoft
+hunt $out nginx
 hunt $out Oracle
-hunt $out SchemaRegistry 
+hunt $out PHP
+hunt $out Puppet
 hunt $out Terraform 
 hunt $out Vault 
-hunt $out Venafi 
 
 # proper name
-hunt $out OCDP
-hunt $out Optum
-hunt $out UHG
+hunt $out Enflick
+hunt $out TextNow
 
