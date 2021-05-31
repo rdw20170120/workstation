@@ -15,7 +15,7 @@ main() {
     require_variable BO_PVE
     
     log_debug "Removing Python virtual environment directory '${BO_PVE}'"
-    maybe_delete_directory_tree ${BO_PVE}
+    maybe_delete_directory_tree "${BO_PVE}"
 
     return 0
 }

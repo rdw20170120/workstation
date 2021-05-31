@@ -14,6 +14,12 @@ Plug 'https://github.com/lifepillar/vim-solarized8'
 call plug#end()
 
 " https://github.com/junegunn/vim-plug
+" Install for Apple macOS (11.0.1)
+" sh -c 'curl -fLo \
+"     ~/.config/nvim/autoload/plug.vim \
+"     --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+" TODO: Install for Linux
 " To manage these plugins:
 " :PlugUpgrade
 " :PlugInstall

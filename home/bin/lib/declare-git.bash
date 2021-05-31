@@ -17,7 +17,7 @@ maybe_clone() {
   if [[ ! -d "$3" ]] ; then
     git clone $2/$3.git
   else
-    maybe_pull $1 $2 $3
+    maybe_pull "$1" $2 $3
   fi
 }
 
@@ -28,9 +28,9 @@ maybe_pull() {
   # $1 = parent directory of git working directory
   # $2 = git repository URL prefix
   # $3 = git repository name
-  if git_status_is_clean $1/$3 ; then
+  if git_status_is_clean "$1/$3" ; then
     echo "INFO:  Working directory is clean: $1/$3"
-    pushd $1/$3 >/dev/null
+    pushd "$1/$3" >/dev/null
     git pull
     popd >/dev/null
   else
@@ -43,9 +43,8 @@ git_status_is_clean() {
   # $1 = git working directory
   # Exit code 0 = clean
   # Exit code 1 = dirty
-  pushd $1 >/dev/null
+  pushd "$1" >/dev/null
   local -r output=$(git status --porcelain)
   popd >/dev/null
   [[ -z "$output" ]]
 }
-

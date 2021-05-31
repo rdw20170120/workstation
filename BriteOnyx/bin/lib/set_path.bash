@@ -33,8 +33,8 @@
 # (as they should).
 
 require_variable BO_PathProject
-[[ -z "${BO_PathNative}" ]] && export BO_PathNative=${PATH}
-export PATH=${BO_PathTool}:${BO_PathNative}:${BO_PathProject}:${BO_PathUser}
+[[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}
+export PATH=${BO_PathTool}:${BO_PathSystem}:${BO_PathProject}:${BO_PathUser}
 remembering PATH
 
 ###############################################################################

@@ -32,4 +32,3 @@ dir=~/project
 if [[ -d $dir ]] ; then
   chmod -R g=,o= $dir
 fi
-

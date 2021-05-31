@@ -1,4 +1,4 @@
-#!/bin/false
+#!/usr/bin/env cat
 # NOTE:  This file is intended to be sourced into a Bash shell.
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -8,14 +8,15 @@
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 
-alias la='ls -Alo'
+alias la='ls -Al'
 alias lB='ls -Aln'
-alias ll='ls -lo'
+alias ll='ls -l'
 alias lL='ls -Lln'
 
 alias vim='nvim'
 
-alias jump_workstation='cd ~/project/WIP/workstation'
+alias jump_experiment='cd ~/project/at\ GitLab/WIP/experiment'
+alias jump_workstation='cd ~/project/at\ GitHub/WIP/workstation'
 
 # For working with ~/.inputrc
 alias configure_readline_from='bind -f'

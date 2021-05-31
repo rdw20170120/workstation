@@ -6,6 +6,8 @@
 ###############################################################################
 # User/machine-specific Bash environment context
 
+unset BO_RunningHumanless
+
 # Bash environment
 # specific to this copy
 # of this project
@@ -22,9 +24,14 @@
 # It is intended
 # to be copied to
 # `${BO_Project}/context.bash`.
-# `activate.bash`
+# The `activate.bash` script
 # does this if it is missing
-# (e.g., initial clone).
+# (e.g.,
+# when first executed after
+# `git clone`
+# )
+# so that BriteOnyx activation
+# is satisfied.
 
 # NOTE: `${BO_Project}/context.bash`
 # is excluded by `.gitignore`;
@@ -40,35 +47,18 @@
 
 export BO_NameApp=MODULE
 
-# TODO: Implement
-
 require_directory_in HOME
 
-# NOTE: Use the following settings
-# to activate special task execution modes
-# as documented in the
-# src/lib/mine/task/config.py Python module.
+source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
 
-# This block of settings
-# are defaults for the safest task execution mode.
-
-export FakeIt=defined
-export Quick=1000000
-export ReservedDiskSpaceInBytes=$((10 * 1024 * 1024 * 1024))
-export Run=Dry
-
-# This block of settings
-# can be selectively uncommented
-# to relax the previous safeties.
-# NOTE: It is best to leave these commented-out here,
-# then manually execute these commands individually
-# to alter only the current shell
-# while you are testing.
-
-# export Run=Force
-# unset FakeIt
-# unset Quick
-# unset Run
+# Remember how to execute various tools
+export black=$(which black)
+export compileall=$(which compileall)
+export coverage=$(which coverage)
+export pip=$(which pip)
+export pytest=$(which pytest)
+export tabnanny=$(which tabnanny)
+export venv=$(which venv)
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
@@ -102,6 +92,32 @@ export BO_PathTestSSL=${BO_DirHomeTestSSL}
 export BO_PathTool=${BO_PathJava}:${BO_PathConfluent}:${BO_PathTestSSL}:${BO_PathTool}
 
 source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
+
+# NOTE: Use the following settings
+# activate special task execution modes
+# as documented in the
+# src/lib/mine/task/config.py Python module.
+
+# This block of settings
+# are defaults for the safest task execution mode.
+
+export FakeIt=defined
+export Quick=1000000
+export ReservedDiskSpaceInBytes=$((10 * 1024 * 1024 * 1024))
+export Run=Dry
+
+# This block of settings
+# can be selectively uncommented
+# to relax the previous safeties.
+# NOTE: It is best to leave these commented-out here,
+# then manually execute these commands individually
+# to alter only the current shell
+# while you are testing.
+
+# export Run=Force
+# unset FakeIt
+# unset Quick
+# unset Run
 
 DisabledContent
 

@@ -20,9 +20,16 @@ export BO_RunningHumanless=defined
 # as a means to update
 # with your latest edits.
 
-# This file
-# should be copied into place
-# by `Jenkins/run`
+# This is a sample.
+# It is intended
+# to be copied to
+# `${BO_Project}/context.bash`.
+# The `Jenkins/run` script
+# does this if it is missing
+# (e.g.,
+# when first executed after
+# `git clone`
+# )
 # so that BriteOnyx activation
 # is satisfied.
 
@@ -38,8 +45,28 @@ export BO_RunningHumanless=defined
 # of each environment variable
 # used.
 
-export BO_NameApp=NAME
+export BO_NameApp=MODULE
 
+require_variable BO_PathNative
+export BO_PathSystem=${BO_PathNative}
+source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
+
+# Remember how to execute various tools
+export black=$(which black)
+export compileall=$(which compileall)
+export coverage=$(which coverage)
+export pip=$(which pip)
+export pytest=$(which pytest)
+export tabnanny=$(which tabnanny)
+export venv=$(which venv)
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
 # Since this script is
 # executing under `Jenkins/run`,
 # it will be affected by
@@ -50,24 +77,7 @@ export BO_NameApp=NAME
 # Therefore, we must
 # capture that path
 # into this new environment.
-require_variable BO_PathNative
 export BO_PathNix=${BO_PathSystem}
 export BO_PathTool=${BO_PathNix}
-export BO_PathSystem=${BO_PathNative}
-source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
-
-export black=$(which black)
-export compileall=$(which compileall)
-export coverage=$(which coverage)
-export pytest=$(which pytest)
-export tabnanny=$(which tabnanny)
-
-###############################################################################
-# NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -vx
-# Code to debug...
-# set +vx
-
-: << 'DisabledContent'
 DisabledContent
 

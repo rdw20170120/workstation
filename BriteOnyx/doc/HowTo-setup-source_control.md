@@ -101,6 +101,12 @@ git config --global user.name 'Rob Williams'
 git config --global user.email rob@refactory.biz
 ~~~
 
+1. Let's also set our default `git pull` behavior:
+
+~~~ bash
+git config --global pull.ff only
+~~~
+
 1. You may also configure an editor for git to use:
 
 ~~~ bash

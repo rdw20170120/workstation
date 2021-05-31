@@ -5,11 +5,19 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-[[ -z "$BO_PathOriginal" ]] && export BO_PathOriginal=$PATH
+[[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
+# NOTE: Order matters!
+# Nix should override all (win all collisions).
+# Native system path is next.
+# Non-native tools follow.
+# User path is last (so user MUST resolve collisions).
 export BO_PathHomebrew=/usr/local/bin
-export BO_PathSystem=/usr/bin:/bin:/usr/sbin
-export BO_PathUser=$BO_PathHomebrew:~/bin
-export PATH=$BO_PathSystem:$BO_PathUser
+export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+export BO_PathNix=~/.nix-profile/bin
+export BO_PathVmware=/Applications/VMware\ Fusion.app/Contents/Public
+export BO_PathSystem=${BO_PathNix}:${BO_PathNative}:${BO_PathVmware}
+export BO_PathUser=${BO_PathHomebrew}:~/bin
+export PATH=${BO_PathSystem}:${BO_PathUser}
 
 # If not running interactively,
 # don't do anything
@@ -20,6 +28,7 @@ esac
 
 # Environment
 export CLICOLOR=true
+# TODO: Change to Spacemacs?
 export EDITOR=nvim
 export GREP_OPTIONS='--color=auto'
 export PAGER=less

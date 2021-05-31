@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a Bash shell.
+
+# Clone git repositories, if they have not been cloned already.
+# Clone from GitLab for my (Rob Williams') account
+# NOTE: I reference my special SSH configuration to handle the connection.
+# TODO: Resolve how to reconcile divergent branches during pull using one of these:
+# hint:   git config pull.rebase false  # merge (the default strategy)
+# hint:   git config pull.rebase true   # rebase
+# hint:   git config pull.ff only       # fast-forward only
+
+source ~/bin/lib/git-maybe_clone.bash
+
+_Source=GitLab
+UrlPrefix=MeAt${_Source}:refactoryllc
+
+# These are reference copies
+Dir=~/project/at\ ${_Source}/reference
+maybe_clone "$Dir" $UrlPrefix experiment
+maybe_clone "$Dir" $UrlPrefix learn-gitlab
+
+# These are what I am actually working on (Work In Progress)
+Dir=~/project/at\ ${_Source}/WIP
+maybe_clone "$Dir" $UrlPrefix experiment
+maybe_clone "$Dir" $UrlPrefix learn-gitlab
+
+: << 'DisabledContent'
+DisabledContent
+

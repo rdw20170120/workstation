@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a Bash shell.
+
+# Clone git repositories, if they have not been cloned already.
+# Clone from GitHub for my (Rob Williams') account
+# NOTE: I reference my special SSH configuration to handle the connection.
+# TODO: Resolve how to reconcile divergent branches during pull using one of these:
+# hint:   git config pull.rebase false  # merge (the default strategy)
+# hint:   git config pull.rebase true   # rebase
+# hint:   git config pull.ff only       # fast-forward only
+
+source ~/bin/lib/git-maybe_clone.bash
+
+_Source=GitHub
+UrlPrefix=MeAt${_Source}:rdw20170120
+
+Dir=~/project/at\ ${_Source}/reference
+# These are reference copies
+maybe_clone "$Dir" $UrlPrefix workstation
+
+# These are what I am actually working on (Work In Progress)
+Dir=~/project/at\ ${_Source}/WIP
+maybe_clone "$Dir" $UrlPrefix trading
+maybe_clone "$Dir" $UrlPrefix workstation
+
+: << 'DisabledContent'
+maybe_clone "$Dir" $UrlPrefix build
+maybe_clone "$Dir" $UrlPrefix euler
+maybe_clone "$Dir" $UrlPrefix first
+maybe_clone "$Dir" $UrlPrefix javascript
+maybe_clone "$Dir" $UrlPrefix sample-python
+maybe_clone "$Dir" $UrlPrefix samples
+DisabledContent
+

@@ -94,9 +94,7 @@ remembering BO_OS
 
 # Create random temporary directory
 if [[ "${BO_OS}" == macOS ]] ; then
-    _result=$(mktemp -d -t "BO-${USER}-XXXXXXX")
-# TODO: Did I mix these up, so this belongs on Linux?
-#   _result=$(mktemp -d -t "BO-${USER}")
+    _result=$(mktemp -d -t "BO")
 else
     _result=$(mktemp -d -t "BO-${USER}-XXXXXXX")
 fi
