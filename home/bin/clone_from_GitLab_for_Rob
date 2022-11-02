@@ -9,20 +9,37 @@
 # hint:   git config pull.rebase true   # rebase
 # hint:   git config pull.ff only       # fast-forward only
 
-source ~/bin/lib/git-maybe_clone.bash
+source ~/bin/lib/declare-git.bash
+
+
+
 
 _Source=GitLab
 UrlPrefix=MeAt${_Source}:refactoryllc
 
 # These are reference copies
 Dir=~/project/at\ ${_Source}/reference
-maybe_clone "$Dir" $UrlPrefix experiment
 maybe_clone "$Dir" $UrlPrefix learn-gitlab
 
 # These are what I am actually working on (Work In Progress)
 Dir=~/project/at\ ${_Source}/WIP
 maybe_clone "$Dir" $UrlPrefix experiment
-maybe_clone "$Dir" $UrlPrefix learn-gitlab
+
+
+
+
+UrlPrefix=MeAt${_Source}:refactorytechllc
+
+# These are reference copies
+Dir=~/project/at\ ${_Source}/reference
+maybe_clone "$Dir" $UrlPrefix PythonSpeed
+
+# These are what I am actually working on (Work In Progress)
+Dir=~/project/at\ ${_Source}/WIP
+maybe_clone "$Dir" $UrlPrefix private-mono
+
+
+
 
 : << 'DisabledContent'
 DisabledContent
