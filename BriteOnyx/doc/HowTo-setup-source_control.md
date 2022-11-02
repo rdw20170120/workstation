@@ -68,6 +68,8 @@ git clone MeAtGitHub:PROFILE/REPO.git
 cd REPO
 ~~~
 
+## Configure GitHub user local settings
+
 1. View git configuration.
 
 ~~~ bash
@@ -113,10 +115,10 @@ git config --global pull.ff only
 git config --global core.editor vim
 ~~~
 
-1. Now, when you repeat the (modified) command above:
+1. Now, when you repeat the command above:
 
 ~~~ bash
-git config --global --list --show-origin
+git config --list --show-origin
 ~~~
 
    you should see the new settings.
