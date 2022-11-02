@@ -5,7 +5,7 @@ Use your own GitHub PROFILE name and REPO name below as appropriate.
 ## Generate a new SSH key
 **NOTE**:  Do not bother with `ssh-agent`, if your new key has no passphrase.
 
-1. Open a Bash shell as the target user account on a machine running Ubuntu Linux.
+Open a Bash shell as the target user account on a machine running Ubuntu Linux.
 
 ~~~ bash
 ssh-keygen
@@ -19,17 +19,17 @@ ls ~/.ssh
 
         id_rsa id_rsa.pub
 
-1. Add the new SSH public key file (`id_rsa.pub`) to your GitHub account.
+Add the new SSH public key file (`id_rsa.pub`) to your GitHub account.
 
-## Configure SSH connection to GitHub
+## Configure SSH connection to GitHub & GitLab
 
-1. Create (or edit) your SSH configuration file.
+Create (or edit) your SSH configuration file.
 
 ~~~ bash
 vim ~/.ssh/config
 ~~~
 
-1. Add this content to the file:
+Add this content to the file:
 
         Host MeAtGitHub
             Compression yes
@@ -38,14 +38,21 @@ vim ~/.ssh/config
             StrictHostKeyChecking yes
             User git
 
-1. Save & exit vim by pressing `Escape :wq Enter`.
-1. Protect the new SSH files.
+        Host MeAtGitLab
+            Compression yes
+            HostName gitlab.com
+            IdentityFile ~/.ssh/id_rsa
+            StrictHostKeyChecking yes
+            User git
+
+Save & exit vim by pressing `Escape :wq Enter`.
+Protect the new SSH files.
 
 ~~~ bash
 chmod g=,o= ~/.ssh/*
 ~~~
 
-1. Test and allow the new SSH connection.
+Test and allow the new SSH connection to GitHub.
 
 ~~~ bash
 ssh -T git@github.com
@@ -53,13 +60,23 @@ ssh -T git@github.com
 ssh -T MeAtGitHub
 ~~~
 
-1. If necessary, troubleshoot SSH issues and Git issues until it works.
+If necessary, troubleshoot SSH issues and Git issues until it works.
+
+Test and allow the new SSH connection to GitLab.
+
+~~~ bash
+ssh -T git@gitlab.com
+# Type 'yes' and hit 'Enter' to accept the authenticity of the GitLab host machine.
+ssh -T MeAtGitLab
+~~~
+
+If necessary, troubleshoot SSH issues and Git issues until it works.
 
 ## Clone project repository
 **NOTE**: We use `MeAtGitHub` now as our prefix for the repo URL to trigger the
 use of the settings in `~/.ssh/config` that we created above.
 
-1. Open a Bash shell.
+Open a Bash shell.
 
 ~~~ bash
 mkdir ~/project
@@ -68,9 +85,9 @@ git clone MeAtGitHub:PROFILE/REPO.git
 cd REPO
 ~~~
 
-## Configure GitHub user local settings
+## Configure Git user local settings
 
-1. View git configuration.
+View git configuration.
 
 ~~~ bash
 git config --list --show-origin
@@ -89,7 +106,7 @@ git config --list --show-origin
 
    Upon initial install, this should output nothing about your GitHub user.
 
-1. Let's change that.
+Let's change that.
    These commands will set
    your name and email address.
    If you do not want
@@ -103,19 +120,19 @@ git config --global user.name 'Rob Williams'
 git config --global user.email rob@refactory.biz
 ~~~
 
-1. Let's also set our default `git pull` behavior:
+Let's also set our default `git pull` behavior:
 
 ~~~ bash
 git config --global pull.ff only
 ~~~
 
-1. You may also configure an editor for git to use:
+You may also configure an editor for git to use:
 
 ~~~ bash
 git config --global core.editor vim
 ~~~
 
-1. Now, when you repeat the command above:
+Now, when you repeat the command above:
 
 ~~~ bash
 git config --list --show-origin
