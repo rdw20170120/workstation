@@ -5,18 +5,26 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Homebrew
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW_PREFIX=/opt/homebrew
+export HOMEBREW_CELLAR=$HOMEBREW_PREFIX/Cellar
+export HOMEBREW_REPOSITORY=$HOMEBREW_PREFIX
+# export MANPATH=$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:
+# export INFOPATH=$HOMEBREW_PREFIX/share/info:${INFOPATH:-}
+export BO_PathHomebrew=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin
+
 [[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
 # NOTE: Order matters!
-# Nix should override all (win all collisions).
+# Homebrew should override all (win all collisions).
 # Native system path is next.
 # Non-native tools follow.
 # User path is last (so user MUST resolve collisions).
-export BO_PathHomebrew=/usr/local/bin
 export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export BO_PathNix=~/.nix-profile/bin
 export BO_PathVmware=/Applications/VMware\ Fusion.app/Contents/Public
-export BO_PathSystem=${BO_PathNix}:${BO_PathNative}:${BO_PathVmware}
-export BO_PathUser=${BO_PathHomebrew}:~/bin
+export BO_PathSystem=${BO_PathHomebrew}:${BO_PathNix}:${BO_PathNative}:${BO_PathVmware}
+export BO_PathUser=~/bin
 export PATH=${BO_PathSystem}:${BO_PathUser}
 
 # If not running interactively,
@@ -29,7 +37,7 @@ esac
 # Environment
 export CLICOLOR=true
 # TODO: Change to Spacemacs?
-export EDITOR=nvim
+export EDITOR=vim
 export GREP_OPTIONS='--color=auto'
 export PAGER=less
 

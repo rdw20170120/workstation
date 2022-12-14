@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a Bash shell.
+
+# Clone git repositories, if they have not been cloned already.
+# Clone from GitLab for my (Rob Williams') account
+# NOTE: I reference my special SSH configuration to handle the connection.
+# TODO: Resolve how to reconcile divergent branches during pull using one of these:
+# hint:   git config pull.rebase false  # merge (the default strategy)
+# hint:   git config pull.rebase true   # rebase
+# hint:   git config pull.ff only       # fast-forward only
+
+source ~/bin/lib/declare-git.bash
+
+_Source=GitLab
+_Connection=SouthwestAirlinesAt${_Source}
+
+# These are reference copies
+Dir=~/project/at\ SWA/reference
+
+UrlPrefix=${_Connection}:airops/platform-opssuite
+maybe_clone "$Dir" $UrlPrefix platform-logging-opensearch
+
+UrlPrefix=${_Connection}:cpe
+maybe_clone "$Dir" $UrlPrefix homebrew-cpe-tools
+
+UrlPrefix=${_Connection}:swa-common/templates/project-templates
+maybe_clone "$Dir" $UrlPrefix ccplat-infra-deployment
+
+UrlPrefix=${_Connection}:swa-common/ccp/modules
+maybe_clone "$Dir" $UrlPrefix cloud-common-eks-module
+maybe_clone "$Dir" $UrlPrefix cloud-common-vpc-module
+
+# These are what I am actually working on (Work In Progress)
+Dir=~/project/at\ SWA/WIP
+
+UrlPrefix=${_Connection}:csauto/csobservability
+maybe_clone "$Dir" $UrlPrefix deployment-opensearch
+
+UrlPrefix=${_Connection}:csiam/idauto/infra
+maybe_clone "$Dir" $UrlPrefix deployment-citizen
+
+# These are bare clones suitable for import into our own GitLab project
+Dir=~/project/at\ SWA/bare
+
+UrlPrefix=${_Connection}:airops/platform-opssuite
+maybe_bare "$Dir" $UrlPrefix platform-logging-opensearch
+
+: << 'DisabledContent'
+DisabledContent
+

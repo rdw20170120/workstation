@@ -12,14 +12,20 @@
 source ~/bin/lib/declare-git.bash
 
 _Source=GitHub
-UrlPrefix=MeAt${_Source}:rdw20170120
 
-Dir=~/project/at\ ${_Source}/reference
 # These are reference copies
+Dir=~/project/at\ ${_Source}/reference
+
+UrlPrefix=MeAt${_Source}:rdw20170120
 maybe_clone "$Dir" $UrlPrefix build
+
+UrlPrefix=MeAt${_Source}:outsideris
+maybe_clone "$Dir" $UrlPrefix citizen
 
 # These are what I am actually working on (Work In Progress)
 Dir=~/project/at\ ${_Source}/WIP
+
+UrlPrefix=MeAt${_Source}:rdw20170120
 maybe_clone "$Dir" $UrlPrefix workstation
 
 : << 'DisabledContent'
