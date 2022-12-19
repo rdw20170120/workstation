@@ -19,6 +19,12 @@ Dir=~/project/at\ ${_Source}/reference
 UrlPrefix=MeAt${_Source}:rdw20170120
 maybe_clone "$Dir" $UrlPrefix build
 
+UrlPrefix=MeAt${_Source}:gruntwork-io
+maybe_clone "$Dir" $UrlPrefix terragrunt
+
+UrlPrefix=MeAt${_Source}:hashicorp
+maybe_clone "$Dir" $UrlPrefix terraform
+
 UrlPrefix=MeAt${_Source}:outsideris
 maybe_clone "$Dir" $UrlPrefix citizen
 
