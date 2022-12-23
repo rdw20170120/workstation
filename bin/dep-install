@@ -13,7 +13,6 @@ main() {
     require_arguments $# 0
 
     log_debug "Installing Python dependencies"
-
 }
 
 main $@

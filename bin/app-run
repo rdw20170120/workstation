@@ -21,10 +21,11 @@ main() {
     # then it should abort
     # after giving the user feedback
     # about how they might proceed further.
+    require_arguments $# 0
 
     require_variable BO_NameApp
     
-    cd "$BO_Project/src/app" ; abort_on_fail $? "from cd"
+    cd "${BO_Project}/src/app" ; abort_on_fail $? "from cd"
     
     # Execute Python
     cmd='python3'

@@ -8,7 +8,7 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-if [[ -z "$BO_PVE" ]] ; then
+if [[ -z "${BO_PVE}" ]] ; then
     log_error "Environment variable 'BO_PVE' is undefined, aborting"
     exit 1
 fi
@@ -18,7 +18,7 @@ findAnd() {
     # $1 = action to perform, either 'delete' or 'print'
     # $2 = directory in which to work
     # $3 = filename pattern to match
-    find $2 \
+    find "$2" \
 	-not -path "${BO_Project}/.git/*" \
 	-and -not -path "${BO_PVE}/*" \
 	-and -name "$3" \
@@ -31,26 +31,26 @@ main() {
     require_arguments $# 0
 
     log_debug "Found these files..."
-    findAnd print $BO_Project '*.bak'
-    findAnd print $BO_Project '*.log'
-    findAnd print $BO_Project '*.pyc'
-    findAnd print $BO_Project '__pycache__'
+    findAnd print "${BO_Project}" '*.bak'
+    findAnd print "${BO_Project}" '*.log'
+    findAnd print "${BO_Project}" '*.pyc'
+    findAnd print "${BO_Project}" '__pycache__'
 
     log_debug "Deleting files..."
-    findAnd delete $BO_Project '*.bak'
-    findAnd delete $BO_Project '*.pyc'
-    findAnd delete $BO_Project '__pycache__'
+    findAnd delete "${BO_Project}" '*.bak'
+    findAnd delete "${BO_Project}" '*.pyc'
+    findAnd delete "${BO_Project}" '__pycache__'
  
-    maybe_delete_file $BO_Project/src/app/pytest.log
-    maybe_delete_file $BO_Project/src/gen/pytest.log
-    maybe_delete_file $BO_Project/src/lib/mine/pytest.log
-    maybe_delete_file $BO_Project/src/lib/third_party/pytest.log
+    maybe_delete_file "${BO_Project}/src/app/pytest.log"
+    maybe_delete_file "${BO_Project}/src/gen/pytest.log"
+    maybe_delete_file "${BO_Project}/src/lib/mine/pytest.log"
+    maybe_delete_file "${BO_Project}/src/lib/third_party/pytest.log"
 
     log_warn "Found these files REMAINING..."
-    findAnd print $BO_Project '*.bak'
-    findAnd print $BO_Project '*.log'
-    findAnd print $BO_Project '*.pyc'
-    findAnd print $BO_Project '__pycache__'
+    findAnd print "${BO_Project}" '*.bak'
+    findAnd print "${BO_Project}" '*.log'
+    findAnd print "${BO_Project}" '*.pyc'
+    findAnd print "${BO_Project}" '__pycache__'
 
     return 0
 }

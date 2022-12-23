@@ -37,7 +37,7 @@ class Renderer(object):
         try:
             if file_path is None:
                 self._log.info("Printing rendered content to stdout")
-                print(self._serialize(content))
+                print((self._serialize(content)))
             else:
                 self._log.info(
                     "Writing rendered content to file '%s'", file_path

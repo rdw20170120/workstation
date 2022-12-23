@@ -8,7 +8,7 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-if [[ -z "$BO_PVE" ]] ; then
+if [[ -z "${BO_PVE}" ]] ; then
     log_error "Environment variable 'BO_PVE' is undefined, aborting"
     exit 1
 fi
@@ -20,8 +20,8 @@ main() {
 
     prj-clean
     log_debug "Wiping (cleaning deeper)..."
-    maybe_delete_directory_tree ${BO_Project}/.pytest_cache 
-    maybe_delete_directory_tree  ${BO_Project}/log 
+    maybe_delete_directory_tree "${BO_Project}/.pytest_cache"
+    maybe_delete_directory_tree "${BO_Project}/log"
     pve-rm
 
     return 0

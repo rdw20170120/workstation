@@ -10,6 +10,8 @@ trap warn_on_error EXIT
 
 main() {
     # List files that are ignored by source control but MAY be wrongly left out
+    require_arguments $# 0
+
     git status --ignored |
         grep -v BO-incoming\.env |
         grep -v BO-outgoing\.env |

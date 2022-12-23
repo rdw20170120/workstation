@@ -10,6 +10,8 @@ trap warn_on_error EXIT
 
 main() {
     # Report Bash environment status
+    require_arguments $# 0
+
     (set -o posix ; set) | sort
     return 0
 }

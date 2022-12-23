@@ -6,9 +6,9 @@ which uname
 /usr/bin/uname
 ##########
 uname -a
-Darwin LAMU02ZL33ZLVDQ.uhc.com. 18.7.0 Darwin Kernel Version 18.7.0: Tue Nov 10 00:07:31 PST 2020; root:xnu-4903.278.51~1/RELEASE_X86_64 x86_64
+Darwin Mac-JF4J397K 21.6.0 Darwin Kernel Version 21.6.0: Thu Sep 29 20:13:56 PDT 2022; root:xnu-8020.240.7~1/RELEASE_ARM64_T6000 arm64
 ##########
-PATH=/Users/rwill253/project/WIP/workstation/.PVE/bin:/usr/bin:/bin:/usr/sbin:/Users/rwill253/project/WIP/workstation/.PVE/bin:/Users/rwill253/project/WIP/workstation/BriteOnyx/bin:/Users/rwill253/project/WIP/workstation/bin
+PATH=/Users/x299424/project/at GitHub/WIP/workstation/.PVE/bin:/Users/x299424/mambaforge/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/x299424/project/at GitHub/WIP/workstation/BriteOnyx/bin:/Users/x299424/project/at GitHub/WIP/workstation/bin:/Users/x299424/bin
 ##########
 type bash
 bash is /bin/bash
@@ -17,127 +17,210 @@ which bash
 /bin/bash
 ##########
 bash --version
-GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin18)
+GNU bash, version 3.2.57(1)-release (arm64-apple-darwin21)
 Copyright (C) 2007 Free Software Foundation, Inc.
 ##########
 type git
-git is /usr/bin/git
+git is /opt/homebrew/bin/git
 ##########
 which git
-/usr/bin/git
+/opt/homebrew/bin/git
 ##########
 git --version
-git version 2.20.1 (Apple Git-117)
+git version 2.39.0
 ##########
 type brew
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 16: type: brew: not found
+brew is /opt/homebrew/bin/brew
 ##########
 which brew
+/opt/homebrew/bin/brew
 ##########
 brew --version
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 16: brew: command not found
+Homebrew 3.6.16
+Homebrew/homebrew-core (git revision 5f1a277f2f4; last commit 2022-12-23)
+Homebrew/homebrew-cask (git revision d397020c08; last commit 2022-12-23)
 ##########
 brew list --full-name --casks
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 16: brew: command not found
+docker
+iterm2
+meld
+visual-studio-code
 ##########
 brew list --versions --casks
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 16: brew: command not found
+docker 4.15.0,93002
+iterm2 3.4.17
+meld 3.21.0-r3,19
+visual-studio-code 1.73.0
 ##########
 brew list --full-name --formulae
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 16: brew: command not found
+awscli
+brotli
+c-ares
+ca-certificates
+docutils
+gdbm
+gettext
+git
+go
+icu4c
+jsonlint
+libidn2
+libnghttp2
+libtermkey
+libunistring
+libuv
+libvterm
+libyaml
+luajit
+luv
+mpdecimal
+msgpack
+neovim
+node
+openssl@1.1
+pcre2
+prettier
+python@3.10
+python@3.11
+pyyaml
+readline
+six
+sqlite
+terraform
+terragrunt
+tree-sitter
+unibilium
+wget
+xz
+cpe/tools/awssaml
 ##########
 brew list --versions --formulae
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 16: brew: command not found
+awscli 2.9.9
+awssaml v2.1.16
+brotli 1.0.9
+c-ares 1.18.1_1
+ca-certificates 2022-10-11
+docutils 0.19
+gdbm 1.23
+gettext 0.21.1
+git 2.39.0
+go 1.19.4
+icu4c 71.1
+jsonlint 1.6.0
+libidn2 2.3.4
+libnghttp2 1.51.0
+libtermkey 0.22
+libunistring 1.0
+libuv 1.44.2
+libvterm 0.3
+libyaml 0.2.5
+luajit 2.1.0-beta3-20221208.2
+luv 1.44.2-1
+mpdecimal 2.5.1
+msgpack 4.0.0
+neovim 0.8.1
+node 19.3.0
+openssl@1.1 1.1.1s
+pcre2 10.40
+prettier 2.8.1
+python@3.10 3.10.9
+python@3.11 3.11.0
+pyyaml 6.0_1
+readline 8.2.1
+six 1.16.0_3
+sqlite 3.40.0
+terraform 1.3.6
+terragrunt 0.42.5
+tree-sitter 0.20.7
+unibilium 2.1.1
+wget 1.21.3
+xz 5.4.0
 ##########
 type python
-python is /Users/rwill253/project/WIP/workstation/.PVE/bin/python
+python is /Users/x299424/mambaforge/bin/python
 ##########
 which python
-/Users/rwill253/project/WIP/workstation/.PVE/bin/python
+/Users/x299424/mambaforge/bin/python
 ##########
 python --version
-Python 3.8.6
+Python 3.10.6
 ##########
-PYTHONPATH=:/Users/rwill253/project/WIP/workstation/src/lib/third_party:/Users/rwill253/project/WIP/workstation/src/lib/mine
+PYTHONPATH=:/Users/x299424/project/at GitHub/WIP/workstation/src/lib/third_party:/Users/x299424/project/at GitHub/WIP/workstation/src/lib/mine
 ##########
 type python2
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 16: type: python2: not found
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: type: python2: not found
 ##########
 which python2
 ##########
 python2 --version
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 16: python2: command not found
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: python2: command not found
 ##########
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 65: python2: command not found
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 65: python2: command not found
 ##########
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 67: python2: command not found
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 67: python2: command not found
 ##########
 type pip
-pip is /Users/rwill253/project/WIP/workstation/.PVE/bin/pip
+pip is /Users/x299424/mambaforge/bin/pip
 ##########
 which pip
-/Users/rwill253/project/WIP/workstation/.PVE/bin/pip
+/Users/x299424/mambaforge/bin/pip
 ##########
 pip --version
-pip 20.3.3 from /Users/rwill253/project/WIP/workstation/.PVE/lib/python3.8/site-packages/pip (python 3.8)
+pip 22.3.1 from /Users/x299424/mambaforge/lib/python3.10/site-packages/pip (python 3.10)
 ##########
 type python3
-python3 is /Users/rwill253/project/WIP/workstation/.PVE/bin/python3
+python3 is /Users/x299424/mambaforge/bin/python3
 ##########
 which python3
-/Users/rwill253/project/WIP/workstation/.PVE/bin/python3
+/Users/x299424/mambaforge/bin/python3
 ##########
 python3 --version
-Python 3.8.6
+Python 3.10.6
 ##########
-3.8.6
+3.10.6
 ##########
-['', '/Users/rwill253/project/WIP/workstation', '/Users/rwill253/project/WIP/workstation/src/lib/third_party', '/Users/rwill253/project/WIP/workstation/src/lib/mine', '/usr/local/Cellar/python@3.8/3.8.6_2/Frameworks/Python.framework/Versions/3.8/lib/python38.zip', '/usr/local/Cellar/python@3.8/3.8.6_2/Frameworks/Python.framework/Versions/3.8/lib/python3.8', '/usr/local/Cellar/python@3.8/3.8.6_2/Frameworks/Python.framework/Versions/3.8/lib/python3.8/lib-dynload', '/Users/rwill253/project/WIP/workstation/.PVE/lib/python3.8/site-packages']
+['', '/Users/x299424/project/at GitHub/WIP/workstation', '/Users/x299424/project/at GitHub/WIP/workstation/src/lib/third_party', '/Users/x299424/project/at GitHub/WIP/workstation/src/lib/mine', '/Users/x299424/mambaforge/lib/python310.zip', '/Users/x299424/mambaforge/lib/python3.10', '/Users/x299424/mambaforge/lib/python3.10/lib-dynload', '/Users/x299424/mambaforge/lib/python3.10/site-packages']
 ##########
 type pip3
-pip3 is /Users/rwill253/project/WIP/workstation/.PVE/bin/pip3
+pip3 is /Users/x299424/mambaforge/bin/pip3
 ##########
 which pip3
-/Users/rwill253/project/WIP/workstation/.PVE/bin/pip3
+/Users/x299424/mambaforge/bin/pip3
 ##########
 pip3 --version
-pip 20.3.3 from /Users/rwill253/project/WIP/workstation/.PVE/lib/python3.8/site-packages/pip (python 3.8)
+pip 22.3.1 from /Users/x299424/mambaforge/lib/python3.10/site-packages/pip (python 3.10)
 ##########
 type 2to3
-/Users/rwill253/project/WIP/workstation/bin/tool-report: line 16: type: 2to3: not found
+2to3 is /Users/x299424/mambaforge/bin/2to3
 ##########
 which 2to3
+/Users/x299424/mambaforge/bin/2to3
 ##########
 type black
-black is /Users/rwill253/project/WIP/workstation/.PVE/bin/black
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: type: black: not found
 ##########
 which black
-/Users/rwill253/project/WIP/workstation/.PVE/bin/black
 ##########
 black --version
-black, version 20.8b1
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: black: command not found
 ##########
 type coverage3
-coverage3 is /Users/rwill253/project/WIP/workstation/.PVE/bin/coverage3
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: type: coverage3: not found
 ##########
 which coverage3
-/Users/rwill253/project/WIP/workstation/.PVE/bin/coverage3
 ##########
 coverage3 --version
-Coverage.py, version 5.3.1 with C extension
-Full documentation is at https://coverage.readthedocs.io
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: coverage3: command not found
 ##########
 type py.test
-py.test is /Users/rwill253/project/WIP/workstation/.PVE/bin/py.test
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: type: py.test: not found
 ##########
 which py.test
-/Users/rwill253/project/WIP/workstation/.PVE/bin/py.test
 ##########
 type pytest
-pytest is /Users/rwill253/project/WIP/workstation/.PVE/bin/pytest
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: type: pytest: not found
 ##########
 which pytest
-/Users/rwill253/project/WIP/workstation/.PVE/bin/pytest
 ##########
 pytest --version
-pytest 6.2.1
+/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: pytest: command not found

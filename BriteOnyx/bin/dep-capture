@@ -15,7 +15,7 @@ main() {
     local -r File="${BO_Project}/cfg/requirements.txt"
     
     log_debug "Capturing Python dependency status to '${File}'"
-    >${File} dep-report
+    >"${File}" dep-report
 
     return 0
 }

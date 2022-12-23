@@ -19,7 +19,7 @@ main() {
 
     # TODO: How do we get the version of venv?
 
-    ${python3} -m venv ${BO_PVE}
+    ${python3} -m venv "${BO_PVE}"
     abort_on_fail $? "from ${python3} -m venv ..."
 
     local -r Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash

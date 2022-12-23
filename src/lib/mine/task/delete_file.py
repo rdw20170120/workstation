@@ -6,7 +6,7 @@ from pathlib import Path
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from task.task import FileSystemTask
+from .task.task import FileSystemTask
 from utility import my_assert as is_
 from utility.filesystem import delete_file
 from utility.tracked_path import TrackedPath

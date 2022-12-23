@@ -95,11 +95,11 @@ def _report_configuration():
 def _report_character_encoding_configuration():
     # TODO: Add to application configuration
     print("Character encoding configuration:")
-    print("sys.getdefaultencoding()='%s'", sys.getdefaultencoding())
-    print("sys.getfilesystemencoding()='%s'", sys.getfilesystemencoding())
-    print("sys.stderr.encoding='%s'", sys.stderr.encoding)
-    print("sys.stdin.encoding='%s'", sys.stdin.encoding)
-    print("sys.stdout.encoding='%s'", sys.stdout.encoding)
+    print(("sys.getdefaultencoding()='%s'", sys.getdefaultencoding()))
+    print(("sys.getfilesystemencoding()='%s'", sys.getfilesystemencoding()))
+    print(("sys.stderr.encoding='%s'", sys.stderr.encoding))
+    print(("sys.stdin.encoding='%s'", sys.stdin.encoding))
+    print(("sys.stdout.encoding='%s'", sys.stdout.encoding))
 
 
 def run():

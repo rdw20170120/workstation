@@ -8,19 +8,18 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-File=${BO_Project}/out/env.out
-
-log_debug "Capturing Bash environment status to '${File}'"
-&>${File} \
-    env-report
-
-# Capture activation output
-cp ${BO_Project}/*.env ${BO_Project}/out
-
 main() {
     # Capture Bash environment status
+    require_arguments $# 0
 
-    # TODO: CONTENT
+    local -r File=${BO_Project}/out/env.out
+
+    log_debug "Capturing Bash environment status to '${File}'"
+    &>"${File}" \
+        env-report
+
+    # Capture activation output
+    cp "${BO_Project}"/*.env "${BO_Project}/out/"
 
     return 0
 }

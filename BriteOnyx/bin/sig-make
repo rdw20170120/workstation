@@ -10,6 +10,8 @@ trap warn_on_error EXIT
 
 main() {
     # Make signature file for directory $1
+    require_arguments $# 0
+
     local Directory=$1
     [[ -z "${Directory}" ]] && Directory=${PWD}
     require_directory "${Directory}"
@@ -17,7 +19,7 @@ main() {
     local -r Signature=shasum-a256-p.sig
  
     log_debug "Making SHA256 signature ${Directory}/${Signature}"
-    cd ${Directory}
+    cd "${Directory}"
     abort_on_fail $? "Failed to cd '${Directory}'"
     shasum --algorithm 256 --portable * |
         grep -v ${Signature} |

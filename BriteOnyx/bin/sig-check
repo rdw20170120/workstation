@@ -10,6 +10,8 @@ trap warn_on_error EXIT
 
 main() {
     # Check signature file
+    require_arguments $# 0
+
     local Directory
     local Signature=shasum-a256-p.sig
     if [[ -z "$1" ]] ; then
@@ -25,7 +27,7 @@ main() {
 
     log_debug "Checking SHA256 signature ${Directory}/${Signature}"
     require_directory "${Directory}"
-    cd ${Directory}
+    cd "${Directory}"
     abort_on_fail $? "Failed to cd '${Directory}'"
     require_file "${Signature}"
     shasum -a 256 --check -p --warn ${Signature}

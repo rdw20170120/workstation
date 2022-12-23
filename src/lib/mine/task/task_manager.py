@@ -5,9 +5,9 @@ from logging import getLogger
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from task.exception import Abort
-from task.exception import Skip
-from task.queue import TaskQueue
+from .task.exception import Abort
+from .task.exception import Skip
+from .task.queue import TaskQueue
 from utility.my_logging import log_exception
 
 # Project modules   (relative references, NOT packaged, in project)

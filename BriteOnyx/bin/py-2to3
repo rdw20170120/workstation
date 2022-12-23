@@ -70,7 +70,7 @@ convert () {
 #   cmd+=" --fix=ws_comma"
     # Execute tool, but filter out the noise
     2>&1 \
-        $cmd $1 |
+        $cmd "$1" |
         grep -v 'Adding transformation' |
         grep -v 'Descending into' |
         grep -v 'No changes' |
@@ -79,19 +79,18 @@ convert () {
         grep -v 'Wrote changes'
 }
 
-# These directories should have Python3 source files in them
-# But $BO_Project/src/lib/python2 should remain as Python2 source (until deleted)
-convert $BO_Project/BriteOnyx/bin
-convert $BO_Project/bin
-convert $BO_Project/src/app
-convert $BO_Project/src/gen
-convert $BO_Project/src/lib/mine
-convert $BO_Project/src/lib/third_party
-
 main() {
     # Convert all Python source from Python2 to Python3
+    require_arguments $# 0
 
-    # TODO: CONTENT
+    # These directories should have Python3 source files in them
+    # But ${BO_Project}/src/lib/python2 should remain as Python2 source (until deleted)
+    convert "$BO_Project/BriteOnyx/bin"
+    convert "$BO_Project/bin"
+    convert "$BO_Project/src/app"
+    convert "$BO_Project/src/gen"
+    convert "$BO_Project/src/lib/mine"
+    convert "$BO_Project/src/lib/third_party"
 
     return 0
 }

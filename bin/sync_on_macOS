@@ -35,7 +35,9 @@ main() {
     # Synchronize relevant files
     # against home directory tree
     # on Apple macOS
+    require_arguments $# 0
 
+    local my_sync=meld
     require_command_in my_sync
 
     sync_directory .config macOS/.config
@@ -44,9 +46,11 @@ main() {
 
     sync_file . macOS .bash_profile
     sync_file . macOS .bashrc
-    sync_file . macOS .inputrc
-    sync_file . macOS .zshrc
     sync_file . macOS alias.bash
+
+    sync_file . macOS .inputrc
+
+    sync_file . macOS .zshrc
     sync_file . macOS alias.zsh
 
     return 0

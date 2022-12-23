@@ -10,6 +10,7 @@ trap warn_on_error EXIT
 
 main() {
     # Check all project configuration status
+    require_arguments $# 0
 
     dep-check
     env-check

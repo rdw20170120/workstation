@@ -10,6 +10,7 @@ trap warn_on_error EXIT
 
 main() {
     # Reformat Python code using Black
+    require_arguments $# 0
 
     require_command_in black
 
@@ -17,7 +18,7 @@ main() {
     export XDG_CACHE_HOME=${BO_Project}/.cache
 
     log_debug "Reformatting Python code using Black"
-    ${black} --config ${BO_Project}/cfg/pyproject.toml ${BO_Project}
+    ${black} --config "${BO_Project}/cfg/pyproject.toml" "${BO_Project}"
 
     return 0
 }

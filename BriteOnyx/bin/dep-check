@@ -16,7 +16,7 @@ main() {
     
     log_debug "Checking Python dependency status against '$File'"
     require_file "${File}"
-    dep-report | diff - ${File}
+    dep-report | diff - "${File}"
 
     return 0
 }

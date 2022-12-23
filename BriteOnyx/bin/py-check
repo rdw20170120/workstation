@@ -8,20 +8,19 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-File=$BO_Project/out/Python.out
-
-if [[ ! -r "$File" ]] ; then
-    log_error "Python status file '$File' is unreadable, aborting"
-    exit 1
-fi
-
-log_debug "Checking Python status against '$File'"
-py-report | diff - $File
-
 main() {
     # Check Python status
+    require_arguments $# 0
 
-    # TODO: CONTENT
+    local -r File=${BO_Project}/out/Python.out
+
+    if [[ ! -r "${File}" ]] ; then
+        log_error "Python status file '${File}' is unreadable, aborting"
+        exit 1
+    fi
+
+    log_debug "Checking Python status against '${File}'"
+    py-report | diff - "${File}"
 
     return 0
 }

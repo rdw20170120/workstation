@@ -10,6 +10,7 @@ trap warn_on_error EXIT
 
 main() {
     # Capture all project configuration status
+    require_arguments $# 0
 
     dep-capture
     env-capture

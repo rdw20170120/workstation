@@ -8,7 +8,7 @@ from pytest import fixture
 
 # Library modules   (absolute references, NOT packaged, in project)
 # Project modules   (relative references, NOT packaged, in project)
-from task.config import Config
+from .task.config import Config
 
 
 @fixture(scope="session")

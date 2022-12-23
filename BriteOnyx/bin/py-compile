@@ -8,19 +8,18 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-require_command_in compileall
-
-log_debug "Compiling Python source files..."
-${compileall} -f $BO_Project/BriteOnyx/bin
-${compileall} -f $BO_Project/bin
-${compileall} -f $BO_Project/src/app
-${compileall} -f $BO_Project/src/gen
-${compileall} -f $BO_Project/src/lib
-
 main() {
     # Compile all Python source
+    require_arguments $# 0
 
-    # TODO: CONTENT
+    require_command_in compileall
+
+    log_debug "Compiling Python source files..."
+    ${compileall} -f "${BO_Project}/BriteOnyx/bin"
+    ${compileall} -f "${BO_Project}/bin"
+    ${compileall} -f "${BO_Project}/src/app"
+    ${compileall} -f "${BO_Project}/src/gen"
+    ${compileall} -f "${BO_Project}/src/lib"
 
     return 0
 }

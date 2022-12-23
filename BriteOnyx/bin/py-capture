@@ -8,15 +8,14 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-File=${BO_Project}/out/python.out
-
-log_debug "Capturing Python status to '${File}'"
->${File} py-report
-
 main() {
     # Capture Python status
+    require_arguments $# 0
 
-    # TODO: CONTENT
+    local -r File=${BO_Project}/out/python.out
+
+    log_debug "Capturing Python status to '${File}'"
+    >"${File}" py-report
 
     return 0
 }

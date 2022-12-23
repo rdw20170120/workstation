@@ -11,18 +11,17 @@ trap warn_on_error EXIT
 pip_install() {
     # Install Python dependencies using PIP, smartly
     # TODO: REFACTOR: to avoid duplication
-    # Arguments are passed through
 
     require_command_in pip
 
     if [[ -n "${BO_RunningHumanless}" ]] ; then
         # Install WITHOUT a Python virtual environment (PVE),
         # but with user isolation
-        ${pip} install --user $@
+        ${pip} install --user "$@"
         abort_on_fail $? "from ${pip} install --user ..."
     else
         # Install WITH a Python virtual environment (PVE)
-        ${pip} install $@
+        ${pip} install "$@"
         abort_on_fail $? "from ${pip} install ..."
     fi
 
@@ -36,7 +35,7 @@ main() {
 
     require_command_in pip
 
-    local -r File=$BO_Project/cfg/requirements.txt
+    local -r File=${BO_Project}/cfg/requirements.txt
 
     ${pip} --version
     abort_on_fail $? "from ${pip} --version"
@@ -49,7 +48,7 @@ main() {
 
     log_debug "Installing Python dependencies from '${File}'"
     require_file "${File}"
-    pip_install -r ${File}
+    pip_install -r "${File}"
 
     return 0
 }

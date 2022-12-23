@@ -11,7 +11,7 @@ import sys
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from task.task_manager import TaskManager
+from .task.task_manager import TaskManager
 from utility import my_logging
 from utility.singleton_application import SingletonApplication
 
@@ -77,11 +77,11 @@ def _report_configuration():
 def _report_character_encoding_configuration():
     # TODO: Add to application configuration
     print("Character encoding configuration:")
-    print("sys.getdefaultencoding()='%s'", sys.getdefaultencoding())
-    print("sys.getfilesystemencoding()='%s'", sys.getfilesystemencoding())
-    print("sys.stderr.encoding='%s'", sys.stderr.encoding)
-    print("sys.stdin.encoding='%s'", sys.stdin.encoding)
-    print("sys.stdout.encoding='%s'", sys.stdout.encoding)
+    print(("sys.getdefaultencoding()='%s'", sys.getdefaultencoding()))
+    print(("sys.getfilesystemencoding()='%s'", sys.getfilesystemencoding()))
+    print(("sys.stderr.encoding='%s'", sys.stderr.encoding))
+    print(("sys.stdin.encoding='%s'", sys.stdin.encoding))
+    print(("sys.stdout.encoding='%s'", sys.stdout.encoding))
 
 
 def run():
