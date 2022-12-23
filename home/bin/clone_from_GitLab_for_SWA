@@ -23,12 +23,91 @@ maybe_clone "$Dir" $UrlPrefix platform-logging-opensearch
 UrlPrefix=${_Connection}:cpe
 maybe_clone "$Dir" $UrlPrefix homebrew-cpe-tools
 
-UrlPrefix=${_Connection}:swa-common/templates/project-templates
-maybe_clone "$Dir" $UrlPrefix ccplat-infra-deployment
+UrlPrefix=${_Connection}:csauto
+maybe_clone "$Dir" $UrlPrefix csauto-terratest-helloworld
+maybe_clone "$Dir" $UrlPrefix csif-identity-automation
+maybe_clone "$Dir" $UrlPrefix cyberark-report-automation
+maybe_clone "$Dir" $UrlPrefix git-practice
+maybe_clone "$Dir" $UrlPrefix ping_automation
+maybe_clone "$Dir" $UrlPrefix pipeline-script-batch
+maybe_clone "$Dir" $UrlPrefix secureauth-to-ping-saml-tfvars-generator
+maybe_clone "$Dir" $UrlPrefix sox-admin-group-report
+maybe_clone "$Dir" $UrlPrefix sox-rbac-rules-validation
+maybe_clone "$Dir" $UrlPrefix test-params-crud
+maybe_clone "$Dir" $UrlPrefix test-semantic-release
+maybe_clone "$Dir" $UrlPrefix tfstate
+
+UrlPrefix=${_Connection}:csauto/container-images
+maybe_clone "$Dir" $UrlPrefix csauto-cli
+maybe_clone "$Dir" $UrlPrefix csauto-cyberark-automation
+maybe_clone "$Dir" $UrlPrefix csauto-docker-knife
+maybe_clone "$Dir" $UrlPrefix csauto-vault-ci
+maybe_clone "$Dir" $UrlPrefix golang-builder-base
+maybe_clone "$Dir" $UrlPrefix pingfederate
+maybe_clone "$Dir" $UrlPrefix terraform-tg-aws
+maybe_clone "$Dir" $UrlPrefix terratest-runner-base
+
+UrlPrefix=${_Connection}:csauto/csobservability
+maybe_clone "$Dir" $UrlPrefix collector-ad
+maybe_clone "$Dir" $UrlPrefix deployment-opensearch
+
+UrlPrefix=${_Connection}:csauto/cyberark-automation
+maybe_clone "$Dir" $UrlPrefix create-account
+maybe_clone "$Dir" $UrlPrefix create-safe-trigger
+maybe_clone "$Dir" $UrlPrefix create-safe
+maybe_clone "$Dir" $UrlPrefix safe-sync-to-dash-trigger
+maybe_clone "$Dir" $UrlPrefix safe-sync-to-dash
+maybe_clone "$Dir" $UrlPrefix service-identity-dash-integration-tests
+
+UrlPrefix=${_Connection}:csauto/idauto-infra-test
+maybe_clone "$Dir" $UrlPrefix idauto-infra-deploy
+maybe_clone "$Dir" $UrlPrefix idauto-infra-module
+
+UrlPrefix=${_Connection}:csauto/modules
+maybe_clone "$Dir" $UrlPrefix csauto-accman-python
+maybe_clone "$Dir" $UrlPrefix csauto-chef-python
+maybe_clone "$Dir" $UrlPrefix csauto-cyberark-python
+maybe_clone "$Dir" $UrlPrefix csauto-dash-python
+maybe_clone "$Dir" $UrlPrefix csauto-ldap-python
+
+UrlPrefix=${_Connection}:csauto/shared-common
+maybe_clone "$Dir" $UrlPrefix infra-build-data
+maybe_clone "$Dir" $UrlPrefix infra-build-network
+maybe_clone "$Dir" $UrlPrefix infra-deploy-data
+maybe_clone "$Dir" $UrlPrefix infra-deploy-network
+maybe_clone "$Dir" $UrlPrefix secureauth-parser
+
+UrlPrefix=${_Connection}:csauto/stash-legacy
+maybe_clone "$Dir" $UrlPrefix CSAUTO-example-app
+maybe_clone "$Dir" $UrlPrefix CSAUTO-gitops-cd
+maybe_clone "$Dir" $UrlPrefix CSAUTO-gitops-ci
+maybe_clone "$Dir" $UrlPrefix CSAUTO-gitops-manifest
+maybe_clone "$Dir" $UrlPrefix CSAUTO-jenkins-manifest
+maybe_clone "$Dir" $UrlPrefix GITOPSDEV-CSAUTO-gitops-cd
+maybe_clone "$Dir" $UrlPrefix GITOPSPROD-CSAUTO-gitops-cd
+maybe_clone "$Dir" $UrlPrefix GITOPSQA-CSAUTO-gitops-cd
+maybe_clone "$Dir" $UrlPrefix csauto-monitoring
+
+UrlPrefix=${_Connection}:csauto/swaam
+maybe_clone "$Dir" $UrlPrefix csauto-accman-api
+maybe_clone "$Dir" $UrlPrefix csauto-accman-cli
+maybe_clone "$Dir" $UrlPrefix csauto-accman-pipelines
+maybe_clone "$Dir" $UrlPrefix csauto-swaam-chef-serverless-collector-module
+maybe_clone "$Dir" $UrlPrefix csauto-swaam-ldap-serverless-collector-module
+maybe_clone "$Dir" $UrlPrefix csauto-swaam-serverless-module
+maybe_clone "$Dir" $UrlPrefix infra-build-swaam
+maybe_clone "$Dir" $UrlPrefix infra-deploy-swaam
+
+UrlPrefix=${_Connection}:csauto/vault
+maybe_clone "$Dir" $UrlPrefix CSAUTO-vault
+maybe_clone "$Dir" $UrlPrefix csauto-vault-cli
 
 UrlPrefix=${_Connection}:swa-common/ccp/modules
 maybe_clone "$Dir" $UrlPrefix cloud-common-eks-module
 maybe_clone "$Dir" $UrlPrefix cloud-common-vpc-module
+
+UrlPrefix=${_Connection}:swa-common/templates/project-templates
+maybe_clone "$Dir" $UrlPrefix ccplat-infra-deployment
 
 # These are what I am actually working on (Work In Progress)
 Dir=~/project/at\ SWA/WIP

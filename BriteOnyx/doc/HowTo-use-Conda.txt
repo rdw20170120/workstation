@@ -1,0 +1,51 @@
+HowTo use Conda
+by Rob Williams
+for Southwest Airlines
+late Fall 2022
+
+REF: https://pythonspeed.com/articles/conda-vs-pip/
+REF: https://pythonspeed.com/articles/faster-conda-install/
+REF: https://github.com/conda-forge/miniforge
+
+# Install Mambaforge
+# Installs Mamba
+# Configures to use Conda-Forge as default channel (https://conda-forge.org/)
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+bash Mambaforge-$(uname)-$(uname -m).sh
+# Accept the license
+# Accept 'conda init'
+# Review changes to .bash_profile
+# Review changes to .zshrc
+# Consider:  conda config --set auto_activate_base false
+
+# TODO: Reconfigure ~/.bash_profile & ~/.bashrc to integrate Conda configuration
+
+# Configure for Python packages only hosted on PyPI
+# Consider conda-lock for version pinning
+# Consider Jake for security scanning
+
+conda --version
+mamba --version
+mamba update conda mamba
+
+# Managing Conda environments
+mamba create --name ENV PACKAGE
+mamba activate ENV
+mamba info --envs
+mamba activate
+mamba create --name ENV python=3.10
+python --version
+
+# Managing Conda packages
+mamba search PACKAGE
+mamba install PACKAGE
+mamba list
+
+# Conda configuration
+conda config
+conda config --get
+
+# Bash tab completion
+mamba install argcomplete
+# Add to Bash profile
+eval "$(register-python-argcomplete conda)"

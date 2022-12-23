@@ -92,7 +92,7 @@ maybe_pull() {
   if git_status_is_clean "${_Dir}" ; then
     echo "INFO:  Working directory is clean: ${_Dir}"
     pushd "${_Dir}" >/dev/null
-    git pull
+    git pull --all
     popd >/dev/null
   else
     echo "WARN:  Working directory is DIRTY: ${_Dir}"

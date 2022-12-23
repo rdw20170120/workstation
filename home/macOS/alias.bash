@@ -18,6 +18,16 @@ alias vim='nvim'
 alias jump_experiment='cd ~/project/at\ GitLab/WIP/experiment'
 alias jump_workstation='cd ~/project/at\ GitHub/WIP/workstation'
 
+# For working with two local copies of the same repository
+alias jump_reference='cd "${BO_DirReference}"'
+alias jump_Work_In_Progress='cd "${BO_DirWorkInProgress}"'
+
+# Git
+alias add_all='git add . ; git status'
+alias ignored='git status --ignored'
+alias status='git status'
+alias unstage='git restore --staged'
+
 # For working with ~/.inputrc
 alias configure_readline_from='bind -f'
 alias show_readline_keymap_current='bind -p'
@@ -29,4 +39,7 @@ alias show_readline_keymap_vi-insert='bind -pm vi-insert'
 alias show_readline_keymap_vi-move='bind -pm vi-move'
 alias show_readline_macros='bind -s'
 alias show_readline_variables='bind -v'
+
+: << 'DisabledContent'
+DisabledContent
 

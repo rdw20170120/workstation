@@ -5,14 +5,35 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Anaconda
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/x299424/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/x299424/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/Users/x299424/mambaforge/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/x299424/mambaforge/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/Users/x299424/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/Users/x299424/mambaforge/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+export BO_PathAnaconda=${CONDA_PREFIX}/bin
+
 # Homebrew
 # eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_PREFIX=/opt/homebrew
-export HOMEBREW_CELLAR=$HOMEBREW_PREFIX/Cellar
-export HOMEBREW_REPOSITORY=$HOMEBREW_PREFIX
-# export MANPATH=$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:
-# export INFOPATH=$HOMEBREW_PREFIX/share/info:${INFOPATH:-}
-export BO_PathHomebrew=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin
+export HOMEBREW_CELLAR=${HOMEBREW_PREFIX}/Cellar
+export HOMEBREW_REPOSITORY=${HOMEBREW_PREFIX}
+# export MANPATH=${HOMEBREW_PREFIX}/share/man${MANPATH+:$MANPATH}:
+# export INFOPATH=${HOMEBREW_PREFIX}/share/info:${INFOPATH:-}
+export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
 
 [[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
 # NOTE: Order matters!
@@ -21,11 +42,14 @@ export BO_PathHomebrew=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin
 # Non-native tools follow.
 # User path is last (so user MUST resolve collisions).
 export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-export BO_PathNix=~/.nix-profile/bin
-export BO_PathVmware=/Applications/VMware\ Fusion.app/Contents/Public
-export BO_PathSystem=${BO_PathHomebrew}:${BO_PathNix}:${BO_PathNative}:${BO_PathVmware}
+BO_PathSystem=${BO_PathAnaconda}
+BO_PathSystem=${BO_PathSystem}:${BO_PathHomebrew}
+BO_PathSystem=${BO_PathSystem}:${BO_PathNative}
+export BO_PathSystem
 export BO_PathUser=~/bin
-export PATH=${BO_PathSystem}:${BO_PathUser}
+PATH=${BO_PathSystem}
+PATH=${PATH}:${BO_PathUser}
+export PATH
 
 # If not running interactively,
 # don't do anything
@@ -131,6 +155,7 @@ fi
 # instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 [[ -r ~/alias.bash ]] && source ~/alias.bash
+[[ -r ~/alias-SWA.bash ]] && source ~/alias-SWA.bash
 
 # Enable programmable completion features
 # You don't need to enable this 
@@ -143,4 +168,7 @@ if ! shopt -oq posix; then
     source /etc/bash_completion
   fi
 fi
+
+: << 'DisabledContent'
+DisabledContent
 

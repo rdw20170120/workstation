@@ -21,6 +21,7 @@ unless they should merely be deleted.
 
 1. [ ] I/U = Item Description
 
+1. [ ] H/H - Switch from Python virtual environment to Anaconda environment
 1. [ ] H/H - Copy Solarized color palettes from iTerm2 to Linux Mint terminal
 1. [ ] H/H - Add `redeclare` alias to `source` Bash function declarations again
 1. [ ] H/H - Extend code generation to all Bash scripts
