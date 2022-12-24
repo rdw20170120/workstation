@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a Bash shell.
+
+# Clone git repositories, if they have not been cloned already.
+# Clone from GitHub for my (Rob Williams') account
+# NOTE: I reference my special SSH configuration to handle the connection.
+# TODO: Implement this:
+# hint:   git config pull.ff only       # fast-forward only
+
+source ${HOME}/bin/lib/declare-git.bash
+
+_Profile=rdw20170120
+_Source=GitHub
+_UrlPrefix=MeAt${_Source}:${_Profile}
+
+_DirBase=${HOME}/repo
+
+# These are what I am actually working on (Work In Progress)
+_Dir=${_DirBase}/WIP
+maybe_clone "${_Dir}" ${_UrlPrefix} trading
+maybe_clone "${_Dir}" ${_UrlPrefix} workstation
+
+: << 'DisabledContent'
+maybe_clone "${_Dir}" ${_UrlPrefix} build
+maybe_clone "${_Dir}" ${_UrlPrefix} euler
+maybe_clone "${_Dir}" ${_UrlPrefix} first
+maybe_clone "${_Dir}" ${_UrlPrefix} javascript
+maybe_clone "${_Dir}" ${_UrlPrefix} sample-python
+maybe_clone "${_Dir}" ${_UrlPrefix} samples
+
+# These are reference copies
+_Dir=${_DirBase}/reference
+maybe_clone "${_Dir}" ${_UrlPrefix} workstation
+DisabledContent
+

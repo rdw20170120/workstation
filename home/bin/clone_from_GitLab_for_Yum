@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a Bash shell.
+
+# Clone git repositories, if they have not been cloned already.
+# Clone from GitLab from Yum Brands' account
+# NOTE: I reference my special SSH configuration to handle the connection.
+# TODO: Implement this:
+# hint:   git config pull.ff only       # fast-forward only
+
+source ${HOME}/bin/lib/declare-git.bash
+
+_Source=Yum
+_TokenName=RXW9465
+_TokenValue=4em4aZ6bVcpAqRVExAnc
+_UrlPrefix=https://${_TokenName}:${_TokenValue}@gitlab.yum.com
+
+_DirBase=${HOME}/repo/${_Source}
+_Name=${_TokenName}
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}/${_Name} remediation
+_Name=yum-shared
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}/${_Name} pipelines
+
+_DirBase=${HOME}/repo/${_Source}/DecisionSciences
+_Name=yc-data-adv-analytics
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}/${_Name} authentication-express-server
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}/${_Name} docker-images
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}/${_Name} operations
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}/${_Name} terraform-ci
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}/${_Name} yc-kube-templates
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}/${_Name} yc-lib
+
+_DirBase=${HOME}/repo/${_Source}/TacoBell
+
+: << 'DisabledContent'
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}/${_Name} 
+DisabledContent

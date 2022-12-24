@@ -5,6 +5,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+[[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
+
+################################################################################
 # Anaconda
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -26,6 +29,7 @@ fi
 # <<< conda initialize <<<
 export BO_PathAnaconda=${CONDA_PREFIX}/bin
 
+################################################################################
 # Homebrew
 # eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_PREFIX=/opt/homebrew
@@ -35,22 +39,39 @@ export HOMEBREW_REPOSITORY=${HOMEBREW_PREFIX}
 # export INFOPATH=${HOMEBREW_PREFIX}/share/info:${INFOPATH:-}
 export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
 
-[[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
+export BO_PathMacPorts=/opt/local/bin:/opt/local/sbin
+# export BO_PathVmware=/Applications/VMware\ Fusion.app/Contents/Public
+
+################################################################################
+# Added by Nix installer
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
+    source ~/.nix-profile/etc/profile.d/nix.sh
+fi
+# Disable use of Nix channels,
+# in favor of release pinning
+# when ready.
+# export NIX_PATH=
+export BO_PathNix=${HOME}/.nix-profile/bin
+
+################################################################################
 # NOTE: Order matters!
-# Homebrew should override all (win all collisions).
+# Anaconda should override all (win all collisions).
+# Then Homebrew comes second.
+# Other non-native tools follow.
 # Native system path is next.
-# Non-native tools follow.
 # User path is last (so user MUST resolve collisions).
-export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+export BO_PathNative=/usr/bin:/bin:/usr/sbin:/sbin
 BO_PathSystem=${BO_PathAnaconda}
+BO_PathSystem=${BO_PathSystem}:${BO_PathNix}
 BO_PathSystem=${BO_PathSystem}:${BO_PathHomebrew}
+BO_PathSystem=${BO_PathSystem}:${BO_PathMacPorts}
+# BO_PathSystem=${BO_PathSystem}:${BO_PathVmware}
 BO_PathSystem=${BO_PathSystem}:${BO_PathNative}
 export BO_PathSystem
-export BO_PathUser=~/bin
-PATH=${BO_PathSystem}
-PATH=${PATH}:${BO_PathUser}
-export PATH
+export BO_PathUser=${HOME}/bin
+export PATH=${BO_PathSystem}:${BO_PathUser}
 
+################################################################################
 # If not running interactively,
 # don't do anything
 case $- in
@@ -58,10 +79,11 @@ case $- in
       *) return;;
 esac
 
+################################################################################
 # Environment
 export CLICOLOR=true
 # TODO: Change to Spacemacs?
-export EDITOR=vim
+export EDITOR=nvim
 export GREP_OPTIONS='--color=auto'
 export PAGER=less
 
@@ -70,6 +92,7 @@ export PAGER=less
 # LC_ALL
 # TZ
 
+################################################################################
 # Bash
 shopt -s checkwinsize cmdhist histappend huponexit lithist
 shopt -u sourcepath
@@ -82,17 +105,20 @@ export HISTSIZE=500
 # export HISTTIMEFORMAT=
 # export TIMEFORMAT=
 
+################################################################################
 # Make less more friendly
 # for non-text input files,
 # see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+################################################################################
 # Set variable identifying the chroot you work in
 # (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+################################################################################
 export COLORTERM=truecolor
 export TERM=xterm-256color
 
@@ -149,6 +175,7 @@ fi
 # Colored GCC warnings and errors
 # export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+################################################################################
 # Alias definitions
 # You may want to put all your additions
 # into a separate file like ~/.bash_aliases,
@@ -157,6 +184,7 @@ fi
 [[ -r ~/alias.bash ]] && source ~/alias.bash
 [[ -r ~/alias-SWA.bash ]] && source ~/alias-SWA.bash
 
+################################################################################
 # Enable programmable completion features
 # You don't need to enable this 
 # if it's already enabled in /etc/bash.bashrc

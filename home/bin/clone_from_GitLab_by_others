@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a Bash shell.
+
+# Clone git repositories, if they have not been cloned already.
+# Clone from GitLab from others' accounts
+# NOTE: I reference my special SSH configuration to handle the connection.
+# TODO: Implement this:
+# hint:   git config pull.ff only       # fast-forward only
+
+source ${HOME}/bin/lib/declare-git.bash
+
+_Source=GitLab
+_DirBase=${HOME}/repo/other
+_UrlPrefix=MeAt${_Source}
+
+_Name=zzamboni
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} dot-elvish
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} dot-emacs
+
+: << 'DisabledContent'
+DisabledContent

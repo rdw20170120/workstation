@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# This script is intended to be executed by a user in a Bash shell.
+
+# Clone git repositories, if they have not been cloned already.
+# Clone from GitLab for my (Rob Williams') account
+# NOTE: I reference my special SSH configuration to handle the connection.
+# TODO: Implement this:
+# hint:   git config pull.ff only       # fast-forward only
+
+source ${HOME}/bin/lib/declare-git.bash
+
+_Profile=refactoryllc
+_Source=GitLab
+_UrlPrefix=MeAt${_Source}:${_Profile}
+
+_DirBase=${HOME}/repo
+
+# These are what I am actually working on (Work In Progress)
+_Dir=${_DirBase}/WIP
+maybe_clone "${_Dir}" ${_UrlPrefix} experiment
+maybe_clone "${_Dir}" ${_UrlPrefix} learn-gitlab
+
+_Profile=refactorytechllc
+_UrlPrefix=MeAt${_Source}:${_Profile}
+
+# These are what I am actually working on (Work In Progress)
+_Dir=${_DirBase}/WIP
+maybe_clone "${_Dir}" ${_UrlPrefix} private-mono
+maybe_clone "${_Dir}" ${_UrlPrefix} pythonspeed
+
+: << 'DisabledContent'
+# These are reference copies
+_Dir=${_DirBase}/reference
+maybe_clone "${_Dir}" ${_UrlPrefix} experiment
+maybe_clone "${_Dir}" ${_UrlPrefix} learn-gitlab
+
+# These are reference copies
+_Dir=${_DirBase}/reference
+maybe_clone "${_Dir}" ${_UrlPrefix} private-mono
+maybe_clone "${_Dir}" ${_UrlPrefix} pythonspeed
+DisabledContent
