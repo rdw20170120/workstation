@@ -13,6 +13,8 @@ main() {
     require_arguments $# 0
 
     log_debug "Installing Python dependencies"
+
+
 }
 
 main $@
@@ -44,7 +46,6 @@ main $@
     Packages+=' python3.9-black-20.8b1'
     Packages+=' python3.9-pytest-html-3.1.1'
     Packages+=' python3.9-pytest-sugar-0.9.4'
-
     nix-env -i ${Packages}
     abort_on_fail $? "from nix-env"
 

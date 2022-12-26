@@ -6,9 +6,9 @@ which uname
 /usr/bin/uname
 ##########
 uname -a
-Darwin Mac-JF4J397K 21.6.0 Darwin Kernel Version 21.6.0: Thu Sep 29 20:13:56 PDT 2022; root:xnu-8020.240.7~1/RELEASE_ARM64_T6000 arm64
+Darwin heka.lan 20.6.0 Darwin Kernel Version 20.6.0: Mon Aug 29 04:31:06 PDT 2022; root:xnu-7195.141.39~2/RELEASE_X86_64 x86_64
 ##########
-PATH=/Users/x299424/project/at GitHub/WIP/workstation/.PVE/bin:/Users/x299424/mambaforge/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/x299424/project/at GitHub/WIP/workstation/BriteOnyx/bin:/Users/x299424/project/at GitHub/WIP/workstation/bin:/Users/x299424/bin
+PATH=/Users/rob/repo/WIP/workstation/.PVE/bin:/usr/local/Caskroom/mambaforge/base/bin:/usr/local/bin:/usr/local/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/rob/repo/WIP/workstation/BriteOnyx/bin:/Users/rob/repo/WIP/workstation/bin:/Users/rob/bin
 ##########
 type bash
 bash is /bin/bash
@@ -17,210 +17,184 @@ which bash
 /bin/bash
 ##########
 bash --version
-GNU bash, version 3.2.57(1)-release (arm64-apple-darwin21)
+GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin20)
 Copyright (C) 2007 Free Software Foundation, Inc.
 ##########
 type git
-git is /opt/homebrew/bin/git
+git is /usr/local/bin/git
 ##########
 which git
-/opt/homebrew/bin/git
+/usr/local/bin/git
 ##########
 git --version
 git version 2.39.0
 ##########
 type brew
-brew is /opt/homebrew/bin/brew
+brew is /usr/local/bin/brew
 ##########
 which brew
-/opt/homebrew/bin/brew
+/usr/local/bin/brew
 ##########
 brew --version
 Homebrew 3.6.16
-Homebrew/homebrew-core (git revision 5f1a277f2f4; last commit 2022-12-23)
-Homebrew/homebrew-cask (git revision d397020c08; last commit 2022-12-23)
+Homebrew/homebrew-core (git revision 63116d724bb; last commit 2022-12-26)
+Homebrew/homebrew-cask (git revision 7aea6c53f4; last commit 2022-12-26)
 ##########
 brew list --full-name --casks
-docker
 iterm2
+mambaforge
 meld
-visual-studio-code
 ##########
 brew list --versions --casks
-docker 4.15.0,93002
-iterm2 3.4.17
+iterm2 3.4.18
+mambaforge 22.9.0-2
 meld 3.21.0-r3,19
-visual-studio-code 1.73.0
 ##########
 brew list --full-name --formulae
-awscli
-brotli
-c-ares
 ca-certificates
-docutils
+fish
 gdbm
 gettext
 git
-go
-icu4c
-jsonlint
 libidn2
-libnghttp2
 libtermkey
 libunistring
 libuv
 libvterm
-libyaml
 luajit
 luv
 mpdecimal
 msgpack
+ncurses
 neovim
-node
 openssl@1.1
 pcre2
-prettier
-python@3.10
-python@3.11
-pyyaml
+python@3.9
 readline
-six
 sqlite
-terraform
-terragrunt
 tree-sitter
 unibilium
 wget
 xz
-cpe/tools/awssaml
 ##########
 brew list --versions --formulae
-awscli 2.9.9
-awssaml v2.1.16
-brotli 1.0.9
-c-ares 1.18.1_1
 ca-certificates 2022-10-11
-docutils 0.19
+fish 3.5.1
 gdbm 1.23
 gettext 0.21.1
 git 2.39.0
-go 1.19.4
-icu4c 71.1
-jsonlint 1.6.0
 libidn2 2.3.4
-libnghttp2 1.51.0
 libtermkey 0.22
 libunistring 1.0
 libuv 1.44.2
 libvterm 0.3
-libyaml 0.2.5
 luajit 2.1.0-beta3-20221208.2
 luv 1.44.2-1
 mpdecimal 2.5.1
 msgpack 4.0.0
+ncurses 6.3
 neovim 0.8.1
-node 19.3.0
 openssl@1.1 1.1.1s
-pcre2 10.40
-prettier 2.8.1
-python@3.10 3.10.9
-python@3.11 3.11.0
-pyyaml 6.0_1
+pcre2 10.42
+python@3.9 3.9.16
 readline 8.2.1
-six 1.16.0_3
 sqlite 3.40.0
-terraform 1.3.6
-terragrunt 0.42.5
 tree-sitter 0.20.7
 unibilium 2.1.1
 wget 1.21.3
 xz 5.4.0
 ##########
 type python
-python is /Users/x299424/mambaforge/bin/python
+python is /usr/local/Caskroom/mambaforge/base/bin/python
 ##########
 which python
-/Users/x299424/mambaforge/bin/python
+/usr/local/Caskroom/mambaforge/base/bin/python
 ##########
 python --version
 Python 3.10.6
 ##########
-PYTHONPATH=:/Users/x299424/project/at GitHub/WIP/workstation/src/lib/third_party:/Users/x299424/project/at GitHub/WIP/workstation/src/lib/mine
+PYTHONPATH=:/Users/rob/repo/WIP/workstation/src/lib/third_party:/Users/rob/repo/WIP/workstation/src/lib/mine:/Users/rob/repo/WIP/workstation/src/lib/third_party:/Users/rob/repo/WIP/workstation/src/lib/mine
 ##########
 type python2
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: type: python2: not found
+python2 is /usr/bin/python2
 ##########
 which python2
+/usr/bin/python2
 ##########
 python2 --version
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: python2: command not found
+Python 2.7.16
 ##########
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 65: python2: command not found
+2.7.16
 ##########
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 67: python2: command not found
+['', '/Users/rob/repo/WIP/workstation', '/Users/rob/repo/WIP/workstation/src/lib/third_party', '/Users/rob/repo/WIP/workstation/src/lib/mine', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python27.zip', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload', '/Library/Python/2.7/site-packages', '/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python', '/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC']
 ##########
 type pip
-pip is /Users/x299424/mambaforge/bin/pip
+pip is /usr/local/Caskroom/mambaforge/base/bin/pip
 ##########
 which pip
-/Users/x299424/mambaforge/bin/pip
+/usr/local/Caskroom/mambaforge/base/bin/pip
 ##########
 pip --version
-pip 22.3.1 from /Users/x299424/mambaforge/lib/python3.10/site-packages/pip (python 3.10)
+pip 22.3.1 from /usr/local/Caskroom/mambaforge/base/lib/python3.10/site-packages/pip (python 3.10)
 ##########
 type python3
-python3 is /Users/x299424/mambaforge/bin/python3
+python3 is /usr/local/Caskroom/mambaforge/base/bin/python3
 ##########
 which python3
-/Users/x299424/mambaforge/bin/python3
+/usr/local/Caskroom/mambaforge/base/bin/python3
 ##########
 python3 --version
 Python 3.10.6
 ##########
 3.10.6
 ##########
-['', '/Users/x299424/project/at GitHub/WIP/workstation', '/Users/x299424/project/at GitHub/WIP/workstation/src/lib/third_party', '/Users/x299424/project/at GitHub/WIP/workstation/src/lib/mine', '/Users/x299424/mambaforge/lib/python310.zip', '/Users/x299424/mambaforge/lib/python3.10', '/Users/x299424/mambaforge/lib/python3.10/lib-dynload', '/Users/x299424/mambaforge/lib/python3.10/site-packages']
+['', '/Users/rob/repo/WIP/workstation', '/Users/rob/repo/WIP/workstation/src/lib/third_party', '/Users/rob/repo/WIP/workstation/src/lib/mine', '/usr/local/Caskroom/mambaforge/base/lib/python310.zip', '/usr/local/Caskroom/mambaforge/base/lib/python3.10', '/usr/local/Caskroom/mambaforge/base/lib/python3.10/lib-dynload', '/usr/local/Caskroom/mambaforge/base/lib/python3.10/site-packages']
 ##########
 type pip3
-pip3 is /Users/x299424/mambaforge/bin/pip3
+pip3 is /usr/local/Caskroom/mambaforge/base/bin/pip3
 ##########
 which pip3
-/Users/x299424/mambaforge/bin/pip3
+/usr/local/Caskroom/mambaforge/base/bin/pip3
 ##########
 pip3 --version
-pip 22.3.1 from /Users/x299424/mambaforge/lib/python3.10/site-packages/pip (python 3.10)
+pip 22.3.1 from /usr/local/Caskroom/mambaforge/base/lib/python3.10/site-packages/pip (python 3.10)
 ##########
 type 2to3
-2to3 is /Users/x299424/mambaforge/bin/2to3
+2to3 is /usr/local/Caskroom/mambaforge/base/bin/2to3
 ##########
 which 2to3
-/Users/x299424/mambaforge/bin/2to3
+/usr/local/Caskroom/mambaforge/base/bin/2to3
 ##########
 type black
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: type: black: not found
+black is /usr/local/bin/black
 ##########
 which black
+/usr/local/bin/black
 ##########
 black --version
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: black: command not found
+black, version 21.6b0
 ##########
 type coverage3
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: type: coverage3: not found
+coverage3 is /usr/local/bin/coverage3
 ##########
 which coverage3
+/usr/local/bin/coverage3
 ##########
 coverage3 --version
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: coverage3: command not found
+Coverage.py, version 5.5 with C extension
+Full documentation is at https://coverage.readthedocs.io
 ##########
 type py.test
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: type: py.test: not found
+py.test is /usr/local/bin/py.test
 ##########
 which py.test
+/usr/local/bin/py.test
 ##########
 type pytest
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: type: pytest: not found
+pytest is /usr/local/bin/pytest
 ##########
 which pytest
+/usr/local/bin/pytest
 ##########
 pytest --version
-/Users/x299424/project/at GitHub/WIP/workstation/bin/tool-report: line 16: pytest: command not found
+pytest 6.2.4
