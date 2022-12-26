@@ -5,68 +5,50 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Remember the native and original system PATHs
+export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 [[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
 
 ################################################################################
-# Anaconda
+# Homebrew
+# Homebrew must be on the PATH
+eval "$(brew shellenv)"
+export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
+
+################################################################################
+# Anaconda (Mambaforge)
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/x299424/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/usr/local/Caskroom/mambaforge/base/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/x299424/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/Users/x299424/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "/usr/local/Caskroom/mambaforge/base/etc/profile.d/conda.sh" ]; then
+        . "/usr/local/Caskroom/mambaforge/base/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/x299424/mambaforge/bin:$PATH"
+        export PATH="/usr/local/Caskroom/mambaforge/base/bin:$PATH"
     fi
 fi
 unset __conda_setup
-
-if [ -f "/Users/x299424/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/Users/x299424/mambaforge/etc/profile.d/mamba.sh"
-fi
 # <<< conda initialize <<<
 export BO_PathAnaconda=${CONDA_PREFIX}/bin
 
 ################################################################################
-# Homebrew
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-export HOMEBREW_PREFIX=/opt/homebrew
-export HOMEBREW_CELLAR=${HOMEBREW_PREFIX}/Cellar
-export HOMEBREW_REPOSITORY=${HOMEBREW_PREFIX}
-# export MANPATH=${HOMEBREW_PREFIX}/share/man${MANPATH+:$MANPATH}:
-# export INFOPATH=${HOMEBREW_PREFIX}/share/info:${INFOPATH:-}
-export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
-
-export BO_PathMacPorts=/opt/local/bin:/opt/local/sbin
-# export BO_PathVmware=/Applications/VMware\ Fusion.app/Contents/Public
-
-################################################################################
-# Added by Nix installer
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
-    source ~/.nix-profile/etc/profile.d/nix.sh
-fi
-# Disable use of Nix channels,
-# in favor of release pinning
-# when ready.
-# export NIX_PATH=
-export BO_PathNix=${HOME}/.nix-profile/bin
+export BO_PathVmware=/Applications/VMware\ Fusion.app/Contents/Public
 
 ################################################################################
 # NOTE: Order matters!
-# Anaconda should override all (win all collisions).
+# Anaconda should override all (win all collisions) as the preferred package manager.
 # Then Homebrew comes second.
 # Other non-native tools follow.
 # Native system path is next.
 # User path is last (so user MUST resolve collisions).
-export BO_PathNative=/usr/bin:/bin:/usr/sbin:/sbin
-BO_PathSystem=${BO_PathAnaconda}
-BO_PathSystem=${BO_PathSystem}:${BO_PathNix}
-BO_PathSystem=${BO_PathSystem}:${BO_PathHomebrew}
-BO_PathSystem=${BO_PathSystem}:${BO_PathMacPorts}
-# BO_PathSystem=${BO_PathSystem}:${BO_PathVmware}
-BO_PathSystem=${BO_PathSystem}:${BO_PathNative}
+# Build up the system path from the end, starting with the native path, moving forward.
+# This allows easier manipulation by (un)commenting entries.
+BO_PathSystem=${BO_PathNative}
+BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
+BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
+BO_PathSystem=${BO_PathAnaconda}:${BO_PathSystem}
 export BO_PathSystem
 export BO_PathUser=${HOME}/bin
 export PATH=${BO_PathSystem}:${BO_PathUser}
@@ -83,7 +65,7 @@ esac
 # Environment
 export CLICOLOR=true
 # TODO: Change to Spacemacs?
-export EDITOR=nvim
+export EDITOR=vim
 export GREP_OPTIONS='--color=auto'
 export PAGER=less
 
@@ -198,5 +180,16 @@ if ! shopt -oq posix; then
 fi
 
 : << 'DisabledContent'
+################################################################################
+# Added by Nix installer
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
+    source ~/.nix-profile/etc/profile.d/nix.sh
+fi
+# Disable use of Nix channels,
+# in favor of release pinning
+# when ready.
+# export NIX_PATH=
+export BO_PathNix=${HOME}/.nix-profile/bin
+
 DisabledContent
 

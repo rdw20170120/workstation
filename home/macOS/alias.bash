@@ -15,8 +15,10 @@ alias lL='ls -Lln'
 
 alias vim='nvim'
 
-alias jump_experiment='cd ~/project/at\ GitLab/WIP/experiment'
-alias jump_workstation='cd ~/project/at\ GitHub/WIP/workstation'
+alias jump_experiment='cd ~/repo/WIP/experiment'
+alias jump_mono='cd ~/repo/WIP/private-mono'
+alias jump_pythonspeed='cd ~/repo/WIP/pythonspeed'
+alias jump_workstation='cd ~/repo/WIP/workstation'
 
 # For working with two local copies of the same repository
 alias jump_reference='cd "${BO_DirReference}"'
