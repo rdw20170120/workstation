@@ -8,7 +8,7 @@ which uname
 uname -a
 Darwin heka.lan 20.6.0 Darwin Kernel Version 20.6.0: Mon Aug 29 04:31:06 PDT 2022; root:xnu-7195.141.39~2/RELEASE_X86_64 x86_64
 ##########
-PATH=/Users/rob/repo/WIP/workstation/.PVE/bin:/usr/local/Caskroom/mambaforge/base/bin:/usr/local/bin:/usr/local/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/rob/repo/WIP/workstation/BriteOnyx/bin:/Users/rob/repo/WIP/workstation/bin:/Users/rob/bin
+PATH=:/usr/local/Caskroom/mambaforge/base/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/rob/repo/WIP/workstation/BriteOnyx/bin:/Users/rob/repo/WIP/workstation/bin:/Users/rob/bin
 ##########
 type bash
 bash is /bin/bash
@@ -113,7 +113,7 @@ which python
 python --version
 Python 3.10.6
 ##########
-PYTHONPATH=:/Users/rob/repo/WIP/workstation/src/lib/third_party:/Users/rob/repo/WIP/workstation/src/lib/mine:/Users/rob/repo/WIP/workstation/src/lib/third_party:/Users/rob/repo/WIP/workstation/src/lib/mine
+PYTHONPATH=:/Users/rob/repo/WIP/workstation/src/lib/third_party:/Users/rob/repo/WIP/workstation/src/lib/mine
 ##########
 type python2
 python2 is /usr/bin/python2

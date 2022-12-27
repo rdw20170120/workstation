@@ -12,7 +12,7 @@ main() {
     # Report Python code status
     require_arguments $# 0
 
-    require_command_in tabnanny
+#   require_command_in tabnanny
 
     Out=${BO_Project}/out/tabnanny.out
      >"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/BriteOnyx/bin"

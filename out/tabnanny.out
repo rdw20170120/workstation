@@ -1,228 +1,222 @@
-'/Users/rwill253/project/WIP/workstation/BriteOnyx/bin': listing directory
-'/Users/rwill253/project/WIP/workstation/BriteOnyx/bin/lib': listing directory
-'/Users/rwill253/project/WIP/workstation/bin': listing directory
-'/Users/rwill253/project/WIP/workstation/bin/lib': listing directory
-'/Users/rwill253/project/WIP/workstation/src/app': listing directory
-'/Users/rwill253/project/WIP/workstation/src/app/.pytest_cache': listing directory
-'/Users/rwill253/project/WIP/workstation/src/app/.pytest_cache/v': listing directory
-'/Users/rwill253/project/WIP/workstation/src/app/.pytest_cache/v/cache': listing directory
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE': listing directory
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/conftest.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/config.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/task': listing directory
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/task/bootstrap.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/task/test_task.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/task/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/task/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/task/scan_directory.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/task/mapping.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/task/test_mapping.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/test_config.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/app.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/__main__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/app/MODULE/test_app.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/.pytest_cache': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/.pytest_cache/v': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/.pytest_cache/v/cache': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/conftest.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/config.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/document': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/document/markdown': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/document/markdown/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/document/markdown/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/document/markdown/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/document/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/document/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/document/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/python': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/python/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/python/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/python/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/briteonyx': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/briteonyx/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/briteonyx/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/briteonyx/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/pve_activate.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/alias.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/set_path.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/declare_log4bash.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/declare_base.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/declare.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/declare_require.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/configure_python.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/activate.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/shared/script/bash/declare_common.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/test_config.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/app.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/document': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/document/markdown': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/document/markdown/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/document/markdown/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/document/markdown/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/document/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/document/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/document/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/python': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/python/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/python/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/python/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/bash': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/bash/briteonyx': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/bash/briteonyx/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/bash/briteonyx/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/bash/briteonyx/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/bash/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/bash/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/custom/script/bash/all.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/__main__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/gen/generate/test_app.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/third_party': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates/section_1.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates/section_4.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates/test_section_2.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates/test_section_3.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates/test_section_4.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates/test_section_1.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates/section_3.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/throw_out_your_templates/section_2.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/.pytest_cache': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/.pytest_cache/v': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/.pytest_cache/v/cache': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/queue.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/delete_file.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/task.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/conftest.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/exception.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/test_task.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/config.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/test_task_manager.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/test_queue.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/task_manager.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/test_exception.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/task/test_config.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/test_structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/test_renderer.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/renderer.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/test_source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/markdown': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/markdown/test_structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/markdown/test_source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/markdown/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/markdown/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/markdown/structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/markdown/complete.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/markdown/source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/markdown/test_complete.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/document/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/test_structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/python': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/python/test_structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/python/test_source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/python/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/python/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/python/structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/python/complete.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/python/source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/python/test_complete.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/test_source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/test_structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/test_source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/complete.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/test_complete.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/test_structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/test_source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/complete.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/bash/test_complete.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/script/source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/structure.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/src_gen/source.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/aws': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/aws/service.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/aws/test_service.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/aws/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/aws/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/aws/ec2.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/aws/s3.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/aws/test_ec2.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/aws/test_s3.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_my_assert.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_my_time.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/my_terminal.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/conftest.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_singleton_application.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/color_log_formatter.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/config.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/my_time.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_python.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/filesystem.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/tracked_path.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/__init__.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/__pycache__': listing directory
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_color_log_formatter.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_filesystem.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_text.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/text.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_config.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/environment.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/my_assert.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_tracked_path.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/singleton_application.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/my_logging.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/math.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/processing.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_math.py': Clean bill of health.
-'/Users/rwill253/project/WIP/workstation/src/lib/mine/utility/test_environment.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/BriteOnyx/bin': listing directory
+'/Users/rob/repo/WIP/workstation/BriteOnyx/bin/lib': listing directory
+'/Users/rob/repo/WIP/workstation/bin': listing directory
+'/Users/rob/repo/WIP/workstation/bin/lib': listing directory
+'/Users/rob/repo/WIP/workstation/src/app': listing directory
+'/Users/rob/repo/WIP/workstation/src/app/MODULE': listing directory
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/conftest.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/config.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/task': listing directory
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/task/bootstrap.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/task/test_task.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/task/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/task/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/task/scan_directory.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/task/mapping.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/task/test_mapping.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/test_config.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/app.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/__main__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/app/MODULE/test_app.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/conftest.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/config.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/document': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/document/markdown': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/document/markdown/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/document/markdown/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/document/markdown/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/document/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/document/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/document/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/python': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/python/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/python/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/python/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/briteonyx': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/briteonyx/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/briteonyx/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/briteonyx/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/pve_activate.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/alias.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/set_path.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/declare_log4bash.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/declare_base.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/declare.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/declare_require.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/configure_python.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/activate.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/shared/script/bash/declare_common.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/test_config.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/app.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/document': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/document/markdown': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/document/markdown/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/document/markdown/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/document/markdown/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/document/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/document/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/document/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/python': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/python/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/python/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/python/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/bash': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/bash/briteonyx': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/bash/briteonyx/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/bash/briteonyx/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/bash/briteonyx/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/bash/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/bash/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/gen/generate/custom/script/bash/all.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/__main__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/gen/generate/test_app.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/third_party': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates/section_1.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates/section_4.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates/test_section_2.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates/test_section_3.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates/test_section_4.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates/test_section_1.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates/section_3.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/throw_out_your_templates/section_2.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/.pytest_cache': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/.pytest_cache/v': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/.pytest_cache/v/cache': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/queue.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/delete_file.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/task.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/conftest.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/exception.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/test_task.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/config.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/test_task_manager.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/test_queue.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/task_manager.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/test_exception.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/task/test_config.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/test_structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/test_renderer.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/renderer.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/test_source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/markdown': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/markdown/test_structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/markdown/test_source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/markdown/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/markdown/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/markdown/structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/markdown/complete.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/markdown/source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/markdown/test_complete.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/document/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/test_structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/python': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/python/test_structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/python/test_source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/python/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/python/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/python/structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/python/complete.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/python/source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/python/test_complete.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/test_source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/test_structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/test_source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/complete.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/briteonyx/test_complete.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/test_structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/test_source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/complete.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/bash/test_complete.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/script/source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/structure.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/src_gen/source.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/aws': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/aws/service.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/aws/test_service.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/aws/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/aws/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/aws/ec2.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/aws/s3.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/aws/test_ec2.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/aws/test_s3.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_my_assert.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_my_time.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/my_terminal.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/conftest.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_singleton_application.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/color_log_formatter.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/config.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/my_time.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_python.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/filesystem.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/tracked_path.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/__init__.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/__pycache__': listing directory
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_color_log_formatter.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_filesystem.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_text.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/text.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_config.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/environment.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/my_assert.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_tracked_path.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/singleton_application.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/my_logging.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/math.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/processing.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_math.py': Clean bill of health.
+'/Users/rob/repo/WIP/workstation/src/lib/mine/utility/test_environment.py': Clean bill of health.

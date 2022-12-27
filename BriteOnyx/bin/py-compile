@@ -12,7 +12,7 @@ main() {
     # Compile all Python source
     require_arguments $# 0
 
-    require_command_in compileall
+#   require_command_in compileall
 
     log_debug "Compiling Python source files..."
     ${compileall} -f "${BO_Project}/BriteOnyx/bin"

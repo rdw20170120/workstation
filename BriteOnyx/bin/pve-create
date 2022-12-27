@@ -13,13 +13,13 @@ main() {
     require_arguments $? 0
 
     require_command_in python3
-    require_variable BO_PVE
+#   require_variable BO_PVE
 
     log_debug "Creating Python virtual environment directory '${BO_PVE}'"
 
     # TODO: How do we get the version of venv?
 
-    ${python3} -m venv "${BO_PVE}"
+#   ${python3} -m venv "${BO_PVE}"
     abort_on_fail $? "from ${python3} -m venv ..."
 
     local -r Script=${BO_Project}/BriteOnyx/bin/lib/pve-activate.bash

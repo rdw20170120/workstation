@@ -8,11 +8,6 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-if [[ -z "${BO_PVE}" ]] ; then
-    log_error "Environment variable 'BO_PVE' is undefined, aborting"
-    exit 1
-fi
-
 main() {
     # Wipe project directory, which is a deeper clean
     # TODO: Wipe other caches such as for 'pip'
@@ -22,7 +17,7 @@ main() {
     log_debug "Wiping (cleaning deeper)..."
     maybe_delete_directory_tree "${BO_Project}/.pytest_cache"
     maybe_delete_directory_tree "${BO_Project}/log"
-    pve-rm
+#   pve-rm
 
     return 0
 }
@@ -36,5 +31,10 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+if [[ -z "${BO_PVE}" ]] ; then
+    log_error "Environment variable 'BO_PVE' is undefined, aborting"
+    exit 1
+fi
+
 DisabledContent
 

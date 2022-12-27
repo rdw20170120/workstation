@@ -6,6 +6,15 @@
 ###############################################################################
 # Activate Python virtual environment (PVE)
 
+# TODO: NOTE: Disabled in favor of using Anaconda
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
 export BO_PVE=${BO_Project}/.PVE
 export BO_PathPve=${BO_PVE}/bin
 export BO_PathTool=${BO_PathPve}
@@ -30,13 +39,5 @@ if [[ -r "${_Script}" ]] ; then
 else
     log_warn "Ignoring, script '${_Script}' is unreadable"
 fi
-
-###############################################################################
-# NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -vx
-# Code to debug...
-# set +vx
-
-: << 'DisabledContent'
 DisabledContent
 

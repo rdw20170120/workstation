@@ -12,7 +12,7 @@ main() {
     # Upgrade Python dependencies
     require_arguments $# 0
 
-    require_command_in pip
+#   require_command_in pip
 
     local -r File=${BO_Project}/cfg/requirements.txt
 
@@ -21,8 +21,9 @@ main() {
 
     log_debug "Upgrading Python dependencies from '${File}'"
     require_file "${File}"
-    ${pip} install -r "${File}" --upgrade --upgrade-strategy=eager
-    abort_on_fail $? "from ${pip} install ..."
+    # TODO: Implement
+#   ${pip} install -r "${File}" --upgrade --upgrade-strategy=eager
+#   abort_on_fail $? "from ${pip} install ..."
 
     return 0
 }

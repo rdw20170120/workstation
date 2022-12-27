@@ -12,7 +12,7 @@ main() {
     # Reformat Python code using Black
     require_arguments $# 0
 
-    require_command_in black
+#   require_command_in black
 
     # Temporarily override user setting to keep Black's cache under BO_Project
     export XDG_CACHE_HOME=${BO_Project}/.cache

@@ -1,0 +1,23 @@
+PySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_1661604839144/work
+brotlipy @ file:///Users/runner/miniforge3/conda-bld/brotlipy_1666764961872/work
+certifi==2022.9.24
+cffi @ file:///Users/runner/miniforge3/conda-bld/cffi_1666754777420/work
+charset-normalizer @ file:///home/conda/feedstock_root/build_artifacts/charset-normalizer_1661170624537/work
+colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1666700638685/work
+conda-package-handling @ file:///Users/runner/miniforge3/conda-bld/conda-package-handling_1666837455577/work
+conda==22.9.0
+cryptography @ file:///Users/runner/miniforge3/conda-bld/cryptography_1667422904319/work
+idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1663625384323/work
+libmambapy @ file:///Users/runner/miniforge3/conda-bld/mamba-split_1667627068753/work/libmambapy
+mamba @ file:///Users/runner/miniforge3/conda-bld/mamba-split_1667627068753/work/mamba
+pip==22.3.1
+pyOpenSSL @ file:///home/conda/feedstock_root/build_artifacts/pyopenssl_1665350324128/work
+pycosat @ file:///Users/runner/miniforge3/conda-bld/pycosat_1666836580084/work
+pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1636257122734/work
+requests @ file:///home/conda/feedstock_root/build_artifacts/requests_1661872987712/work
+ruamel-yaml-conda @ file:///Users/runner/miniforge3/conda-bld/ruamel_yaml_1666819760545/work
+setuptools==65.5.1
+toolz @ file:///home/conda/feedstock_root/build_artifacts/toolz_1657485559105/work
+tqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1662214488106/work
+urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1658789158161/work
+wheel==0.38.4
