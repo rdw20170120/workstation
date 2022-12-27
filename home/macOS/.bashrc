@@ -5,6 +5,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+################################################################################
 # Remember the native and original system PATHs
 export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 [[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}

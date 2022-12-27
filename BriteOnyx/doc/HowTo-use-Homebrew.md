@@ -12,18 +12,21 @@ REF: https://brew.sh/
 # Upgrade installed packages
 `brew upgrade`
 
-# List installed packages
+# List installed packages after initial install
 `brew list`
 ==> Formulae
-ca-certificates	gettext		libunistring	openssl@1.1	readline	xz
-fish		git		mpdecimal	pcre2		sqlite
-gdbm		libidn2		ncurses		python@3.9	wget
-
-==> Casks
-meld
 
 # Install desired packages
 `brew install iterm2 meld neovim`
+
+# List installed packages again
+`brew list`
+==> Formulae
+gettext		libuv		luajit		msgpack		tree-sitter
+libtermkey	libvterm	luv		neovim		unibilium
+
+==> Casks
+iterm2		meld
 
 # TODO: Authorize Meld to open in System Preferences
 

@@ -8,15 +8,9 @@ REF: https://pythonspeed.com/articles/faster-conda-install/
 REF: https://github.com/conda-forge/miniforge
 
 # Install Mambaforge
-# Installs Mamba
-# Configures to use Conda-Forge as default channel (https://conda-forge.org/)
-curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-bash Mambaforge-$(uname)-$(uname -m).sh
-# Accept the license
-# Accept 'conda init'
-# Review changes to .bash_profile
-# Review changes to .zshrc
-# Consider:  conda config --set auto_activate_base false
+brew install mambaforge
+
+conda init "$(basename "${SHELL}")"
 
 # TODO: Reconfigure ~/.bash_profile & ~/.bashrc to integrate Conda configuration
 
