@@ -28,14 +28,11 @@ _Dir=${_DirBase}/wip
 maybe_clone "${_Dir}" ${_UrlPrefix} private-mono
 maybe_clone "${_Dir}" ${_UrlPrefix} pythonspeed
 
-: << 'DisabledContent'
-# These are reference copies
-_Dir=${_DirBase}/ref
-maybe_clone "${_Dir}" ${_UrlPrefix} experiment
-maybe_clone "${_Dir}" ${_UrlPrefix} learn-gitlab
-
 # These are reference copies
 _Dir=${_DirBase}/ref
 maybe_clone "${_Dir}" ${_UrlPrefix} private-mono
 maybe_clone "${_Dir}" ${_UrlPrefix} pythonspeed
+
+: << 'DisabledContent'
 DisabledContent
+
