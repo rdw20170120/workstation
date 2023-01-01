@@ -14,15 +14,24 @@ _DirBase=${HOME}/repo/other
 _UrlPrefix=MeAt${_Source}
 
 _Name=earthly
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} ${_Name}
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} earthly
 
 _Name=elves
 maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} awesome-elvish
 maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} elvish
 
+_Name=gruntwork-io
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} terragrunt
+
+_Name=hashicorp
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} terraform
+
 _Name=jorgebucaran
 maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} fisher
 maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} fishtape
+
+_Name=outsideris
+maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} citizen
 
 _Name=zzamboni
 maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} dot-elvish
@@ -34,3 +43,4 @@ maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} emacs-org-leanpub
 
 : << 'DisabledContent'
 DisabledContent
+

@@ -50,8 +50,8 @@ main() {
 
     sync_file . macOS .inputrc
 
-    sync_file . macOS .zshrc
-    sync_file . macOS alias.zsh
+#   sync_file . macOS .zshrc
+#   sync_file . macOS alias.zsh
 
     return 0
 }

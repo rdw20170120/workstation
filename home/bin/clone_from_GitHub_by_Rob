@@ -43,15 +43,6 @@ maybe_clone "${_Dir}" ${_UrlPrefix} trading
 maybe_clone "${_Dir}" ${_UrlPrefix} training
 maybe_clone "${_Dir}" ${_UrlPrefix} workstation
 
-UrlPrefix=MeAt${_Source}:gruntwork-io
-maybe_clone "$Dir" $UrlPrefix terragrunt
-
-UrlPrefix=MeAt${_Source}:hashicorp
-maybe_clone "$Dir" $UrlPrefix terraform
-
-UrlPrefix=MeAt${_Source}:outsideris
-maybe_clone "$Dir" $UrlPrefix citizen
-
 : << 'DisabledContent'
 DisabledContent
 
