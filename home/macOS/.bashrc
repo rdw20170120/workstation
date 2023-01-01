@@ -31,6 +31,10 @@ else
     fi
 fi
 unset __conda_setup
+
+if [ -f "/usr/local/Caskroom/mambaforge/base/etc/profile.d/mamba.sh" ]; then
+    . "/usr/local/Caskroom/mambaforge/base/etc/profile.d/mamba.sh"
+fi
 # <<< conda initialize <<<
 export BO_PathAnaconda=${CONDA_PREFIX}/bin
 
@@ -47,7 +51,7 @@ export BO_PathVmware=/Applications/VMware\ Fusion.app/Contents/Public
 # Build up the system path from the end, starting with the native path, moving forward.
 # This allows easier manipulation by (un)commenting entries.
 BO_PathSystem=${BO_PathNative}
-BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
+# BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
 BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
 BO_PathSystem=${BO_PathAnaconda}:${BO_PathSystem}
 export BO_PathSystem

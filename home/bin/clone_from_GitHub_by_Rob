@@ -16,20 +16,33 @@ _UrlPrefix=MeAt${_Source}:${_Profile}
 _DirBase=${HOME}/repo
 
 # These are what I am actually working on (Work In Progress)
-_Dir=${_DirBase}/WIP
+_Dir=${_DirBase}/wip
 maybe_clone "${_Dir}" ${_UrlPrefix} trading
 maybe_clone "${_Dir}" ${_UrlPrefix} workstation
 
-: << 'DisabledContent'
+# These are reference copies
+_Dir=${_DirBase}/ref
+maybe_clone "${_Dir}" ${_UrlPrefix} astech
+maybe_clone "${_Dir}" ${_UrlPrefix} aws-inventory
 maybe_clone "${_Dir}" ${_UrlPrefix} build
+maybe_clone "${_Dir}" ${_UrlPrefix} cb-infrastructure
+maybe_clone "${_Dir}" ${_UrlPrefix} cert
+maybe_clone "${_Dir}" ${_UrlPrefix} couchbase
 maybe_clone "${_Dir}" ${_UrlPrefix} euler
 maybe_clone "${_Dir}" ${_UrlPrefix} first
+maybe_clone "${_Dir}" ${_UrlPrefix} hortonworks
 maybe_clone "${_Dir}" ${_UrlPrefix} javascript
+maybe_clone "${_Dir}" ${_UrlPrefix} ocdp
+maybe_clone "${_Dir}" ${_UrlPrefix} potrero
+maybe_clone "${_Dir}" ${_UrlPrefix} quoting-api
+maybe_clone "${_Dir}" ${_UrlPrefix} restinjava
 maybe_clone "${_Dir}" ${_UrlPrefix} sample-python
+maybe_clone "${_Dir}" ${_UrlPrefix} samplegwtviaant
 maybe_clone "${_Dir}" ${_UrlPrefix} samples
-
-# These are reference copies
-_Dir=${_DirBase}/reference
+maybe_clone "${_Dir}" ${_UrlPrefix} trading
+maybe_clone "${_Dir}" ${_UrlPrefix} training
 maybe_clone "${_Dir}" ${_UrlPrefix} workstation
+
+: << 'DisabledContent'
 DisabledContent
 
