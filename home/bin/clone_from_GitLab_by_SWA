@@ -2,127 +2,117 @@
 # This script is intended to be executed by a user in a Bash shell.
 
 # Clone git repositories, if they have not been cloned already.
-# Clone from GitLab for my (Rob Williams') account
-# NOTE: I reference my special SSH configuration to handle the connection.
-# TODO: Resolve how to reconcile divergent branches during pull using one of these:
-# hint:   git config pull.rebase false  # merge (the default strategy)
-# hint:   git config pull.rebase true   # rebase
+# NOTE: I reference my special SSH configuration to handle the connection, see `~/.ssh/config`.
+# TODO: Implement this:
 # hint:   git config pull.ff only       # fast-forward only
 
 source ~/bin/lib/declare-git.bash
 
 _Source=GitLab
 _Connection=SouthwestAirlinesAt${_Source}
+_Dir=${HOME}/repo/SWA
 
-# These are reference copies
-Dir=~/project/at\ SWA/reference
+_Profile=airops/platform-opssuite
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" platform-logging-opensearch
 
-UrlPrefix=${_Connection}:airops/platform-opssuite
-maybe_clone "$Dir" $UrlPrefix platform-logging-opensearch
+_Profile=cpe
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" homebrew-cpe-tools
 
-UrlPrefix=${_Connection}:cpe
-maybe_clone "$Dir" $UrlPrefix homebrew-cpe-tools
+_Profile=csauto
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-terratest-helloworld
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csif-identity-automation
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" cyberark-report-automation
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" git-practice
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping_automation
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" pipeline-script-batch
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" secureauth-to-ping-saml-tfvars-generator
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" sox-admin-group-report
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" sox-rbac-rules-validation
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" test-params-crud
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" test-semantic-release
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" tfstate
 
-UrlPrefix=${_Connection}:csauto
-maybe_clone "$Dir" $UrlPrefix csauto-terratest-helloworld
-maybe_clone "$Dir" $UrlPrefix csif-identity-automation
-maybe_clone "$Dir" $UrlPrefix cyberark-report-automation
-maybe_clone "$Dir" $UrlPrefix git-practice
-maybe_clone "$Dir" $UrlPrefix ping_automation
-maybe_clone "$Dir" $UrlPrefix pipeline-script-batch
-maybe_clone "$Dir" $UrlPrefix secureauth-to-ping-saml-tfvars-generator
-maybe_clone "$Dir" $UrlPrefix sox-admin-group-report
-maybe_clone "$Dir" $UrlPrefix sox-rbac-rules-validation
-maybe_clone "$Dir" $UrlPrefix test-params-crud
-maybe_clone "$Dir" $UrlPrefix test-semantic-release
-maybe_clone "$Dir" $UrlPrefix tfstate
+_Profile=csauto/container-images
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-cli
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-cyberark-automation
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-docker-knife
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-vault-ci
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" golang-builder-base
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" pingfederate
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" terraform-tg-aws
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" terratest-runner-base
 
-UrlPrefix=${_Connection}:csauto/container-images
-maybe_clone "$Dir" $UrlPrefix csauto-cli
-maybe_clone "$Dir" $UrlPrefix csauto-cyberark-automation
-maybe_clone "$Dir" $UrlPrefix csauto-docker-knife
-maybe_clone "$Dir" $UrlPrefix csauto-vault-ci
-maybe_clone "$Dir" $UrlPrefix golang-builder-base
-maybe_clone "$Dir" $UrlPrefix pingfederate
-maybe_clone "$Dir" $UrlPrefix terraform-tg-aws
-maybe_clone "$Dir" $UrlPrefix terratest-runner-base
+_Profile=csauto/csobservability
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" collector-ad
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" deployment-opensearch
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" deployment-opensearch
 
-UrlPrefix=${_Connection}:csauto/csobservability
-maybe_clone "$Dir" $UrlPrefix collector-ad
-maybe_clone "$Dir" $UrlPrefix deployment-opensearch
+_Profile=csauto/cyberark-automation
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" create-account
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" create-safe-trigger
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" create-safe
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" safe-sync-to-dash-trigger
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" safe-sync-to-dash
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" service-identity-dash-integration-tests
 
-UrlPrefix=${_Connection}:csauto/cyberark-automation
-maybe_clone "$Dir" $UrlPrefix create-account
-maybe_clone "$Dir" $UrlPrefix create-safe-trigger
-maybe_clone "$Dir" $UrlPrefix create-safe
-maybe_clone "$Dir" $UrlPrefix safe-sync-to-dash-trigger
-maybe_clone "$Dir" $UrlPrefix safe-sync-to-dash
-maybe_clone "$Dir" $UrlPrefix service-identity-dash-integration-tests
+_Profile=csauto/idauto-infra-test
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" idauto-infra-deploy
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" idauto-infra-module
 
-UrlPrefix=${_Connection}:csauto/idauto-infra-test
-maybe_clone "$Dir" $UrlPrefix idauto-infra-deploy
-maybe_clone "$Dir" $UrlPrefix idauto-infra-module
+_Profile=csauto/modules
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-accman-python
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-chef-python
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-cyberark-python
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-dash-python
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-ldap-python
 
-UrlPrefix=${_Connection}:csauto/modules
-maybe_clone "$Dir" $UrlPrefix csauto-accman-python
-maybe_clone "$Dir" $UrlPrefix csauto-chef-python
-maybe_clone "$Dir" $UrlPrefix csauto-cyberark-python
-maybe_clone "$Dir" $UrlPrefix csauto-dash-python
-maybe_clone "$Dir" $UrlPrefix csauto-ldap-python
+_Profile=csauto/shared-common
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" infra-build-data
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" infra-build-network
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" infra-deploy-data
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" infra-deploy-network
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" secureauth-parser
 
-UrlPrefix=${_Connection}:csauto/shared-common
-maybe_clone "$Dir" $UrlPrefix infra-build-data
-maybe_clone "$Dir" $UrlPrefix infra-build-network
-maybe_clone "$Dir" $UrlPrefix infra-deploy-data
-maybe_clone "$Dir" $UrlPrefix infra-deploy-network
-maybe_clone "$Dir" $UrlPrefix secureauth-parser
+_Profile=csauto/stash-legacy
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" CSAUTO-example-app
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" CSAUTO-gitops-cd
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" CSAUTO-gitops-ci
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" CSAUTO-gitops-manifest
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" CSAUTO-jenkins-manifest
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" GITOPSDEV-CSAUTO-gitops-cd
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" GITOPSPROD-CSAUTO-gitops-cd
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" GITOPSQA-CSAUTO-gitops-cd
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-monitoring
 
-UrlPrefix=${_Connection}:csauto/stash-legacy
-maybe_clone "$Dir" $UrlPrefix CSAUTO-example-app
-maybe_clone "$Dir" $UrlPrefix CSAUTO-gitops-cd
-maybe_clone "$Dir" $UrlPrefix CSAUTO-gitops-ci
-maybe_clone "$Dir" $UrlPrefix CSAUTO-gitops-manifest
-maybe_clone "$Dir" $UrlPrefix CSAUTO-jenkins-manifest
-maybe_clone "$Dir" $UrlPrefix GITOPSDEV-CSAUTO-gitops-cd
-maybe_clone "$Dir" $UrlPrefix GITOPSPROD-CSAUTO-gitops-cd
-maybe_clone "$Dir" $UrlPrefix GITOPSQA-CSAUTO-gitops-cd
-maybe_clone "$Dir" $UrlPrefix csauto-monitoring
+_Profile=csauto/swaam
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-accman-api
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-accman-cli
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-accman-pipelines
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-swaam-chef-serverless-collector-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-swaam-ldap-serverless-collector-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-swaam-serverless-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" infra-build-swaam
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" infra-deploy-swaam
 
-UrlPrefix=${_Connection}:csauto/swaam
-maybe_clone "$Dir" $UrlPrefix csauto-accman-api
-maybe_clone "$Dir" $UrlPrefix csauto-accman-cli
-maybe_clone "$Dir" $UrlPrefix csauto-accman-pipelines
-maybe_clone "$Dir" $UrlPrefix csauto-swaam-chef-serverless-collector-module
-maybe_clone "$Dir" $UrlPrefix csauto-swaam-ldap-serverless-collector-module
-maybe_clone "$Dir" $UrlPrefix csauto-swaam-serverless-module
-maybe_clone "$Dir" $UrlPrefix infra-build-swaam
-maybe_clone "$Dir" $UrlPrefix infra-deploy-swaam
+_Profile=csauto/vault
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" CSAUTO-vault
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-vault-cli
 
-UrlPrefix=${_Connection}:csauto/vault
-maybe_clone "$Dir" $UrlPrefix CSAUTO-vault
-maybe_clone "$Dir" $UrlPrefix csauto-vault-cli
+_Profile=swa-common/ccp/modules
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" cloud-common-eks-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" cloud-common-vpc-module
 
-UrlPrefix=${_Connection}:swa-common/ccp/modules
-maybe_clone "$Dir" $UrlPrefix cloud-common-eks-module
-maybe_clone "$Dir" $UrlPrefix cloud-common-vpc-module
+_Profile=swa-common/templates/project-templates
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ccplat-infra-deployment
 
-UrlPrefix=${_Connection}:swa-common/templates/project-templates
-maybe_clone "$Dir" $UrlPrefix ccplat-infra-deployment
+_Profile=csauto/csobservability
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" deployment-opensearch
 
-# These are what I am actually working on (Work In Progress)
-Dir=~/project/at\ SWA/WIP
+_Profile=csiam/idauto/infra
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" deployment-citizen
 
-UrlPrefix=${_Connection}:csauto/csobservability
-maybe_clone "$Dir" $UrlPrefix deployment-opensearch
-
-UrlPrefix=${_Connection}:csiam/idauto/infra
-maybe_clone "$Dir" $UrlPrefix deployment-citizen
-
-# These are bare clones suitable for import into our own GitLab project
-Dir=~/project/at\ SWA/bare
-
-UrlPrefix=${_Connection}:airops/platform-opssuite
-maybe_bare "$Dir" $UrlPrefix platform-logging-opensearch
+_Profile=airops/platform-opssuite
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" platform-logging-opensearch
 
 : << 'DisabledContent'
 DisabledContent

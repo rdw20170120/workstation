@@ -2,46 +2,36 @@
 # This script is intended to be executed by a user in a Bash shell.
 
 # Clone git repositories, if they have not been cloned already.
-# Clone from GitHub for my (Rob Williams') account
-# NOTE: I reference my special SSH configuration to handle the connection.
+# NOTE: I reference my special SSH configuration to handle the connection, see `~/.ssh/config`.
 # TODO: Implement this:
 # hint:   git config pull.ff only       # fast-forward only
 
 source ${HOME}/bin/lib/declare-git.bash
 
-_Profile=rdw20170120
 _Source=GitHub
-_UrlPrefix=MeAt${_Source}:${_Profile}
+_Connection=MeAt${_Source}
+_Dir=${HOME}/repo/${_Source}
 
-_DirBase=${HOME}/repo
-
-# These are what I am actually working on (Work In Progress)
-_Dir=${_DirBase}/wip
-maybe_clone "${_Dir}" ${_UrlPrefix} trading
-maybe_clone "${_Dir}" ${_UrlPrefix} workstation
-
-# These are reference copies
-_Dir=${_DirBase}/ref
-maybe_clone "${_Dir}" ${_UrlPrefix} astech
-maybe_clone "${_Dir}" ${_UrlPrefix} aws-inventory
-maybe_clone "${_Dir}" ${_UrlPrefix} build
-maybe_clone "${_Dir}" ${_UrlPrefix} cb-infrastructure
-maybe_clone "${_Dir}" ${_UrlPrefix} cert
-maybe_clone "${_Dir}" ${_UrlPrefix} couchbase
-maybe_clone "${_Dir}" ${_UrlPrefix} euler
-maybe_clone "${_Dir}" ${_UrlPrefix} first
-maybe_clone "${_Dir}" ${_UrlPrefix} hortonworks
-maybe_clone "${_Dir}" ${_UrlPrefix} javascript
-maybe_clone "${_Dir}" ${_UrlPrefix} ocdp
-maybe_clone "${_Dir}" ${_UrlPrefix} potrero
-maybe_clone "${_Dir}" ${_UrlPrefix} quoting-api
-maybe_clone "${_Dir}" ${_UrlPrefix} restinjava
-maybe_clone "${_Dir}" ${_UrlPrefix} sample-python
-maybe_clone "${_Dir}" ${_UrlPrefix} samplegwtviaant
-maybe_clone "${_Dir}" ${_UrlPrefix} samples
-maybe_clone "${_Dir}" ${_UrlPrefix} trading
-maybe_clone "${_Dir}" ${_UrlPrefix} training
-maybe_clone "${_Dir}" ${_UrlPrefix} workstation
+_Profile=rdw20170120
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" astech
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" aws-inventory
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" cb-infrastructure
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" cert
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" couchbase
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" euler
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" first
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" hortonworks
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" javascript
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" ocdp
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" potrero
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" quoting-api
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" restinjava
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" sample-python
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" samplegwtviaant
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" samples
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" trading
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" training
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" workstation
 
 : << 'DisabledContent'
 DisabledContent

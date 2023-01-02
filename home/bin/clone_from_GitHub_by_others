@@ -2,44 +2,34 @@
 # This script is intended to be executed by a user in a Bash shell.
 
 # Clone git repositories, if they have not been cloned already.
-# Clone from GitHub from others' accounts
-# NOTE: I reference my special SSH configuration to handle the connection.
+# NOTE: I reference my special SSH configuration to handle the connection, see `~/.ssh/config`.
 # TODO: Implement this:
 # hint:   git config pull.ff only       # fast-forward only
 
 source ${HOME}/bin/lib/declare-git.bash
 
 _Source=GitHub
-_DirBase=${HOME}/repo/other
-_UrlPrefix=MeAt${_Source}
+_Connection=MeAt${_Source}
+_Dir=${HOME}/repo/${_Source}
 
-_Name=earthly
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} earthly
+_Profile=earthly
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" earthly
 
-_Name=elves
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} awesome-elvish
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} elvish
+_Profile=elves
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" awesome-elvish
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish
 
-_Name=gruntwork-io
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} terragrunt
+_Profile=jorgebucaran
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" fisher
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" fishtape
 
-_Name=hashicorp
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} terraform
-
-_Name=jorgebucaran
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} fisher
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} fishtape
-
-_Name=outsideris
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} citizen
-
-_Name=zzamboni
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} dot-elvish
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} dot-emacs
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} elvish-completions
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} elvish-modules
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} elvish-themes
-maybe_clone "${_DirBase}/${_Name}" ${_UrlPrefix}:${_Name} emacs-org-leanpub
+_Profile=zzamboni
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" dot-elvish
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" dot-emacs
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish-completions
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish-modules
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish-themes
+maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" emacs-org-leanpub
 
 : << 'DisabledContent'
 DisabledContent
