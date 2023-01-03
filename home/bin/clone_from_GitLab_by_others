@@ -12,9 +12,9 @@ _Source=GitLab
 _Connection=MeAt${_Source}
 _Dir=${HOME}/repo/${_Source}
 
+: << 'DisabledContent'
 _Profile=zzamboni
 maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" dot-elvish
 maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" dot-emacs
-
-: << 'DisabledContent'
 DisabledContent
+

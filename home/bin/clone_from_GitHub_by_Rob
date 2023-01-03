@@ -13,6 +13,10 @@ _Connection=MeAt${_Source}
 _Dir=${HOME}/repo/${_Source}
 
 _Profile=rdw20170120
+maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" workstation
+
+: << 'DisabledContent'
+_Profile=rdw20170120
 maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" astech
 maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" aws-inventory
 maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" cb-infrastructure
@@ -32,7 +36,5 @@ maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" samples
 maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" trading
 maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" training
 maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" workstation
-
-: << 'DisabledContent'
 DisabledContent
 

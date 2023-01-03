@@ -12,7 +12,7 @@ export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 ################################################################################
 # Homebrew
-export HOMEBREW_PREFIX=/usr/local
+export HOMEBREW_PREFIX=/opt/homebrew
 eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
 export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
 
@@ -185,16 +185,5 @@ if ! shopt -oq posix; then
 fi
 
 : << 'DisabledContent'
-################################################################################
-# Added by Nix installer
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
-    source ~/.nix-profile/etc/profile.d/nix.sh
-fi
-# Disable use of Nix channels,
-# in favor of release pinning
-# when ready.
-# export NIX_PATH=
-export BO_PathNix=${HOME}/.nix-profile/bin
-
 DisabledContent
 

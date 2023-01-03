@@ -12,6 +12,7 @@ _Source=GitHub
 _Connection=MeAt${_Source}
 _Dir=${HOME}/repo/${_Source}
 
+: << 'DisabledContent'
 _Profile=earthly
 maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" earthly
 
@@ -30,7 +31,5 @@ maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish-comp
 maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish-modules
 maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish-themes
 maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" emacs-org-leanpub
-
-: << 'DisabledContent'
 DisabledContent
 

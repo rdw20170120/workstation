@@ -12,6 +12,7 @@ _Source=GitLab
 _Connection=MeAt${_Source}
 _Dir=${HOME}/repo/${_Source}
 
+: << 'DisabledContent'
 _Profile=refactoryllc
 maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" experiment
 maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" learn-gitlab
@@ -19,7 +20,5 @@ maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" learn-gitlab
 _Profile=refactorytechllc
 maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" private-mono
 maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" pythonspeed
-
-: << 'DisabledContent'
 DisabledContent
 
