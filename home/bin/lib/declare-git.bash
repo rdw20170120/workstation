@@ -7,13 +7,6 @@
 # Change directory into the root of that local bare clone
 #
 
-git_working_directory() {
-  # Return path of local working directory with parent directory $1 and repository name $2
-  # $1 = parent directory of git working directory
-  # $2 = git repository name
-  echo $1/$2
-}
-
 git_repo_url() {
   # Return URL of remote Git repository with prefix $1 and name $2
   # $1 = git repository URL prefix
@@ -30,6 +23,13 @@ git_status_is_clean() {
   local -r _Output=$(git status --porcelain)
   popd >/dev/null
   [[ -z "${_Output}" ]]
+}
+
+git_working_directory() {
+  # Return path of local working directory with parent directory $1 and repository name $2
+  # $1 = parent directory of git working directory
+  # $2 = git repository name
+  echo $1/$2
 }
 
 maybe_bare() {

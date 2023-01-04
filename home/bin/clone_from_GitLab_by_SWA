@@ -98,21 +98,101 @@ _Profile=csauto/vault
 maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" CSAUTO-vault
 maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" csauto-vault-cli
 
+_Profile=csiam/csdir
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" cysec-domain-controller-deploy
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" cysec-domain-controller-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" cysec-route53-private-healthcheck-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" infra-deploy
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" infra-deploy-network
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" termination-automation
+
+_Profile=csiam/idauto
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" idauto_migration_tool
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" identity-automation-gui-tests
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" renovate-bot
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" renovate-runner
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" terraform-terragrunt
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" terragrunt-renovate-test
+
+_Profile=csiam/idauto/infra
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" deployment-citizen
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" deployment-tfstate
+
+_Profile=csiam/idauto/misc_tools
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" check_certs_script
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" quick_metrics_script
+
+_Profile=csiam/idauto/modulebuilder-suite
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" deployment-configs-gitops
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" pep-engine-provider-repo
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" trigger-pipeline-script
+
+_Profile=csiam/idauto/terraform-modules
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" cyberark_app_safe
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping_oidc_atm_policy
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" roboticid_accounts
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" root_service_module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" root_suite_module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" test-semantic-release
+
+_Profile=csiam/idauto/terraform-providers
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" terraform-provider-cyberark
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" terraform-provider-cyberarkcli
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" terraform-provider-ldap
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" terraform-provider-oauth2
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" terraform-provider-pingfederate
+
+_Profile=csiam/idm
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" DPPtoID
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" IDtoSAPFiori
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" global-idm-library
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" serviceidmgmt
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" test-envs
+
+_Profile=csiam/myaccess
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" myaccess-postman-collection
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" workday-role-based-collection
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" workday-user-based-collection
+
+_Profile=csiam/ping
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" aws-fine-grained-authorization
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ccplat-ssl-cert-deployment
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ccplat-ssm-param-deployment
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" cloud-common-secrets-manager-rotation-ping-oauth-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" dev-activity
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" docker-ping-directory
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" docker-ping-federate
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" docker-ping-post-deploy-tasks
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" helm-pingfed
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" helm-pingfed-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-admin-api-proxy-infra
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-app-config-terraform-source
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-infra
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-infra-network
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-interfacing-serverless
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-misc-scripts
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-private-hosted-zone-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-route53-healthcheck-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-route53-private-healthcheck-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-secrets-management-lambda-authorizer
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-smoke-tests-robotframework
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-terraform-cac-pipeline
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-vpc-link-integration-module
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" pingfederate-plugins-and-binaries
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" test-acm-certificate-module
+
+_Profile=csiam/ping/docker-images
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-backup
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-federate-base
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-federate-enterprise
+maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ping-federate-enterprise-backups
+
 _Profile=swa-common/ccp/modules
 maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" cloud-common-eks-module
 maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" cloud-common-vpc-module
 
 _Profile=swa-common/templates/project-templates
 maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" ccplat-infra-deployment
-
-_Profile=csauto/csobservability
-maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" deployment-opensearch
-
-_Profile=csiam/idauto/infra
-maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" deployment-citizen
-
-_Profile=airops/platform-opssuite
-maybe_clone "${_Dir}/ref" "${_Connection}:${_Profile}" platform-logging-opensearch
 
 : << 'DisabledContent'
 DisabledContent
