@@ -14,10 +14,15 @@ export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 # Homebrew
 export HOMEBREW_PREFIX=/opt/homebrew
 eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+export BO_PathAfterHomebrew=${PATH}
 export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
 
 ################################################################################
 # Anaconda (Mambaforge)
+# TODO: FIX: This code only supports the default `base` environment
+# and does not support changing it.
+# TODO: Implement: Means to change environments
+# TODO: Implement: Use CONDA_PREFIX
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$(${HOMEBREW_PREFIX}/Caskroom/mambaforge/base/bin/conda shell.bash hook 2>/dev/null)"
@@ -36,7 +41,8 @@ if [ -f "${HOMEBREW_PREFIX}/Caskroom/mambaforge/etc/profile.d/mamba.sh" ]; then
     . "${HOMEBREW_PREFIX}/Caskroom/mambaforge/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
-export BO_PathAnaconda=${CONDA_PREFIX}/bin
+export BO_PathAfterAnaconda=${PATH}
+export BO_PathAnaconda=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
 
 ################################################################################
 export BO_PathVmware=/Applications/VMware\ Fusion.app/Contents/Public

@@ -6,6 +6,9 @@
 # Create a local bare clone of the source repository (using maybe_bare below)
 # Change directory into the root of that local bare clone
 #
+# TODO: Implement: Consider installing Git pre-commit hook
+# First, by installing the tool: `brew install pre-commit`
+# Then by using the tool: `cd REPO ; pre-commit install`
 
 git_repo_url() {
   # Return URL of remote Git repository with prefix $1 and name $2
@@ -92,6 +95,7 @@ maybe_pull() {
   if git_status_is_clean "${_Dir}" ; then
     echo "INFO:  Working directory is clean: ${_Dir}"
     pushd "${_Dir}" >/dev/null
+    git fetch --all --prune
     git pull --all
     popd >/dev/null
   else
