@@ -1,4 +1,5 @@
 # Files and directories within THIS project
+/.anaconda
 /alias.bash
 /context.bash
 /BO-*.env

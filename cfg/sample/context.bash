@@ -8,6 +8,11 @@
 
 unset BO_RunningHumanless
 
+_Script=${BO_Project}/BriteOnyx/bin/lib/configure-Anaconda.bash
+source "${_Script}" ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
 # Bash environment
 # specific to this copy
 # of this project
@@ -46,19 +51,33 @@ unset BO_RunningHumanless
 # used.
 
 export BO_NameApp=MODULE
+remembering BO_NameApp
 
 require_directory_in HOME
 
-source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
-
 # Remember how to execute various tools
-export black=$(which black)
-export compileall=$(which compileall)
-export coverage=$(which coverage)
-export pip=$(which pip)
-export pytest=$(which pytest)
-export tabnanny=$(which tabnanny)
-export venv=$(which venv)
+export python3=$(which python3)
+remembering python3
+export black="${python3} -m black"
+remembering black
+# export compileall=$(which compileall)
+export compileall="${python3} -m compileall"
+remembering compileall
+# export coverage=$(which coverage)
+export coverage="${python3} -m coverage"
+remembering coverage
+# export pip=$(which pip)
+export pip="${python3} -m pip"
+remembering pip
+# export pytest=$(which pytest)
+export pytest="${python3} -m pytest"
+remembering pytest
+# export tabnanny=$(which tabnanny)
+export tabnanny="${python3} -m tabnanny"
+remembering tabnanny
+# TODO: Stop using venv in favor of Anaconda environments
+# export venv=$(which venv)
+# remembering venv
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

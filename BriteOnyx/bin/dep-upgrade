@@ -12,7 +12,7 @@ main() {
     # Upgrade Python dependencies
     require_arguments $# 0
 
-#   require_command_in pip
+    require_value pip
 
     local -r File=${BO_Project}/cfg/requirements.txt
 

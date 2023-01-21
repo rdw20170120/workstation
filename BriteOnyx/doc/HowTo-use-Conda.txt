@@ -11,6 +11,7 @@ REF: https://github.com/conda-forge/miniforge
 brew install mambaforge
 
 conda init "$(basename "${SHELL}")"
+mamba init
 
 # TODO: Reconfigure ~/.bash_profile & ~/.bashrc to integrate Conda configuration
 
@@ -21,14 +22,38 @@ conda init "$(basename "${SHELL}")"
 conda --version
 mamba --version
 mamba update conda mamba
+python --version
 
 # Managing Conda environments
-mamba create --name ENV PACKAGE
-mamba activate ENV
-mamba info --envs
-mamba activate
-mamba create --name ENV python=3.10
-python --version
+# NOTE: Edit `create_default_packages` section of `.condarc`
+# NOTE:  It is best to install packages all together
+# so that dependency management can work against the entire set,
+# rather than one-by-one.
+conda activate
+conda activate ENV
+conda create --name ENV
+conda create --name ENV python=3.10
+conda create --prefix DIR 
+conda info --envs
+conda remove --name ENV --all
+
+# Create an environment from a YAML file (name is on the first line)
+conda env create --file environment.yml
+conda activate ENV
+conda env list
+conda env update --file environment.yml -prune
+conda list --explicit >FILE
+conda env export --from-history
+
+# Using PIP
+# Avoid running pip in the root environment
+# Always use an environment
+# Install as much as possible using conda
+# Use pip only after conda
+# Use pip with --upgrade-strategy only-if-needed (default)
+# Do NOT use pip --user
+# conda will be unaware of changes made by pip
+# In order to alter conda packages, rebuild the environment
 
 # Managing Conda packages
 mamba search PACKAGE
@@ -43,3 +68,4 @@ conda config --get
 mamba install argcomplete
 # Add to Bash profile
 eval "$(register-python-argcomplete conda)"
+

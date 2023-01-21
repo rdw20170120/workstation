@@ -13,7 +13,7 @@ main() {
     # TODO: Enhance to accept argument for output file
     require_arguments $# 0
 
-#   require_command_in pip
+    require_value pip
 
     ${pip} freeze --all | sort
     abort_on_fail $? "from ${pip} freeze ... | sort"
