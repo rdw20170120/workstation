@@ -10,7 +10,6 @@
 grep_options='--color=auto'
 grep_options+=' --exclude-dir=.git'
 grep_options+=' --exclude-dir=.pytest_cache'
-grep_options+=' --exclude-dir=.PVE'
 grep_options+=' --exclude-dir=coverage'
 # TODO: It appears that '--exclude-from' is not supported on macOS Mojave 10.14.6
 # TODO: Perhaps I should consider installing a compatible `grep`
@@ -34,5 +33,6 @@ alias todo='grep -FR TODO "${BO_Project}" | grep -Fv .log | grep -Fv .out'
 # set +vx
 
 : << 'DisabledContent'
+grep_options+=' --exclude-dir=.PVE'
 DisabledContent
 

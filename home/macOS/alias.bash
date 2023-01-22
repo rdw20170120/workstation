@@ -23,7 +23,6 @@ alias jump_reference='cd "${BO_DirReference}"'
 alias jump_Work_In_Progress='cd "${BO_DirWorkInProgress}"'
 
 # Git
-alias add_all='git add . ; git status'
 alias ignored='git status --ignored'
 alias status='git status'
 alias unstage='git restore --staged'

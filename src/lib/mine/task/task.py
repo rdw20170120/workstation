@@ -6,8 +6,8 @@ from shutil import disk_usage
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from .task.exception import Abort
-from .task.exception import Skip
+from .exception import Abort
+from .exception import Skip
 from utility.filesystem import delete_directory_tree
 from utility.filesystem import delete_file
 from utility.filesystem import touch

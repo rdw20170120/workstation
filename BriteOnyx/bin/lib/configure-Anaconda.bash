@@ -48,13 +48,29 @@ source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-# Install desired packages into Anaconda environment
+# Need Python itself
 _Packages="python=3.11.*"
+
+# Need Python support tools
+_Packages="${_Packages} ansi2html"
 _Packages="${_Packages} black"
 _Packages="${_Packages} coverage"
+# TODO: FIX: Why does icdiff=2.0.* seem to all be corrupted?
+_Packages="${_Packages} icdiff=1.9.*"
 _Packages="${_Packages} pip"
 _Packages="${_Packages} pytest"
+_Packages="${_Packages} pytest-cov"
+_Packages="${_Packages} pytest-html"
+_Packages="${_Packages} pytest-icdiff"
+_Packages="${_Packages} pytest-sugar"
 # _Packages="${_Packages} tabnanny"
+
+# Need Python packages required by project source code
+_Packages="${_Packages} awscli"
+_Packages="${_Packages} boto3"
+_Packages="${_Packages} logzero"
+
+# Install desired packages into Anaconda environment
 mamba install --yes ${_Packages}
 mamba list --explicit >"${BO_FileAnaconda}"
 require_file "${BO_FileAnaconda}"
@@ -69,6 +85,5 @@ env | grep -i CONDA
 # set +vx
 
 : << 'DisabledContent'
-mamba install --file "${BO_FileAnaconda}"
 DisabledContent
 

@@ -10,7 +10,6 @@ trap warn_on_error EXIT
 
 main() {
     # Generate source
-    require_arguments $# 0
     local Cmd
     
     require_directory_in BO_Project

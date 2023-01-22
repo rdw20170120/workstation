@@ -2,7 +2,7 @@
 """Queue to manage tasks."""
 # Internal packages (absolute references, distributed with Python)
 from logging import getLogger
-from .queue import Queue
+from queue import Queue
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)

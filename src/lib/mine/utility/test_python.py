@@ -27,6 +27,10 @@ def test_kwlist_len():
         assert is_.equal(len(kwlist), 35)
     elif version_info.minor == 9:
         assert is_.equal(len(kwlist), 36)
+    elif version_info.minor == 10:
+        assert is_.equal(len(kwlist), 36)
+    elif version_info.minor == 11:
+        assert is_.equal(len(kwlist), 35)
     else:
         assert False, "No test case for Python version {}".format(version_info)
 

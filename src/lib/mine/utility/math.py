@@ -2,8 +2,8 @@
 """TODO: Write
 """
 # Internal packages (absolute references, distributed with Python)
-from .math import isnan
-from .math import nan
+from math import isnan
+from math import nan
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)

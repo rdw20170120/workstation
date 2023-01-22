@@ -11,7 +11,7 @@ import sys
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from .task.task_manager import TaskManager
+from task.task_manager import TaskManager
 from utility import my_logging
 from utility.singleton_application import SingletonApplication
 
