@@ -1,6 +1,6 @@
 PySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_1661604839144/work
 brotlipy @ file:///Users/runner/miniforge3/conda-bld/brotlipy_1666764961872/work
-certifi==2022.9.24
+certifi==2022.12.7
 cffi @ file:///Users/runner/miniforge3/conda-bld/cffi_1666754777420/work
 charset-normalizer @ file:///home/conda/feedstock_root/build_artifacts/charset-normalizer_1661170624537/work
 colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1666700638685/work
