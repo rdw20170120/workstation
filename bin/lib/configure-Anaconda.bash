@@ -75,9 +75,6 @@ mamba install --yes ${_Packages}
 mamba list --explicit >"${BO_FileAnaconda}"
 require_file "${BO_FileAnaconda}"
 
-log_info "Showing Anaconda environment variables"
-env | grep -i CONDA
-
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
 # export PS4='$ ' ; set -vx

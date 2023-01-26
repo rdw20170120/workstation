@@ -133,7 +133,6 @@ htmlcov/
 # *.sage.py
 
 # Environments
-.PVE/
 # .env
 # .venv
 # ENV/

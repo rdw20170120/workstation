@@ -8,6 +8,7 @@
 
 # TODO: Consider augmenting the other forms of 'grep' too
 grep_options='--color=auto'
+grep_options+=' --exclude-dir=.anaconda'
 grep_options+=' --exclude-dir=.git'
 grep_options+=' --exclude-dir=.pytest_cache'
 grep_options+=' --exclude-dir=coverage'
@@ -33,6 +34,5 @@ alias todo='grep -FR TODO "${BO_Project}" | grep -Fv .log | grep -Fv .out'
 # set +vx
 
 : << 'DisabledContent'
-grep_options+=' --exclude-dir=.PVE'
 DisabledContent
 

@@ -16,7 +16,7 @@ main() {
         grep -v BO-incoming\.env |
         grep -v BO-outgoing\.env |
         grep -v \.DS_Store |
-        grep -v \.PVE |
+        grep -v \.anaconda |
         grep -v \.cache\/ |
         grep -v \.class |
         grep -v \.html |
