@@ -8,6 +8,8 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
+# TODO: Implement: Update for Python 3.11?
+
 # NOTE: Apparently, it is not possible to run Python3 code exclusively with the
 # .py3 file extension, so do not add a '3' suffix to the source files.
 

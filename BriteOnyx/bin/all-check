@@ -12,7 +12,8 @@ main() {
     # Check all project configuration status
     require_arguments $# 0
 
-    dep-check
+    # TODO: Implement
+    # dep-check
     env-check
     py-check
     tool-check

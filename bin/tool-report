@@ -37,6 +37,12 @@ else
 fi
 checkVariable PATH "$PATH"
 
+# Anaconda
+checkExecutable conda
+check 'conda --version'
+checkExecutable mamba
+check 'mamba --version'
+
 # Bash
 checkExecutable bash
 check 'bash --version'
@@ -108,12 +114,6 @@ main $@
 # AWS CLI
 checkExecutable aws
 check 'aws --version'
-
-# Homebrew
-checkExecutable brew
-check 'brew --version'
-check 'brew list --full-name --versions --casks'
-check 'brew list --full-name --versions --formulae'
 
 # Kubernetes 
 checkExecutable kubectl

@@ -1,7 +1,5 @@
-HowTo use Conda
+HowTo use Anaconda
 by Rob Williams
-for Southwest Airlines
-late Fall 2022
 
 REF: https://pythonspeed.com/articles/conda-vs-pip/
 REF: https://pythonspeed.com/articles/faster-conda-install/

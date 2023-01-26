@@ -10,12 +10,15 @@ exclude = '''
   # By more interesting patterns
   | bin/.*-run$
   | bin/all-.*$
+  | bin/app-.*$
   | bin/dep-.*$
   | bin/env-.*$
   | bin/prj-.*$
   | bin/pve-.*$
   | bin/py-.*$
+  | bin/show_maybe_missed_source$
   | bin/sig-.*$
+  | bin/sync_on_macOS$
   | bin/tool-.*$
   # Project-specific
   | Jenkins/run$
@@ -23,33 +26,37 @@ exclude = '''
   | bin/filter_.*$
   | cfg/DESIRED/.*$
   | home/\.ssh/.*$
-  | home/bin/git-.*$
+  | home/bin/clone_.*$
+  | home/bin/git_.*$
+  | home/bin/grep_.*$
   | home/bin/secure$
   | home/Linux/\.config/.*$
   | home/macOS/\.config/.*$
   | home/macOS/\.inputrc$
+  | home/macOS/\.zshrc$
 )
 '''
 force-exclude = '''
 (
     PLACEHOLDER$
   # By parent directory
-  | \.PVE/.*$
+  | \.anaconda/.*$
   | \.git/.*$
   | \.pytest_cache/.*$
+  | __pycache__/.*$
   # By specific pathname
+  | Dockerfile$
+  | Jenkinsfile$
   | \.bash_logout$
   | \.bash_profile$
   | \.bashrc$
-  | \.profile$
-  | \.xprofile$
-  | Dockerfile$
-  | Jenkinsfile$
   | \.coverage$
   | \.coveragerc$
   | \.gitignore$
   | \.grep-exclude-from$
   | \.mailmap$
+  | \.profile$
+  | \.xprofile$
   # By file suffix
   | \.avsc$
   | \.bash$
@@ -59,6 +66,8 @@ force-exclude = '''
   | \.log$
   | \.md$
   | \.java$
+  | \.json$
+  | \.nix$
   | \.out$
   | \.properties$
   | \.rst$
@@ -69,6 +78,7 @@ force-exclude = '''
   | \.txt$
   | \.vim$
   | \.yaml$
+  | \.yml$
   # By more interesting patterns
 )
 '''

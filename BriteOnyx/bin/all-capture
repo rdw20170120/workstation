@@ -12,7 +12,8 @@ main() {
     # Capture all project configuration status
     require_arguments $# 0
 
-    dep-capture
+    # TODO: Implement
+    # dep-capture
     env-capture
     py-capture
     tool-capture

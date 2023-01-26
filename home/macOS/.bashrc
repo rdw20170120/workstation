@@ -19,33 +19,7 @@ export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
 
 ################################################################################
 # Anaconda (Mambaforge)
-# TODO: FIX: This code only supports the default `base` environment
-# and does not support changing it.
-# TODO: Implement: Means to change environments
-# TODO: Implement: Use CONDA_PREFIX
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(${HOMEBREW_PREFIX}/Caskroom/mambaforge/base/bin/conda shell.bash hook 2>/dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "${HOMEBREW_PREFIX}/Caskroom/mambaforge/base/etc/profile.d/conda.sh" ]; then
-        . "${HOMEBREW_PREFIX}/Caskroom/mambaforge/base/etc/profile.d/conda.sh"
-    else
-        export PATH="${HOMEBREW_PREFIX}/Caskroom/mambaforge/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "${HOMEBREW_PREFIX}/Caskroom/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "${HOMEBREW_PREFIX}/Caskroom/mambaforge/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
-export BO_PathAfterAnaconda=${PATH}
-export BO_PathAnaconda=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
-
-################################################################################
-export BO_PathVmware=/Applications/VMware\ Fusion.app/Contents/Public
+export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
 
 ################################################################################
 # NOTE: Order matters!
@@ -57,9 +31,7 @@ export BO_PathVmware=/Applications/VMware\ Fusion.app/Contents/Public
 # Build up the system path from the end, starting with the native path, moving forward.
 # This allows easier manipulation by (un)commenting entries.
 BO_PathSystem=${BO_PathNative}
-# BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
 BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
-BO_PathSystem=${BO_PathAnaconda}:${BO_PathSystem}
 export BO_PathSystem
 export BO_PathUser=${HOME}/bin
 export PATH=${BO_PathSystem}:${BO_PathUser}
@@ -191,5 +163,33 @@ if ! shopt -oq posix; then
 fi
 
 : << 'DisabledContent'
+################################################################################
+# Anaconda (Mambaforge)
+# TODO: FIX: This code only supports the default `base` environment
+# and does not support changing it.
+# TODO: Implement: Means to change environments
+# TODO: Implement: Use CONDA_PREFIX
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(${HOMEBREW_PREFIX}/Caskroom/mambaforge/base/bin/conda shell.bash hook 2>/dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "${HOMEBREW_PREFIX}/Caskroom/mambaforge/base/etc/profile.d/conda.sh" ]; then
+        . "${HOMEBREW_PREFIX}/Caskroom/mambaforge/base/etc/profile.d/conda.sh"
+    else
+        export PATH="${HOMEBREW_PREFIX}/Caskroom/mambaforge/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "${HOMEBREW_PREFIX}/Caskroom/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "${HOMEBREW_PREFIX}/Caskroom/mambaforge/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+export BO_PathAfterAnaconda=${PATH}
+export BO_PathAnaconda=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
+
+BO_PathSystem=${BO_PathAnaconda}:${BO_PathSystem}
 DisabledContent
 
