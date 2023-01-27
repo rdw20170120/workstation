@@ -19,6 +19,8 @@ from utility.config import Config
 
 def _generate_briteonyx(dir_):
     sub = dir_ / "bin"
+
+
 #   script(sub, "avro-print")
 #   script(sub, "extensions")
 #   script(sub, "list")
