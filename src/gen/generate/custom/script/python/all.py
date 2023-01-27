@@ -26,6 +26,7 @@ def _generate_src(dir_):
 
 def _generate_src_app(dir_):
     sub = dir_
+    _generate_src_app_task(sub / "task")
     _generate_src_app_utility(sub / "utility")
 
 

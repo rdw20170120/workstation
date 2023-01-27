@@ -33,7 +33,7 @@ fi
 require_directory_in BO_Project
 export BO_DirAnaconda=${BO_Project}/.anaconda
 remembering BO_DirAnaconda
-export BO_FileAnaconda=${BO_Project}/anaconda.yml
+export BO_FileAnaconda=${BO_Project}/cfg/anaconda.yml
 remembering BO_FileAnaconda
 
 maybe_delete_directory_tree "${BO_DirAnaconda}"

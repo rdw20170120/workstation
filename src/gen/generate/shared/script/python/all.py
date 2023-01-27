@@ -19,10 +19,10 @@ from utility.config import Config
 
 def _generate_briteonyx(dir_):
     sub = dir_ / "bin"
-    script(sub, "avro-print")
-    script(sub, "extensions")
-    script(sub, "list")
-    script(sub, "parquet-print")
+#   script(sub, "avro-print")
+#   script(sub, "extensions")
+#   script(sub, "list")
+#   script(sub, "parquet-print")
 
 
 def _generate_src(dir_):
@@ -102,7 +102,6 @@ def _generate_src_gen_shared_bash(dir_):
     sub = dir_
     package(sub, "__init__.py")
     generator(sub, "activate.py")
-    generator(sub, "pve_activate.py")
     generator(sub, "alias.py")
     generator(sub, "all.py")
     generator(sub, "configure_python.py")

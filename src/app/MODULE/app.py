@@ -8,13 +8,11 @@ from argparse import ArgumentParser
 from logging import DEBUG, INFO, WARN, ERROR, FATAL
 from logging import getLogger
 import sys
-
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from .task.task_manager import TaskManager
+from task.task_manager import TaskManager
 from utility import my_logging
 from utility.singleton_application import SingletonApplication
-
 # Project modules   (relative references, NOT packaged, in project)
 from .config import Config
 from .task.bootstrap import Bootstrap

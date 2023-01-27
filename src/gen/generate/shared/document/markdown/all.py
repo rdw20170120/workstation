@@ -25,7 +25,6 @@ def _generate_briteonyx(dir_):
     sub = dir_ / "doc"
     document(sub, "HowTo-activate_this_project.md")
     document(sub, "HowTo-execute_application.md")
-    document(sub, "HowTo-setup-Python_virtual_environment.md")
     document(sub, "HowTo-setup-source_control.md")
     document(sub, "HowTo-setup-workstation.md")
     document(sub, "HowTo-test.md")

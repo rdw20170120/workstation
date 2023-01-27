@@ -16,14 +16,8 @@ def _generate_bin(dir_):
 
 def _generate_bin_lib(dir_):
     sub = dir_
+    activation(sub, "configure-Anaconda.bash")
     activation(sub, "declare.bash")
-
-
-def _generate_jenkins(dir_):
-    sub = dir_
-    activation(sub, "alias.bash")
-    activation(sub, "context.bash")
-    activation(sub, "run")
 
 
 def generate(directory):
@@ -37,7 +31,6 @@ def generate(directory):
     # instead.
     generate_all_briteonyx(directory)
     _generate_bin(directory / "bin")
-    _generate_jenkins(directory / "Jenkins")
 
 
 """DisabledContent

@@ -7,7 +7,6 @@ from src_gen.script.bash.complete import generate_activation as activation
 
 # Project modules   (relative references, NOT packaged, in project)
 from .activate import generate as generate_activate
-from .pve_activate import generate as generate_pve_activate
 from .alias import generate as generate_alias
 from .briteonyx.all import generate as generate_all_briteonyx
 from .configure_python import generate as generate_configure_python
@@ -21,7 +20,6 @@ from .set_path import generate as generate_set_path
 
 def _generate_briteonyx(dir_):
     sub = dir_ / "bin" / "lib"
-    generate_pve_activate(sub)
     generate_alias(sub)
     generate_configure_python(sub)
     generate_declare(sub)
