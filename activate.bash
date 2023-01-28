@@ -25,7 +25,7 @@ if [[ -z "${PWD}" ]] ; then
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 fi
 
-(set -o posix ; set) | sort > "${PWD}/BO-incoming.env"
+(set -o posix ; set) | sort > "${PWD}/BO-activation-before.env"
 
 _Script=${PWD}/BriteOnyx/bin/lib/declare-log4bash.bash
 source "${_Script}" ; _Status=$?
@@ -115,41 +115,45 @@ maybe_create_directory_tree "${BO_Project}/log"
 maybe_copy_file "${BO_Project}/cfg/sample/alias.bash" "${BO_Project}/alias.bash"
 maybe_copy_file "${BO_Project}/cfg/sample/context.bash" "${BO_Project}/context.bash"
 
-_Script=${BO_Project}/bin/lib/declare.bash
-if [[ -r ${_Script} ]] ; then
-    source "${_Script}" ; _Status=$?
-    [[ ${_Status} -ne 0 ]] &&
-        kill -INT $$  # Kill the executing script, but not the shell (terminal)
-fi
-
-(set -o posix ; set) | sort > "${PWD}/BO-Anaconda-prior.env"
+# Configure Anaconda environment
+(set -o posix ; set) | sort > "${PWD}/BO-Anaconda-before.env"
 _Script=${BO_Project}/bin/lib/configure-Anaconda.bash
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 (set -o posix ; set) | sort > "${PWD}/BO-Anaconda-after.env"
 
+# Configure Python
+(set -o posix ; set) | sort > "${PWD}/BO-Python-before.env"
 _Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
+(set -o posix ; set) | sort > "${PWD}/BO-Python-after.env"
 
-_Script=${BO_Project}/context.bash
+_Script="${BO_Project}/bin/lib/declare.bash"
+if [[ -r ${_Script} ]] ; then
+    source ${_Script} ; _Status=$?
+    [[ ${_Status} -ne 0 ]] &&
+        kill -INT $$  # Kill the executing script, but not the shell (terminal)
+fi
+
+_Script="${BO_Project}/context.bash"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-_Script=${BO_Project}/BriteOnyx/bin/lib/alias.bash
+_Script="${BO_Project}/BriteOnyx/bin/lib/alias.bash"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-_Script=${BO_Project}/alias.bash
+_Script="${BO_Project}/alias.bash"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-(set -o posix ; set) | sort > "${PWD}/BO-outgoing.env"
+(set -o posix ; set) | sort > "${PWD}/BO-activation-after.env"
 log_good "BriteOnyx has successfully activated this project"
 log_info "To get started, try executing the 'cycle' alias..."
 

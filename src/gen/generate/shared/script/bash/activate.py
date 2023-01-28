@@ -10,6 +10,11 @@ from src_gen.script.bash.structure import *
 
 # Project modules   (relative references, NOT packaged, in project)
 
+project_alias_script = x(vr("BO_Project"), "/alias.bash")
+project_context_script = x(vr("BO_Project"), "/context.bash")
+script = "_Script"
+status = "_Status"
+
 
 def _abort_if_activated():
     return [
@@ -51,16 +56,24 @@ def _abort_if_missing_pwd():
     ]
 
 
-def _activate_python_virtual_environment(pve_activate_script, script, status):
+def _call_project_scripts():
+    briteonyx_alias_script = x(
+        vr("BO_Project"), "/BriteOnyx/bin/lib/alias.bash"
+    )
+    project_declare_script = x(vr("BO_Project"), "/bin/lib/declare.bash")
     return [
-        comment("Activate Python virtual environment (PVE)"),
-        _capture_environment("PVE-prior"),
-        source_or_abort(pve_activate_script, script, status),
-        _capture_environment("PVE-after"),
+        maybe_source_or_abort(dq(project_declare_script), script, status),
+        line(),
+        source_or_abort(dq(project_context_script), script, status),
+        line(),
+        source_or_abort(dq(briteonyx_alias_script), script, status),
+        line(),
+        source_or_abort(dq(project_alias_script), script, status),
+        line(),
     ]
 
 
-def _capture_environment(file_name):
+def _capture_environment(where, when):
     return [
         "(",
         set_("-o", "posix"),
@@ -68,7 +81,7 @@ def _capture_environment(file_name):
         set_(),
         ")",
         pipe(),
-        command("sort", ">", dq(vr("PWD"), "/BO-", file_name, ".env")),
+        command("sort", ">", dq(vr("PWD"), "/BO-", where, "-", when, ".env")),
         eol(),
     ]
 
@@ -92,6 +105,32 @@ def _comments():
     ]
 
 
+def _configure_anaconda():
+    configure_anaconda_script = x(
+        vr("BO_Project"), "/bin/lib/configure-Anaconda.bash"
+    )
+    return [
+        comment("Configure Anaconda environment"),
+        _capture_environment("Anaconda", "before"),
+        source_or_abort(configure_anaconda_script, script, status),
+        _capture_environment("Anaconda", "after"),
+        line(),
+    ]
+
+
+def _configure_python():
+    configure_python_script = x(
+        vr("BO_Project"), "/BriteOnyx/bin/lib/configure-Python.bash"
+    )
+    return [
+        comment("Configure Python"),
+        _capture_environment("Python", "before"),
+        source_or_abort(configure_python_script, script, status),
+        _capture_environment("Python", "after"),
+        line(),
+    ]
+
+
 def _create_random_tmpdir():
     local = "_result"
     # TODO: Consider capturing this special variable
@@ -105,7 +144,7 @@ def _create_random_tmpdir():
             indent(),
             assign(
                 vn(local),
-                substitute("mktemp", "-d", "-t", dq("BO-", vr(user))),
+                substitute("mktemp", "-d", "-t", dq("BO")),
             ),
             eol(),
         ),
@@ -150,6 +189,29 @@ def _create_random_tmpdir():
             abort_script(),
         ),
         fi(),
+    ]
+
+
+def _declare_briteonyx():
+    briteonyx_declare_script = x(
+        vr("BO_Project"), "/BriteOnyx/bin/lib/declare.bash"
+    )
+    return [
+        source_or_abort(briteonyx_declare_script, script, status),
+        line(),
+        note("We can now use BriteOnyx Bash functionality."),
+        line(),
+    ]
+
+
+def _declare_logging():
+    log4bash_script = x(vr("PWD"), "/BriteOnyx/bin/lib/declare-log4bash.bash")
+    return [
+        source_or_abort(log4bash_script, script, status),
+        line(),
+        log_info("Activating ", sq(vr("PWD")), " as the current project"),
+        eol(),
+        line(),
     ]
 
 
@@ -202,6 +264,68 @@ def _detect_operating_system():
         fi(),
         remembering("BO_OS"),
         eol(),
+        line(),
+    ]
+
+
+def _footer():
+    return [
+        log_good("BriteOnyx has successfully activated this project"),
+        eol(),
+        log_info("To get started, try executing the 'cycle' alias..."),
+        eol(),
+        line(),
+        disabled_content_footer(),
+    ]
+
+
+def _header():
+    return [
+        header_activation(),
+        _comments(),
+        _abort_if_activated(),
+        line(),
+        _abort_if_missing_pwd(),
+        line(),
+    ]
+
+
+def _prepare_file_system():
+    alias_sample = x(vr("BO_Project"), "/cfg/sample/alias.bash")
+    context_sample = x(vr("BO_Project"), "/cfg/sample/context.bash")
+    log_directory = x(vr("BO_Project"), "/log")
+    return [
+        _create_random_tmpdir(),
+        line(),
+        command("maybe_create_directory_tree", dq(log_directory)),
+        eol(),
+        line(),
+        maybe_copy_file(dq(alias_sample), dq(project_alias_script)),
+        eol(),
+        maybe_copy_file(dq(context_sample), dq(project_context_script)),
+        eol(),
+        line(),
+    ]
+
+
+def _prepare_paths():
+    set_path_script = x(vr("BO_Project"), "/BriteOnyx/bin/lib/set_path.bash")
+    return [
+        _remember_paths(),
+        line(),
+        source_or_abort(set_path_script, script, status),
+        line(),
+    ]
+
+
+def _remember():
+    return [
+        _declare_remembering(),
+        line(),
+        _remember_project_root(),
+        remembering("BO_Interactive"),
+        eol(),
+        line(),
     ]
 
 
@@ -210,8 +334,6 @@ def _remember_paths():
         vr("BO_Project"), "/BriteOnyx/bin", ":", vr("BO_Project"), "/bin"
     )
     return [
-        note("We can now use BriteOnyx Bash functionality."),
-        line(),
         comment("BriteOnyx scripts"),
         comment("must precede"),
         comment("project-specific scripts"),
@@ -222,107 +344,53 @@ def _remember_paths():
         comment("the project-specific script"),
         comment("to avoid that collision."),
         line(),
-        export(vn("BO_PathProject"), project_path), eol(),
+        export(vn("BO_PathProject"), project_path),
+        eol(),
         line(),
-        export_if_null("BO_PathSystem", vr("PATH")), eol(),
-        export("BO_PathTool", ""), eol(),
-        export_if_null("BO_PathUser", x(vr("HOME"), "/bin")), eol(),
+        export_if_null("BO_PathSystem", vr("PATH")),
+        eol(),
+        export("BO_PathTool", ""),
+        eol(),
+        export_if_null("BO_PathUser", x(vr("HOME"), "/bin")),
+        eol(),
         line(),
-        remembering("BO_PathNative"), eol(),
-        remembering("BO_PathProject"), eol(),
-        remembering("BO_PathSystem"), eol(),
-        remembering("BO_PathTool"), eol(),
-        remembering("BO_PathUser"), eol(),
+        remembering("BO_PathNative"),
+        eol(),
+        remembering("BO_PathProject"),
+        eol(),
+        remembering("BO_PathSystem"),
+        eol(),
+        remembering("BO_PathTool"),
+        eol(),
+        remembering("BO_PathUser"),
+        eol(),
     ]
 
 
 def _remember_project_root():
     return [
-        export(vn("BO_Project"), vr("PWD")), eol(),
-        remembering("BO_Project"), eol(),
+        export(vn("BO_Project"), vr("PWD")),
+        eol(),
+        remembering("BO_Project"),
+        eol(),
     ]
 
 
 def build():
-    script = "_Script"
-    status = "_Status"
-    alias_sample = x(vr("BO_Project"), "/cfg/sample/alias.bash")
-    briteonyx_alias_script = x(
-        vr("BO_Project"), "/BriteOnyx/bin/lib/alias.bash"
-    )
-    briteonyx_declare_script = x(
-        vr("BO_Project"), "/BriteOnyx/bin/lib/declare.bash"
-    )
-    configure_python_script = x(
-        vr("BO_Project"), "/BriteOnyx/bin/lib/configure-Python.bash"
-    )
-    context_sample = x(vr("BO_Project"), "/cfg/sample/context.bash")
-    log4bash_script = x(vr("PWD"), "/BriteOnyx/bin/lib/declare-log4bash.bash")
-    log_directory = x(vr("BO_Project"), "/log")
-    project_alias_script = x(vr("BO_Project"), "/alias.bash")
-    project_context_script = x(vr("BO_Project"), "/context.bash")
-    project_declare_script = x(vr("BO_Project"), "/bin/lib/declare.bash")
-    pve_activate_script = x(
-        vr("BO_Project"), "/BriteOnyx/bin/lib/pve-activate.bash"
-    )
-    set_path_script = x(vr("BO_Project"), "/BriteOnyx/bin/lib/set_path.bash")
     return [
-        header_activation(),
-        _comments(),
-        _abort_if_activated(),
-        line(),
-        _abort_if_missing_pwd(),
-        line(),
-        _capture_environment("incoming"),
-        line(),
-        source_or_abort(log4bash_script, script, status),
-        line(),
-        log_info("Activating ", sq(vr("PWD")), " as the current project"),
-        eol(),
-        line(),
-        _declare_remembering(),
-        line(),
-        _remember_project_root(),
-        remembering("BO_Interactive"),
-        eol(),
-        line(),
-        source_or_abort(briteonyx_declare_script, script, status),
-        line(),
-        _remember_paths(),
-        line(),
-        source_or_abort(set_path_script, script, status),
-        line(),
+        _header(),
+        _capture_environment("activation", "before"),
+        _declare_logging(),
+        _remember(),
+        _declare_briteonyx(),
+        _prepare_paths(),
         _detect_operating_system(),
-        line(),
-        _create_random_tmpdir(),
-        line(),
-        command("maybe_create_directory_tree", log_directory),
-        eol(),
-        line(),
-        _activate_python_virtual_environment(
-            pve_activate_script, script, status
-        ),
-        line(),
-        maybe_copy_file(alias_sample, project_alias_script),
-        eol(),
-        maybe_copy_file(context_sample, project_context_script),
-        eol(),
-        line(),
-        maybe_source_or_abort(project_declare_script, script, status),
-        line(),
-        source_or_abort(project_context_script, script, status),
-        line(),
-        source_or_abort(briteonyx_alias_script, script, status),
-        line(),
-        source_or_abort(project_alias_script, script, status),
-        line(),
-        _capture_environment("outgoing"),
-        log_good("BriteOnyx has successfully activated this project"),
-        eol(),
-        log_info("To get started, try executing the 'cycle' alias..."),
-        eol(),
-        line(),
-        disabled_content_footer(),
+        _prepare_file_system(),
+        _configure_anaconda(),
+        _configure_python(),
+        _call_project_scripts(),
+        _capture_environment("activation", "after"),
+        _footer(),
     ]
 
 
@@ -331,7 +399,4 @@ def generate(directory):
 
 
 """DisabledContent
-        source(configure_python_script), eol(),
-        source(briteonyx_alias_script), eol(),
-        line(),
 """
