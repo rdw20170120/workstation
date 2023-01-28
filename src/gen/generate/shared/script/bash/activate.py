@@ -68,7 +68,7 @@ def _capture_environment(file_name):
         set_(),
         ")",
         pipe(),
-        command("sort", ">", x(vr("PWD"), "/BO-", file_name, ".env")),
+        command("sort", ">", dq(vr("PWD"), "/BO-", file_name, ".env")),
         eol(),
     ]
 
@@ -222,29 +222,24 @@ def _remember_paths():
         comment("the project-specific script"),
         comment("to avoid that collision."),
         line(),
-        export(vn("BO_PathProject"), project_path),
-        eol(),
+        export(vn("BO_PathProject"), project_path), eol(),
         line(),
-        export_if_null("BO_PathSystem", vr("PATH")),
-        eol(),
-        export_if_null("BO_PathUser", x(vr("HOME"), "/bin")),
-        eol(),
+        export_if_null("BO_PathSystem", vr("PATH")), eol(),
+        export("BO_PathTool", ""), eol(),
+        export_if_null("BO_PathUser", x(vr("HOME"), "/bin")), eol(),
         line(),
-        remembering("BO_PathProject"),
-        eol(),
-        remembering("BO_PathSystem"),
-        eol(),
-        remembering("BO_PathUser"),
-        eol(),
+        remembering("BO_PathNative"), eol(),
+        remembering("BO_PathProject"), eol(),
+        remembering("BO_PathSystem"), eol(),
+        remembering("BO_PathTool"), eol(),
+        remembering("BO_PathUser"), eol(),
     ]
 
 
 def _remember_project_root():
     return [
-        export(vn("BO_Project"), vr("PWD")),
-        eol(),
-        remembering("BO_Project"),
-        eol(),
+        export(vn("BO_Project"), vr("PWD")), eol(),
+        remembering("BO_Project"), eol(),
     ]
 
 
@@ -288,7 +283,7 @@ def build():
         _declare_remembering(),
         line(),
         _remember_project_root(),
-        remembering("INTERACTIVE_MODE"),
+        remembering("BO_Interactive"),
         eol(),
         line(),
         source_or_abort(briteonyx_declare_script, script, status),

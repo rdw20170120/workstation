@@ -566,7 +566,7 @@ def source_or_abort(file_, script="Script", status="Status"):
     return [
         assign(vn(script), file_),
         eol(),
-        source(vr(script)),
+        source(dq(vr(script))),
         seq(),
         remember_last_status(status),
         eol(),

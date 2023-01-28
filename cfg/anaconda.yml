@@ -12,7 +12,7 @@ https://conda.anaconda.org/conda-forge/noarch/tzdata-2022g-h191b570_0.conda
 https://conda.anaconda.org/conda-forge/osx-arm64/xz-5.2.6-h57fd34a_0.tar.bz2
 https://conda.anaconda.org/conda-forge/osx-arm64/yaml-0.2.5-h3422bc3_2.tar.bz2
 https://conda.anaconda.org/conda-forge/osx-arm64/libsqlite-3.40.0-h76d750c_0.tar.bz2
-https://conda.anaconda.org/conda-forge/osx-arm64/openssl-3.0.7-h03a7124_1.conda
+https://conda.anaconda.org/conda-forge/osx-arm64/openssl-3.0.7-h03a7124_2.conda
 https://conda.anaconda.org/conda-forge/osx-arm64/readline-8.1.2-h46ed386_0.tar.bz2
 https://conda.anaconda.org/conda-forge/osx-arm64/tk-8.6.12-he1e0b03_0.tar.bz2
 https://conda.anaconda.org/conda-forge/osx-arm64/python-3.11.0-h3ba56d0_1_cpython.conda
@@ -63,7 +63,7 @@ https://conda.anaconda.org/conda-forge/osx-arm64/black-22.12.0-py311h267d04e_0.c
 https://conda.anaconda.org/conda-forge/noarch/pyopenssl-23.0.0-pyhd8ed1ab_0.conda
 https://conda.anaconda.org/conda-forge/noarch/pytest-html-3.2.0-pyhd8ed1ab_1.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/urllib3-1.26.14-pyhd8ed1ab_0.conda
-https://conda.anaconda.org/conda-forge/noarch/botocore-1.29.57-pyhd8ed1ab_0.conda
+https://conda.anaconda.org/conda-forge/noarch/botocore-1.29.58-pyhd8ed1ab_0.conda
 https://conda.anaconda.org/conda-forge/noarch/s3transfer-0.6.0-pyhd8ed1ab_0.tar.bz2
-https://conda.anaconda.org/conda-forge/osx-arm64/awscli-1.27.57-py311h267d04e_0.conda
-https://conda.anaconda.org/conda-forge/noarch/boto3-1.26.57-pyhd8ed1ab_0.conda
+https://conda.anaconda.org/conda-forge/osx-arm64/awscli-1.27.58-py311h267d04e_0.conda
+https://conda.anaconda.org/conda-forge/noarch/boto3-1.26.58-pyhd8ed1ab_0.conda

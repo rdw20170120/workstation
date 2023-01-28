@@ -8,11 +8,6 @@
 
 unset BO_RunningHumanless
 
-_Script=${BO_Project}/BriteOnyx/bin/lib/configure-Anaconda.bash
-source "${_Script}" ; _Status=$?
-[[ ${_Status} -ne 0 ]] &&
-    kill -INT $$  # Kill the executing script, but not the shell (terminal)
-
 # Bash environment
 # specific to this copy
 # of this project
@@ -77,6 +72,14 @@ export pytest="${python3} -m pytest"
 remembering pytest
 export tabnanny="${python3} -m tabnanny"
 remembering tabnanny
+
+# While testing, execute a 'cycle'
+# test-run
+# abort_on_fail $? "from test-run"
+# gen-run -vvv
+# abort_on_fail $? "from gen-run -vvv"
+# app-run -vvv
+# abort_on_fail $? "from app-run -vvv"
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
