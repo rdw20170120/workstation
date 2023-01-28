@@ -8,6 +8,9 @@
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
+# Save PS1 since Anaconda is about to modify it
+BO_PS1=${PS1}
+
 # Initilize Anaconda
 require_directory_in CONDA_PREFIX
 # >>> conda initialize >>>
@@ -74,6 +77,9 @@ _Packages="${_Packages} logzero"
 mamba install --yes ${_Packages}
 mamba list --explicit >"${BO_FileAnaconda}"
 require_file "${BO_FileAnaconda}"
+
+# NOTE: Restore PS1 since I don't like having Anaconda put the environment prefix there
+export PS1=${BO_PS1}
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
