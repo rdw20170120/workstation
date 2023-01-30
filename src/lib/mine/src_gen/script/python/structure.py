@@ -154,7 +154,7 @@ def header_for_generator():
         eol(),
         '"""',
         eol(),
-        empty_imports(),
+        imports_empty(),
         line(),
         line(),
     ]
@@ -167,7 +167,7 @@ def header_for_library():
         eol(),
         '"""',
         eol(),
-        empty_imports(),
+        imports_empty(),
         line(),
         line(),
     ]
@@ -180,7 +180,7 @@ def header_for_main():
         eol(),
         '"""',
         eol(),
-        empty_imports(),
+        imports_empty(),
         line(),
         line(),
     ]
@@ -202,7 +202,7 @@ def header_for_script():
         line("Intended to be executed directly by the user."),
         '"""',
         eol(),
-        empty_imports(),
+        imports_empty(),
         line(),
         line(),
     ]

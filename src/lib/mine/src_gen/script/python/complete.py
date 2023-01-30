@@ -12,47 +12,47 @@ from src_gen.script.python.structure import *
 
 def _generator():
     return [
-        generator_header(),
+        header_for_generator(),
         todo("CONTENT"),
-        disabled_content_footer(),
+        footer_for_disabled_content(),
     ]
 
 
 def _library():
     return [
-        library_header(),
+        header_for_library(),
         todo("CONTENT"),
-        disabled_content_footer(),
+        footer_for_disabled_content(),
     ]
 
 
 def _main():
     return [
-        main_header(),
+        header_for_main(),
         todo("CONTENT"),
-        disabled_content_footer(),
+        footer_for_disabled_content(),
     ]
 
 
 def _package():
     return [
-        package_header(),
+        header_for_package(),
     ]
 
 
 def _script():
     return [
-        script_header(),
+        header_for_script(),
         todo("CONTENT"),
-        disabled_content_footer(),
+        footer_for_disabled_content(),
     ]
 
 
 def _test():
     return [
-        test_header(),
+        header_for_tests(),
         todo("CONTENT"),
-        disabled_content_footer(),
+        footer_for_disabled_content(),
     ]
 
 
