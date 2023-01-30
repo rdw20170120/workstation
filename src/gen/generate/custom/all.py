@@ -3,18 +3,18 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.document.markdown.complete import generate_document as document
-from src_gen.script.bash.briteonyx.complete import (
+from src_gen.markdown.complete import generate_document as document
+from src_gen.briteonyx.complete import (
     generate_executed as executed,
 )
-from src_gen.script.bash.briteonyx.complete import generate_sourced as sourced
-from src_gen.script.bash.complete import generate_activation as activation
-from src_gen.script.python.complete import generate_generator as generator
-from src_gen.script.python.complete import generate_library as library
-from src_gen.script.python.complete import generate_main as main
-from src_gen.script.python.complete import generate_package as package
-from src_gen.script.python.complete import generate_script as script
-from src_gen.script.python.complete import generate_test as test
+from src_gen.briteonyx.complete import generate_sourced as sourced
+from src_gen.bash.complete import generate_activation as activation
+from src_gen.python.complete import generate_generator as generator
+from src_gen.python.complete import generate_library as library
+from src_gen.python.complete import generate_main as main
+from src_gen.python.complete import generate_package as package
+from src_gen.python.complete import generate_script as script
+from src_gen.python.complete import generate_test as test
 from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)
@@ -35,11 +35,7 @@ def _generate_src(dir_):
 
 def _generate_src_app(dir_):
     sub = dir_ / Config().application_name
-    _generate_src_app_task(sub / "task")
-
-
-def _generate_src_app_task(dir_):
-    sub = dir_
+    sub = dir_ / Config().application_name / "task"
     package(sub, "__init__.py")
     library(sub, "bootstrap.py")
     library(sub, "mapping.py")

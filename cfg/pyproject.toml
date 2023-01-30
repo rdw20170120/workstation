@@ -47,6 +47,7 @@ force-exclude = '''
   # By specific pathname
   | Dockerfile$
   | Jenkinsfile$
+  | \.DS_Store$
   | \.bash_logout$
   | \.bash_profile$
   | \.bashrc$

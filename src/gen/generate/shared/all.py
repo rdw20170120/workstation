@@ -3,30 +3,30 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.document.markdown.complete import generate_document as document
-from src_gen.script.bash.briteonyx.complete import (
+from src_gen.markdown.complete import generate_document as document
+from src_gen.briteonyx.complete import (
     generate_executed as executed,
 )
-from src_gen.script.bash.briteonyx.complete import generate_sourced as sourced
-from src_gen.script.bash.complete import generate_activation as activation
-from src_gen.script.python.complete import generate_generator as generator
-from src_gen.script.python.complete import generate_library as library
-from src_gen.script.python.complete import generate_main as main
-from src_gen.script.python.complete import generate_package as package
-from src_gen.script.python.complete import generate_script as script
-from src_gen.script.python.complete import generate_test as test
+from src_gen.briteonyx.complete import generate_sourced as sourced
+from src_gen.bash.complete import generate_activation as activation
+from src_gen.python.complete import generate_generator as generator
+from src_gen.python.complete import generate_library as library
+from src_gen.python.complete import generate_main as main
+from src_gen.python.complete import generate_package as package
+from src_gen.python.complete import generate_script as script
+from src_gen.python.complete import generate_test as test
 from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)
-from .script.bash.activate import generate as generate_activate
-from .script.bash.alias import generate as generate_alias
-from .script.bash.configure_python import generate as generate_configure_python
-from .script.bash.declare import generate as generate_declare
-from .script.bash.declare_base import generate as generate_declare_base
-from .script.bash.declare_common import generate as generate_declare_common
-from .script.bash.declare_log4bash import generate as generate_declare_log4bash
-from .script.bash.declare_require import generate as generate_declare_require
-from .script.bash.set_path import generate as generate_set_path
+from .briteonyx.activate import generate as generate_activate
+from .briteonyx.alias import generate as generate_alias
+from .briteonyx.configure_python import generate as generate_configure_python
+from .briteonyx.declare import generate as generate_declare
+from .briteonyx.declare_base import generate as generate_declare_base
+from .briteonyx.declare_common import generate as generate_declare_common
+from .briteonyx.declare_log4bash import generate as generate_declare_log4bash
+from .briteonyx.declare_require import generate as generate_declare_require
+from .briteonyx.set_path import generate as generate_set_path
 
 
 def _generate(dir_):
@@ -126,29 +126,14 @@ def _generate_doc(dir_):
     document(sub, "README.md")
 
 
-def _generate_mine(dir_):
-    sub = dir_
-    document(sub, "README.md")
-    sub = dir_ / "aws"
-    document(sub, "README.md")
-    sub = dir_ / "src_gen"
-    document(sub, "README.md")
-    sub = dir_ / "task"
-    document(sub, "README.md")
-    sub = dir_ / "throw_out_your_templates"
-    document(sub, "README.md")
-    sub = dir_ / "utility"
-    document(sub, "README.md")
-
-
 def _generate_src(dir_):
     sub = dir_
     _generate_src_app(sub / "app")
     _generate_src_gen(sub / "gen")
     document(sub, "README.md")
     sub = dir_ / "lib"
-    _generate_mine(sub / "mine")
-    _generate_third_party(sub / "third_party")
+    _generate_src_lib_mine(sub / "mine")
+    _generate_src_lib_third_party(sub / "third_party")
     document(sub, "README.md")
 
 
@@ -170,8 +155,6 @@ def _generate_src_gen(dir_):
     sub = dir_
     document(sub, "README.md")
     sub = dir_ / "generate"
-    _generate_src_gen_custom(sub / "custom")
-    _generate_src_gen_shared(sub / "shared")
     library(sub, "app.py")
     library(sub, "config.py")
     main(sub, "__main__.py")
@@ -179,43 +162,13 @@ def _generate_src_gen(dir_):
     test(sub, "conftest.py")
     test(sub, "test_app.py")
     test(sub, "test_config.py")
-
-
-def _generate_src_gen_custom(dir_):
-    sub = dir_
+    sub = dir_ / "generate" / "custom"
     package(sub, "__init__.py")
     library(sub, "all.py")
-    sub = dir_ / "document"
-    package(sub, "__init__.py")
-    sub = dir_ / "document" / "markdown"
-    package(sub, "__init__.py")
-    sub = dir_ / "script"
-    package(sub, "__init__.py")
-    sub = dir_ / "script" / "bash"
-    package(sub, "__init__.py")
-    sub = dir_ / "script" / "bash" / "briteonyx"
-    package(sub, "__init__.py")
-    sub = dir_ / "script" / "python"
-    package(sub, "__init__.py")
-
-
-def _generate_src_gen_shared(dir_):
-    sub = dir_
+    sub = dir_ / "generate" / "shared"
     library(sub, "all.py")
     package(sub, "__init__.py")
-    sub = dir_ / "document"
-    package(sub, "__init__.py")
-    sub = dir_ / "document" / "markdown"
-    package(sub, "__init__.py")
-    sub = dir_ / "script"
-    _generate_src_gen_shared_bash(sub / "bash")
-    _generate_src_gen_shared_briteonyx(sub / "bash" / "briteonyx")
-    _generate_src_gen_shared_python(sub / "python")
-    package(sub, "__init__.py")
-
-
-def _generate_src_gen_shared_bash(dir_):
-    sub = dir_
+    sub = dir_ / "generate" / "shared" / "briteonyx"
     generator(sub, "activate.py")
     generator(sub, "alias.py")
     generator(sub, "configure_python.py")
@@ -228,26 +181,31 @@ def _generate_src_gen_shared_bash(dir_):
     package(sub, "__init__.py")
 
 
-def _generate_src_gen_shared_briteonyx(dir_):
-    sub = dir_
-    package(sub, "__init__.py")
-
-
-def _generate_src_gen_shared_python(dir_):
-    sub = dir_
-    package(sub, "__init__.py")
-
-
 def _generate_src_lib(dir_):
     sub = dir_ / "mine"
-    _generate_src_lib_aws(sub / "aws")
-    _generate_src_lib_src_gen(sub / "src_gen")
-    _generate_src_lib_task(sub / "task")
-    _generate_src_lib_templates(sub / "throw_out_your_templates")
-    _generate_src_lib_utility(sub / "utility")
+    _generate_src_lib_mine_aws(sub / "aws")
+    _generate_src_lib_mine_src_gen(sub / "src_gen")
+    _generate_src_lib_mine_task(sub / "task")
+    _generate_src_lib_mine_templates(sub / "throw_out_your_templates")
+    _generate_src_lib_mine_utility(sub / "utility")
 
 
-def _generate_src_lib_aws(dir_):
+def _generate_src_lib_mine(dir_):
+    sub = dir_
+    document(sub, "README.md")
+    sub = dir_ / "aws"
+    document(sub, "README.md")
+    sub = dir_ / "src_gen"
+    document(sub, "README.md")
+    sub = dir_ / "task"
+    document(sub, "README.md")
+    sub = dir_ / "throw_out_your_templates"
+    document(sub, "README.md")
+    sub = dir_ / "utility"
+    document(sub, "README.md")
+
+
+def _generate_src_lib_mine_aws(dir_):
     sub = dir_
     library(sub, "ec2.py")
     library(sub, "s3.py")
@@ -258,7 +216,7 @@ def _generate_src_lib_aws(dir_):
     test(sub, "test_service.py")
 
 
-def _generate_src_lib_src_gen(dir_):
+def _generate_src_lib_mine_src_gen(dir_):
     sub = dir_
     library(sub, "renderer.py")
     library(sub, "source.py")
@@ -309,7 +267,7 @@ def _generate_src_lib_src_gen(dir_):
     test(sub, "test_structure.py")
 
 
-def _generate_src_lib_task(dir_):
+def _generate_src_lib_mine_task(dir_):
     sub = dir_
     library(sub, "config.py")
     library(sub, "delete_file.py")
@@ -326,7 +284,7 @@ def _generate_src_lib_task(dir_):
     test(sub, "test_task_manager.py")
 
 
-def _generate_src_lib_templates(dir_):
+def _generate_src_lib_mine_templates(dir_):
     sub = dir_
     library(sub, "section_1.py")
     library(sub, "section_2.py")
@@ -339,7 +297,7 @@ def _generate_src_lib_templates(dir_):
     test(sub, "test_section_4.py")
 
 
-def _generate_src_lib_utility(dir_):
+def _generate_src_lib_mine_utility(dir_):
     sub = dir_
     library(sub, "color_log_formatter.py")
     library(sub, "config.py")
@@ -369,7 +327,7 @@ def _generate_src_lib_utility(dir_):
     test(sub, "test_tracked_path.py")
 
 
-def _generate_third_party(dir_):
+def _generate_src_lib_third_party(dir_):
     sub = dir_
     document(sub, "README.md")
 
