@@ -15,7 +15,7 @@ main() {
 
     prj-clean
     log_debug "Wiping (cleaning deeper)..."
-    maybe_delete_directory_tree "${BO_Project}/.pytest_cache"
+    maybe_delete_directory_tree "${BO_DirAnaconda}"
     maybe_delete_directory_tree "${BO_Project}/log"
 
     return 0

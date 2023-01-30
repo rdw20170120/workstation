@@ -49,7 +49,7 @@ require_directory_in() {
     require_variable "$1"
     local -r Name=$1
     require_directory "${!Name}"
-} && export -f require_directory
+} && export -f require_directory_in
 
 require_file() {
     # Require file $1

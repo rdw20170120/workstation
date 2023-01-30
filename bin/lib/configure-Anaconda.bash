@@ -39,9 +39,19 @@ remembering BO_DirAnaconda
 export BO_FileAnaconda=${BO_Project}/cfg/anaconda.yml
 remembering BO_FileAnaconda
 
-maybe_delete_directory_tree "${BO_DirAnaconda}"
-log_info "Creating Anaconda environment in directory '${BO_DirAnaconda}'"
-mamba create --prefix "${BO_DirAnaconda}"
+_BO_CreateAnacondaEnvironment=true
+if [[ -d "${BO_DirAnaconda}" ]] ; then
+    _BO_CreateAnacondaEnvironment=false
+fi
+
+if [[ "${_BO_CreateAnacondaEnvironment}" == "true" ]] ; then
+    log_warn "Creating Anaconda environment in directory '${BO_DirAnaconda}'"
+    maybe_delete_directory_tree "${BO_DirAnaconda}"
+    mamba create --prefix "${BO_DirAnaconda}"
+else
+    log_info "Keeping Anaconda environment in directory '${BO_DirAnaconda}'"
+fi
+
 require_directory "${BO_DirAnaconda}"
 log_info "Activating Anaconda environment in directory '${BO_DirAnaconda}'"
 mamba activate "${BO_DirAnaconda}"
@@ -50,6 +60,9 @@ _Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
+# TODO: Extract management of Anaconda environment into separate scripts
+# TODO: Extract package list into a function
 
 # Need Python itself
 _Packages="python=3.11.*"
@@ -73,10 +86,14 @@ _Packages="${_Packages} awscli"
 _Packages="${_Packages} boto3"
 _Packages="${_Packages} logzero"
 
-# Install desired packages into Anaconda environment
-mamba install --yes ${_Packages}
-mamba list --explicit >"${BO_FileAnaconda}"
-require_file "${BO_FileAnaconda}"
+if [[ "${_BO_CreateAnacondaEnvironment}" == "true" ]] ; then
+    # Install desired packages into Anaconda environment
+    mamba install --yes ${_Packages}
+    mamba list --explicit >"${BO_FileAnaconda}"
+    require_file "${BO_FileAnaconda}"
+fi
+
+_BO_CreateAnacondaEnvironment=
 
 # NOTE: Restore PS1 since I don't like having Anaconda put the environment prefix there
 export PS1=${BO_PS1}

@@ -112,7 +112,7 @@ def import_from(package, item, as_=None):
 
 
 ###############################################################################
-def empty_imports():
+def imports_empty():
     return [
         import_header_internal(),
         import_header_external(),
@@ -121,7 +121,7 @@ def empty_imports():
     ]
 
 
-def test_imports():
+def imports_for_tests():
     return [
         import_header_internal(),
         import_header_external(),
@@ -136,7 +136,7 @@ def test_imports():
 
 
 ###############################################################################
-def disabled_content_footer():
+def footer_for_disabled_content():
     return [
         line(),
         '"""DisabledContent',
@@ -147,7 +147,7 @@ def disabled_content_footer():
     ]
 
 
-def generator_header():
+def header_for_generator():
     return [
         shebang_false(),
         '"""Generate script to TODO',
@@ -160,7 +160,7 @@ def generator_header():
     ]
 
 
-def library_header():
+def header_for_library():
     return [
         shebang_false(),
         '"""TODO: Write',
@@ -173,7 +173,7 @@ def library_header():
     ]
 
 
-def main_header():
+def header_for_main():
     return [
         shebang_false(),
         '"""TODO: Write',
@@ -186,14 +186,14 @@ def main_header():
     ]
 
 
-def package_header():
+def header_for_package():
     return [
         shebang_false(),
         line(),
     ]
 
 
-def script_header():
+def header_for_script():
     return [
         shebang_python3(),
         '"""TODO: Write',
@@ -208,12 +208,12 @@ def script_header():
     ]
 
 
-def test_header():
+def header_for_tests():
     return [
         shebang_false(),
         '"""Test corresponding module."""',
         eol(),
-        test_imports(),
+        imports_for_tests(),
         line(),
         line(),
     ]
