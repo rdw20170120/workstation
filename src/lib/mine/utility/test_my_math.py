@@ -2,14 +2,14 @@
 """TODO: Write
 """
 # Internal packages (absolute references, distributed with Python)
-from .math import isnan
+from math import isnan
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
-from utility.math import Percentage
-from utility.math import Rate
-from utility.math import assert_nan
+from utility.my_math import Percentage
+from utility.my_math import Rate
+from utility.my_math import assert_nan
 
 # Project modules   (relative references, NOT packaged, in project)
 
