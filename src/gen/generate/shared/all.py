@@ -56,14 +56,20 @@ def _generate_briteonyx(dir_):
     sub = dir_
     document(sub, "README.md")
     sub = dir_ / "bin"
-    document(sub, "README.md")
-    executed(sub, "all-capture")
-    executed(sub, "all-check")
     # executed(sub, "dep-capture")
     # executed(sub, "dep-check")
     # executed(sub, "dep-reinstall")
     # executed(sub, "dep-report")
     # executed(sub, "dep-upgrade")
+    # executed(sub, "sig-check")
+    # executed(sub, "sig-make")
+    # script(sub, "avro-print")
+    # script(sub, "extensions")
+    # script(sub, "list")
+    # script(sub, "parquet-print")
+    document(sub, "README.md")
+    executed(sub, "all-capture")
+    executed(sub, "all-check")
     executed(sub, "env-capture")
     executed(sub, "env-check")
     executed(sub, "env-report")
@@ -76,15 +82,9 @@ def _generate_briteonyx(dir_):
     executed(sub, "py-compile")
     executed(sub, "py-reformat")
     executed(sub, "py-report")
-    # executed(sub, "sig-check")
-    # executed(sub, "sig-make")
     executed(sub, "test-run")
     executed(sub, "tool-capture")
     executed(sub, "tool-check")
-    # script(sub, "avro-print")
-    # script(sub, "extensions")
-    # script(sub, "list")
-    # script(sub, "parquet-print")
     sub = dir_ / "bin" / "lib"
     document(sub, "README.md")
     generate_alias(sub)
@@ -143,14 +143,13 @@ def _generate_mine(dir_):
 
 def _generate_src(dir_):
     sub = dir_
-    document(sub, "README.md")
-    _generate_src_app(dir_ / "app")
-    _generate_src_gen(dir_ / "gen")
+    _generate_src_app(sub / "app")
+    _generate_src_gen(sub / "gen")
     document(sub, "README.md")
     sub = dir_ / "lib"
-    document(sub, "README.md")
     _generate_mine(sub / "mine")
     _generate_third_party(sub / "third_party")
+    document(sub, "README.md")
 
 
 def _generate_src_app(dir_):
@@ -171,15 +170,15 @@ def _generate_src_gen(dir_):
     sub = dir_
     document(sub, "README.md")
     sub = dir_ / "generate"
-    package(sub, "__init__.py")
-    main(sub, "__main__.py")
+    _generate_src_gen_custom(sub / "custom")
+    _generate_src_gen_shared(sub / "shared")
     library(sub, "app.py")
     library(sub, "config.py")
+    main(sub, "__main__.py")
+    package(sub, "__init__.py")
     test(sub, "conftest.py")
     test(sub, "test_app.py")
     test(sub, "test_config.py")
-    _generate_src_gen_custom(sub / "custom")
-    _generate_src_gen_shared(sub / "shared")
 
 
 def _generate_src_gen_custom(dir_):
@@ -188,48 +187,37 @@ def _generate_src_gen_custom(dir_):
     library(sub, "all.py")
     sub = dir_ / "document"
     package(sub, "__init__.py")
-    library(sub, "all.py")
     sub = dir_ / "document" / "markdown"
     package(sub, "__init__.py")
-    library(sub, "all.py")
     sub = dir_ / "script"
     package(sub, "__init__.py")
-    library(sub, "all.py")
     sub = dir_ / "script" / "bash"
     package(sub, "__init__.py")
-    library(sub, "all.py")
     sub = dir_ / "script" / "bash" / "briteonyx"
     package(sub, "__init__.py")
-    library(sub, "all.py")
     sub = dir_ / "script" / "python"
     package(sub, "__init__.py")
-    library(sub, "all.py")
 
 
 def _generate_src_gen_shared(dir_):
     sub = dir_
-    package(sub, "__init__.py")
     library(sub, "all.py")
+    package(sub, "__init__.py")
     sub = dir_ / "document"
     package(sub, "__init__.py")
-    library(sub, "all.py")
     sub = dir_ / "document" / "markdown"
     package(sub, "__init__.py")
-    library(sub, "all.py")
     sub = dir_ / "script"
-    package(sub, "__init__.py")
-    library(sub, "all.py")
     _generate_src_gen_shared_bash(sub / "bash")
     _generate_src_gen_shared_briteonyx(sub / "bash" / "briteonyx")
     _generate_src_gen_shared_python(sub / "python")
+    package(sub, "__init__.py")
 
 
 def _generate_src_gen_shared_bash(dir_):
     sub = dir_
-    package(sub, "__init__.py")
     generator(sub, "activate.py")
     generator(sub, "alias.py")
-    generator(sub, "all.py")
     generator(sub, "configure_python.py")
     generator(sub, "declare.py")
     generator(sub, "declare_base.py")
@@ -237,18 +225,17 @@ def _generate_src_gen_shared_bash(dir_):
     generator(sub, "declare_log4bash.py")
     generator(sub, "declare_require.py")
     generator(sub, "set_path.py")
+    package(sub, "__init__.py")
 
 
 def _generate_src_gen_shared_briteonyx(dir_):
     sub = dir_
     package(sub, "__init__.py")
-    library(sub, "all.py")
 
 
 def _generate_src_gen_shared_python(dir_):
     sub = dir_
     package(sub, "__init__.py")
-    library(sub, "all.py")
 
 
 def _generate_src_lib(dir_):
@@ -262,10 +249,10 @@ def _generate_src_lib(dir_):
 
 def _generate_src_lib_aws(dir_):
     sub = dir_
-    package(sub, "__init__.py")
     library(sub, "ec2.py")
     library(sub, "s3.py")
     library(sub, "service.py")
+    package(sub, "__init__.py")
     test(sub, "test_ec2.py")
     test(sub, "test_s3.py")
     test(sub, "test_service.py")
@@ -273,50 +260,50 @@ def _generate_src_lib_aws(dir_):
 
 def _generate_src_lib_src_gen(dir_):
     sub = dir_
-    package(sub, "__init__.py")
     library(sub, "renderer.py")
     library(sub, "source.py")
     library(sub, "structure.py")
+    package(sub, "__init__.py")
     test(sub, "test_renderer.py")
     test(sub, "test_source.py")
     test(sub, "test_structure.py")
     sub = dir_ / "document"
     package(sub, "__init__.py")
     sub = dir_ / "document" / "markdown"
-    package(sub, "__init__.py")
     library(sub, "complete.py")
     library(sub, "source.py")
     library(sub, "structure.py")
+    package(sub, "__init__.py")
     test(sub, "test_complete.py")
     test(sub, "test_source.py")
     test(sub, "test_structure.py")
     sub = dir_ / "script"
-    package(sub, "__init__.py")
     library(sub, "source.py")
     library(sub, "structure.py")
+    package(sub, "__init__.py")
     test(sub, "test_source.py")
     test(sub, "test_structure.py")
     sub = dir_ / "script" / "bash"
-    package(sub, "__init__.py")
     library(sub, "complete.py")
     library(sub, "source.py")
     library(sub, "structure.py")
+    package(sub, "__init__.py")
     test(sub, "test_complete.py")
     test(sub, "test_source.py")
     test(sub, "test_structure.py")
     sub = dir_ / "script" / "bash" / "briteonyx"
-    package(sub, "__init__.py")
     library(sub, "complete.py")
     library(sub, "source.py")
     library(sub, "structure.py")
+    package(sub, "__init__.py")
     test(sub, "test_complete.py")
     test(sub, "test_source.py")
     test(sub, "test_structure.py")
     sub = dir_ / "script" / "python"
-    package(sub, "__init__.py")
     library(sub, "complete.py")
     library(sub, "source.py")
     library(sub, "structure.py")
+    package(sub, "__init__.py")
     test(sub, "test_complete.py")
     test(sub, "test_source.py")
     test(sub, "test_structure.py")
@@ -324,14 +311,14 @@ def _generate_src_lib_src_gen(dir_):
 
 def _generate_src_lib_task(dir_):
     sub = dir_
-    package(sub, "__init__.py")
     library(sub, "config.py")
-    test(sub, "conftest.py")
-    library(sub, "exception.py")
     library(sub, "delete_file.py")
+    library(sub, "exception.py")
     library(sub, "queue.py")
     library(sub, "task.py")
     library(sub, "task_manager.py")
+    package(sub, "__init__.py")
+    test(sub, "conftest.py")
     test(sub, "test_config.py")
     test(sub, "test_exception.py")
     test(sub, "test_queue.py")
@@ -341,11 +328,11 @@ def _generate_src_lib_task(dir_):
 
 def _generate_src_lib_templates(dir_):
     sub = dir_
-    package(sub, "__init__.py")
     library(sub, "section_1.py")
     library(sub, "section_2.py")
     library(sub, "section_3.py")
     library(sub, "section_4.py")
+    package(sub, "__init__.py")
     test(sub, "test_section_1.py")
     test(sub, "test_section_2.py")
     test(sub, "test_section_3.py")
@@ -354,10 +341,8 @@ def _generate_src_lib_templates(dir_):
 
 def _generate_src_lib_utility(dir_):
     sub = dir_
-    package(sub, "__init__.py")
     library(sub, "color_log_formatter.py")
     library(sub, "config.py")
-    test(sub, "conftest.py")
     library(sub, "environment.py")
     library(sub, "filesystem.py")
     library(sub, "my_assert.py")
@@ -367,6 +352,10 @@ def _generate_src_lib_utility(dir_):
     library(sub, "my_time.py")
     library(sub, "processing.py")
     library(sub, "singleton_application.py")
+    library(sub, "text.py")
+    library(sub, "tracked_path.py")
+    package(sub, "__init__.py")
+    test(sub, "conftest.py")
     test(sub, "test_color_log_formatter.py")
     test(sub, "test_config.py")
     test(sub, "test_environment.py")
@@ -378,8 +367,6 @@ def _generate_src_lib_utility(dir_):
     test(sub, "test_singleton_application.py")
     test(sub, "test_text.py")
     test(sub, "test_tracked_path.py")
-    library(sub, "text.py")
-    library(sub, "tracked_path.py")
 
 
 def _generate_third_party(dir_):

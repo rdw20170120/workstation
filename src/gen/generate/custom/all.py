@@ -62,11 +62,4 @@ def generate(directory):
 
 
 """DisabledContent
-from .document.all import generate as generate_all_document
-from .script.all import generate as generate_all_script
-
-def generate(directory):
-    generate_all_document(directory)
-    generate_all_script(directory)
-
 """
