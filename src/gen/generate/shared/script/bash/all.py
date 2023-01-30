@@ -3,9 +3,12 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.script.bash.complete import generate_activation as activation
 
 # Project modules   (relative references, NOT packaged, in project)
+
+
+"""DisabledContent
+from src_gen.script.bash.complete import generate_activation as activation
 from .activate import generate as generate_activate
 from .alias import generate as generate_alias
 from .briteonyx.all import generate as generate_all_briteonyx
@@ -16,7 +19,6 @@ from .declare_common import generate as generate_declare_common
 from .declare_log4bash import generate as generate_declare_log4bash
 from .declare_require import generate as generate_declare_require
 from .set_path import generate as generate_set_path
-
 
 def _generate_briteonyx(dir_):
     sub = dir_ / "bin" / "lib"
@@ -46,5 +48,4 @@ def generate(directory):
     generate_all_briteonyx(directory)
 
 
-"""DisabledContent
 """

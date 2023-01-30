@@ -19,7 +19,7 @@ from utility.singleton_application import SingletonApplication
 # Project modules   (relative references, NOT packaged, in project)
 from .config import Config
 # TODO: from .custom.all import generate as generate_all_custom
-# TODO: from .shared.all import generate as generate_all_shared
+from .shared.all import generate as generate_all_shared
 
 
 c = Config()
@@ -36,7 +36,7 @@ class MyApp(SingletonApplication):
         )
         recreate_directory(self._target_directory)
         # TODO: generate_all_custom(self._target_directory)
-        # TODO: generate_all_shared(self._target_directory)
+        generate_all_shared(self._target_directory)
 
 
 def _apply_verbosity(verbosity=0):
