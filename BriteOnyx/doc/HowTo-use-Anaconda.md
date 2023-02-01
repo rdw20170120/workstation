@@ -1,36 +1,41 @@
 HowTo use Anaconda
-by Rob Williams
 
 REF: https://pythonspeed.com/articles/conda-vs-pip/
 REF: https://pythonspeed.com/articles/faster-conda-install/
 REF: https://github.com/conda-forge/miniforge
 
 # How I use Anaconda
-- I do not like Homebrew, but I have yet to find something that I like better and that is tractable
-- use Homebrew to install tools for the user, not required by any project e.g., developers favorite terminal, editor, etc.
+- I do not like Homebrew,
+  but I have yet to find something
+  that I like better and that is tractable
+- use Homebrew to install tools strictly for the user,
+  but not required by any project:
+  e.g., developers favorite terminal, editor, etc.
 - use Homebrew to install Anaconda
 - use Mamba, so use Homebrew to install Mambaforge
 - leave the `base` Anaconda environment empty
-- do NOT activate Anaconda/Mamba except within a specific project repository
+- do NOT activate Anaconda/Mamba except
+  within a specific project repository
 - create an Anaconda environment as a subdirectory within the project repository
 - configure each project repository with scripts to populate the Anaconda environment
 - write scripts & aliases to manage the Anaconda environment
-- do NOT manipulate Homebrew from within a project repository (leave it to the user & workstation)
+- do NOT manipulate Homebrew from within a project repository
+  (leave it to the user & workstation)
 - do we need to make the project aware of the Anaconda/Mamba versions?!?!
 - can we install tools like Terraform/Terragrunt from within Anaconda?
 - do NOT recreate the Anaconda environment during project activation, unless it does not exist
+- therefore, do NOT `conda init` or `mamba init` for the user account
+  - do NOT modify ~/.bash_profile
+  - do NOT modify ~/.bashrc
+  - instead, integrate `conda init` and `mamba init` RESULTS
+    into a script
+    to configure Anaconda/Mamba
+    in each project repository
 
 # Install Mambaforge
 brew install mambaforge
 conda init "$(basename "${SHELL}")"
 mamba init
-
-# TODO: Reconfigure ~/.bash_profile & ~/.bashrc to integrate Conda configuration
-
-# Configure for Python packages only hosted on PyPI
-# Consider conda-lock for version pinning
-# Consider Jake for security scanning
-
 conda --version
 mamba --version
 mamba update conda mamba
@@ -57,16 +62,6 @@ conda env update --file environment.yml -prune
 conda list --explicit >FILE
 conda env export --from-history
 
-# Using PIP
-# Avoid running pip in the root environment
-# Always use an environment
-# Install as much as possible using conda
-# Use pip only after conda
-# Use pip with --upgrade-strategy only-if-needed (default)
-# Do NOT use pip --user
-# conda will be unaware of changes made by pip
-# In order to alter conda packages, rebuild the environment
-
 # Managing Conda packages
 mamba search PACKAGE
 mamba install PACKAGE
@@ -80,4 +75,18 @@ conda config --get
 mamba install argcomplete
 # Add to Bash profile
 eval "$(register-python-argcomplete conda)"
+
+# Using PIP
+# Avoid running pip in the root environment
+# Always use an environment
+# Install as much as possible using conda
+# Use pip only after conda
+# Use pip with --upgrade-strategy only-if-needed (default)
+# Do NOT use pip --user
+# conda will be unaware of changes made by pip
+# In order to alter conda packages, rebuild the environment
+
+# Configure for Python packages only hosted on PyPI
+# Consider conda-lock for version pinning
+# Consider Jake for security scanning
 
