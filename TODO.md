@@ -20,12 +20,14 @@ to indicate that they have been canceled,
 unless they should merely be deleted.
 
 1. [ ] I/U = Item Description
+1. [ ]  /  = 
 
 1. [ ]  /  = Create scripts & aliases for managing Anaconda environments
 1. [ ]  /  = Create scripts & aliases for managing Homebrew
+1. [ ]  /  = Document use of Anaconda for our purposes
 1. [ ]  /  = Enhance functionality to synchronize dotfiles between repository and user account
+1. [ ]  /  = Investigate whether I want to capture log files during `test-run`
 1. [ ]  /  = Restore reporting of `coverage`
-1. [ ]  /  = Restore reporting of test results
 1. [ ] 1/1 - Add `redeclare` alias to `source` Bash function declarations again
 1. [ ] 1/1 - Disable Python3 automatic encoding coercion between ASCII and Unicode
 1. [ ] 1/1 - Extend code generation to all Bash scripts
@@ -51,12 +53,13 @@ unless they should merely be deleted.
 1. [ ] 3/3 - Implement code generation for testing code generation functionality
 1. [ ] 3/3 - Switch font in Neovim for better readability
 1. [ ] 3/3 - Switch font in shell for better readability
-1. [X] 1/1 - Log Bash messages to stderr instead of stdout
 1. [X] 1/1 - Convert to Python3 source code
 1. [X] 1/1 - Enhance Bash activation to declare functions
 1. [X] 1/1 - Fix broken code generation functionality
 1. [X] 1/1 - Implement methods for always using text files with default UTF-8 encoding
+1. [X] 1/1 - Log Bash messages to stderr instead of stdout
 1. [X] 1/1 - Switch from Python virtual environment to Anaconda environment
+1. [X] 1/1 = Restore reporting of test results
 1. [X] 3/3 - Move captured output files to `out` directory
 
 ## Notes

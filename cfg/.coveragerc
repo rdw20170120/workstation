@@ -1,19 +1,19 @@
-[html]
-directory = ${BO_Project?}/out/coverage
-
-[json]
-pretty_print = true
-
-[report]
+[coverage:report]
 show_missing = false
 skip_covered = true
 skip_empty = true
 sort = Cover
 
-[run]
+[coverage:run]
 branch = true
 data_file = ${BO_Project?}/cfg/.coverage
 omit =
   */test_*.py
   */__main__.py
+
+[html]
+directory = ${BO_Project?}/out/coverage
+
+[json]
+pretty_print = true
 

@@ -5,9 +5,23 @@ REF: https://pythonspeed.com/articles/conda-vs-pip/
 REF: https://pythonspeed.com/articles/faster-conda-install/
 REF: https://github.com/conda-forge/miniforge
 
+# How I use Anaconda
+- I do not like Homebrew, but I have yet to find something that I like better and that is tractable
+- use Homebrew to install tools for the user, not required by any project e.g., developers favorite terminal, editor, etc.
+- use Homebrew to install Anaconda
+- use Mamba, so use Homebrew to install Mambaforge
+- leave the `base` Anaconda environment empty
+- do NOT activate Anaconda/Mamba except within a specific project repository
+- create an Anaconda environment as a subdirectory within the project repository
+- configure each project repository with scripts to populate the Anaconda environment
+- write scripts & aliases to manage the Anaconda environment
+- do NOT manipulate Homebrew from within a project repository (leave it to the user & workstation)
+- do we need to make the project aware of the Anaconda/Mamba versions?!?!
+- can we install tools like Terraform/Terragrunt from within Anaconda?
+- do NOT recreate the Anaconda environment during project activation, unless it does not exist
+
 # Install Mambaforge
 brew install mambaforge
-
 conda init "$(basename "${SHELL}")"
 mamba init
 

@@ -16,10 +16,10 @@ run_coverage() {
 
     require_value coverage
 
-#   ${coverage} html --rcfile="$1"
-#   abort_on_fail $? "from ${coverage} html ..."
-#   ${coverage} report --rcfile="$1"
-#   abort_on_fail $? "from ${coverage} report ..."
+    ${coverage} html --rcfile="$1"
+    abort_on_fail $? "from ${coverage} html ..."
+    ${coverage} report --rcfile="$1"
+    abort_on_fail $? "from ${coverage} report ..."
 }
 
 run_pytest() {
@@ -35,14 +35,11 @@ run_pytest() {
     require_value pytest
 
     cd "$3" ; abort_on_fail $? "from cd"
-
-#   ${pytest} \
-#       --cov="$3" \
-#       --cov-append \
-#       --cov-config="$1" \
-#       --cov-report= \
-#       --log-file="${BO_Project}/log/pytest-$2.log"
     ${pytest} \
+        --cov="$3" \
+        --cov-append \
+        --cov-config="$1" \
+        --cov-report= \
         --log-file="${BO_Project}/log/pytest-$2.log"
     abort_on_fail $? "from ${pytest} ..."
 }

@@ -44,6 +44,8 @@ force-exclude = '''
   | \.git/.*$
   | \.pytest_cache/.*$
   | __pycache__/.*$
+  | log/.*$
+  | out/.*$
   # By specific pathname
   | Dockerfile$
   | Jenkinsfile$
