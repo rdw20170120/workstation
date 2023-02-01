@@ -33,7 +33,7 @@ coverage/
 
 # Python
 *.py[cdo]
-.coverage
+/.coverage
 __pycache__/
 htmlcov/
 

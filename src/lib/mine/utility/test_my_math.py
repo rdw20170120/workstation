@@ -5,6 +5,8 @@
 from math import isnan
 
 # External packages (absolute references, NOT distributed with Python)
+from pytest import raises
+
 # Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
 from utility.my_math import Percentage
@@ -12,6 +14,25 @@ from utility.my_math import Rate
 from utility.my_math import assert_nan
 
 # Project modules   (relative references, NOT packaged, in project)
+
+
+def test_assert_nan():
+    with raises(AssertionError):
+        assert_nan(-1.0)
+    with raises(AssertionError):
+        assert_nan(0)
+    with raises(AssertionError):
+        assert_nan(1.0)
+    with raises(AssertionError):
+        assert_nan(False)
+    with raises(AssertionError):
+        assert_nan(True)
+    with raises(TypeError):
+        assert_nan("")
+    with raises(TypeError):
+        assert_nan("text")
+    with raises(TypeError):
+        assert_nan(None)
 
 
 def test_percentage_01():

@@ -2,6 +2,10 @@
 """TODO: Write
 
 TODO: REVIEW: this module against its siblings.
+TODO: REFACTOR: this module to separate
+filesystem calls (difficult to test)
+from
+pathname manipulations (easy to test)
 """
 # Internal packages (absolute references, distributed with Python)
 from logging import getLogger

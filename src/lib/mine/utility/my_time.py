@@ -85,6 +85,7 @@ Eventually represent distinctions of clock time, wall time, local time, and
 universal time.
 
 TODO: Refine ISO8601 output formats for compactness
+TODO: REFACTOR: separate out calls that use the system clock
 """
 # Internal packages (absolute references, distributed with Python)
 import datetime as dt

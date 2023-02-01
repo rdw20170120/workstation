@@ -15,6 +15,7 @@ from utility.text import string_without_suffix
 
 def test_dict_from_string():
     # TODO: Test with other basic data types
+    assert is_.equal(dict_from_string(None), None)
     the_dict = {
         "first": -1.0,
         "second": -1,
