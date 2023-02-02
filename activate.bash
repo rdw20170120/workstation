@@ -63,18 +63,10 @@ source "${_Script}" ; _Status=$?
 # by renaming
 # the project-specific script
 # to avoid that collision.
-
 export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
 
 [[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}
-export BO_PathTool=
 [[ -z "${BO_PathUser}" ]] && export BO_PathUser=${HOME}/bin
-
-remembering BO_PathNative
-remembering BO_PathProject
-remembering BO_PathSystem
-remembering BO_PathTool
-remembering BO_PathUser
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
 source "${_Script}" ; _Status=$?

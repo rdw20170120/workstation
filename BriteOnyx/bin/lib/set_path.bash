@@ -7,11 +7,8 @@
 # Set PATH for project
 #
 # NOTE: This specific ordering of PATH elements is REQUIRED.
-# The Python virtual environment MUST come first
-# in order to override the system Python.
-# For now,
-# that PATH element also includes the system PATH element,
-# which is repeated here for when that is eventually fixed.
+# The Anaconda environment MUST come first
+# in order to override everything else.
 # The system PATH element MUST precede any user PATH elements
 # in order to make collisions fail-fast
 # and
@@ -23,7 +20,7 @@
 # in order to make collisions fail-fast.
 # This arrangement is best
 # for ensuring consistent behavior
-# of the Python virtual environment, the system, and the project.
+# of the environment, the system, and the project.
 # It puts at-risk
 # only those user-specific commands, tools, and scripts
 # relevant to the current deployed environment--
@@ -32,9 +29,24 @@
 # to affecting only them
 # (as they should).
 
-require_variable BO_PathProject
 [[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}
-export PATH=${BO_PathTool}:${BO_PathSystem}:${BO_PathProject}:${BO_PathUser}
+[[ -z "${BO_PathTool}" ]] && export BO_PathTool=
+
+require_variable BO_PathProject
+require_variable BO_PathSystem
+# TODO: require_variable BO_PathTool
+require_variable BO_PathUser
+
+PATH=${BO_PathTool}
+PATH=${PATH}:${BO_PathSystem}
+PATH=${PATH}:${BO_PathProject}
+PATH=${PATH}:${BO_PathUser}
+export PATH
+
+remembering BO_PathTool
+remembering BO_PathSystem
+remembering BO_PathProject
+remembering BO_PathUser
 remembering PATH
 
 ###############################################################################

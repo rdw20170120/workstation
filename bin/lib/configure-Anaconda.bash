@@ -56,6 +56,10 @@ require_directory "${BO_DirAnaconda}"
 log_info "Activating Anaconda environment in directory '${BO_DirAnaconda}'"
 mamba activate "${BO_DirAnaconda}"
 
+export BO_PathAfterAnaconda=${PATH}
+remembering BO_PathAfterAnaconda
+export BO_PathTool=${BO_DirAnaconda}/bin:${CONDA_PREFIX}/condabin
+
 _Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
@@ -87,11 +91,13 @@ _Packages="${_Packages} boto3"
 _Packages="${_Packages} logzero"
 
 if [[ "${_BO_CreateAnacondaEnvironment}" == "true" ]] ; then
-    # Install desired packages into Anaconda environment
+    log_debug "Installing desired packages into Anaconda environment '${BO_DirAnaconda}'"
     mamba install --yes ${_Packages}
-    mamba list --explicit >"${BO_FileAnaconda}"
-    require_file "${BO_FileAnaconda}"
 fi
+
+log_debug "Capturing installed packages to file '${BO_FileAnaconda}'"
+mamba list --explicit >"${BO_FileAnaconda}"
+require_file "${BO_FileAnaconda}"
 
 _BO_CreateAnacondaEnvironment=
 

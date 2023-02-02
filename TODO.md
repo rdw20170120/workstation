@@ -24,6 +24,9 @@ unless they should merely be deleted.
 
 1. [ ]  /  = Create scripts & aliases for managing Anaconda environments
 1. [ ]  /  = Create scripts & aliases for managing Homebrew
+1. [ ]  /  = Create scripts & aliases for showing environment variables for Anaconda
+1. [ ]  /  = Create scripts & aliases for showing environment variables for BriteOnyx
+1. [ ]  /  = Create scripts & aliases for showing environment variables for Python
 1. [ ]  /  = Document use of Anaconda for our purposes
 1. [ ]  /  = Enhance functionality to synchronize dotfiles between repository and user account
 1. [ ]  /  = Investigate whether I want to capture log files during `test-run`
