@@ -196,7 +196,6 @@ def set_log_level(loggers, log_level):
 
 
 """DisabledContent
-from src_gen.source import generate
 from src_gen.source import my_visitor_map as parent_visitor_map
 from src_gen.structure import *
 from throw_out_your_templates.section_3 import VisitorMap

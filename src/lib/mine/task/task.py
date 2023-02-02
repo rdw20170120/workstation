@@ -12,6 +12,7 @@ from utility.filesystem import delete_directory_tree
 from utility.filesystem import delete_file
 from utility.filesystem import touch
 from utility import my_assert as is_
+from utility import my_assert_pathname as pn_is_
 from utility.my_logging import log_exception
 
 # Project modules   (relative references, NOT packaged, in project)
@@ -134,7 +135,7 @@ class FileSystemTask(PlainTask):
         if not len(paths):
             self._log.debug("No %s registered in %s", name, self)
         for path in paths:
-            assert is_.absolute_path(path)
+            assert pn_is_.absolute_path(path)
             if not path.exists():
                 raise FileNotFoundError(
                     "{} is aborting since {} {} is missing".format(
@@ -155,7 +156,7 @@ class FileSystemTask(PlainTask):
             return
         self._log.debug("%s is deleting targets upon exception", self)
         for target in self._targets:
-            assert is_.absolute_path(target)
+            assert pn_is_.absolute_path(target)
             if target.exists():
                 if target.is_dir():
                     self._log.warn(
@@ -208,7 +209,7 @@ class FileSystemTask(PlainTask):
     def _register_source(self, source):
         if source is None:
             return None
-        assert is_.absolute_path(source)
+        assert pn_is_.absolute_path(source)
         self._log.debug("Registering source %s", source.for_log())
         self._sources.append(source)
         return source
@@ -221,7 +222,7 @@ class FileSystemTask(PlainTask):
     def _register_target(self, target):
         if target is None:
             return None
-        assert is_.absolute_path(target)
+        assert pn_is_.absolute_path(target)
         self._log.debug("Registering target %s", target.for_log())
         self._targets.append(target)
         return target
@@ -239,7 +240,7 @@ class FileSystemTask(PlainTask):
             return True
         if not force:
             force = self.config.is_forced_run
-        assert is_.absolute_path(target)
+        assert pn_is_.absolute_path(target)
         if not target.exists():
             return True
         result = False
@@ -270,7 +271,7 @@ class FileSystemTask(PlainTask):
         return result
 
     def _should_delete_directory(self, directory_path):
-        assert is_.absolute_path(directory_path)
+        assert pn_is_.absolute_path(directory_path)
         if self.config.is_dry_run:
             return False
         if not directory_path.exists():
@@ -284,7 +285,7 @@ class FileSystemTask(PlainTask):
         return True
 
     def _should_delete_file(self, file_path):
-        assert is_.absolute_path(file_path)
+        assert pn_is_.absolute_path(file_path)
         if self.config.is_dry_run:
             return False
         if not file_path.exists():
@@ -299,9 +300,9 @@ class FileSystemTask(PlainTask):
 
     def _touch_targets(self):
         for target in self._targets:
-            assert is_.absolute_path(target)
+            assert pn_is_.absolute_path(target)
             touch(target)
-            assert is_.absolute_file(target)
+            assert pn_is_.absolute_file(target)
 
 
 """DisabledContent

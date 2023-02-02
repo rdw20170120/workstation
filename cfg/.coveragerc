@@ -22,6 +22,7 @@ omit =
   */mine/task/*.py
   */mine/utility/color_log_formatter.py
   */mine/utility/environment.py
+  */mine/utility/filesystem.py
   */mine/utility/my_logging.py
   */mine/utility/my_terminal.py
   */mine/utility/processing.py

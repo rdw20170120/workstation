@@ -33,6 +33,9 @@ class Renderer(object):
     def _serialize(self, content):
         return self._get_serializer().serialize(content)
 
+
+
+"""DisabledContent
     def render(self, content, file_path=None):
         try:
             if file_path is None:
@@ -48,7 +51,4 @@ class Renderer(object):
             log_exception(self._log, e)
         except Exception:
             raise
-
-
-"""DisabledContent
 """

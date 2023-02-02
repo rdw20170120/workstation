@@ -26,41 +26,11 @@ This preserves the observable behavior of the `assert` statements.
 Since the `assert` statements
 become a no-op during an optimized compilation,
 all of these helper functions can still be optimized away.
-
-TODO: REFACTOR: to separate out assertions that invoke the filesystem
 """
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 # Project modules   (relative references, NOT packaged, in project)
-
-
-def absolute_directory(path):
-    result = path.is_absolute()
-    if result:
-        result = path.is_dir()
-    if result:
-        return result
-    else:
-        raise AssertionError("{!r} is NOT an absolute directory".format(path))
-
-
-def absolute_file(path):
-    result = path.is_absolute()
-    if result:
-        result = path.is_file()
-    if result:
-        return result
-    else:
-        raise AssertionError("{!r} is NOT an absolute file".format(path))
-
-
-def absolute_path(path):
-    result = path.is_absolute()
-    if result:
-        return result
-    else:
-        raise AssertionError("{!r} is NOT an absolute path".format(path))
 
 
 def at_least(actual_value, expected_value):
@@ -105,18 +75,6 @@ def equal(actual_value, expected_value):
     else:
         raise AssertionError(
             "{!r} does NOT equal {!r}".format(actual_value, expected_value)
-        )
-
-
-def existing_absolute_path(path):
-    result = path.is_absolute()
-    if result:
-        result = path.exists()
-    if result:
-        return result
-    else:
-        raise AssertionError(
-            "{!r} is NOT an existing absolute path".format(path)
         )
 
 
@@ -262,14 +220,6 @@ def not_instance(actual_value, expected_types):
 
 def not_none(value):
     return not_(value, None)
-
-
-def relative_path(path):
-    result = not path.is_absolute()
-    if result:
-        return result
-    else:
-        raise AssertionError("{!r} is NOT a relative path".format(path))
 
 
 def range(actual_value, lower_limit, higher_limit):

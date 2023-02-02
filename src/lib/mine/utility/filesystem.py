@@ -1,12 +1,5 @@
 #!/usr/bin/env false
-"""TODO: Write
-
-TODO: REVIEW: this module against its siblings.
-TODO: REFACTOR: this module to separate
-filesystem calls (difficult to test)
-from
-pathname manipulations (easy to test)
-"""
+"""Manipulate the filesystem."""
 # Internal packages (absolute references, distributed with Python)
 from logging import getLogger
 from os import link
@@ -16,23 +9,18 @@ from os.path import getsize
 from os.path import isdir
 from os.path import isfile
 from pathlib import Path
-from pathlib import PurePath
 from shutil import copy2
 from shutil import rmtree
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+from utility import my_assert_pathname as pn_is_
 
 # Project modules   (relative references, NOT packaged, in project)
 
 
 log = getLogger(__name__)
-
-
-def basename_has_suffix(path_, suffix):
-    assert is_.instance(suffix, str)
-    return str(path_).endswith(suffix)
 
 
 def clone_file(target_file, source_file):
@@ -123,13 +111,11 @@ def make_hard_link(new_path, existing_path):
     if isinstance(new_path, str):
         new_path = Path(new_path)
     assert is_.instance(new_path, Path)
-    assert is_.absolute_path(new_path)
+    assert pn_is_.absolute_path(new_path)
     assert is_.existing_absolute_path(existing_path)
     link(existing_path, new_path)
     # TODO: Added in Python 3.8
-
-
-#   new_path.link_to(existing_path)
+    # new_path.link_to(existing_path)
 
 
 def maybe_create_directory(path_):
@@ -168,25 +154,6 @@ def recreate_directory(path_):
     create_directory(path_)
 
 
-def split_basename(path_):
-    parent, basename = split_path(path_)
-    name = PurePath(basename)
-    suffixes = ""
-    while True:
-        suffix, name = name.suffix, name.stem
-        if not suffix:
-            break
-        suffixes = suffix + suffixes
-        name = PurePath(name)
-    return str(name), suffixes
-
-
-def split_path(path_):
-    if not isinstance(path_, Path):
-        path_ = PurePath(path_)
-    return path_.parent, path_.name
-
-
 def touch(file_):
     try:
         if not isinstance(file_, Path):
@@ -217,3 +184,4 @@ def write_text_into_file(file_, text_content, encoding=None):
 
 """DisabledContent
 """
+

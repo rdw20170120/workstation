@@ -24,8 +24,10 @@ from shutil import rmtree
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from utility.filesystem import split_path
+from utility.pathname import split_path
 from utility import my_assert as is_
+from utility import my_assert_filesystem as fs_is_
+from utility import my_assert_pathname as pn_is_
 
 # Project modules   (relative references, NOT packaged, in project)
 
@@ -61,9 +63,9 @@ class TrackedPath(object):
         if not isinstance(self._top, Path):
             self._top = Path(self._top)
         assert is_.instance(self._top, Path)
-        assert is_.absolute_path(self._top)
+        assert pn_is_.absolute_path(self._top)
         if self._top.exists():
-            assert is_.absolute_directory(self._top)
+            assert fs_is_.absolute_directory(self._top)
 
         assert is_.not_instance(self._relative, self.__class__)
         if self._relative is None:
@@ -72,12 +74,12 @@ class TrackedPath(object):
         if not isinstance(self._relative, Path):
             self._relative = Path(self._relative)
         assert is_.instance(self._relative, Path)
-        assert is_.relative_path(self._relative)
+        assert pn_is_.relative_path(self._relative)
         self._subpath, self._basename = split_path(self._relative)
 
         self._path = self._top / self._relative
         assert is_.instance(self._path, Path)
-        assert is_.absolute_path(self._path)
+        assert pn_is_.absolute_path(self._path)
 
     def __repr__(self):
         return "{}({!r}, {!r}, {!r})".format(

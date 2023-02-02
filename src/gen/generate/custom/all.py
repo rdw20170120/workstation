@@ -3,18 +3,16 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.markdown.complete import generate_document as document
-from src_gen.briteonyx.complete import (
-    generate_executed as executed,
-)
-from src_gen.briteonyx.complete import generate_sourced as sourced
-from src_gen.bash.complete import generate_activation as activation
-from src_gen.python.complete import generate_generator as generator
-from src_gen.python.complete import generate_library as library
-from src_gen.python.complete import generate_main as main
-from src_gen.python.complete import generate_package as package
-from src_gen.python.complete import generate_script as script
-from src_gen.python.complete import generate_test as test
+from src_gen.markdown.complete import document
+from src_gen.briteonyx.complete import executed
+from src_gen.briteonyx.complete import sourced
+from src_gen.bash.complete import activation
+from src_gen.python.complete import generator
+from src_gen.python.complete import library
+from src_gen.python.complete import main
+from src_gen.python.complete import package
+from src_gen.python.complete import script
+from src_gen.python.complete import suite
 from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)

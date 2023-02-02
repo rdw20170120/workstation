@@ -4,13 +4,12 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.briteonyx.source import generate
 from src_gen.briteonyx.structure import *
 
 # Project modules   (relative references, NOT packaged, in project)
 
 
-def _executed():
+def executed():
     return [
         header_executed(),
         abort_if_not_activated(),
@@ -37,7 +36,7 @@ def _executed():
     ]
 
 
-def _sourced():
+def sourced():
     return [
         header_sourced(),
         todo("DESCRIPTION"),
@@ -47,12 +46,6 @@ def _sourced():
     ]
 
 
-def generate_executed(directory, filename):
-    generate(_executed(), directory, filename)
-
-
-def generate_sourced(directory, filename):
-    generate(_sourced(), directory, filename)
 
 
 """DisabledContent

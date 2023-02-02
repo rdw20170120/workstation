@@ -3,7 +3,6 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.bash.source import generate as gen
 from src_gen.bash.structure import *
 
 # Project modules   (relative references, NOT packaged, in project)
@@ -82,10 +81,6 @@ def build():
         line(),
         disabled_content_footer(),
     ]
-
-
-def generate(directory):
-    gen(build(), directory, "set_path.bash")
 
 
 """DisabledContent

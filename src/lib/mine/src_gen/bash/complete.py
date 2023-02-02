@@ -4,13 +4,12 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.bash.source import generate
 from src_gen.bash.structure import *
 
 # Project modules   (relative references, NOT packaged, in project)
 
 
-def _activation():
+def activation():
     return [
         header_activation(),
         todo("DESCRIPTION"),
@@ -23,7 +22,7 @@ def _activation():
     ]
 
 
-def _sourced():
+def sourced():
     return [
         header_sourced(),
         todo("DESCRIPTION"),
@@ -33,12 +32,6 @@ def _sourced():
     ]
 
 
-def generate_activation(directory, filename):
-    generate(_activation(), directory, filename)
-
-
-def generate_sourced(directory, filename):
-    generate(_sourced(), directory, filename)
 
 
 """DisabledContent

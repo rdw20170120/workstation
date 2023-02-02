@@ -5,6 +5,7 @@
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
+from utility import my_assert_filesystem as fs_is_
 from utility.test_config import *
 
 # Project modules   (relative references, NOT packaged, in project)
@@ -17,7 +18,7 @@ def test_fake_suffix(config):
 
 def test_filesystem_to_watch(config):
     v = config.filesystem_to_watch
-    assert is_.absolute_directory(v)
+    assert fs_is_.absolute_directory(v)
 
 
 def test_is_dry_run(config):
