@@ -99,7 +99,7 @@ log_debug "Capturing installed packages to file '${BO_FileAnaconda}'"
 mamba list --explicit >"${BO_FileAnaconda}"
 require_file "${BO_FileAnaconda}"
 
-_BO_CreateAnacondaEnvironment=
+unset _BO_CreateAnacondaEnvironment
 
 # NOTE: Restore PS1 since I don't like having Anaconda put the environment prefix there
 export PS1=${BO_PS1}

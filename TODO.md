@@ -29,8 +29,12 @@ unless they should merely be deleted.
 1. [ ]  /  = Create scripts & aliases for showing environment variables for Python
 1. [ ]  /  = Document use of Anaconda for our purposes
 1. [ ]  /  = Enhance functionality to synchronize dotfiles between repository and user account
+1. [ ]  /  = Filter sensitive values out of committed output (environment variables)
+1. [ ]  /  = Integrate OpenTelemetry into Python code
 1. [ ]  /  = Investigate whether I want to capture log files during `test-run`
 1. [ ]  /  = Restore reporting of `coverage`
+1. [ ]  /  = Sort Anaconda packages in `cfg/anaconda.yml`
+1. [ ]  /  = `unset` relevant Bash variables when appropriate
 1. [ ] 1/1 - Add `redeclare` alias to `source` Bash function declarations again
 1. [ ] 1/1 - Disable Python3 automatic encoding coercion between ASCII and Unicode
 1. [ ] 1/1 - Extend code generation to all Bash scripts
