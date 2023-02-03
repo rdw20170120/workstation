@@ -6,9 +6,9 @@ which uname
 /usr/bin/uname
 ##########
 uname -a
-Darwin Mac-JF4J397K 21.6.0 Darwin Kernel Version 21.6.0: Sun Nov  6 23:31:13 PST 2022; root:xnu-8020.240.14~1/RELEASE_ARM64_T6000 arm64
+Darwin Mac-JF4J397K 21.6.0 Darwin Kernel Version 21.6.0: Mon Dec 19 20:43:09 PST 2022; root:xnu-8020.240.18~2/RELEASE_ARM64_T6000 arm64
 ##########
-PATH=/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin:.:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin:/Users/x299424/repo/GitHub/wip/workstation/bin:/Users/x299424/bin
+PATH=/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin:/Users/x299424/repo/GitHub/wip/workstation/.anaconda/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin:/Users/x299424/repo/GitHub/wip/workstation/bin:/Users/x299424/bin
 ##########
 type conda
 conda is /opt/homebrew/bin/conda

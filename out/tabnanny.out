@@ -151,6 +151,7 @@
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/aws/test_s3.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility': listing directory
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_assert.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/my_assert_pathname.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_time.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/my_terminal.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/conftest.py': Clean bill of health.
@@ -162,10 +163,12 @@
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/filesystem.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/tracked_path.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/my_assert_filesystem.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/__pycache__': listing directory
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_color_log_formatter.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_filesystem.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_text.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_pathname.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/text.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_config.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/environment.py': Clean bill of health.
@@ -174,6 +177,9 @@
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/singleton_application.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/my_logging.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_math.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_assert_filesystem.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/processing.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/pathname.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_assert_pathname.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/my_math.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_environment.py': Clean bill of health.
