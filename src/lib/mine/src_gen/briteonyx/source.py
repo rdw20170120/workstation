@@ -2,6 +2,7 @@
 """TODO: Write
 """
 # Internal packages (absolute references, distributed with Python)
+from pathlib import Path
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
@@ -9,17 +10,13 @@ from throw_out_your_templates.section_3 import VisitorMap
 
 # Project modules   (relative references, NOT packaged, in project)
 from src_gen.bash.source import my_visitor_map as parent_visitor_map
+from utility.filesystem import maybe_create_directory
+from utility import my_assert as is_
+from src_gen.bash.source import BashScript
 
 
 my_visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
-
-
-"""DisabledContent
-from pathlib import Path
-from utility.filesystem import maybe_create_directory
-from utility import my_assert as is_
-from src_gen.bash.source import BashScript
 
 class BriteOnyxScript(BashScript):
     def __init__(self, visitor_map, content):
@@ -43,4 +40,7 @@ def generate(
         assert is_.instance(directory, Path)
         maybe_create_directory(directory)
         source.generate(directory / filename)
+
+
+"""DisabledContent
 """

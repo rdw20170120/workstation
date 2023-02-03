@@ -2,24 +2,21 @@
 """TODO: Write
 """
 # Internal packages (absolute references, distributed with Python)
+from pathlib import Path
+
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from throw_out_your_templates.section_3 import VisitorMap
 from throw_out_your_templates.section_4 import visitor_map
+
 # Project modules   (relative references, NOT packaged, in project)
+from utility.filesystem import maybe_create_directory
+from utility import my_assert as is_
+from src_gen.renderer import Renderer
 
 
 my_visitor_map = VisitorMap(parent_map=visitor_map)
 
-
-
-
-"""DisabledContent
-from pathlib import Path
-
-from utility.filesystem import maybe_create_directory
-from utility import my_assert as is_
-from src_gen.renderer import Renderer
 
 class Content(object):
     def __init__(self, visitor_map, content):
@@ -61,4 +58,7 @@ def generate(
         assert is_.instance(directory, Path)
         maybe_create_directory(directory)
         source.generate(directory / filename)
+
+
+"""DisabledContent
 """

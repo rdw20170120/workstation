@@ -14,16 +14,18 @@ from src_gen.python.complete import package
 from src_gen.python.complete import script
 from src_gen.python.complete import suite
 from utility.config import Config
+from src_gen.briteonyx.source import generate as briteonyx
+from src_gen.python.source import generate as python
 
 # Project modules   (relative references, NOT packaged, in project)
 
 
 def _generate_bin(dir_):
     sub = dir_
-    executed(sub, "sync_on_macOS")
+    briteonyx(executed(), sub, "sync_on_macOS")
     sub = dir_ / "lib"
-    activation(sub, "configure-Anaconda.bash")
-    activation(sub, "declare.bash")
+    briteonyx(activation(), sub, "configure-Anaconda.bash")
+    briteonyx(activation(), sub, "declare.bash")
 
 
 def _generate_src(dir_):
@@ -34,12 +36,12 @@ def _generate_src(dir_):
 def _generate_src_app(dir_):
     sub = dir_ / Config().application_name
     sub = dir_ / Config().application_name / "task"
-    package(sub, "__init__.py")
-    library(sub, "bootstrap.py")
-    library(sub, "mapping.py")
-    library(sub, "scan_directory.py")
-    test(sub, "test_mapping.py")
-    test(sub, "test_task.py")
+    python(package(), sub, "__init__.py")
+    python(library(), sub, "bootstrap.py")
+    python(library(), sub, "mapping.py")
+    python(library(), sub, "scan_directory.py")
+    python(suite(), sub, "test_mapping.py")
+    python(suite(), sub, "test_task.py")
 
 
 def generate(directory):
