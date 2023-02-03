@@ -49,7 +49,7 @@ def script():
 
 def suite():
     return [
-        header_for_tests(),
+        header_for_suite(),
         todo("CONTENT"),
         footer_for_disabled_content(),
     ]

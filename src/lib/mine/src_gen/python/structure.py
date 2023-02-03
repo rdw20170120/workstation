@@ -121,7 +121,7 @@ def imports_empty():
     ]
 
 
-def imports_for_tests():
+def imports_for_suite():
     return [
         import_header_internal(),
         import_header_external(),
@@ -131,6 +131,8 @@ def imports_for_tests():
         import_from("pytest", "raises"),
         import_header_library(),
         import_from("utility", "my_assert", "is_"),
+        import_from("utility", "my_assert_filesystem", "fs_is_"),
+        import_from("utility", "my_assert_pathname", "pn_is_"),
         import_header_project(),
     ]
 
@@ -208,12 +210,12 @@ def header_for_script():
     ]
 
 
-def header_for_tests():
+def header_for_suite():
     return [
         shebang_false(),
         '"""Test corresponding module."""',
         eol(),
-        imports_for_tests(),
+        imports_for_suite(),
         line(),
         line(),
     ]
