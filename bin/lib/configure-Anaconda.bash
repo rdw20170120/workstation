@@ -36,8 +36,10 @@ fi
 require_directory_in BO_Project
 export BO_DirAnaconda=${BO_Project}/.anaconda
 remembering BO_DirAnaconda
-export BO_FileAnaconda=${BO_Project}/cfg/anaconda.yml
-remembering BO_FileAnaconda
+export BO_FileAnacondaJson=${BO_Project}/cfg/anaconda.json
+remembering BO_FileAnacondaJson
+export BO_FileAnacondaYaml=${BO_Project}/cfg/anaconda.yml
+remembering BO_FileAnacondaYaml
 
 _BO_CreateAnacondaEnvironment=true
 if [[ -d "${BO_DirAnaconda}" ]] ; then
@@ -95,9 +97,12 @@ if [[ "${_BO_CreateAnacondaEnvironment}" == "true" ]] ; then
     mamba install --yes ${_Packages}
 fi
 
-log_debug "Capturing installed packages to file '${BO_FileAnaconda}'"
-mamba list --explicit --export --md5 --no-pip >"${BO_FileAnaconda}"
-require_file "${BO_FileAnaconda}"
+log_debug "Capturing installed packages to file '${BO_FileAnacondaJson}'"
+mamba list --no-pip >"${BO_FileAnacondaJson}"
+require_file "${BO_FileAnacondaJson}"
+log_debug "Capturing installed packages to file '${BO_FileAnacondaYaml}'"
+mamba list --explicit --export --md5 --no-pip >"${BO_FileAnacondaYaml}"
+require_file "${BO_FileAnacondaYaml}"
 
 unset _BO_CreateAnacondaEnvironment
 
