@@ -97,10 +97,10 @@ if [[ "${_BO_CreateAnacondaEnvironment}" == "true" ]] ; then
     mamba install --yes ${_Packages}
 fi
 
-log_debug "Capturing installed packages to file '${BO_FileAnacondaJson}'"
+log_info "Capturing installed packages to file '${BO_FileAnacondaJson}'"
 mamba list --no-pip >"${BO_FileAnacondaJson}"
 require_file "${BO_FileAnacondaJson}"
-log_debug "Capturing installed packages to file '${BO_FileAnacondaYaml}'"
+log_info "Capturing installed packages to file '${BO_FileAnacondaYaml}'"
 mamba list --explicit --export --md5 --no-pip >"${BO_FileAnacondaYaml}"
 require_file "${BO_FileAnacondaYaml}"
 
