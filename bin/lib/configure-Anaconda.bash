@@ -96,7 +96,7 @@ if [[ "${_BO_CreateAnacondaEnvironment}" == "true" ]] ; then
 fi
 
 log_debug "Capturing installed packages to file '${BO_FileAnaconda}'"
-mamba list --explicit >"${BO_FileAnaconda}"
+mamba list --explicit --export --md5 --no-pip >"${BO_FileAnaconda}"
 require_file "${BO_FileAnaconda}"
 
 unset _BO_CreateAnacondaEnvironment
