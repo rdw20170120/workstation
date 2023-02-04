@@ -50,13 +50,6 @@ remembering BO_NameApp
 
 require_directory_in HOME
 
-which black
-which compileall
-which coverage
-which pip
-which pytest
-which tabnanny
-
 # Remember how to execute various tools
 export python3=$(which python3)
 remembering python3
