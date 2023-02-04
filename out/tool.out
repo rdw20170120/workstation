@@ -1,15 +1,4 @@
 ##########
-type uname
-uname is /usr/bin/uname
-##########
-which uname
-/usr/bin/uname
-##########
-uname -a
-Darwin Mac-JF4J397K 21.6.0 Darwin Kernel Version 21.6.0: Mon Dec 19 20:43:09 PST 2022; root:xnu-8020.240.18~2/RELEASE_ARM64_T6000 arm64
-##########
-PATH=/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin:/Users/x299424/repo/GitHub/wip/workstation/.anaconda/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin:/Users/x299424/repo/GitHub/wip/workstation/bin:/Users/x299424/bin
-##########
 type conda
 conda is /opt/homebrew/bin/conda
 ##########
@@ -26,6 +15,15 @@ which mamba
 ##########
 mamba --version
 /Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 16: mamba: command not found
+##########
+type aws
+aws is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/aws
+##########
+which aws
+/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/aws
+##########
+aws --version
+aws-cli/1.27.59 Python/3.11.0 Darwin/21.6.0 botocore/1.29.59
 ##########
 type bash
 bash is /bin/bash
@@ -129,16 +127,102 @@ unibilium 2.1.1
 virtualenv 20.17.1
 xz 5.4.1
 ##########
-type python
-python is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/python
+type kubectl
+/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 16: type: kubectl: not found
 ##########
-which python
-/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/python
+which kubectl
 ##########
-python --version
-Python 3.11.0
+kubectl version
+/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 16: kubectl: command not found
 ##########
-PYTHONPATH=:/Users/x299424/repo/GitHub/wip/workstation/src/lib/third_party:/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine
+type openssl
+openssl is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/openssl
+##########
+which openssl
+/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/openssl
+##########
+openssl version -a
+OpenSSL 3.0.7 1 Nov 2022 (Library: OpenSSL 3.0.7 1 Nov 2022)
+built on: Fri Jan 27 09:51:22 2023 UTC
+platform: darwin64-arm64-cc
+options:  bn(64,64)
+compiler: arm64-apple-darwin20.0.0-clang -D_FORTIFY_SOURCE=2 -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -mmacosx-version-min=11.0 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -fdebug-prefix-map=/Users/runner/miniforge3/conda-bld/openssl_split_1674812699853/work=/usr/local/src/conda/openssl_split-3.0.7 -fdebug-prefix-map=/Users/x299424/repo/GitHub/wip/workstation/.anaconda=/usr/local/src/conda-prefix -fPIC -arch arm64 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -fdebug-prefix-map=/Users/runner/miniforge3/conda-bld/openssl_split_1674812699853/work=/usr/local/src/conda/openssl_split-3.0.7 -fdebug-prefix-map=/Users/x299424/repo/GitHub/wip/workstation/.anaconda=/usr/local/src/conda-prefix -DL_ENDIAN -DOPENSSL_PIC -D_REENTRANT -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -mmacosx-version-min=11.0
+OPENSSLDIR: "/Users/x299424/repo/GitHub/wip/workstation/.anaconda/ssl"
+ENGINESDIR: "/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/engines-3"
+MODULESDIR: "/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/ossl-modules"
+Seeding source: os-specific
+CPUINFO: OPENSSL_armcap=0x7d
+##########
+openssl list-cipher-algorithms
+Invalid command 'list-cipher-algorithms'; type "help" for a list.
+##########
+openssl list-cipher-commands
+Invalid command 'list-cipher-commands'; type "help" for a list.
+##########
+openssl list-message-digest-algorithms
+Invalid command 'list-message-digest-algorithms'; type "help" for a list.
+##########
+openssl list-message-digest-commands
+Invalid command 'list-message-digest-commands'; type "help" for a list.
+##########
+openssl list-public-key-algorithms
+Invalid command 'list-public-key-algorithms'; type "help" for a list.
+##########
+openssl list-standard-commands
+Invalid command 'list-standard-commands'; type "help" for a list.
+##########
+type uname
+uname is /usr/bin/uname
+##########
+which uname
+/usr/bin/uname
+##########
+uname -a
+Darwin Mac-JF4J397K 21.6.0 Darwin Kernel Version 21.6.0: Mon Dec 19 20:43:09 PST 2022; root:xnu-8020.240.18~2/RELEASE_ARM64_T6000 arm64
+##########
+PATH=/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin:/Users/x299424/repo/GitHub/wip/workstation/.anaconda/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin:/Users/x299424/repo/GitHub/wip/workstation/bin:/Users/x299424/bin
+##########
+type java
+java is /usr/bin/java
+##########
+which java
+/usr/bin/java
+##########
+java --version
+Unrecognized option: --version
+Error: Could not create the Java Virtual Machine.
+Error: A fatal exception has occurred. Program will exit.
+##########
+type keytool
+keytool is /usr/bin/keytool
+##########
+which keytool
+/usr/bin/keytool
+##########
+keytool -showinfo -tls
+Illegal option:  -showinfo
+Key and Certificate Management Tool
+
+Commands:
+
+ -certreq            Generates a certificate request
+ -changealias        Changes an entry's alias
+ -delete             Deletes an entry
+ -exportcert         Exports certificate
+ -genkeypair         Generates a key pair
+ -genseckey          Generates a secret key
+ -gencert            Generates certificate from a certificate request
+ -importcert         Imports a certificate or a certificate chain
+ -importpass         Imports a password
+ -importkeystore     Imports one or all entries from another keystore
+ -keypasswd          Changes the key password of an entry
+ -list               Lists entries in a keystore
+ -printcert          Prints the content of a certificate
+ -printcertreq       Prints the content of a certificate request
+ -printcrl           Prints the content of a CRL file
+ -storepasswd        Changes the store password of a keystore
+
+Use "keytool -command_name -help" for usage of command_name
 ##########
 type python2
 /Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 16: type: python2: not found
@@ -148,18 +232,9 @@ which python2
 python2 --version
 /Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 16: python2: command not found
 ##########
-/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 71: python2: command not found
+/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 123: python2: command not found
 ##########
-/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 73: python2: command not found
-##########
-type pip
-pip is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip
-##########
-which pip
-/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip
-##########
-pip --version
-pip 22.3.1 from /Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/site-packages/pip (python 3.11)
+/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 125: python2: command not found
 ##########
 type python3
 python3 is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/python3
@@ -174,14 +249,28 @@ Python 3.11.0
 ##########
 ['', '/Users/x299424/repo/GitHub/wip/workstation', '/Users/x299424/repo/GitHub/wip/workstation/src/lib/third_party', '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine', '/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python311.zip', '/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11', '/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/lib-dynload', '/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/site-packages']
 ##########
-type pip3
-pip3 is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip3
+python -m OpenSSL.debug
+pyOpenSSL: 23.0.0
+cryptography: 39.0.0
+cffi: 1.15.1
+cryptography's compiled against OpenSSL: OpenSSL 3.0.7 1 Nov 2022
+cryptography's linked OpenSSL: OpenSSL 3.0.7 1 Nov 2022
+Python's OpenSSL: OpenSSL 3.0.7 1 Nov 2022
+Python executable: /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/python
+Python version: 3.11.0 | packaged by conda-forge | (main, Jan 14 2023, 12:26:40) [Clang 14.0.6 ]
+Platform: darwin
+sys.path: ['/Users/x299424/repo/GitHub/wip/workstation', '/Users/x299424/repo/GitHub/wip/workstation', '/Users/x299424/repo/GitHub/wip/workstation/src/lib/third_party', '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine', '/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python311.zip', '/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11', '/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/lib-dynload', '/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/site-packages']
 ##########
-which pip3
-/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip3
+type python
+python is hashed (/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/python)
 ##########
-pip3 --version
-pip 22.3.1 from /Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/site-packages/pip (python 3.11)
+which python
+/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/python
+##########
+python --version
+Python 3.11.0
+##########
+PYTHONPATH=:/Users/x299424/repo/GitHub/wip/workstation/src/lib/third_party:/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine
 ##########
 type 2to3
 2to3 is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/2to3
@@ -199,6 +288,16 @@ black --version
 black, 22.12.0 (compiled: no)
 Python (CPython) 3.11.0
 ##########
+type coverage
+coverage is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/coverage
+##########
+which coverage
+/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/coverage
+##########
+coverage --version
+Coverage.py, version 7.1.0 with C extension
+Full documentation is at https://coverage.readthedocs.io
+##########
 type coverage3
 /Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 16: type: coverage3: not found
 ##########
@@ -207,11 +306,32 @@ which coverage3
 coverage3 --version
 /Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 16: coverage3: command not found
 ##########
+type pip
+pip is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip
+##########
+which pip
+/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip
+##########
+pip --version
+pip 22.3.1 from /Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/site-packages/pip (python 3.11)
+##########
+type pip3
+pip3 is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip3
+##########
+which pip3
+/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip3
+##########
+pip3 --version
+pip 22.3.1 from /Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/site-packages/pip (python 3.11)
+##########
 type py.test
 py.test is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/py.test
 ##########
 which py.test
 /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/py.test
+##########
+py.test --version
+pytest 7.2.1
 ##########
 type pytest
 pytest is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pytest

@@ -8,96 +8,191 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-Rule=##########
-
 check() {
+    require_arguments $# 1
+
     echo $Rule
     echo $1
     $1
 }
 
 checkExecutable() {
+    require_arguments $# 1
+
     check "type $1"
     check "which $1"
 }
 
 checkVariable() {
+    require_arguments $# 2
+
     echo $Rule
     echo "$1=$2"
 }
 
-# operating system
-checkExecutable uname
-if [[ "$(uname)" -eq 'Darwin' ]] ; then
-    # NOTE: This works on macOS
-    check 'uname -a'
-else
-    # NOTE: This works on Ubuntu
-    check 'uname --all'
-fi
-checkVariable PATH "$PATH"
+report_anaconda() {
+    require_arguments $# 0
 
-# Anaconda
-checkExecutable conda
-check 'conda --version'
-checkExecutable mamba
-check 'mamba --version'
+    checkExecutable conda
+    check 'conda --version'
+    checkExecutable mamba
+    check 'mamba --version'
+}
 
-# Bash
-checkExecutable bash
-check 'bash --version'
+report_aws_cli() {
+    require_arguments $# 0
 
-# Git
-checkExecutable git
-check 'git --version'
+    checkExecutable aws
+    check 'aws --version'
+}
 
-# Homebrew
-checkExecutable brew
-check 'brew --version'
-check 'brew list --full-name --casks'
-check 'brew list --versions --casks'
-check 'brew list --full-name --formulae'
-check 'brew list --versions --formulae'
+report_bash() {
+    require_arguments $# 0
 
-# Python shared
-checkExecutable python
-check 'python --version'
-checkVariable PYTHONPATH "$PYTHONPATH"
+    checkExecutable bash
+    check 'bash --version'
+}
 
-# Python 2
-checkExecutable python2
-2>&1 check 'python2 --version'
-echo $Rule
-python2 -c 'import platform; print(platform.python_version())'
-echo $Rule
-python2 -c 'import os; print(os.sys.path)'
-checkExecutable pip
-check 'pip --version'
+report_git() {
+    require_arguments $# 0
 
-# Python 3
-checkExecutable python3
-check 'python3 --version'
-echo $Rule
-python3 -c 'import platform; print(platform.python_version())'
-echo $Rule
-python3 -c 'import os; print(os.sys.path)'
-checkExecutable pip3
-check 'pip3 --version'
+    checkExecutable git
+    check 'git --version'
+}
 
-# Python tools
-checkExecutable 2to3
-checkExecutable black
-check 'black --version'
-checkExecutable coverage3
-check 'coverage3 --version'
-checkExecutable py.test
-checkExecutable pytest
-2>&1 check 'pytest --version'
+report_homebrew() {
+    require_arguments $# 0
+
+    checkExecutable brew
+    check 'brew --version'
+    check 'brew list --full-name --casks'
+    check 'brew list --versions --casks'
+    check 'brew list --full-name --formulae'
+    check 'brew list --versions --formulae'
+}
+
+report_kubernetes() {
+    require_arguments $# 0
+
+    checkExecutable kubectl
+    check 'kubectl version'
+}
+
+report_openssl() {
+    require_arguments $# 0
+
+    checkExecutable openssl
+    check 'openssl version -a'
+    check 'openssl list-cipher-algorithms'
+    check 'openssl list-cipher-commands'
+    check 'openssl list-message-digest-algorithms'
+    check 'openssl list-message-digest-commands'
+    check 'openssl list-public-key-algorithms'
+    check 'openssl list-standard-commands'
+}
+
+report_operating_system() {
+    require_arguments $# 0
+
+    checkExecutable uname
+    if [[ "$(uname)" -eq 'Darwin' ]] ; then
+        # NOTE: This works on macOS
+        check 'uname -a'
+    else
+        # NOTE: This works on Ubuntu
+        check 'uname --all'
+    fi
+    checkVariable PATH "$PATH"
+}
+
+report_oracle_java() {
+    require_arguments $# 0
+
+    checkExecutable java
+    check 'java --version'
+    checkExecutable keytool
+    check 'keytool -showinfo -tls'
+}
+
+report_python2() {
+    require_arguments $# 0
+
+    checkExecutable python2
+    2>&1 check 'python2 --version'
+    echo $Rule
+    python2 -c 'import platform; print(platform.python_version())'
+    echo $Rule
+    python2 -c 'import os; print(os.sys.path)'
+}
+
+report_python3() {
+    require_arguments $# 0
+
+    checkExecutable python3
+    check 'python3 --version'
+    echo $Rule
+    python3 -c 'import platform; print(platform.python_version())'
+    echo $Rule
+    python3 -c 'import os; print(os.sys.path)'
+}
+
+report_python_openssl() {
+    require_arguments $# 0
+
+    check 'python -m OpenSSL.debug'
+}
+
+report_python_shared() {
+    require_arguments $# 0
+
+    checkExecutable python
+    check 'python --version'
+    checkVariable PYTHONPATH "$PYTHONPATH"
+}
+
+report_python_tools() {
+    # TODO: Implement how to report Python modules
+    require_arguments $# 0
+
+    checkExecutable 2to3
+    checkExecutable black
+    check 'black --version'
+    # checkExecutable compileall
+    checkExecutable coverage
+    check 'coverage --version'
+    checkExecutable coverage3
+    check 'coverage3 --version'
+    checkExecutable pip
+    check 'pip --version'
+    checkExecutable pip3
+    check 'pip3 --version'
+    checkExecutable py.test
+    check 'py.test --version'
+    checkExecutable pytest
+    2>&1 check 'pytest --version'
+    # checkExecutable tabnanny
+}
 
 main() {
     # Report tool status
+    require_arguments $# 0
 
-    # TODO: CONTENT
+    local -r Rule=##########
+
+    report_anaconda
+    report_aws_cli
+    report_bash
+    report_git
+    report_homebrew
+    report_kubernetes
+    report_openssl
+    report_operating_system
+    report_oracle_java
+    report_python2
+    report_python3
+    report_python_openssl
+    report_python_shared
+    report_python_tools
 
     return 0
 }
@@ -111,32 +206,5 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-# AWS CLI
-checkExecutable aws
-check 'aws --version'
-
-# Kubernetes 
-checkExecutable kubectl
-check 'kubectl version'
-
-# OpenSSL 
-checkExecutable openssl
-check 'openssl version -a'
-check 'openssl list-cipher-algorithms'
-check 'openssl list-cipher-commands'
-check 'openssl list-message-digest-algorithms'
-check 'openssl list-message-digest-commands'
-check 'openssl list-public-key-algorithms'
-check 'openssl list-standard-commands'
-
-# Oracle Java
-checkExecutable java
-check 'java --version'
-checkExecutable keytool
-check 'keytool -showinfo -tls'
-
-# Python OpenSSL
-check 'python -m OpenSSL.debug'
-
 DisabledContent
 
