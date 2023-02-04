@@ -118,6 +118,29 @@ def _generate_doc(dir_):
     markdown(document(), sub, "README.md")
 
 
+def _generate_home(dir_):
+    sub = dir_
+    markdown(document(), sub, "README.md")
+    sub = dir_ / "Linux"
+    markdown(document(), sub, "README.md")
+    sub = dir_ / "bin"
+    bash(executed(), sub, "24-bit-color.sh")
+    bash(executed(), sub, "clone_from_GitHub_by_Rob")
+    bash(executed(), sub, "clone_from_GitHub_by_others")
+    bash(executed(), sub, "clone_from_GitLab_by_Rob")
+    bash(executed(), sub, "clone_from_GitLab_by_others")
+    bash(executed(), sub, "git_config_user_Me_at_home")
+    bash(executed(), sub, "grep_stable_projects_for_all_phrases")
+    bash(executed(), sub, "grep_stable_projects_for_phrase")
+    bash(executed(), sub, "secure")
+    markdown(document(), sub, "README.md")
+    sub = dir_ / "bin" / "lib"
+    bash(sourced(), sub, "declare-git.bash")
+    markdown(document(), sub, "README.md")
+    sub = dir_ / "macOS"
+    markdown(document(), sub, "README.md")
+
+
 def _generate_src(dir_):
     sub = dir_
     _generate_src_app(sub / "app")
@@ -330,6 +353,7 @@ def generate(directory):
     _generate_briteonyx(directory / "BriteOnyx")
     _generate_cfg(directory / "cfg")
     _generate_doc(directory / "doc")
+    _generate_home(directory / "home")
     _generate_src(directory / "src")
 
 

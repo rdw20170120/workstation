@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-# This script is intended to be executed by a user in a Bash shell.
-
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+trap warn_on_error EXIT
+###############################################################################
 # Hunt for all interesting phrases in stable project directories
 
 script=$(which grep_stable_projects_for_phrase)
@@ -81,4 +84,23 @@ hunt $out Vault
 # proper name
 hunt $out Enflick
 hunt $out TextNow
+
+main() {
+    # TODO: DESCRIPTION
+
+    # TODO: CONTENT
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
 

@@ -1,11 +1,9 @@
-#!/bin/false
-# This script is intended to be sourced into another script within Bash.
-
-# HowTo import another SWA GitLab repository into our project
-# Create empty target repository within our SWA GitLab project
-# Create a local bare clone of the source repository (using maybe_bare below)
-# Change directory into the root of that local bare clone
-#
+#!/usr/bin/env false
+# Intended to be sourced in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
 # TODO: Implement: Consider installing Git pre-commit hook
 # First, by installing the tool: `brew install pre-commit`
 # Then by using the tool: `cd REPO ; pre-commit install`
@@ -102,6 +100,12 @@ maybe_pull() {
     echo "WARN:  Working directory is DIRTY: ${_Dir}"
   fi
 }
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
 
 : << 'DisabledContent'
 DisabledContent
