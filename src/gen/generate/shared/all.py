@@ -26,8 +26,6 @@ from .briteonyx.activate import build as activate
 def _generate(dir_):
     sub = dir_
     bash(activate(), sub, "activate.bash")
-    bash(activation(), sub, "alias.bash")
-    bash(activation(), sub, "context.bash")
     markdown(document(), sub, "HowTo-use_this_project.md")
     markdown(document(), sub, "LICENSE.md")
     markdown(document(), sub, "README.md")
