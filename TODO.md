@@ -22,6 +22,7 @@ unless they should merely be deleted.
 1. [ ] I/U = Item Description
 1. [ ]  /  = 
 
+1. [ ]  /  = Add encoding header to all Python source
 1. [ ]  /  = Create scripts & aliases for managing Anaconda environments
 1. [ ]  /  = Create scripts & aliases for managing Homebrew
 1. [ ]  /  = Create scripts & aliases for showing environment variables for Anaconda
