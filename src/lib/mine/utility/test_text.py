@@ -5,10 +5,7 @@
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
-from utility.text import dict_from_string
-from utility.text import replace_last
-from utility.text import string_without_prefix
-from utility.text import string_without_suffix
+from utility.text import *
 
 # Project modules   (relative references, NOT packaged, in project)
 
@@ -30,6 +27,39 @@ def test_dict_from_string():
     }
     the_string = str(the_dict)
     assert is_.equal(dict_from_string(the_string), the_dict)
+
+
+def test_generate():
+    assert is_.equal(generate(""), "")
+    assert is_.equal(generate("Test"), "Test")
+    assert is_.equal(generate("\n"), "\n")
+    assert is_.equal(generate(("")), "")
+    assert is_.equal(generate(("Test")), "Test")
+    assert is_.equal(generate(("a", "b", "c")), "abc")
+    assert is_.equal(generate((-1.0, -1, 0, 0.0, 1, 1.0)), "-1.0-100.011.0")
+    assert is_.equal(generate((None)), "")
+    assert is_.equal(generate(-1), "-1")
+    assert is_.equal(generate(-1.0), "-1.0")
+    assert is_.equal(generate(0), "0")
+    assert is_.equal(generate(0.0), "0.0")
+    assert is_.equal(generate(1), "1")
+    assert is_.equal(generate(1.0), "1.0")
+    assert is_.equal(generate(None), "")
+    assert is_.equal(generate([""]), "")
+    assert is_.equal(generate(["Test"]), "Test")
+    assert is_.equal(generate(["a", "b", "c"]), "abc")
+    assert is_.equal(generate([-1.0, -1, 0, 0.0, 1, 1.0]), "-1.0-100.011.0")
+    assert is_.equal(generate([None]), "")
+    assert is_.equal(generate({"a": ""}), "a: ''")
+    assert is_.equal(generate({"a": "Test"}), "a: 'Test'")
+    assert is_.equal(
+        generate({"a": "a", "b": "b", "c": "c"}), "a: 'a'b: 'b'c: 'c'"
+    )
+    assert is_.equal(
+        generate({"a": -1.0, "b": -1, "c": 0, "d": 0.0, "e": 1, "f": 1.0}),
+        "a: '-1.0'b: '-1'c: '0'd: '0.0'e: '1'f: '1.0'",
+    )
+    assert is_.equal(generate({"a": None}), "a: ''")
 
 
 def test_replace_last():

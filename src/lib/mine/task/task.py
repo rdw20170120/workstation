@@ -125,7 +125,11 @@ class FileSystemTask(PlainTask):
     def _abort_for_lack_of_disk_space(self, needed_space_in_bytes):
         du = disk_usage(self.config.filesystem_to_watch)
         if du.free < needed_space_in_bytes:
-            raise Abort("{} is aborting for lack of disk space".format(self))
+            raise Abort(
+                "{} is aborting for lack of disk space since {} is less than needed {} bytes".format(
+                    self, du.free, needed_space_in_bytes
+                )
+            )
 
     def _abort_for_quick_run(self, disk_space_estimate):
         if disk_space_estimate > self.config.quick_run_limit:

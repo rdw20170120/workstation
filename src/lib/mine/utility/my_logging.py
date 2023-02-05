@@ -22,6 +22,7 @@ import logzero
 from utility.color_log_formatter import ColorLogFormatter
 from utility.my_terminal import using_gnome
 from utility.my_terminal import using_iterm2
+from utility.text import generate
 
 # Project modules   (relative references, NOT packaged, in project)
 
@@ -50,7 +51,7 @@ def _ansi_color(name, index, codes):
         " known to logzero as ",
         name,
         Fore.RESET,
-        eol(),
+        "\n",
     ]
 
 
@@ -74,22 +75,6 @@ def _ansi_colors():
         _ansi_color("LIGHTCYAN_EX", 96, Fore.LIGHTCYAN_EX),
         _ansi_color("LIGHTWHITE_EX", 97, Fore.LIGHTWHITE_EX),
     ]
-
-
-def _dump():
-    """Dump current `log` configuration."""
-    content = [
-        _ansi_colors(),
-        nvp("my_terminal.using_gnome", using_gnome()),
-        eol(),
-        nvp("my_terminal.using_iterm2", using_iterm2()),
-        eol(),
-        nvp("logzero.logger", logzero.logger),
-        eol(),
-        nvp("logging.getLogger()", logging.getLogger()),
-        eol(),
-    ]
-    generate(content, visitor_map=my_visitor_map)
 
 
 def _formatter(for_stderr=False):
@@ -184,10 +169,20 @@ def log_exception(logger, exception, with_traceback=False):
         logger.error("%r", exception)
 
 
-def report_configuration():
-    _dump()
-    # TODO: Temporarily increase verbosity to show all samples
-    _log_samples()
+def configuration():
+    content = [
+        "Logging configuration:\n",
+        _ansi_colors(),
+        {"my_terminal.using_gnome": using_gnome()},
+        "\n",
+        {"my_terminal.using_iterm2": using_iterm2()},
+        "\n",
+        {"logzero.logger": repr(logzero.logger)},
+        "\n",
+        {"logging.getLogger()": repr(logging.getLogger())},
+        "\n",
+    ]
+    return content
 
 
 def set_log_level(loggers, log_level):
@@ -196,58 +191,4 @@ def set_log_level(loggers, log_level):
 
 
 """DisabledContent
-from src_gen.source import my_visitor_map as parent_visitor_map
-from src_gen.structure import *
-from throw_out_your_templates.section_3 import VisitorMap
-
-my_visitor_map = VisitorMap(parent_map=parent_visitor_map)
-
-@my_visitor_map.register(logging.Formatter)
-def _visit_formatter(element, walker):
-    walker.emit('Formatter(')
-#   walker.emit('attributes: ')
-#   walker.walk(repr(dir(element)))
-    walker.emit(')')
-
-@my_visitor_map.register(logzero.LogFormatter)
-def _visit_logformatter(element, walker):
-    walker.emit('LogFormatter(')
-    walker.emit('_colors: ')
-    walker.walk(repr(element._colors))
-#   walker.emit(', attributes: ')
-#   walker.walk(repr(dir(element)))
-    walker.emit(')')
-
-@my_visitor_map.register(logging.Logger)
-def _visit_logger(element, walker):
-    walker.emit('Logger(')
-    walker.emit('name=')
-    walker.walk(element.name)
-    walker.emit(', disabled=')
-    walker.walk(element.disabled)
-    walker.emit(', getEffectiveLevel=')
-    walker.walk(element.getEffectiveLevel())
-    walker.emit(', propagate=')
-    walker.walk(element.propagate)
-#   walker.emit(', attributes: ')
-#   walker.walk(repr(dir(element)))
-    walker.emit(')')
-    walker.emit('\nhandlers:\n')
-    for h in element.handlers:
-        walker.walk(h)
-        walker.emit('\n')
-
-@my_visitor_map.register(logging.StreamHandler)
-def _visit_streamhandler(element, walker):
-    walker.emit('StreamHandler(')
-    walker.emit('name=')
-    walker.walk(element.name)
-    walker.emit(', formatter=')
-    walker.walk(element.formatter)
-    walker.emit(', level=')
-    walker.walk(element.level)
-#   walker.emit(', attributes: ')
-#   walker.walk(repr(dir(element)))
-    walker.emit(')')
-
 """

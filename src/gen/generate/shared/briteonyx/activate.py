@@ -342,10 +342,13 @@ def _remember_paths():
         comment("the project-specific script"),
         comment("to avoid that collision."),
         line(),
-        export(vn("BO_PathProject"), project_path), eol(),
+        export(vn("BO_PathProject"), project_path),
+        eol(),
         line(),
-        export_if_null("BO_PathSystem", vr("PATH")), eol(),
-        export_if_null("BO_PathUser", x(vr("HOME"), "/bin")), eol(),
+        export_if_null("BO_PathSystem", vr("PATH")),
+        eol(),
+        export_if_null("BO_PathUser", x(vr("HOME"), "/bin")),
+        eol(),
         line(),
     ]
 

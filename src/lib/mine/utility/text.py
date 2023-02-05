@@ -20,6 +20,24 @@ def dict_from_string(the_string):
     return result
 
 
+def generate(content):
+    """Return content as a flattened string."""
+    result = ""
+    if isinstance(content, str):
+        result = content
+    elif isinstance(content, (list, set, tuple)):
+        for c in content:
+            result += generate(c)
+    elif isinstance(content, dict):
+        for k, v in content.items():
+            result += "%s: '%s'" % (generate(k), generate(v))
+    elif content is None:
+        result = ""
+    else:
+        result = str(content)
+    return result
+
+
 def replace_last(the_string, find, replace):
     if the_string is None:
         return None

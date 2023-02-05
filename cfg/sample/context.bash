@@ -66,7 +66,45 @@ remembering pytest
 export tabnanny="${python3} -m tabnanny"
 remembering tabnanny
 
-# While testing, execute a 'cycle'
+###############################################################################
+# NOTE: Use the following settings
+# activate special task execution modes
+# as documented in the
+# src/lib/mine/task/config.py Python module.
+
+# This block of settings
+# are defaults for the safest task execution mode.
+
+export FakeIt=defined
+export Quick=1000000
+export ReservedDiskSpaceInBytes=$((10 * 1024 * 1024 * 1024))
+export Run=Dry
+
+# This block of settings
+# can be selectively uncommented
+# to relax the previous safeties.
+# NOTE: It is best to leave these commented-out here,
+# then manually execute these commands individually
+# to alter only the current shell
+# while you are testing.
+
+# export Run=Force
+# unset FakeIt
+# unset Quick
+# unset Run
+
+###############################################################################
+# NOTE:  It can be extremely useful
+# to test BriteOnyx activation
+# by invoking it in a subshell like so:
+# `cd PROJECT_ROOT_DIRECTORY`
+# `bash -c 'source activate.bash'`
+#
+# During such testing,
+# it can be useful
+# to also uncomment the follow lines
+# to execute a 'cycle' (see the alias).
+#
 # test-run
 # abort_on_fail $? "from test-run"
 # gen-run -vvv
@@ -106,32 +144,6 @@ export BO_PathTestSSL=${BO_DirHomeTestSSL}
 export BO_PathTool=${BO_PathJava}:${BO_PathConfluent}:${BO_PathTestSSL}:${BO_PathTool}
 
 source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
-
-# NOTE: Use the following settings
-# activate special task execution modes
-# as documented in the
-# src/lib/mine/task/config.py Python module.
-
-# This block of settings
-# are defaults for the safest task execution mode.
-
-export FakeIt=defined
-export Quick=1000000
-export ReservedDiskSpaceInBytes=$((10 * 1024 * 1024 * 1024))
-export Run=Dry
-
-# This block of settings
-# can be selectively uncommented
-# to relax the previous safeties.
-# NOTE: It is best to leave these commented-out here,
-# then manually execute these commands individually
-# to alter only the current shell
-# while you are testing.
-
-# export Run=Force
-# unset FakeIt
-# unset Quick
-# unset Run
 
 DisabledContent
 
