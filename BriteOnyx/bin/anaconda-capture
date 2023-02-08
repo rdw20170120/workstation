@@ -9,24 +9,9 @@ trap warn_on_error EXIT
     exit 99
 
 main() {
-    # Report Python code status
-    require_arguments $# 0
+    # TODO: DESCRIPTION
 
-    require_value tabnanny
-
-    Out=${BO_Project}/out/tabnanny.out
-     >"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/BriteOnyx/bin"
-    >>"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/bin"
-    >>"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/src/app"
-    >>"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/src/gen"
-    >>"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/src/lib"
-    cat "${Out}" \
-        | grep -v 'listing directory' \
-        | grep -v 'Clean bill of health.'
-    log_debug "No output means all Python code passes all TabNanny checks"
-
-    Out=${BO_Project}/out/py-format.out
-    &>"${Out}" py-format
+    # TODO: CONTENT
 
     return 0
 }
