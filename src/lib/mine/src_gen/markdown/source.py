@@ -28,6 +28,7 @@ def generate(
     filename=None,
     visitor_map=None,
 ):
+    # TODO: REFACTOR: Reduce code duplication
     if visitor_map is None:
         visitor_map = my_visitor_map
     source = Markdown(visitor_map, content)

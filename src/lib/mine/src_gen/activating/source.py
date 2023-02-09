@@ -9,16 +9,16 @@ from pathlib import Path
 from throw_out_your_templates.section_3 import VisitorMap
 
 # Project modules   (relative references, NOT packaged, in project)
-from src_gen.source import my_visitor_map as parent_visitor_map
-from utility.filesystem import maybe_create_directory
+from src_gen.bash.source import BashScript
+from src_gen.bash.source import my_visitor_map as parent_visitor_map
 from utility import my_assert as is_
-from src_gen.source import Content
+from utility.filesystem import maybe_create_directory
 
 
 my_visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
 
-class Script(Content):
+class ActivatingBashScript(BashScript):
     def __init__(self, visitor_map, content):
         super().__init__(visitor_map, content)
 
@@ -32,7 +32,7 @@ def generate(
     # TODO: REFACTOR: Reduce code duplication
     if visitor_map is None:
         visitor_map = my_visitor_map
-    source = Script(visitor_map, content)
+    source = ActivatingBashScript(visitor_map, content)
     if directory is None:
         source.generate()
     elif filename is None:

@@ -3,21 +3,20 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.markdown.complete import document
+from src_gen.bash.source import generate as bash
 from src_gen.briteonyx.complete import executed
 from src_gen.briteonyx.complete import sourced
-from src_gen.bash.complete import activation
+from src_gen.briteonyx.source import generate as briteonyx
+from src_gen.markdown.complete import document
+from src_gen.markdown.source import generate as markdown
 from src_gen.python.complete import generator
 from src_gen.python.complete import library
 from src_gen.python.complete import main
 from src_gen.python.complete import package
 from src_gen.python.complete import script
 from src_gen.python.complete import suite
-from utility.config import Config
-from src_gen.bash.source import generate as bash
-from src_gen.briteonyx.source import generate as briteonyx
-from src_gen.markdown.source import generate as markdown
 from src_gen.python.source import generate as python
+from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)
 
@@ -26,8 +25,8 @@ def _generate_bin(dir_):
     sub = dir_
     briteonyx(executed(), sub, "sync_on_macOS")
     sub = dir_ / "lib"
-    briteonyx(activation(), sub, "configure-Anaconda.bash")
-    briteonyx(activation(), sub, "declare.bash")
+    briteonyx(sourced(), sub, "configure-Anaconda.bash")
+    briteonyx(sourced(), sub, "declare.bash")
 
 
 def _generate_home(dir_):

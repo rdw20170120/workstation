@@ -68,29 +68,6 @@ def echo_warn(*element):
 ###############################################################################
 
 
-def log_debug(*element):
-    return command("log_debug", dq(element))
-
-
-def log_error(*element):
-    return command("log_error", dq(element))
-
-
-def log_good(*element):
-    return command("log_good", dq(element))
-
-
-def log_info(*element):
-    return command("log_info", dq(element))
-
-
-def log_warn(*element):
-    return command("log_warn", dq(element))
-
-
-###############################################################################
-
-
 def cc(command_embedded_within_comment):
     assert is_.instance(command_embedded_within_comment, _Command)
     return bt(command_embedded_within_comment)
@@ -242,12 +219,6 @@ def local(expression, integer=False, readonly=False):
             return command("local", "-r", expression)
         else:
             return command("local", expression)
-
-
-def remembering(name):
-    return [
-        command("remembering", name),
-    ]
 
 
 ###############################################################################
@@ -476,16 +447,7 @@ def tracing_in_header():
     ]
 
 
-def header_activation():
-    return [
-        shebang_sourced(),
-        comment("Intended to be sourced in a Bash shell during activation."),
-        tracing_in_header(),
-        no(set_("-e")),
-        no(trap("...", "EXIT")),
-        rule(),
-    ]
-
+###############################################################################
 
 def header_executed():
     return [
@@ -510,11 +472,7 @@ def header_sourced():
     ]
 
 
-def maybe_copy_file(source, target):
-    return [
-        command("maybe_copy_file", source, target),
-    ]
-
+###############################################################################
 
 def maybe_source(file_):
     return [

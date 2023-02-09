@@ -4,11 +4,13 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.bash.structure import *
+from src_gen.activating.structure import *
 from src_gen.briteonyx.source import my_visitor_map
 
 # Project modules   (relative references, NOT packaged, in project)
 
+
+###############################################################################
 
 def abort_if_not_activated():
     return [
@@ -22,6 +24,30 @@ def abort_if_not_activated():
         indent(),
         exit(99),
         eol(),
+    ]
+
+###############################################################################
+
+def header_executed():
+    return [
+        shebang_bash(),
+        comment("Intended to be executed in a Bash shell."),
+        tracing_in_header(),
+        no(set_("-e")),
+        trap("warn_on_error", "EXIT"),
+        eol(),
+        rule(),
+    ]
+
+
+def header_sourced():
+    return [
+        shebang_sourced(),
+        comment("Intended to be sourced in a Bash shell."),
+        tracing_in_header(),
+        no(set_("-e")),
+        no(trap("...", "EXIT")),
+        rule(),
     ]
 
 

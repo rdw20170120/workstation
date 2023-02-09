@@ -9,15 +9,28 @@ from src_gen.bash.structure import *
 # Project modules   (relative references, NOT packaged, in project)
 
 
-def activation():
+def executed():
     return [
-        header_activation(),
-        todo("DESCRIPTION"),
-        disable_tracing_unless_maximal(),
+        header_executed(),
         line(),
-        todo("CONTENT"),
+        function(
+            "main",
+            [
+                indent(),
+                todo("DESCRIPTION"),
+                line(),
+                indent(),
+                todo("CONTENT"),
+                line(),
+                indent(),
+                return_(0),
+                eol(),
+            ],
+        ),
+        eol(),
         line(),
-        enable_tracing_unless_minimal(),
+        line("main $@"),
+        line(),
         disabled_content_footer(),
     ]
 

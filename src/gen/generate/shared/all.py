@@ -3,21 +3,21 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.markdown.complete import document
+from src_gen.bash.source import generate as bash
+from src_gen.activating.complete import sourced as activating
 from src_gen.briteonyx.complete import executed
 from src_gen.briteonyx.complete import sourced
-from src_gen.bash.complete import activation
+from src_gen.briteonyx.source import generate as briteonyx
+from src_gen.markdown.complete import document
+from src_gen.markdown.source import generate as markdown
 from src_gen.python.complete import generator
 from src_gen.python.complete import library
 from src_gen.python.complete import main
 from src_gen.python.complete import package
 from src_gen.python.complete import script
 from src_gen.python.complete import suite
-from utility.config import Config
-from src_gen.bash.source import generate as bash
-from src_gen.briteonyx.source import generate as briteonyx
-from src_gen.markdown.source import generate as markdown
 from src_gen.python.source import generate as python
+from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)
 from .briteonyx.activate import build as activate
@@ -80,14 +80,14 @@ def _generate_briteonyx(dir_):
     python(script(), sub, "list")
     python(script(), sub, "parquet-print")
     sub = dir_ / "bin" / "lib"
-    bash(activation(), sub, "alias.bash")
-    bash(activation(), sub, "configure-Python.bash")
-    bash(activation(), sub, "declare-base.bash")
-    bash(activation(), sub, "declare-common.bash")
-    bash(activation(), sub, "declare-log4bash.bash")
-    bash(activation(), sub, "declare-require.bash")
-    bash(activation(), sub, "declare.bash")
-    bash(activation(), sub, "set_path.bash")
+    bash(activating(), sub, "alias.bash")
+    bash(activating(), sub, "configure-Python.bash")
+    bash(activating(), sub, "declare-base.bash")
+    bash(activating(), sub, "declare-common.bash")
+    bash(activating(), sub, "declare-log4bash.bash")
+    bash(activating(), sub, "declare-require.bash")
+    bash(activating(), sub, "declare.bash")
+    bash(activating(), sub, "set_path.bash")
     markdown(document(), sub, "README.md")
     sub = dir_ / "doc"
     markdown(document(), sub, "HowTo-activate_this_project.md")
@@ -110,8 +110,8 @@ def _generate_cfg(dir_):
     sub = dir_
     markdown(document(), sub, "README.md")
     sub = dir_ / "sample"
-    bash(activation(), sub, "alias.bash")
-    bash(activation(), sub, "context.bash")
+    bash(activating(), sub, "alias.bash")
+    bash(activating(), sub, "context.bash")
     markdown(document(), sub, "README.md")
 
 
