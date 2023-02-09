@@ -3,6 +3,7 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.activating.source import generate as activating
 from src_gen.bash.source import generate as bash
 from src_gen.activating.complete import sourced as activating
 from src_gen.briteonyx.complete import executed
@@ -20,7 +21,7 @@ from src_gen.python.source import generate as python
 from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)
-from .briteonyx.activate import build as activate
+from .activating.activate import build as activate
 
 
 def _generate(dir_):
@@ -80,14 +81,14 @@ def _generate_briteonyx(dir_):
     python(script(), sub, "list")
     python(script(), sub, "parquet-print")
     sub = dir_ / "bin" / "lib"
-    bash(activating(), sub, "alias.bash")
-    bash(activating(), sub, "configure-Python.bash")
-    bash(activating(), sub, "declare-base.bash")
-    bash(activating(), sub, "declare-common.bash")
-    bash(activating(), sub, "declare-log4bash.bash")
-    bash(activating(), sub, "declare-require.bash")
-    bash(activating(), sub, "declare.bash")
-    bash(activating(), sub, "set_path.bash")
+    activating(sourced(), sub, "configure-Python.bash")
+    activating(sourced(), sub, "declare-base.bash")
+    activating(sourced(), sub, "declare-common.bash")
+    activating(sourced(), sub, "declare-log4bash.bash")
+    activating(sourced(), sub, "declare-require.bash")
+    activating(sourced(), sub, "declare.bash")
+    activating(sourced(), sub, "set_path.bash")
+    briteonyx(sourced(), sub, "alias.bash")
     markdown(document(), sub, "README.md")
     sub = dir_ / "doc"
     markdown(document(), sub, "HowTo-activate_this_project.md")
@@ -110,8 +111,8 @@ def _generate_cfg(dir_):
     sub = dir_
     markdown(document(), sub, "README.md")
     sub = dir_ / "sample"
-    bash(activating(), sub, "alias.bash")
-    bash(activating(), sub, "context.bash")
+    activating(sourced(), sub, "alias.bash")
+    activating(sourced(), sub, "context.bash")
     markdown(document(), sub, "README.md")
 
 

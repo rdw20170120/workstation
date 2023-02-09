@@ -55,13 +55,11 @@ def header_activation():
 
 
 def header_executed():
-    # TODO: ABORT
-    raise "Unimplemented"
+    raise NotImplementedError
 
 
 def header_sourced():
-    # TODO: ABORT
-    raise "Unimplemented"
+    raise NotImplementedError
 
 
 ###############################################################################

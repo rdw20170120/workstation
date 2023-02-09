@@ -3,8 +3,7 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-# TODO: from src_gen.briteonyx.structure import *
-from src_gen.bash.structure import *
+from src_gen.activating.structure import *
 
 # Project modules   (relative references, NOT packaged, in project)
 
