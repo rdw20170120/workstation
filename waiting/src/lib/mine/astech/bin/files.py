@@ -8,9 +8,7 @@ import shutil
 
 
 class FileManager(object):
-    def copy_directory(
-        self, source, target, pattern=None, flatten=False, maybe=False
-    ):
+    def copy_directory(self, source, target, pattern=None, flatten=False, maybe=False):
         # TODO: FIX: implement use of glob pattern
         for name in self.names_in_directory(source):
             next_source = os.path.join(source, name)
@@ -28,10 +26,7 @@ class FileManager(object):
                         self.copy_file(next_source, next_target, maybe)
             except (IOError, os.error) as e:
                 print(
-                    (
-                        'Cannot copy "%s"\n  to "%s"\n  because %s'
-                        % (source, target, e)
-                    )
+                    ('Cannot copy "%s"\n  to "%s"\n  because %s' % (source, target, e))
                 )
 
     def copy_file(self, source, target, maybe=False):
@@ -175,6 +170,4 @@ Available commands:
             maybe=True,
         )
     else:
-        raise ValueError(
-            'Command "%s" is unrecognized, try "help"!' % (command,)
-        )
+        raise ValueError('Command "%s" is unrecognized, try "help"!' % (command,))

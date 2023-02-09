@@ -32,9 +32,7 @@ class Config(object):
 
     @property
     def pid_file(self):
-        return self.project_directory / (
-            self.application_name + self.pid_suffix
-        )
+        return self.project_directory / (self.application_name + self.pid_suffix)
 
     @property
     def pid_suffix(self):

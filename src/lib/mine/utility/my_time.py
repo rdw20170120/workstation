@@ -253,9 +253,7 @@ class ProlepticGregorianOrdinal(object):
             self._ordinal = value
         else:
             raise ValueError(
-                "Cannot handle value '{}' of type '{}'".format(
-                    value, type(value)
-                )
+                "Cannot handle value '{}' of type '{}'".format(value, type(value))
             )
 
     def as_date(self):
@@ -273,9 +271,7 @@ class UnixTime(object):
             self._float_seconds = value
         else:
             raise ValueError(
-                "Cannot handle value '{}' of type '{}'".format(
-                    value, type(value)
-                )
+                "Cannot handle value '{}' of type '{}'".format(value, type(value))
             )
 
     def as_datetime(self):

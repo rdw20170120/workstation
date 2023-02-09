@@ -11,10 +11,10 @@ e.g., those consisting of 'return [...]'.
 from pytest import raises
 
 # Library modules   (absolute references, NOT packaged, in project)
-from utility import my_assert as is_
-from src_gen.script.source import my_visitor_map
-from src_gen.script.structure import *
 from src_gen.renderer import Renderer
+from src_gen.script.file import my_visitor_map
+from src_gen.script.structure import *
+from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
 

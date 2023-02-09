@@ -38,9 +38,7 @@ class AwsService(object):
             self._profile_name,
             self._region_name,
         )
-        self._session = Session(
-            profile_name=profile_name, region_name=region_name
-        )
+        self._session = Session(profile_name=profile_name, region_name=region_name)
         self._client = self._session.client(self._service_name)
 
     @property

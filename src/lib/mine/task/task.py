@@ -38,9 +38,7 @@ class PlainTask(object):
 
     def _execute(self):
         """MUST be overridden in subclasses, WITHOUT a call to super()."""
-        raise NotImplementedError(
-            "_execute() MUST be overridden in subclasses"
-        )
+        raise NotImplementedError("_execute() MUST be overridden in subclasses")
 
     def _fake_it(self):
         """MAY be overridden in subclasses, starting with call to super()."""
@@ -71,9 +69,7 @@ class PlainTask(object):
                 self._execute()
             self._post_execute()
         except Abort as e:
-            self._log.debug(
-                "From %s execute() except Abort", self.__class__.__name__
-            )
+            self._log.debug("From %s execute() except Abort", self.__class__.__name__)
             self._log.warn(repr(e))
             raise
         except KeyboardInterrupt as e:
@@ -91,9 +87,7 @@ class PlainTask(object):
             self._log.warn(repr(e))
             raise
         except Skip as e:
-            self._log.debug(
-                "From %s execute() except Skip", self.__class__.__name__
-            )
+            self._log.debug("From %s execute() except Skip", self.__class__.__name__)
             self._log.info(repr(e))
             raise
         except BaseException as e:
@@ -185,8 +179,7 @@ class FileSystemTask(PlainTask):
                     )
             else:
                 self._log.debug(
-                    "%s encountered exception"
-                    + ", no need to delete absent target %s",
+                    "%s encountered exception" + ", no need to delete absent target %s",
                     self,
                     target.for_log(),
                 )
@@ -204,9 +197,7 @@ class FileSystemTask(PlainTask):
     def _pre_execute(self):
         """MAY be overridden in subclasses, starting with call to super()."""
         super()._pre_execute()
-        self._abort_for_lack_of_disk_space(
-            self.config.reserved_disk_space_in_bytes
-        )
+        self._abort_for_lack_of_disk_space(self.config.reserved_disk_space_in_bytes)
         self._register_sources()
         self._abort_if_source_is_missing()
 
@@ -251,14 +242,10 @@ class FileSystemTask(PlainTask):
         if force:
             result = True
             if target.is_dir():
-                self._log.info(
-                    "Target creation forced, deleting %s", target.for_log()
-                )
+                self._log.info("Target creation forced, deleting %s", target.for_log())
                 delete_directory_tree(target, force=True)
             elif target.is_file():
-                self._log.info(
-                    "Target creation forced, deleting %s", target.for_log()
-                )
+                self._log.info("Target creation forced, deleting %s", target.for_log())
                 delete_file(target)
             else:
                 self._log.error(

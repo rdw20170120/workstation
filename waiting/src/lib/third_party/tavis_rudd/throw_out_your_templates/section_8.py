@@ -57,17 +57,13 @@ class HTML5Doc(object):
     def __init__(self, body, head=None):
         self.body = body
         self.head = (
-            head
-            if head
-            else htmltags.head[title["An example"], meta(charset="UTF-8")]
+            head if head else htmltags.head[title["An example"], meta(charset="UTF-8")]
         )
 
 
 @examples_vmap.register(HTML5Doc)
 def visit_html5_doc(doc, walker):
-    walker.walk(
-        [safe_unicode("<!DOCTYPE html>"), html(lang="en")[doc.head, doc.body]]
-    )
+    walker.walk([safe_unicode("<!DOCTYPE html>"), html(lang="en")[doc.head, doc.body]])
 
 
 Example(

@@ -37,12 +37,8 @@ def concatenate_text_file(target_file, source_file, encoding=None):
     assert is_.absolute_file(source_file)
     if encoding is None:
         encoding = "utf_8"
-    with target_file.open(
-        encoding=encoding, mode="at", newline=None
-    ) as writer:
-        with source_file.open(
-            encoding=encoding, mode="rt", newline=None
-        ) as reader:
+    with target_file.open(encoding=encoding, mode="at", newline=None) as writer:
+        with source_file.open(encoding=encoding, mode="rt", newline=None) as reader:
             for line in reader:
                 writer.write(line)
 
@@ -51,9 +47,7 @@ def concatenate_text_files(target_file, source_files, encoding=None):
     if encoding is None:
         encoding = "utf_8"
     assert is_.instance(source_files, list)
-    with target_file.open(
-        encoding=encoding, mode="wt", newline=None
-    ) as writer:
+    with target_file.open(encoding=encoding, mode="wt", newline=None) as writer:
         for s in source_files:
             assert is_.absolute_file(s)
             with s.open(encoding=encoding, mode="rt", newline=None) as reader:

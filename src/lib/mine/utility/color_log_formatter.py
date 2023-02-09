@@ -18,13 +18,7 @@ _location = "%(name)s:%(lineno)d"
 _message = "%(message)s"
 _time = "%(asctime)s"
 _prefix = str(
-    "%(color)s["
-    + _levelname
-    + " "
-    + _time
-    + " "
-    + _location
-    + "]%(end_color)s"
+    "%(color)s[" + _levelname + " " + _time + " " + _location + "]%(end_color)s"
 )
 DEFAULT_FORMAT = _prefix + " " + _message
 

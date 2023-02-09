@@ -19,9 +19,7 @@ from utility.my_logging import log_exception
 
 
 class Renderer(object):
-    def __init__(
-        self, visitor_map=default_visitor_map, encoding=default_encoding
-    ):
+    def __init__(self, visitor_map=default_visitor_map, encoding=default_encoding):
         self._encoding = encoding
         self._log = getLogger(self.__class__.__name__)
         self._visitor_map = visitor_map
@@ -39,9 +37,7 @@ class Renderer(object):
                 self._log.info("Printing rendered content to stdout")
                 print((self._serialize(content)))
             else:
-                self._log.info(
-                    "Writing rendered content to file '%s'", file_path
-                )
+                self._log.info("Writing rendered content to file '%s'", file_path)
                 with open(file_path, mode="wt", newline=None) as f:
                     f.write(self._serialize(content))
         except TypeError as e:

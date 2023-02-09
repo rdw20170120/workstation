@@ -22,9 +22,7 @@ class EC2(AwsService):
     def _describe_availability_zones(self):
         result = []
         try:
-            result = self.client.describe_availability_zones()[
-                "AvailabilityZones"
-            ]
+            result = self.client.describe_availability_zones()["AvailabilityZones"]
         except ClientError as e:
             if "AccessDenied" in str(e):
                 self._log.warn(

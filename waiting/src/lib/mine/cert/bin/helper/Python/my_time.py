@@ -45,9 +45,7 @@ def timestamp_as_datetime_utc(timestamp):
     elif has_type(timestamp, IntType):
         result = datetime.datetime.utcfromtimestamp(timestamp)
     else:
-        raise ValueError(
-            unrecognized_message(timestamp, type(timestamp), "type")
-        )
+        raise ValueError(unrecognized_message(timestamp, type(timestamp), "type"))
     assert has_type(result, datetime.datetime), has_type_message(
         result, datetime.datetime
     )

@@ -81,9 +81,7 @@ def _formatter(for_stderr=False):
     if for_stderr:
         return ColorLogFormatter(colors=_level_colors())
     else:
-        return logging.Formatter(
-            fmt=DEFAULT_FORMAT, datefmt=DEFAULT_DATE_FORMAT
-        )
+        return logging.Formatter(fmt=DEFAULT_FORMAT, datefmt=DEFAULT_DATE_FORMAT)
 
 
 def _level_colors():

@@ -74,9 +74,7 @@ def test_tracked_path():
     assert is_.not_none(a)
     assert is_.equal(a, PosixPath("/123"))
     assert is_.equal(a.__fspath__(), "/123")
-    assert is_.equal(
-        repr(a), "TrackedPath('Test', PosixPath('/123'), PosixPath('.'))"
-    )
+    assert is_.equal(repr(a), "TrackedPath('Test', PosixPath('/123'), PosixPath('.'))")
     assert is_.equal(str(a), a)
     assert is_.equal(str(a), a.__fspath__())
     assert is_.equal(a.for_log(), "'Test' path '.'")

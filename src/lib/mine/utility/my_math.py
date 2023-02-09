@@ -16,9 +16,7 @@ def assert_nan(actual_value):
     if result:
         return result
     else:
-        raise AssertionError(
-            "{!r} is NOT a not-a-number (NaN)".format(actual_value)
-        )
+        raise AssertionError("{!r} is NOT a not-a-number (NaN)".format(actual_value))
 
 
 class Percentage(object):
@@ -57,9 +55,7 @@ class Rate(Percentage):
         self._numerator_units = numerator_units
         self._rate_units = rate_units
         if self._rate_units is None:
-            self._rate_units = "{}/{}".format(
-                numerator_units, denominator_units
-            )
+            self._rate_units = "{}/{}".format(numerator_units, denominator_units)
 
     @property
     def denominator_units(self):

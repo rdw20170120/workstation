@@ -14,15 +14,10 @@ omit =
   */app/MODULE/task/*.py
   */config.py
   */conftest.py
-  */generate/custom/all.py
-  */generate/shared/all.py
-  */generate/shared/briteonyx/*.py
   */mine/aws/ec2.py
   */mine/aws/s3.py
   */mine/src_gen/*/complete.py
-  */mine/src_gen/*/source.py
   */mine/src_gen/renderer.py
-  */mine/src_gen/source.py
   */mine/task/*.py
   */mine/utility/color_log_formatter.py
   */mine/utility/environment.py

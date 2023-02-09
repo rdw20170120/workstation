@@ -30,8 +30,4 @@ class safe_unicode(str):
 
     def __add__(self, o):
         res = super(safe_unicode, self).__add__(o)
-        return (
-            safe_unicode(res)
-            if isinstance(o, (safe_unicode, safe_bytes))
-            else res
-        )
+        return safe_unicode(res) if isinstance(o, (safe_unicode, safe_bytes)) else res

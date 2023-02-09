@@ -6,9 +6,9 @@ from pathlib import Path
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from utility import my_assert as is_
+from src_gen.content import my_visitor_map
 from src_gen.structure import *
-from src_gen.source import my_visitor_map
+from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
 

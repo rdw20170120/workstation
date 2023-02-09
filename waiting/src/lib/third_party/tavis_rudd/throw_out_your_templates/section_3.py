@@ -31,9 +31,7 @@ class VisitorMap(dict):
         `None`.
         """
         py_type = type(obj)
-        result = self.get(py_type) or self._get_parent_type_visitor(
-            obj, py_type
-        )
+        result = self.get(py_type) or self._get_parent_type_visitor(obj, py_type)
         if result:
             return result
         elif self.parent_map is not None:

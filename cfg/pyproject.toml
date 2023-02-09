@@ -10,9 +10,10 @@ exclude = '''
   # By more interesting patterns
   | bin/.*-run$
   | bin/all-.*$
+  | bin/anaconda-.*$
   | bin/app-.*$
-  | bin/dep-.*$
   | bin/env-.*$
+  | bin/homebrew-.*$
   | bin/prj-.*$
   | bin/pve-.*$
   | bin/py-.*$
@@ -21,10 +22,6 @@ exclude = '''
   | bin/sync_on_macOS$
   | bin/tool-.*$
   # Project-specific
-  | Jenkins/run$
-  | bin/diff_.*$
-  | bin/filter_.*$
-  | cfg/DESIRED/.*$
   | home/\.ssh/.*$
   | home/bin/clone_.*$
   | home/bin/git_.*$
@@ -48,7 +45,6 @@ force-exclude = '''
   | out/.*$
   # By specific pathname
   | Dockerfile$
-  | Jenkinsfile$
   | \.DS_Store$
   | \.bash_logout$
   | \.bash_profile$
@@ -85,8 +81,8 @@ force-exclude = '''
   # By more interesting patterns
 )
 '''
-include = ''
-line-length = 79
-target-version = ['py36']
+# include = ''
+# line-length = 79
+# target-version = ['py36']
 # verbose = true
 

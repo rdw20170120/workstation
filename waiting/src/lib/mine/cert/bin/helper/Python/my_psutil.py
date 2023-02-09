@@ -24,9 +24,7 @@ def get_uptime():
 
 
 def process_is_running(pid):
-    return (
-        psutil.Process(pid).is_running() if psutil.pid_exists(pid) else False
-    )
+    return psutil.Process(pid).is_running() if psutil.pid_exists(pid) else False
 
 
 def report_process(pid=None):
@@ -34,13 +32,7 @@ def report_process(pid=None):
     print(("Reporting process pid {0}:".format(pid)))
     with p.oneshot():
         print(("cmdline: {0}".format(p.cmdline())))
-        print(
-            (
-                "create_time: {0}".format(
-                    timestamp_as_datetime_utc(p.create_time())
-                )
-            )
-        )
+        print(("create_time: {0}".format(timestamp_as_datetime_utc(p.create_time()))))
         print(("cwd: {0}".format(p.cwd())))
         print(("exe: {0}".format(p.exe())))
         print(("hash: {0}".format(hash(p))))

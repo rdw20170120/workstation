@@ -113,9 +113,7 @@ class S3(AwsService):
                 result.append(prefix.get("Prefix"))
             else:
                 self._log.debug("Found None")
-        self._log.debug(
-            "Bucket '%s' has common prefixes: %r", bucket_name, result
-        )
+        self._log.debug("Bucket '%s' has common prefixes: %r", bucket_name, result)
         return result
 
     def list_bucket_objects(self, bucket_name, prefix):

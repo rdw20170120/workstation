@@ -60,9 +60,7 @@ def existing_absolute_path(path):
     if result:
         return result
     else:
-        raise AssertionError(
-            "{!r} is NOT an existing absolute path".format(path)
-        )
+        raise AssertionError("{!r} is NOT an existing absolute path".format(path))
 
 
 """DisabledContent

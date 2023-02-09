@@ -45,9 +45,7 @@ class TaskManager(object):
             self._log.debug("From %s _execute_task() except Skip", __name__)
             self._log.info(repr(e))
         except BaseException as e:
-            self._log.debug(
-                "From %s _execute_task() except BaseException", __name__
-            )
+            self._log.debug("From %s _execute_task() except BaseException", __name__)
             if self._config.should_abort_upon_task_failure:
                 log_exception(self._log, e)
                 raise

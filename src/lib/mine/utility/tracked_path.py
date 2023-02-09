@@ -110,9 +110,7 @@ class TrackedPath(object):
         elif self.is_file():
             self.unlink()
         else:
-            raise NotImplementedError(
-                "Do not know how to delete {!r}".format(self)
-            )
+            raise NotImplementedError("Do not know how to delete {!r}".format(self))
 
     def for_log(self):
         return "'{}' path '{}'".format(self._title, self._relative)

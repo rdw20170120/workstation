@@ -283,11 +283,7 @@ class safe_unicode(str):
 
     def __add__(self, o):
         res = super(safe_unicode, self).__add__(o)
-        return (
-            safe_unicode(res)
-            if isinstance(o, (safe_unicode, safe_bytes))
-            else res
-        )
+        return safe_unicode(res) if isinstance(o, (safe_unicode, safe_bytes)) else res
 
 
 ################################################################################
@@ -357,9 +353,7 @@ class VisitorMap(dict):
         `None`.
         """
         py_type = type(obj)
-        result = self.get(py_type) or self._get_parent_type_visitor(
-            obj, py_type
-        )
+        result = self.get(py_type) or self._get_parent_type_visitor(obj, py_type)
         if result:
             return result
         elif self.parent_map is not None:
@@ -375,9 +369,7 @@ class VisitorMap(dict):
             m = [t for t in self if isinstance(obj, t)]
             for i, t in enumerate(m):
                 if not any(
-                    t2
-                    for t2 in m[i + i :]
-                    if t2 is not t and issubclass(t2, t)
+                    t2 for t2 in m[i + i :] if t2 is not t and issubclass(t2, t)
                 ):
                     return self[t]
         else:  # newstyle type/class
@@ -780,17 +772,13 @@ class HTML5Doc(object):
     def __init__(self, body, head=None):
         self.body = body
         self.head = (
-            head
-            if head
-            else htmltags.head[title["An example"], meta(charset="UTF-8")]
+            head if head else htmltags.head[title["An example"], meta(charset="UTF-8")]
         )
 
 
 @examples_vmap.register(HTML5Doc)
 def visit_html5_doc(doc, walker):
-    walker.walk(
-        [safe_unicode("<!DOCTYPE html>"), html(lang="en")[doc.head, doc.body]]
-    )
+    walker.walk([safe_unicode("<!DOCTYPE html>"), html(lang="en")[doc.head, doc.body]])
 
 
 Example(
@@ -879,9 +867,7 @@ def render_org_prices__imperative(org):
 
 
 def render_price(pr):
-    return span("price_rule", id=("rule", pr.oid))[
-        pr.product, ": $%0.2f" % pr.price
-    ]
+    return span("price_rule", id=("rule", pr.oid))[pr.product, ": $%0.2f" % pr.price]
 
 
 customer1 = Organization(name="Smith and Sons")
@@ -945,11 +931,7 @@ def visit_pricerule(pr, w):
 def render_org_prices__declarative(org):
     return UIScreen(
         title=("Custom Prices For ", org.name),
-        content=(
-            org.price_rules
-            if org.price_rules
-            else "No custom prices assigned."
-        ),
+        content=(org.price_rules if org.price_rules else "No custom prices assigned."),
     )
 
 

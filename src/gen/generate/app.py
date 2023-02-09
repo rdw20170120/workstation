@@ -31,9 +31,7 @@ class MyApp(SingletonApplication):
         super().__init__(getLogger(self.__class__.__name__), pid_file)
 
     def _run(self):
-        self._log.info(
-            "Generating content into directory '%s'", self._target_directory
-        )
+        self._log.info("Generating content into directory '%s'", self._target_directory)
         recreate_directory(self._target_directory)
         generate_all_custom(self._target_directory)
         generate_all_shared(self._target_directory)
@@ -67,9 +65,7 @@ def _parse_args():
         description="Generate source for various project files",
         prog="python3 -m " + c.application_name,
     )
-    parser.add_argument(
-        "target_directory", help="into which to generate output"
-    )
+    parser.add_argument("target_directory", help="into which to generate output")
     parser.add_argument(
         "--configuration",
         help="report configuration and exit",

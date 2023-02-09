@@ -66,9 +66,7 @@ class Html5(object):
             filename = os.path.join(self.DIRECTORY, relative_file_path)
             with open(filename, "w") as f:
                 f.write(
-                    get_output(self._as_document()).encode(
-                        self._get_default_encoding()
-                    )
+                    get_output(self._as_document()).encode(self._get_default_encoding())
                 )
 
 

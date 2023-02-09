@@ -9,9 +9,9 @@ from pathlib import Path
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
-from src_gen.source import my_visitor_map
 
 # Project modules   (relative references, NOT packaged, in project)
+from .content import my_visitor_map
 
 
 ###############################################################################

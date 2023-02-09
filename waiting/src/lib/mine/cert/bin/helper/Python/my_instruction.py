@@ -7,12 +7,12 @@ from my_couchbase import SERVICE_SEARCH_ID
 from my_couchbase import service_name
 
 
-htmltags = throw_out_your_templates._GetAttrDict(
-    throw_out_your_templates.htmltags
-)
+htmltags = throw_out_your_templates._GetAttrDict(throw_out_your_templates.htmltags)
 visitor_map = throw_out_your_templates.xml_default_visitors_map.copy()
 
-PAGE_DOC_4_6 = "https://developer.couchbase.com/documentation/server/4.6/introduction/intro.html"
+PAGE_DOC_4_6 = (
+    "https://developer.couchbase.com/documentation/server/4.6/introduction/intro.html"
+)
 PAGE_EXAMPLE_COM = "http://example.com"
 
 PAGE_Bash = "support/HowTo-Bash.html"
@@ -32,9 +32,7 @@ def _get_default_encoding():
 
 
 def _get_serializer():
-    return throw_out_your_templates.Serializer(
-        visitor_map, _get_default_encoding()
-    )
+    return throw_out_your_templates.Serializer(visitor_map, _get_default_encoding())
 
 
 def _meta():
@@ -86,9 +84,7 @@ def service_list(content):
 ####################################################################################################
 
 
-def configure_storage_directories(
-    task, step, servers, directory_data, directory_index
-):
+def configure_storage_directories(task, step, servers, directory_data, directory_index):
     task.add_step_header(step, "Configure storage directories")
     task.add(
         htmltags.p[

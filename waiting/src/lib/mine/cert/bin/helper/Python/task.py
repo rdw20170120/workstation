@@ -14,9 +14,7 @@ class Task(Html5):
         )
 
     def _step_header(self, number, description):
-        return htmltags.h2("step")[
-            "Step {0} - {1}".format(number, description)
-        ]
+        return htmltags.h2("step")["Step {0} - {1}".format(number, description)]
 
     def add_step_header(self, number, description):
         return self.add(self._step_header(number, description))

@@ -52,9 +52,7 @@ def test_generate():
     assert is_.equal(generate([None]), "")
     assert is_.equal(generate({"a": ""}), "a: ''")
     assert is_.equal(generate({"a": "Test"}), "a: 'Test'")
-    assert is_.equal(
-        generate({"a": "a", "b": "b", "c": "c"}), "a: 'a'b: 'b'c: 'c'"
-    )
+    assert is_.equal(generate({"a": "a", "b": "b", "c": "c"}), "a: 'a'b: 'b'c: 'c'")
     assert is_.equal(
         generate({"a": -1.0, "b": -1, "c": 0, "d": 0.0, "e": 1, "f": 1.0}),
         "a: '-1.0'b: '-1'c: '0'd: '0.0'e: '1'f: '1.0'",
@@ -101,9 +99,7 @@ def test_string_without_prefix_for_none_string():
 
 
 def test_string_without_prefix_having_prefix():
-    assert is_.equal(
-        string_without_prefix("prefix on string", "prefix"), " on string"
-    )
+    assert is_.equal(string_without_prefix("prefix on string", "prefix"), " on string")
 
 
 def test_string_without_prefix_missing_prefix():

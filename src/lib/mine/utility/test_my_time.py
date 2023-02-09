@@ -153,9 +153,7 @@ def test_is_aware():
     assert is_.false(is_aware(dt.datetime.now()))
     assert is_.false(is_aware(dt.datetime.today()))
     assert is_.false(is_aware(dt.datetime.utcnow()))
-    assert is_.false(
-        is_aware(dt.datetime(dt.MAXYEAR, 12, 31, 23, 59, 59, 999999))
-    )
+    assert is_.false(is_aware(dt.datetime(dt.MAXYEAR, 12, 31, 23, 59, 59, 999999)))
     assert is_.false(is_aware(dt.datetime.max))
     assert is_.false(is_aware(dt.datetime(dt.MINYEAR, 1, 1, 0, 0, 0, 0)))
     assert is_.false(is_aware(dt.datetime.fromordinal(1)))
@@ -175,9 +173,7 @@ def test_is_naive():
     assert is_.true(is_naive(dt.datetime.now()))
     assert is_.true(is_naive(dt.datetime.today()))
     assert is_.true(is_naive(dt.datetime.utcnow()))
-    assert is_.true(
-        is_naive(dt.datetime(dt.MAXYEAR, 12, 31, 23, 59, 59, 999999))
-    )
+    assert is_.true(is_naive(dt.datetime(dt.MAXYEAR, 12, 31, 23, 59, 59, 999999)))
     assert is_.true(is_naive(dt.datetime.max))
     assert is_.true(is_naive(dt.datetime(dt.MINYEAR, 1, 1, 0, 0, 0, 0)))
     assert is_.true(is_naive(dt.datetime.fromordinal(1)))

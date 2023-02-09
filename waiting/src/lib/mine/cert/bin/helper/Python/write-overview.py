@@ -28,9 +28,7 @@ understand the exam and the machines that constitute the exam environment.  You 
     )
     page.add(
         htmltags.ul(css_class)[
-            htmltags.li[
-                link(css_class, PAGE_MACHINE, "machine naming conventions")
-            ],
+            htmltags.li[link(css_class, PAGE_MACHINE, "machine naming conventions")],
             htmltags.li[
                 link(css_class, PAGE_SSH, "HowTo:  access other exam machines")
             ],
@@ -83,16 +81,10 @@ take this exam.""",
                     "HowTo:  begin/end your exam session",
                 )
             ],
-            htmltags.li[
-                link(css_class, PAGE_FOCUS, "HowTo:  manage keyboard focus")
-            ],
-            htmltags.li[
-                link(css_class, PAGE_CUT_AND_PASTE, "HowTo:  cut and paste")
-            ],
+            htmltags.li[link(css_class, PAGE_FOCUS, "HowTo:  manage keyboard focus")],
+            htmltags.li[link(css_class, PAGE_CUT_AND_PASTE, "HowTo:  cut and paste")],
             htmltags.li[link(css_class, PAGE_Bash, "HowTo:  leverage Bash")],
-            htmltags.li[
-                link(css_class, PAGE_UNDO, "Why:  do and then undo tasks")
-            ],
+            htmltags.li[link(css_class, PAGE_UNDO, "Why:  do and then undo tasks")],
         ]
     )
     page.render(PAGE_OVERVIEW)

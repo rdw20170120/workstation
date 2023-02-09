@@ -62,9 +62,7 @@ def encoding_is_utf8(encoding):
     if result:
         return result
     else:
-        raise AssertionError(
-            "Encoding {!r} is NOT a variant of UTF8".format(encoding)
-        )
+        raise AssertionError("Encoding {!r} is NOT a variant of UTF8".format(encoding))
 
 
 def equal(actual_value, expected_value):
@@ -95,9 +93,7 @@ def greater(actual_value, lower_limit):
         return result
     else:
         raise AssertionError(
-            "{!r} is LESS than or EQUAL to {!r}".format(
-                actual_value, lower_limit
-            )
+            "{!r} is LESS than or EQUAL to {!r}".format(actual_value, lower_limit)
         )
 
 
@@ -108,9 +104,7 @@ def identical(actual_value, expected_value):
         return result
     else:
         raise AssertionError(
-            "{!r} is NOT identical to {!r}".format(
-                actual_value, expected_value
-            )
+            "{!r} is NOT identical to {!r}".format(actual_value, expected_value)
         )
 
 
@@ -130,9 +124,7 @@ def instance(actual_value, expected_types):
         return result
     else:
         raise AssertionError(
-            "Value is {!r}, INSTEAD of {!r}".format(
-                actual_value, expected_types
-            )
+            "Value is {!r}, INSTEAD of {!r}".format(actual_value, expected_types)
         )
 
 
@@ -191,9 +183,7 @@ def not_equal(actual_value, expected_value):
     if result:
         return result
     else:
-        raise AssertionError(
-            "{!r} EQUALS {!r}".format(actual_value, expected_value)
-        )
+        raise AssertionError("{!r} EQUALS {!r}".format(actual_value, expected_value))
 
 
 def not_in(actual_value, expected_values):
