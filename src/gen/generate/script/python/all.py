@@ -133,8 +133,9 @@ def _generate_src_gen(dir_):
 
 
 def _generate_src_gen_generate(dir_):
-    _generate_src_gen_generate_custom(dir_ / "custom")
-    _generate_src_gen_generate_shared(dir_ / "shared")
+    _generate_src_gen_generate_document(dir_ / "document")
+    _generate_src_gen_generate_script(dir_ / "script")
+    python(library(), dir_, "all.py")
     python(library(), dir_, "app.py")
     python(library(), dir_, "config.py")
     python(main(), dir_, "__main__.py")
@@ -144,27 +145,45 @@ def _generate_src_gen_generate(dir_):
     python(suite(), dir_, "test_config.py")
 
 
-def _generate_src_gen_generate_custom(dir_):
+def _generate_src_gen_generate_document(dir_):
+    _generate_src_gen_generate_document_markdown(dir_ / "markdown")
     python(library(), dir_, "all.py")
     python(package(), dir_, "__init__.py")
 
 
-def _generate_src_gen_generate_shared(dir_):
-    _generate_src_gen_generate_shared_briteonyx(dir_ / "briteonyx")
+def _generate_src_gen_generate_document_markdown(dir_):
     python(library(), dir_, "all.py")
     python(package(), dir_, "__init__.py")
 
 
-def _generate_src_gen_generate_shared_briteonyx(dir_):
+def _generate_src_gen_generate_script(dir_):
+    _generate_src_gen_generate_script_bash(dir_ / "bash")
+    _generate_src_gen_generate_script_python(dir_ / "python")
+    python(library(), dir_, "all.py")
+    python(package(), dir_, "__init__.py")
+
+
+def _generate_src_gen_generate_script_bash(dir_):
+    _generate_src_gen_generate_script_bash_activating(dir_ / "activating")
+    _generate_src_gen_generate_script_bash_briteonyx(dir_ / "briteonyx")
+    python(library(), dir_, "all.py")
+    python(package(), dir_, "__init__.py")
+
+
+def _generate_src_gen_generate_script_bash_activating(dir_):
     python(generator(), dir_, "activate.py")
-    python(generator(), dir_, "alias.py")
-    python(generator(), dir_, "configure_python.py")
-    python(generator(), dir_, "declare.py")
-    python(generator(), dir_, "declare_base.py")
-    python(generator(), dir_, "declare_common.py")
-    python(generator(), dir_, "declare_log4bash.py")
-    python(generator(), dir_, "declare_require.py")
     python(generator(), dir_, "set_path.py")
+    python(library(), dir_, "all.py")
+    python(package(), dir_, "__init__.py")
+
+
+def _generate_src_gen_generate_script_bash_briteonyx(dir_):
+    python(library(), dir_, "all.py")
+    python(package(), dir_, "__init__.py")
+
+
+def _generate_src_gen_generate_script_python(dir_):
+    python(library(), dir_, "all.py")
     python(package(), dir_, "__init__.py")
 
 
@@ -182,10 +201,6 @@ def _generate_src_lib_mine(dir_):
 
 
 def _generate_src_lib_mine_aws(dir_):
-    pass
-
-
-def _generate_src_lib_mine_aws(dir_):
     python(library(), dir_, "ec2.py")
     python(library(), dir_, "s3.py")
     python(library(), dir_, "service.py")
@@ -199,11 +214,9 @@ def _generate_src_lib_mine_src_gen(dir_):
     _generate_src_lib_mine_src_gen_document(dir_ / "document")
     _generate_src_lib_mine_src_gen_script(dir_ / "script")
     python(library(), dir_, "renderer.py")
-    python(library(), dir_, "source.py")
+    python(library(), dir_, "content.py")
     python(library(), dir_, "structure.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_renderer.py")
-    python(suite(), dir_, "test_source.py")
     python(suite(), dir_, "test_structure.py")
 
 
@@ -214,42 +227,44 @@ def _generate_src_lib_mine_src_gen_document(dir_):
 
 def _generate_src_lib_mine_src_gen_document_markdown(dir_):
     python(library(), dir_, "complete.py")
-    python(library(), dir_, "source.py")
+    python(library(), dir_, "document.py")
     python(library(), dir_, "structure.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_complete.py")
-    python(suite(), dir_, "test_source.py")
     python(suite(), dir_, "test_structure.py")
 
 
 def _generate_src_lib_mine_src_gen_script(dir_):
     _generate_src_lib_mine_src_gen_script_bash(dir_ / "bash")
     _generate_src_lib_mine_src_gen_script_python(dir_ / "python")
-    python(library(), dir_, "source.py")
+    python(library(), dir_, "file.py")
     python(library(), dir_, "structure.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_source.py")
     python(suite(), dir_, "test_structure.py")
 
 
 def _generate_src_lib_mine_src_gen_script_bash(dir_):
+    _generate_src_lib_mine_src_gen_script_bash_activating(dir_ / "activating")
     _generate_src_lib_mine_src_gen_script_bash_briteonyx(dir_ / "briteonyx")
     python(library(), dir_, "complete.py")
-    python(library(), dir_, "source.py")
+    python(library(), dir_, "script.py")
     python(library(), dir_, "structure.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_complete.py")
-    python(suite(), dir_, "test_source.py")
+    python(suite(), dir_, "test_structure.py")
+
+
+def _generate_src_lib_mine_src_gen_script_bash_activating(dir_):
+    python(library(), dir_, "complete.py")
+    python(library(), dir_, "script.py")
+    python(library(), dir_, "structure.py")
+    python(package(), dir_, "__init__.py")
     python(suite(), dir_, "test_structure.py")
 
 
 def _generate_src_lib_mine_src_gen_script_bash_briteonyx(dir_):
     python(library(), dir_, "complete.py")
-    python(library(), dir_, "source.py")
+    python(library(), dir_, "script.py")
     python(library(), dir_, "structure.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_complete.py")
-    python(suite(), dir_, "test_source.py")
     python(suite(), dir_, "test_structure.py")
 
 
@@ -258,8 +273,6 @@ def _generate_src_lib_mine_src_gen_script_python(dir_):
     python(library(), dir_, "source.py")
     python(library(), dir_, "structure.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_complete.py")
-    python(suite(), dir_, "test_source.py")
     python(suite(), dir_, "test_structure.py")
 
 
@@ -297,10 +310,13 @@ def _generate_src_lib_mine_utility(dir_):
     python(library(), dir_, "environment.py")
     python(library(), dir_, "filesystem.py")
     python(library(), dir_, "my_assert.py")
+    python(library(), dir_, "my_assert_filesystem.py")
+    python(library(), dir_, "my_assert_pathname.py")
     python(library(), dir_, "my_logging.py")
     python(library(), dir_, "my_math.py")
     python(library(), dir_, "my_terminal.py")
     python(library(), dir_, "my_time.py")
+    python(library(), dir_, "pathname.py")
     python(library(), dir_, "processing.py")
     python(library(), dir_, "singleton_application.py")
     python(library(), dir_, "text.py")
@@ -312,8 +328,11 @@ def _generate_src_lib_mine_utility(dir_):
     python(suite(), dir_, "test_environment.py")
     python(suite(), dir_, "test_filesystem.py")
     python(suite(), dir_, "test_my_assert.py")
+    python(suite(), dir_, "test_my_assert_filesystem.py")
+    python(suite(), dir_, "test_my_assert_pathname.py")
     python(suite(), dir_, "test_my_math.py")
     python(suite(), dir_, "test_my_time.py")
+    python(suite(), dir_, "test_pathname.py")
     python(suite(), dir_, "test_python.py")
     python(suite(), dir_, "test_singleton_application.py")
     python(suite(), dir_, "test_text.py")

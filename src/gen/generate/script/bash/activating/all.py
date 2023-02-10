@@ -8,6 +8,8 @@ from src_gen.script.bash.activating.script import generate as activating
 from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)
+from .activate import build as activate
+from .set_path import build as set_path
 
 
 def _generate(dir_):
@@ -18,6 +20,7 @@ def _generate(dir_):
     _generate_home(dir_ / "home")
     _generate_out(dir_ / "home")
     _generate_src(dir_ / "src")
+    activating(activate(), dir_, "activate.bash")
 
 
 def _generate_bin(dir_):
@@ -45,7 +48,7 @@ def _generate_briteonyx_bin_lib(dir_):
     activating(sourced(), dir_, "declare-log4bash.bash")
     activating(sourced(), dir_, "declare-require.bash")
     activating(sourced(), dir_, "declare.bash")
-    activating(sourced(), dir_, "set_path.bash")
+    activating(set_path(), dir_, "set_path.bash")
 
 
 def _generate_briteonyx_doc(dir_):
@@ -66,15 +69,13 @@ def _generate_doc(dir_):
 
 def _generate_home(dir_):
     _generate_home_bin(dir_ / "bin")
-    _generate_home_bin_lib(dir_ / "lib")
     _generate_home_linux(dir_ / "Linux")
     _generate_home_macos(dir_ / "macOS")
-    _generate_home_macos_bin(dir_ / "bin")
     _generate_home_ssh(dir_ / ".ssh")
 
 
 def _generate_home_bin(dir_):
-    pass
+    _generate_home_bin_lib(dir_ / "lib")
 
 
 def _generate_home_bin_lib(dir_):
@@ -86,7 +87,7 @@ def _generate_home_linux(dir_):
 
 
 def _generate_home_macos(dir_):
-    pass
+    _generate_home_macos_bin(dir_ / "bin")
 
 
 def _generate_home_macos_bin(dir_):

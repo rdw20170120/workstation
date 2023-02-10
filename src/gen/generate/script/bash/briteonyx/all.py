@@ -80,7 +80,8 @@ def _generate_cfg(dir_):
 
 
 def _generate_cfg_sample(dir_):
-    pass
+    briteonyx(sourced(), dir_, "alias.bash")
+    briteonyx(sourced(), dir_, "context.bash")
 
 
 def _generate_doc(dir_):
@@ -89,15 +90,13 @@ def _generate_doc(dir_):
 
 def _generate_home(dir_):
     _generate_home_bin(dir_ / "bin")
-    _generate_home_bin_lib(dir_ / "lib")
     _generate_home_linux(dir_ / "Linux")
     _generate_home_macos(dir_ / "macOS")
-    _generate_home_macos_bin(dir_ / "bin")
     _generate_home_ssh(dir_ / ".ssh")
 
 
 def _generate_home_bin(dir_):
-    pass
+    _generate_home_bin_lib(dir_ / "lib")
 
 
 def _generate_home_bin_lib(dir_):
@@ -109,7 +108,7 @@ def _generate_home_linux(dir_):
 
 
 def _generate_home_macos(dir_):
-    pass
+    _generate_home_macos_bin(dir_ / "bin")
 
 
 def _generate_home_macos_bin(dir_):

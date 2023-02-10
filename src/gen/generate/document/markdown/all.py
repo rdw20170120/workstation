@@ -16,7 +16,7 @@ def _generate(dir_):
     _generate_cfg(dir_ / "cfg")
     _generate_doc(dir_ / "doc")
     _generate_home(dir_ / "home")
-    _generate_out(dir_ / "home")
+    _generate_out(dir_ / "out")
     _generate_src(dir_ / "src")
     markdown(document(), dir_, "HowTo-use_this_project.md")
     markdown(document(), dir_, "LICENSE.md")
@@ -80,16 +80,15 @@ def _generate_doc(dir_):
 
 def _generate_home(dir_):
     _generate_home_bin(dir_ / "bin")
-    _generate_home_bin_lib(dir_ / "lib")
     _generate_home_linux(dir_ / "Linux")
     _generate_home_macos(dir_ / "macOS")
-    _generate_home_macos_bin(dir_ / "bin")
     _generate_home_ssh(dir_ / ".ssh")
     markdown(document(), dir_, "README.md")
 
 
 def _generate_home_bin(dir_):
-    pass
+    _generate_home_bin_lib(dir_ / "lib")
+    markdown(document(), dir_, "README.md")
 
 
 def _generate_home_bin_lib(dir_):
@@ -101,6 +100,7 @@ def _generate_home_linux(dir_):
 
 
 def _generate_home_macos(dir_):
+    _generate_home_macos_bin(dir_ / "bin")
     markdown(document(), dir_, "README.md")
 
 
@@ -120,6 +120,7 @@ def _generate_src(dir_):
     _generate_src_app(dir_ / "app")
     _generate_src_gen(dir_ / "gen")
     _generate_src_lib(dir_ / "lib")
+    markdown(document(), dir_, "README.md")
 
 
 def _generate_src_app(dir_):
@@ -161,6 +162,7 @@ def _generate_src_gen_generate_shared_briteonyx(dir_):
 def _generate_src_lib(dir_):
     _generate_src_lib_mine(dir_ / "mine")
     _generate_src_lib_third_party(dir_ / "third_party")
+    markdown(document(), dir_, "README.md")
 
 
 def _generate_src_lib_mine(dir_):
@@ -174,10 +176,6 @@ def _generate_src_lib_mine(dir_):
 
 def _generate_src_lib_mine_aws(dir_):
     markdown(document(), dir_, "README.md")
-
-
-def _generate_src_lib_mine_aws(dir_):
-    pass
 
 
 def _generate_src_lib_mine_src_gen(dir_):

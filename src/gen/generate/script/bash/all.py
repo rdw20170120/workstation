@@ -61,14 +61,13 @@ def _generate_doc(dir_):
 
 def _generate_home(dir_):
     _generate_home_bin(dir_ / "bin")
-    _generate_home_bin_lib(dir_ / "lib")
     _generate_home_linux(dir_ / "Linux")
     _generate_home_macos(dir_ / "macOS")
-    _generate_home_macos_bin(dir_ / "bin")
     _generate_home_ssh(dir_ / ".ssh")
 
 
 def _generate_home_bin(dir_):
+    _generate_home_bin_lib(dir_ / "lib")
     bash(executed(), dir_, "24-bit-color.sh")
     bash(executed(), dir_, "clone_from_GitHub_by_Rob")
     bash(executed(), dir_, "clone_from_GitHub_by_TextNow")
@@ -94,7 +93,7 @@ def _generate_home_linux(dir_):
 
 
 def _generate_home_macos(dir_):
-    pass
+    _generate_home_macos_bin(dir_ / "bin")
 
 
 def _generate_home_macos_bin(dir_):
