@@ -17,9 +17,8 @@ from utility.filesystem import recreate_directory
 from utility.singleton_application import SingletonApplication
 
 # Project modules   (relative references, NOT packaged, in project)
+from .all import generate
 from .config import Config
-from .custom.all import generate as generate_all_custom
-from .shared.all import generate as generate_all_shared
 
 
 c = Config()
@@ -33,8 +32,7 @@ class MyApp(SingletonApplication):
     def _run(self):
         self._log.info("Generating content into directory '%s'", self._target_directory)
         recreate_directory(self._target_directory)
-        generate_all_custom(self._target_directory)
-        generate_all_shared(self._target_directory)
+        generate(self._target_directory)
 
 
 def _apply_verbosity(verbosity=0):

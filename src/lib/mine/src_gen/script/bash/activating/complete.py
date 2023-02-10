@@ -4,14 +4,14 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.activating.structure import *
+from src_gen.script.bash.activating.structure import *
 
 # Project modules   (relative references, NOT packaged, in project)
 
 
 def sourced():
     return [
-        header_sourced(),
+        header_activation(),
         todo("DESCRIPTION"),
         line(),
         todo("CONTENT"),
