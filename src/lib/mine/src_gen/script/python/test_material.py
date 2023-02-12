@@ -11,12 +11,15 @@ e.g., those consisting of 'return [...]'.
 from pytest import raises
 
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.common import *
+from src_gen.script.material import *
 from src_gen.renderer import Renderer
 from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
-from .source import my_visitor_map
-from .structure import *
+from .frame import *
+from .material import *
+from .render import my_visitor_map
 
 
 s = Renderer(my_visitor_map)._serialize

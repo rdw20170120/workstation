@@ -11,6 +11,8 @@ from pathlib import Path
 from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
+from .element import *
+from .material import *
 
 
 """DisabledContent

@@ -4,7 +4,10 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.script.bash.frame import *
 # Project modules   (relative references, NOT packaged, in project)
+from .element import *
+from .material import *
 
 
 def remembering(name):

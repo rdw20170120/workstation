@@ -6,12 +6,15 @@
 from pytest import raises
 
 # Library modules   (absolute references, NOT packaged, in project)
-from utility import my_assert as is_
+from src_gen.common import *
 from src_gen.renderer import Renderer
-from src_gen.script.bash.script import my_visitor_map
-from src_gen.script.bash.structure import *
+from src_gen.script.material import *
+from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
+from .frame import *
+from .material import *
+from .render import my_visitor_map
 
 
 # NOTE: There is little value in testing "composed" methods,

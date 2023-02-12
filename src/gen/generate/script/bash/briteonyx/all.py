@@ -4,7 +4,7 @@
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.bash.briteonyx.complete import *
-from src_gen.script.bash.briteonyx.script import generate as briteonyx
+from src_gen.script.bash.briteonyx.render import generate as briteonyx
 from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)

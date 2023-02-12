@@ -5,21 +5,23 @@
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.material import *
 from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
+from .frame import *
 
 def _shebang(command):
-    assert is_.instance(command, _Command)
-    return _Comment("!", command, tight=True)
+    assert is_.instance(command, Command)
+    return Comment("!", command, tight=True)
 
 
 def command(executable, *argument):
-    return _Command(executable, argument)
+    return Command(executable, argument)
 
 
 def comment(*element):
-    return _Comment(element)
+    return Comment(element)
 
 
 def disabled(*element):
@@ -61,7 +63,7 @@ def shebang_false():
 
 def shebang_thru_env(executable):
     assert is_.not_none(executable)
-    return _shebang(_Command(Path("/usr/bin/env"), executable))
+    return _shebang(Command(Path("/usr/bin/env"), executable))
 
 
 def someday(*element):
@@ -73,7 +75,7 @@ def todo(*element):
 
 
 def x(*element):
-    return _Expression(element)
+    return Expression(element)
 
 
 """DisabledContent

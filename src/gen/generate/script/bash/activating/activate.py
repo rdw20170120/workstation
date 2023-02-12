@@ -3,7 +3,8 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.script.bash.activating.structure import *
+from src_gen.script.bash.activating.frame import *
+from src_gen.script.bash.activating.material import *
 
 # Project modules   (relative references, NOT packaged, in project)
 

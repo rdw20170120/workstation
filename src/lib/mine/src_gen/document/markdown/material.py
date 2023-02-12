@@ -4,8 +4,10 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.material import *
 from utility import my_assert as is_
 # Project modules   (relative references, NOT packaged, in project)
+from .frame import *
 
 
 def h1(title):
@@ -42,15 +44,15 @@ def s(sentence):
 
 
 def table_header(*column):
-    return _TableRow(column)
+    return TableRow(column)
 
 
 def table_row(*column):
-    return _TableRow(column)
+    return TableRow(column)
 
 
 def table_ruler(*column):
-    return _TableRow(column)
+    return TableRow(column)
 
 
 """DisabledContent

@@ -4,7 +4,7 @@
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.bash.activating.complete import *
-from src_gen.script.bash.activating.script import generate as activating
+from src_gen.script.bash.activating.render import generate as activating
 from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)

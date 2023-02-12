@@ -10,13 +10,16 @@ e.g., those consisting of 'return [...]'.
 from pytest import raises
 
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.common import *
+from src_gen.material import *
 from src_gen.renderer import Renderer
 from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
-from .source import my_visitor_map
-from .structure import *
-from .structure import s as structure_s
+from .frame import *
+from .material import *
+from .material import s as material_s
+from .render import my_visitor_map
 
 
 s = Renderer(my_visitor_map)._serialize
@@ -113,10 +116,10 @@ def test_note():
 
 
 def test_s():
-    assert is_.equal(s(structure_s(None)), "\n")
-    assert is_.equal(s(structure_s("")), "\n")
-    assert is_.equal(s(structure_s("text")), "text\n")
-    assert is_.equal(s(structure_s(0)), "0\n")
+    assert is_.equal(s(material_s(None)), "\n")
+    assert is_.equal(s(material_s("")), "\n")
+    assert is_.equal(s(material_s("text")), "text\n")
+    assert is_.equal(s(material_s(0)), "0\n")
 
 
 def test_table_header():
@@ -142,7 +145,7 @@ def test_table_row():
 
 
 def test_table_row_repr():
-    assert is_.equal(repr(table_row("Test", "123")), "_TableRow(['Test', '123'])")
+    assert is_.equal(repr(table_row("Test", "123")), "TableRow(['Test', '123'])")
 
 
 def test_table_ruler():

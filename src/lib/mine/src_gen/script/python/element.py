@@ -4,11 +4,13 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.common import *
+from src_gen.script.element import *
 # Project modules   (relative references, NOT packaged, in project)
 from .render import my_visitor_map
 
 
-class _Import(object):
+class Import(object):
     def __init__(self, package, as_):
         super().__init__()
         self.package = squashed(package)
@@ -16,10 +18,10 @@ class _Import(object):
         self.as_ = squashed(as_)
 
     def __repr__(self):
-        return "_Import({}, {})".format(self.package, self.as_)
+        return "Import({}, {})".format(self.package, self.as_)
 
 
-class _ImportFrom(object):
+class ImportFrom(object):
     def __init__(self, package, item, as_):
         super().__init__()
         self.package = squashed(package)
@@ -29,10 +31,10 @@ class _ImportFrom(object):
         self.as_ = squashed(as_)
 
     def __repr__(self):
-        return "_ImportFrom({}, {}, {})".format(self.package, self.item, self.as_)
+        return "ImportFrom({}, {}, {})".format(self.package, self.item, self.as_)
 
 
-@my_visitor_map.register(_Import)
+@my_visitor_map.register(Import)
 def _visit_import(element, walker):
     walker.emit("import ")
     walker.walk(element.package)
@@ -42,7 +44,7 @@ def _visit_import(element, walker):
     walker.emit("\n")
 
 
-@my_visitor_map.register(_ImportFrom)
+@my_visitor_map.register(ImportFrom)
 def _visit_import_from(element, walker):
     walker.emit("from ")
     walker.walk(element.package)

@@ -4,8 +4,10 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.script.material import *
 from utility import my_assert as is_
 # Project modules   (relative references, NOT packaged, in project)
+from .frame import *
 
 
 trace_variable = "BO_Trace"
@@ -13,20 +15,12 @@ trace_minimal = "TRACE"
 trace_maximal = "DEEP"
 
 
-def and_():
-    return " &&"
-
-
 def assign(variable, *expression):
-    return _Assign(variable, expression)
-
-
-def bs():
-    return ["\\", eol()]
+    return Assign(variable, expression)
 
 
 def cc(command_embedded_within_comment):
-    assert is_.instance(command_embedded_within_comment, _Command)
+    assert is_.instance(command_embedded_within_comment, Command)
     return bt(command_embedded_within_comment)
 
 
@@ -66,11 +60,11 @@ def echo_warn(*element):
 
 
 def elif_(condition, *statement):
-    return _ElseIf(condition, statement)
+    return ElseIf(condition, statement)
 
 
 def else_(*statement):
-    return _Else(statement)
+    return Else(statement)
 
 
 def exit(argument=None):
@@ -89,7 +83,7 @@ def export(variable, expression=None, options=None):
 
 
 def fi():
-    return _Fi()
+    return Fi()
 
 
 def file_exists(file_name):
@@ -101,11 +95,11 @@ def file_is_readable(file_name):
 
 
 def function(name, *statement):
-    return _Function(name, statement)
+    return Function(name, statement)
 
 
 def if_(condition, *statement):
-    return _If(condition, statement)
+    return If(condition, statement)
 
 
 def integer_equal(left, right):
@@ -129,10 +123,6 @@ def local(expression, integer=False, readonly=False):
             return command("local", expression)
 
 
-def or_():
-    return " || "
-
-
 def path_is_not_directory(path_name):
     return condition("[[", "!", "-d", path_name, "]]")
 
@@ -145,10 +135,6 @@ def path_is_not_file(path_name):
     return condition("[[", "!", "-f", path_name, "]]")
 
 
-def pipe():
-    return " | "
-
-
 def remember_last_status(variable="Status"):
     return assign(vn(variable), "$?")
 
@@ -159,10 +145,6 @@ def return_(argument=None):
 
 def return_with_status(variable="Status"):
     return return_(vr(variable))
-
-
-def seq():
-    return " ; "
 
 
 def set_(*argument):
@@ -206,7 +188,7 @@ def string_not_equal(left, right):
 
 
 def substitute(executable, *argument):
-    return _Substitution(command(executable, argument))
+    return Substitution(command(executable, argument))
 
 
 def trap(name, signal):
@@ -214,11 +196,11 @@ def trap(name, signal):
 
 
 def vn(name):
-    return _VariableName(name)
+    return VariableName(name)
 
 
 def vr(name):
-    return _VariableReference(name)
+    return VariableReference(name)
 
 
 """DisabledContent

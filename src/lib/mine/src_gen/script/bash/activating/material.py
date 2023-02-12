@@ -4,9 +4,11 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.script.bash.material import *
 from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
+from .frame import *
 
 
 def log_debug(*element):

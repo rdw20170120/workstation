@@ -6,13 +6,13 @@ from pathlib import Path
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.renderer import Renderer
 from throw_out_your_templates.section_3 import VisitorMap
 from throw_out_your_templates.section_4 import visitor_map
-
-# Project modules   (relative references, NOT packaged, in project)
-from src_gen.renderer import Renderer
 from utility import my_assert as is_
 from utility.filesystem import maybe_create_directory
+
+# Project modules   (relative references, NOT packaged, in project)
 
 
 my_visitor_map = VisitorMap(parent_map=visitor_map)

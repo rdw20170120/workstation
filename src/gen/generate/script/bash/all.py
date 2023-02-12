@@ -4,7 +4,7 @@
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.bash.complete import *
-from src_gen.script.bash.script import generate as bash
+from src_gen.script.bash.render import generate as bash
 from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)

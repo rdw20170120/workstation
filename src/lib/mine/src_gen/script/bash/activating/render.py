@@ -6,13 +6,13 @@ from pathlib import Path
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.script.bash.render import BashScript
+from src_gen.script.bash.render import my_visitor_map as parent_visitor_map
 from throw_out_your_templates.section_3 import VisitorMap
-
-# Project modules   (relative references, NOT packaged, in project)
-from src_gen.script.bash.script import BashScript
-from src_gen.script.bash.script import my_visitor_map as parent_visitor_map
 from utility import my_assert as is_
 from utility.filesystem import maybe_create_directory
+
+# Project modules   (relative references, NOT packaged, in project)
 
 
 my_visitor_map = VisitorMap(parent_map=parent_visitor_map)

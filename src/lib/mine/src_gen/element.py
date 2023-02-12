@@ -8,31 +8,32 @@ from pathlib import Path
 
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
+from src_gen.common import *
 from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
 from .render import my_visitor_map
 
 
-class _BacktickQuoted(object):
+class BacktickQuoted(object):
     def __init__(self, elements):
         super().__init__()
         self.elements = squashed(elements)
 
     def __repr__(self):
-        return "_BacktickQuoted({})".format(self.elements)
+        return "BacktickQuoted({})".format(self.elements)
 
 
-class _DoubleQuoted(object):
+class DoubleQuoted(object):
     def __init__(self, elements):
         super().__init__()
         self.elements = squashed(elements)
 
     def __repr__(self):
-        return "_DoubleQuoted({})".format(self.elements)
+        return "DoubleQuoted({})".format(self.elements)
 
 
-class _NameValuePair(object):
+class NameValuePair(object):
     def __init__(self, name, value):
         super().__init__()
         self.name = squashed(name)
@@ -40,26 +41,26 @@ class _NameValuePair(object):
         assert is_.not_none(self.name)
 
     def __repr__(self):
-        return "_NameValuePair({}, {})".format(self.name, self.value)
+        return "NameValuePair({}, {})".format(self.name, self.value)
 
 
-class _SingleQuoted(object):
+class SingleQuoted(object):
     def __init__(self, elements):
         super().__init__()
         self.elements = squashed(elements)
 
     def __repr__(self):
-        return "_SingleQuoted({})".format(self.elements)
+        return "SingleQuoted({})".format(self.elements)
 
 
-@my_visitor_map.register(_BacktickQuoted)
+@my_visitor_map.register(BacktickQuoted)
 def _visit_backtick_quoted(element, walker):
     walker.emit("`")
     walker.walk(element.elements)
     walker.emit("`")
 
 
-@my_visitor_map.register(_DoubleQuoted)
+@my_visitor_map.register(DoubleQuoted)
 def _visit_double_quoted(element, walker):
     walker.emit('"')
     walker.walk(element.elements)
@@ -71,14 +72,14 @@ def _visit_enum(element, walker):
     walker.walk(element.value)
 
 
-@my_visitor_map.register(_NameValuePair)
+@my_visitor_map.register(NameValuePair)
 def _visit_name_value_pair(element, walker):
     walker.walk(element.name)
     walker.emit(" = ")
     walker.walk(element.value)
 
 
-@my_visitor_map.register(_SingleQuoted)
+@my_visitor_map.register(SingleQuoted)
 def _visit_single_quoted(element, walker):
     walker.emit("'")
     walker.walk(element.elements)

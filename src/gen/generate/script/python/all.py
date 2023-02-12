@@ -4,7 +4,7 @@
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.python.complete import *
-from src_gen.script.python.source import generate as python
+from src_gen.script.python.render import generate as python
 from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)
@@ -213,11 +213,15 @@ def _generate_src_lib_mine_aws(dir_):
 def _generate_src_lib_mine_src_gen(dir_):
     _generate_src_lib_mine_src_gen_document(dir_ / "document")
     _generate_src_lib_mine_src_gen_script(dir_ / "script")
+    python(library(), dir_, "common.py")
+    python(library(), dir_, "element.py")
+    python(library(), dir_, "frame.py")
+    python(library(), dir_, "material.py")
+    python(library(), dir_, "render.py")
     python(library(), dir_, "renderer.py")
-    python(library(), dir_, "content.py")
-    python(library(), dir_, "structure.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_structure.py")
+    python(suite(), dir_, "test_common.py")
+    python(suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_document(dir_):
@@ -227,53 +231,70 @@ def _generate_src_lib_mine_src_gen_document(dir_):
 
 def _generate_src_lib_mine_src_gen_document_markdown(dir_):
     python(library(), dir_, "complete.py")
-    python(library(), dir_, "document.py")
-    python(library(), dir_, "structure.py")
+    python(library(), dir_, "element.py")
+    python(library(), dir_, "frame.py")
+    python(library(), dir_, "material.py")
+    python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_structure.py")
+    python(suite(), dir_, "test_complete.py")
+    python(suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script(dir_):
     _generate_src_lib_mine_src_gen_script_bash(dir_ / "bash")
     _generate_src_lib_mine_src_gen_script_python(dir_ / "python")
-    python(library(), dir_, "file.py")
-    python(library(), dir_, "structure.py")
+    python(library(), dir_, "element.py")
+    python(library(), dir_, "frame.py")
+    python(library(), dir_, "material.py")
+    python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_structure.py")
+    python(suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script_bash(dir_):
     _generate_src_lib_mine_src_gen_script_bash_activating(dir_ / "activating")
     _generate_src_lib_mine_src_gen_script_bash_briteonyx(dir_ / "briteonyx")
     python(library(), dir_, "complete.py")
-    python(library(), dir_, "script.py")
-    python(library(), dir_, "structure.py")
+    python(library(), dir_, "element.py")
+    python(library(), dir_, "frame.py")
+    python(library(), dir_, "material.py")
+    python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_structure.py")
+    python(suite(), dir_, "test_complete.py")
+    python(suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script_bash_activating(dir_):
     python(library(), dir_, "complete.py")
-    python(library(), dir_, "script.py")
-    python(library(), dir_, "structure.py")
+    python(library(), dir_, "element.py")
+    python(library(), dir_, "frame.py")
+    python(library(), dir_, "material.py")
+    python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_structure.py")
+    python(suite(), dir_, "test_complete.py")
+    python(suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script_bash_briteonyx(dir_):
     python(library(), dir_, "complete.py")
-    python(library(), dir_, "script.py")
-    python(library(), dir_, "structure.py")
+    python(library(), dir_, "element.py")
+    python(library(), dir_, "frame.py")
+    python(library(), dir_, "material.py")
+    python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_structure.py")
+    python(suite(), dir_, "test_complete.py")
+    python(suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script_python(dir_):
     python(library(), dir_, "complete.py")
-    python(library(), dir_, "source.py")
-    python(library(), dir_, "structure.py")
+    python(library(), dir_, "element.py")
+    python(library(), dir_, "frame.py")
+    python(library(), dir_, "material.py")
+    python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_structure.py")
+    python(suite(), dir_, "test_complete.py")
+    python(suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_task(dir_):

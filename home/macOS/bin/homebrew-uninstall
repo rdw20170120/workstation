@@ -4,9 +4,6 @@
 # NO: set -e
 trap warn_on_error EXIT
 ###############################################################################
-[[ -z "${BO_Project}" ]] &&
-    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
-    exit 99
 
 main() {
     # TODO: DESCRIPTION

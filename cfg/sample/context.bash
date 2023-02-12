@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-# Intended to be sourced in a Bash shell during activation.
+# Intended to be sourced in a Bash shell.
 [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
 # NO: trap ... EXIT
