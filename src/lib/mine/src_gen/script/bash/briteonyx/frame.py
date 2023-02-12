@@ -4,13 +4,7 @@
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
-from src_gen.script.bash.activating.structure import *
-
 # Project modules   (relative references, NOT packaged, in project)
-from .script import my_visitor_map
-
-
-###############################################################################
 
 
 def abort_if_not_activated():
@@ -26,9 +20,6 @@ def abort_if_not_activated():
         exit(99),
         eol(),
     ]
-
-
-###############################################################################
 
 
 def header_executed():
