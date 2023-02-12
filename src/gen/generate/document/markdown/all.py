@@ -4,7 +4,7 @@
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.document.markdown.complete import *
-from src_gen.document.markdown.document import generate as markdown
+from src_gen.document.markdown.source import generate as markdown
 from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)

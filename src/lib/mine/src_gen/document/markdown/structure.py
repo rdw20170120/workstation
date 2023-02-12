@@ -10,7 +10,7 @@ from src_gen.structure import *
 from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
-from .document import my_visitor_map
+from .source import my_visitor_map
 
 
 ###############################################################################

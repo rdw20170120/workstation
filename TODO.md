@@ -33,7 +33,6 @@ unless they should merely be deleted.
 1. [ ]  /  = Filter sensitive values out of committed output (environment variables)
 1. [ ]  /  = Integrate OpenTelemetry into Python code
 1. [ ]  /  = Investigate whether I want to capture log files during `test-run`
-1. [ ]  /  = Restore reporting of `coverage`
 1. [ ]  /  = Sort Anaconda packages in `cfg/anaconda.yml`
 1. [ ]  /  = `unset` relevant Bash variables when appropriate
 1. [ ] 1/1 - Add `redeclare` alias to `source` Bash function declarations again
@@ -67,6 +66,8 @@ unless they should merely be deleted.
 1. [X] 1/1 - Implement methods for always using text files with default UTF-8 encoding
 1. [X] 1/1 - Log Bash messages to stderr instead of stdout
 1. [X] 1/1 - Switch from Python virtual environment to Anaconda environment
+1. [X] 1/1 = Refactor BriteOnyx source generation to better distinguish before, during, and after activation
+1. [X] 1/1 = Restore reporting of `coverage`
 1. [X] 1/1 = Restore reporting of test results
 1. [X] 3/3 - Move captured output files to `out` directory
 

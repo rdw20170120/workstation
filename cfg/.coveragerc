@@ -14,20 +14,28 @@ omit =
   */app/MODULE/task/*.py
   */config.py
   */conftest.py
-  */mine/aws/ec2.py
-  */mine/aws/s3.py
-  */mine/src_gen/*/complete.py
-  */mine/src_gen/renderer.py
-  */mine/task/*.py
-  */mine/utility/color_log_formatter.py
-  */mine/utility/environment.py
-  */mine/utility/filesystem.py
-  */mine/utility/my_assert_filesystem.py
-  */mine/utility/my_logging.py
-  */mine/utility/my_terminal.py
-  */mine/utility/processing.py
-  */mine/utility/singleton_application.py
-  */test_*.py
+  */gen/generate/**/all.py
+  */gen/generate/script/bash/activating/activate.py
+  */gen/generate/script/bash/activating/set_path.py
+  */lib/mine/aws/ec2.py
+  */lib/mine/aws/s3.py
+  */lib/mine/src_gen/**/complete.py
+  */lib/mine/src_gen/content.py
+  */lib/mine/src_gen/document/markdown/source.py
+  */lib/mine/src_gen/renderer.py
+  */lib/mine/src_gen/script/bash/activating/script.py
+  */lib/mine/src_gen/script/bash/briteonyx/script.py
+  */lib/mine/src_gen/script/bash/script.py
+  */lib/mine/src_gen/script/file.py
+  */lib/mine/src_gen/script/python/source.py
+  */lib/mine/utility/color_log_formatter.py
+  */lib/mine/utility/environment.py
+  */lib/mine/utility/filesystem.py
+  */lib/mine/utility/my_assert_filesystem.py
+  */lib/mine/utility/my_logging.py
+  */lib/mine/utility/my_terminal.py
+  */lib/mine/utility/processing.py
+  */lib/mine/utility/singleton_application.py
 
 [html]
 directory = ${BO_Project?}/out/coverage

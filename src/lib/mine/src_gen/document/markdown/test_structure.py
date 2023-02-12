@@ -14,7 +14,7 @@ from src_gen.renderer import Renderer
 from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
-from .document import my_visitor_map
+from .source import my_visitor_map
 from .structure import *
 from .structure import s as structure_s
 
