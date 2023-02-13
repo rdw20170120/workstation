@@ -5,9 +5,11 @@
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.frame import *
+
 # Project modules   (relative references, NOT packaged, in project)
 from .element import *
 from .material import *
+
 
 def footer_for_disabled_content():
     return [
@@ -143,4 +145,3 @@ def imports_for_suite():
 
 """DisabledContent
 """
-

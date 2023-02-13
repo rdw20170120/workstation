@@ -6,11 +6,13 @@ from pytest import fixture
 from pytest import mark
 from pytest import param
 from pytest import raises
+
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.renderer import Renderer
 from utility import my_assert as is_
 from utility import my_assert_filesystem as fs_is_
 from utility import my_assert_pathname as pn_is_
+
 # Project modules   (relative references, NOT packaged, in project)
 from src_gen.common import *
 from .render import my_visitor_map
@@ -19,7 +21,6 @@ from .render import my_visitor_map
 s = Renderer(my_visitor_map)._serialize
 will_squash = (None, "", (), [])
 wont_squash = (False, True, 0, 0.0, 0j, " ", "Test", {})
-
 
 
 def test_eol():
@@ -117,4 +118,3 @@ def test_squashed_18():
 
 """DisabledContent
 """
-

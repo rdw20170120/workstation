@@ -7,6 +7,7 @@
 from src_gen.common import *
 from src_gen.element import *
 from utility import my_assert as is_
+
 # Project modules   (relative references, NOT packaged, in project)
 from .render import my_visitor_map
 

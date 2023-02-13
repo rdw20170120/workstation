@@ -1,17 +1,3 @@
-[0;34m[20230208 231456Z D] Reformatting Python code using Black[0m
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin/anaconda-capture: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin/anaconda-check: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin/anaconda-create: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/home/macOS/bin/homebrew-uninstall: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin/anaconda-populate: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin/anaconda-destroy: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/home/macOS/bin/homebrew-update: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/home/macOS/bin/homebrew-upgrade: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin/anaconda-report: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/home/macOS/bin/homebrew-install: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/home/macOS/bin/homebrew-list: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin/anaconda-upgrade: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-error: cannot format /Users/x299424/repo/GitHub/wip/workstation/home/macOS/bin/homebrew-populate: Cannot parse: 3:6: [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-
-Oh no! 💥 💔 💥
-177 files left unchanged, 13 files failed to reformat.
+[0;34m[20230213 014225Z D] Reformatting Python code using Black[0m
+All done! ✨ 🍰 ✨
+196 files left unchanged.

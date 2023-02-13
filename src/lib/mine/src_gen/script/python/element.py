@@ -6,6 +6,7 @@
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.common import *
 from src_gen.script.element import *
+
 # Project modules   (relative references, NOT packaged, in project)
 from .render import my_visitor_map
 

@@ -31,29 +31,40 @@
 '/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/conftest.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/config.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/__init__.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/alias.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/set_path.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/declare_log4bash.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/declare_base.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/__init__.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/__pycache__': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/declare.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/declare_require.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/configure_python.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/activate.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/briteonyx/declare_common.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/__init__.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/__pycache__': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/shared/all.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/document': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/document/markdown': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/document/markdown/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/document/markdown/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/document/markdown/all.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/document/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/document/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/document/all.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/all.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/python': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/python/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/python/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/python/all.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/all.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/briteonyx': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/briteonyx/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/briteonyx/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/briteonyx/all.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/all.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/activating': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/activating/set_path.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/activating/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/activating/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/activating/all.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/script/bash/activating/activate.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/test_config.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/app.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/custom': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/custom/__init__.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/custom/__pycache__': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/custom/all.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/__main__.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/gen/generate/test_app.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib': listing directory
@@ -89,57 +100,82 @@
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/task/test_exception.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/task/test_config.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/briteonyx': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/briteonyx/test_structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/briteonyx/test_source.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/briteonyx/__init__.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/briteonyx/__pycache__': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/briteonyx/structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/briteonyx/complete.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/briteonyx/source.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/briteonyx/test_complete.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/test_structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/test_renderer.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/python': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/python/test_structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/python/test_source.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/python/__init__.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/python/__pycache__': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/python/structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/python/complete.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/python/source.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/python/test_complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/test_common.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/render.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/renderer.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/markdown': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/markdown/test_structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/markdown/test_source.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/markdown/__init__.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/markdown/__pycache__': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/markdown/structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/markdown/complete.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/markdown/source.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/markdown/test_complete.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/test_source.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/test_material.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/render.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/test_material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/element.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/frame.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/test_complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/__pycache__': listing directory
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/element.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/test_structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/test_source.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/test_frame.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/render.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/test_material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/element.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/frame.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/test_complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/render.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/test_material.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/__init__.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/__pycache__': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/source.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/bash': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/bash/test_structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/bash/test_source.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/bash/__init__.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/bash/__pycache__': listing directory
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/bash/structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/bash/complete.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/bash/source.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/bash/test_complete.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/structure.py': Clean bill of health.
-'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/source.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/element.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/test_frame.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/render.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/test_material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/element.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/frame.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/test_complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_frame.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/render.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_element.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/element.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/test_frame.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/render.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/test_material.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/__init__.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/__pycache__': listing directory
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/element.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/frame.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/test_complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/frame.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_complete.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/frame.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/common.py': Clean bill of health.
+'/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/frame.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/aws': listing directory
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/aws/service.py': Clean bill of health.
 '/Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/aws/test_service.py': Clean bill of health.

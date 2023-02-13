@@ -3,13 +3,16 @@
 """
 # Internal packages (absolute references, distributed with Python)
 from pathlib import Path
+
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.common import *
 from src_gen.element import *
 from utility import my_assert as is_
+
 # Project modules   (relative references, NOT packaged, in project)
 from .render import my_visitor_map
+
 
 class Arguments(object):
     def __init__(self, *arguments):
@@ -99,6 +102,7 @@ def _visit_expression(element, walker):
 @my_visitor_map.register(Path)
 def _visit_path(element, walker):
     walker.walk(str(element))
+
 
 """DisabledContent
 """

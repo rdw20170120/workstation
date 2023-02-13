@@ -5,6 +5,7 @@
 from enum import Enum
 from numbers import Number
 from pathlib import Path
+
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_

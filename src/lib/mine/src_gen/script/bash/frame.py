@@ -6,6 +6,7 @@
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.frame import *
 from utility import my_assert as is_
+
 # Project modules   (relative references, NOT packaged, in project)
 from .element import *
 from .material import *

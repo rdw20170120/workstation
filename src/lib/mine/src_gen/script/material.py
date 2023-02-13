@@ -11,6 +11,7 @@ from utility import my_assert as is_
 # Project modules   (relative references, NOT packaged, in project)
 from .frame import *
 
+
 def _shebang(command):
     assert is_.instance(command, Command)
     return Comment("!", command, tight=True)
