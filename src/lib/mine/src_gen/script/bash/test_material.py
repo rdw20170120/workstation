@@ -24,13 +24,6 @@ from .render import my_visitor_map
 s = Renderer(my_visitor_map)._serialize
 
 
-def test_and_():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(and_()), " &&")
-    with raises(TypeError):
-        and_(None)
-
-
 def test_assign():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
@@ -41,13 +34,6 @@ def test_assign():
     assert is_.equal(s(assign("Test", None)), "Test=")
     assert is_.equal(s(assign("Test", "")), "Test=")
     assert is_.equal(s(assign("Test", "123")), "Test=123")
-
-
-def test_bs():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(bs()), "\\\n")
-    with raises(TypeError):
-        bs(None)
 
 
 def test_directory_exists():
@@ -286,13 +272,6 @@ def test_note():
     assert is_.equal(s(note("Test", "123")), "# NOTE: Test123\n")
 
 
-def test_or_():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(or_()), " || ")
-    with raises(TypeError):
-        or_(None)
-
-
 def test_path_not_exists():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
@@ -324,13 +303,6 @@ def test_path_is_not_file():
     assert is_.equal(s(path_is_not_file("Test")), "[[ ! -f Test ]]")
     with raises(TypeError):
         path_is_not_file("Test", None)
-
-
-def test_pipe():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(pipe()), " | ")
-    with raises(TypeError):
-        pipe(None)
 
 
 def test_remember_last_status():
@@ -375,13 +347,6 @@ def test_rule():
     assert is_.equal(s(rule()), 79 * "#" + "\n")
     with raises(TypeError):
         rule(None)
-
-
-def test_seq():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(seq()), " ; ")
-    with raises(TypeError):
-        seq(None)
 
 
 def test_set_():

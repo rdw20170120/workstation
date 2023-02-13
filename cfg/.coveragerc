@@ -19,15 +19,14 @@ omit =
   */gen/generate/script/bash/activating/set_path.py
   */lib/mine/aws/ec2.py
   */lib/mine/aws/s3.py
-  */lib/mine/src_gen/**/complete.py
-  */lib/mine/src_gen/content.py
-  */lib/mine/src_gen/document/markdown/source.py
+  */lib/mine/src_gen/**/render.py
   */lib/mine/src_gen/renderer.py
-  */lib/mine/src_gen/script/bash/activating/script.py
-  */lib/mine/src_gen/script/bash/briteonyx/script.py
-  */lib/mine/src_gen/script/bash/script.py
-  */lib/mine/src_gen/script/file.py
-  */lib/mine/src_gen/script/python/source.py
+  */lib/mine/src_gen/script/bash/activating/element.py
+  */lib/mine/src_gen/script/bash/briteonyx/element.py
+  */lib/mine/src_gen/script/bash/element.py
+  */lib/mine/src_gen/script/document/markdown/element.py
+  */lib/mine/src_gen/script/element.py
+  */lib/mine/src_gen/script/python/element.py
   */lib/mine/utility/color_log_formatter.py
   */lib/mine/utility/environment.py
   */lib/mine/utility/filesystem.py

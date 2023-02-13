@@ -261,6 +261,8 @@ def _generate_src_lib_mine_src_gen_script_bash(dir_):
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
     python(suite(), dir_, "test_complete.py")
+    python(suite(), dir_, "test_element.py")
+    python(suite(), dir_, "test_frame.py")
     python(suite(), dir_, "test_material.py")
 
 
@@ -272,6 +274,7 @@ def _generate_src_lib_mine_src_gen_script_bash_activating(dir_):
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
     python(suite(), dir_, "test_complete.py")
+    python(suite(), dir_, "test_frame.py")
     python(suite(), dir_, "test_material.py")
 
 
@@ -283,6 +286,7 @@ def _generate_src_lib_mine_src_gen_script_bash_briteonyx(dir_):
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
     python(suite(), dir_, "test_complete.py")
+    python(suite(), dir_, "test_frame.py")
     python(suite(), dir_, "test_material.py")
 
 
@@ -294,6 +298,7 @@ def _generate_src_lib_mine_src_gen_script_python(dir_):
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
     python(suite(), dir_, "test_complete.py")
+    python(suite(), dir_, "test_frame.py")
     python(suite(), dir_, "test_material.py")
 
 
