@@ -220,8 +220,8 @@ def _generate_src_lib_mine_src_gen(dir_):
     python(library(), dir_, "render.py")
     python(library(), dir_, "renderer.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_common.py")
-    python(suite(), dir_, "test_material.py")
+    python(generator_suite(), dir_, "test_common.py")
+    python(generator_suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_document(dir_):
@@ -236,8 +236,8 @@ def _generate_src_lib_mine_src_gen_document_markdown(dir_):
     python(library(), dir_, "material.py")
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_complete.py")
-    python(suite(), dir_, "test_material.py")
+    python(generator_suite(), dir_, "test_complete.py")
+    python(generator_suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script(dir_):
@@ -248,7 +248,7 @@ def _generate_src_lib_mine_src_gen_script(dir_):
     python(library(), dir_, "material.py")
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_material.py")
+    python(generator_suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script_bash(dir_):
@@ -260,10 +260,10 @@ def _generate_src_lib_mine_src_gen_script_bash(dir_):
     python(library(), dir_, "material.py")
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_complete.py")
-    python(suite(), dir_, "test_element.py")
-    python(suite(), dir_, "test_frame.py")
-    python(suite(), dir_, "test_material.py")
+    python(generator_suite(), dir_, "test_complete.py")
+    python(generator_suite(), dir_, "test_element.py")
+    python(generator_suite(), dir_, "test_frame.py")
+    python(generator_suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script_bash_activating(dir_):
@@ -273,9 +273,9 @@ def _generate_src_lib_mine_src_gen_script_bash_activating(dir_):
     python(library(), dir_, "material.py")
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_complete.py")
-    python(suite(), dir_, "test_frame.py")
-    python(suite(), dir_, "test_material.py")
+    python(generator_suite(), dir_, "test_complete.py")
+    python(generator_suite(), dir_, "test_frame.py")
+    python(generator_suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script_bash_briteonyx(dir_):
@@ -285,9 +285,9 @@ def _generate_src_lib_mine_src_gen_script_bash_briteonyx(dir_):
     python(library(), dir_, "material.py")
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_complete.py")
-    python(suite(), dir_, "test_frame.py")
-    python(suite(), dir_, "test_material.py")
+    python(generator_suite(), dir_, "test_complete.py")
+    python(generator_suite(), dir_, "test_frame.py")
+    python(generator_suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script_python(dir_):
@@ -297,9 +297,9 @@ def _generate_src_lib_mine_src_gen_script_python(dir_):
     python(library(), dir_, "material.py")
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_complete.py")
-    python(suite(), dir_, "test_frame.py")
-    python(suite(), dir_, "test_material.py")
+    python(generator_suite(), dir_, "test_complete.py")
+    python(generator_suite(), dir_, "test_frame.py")
+    python(generator_suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_task(dir_):

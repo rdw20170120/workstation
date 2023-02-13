@@ -17,6 +17,19 @@ def generator():
     ]
 
 
+def generator_suite():
+    return [
+        header_for_generator_suite(),
+        "s = Renderer(my_visitor_map)._serialize",
+        eol(),
+        line(),
+        line(),
+        todo("CONTENT"),
+        line(),
+        footer_for_disabled_content(),
+    ]
+
+
 def library():
     return [
         header_for_library(),

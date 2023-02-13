@@ -35,6 +35,16 @@ def header_for_generator():
     ]
 
 
+def header_for_generator_suite():
+    return [
+        shebang_false(),
+        '"""Test corresponding source-generation module."""',
+        eol(),
+        imports_for_generator_suite(),
+        line(),
+    ]
+
+
 def header_for_library():
     return [
         shebang_false(),
@@ -127,17 +137,57 @@ def imports_empty():
     ]
 
 
+def imports_for_generator_suite():
+    return [
+        import_header_internal(),
+        import_header_external(),
+        "# ",
+        import_from("pytest", "fixture"),
+        "# ",
+        import_from("pytest", "mark"),
+        "# ",
+        import_from("pytest", "param"),
+        "# ",
+        import_from("pytest", "raises"),
+        import_header_library(),
+        "# ",
+        import_from("src_gen.common", "*"),
+        import_from("src_gen.renderer", "Renderer"),
+        import_from("utility", "my_assert", "is_"),
+        "# ",
+        import_from("utility", "my_assert_filesystem", "fs_is_"),
+        "# ",
+        import_from("utility", "my_assert_pathname", "pn_is_"),
+        import_header_project(),
+        "# ",
+        import_from(".complete", "*"),
+        "# ",
+        import_from(".element", "*"),
+        "# ",
+        import_from(".frame", "*"),
+        "# ",
+        import_from(".material", "*"),
+        import_from(".render", "my_visitor_map"),
+    ]
+
+
 def imports_for_suite():
     return [
         import_header_internal(),
         import_header_external(),
+        "# ",
         import_from("pytest", "fixture"),
+        "# ",
         import_from("pytest", "mark"),
+        "# ",
         import_from("pytest", "param"),
+        "# ",
         import_from("pytest", "raises"),
         import_header_library(),
         import_from("utility", "my_assert", "is_"),
+        "# ",
         import_from("utility", "my_assert_filesystem", "fs_is_"),
+        "# ",
         import_from("utility", "my_assert_pathname", "pn_is_"),
         import_header_project(),
     ]
