@@ -41,6 +41,9 @@ def test_dq():
     assert is_.equal(s(dq("Test", "123")), '"Test123"')
 
 
+# TODO: def test_nvp():
+
+
 def test_sq():
     # TODO: Expand tests for full pattern
     # TODO: Break up tests into individual test methods

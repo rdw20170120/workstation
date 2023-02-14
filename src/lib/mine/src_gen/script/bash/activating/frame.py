@@ -11,12 +11,6 @@ from .element import *
 from .material import *
 
 
-def remembering(name):
-    return [
-        command("remembering", name),
-    ]
-
-
 def header_activation():
     return [
         shebang_sourced(),
@@ -31,6 +25,12 @@ def header_activation():
 def maybe_copy_file(source, target):
     return [
         command("maybe_copy_file", source, target),
+    ]
+
+
+def remembering(name):
+    return [
+        command("remembering", name),
     ]
 
 

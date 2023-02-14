@@ -56,8 +56,9 @@ class Function(object):
     def __init__(self, name, *statement):
         super().__init__()
         self.name = squashed(name)
+        assert is_.not_none(self.name)
         self.statements = squashed(statement)
-        assert is_.not_none(self.statements)
+        # TODO: assert is_.not_none(self.statements)
 
     def __repr__(self):
         return "Function({})".format(self.statements)

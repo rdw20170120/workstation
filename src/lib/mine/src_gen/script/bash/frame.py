@@ -30,7 +30,7 @@ def debugging_comment():
 
 
 def disable_tracing_unless_maximal():
-    return []
+    return [todo()]
 
 
 def disabled_content_footer():
@@ -46,7 +46,7 @@ def disabled_content_footer():
 
 
 def enable_tracing_unless_minimal():
-    return []
+    return [todo()]
 
 
 def export_if_null(variable, expression):

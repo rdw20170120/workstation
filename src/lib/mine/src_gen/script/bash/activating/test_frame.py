@@ -14,15 +14,19 @@ from utility import my_assert as is_
 # from utility import my_assert_filesystem as fs_is_
 # from utility import my_assert_pathname as pn_is_
 # Project modules   (relative references, NOT packaged, in project)
-# from .complete import *
-# from .frame import *
-# from .material import *
+from .frame import *
 from .render import my_visitor_map
 
 s = Renderer(my_visitor_map)._serialize
 
 
-# TODO: CONTENT
+def test_maybe_copy_file():
+    assert is_.nonempty_string(s(maybe_copy_file(None, None)))
+
+
+def test_remembering():
+    assert is_.nonempty_string(s(remembering(None)))
+
 
 """DisabledContent
 """

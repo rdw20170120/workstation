@@ -128,12 +128,12 @@ def path_is_not_directory(path_name):
     return condition("[[", "!", "-d", path_name, "]]")
 
 
-def path_not_exists(path_name):
-    return condition("[[", "!", "-e", path_name, "]]")
-
-
 def path_is_not_file(path_name):
     return condition("[[", "!", "-f", path_name, "]]")
+
+
+def path_not_exists(path_name):
+    return condition("[[", "!", "-e", path_name, "]]")
 
 
 def remember_last_status(variable="Status"):

@@ -78,5 +78,8 @@ def test_log_warn():
     assert is_.equal(s(log_warn("Test", "123")), 'log_warn "Test123"')
 
 
+# TODO: def test_header_executed():
+# TODO: def test_header_sourced():
+
 """DisabledContent
 """

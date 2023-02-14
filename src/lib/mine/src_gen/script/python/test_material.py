@@ -23,48 +23,8 @@ from .render import my_visitor_map
 s = Renderer(my_visitor_map)._serialize
 
 
-def test_command_01():
-    assert is_.equal(s(command("Test")), "Test")
-
-
-def test_command_02():
-    assert is_.equal(s(command("Test", None)), "Test")
-
-
-def test_command_03():
-    assert is_.equal(s(command("Test", "")), "Test")
-
-
-def test_command_04():
-    assert is_.equal(s(command("Test", "123")), "Test 123")
-
-
-def test_comment_01():
-    assert is_.equal(s(comment()), "#\n")
-
-
-def test_comment_02():
-    assert is_.equal(s(comment(None)), "#\n")
-
-
-def test_comment_03():
-    assert is_.equal(s(comment("")), "#\n")
-
-
-def test_comment_04():
-    assert is_.equal(s(comment("Test")), "# Test\n")
-
-
-def test_comment_05():
-    assert is_.equal(s(comment("Test", None)), "# Test\n")
-
-
-def test_comment_06():
-    assert is_.equal(s(comment("Test", "")), "# Test\n")
-
-
-def test_comment_06():
-    assert is_.equal(s(comment("Test", "123")), "# Test123\n")
+# TODO: def test_import_():
+# TODO: def test_import_from():
 
 
 def test_shebang_cat():

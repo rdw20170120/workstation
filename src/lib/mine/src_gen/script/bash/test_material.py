@@ -35,6 +35,9 @@ def test_assign():
     assert is_.equal(s(assign("Test", "123")), "Test=123")
 
 
+# TODO: def test_cc():
+
+
 def test_directory_exists():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
@@ -153,6 +156,9 @@ def test_exit():
         exit("Test", None)
 
 
+# TODO: def test_exit_with_status():
+
+
 def test_export():
     # TODO: Break up tests into individual test methods
     with raises(TypeError):
@@ -222,16 +228,7 @@ def test_if_():
     assert is_.equal(s(if_("Test", "123")), "if Test ; then\n123")
 
 
-def test_indent():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(indent()), 4 * " ")
-    with raises(TypeError):
-        indent(None)
-    assert is_.equal(s(indent(-1)), -1 * 4 * " ")
-    assert is_.equal(s(indent(0)), 0 * 4 * " ")
-    assert is_.equal(s(indent(1)), 1 * 4 * " ")
-    assert is_.equal(s(indent(2)), 2 * 4 * " ")
-    assert is_.equal(s(indent(9)), 9 * 4 * " ")
+# TODO: def test_integer_equal():
 
 
 def test_integer_not_equal():
@@ -249,37 +246,7 @@ def test_integer_not_equal():
     assert is_.equal(s(integer_not_equal("Test", 123)), "[[ Test -ne 123 ]]")
 
 
-def test_no():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(no()), "# NO: \n")
-    assert is_.equal(s(no(None)), "# NO: \n")
-    assert is_.equal(s(no("")), "# NO: \n")
-    assert is_.equal(s(no("Test")), "# NO: Test\n")
-    assert is_.equal(s(no("Test", None)), "# NO: Test\n")
-    assert is_.equal(s(no("Test", "")), "# NO: Test\n")
-    assert is_.equal(s(no("Test", "123")), "# NO: Test123\n")
-
-
-def test_note():
-    # TODO: Break up tests into individual test methods
-    assert is_.equal(s(note()), "# NOTE: \n")
-    assert is_.equal(s(note(None)), "# NOTE: \n")
-    assert is_.equal(s(note("")), "# NOTE: \n")
-    assert is_.equal(s(note("Test")), "# NOTE: Test\n")
-    assert is_.equal(s(note("Test", None)), "# NOTE: Test\n")
-    assert is_.equal(s(note("Test", "")), "# NOTE: Test\n")
-    assert is_.equal(s(note("Test", "123")), "# NOTE: Test123\n")
-
-
-def test_path_not_exists():
-    # TODO: Break up tests into individual test methods
-    with raises(TypeError):
-        path_not_exists()
-    assert is_.equal(s(path_not_exists(None)), "[[ ! -e ]]")
-    assert is_.equal(s(path_not_exists("")), "[[ ! -e ]]")
-    assert is_.equal(s(path_not_exists("Test")), "[[ ! -e Test ]]")
-    with raises(TypeError):
-        path_not_exists("Test", None)
+# TODO: def test_local():
 
 
 def test_path_is_not_directory():
@@ -302,6 +269,17 @@ def test_path_is_not_file():
     assert is_.equal(s(path_is_not_file("Test")), "[[ ! -f Test ]]")
     with raises(TypeError):
         path_is_not_file("Test", None)
+
+
+def test_path_not_exists():
+    # TODO: Break up tests into individual test methods
+    with raises(TypeError):
+        path_not_exists()
+    assert is_.equal(s(path_not_exists(None)), "[[ ! -e ]]")
+    assert is_.equal(s(path_not_exists("")), "[[ ! -e ]]")
+    assert is_.equal(s(path_not_exists("Test")), "[[ ! -e Test ]]")
+    with raises(TypeError):
+        path_not_exists("Test", None)
 
 
 def test_remember_last_status():
@@ -394,6 +372,9 @@ def test_status_is_failure():
     assert is_.equal(s(status_is_failure(None)), "[[ ${} -ne 0 ]]")
     assert is_.equal(s(status_is_failure("")), "[[ ${} -ne 0 ]]")
     assert is_.equal(s(status_is_failure("Test")), "[[ ${Test} -ne 0 ]]")
+
+
+# TODO: def test_status_is_success():
 
 
 def test_string_equals():

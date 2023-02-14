@@ -63,8 +63,42 @@ def test_comment_06():
     assert is_.equal(s(comment("Test", "")), "# Test\n")
 
 
-def test_comment_06():
+def test_comment_07():
     assert is_.equal(s(comment("Test", "123")), "# Test123\n")
+
+
+def test_indent():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(indent()), 4 * " ")
+    with raises(TypeError):
+        indent(None)
+    assert is_.equal(s(indent(-1)), -1 * 4 * " ")
+    assert is_.equal(s(indent(0)), 0 * 4 * " ")
+    assert is_.equal(s(indent(1)), 1 * 4 * " ")
+    assert is_.equal(s(indent(2)), 2 * 4 * " ")
+    assert is_.equal(s(indent(9)), 9 * 4 * " ")
+
+
+def test_no():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(no()), "# NO: \n")
+    assert is_.equal(s(no(None)), "# NO: \n")
+    assert is_.equal(s(no("")), "# NO: \n")
+    assert is_.equal(s(no("Test")), "# NO: Test\n")
+    assert is_.equal(s(no("Test", None)), "# NO: Test\n")
+    assert is_.equal(s(no("Test", "")), "# NO: Test\n")
+    assert is_.equal(s(no("Test", "123")), "# NO: Test123\n")
+
+
+def test_note():
+    # TODO: Break up tests into individual test methods
+    assert is_.equal(s(note()), "# NOTE: \n")
+    assert is_.equal(s(note(None)), "# NOTE: \n")
+    assert is_.equal(s(note("")), "# NOTE: \n")
+    assert is_.equal(s(note("Test")), "# NOTE: Test\n")
+    assert is_.equal(s(note("Test", None)), "# NOTE: Test\n")
+    assert is_.equal(s(note("Test", "")), "# NOTE: Test\n")
+    assert is_.equal(s(note("Test", "123")), "# NOTE: Test123\n")
 
 
 def test_shebang_cat():
@@ -87,6 +121,8 @@ def test_shebang_thru_env_02():
 def test_shebang_thru_env_03():
     assert is_.equal(s(shebang_thru_env("Test")), "#!/usr/bin/env Test\n")
 
+
+# TDDO: def test_x():
 
 """DisabledContent
 """
