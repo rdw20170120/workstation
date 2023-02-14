@@ -2,7 +2,7 @@
 # Intended to be executed in a Bash shell.
 [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
-trap warn_on_error EXIT
+# NO: trap ... EXIT
 ###############################################################################
 # Clone git repositories, if they have not been cloned already.
 # NOTE: I reference my special SSH configuration to handle the connection, see `~/.ssh/config`.

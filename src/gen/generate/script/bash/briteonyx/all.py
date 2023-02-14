@@ -21,15 +21,16 @@ def _generate(dir_):
 
 
 def _generate_bin(dir_):
+    _generate_bin_lib(dir_ / "lib")
     briteonyx(executed(), dir_, "app-run")
     briteonyx(executed(), dir_, "show_maybe_missed_source")
     briteonyx(executed(), dir_, "sync_on_macOS")
     briteonyx(executed(), dir_, "tool-report")
-    _generate_bin_lib(dir_ / "lib")
 
 
 def _generate_bin_lib(dir_):
-    pass
+    briteonyx(sourced(), dir_, "configure-Anaconda.bash")
+    briteonyx(sourced(), dir_, "declare.bash")
 
 
 def _generate_briteonyx(dir_):
@@ -38,6 +39,7 @@ def _generate_briteonyx(dir_):
 
 
 def _generate_briteonyx_bin(dir_):
+    _generate_briteonyx_bin_lib(dir_ / "lib")
     briteonyx(executed(), dir_, "all-capture")
     briteonyx(executed(), dir_, "all-check")
     briteonyx(executed(), dir_, "anaconda-capture")
@@ -64,7 +66,6 @@ def _generate_briteonyx_bin(dir_):
     briteonyx(executed(), dir_, "test-run")
     briteonyx(executed(), dir_, "tool-capture")
     briteonyx(executed(), dir_, "tool-check")
-    _generate_briteonyx_bin_lib(dir_ / "lib")
 
 
 def _generate_briteonyx_bin_lib(dir_):

@@ -1,4 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
 # This file was originally taken from iterm2 https://github.com/gnachman/iTerm2/blob/master/tests/24-bit-color.sh
 #
 #   This file echoes a bunch of 24-bit color codes
@@ -98,3 +103,13 @@ for i in `seq 255 -1 128`; do
     echo -n " "
 done
 resetOutput
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

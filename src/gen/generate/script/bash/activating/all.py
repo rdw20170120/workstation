@@ -28,8 +28,7 @@ def _generate_bin(dir_):
 
 
 def _generate_bin_lib(dir_):
-    activating(sourced(), dir_, "configure-Anaconda.bash")
-    activating(sourced(), dir_, "declare.bash")
+    pass
 
 
 def _generate_briteonyx(dir_):

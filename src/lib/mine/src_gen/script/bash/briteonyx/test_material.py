@@ -8,14 +8,14 @@
 # from pytest import raises
 # Library modules   (absolute references, NOT packaged, in project)
 # from src_gen.common import *
-from src_gen.script.bash.material import *
+# from src_gen.script.bash.material import *
 from src_gen.renderer import Renderer
 from utility import my_assert as is_
 
 # from utility import my_assert_filesystem as fs_is_
 # from utility import my_assert_pathname as pn_is_
 # Project modules   (relative references, NOT packaged, in project)
-from .frame import *
+# from .frame import *
 from .material import *
 from .render import my_visitor_map
 

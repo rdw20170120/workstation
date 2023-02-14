@@ -74,8 +74,7 @@ def header_executed():
         comment("Intended to be executed in a Bash shell."),
         tracing_in_header(),
         no(set_("-e")),
-        trap("warn_on_error", "EXIT"),
-        eol(),
+        no(trap("...", "EXIT")),
         rule(),
     ]
 

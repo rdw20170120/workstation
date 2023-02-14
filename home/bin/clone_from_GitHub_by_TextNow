@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-# This script is intended to be executed by a user in a Bash shell.
-
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
 # Clone git repositories, if they have not been cloned already.
 # NOTE that I reference my special SSH configuration to handle the connection.
 
@@ -24,6 +27,12 @@ maybe_clone $Dir $UrlPrefix kubernetes
 maybe_clone $Dir $UrlPrefix puppet
 maybe_clone $Dir $UrlPrefix server-tooling
 maybe_clone $Dir $UrlPrefix terraform
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
 
 : << 'DisabledContent'
 DisabledContent
