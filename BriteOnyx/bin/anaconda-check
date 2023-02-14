@@ -9,7 +9,8 @@ trap warn_on_error EXIT
     exit 99
 
 main() {
-    # TODO: DESCRIPTION
+    # Check Anaconda state
+    require_arguments $# 0
 
     # TODO: CONTENT
 

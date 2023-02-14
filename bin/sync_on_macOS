@@ -43,6 +43,7 @@ main() {
     sync_directory .config macOS/.config
     sync_directory .ssh .ssh
     sync_directory bin  bin
+    sync_directory bin  macOS/bin
 
     sync_file . macOS .bash_profile
     sync_file . macOS .bashrc

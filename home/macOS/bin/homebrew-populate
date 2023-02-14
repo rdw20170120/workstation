@@ -6,11 +6,10 @@ trap warn_on_error EXIT
 ###############################################################################
 
 main() {
-    # TODO: DESCRIPTION
+    # Populate Homebrew by installing desired casks & formulae
+    require_arguments $# 0
 
-    # TODO: CONTENT
-
-    return 0
+    brew install iterm2 mambaforge meld neovim
 }
 
 main $@

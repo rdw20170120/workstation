@@ -6,11 +6,10 @@ trap warn_on_error EXIT
 ###############################################################################
 
 main() {
-    # TODO: DESCRIPTION
+    # Update Homebrew itself
+    require_arguments $# 0
 
-    # TODO: CONTENT
-
-    return 0
+    brew update
 }
 
 main $@

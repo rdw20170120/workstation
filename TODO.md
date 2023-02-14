@@ -35,7 +35,6 @@ unless they should merely be deleted.
 1. [ ]  /  = Investigate whether I want to capture log files during `test-run`
 1. [ ]  /  = Sort Anaconda packages in `cfg/anaconda.yml`
 1. [ ]  /  = `unset` relevant Bash variables when appropriate
-1. [ ] 1/1 - Add `redeclare` alias to `source` Bash function declarations again
 1. [ ] 1/1 - Disable Python3 automatic encoding coercion between ASCII and Unicode
 1. [ ] 1/1 - Extend code generation to all Bash scripts
 1. [ ] 1/1 - Implement full test suite for code generation functionality
@@ -60,6 +59,7 @@ unless they should merely be deleted.
 1. [ ] 3/3 - Implement code generation for testing code generation functionality
 1. [ ] 3/3 - Switch font in Neovim for better readability
 1. [ ] 3/3 - Switch font in shell for better readability
+1. [X] 1/1 - Add `redeclare` alias to `source` Bash function declarations again
 1. [X] 1/1 - Convert to Python3 source code
 1. [X] 1/1 - Enhance Bash activation to declare functions
 1. [X] 1/1 - Fix broken code generation functionality

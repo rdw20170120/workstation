@@ -6,11 +6,10 @@ trap warn_on_error EXIT
 ###############################################################################
 
 main() {
-    # TODO: DESCRIPTION
+    # Uninstall Homebrew on Apple macOS
+    require_arguments $# 0
 
-    # TODO: CONTENT
-
-    return 0
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 }
 
 main $@

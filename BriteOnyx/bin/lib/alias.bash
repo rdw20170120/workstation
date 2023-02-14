@@ -24,7 +24,6 @@ alias cycle='clear ; test-run && gen-run -vvv && app-run -vvv'
 alias list_sort_by_size='sort -nr --key=5'
 alias logs_reset='rm -fr "${BO_Project}/log" ; mkdir "${BO_Project}/log"'
 alias redeclare='source "${BO_Project}/BriteOnyx/bin/lib/declare.bash"'
-alias sync_generate='meld src/gen/generate/custom src/gen/generate/shared'
 alias todo='grep -FR TODO "${BO_Project}" | grep -Fv .log | grep -Fv .out'
 
 ###############################################################################

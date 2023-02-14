@@ -6,11 +6,10 @@ trap warn_on_error EXIT
 ###############################################################################
 
 main() {
-    # TODO: DESCRIPTION
+    # List casks & formulae installed by Homebrew
+    require_arguments $# 0
 
-    # TODO: CONTENT
-
-    return 0
+    brew list
 }
 
 main $@
