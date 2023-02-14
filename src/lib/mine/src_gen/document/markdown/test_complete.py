@@ -2,12 +2,7 @@
 """Test corresponding source-generation module."""
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
-# from pytest import fixture
-# from pytest import mark
-# from pytest import param
-# from pytest import raises
 # Library modules   (absolute references, NOT packaged, in project)
-# from src_gen.common import *
 from src_gen.renderer import Renderer
 from utility import my_assert as is_
 

@@ -1,13 +1,3 @@
-[0;34m[20230214 012146Z D] Reformatting Python code using Black[0m
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/test_frame.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/briteonyx/test_frame.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/python/test_material.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_element.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_frame.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/test_material.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/test_material.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/test_material.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_material.py
-
+[0;34m[20230214 023310Z D] Reformatting Python code using Black[0m
 All done! ✨ 🍰 ✨
-9 files reformatted, 187 files left unchanged.
+196 files left unchanged.
