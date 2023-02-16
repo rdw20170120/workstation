@@ -36,7 +36,7 @@ class VisitorMap(dict):
         result = self.get(py_type) or self._get_parent_type_visitor(obj, py_type)
         if result:
             return result
-        elif self.parent_map is not None:
+        if self.parent_map is not None:
             result = self.parent_map.get_visitor(obj, False)
         if not result and use_default:
             result = self.get(DEFAULT)

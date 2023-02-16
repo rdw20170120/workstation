@@ -27,6 +27,8 @@ omit =
   */lib/mine/src_gen/script/document/markdown/element.py
   */lib/mine/src_gen/script/element.py
   */lib/mine/src_gen/script/python/element.py
+  */lib/mine/task/task.py
+  */lib/mine/task/task_manager.py
   */lib/mine/utility/color_log_formatter.py
   */lib/mine/utility/environment.py
   */lib/mine/utility/filesystem.py
