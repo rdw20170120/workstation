@@ -16,6 +16,8 @@ alias lL='ls -Lln'
 alias vim='nvim'
 
 alias jump_experiment='cd ~/repo/GitLab/wip/experiment'
+alias jump_mono='cd ~/repo/GitLab/wip/private-mono'
+alias jump_pythonspeed='cd ~/repo/GitLab/wip/pythonspeed'
 alias jump_workstation='cd ~/repo/GitHub/wip/workstation'
 
 # For working with two local copies of the same repository

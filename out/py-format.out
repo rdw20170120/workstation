@@ -1,3 +1,6 @@
-[0;34m[20230214 023310Z D] Reformatting Python code using Black[0m
+[0;34m[20230217 001159Z D] Reformatting Python code using Black[0m
+reformatted /Users/rob/repo/GitHub/wip/workstation/waiting/src/lib/mine/cert/bin/helper/Python/write-session.py
+reformatted /Users/rob/repo/GitHub/wip/workstation/waiting/src/lib/mine/cert/bin/helper/Python/webpage.py
+
 All done! ✨ 🍰 ✨
-196 files left unchanged.
+2 files reformatted, 194 files left unchanged.

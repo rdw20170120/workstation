@@ -12,7 +12,7 @@ export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 ################################################################################
 # Homebrew
-export HOMEBREW_PREFIX=/opt/homebrew
+export HOMEBREW_PREFIX=/usr/local
 eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
 export BO_PathAfterHomebrew=${PATH}
 export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
@@ -147,7 +147,6 @@ fi
 # instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 [[ -r ~/alias.bash ]] && source ~/alias.bash
-[[ -r ~/alias-SWA.bash ]] && source ~/alias-SWA.bash
 
 ################################################################################
 # Enable programmable completion features

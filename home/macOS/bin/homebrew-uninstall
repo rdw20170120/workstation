@@ -9,6 +9,12 @@ main() {
     # Uninstall Homebrew on Apple macOS
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+    sudo rm -fr /Applications/iTerm.app
+    sudo rm -fr /Applications/Meld.app
+    if [[ -d "${HOMEBREW_PREFIX}" ]] ; then
+        cd "${HOMEBREW_PREFIX}"
+        sudo rm -fr Frameworks Homebrew bin etc include lib opt sbin share var
+    fi
 }
 
 main $@
