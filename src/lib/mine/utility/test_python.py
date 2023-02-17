@@ -11,9 +11,11 @@ from utility import my_assert as is_
 # Project modules   (relative references, NOT packaged, in project)
 
 
-def test_python_version():
+def test_python_version_00():
     assert is_.not_none(version_info)
+def test_python_version_01():
     assert is_.equal(version_info.major, 3)
+def test_python_version_02():
     assert is_.at_least(version_info.minor, 6)
 
 

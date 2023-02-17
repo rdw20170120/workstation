@@ -60,37 +60,52 @@ def test_comment_07():
     assert is_.equal(s(comment("Test", "123")), "# Test123\n")
 
 
-def test_indent():
-    # TODO: Break up tests into individual test methods
+def test_indent_00():
     assert is_.equal(s(indent()), 4 * " ")
+def test_indent_01():
     with raises(TypeError):
         indent(None)
+def test_indent_02():
     assert is_.equal(s(indent(-1)), -1 * 4 * " ")
+def test_indent_03():
     assert is_.equal(s(indent(0)), 0 * 4 * " ")
+def test_indent_04():
     assert is_.equal(s(indent(1)), 1 * 4 * " ")
+def test_indent_05():
     assert is_.equal(s(indent(2)), 2 * 4 * " ")
+def test_indent_06():
     assert is_.equal(s(indent(9)), 9 * 4 * " ")
 
 
-def test_no():
-    # TODO: Break up tests into individual test methods
+def test_no_00():
     assert is_.equal(s(no()), "# NO: \n")
+def test_no_01():
     assert is_.equal(s(no(None)), "# NO: \n")
+def test_no_02():
     assert is_.equal(s(no("")), "# NO: \n")
+def test_no_03():
     assert is_.equal(s(no("Test")), "# NO: Test\n")
+def test_no_04():
     assert is_.equal(s(no("Test", None)), "# NO: Test\n")
+def test_no_05():
     assert is_.equal(s(no("Test", "")), "# NO: Test\n")
+def test_no_06():
     assert is_.equal(s(no("Test", "123")), "# NO: Test123\n")
 
 
-def test_note():
-    # TODO: Break up tests into individual test methods
+def test_note_00():
     assert is_.equal(s(note()), "# NOTE: \n")
+def test_note_01():
     assert is_.equal(s(note(None)), "# NOTE: \n")
+def test_note_02():
     assert is_.equal(s(note("")), "# NOTE: \n")
+def test_note_03():
     assert is_.equal(s(note("Test")), "# NOTE: Test\n")
+def test_note_04():
     assert is_.equal(s(note("Test", None)), "# NOTE: Test\n")
+def test_note_05():
     assert is_.equal(s(note("Test", "")), "# NOTE: Test\n")
+def test_note_06():
     assert is_.equal(s(note("Test", "123")), "# NOTE: Test123\n")
 
 
