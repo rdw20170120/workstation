@@ -11,12 +11,12 @@ from aws import ec2
 # Co-located modules (relative references, NOT packaged, in project)
 
 
-def test_01():
+def test_00():
     with raises(ValueError, match="profile_name"):
         ec2.EC2(None)
 
 
-def test_02():
+def test_01():
     with raises(ValueError, match="profile_name"):
         ec2.EC2("")
 

@@ -1,5 +1,8 @@
 #!/usr/bin/env false
 """TODO: Write
+
+TODO: REFACTOR: Extract variables as module constants
+TODO: REFACTOR: Split up tests
 """
 # Internal packages (absolute references, distributed with Python)
 from pathlib import Path

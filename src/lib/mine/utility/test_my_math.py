@@ -16,21 +16,42 @@ from utility.my_math import assert_nan
 # Project modules   (relative references, NOT packaged, in project)
 
 
-def test_assert_nan():
+def test_assert_nan_00():
     with raises(AssertionError):
         assert_nan(-1.0)
+
+
+def test_assert_nan_01():
     with raises(AssertionError):
         assert_nan(0)
+
+
+def test_assert_nan_02():
     with raises(AssertionError):
         assert_nan(1.0)
+
+
+def test_assert_nan_03():
     with raises(AssertionError):
         assert_nan(False)
+
+
+def test_assert_nan_04():
     with raises(AssertionError):
         assert_nan(True)
+
+
+def test_assert_nan_05():
     with raises(TypeError):
         assert_nan("")
+
+
+def test_assert_nan_06():
     with raises(TypeError):
         assert_nan("text")
+
+
+def test_assert_nan_07():
     with raises(TypeError):
         assert_nan(None)
 

@@ -1,12 +1,12 @@
-[0;34m[20230224 183840Z D] Reformatting Python code using Black[0m
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_element.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/waiting/src/lib/mine/cert/bin/helper/Python/write-session.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/test_material.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/waiting/src/lib/mine/cert/bin/helper/Python/webpage.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/test_common.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/test_material.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_python.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_material.py
+[0;34m[20230224 191545Z D] Reformatting Python code using Black[0m
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_assert_pathname.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_assert_filesystem.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_pathname.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/test_material.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_math.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/test_material.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_text.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_assert.py
 
 All done! ✨ 🍰 ✨
 8 files reformatted, 175 files left unchanged.

@@ -17,20 +17,29 @@ this_file = Path(__file__)
 this_directory = this_file.parent
 
 
-def test_absolute_directory():
+def test_absolute_directory_00():
     assert fs_is_.absolute_directory(this_directory)
+
+
+def test_absolute_directory_01():
     with raises(AssertionError):
         assert fs_is_.absolute_directory(this_file)
 
 
-def test_absolute_file():
+def test_absolute_file_00():
     with raises(AssertionError):
         assert fs_is_.absolute_file(this_directory)
+
+
+def test_absolute_file_01():
     assert fs_is_.absolute_file(this_file)
 
 
-def test_existing_absolute_path():
+def test_existing_absolute_path_00():
     assert fs_is_.existing_absolute_path(this_directory)
+
+
+def test_existing_absolute_path_01():
     assert fs_is_.existing_absolute_path(this_file)
 
 

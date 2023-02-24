@@ -28,16 +28,16 @@ def test_shebang_false():
     assert is_.equal(s(shebang_false()), "#!/usr/bin/env false\n")
 
 
-def test_shebang_thru_env_01():
+def test_shebang_thru_env_00():
     with raises(AssertionError):
         shebang_thru_env(None)
 
 
-def test_shebang_thru_env_02():
+def test_shebang_thru_env_01():
     assert is_.equal(s(shebang_thru_env("")), "#!/usr/bin/env\n")
 
 
-def test_shebang_thru_env_03():
+def test_shebang_thru_env_02():
     assert is_.equal(s(shebang_thru_env("Test")), "#!/usr/bin/env Test\n")
 
 

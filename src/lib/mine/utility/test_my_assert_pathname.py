@@ -17,8 +17,11 @@ this_file = Path(__file__)
 this_directory = this_file.parent
 
 
-def test_absolute_path():
+def test_absolute_path_00():
     assert pn_is_.absolute_path(this_directory)
+
+
+def test_absolute_path_01():
     assert pn_is_.absolute_path(this_file)
 
 
