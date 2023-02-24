@@ -1,6 +1,12 @@
-[0;34m[20230217 001159Z D] Reformatting Python code using Black[0m
-reformatted /Users/rob/repo/GitHub/wip/workstation/waiting/src/lib/mine/cert/bin/helper/Python/write-session.py
-reformatted /Users/rob/repo/GitHub/wip/workstation/waiting/src/lib/mine/cert/bin/helper/Python/webpage.py
+[0;34m[20230224 183840Z D] Reformatting Python code using Black[0m
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_element.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/waiting/src/lib/mine/cert/bin/helper/Python/write-session.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/test_material.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/waiting/src/lib/mine/cert/bin/helper/Python/webpage.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/test_common.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/test_material.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_python.py
+reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/test_material.py
 
 All done! ✨ 🍰 ✨
-2 files reformatted, 194 files left unchanged.
+8 files reformatted, 175 files left unchanged.

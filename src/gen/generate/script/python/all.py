@@ -124,7 +124,6 @@ def _generate_src_app_name_task(dir_):
     python(library(), dir_, "mapping.py")
     python(library(), dir_, "scan_directory.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_mapping.py")
     python(suite(), dir_, "test_task.py")
 
 
@@ -287,7 +286,6 @@ def _generate_src_lib_mine_src_gen_script_bash_briteonyx(dir_):
     python(package(), dir_, "__init__.py")
     python(generator_suite(), dir_, "test_complete.py")
     python(generator_suite(), dir_, "test_frame.py")
-    python(generator_suite(), dir_, "test_material.py")
 
 
 def _generate_src_lib_mine_src_gen_script_python(dir_):
@@ -298,7 +296,6 @@ def _generate_src_lib_mine_src_gen_script_python(dir_):
     python(library(), dir_, "render.py")
     python(package(), dir_, "__init__.py")
     python(generator_suite(), dir_, "test_complete.py")
-    python(generator_suite(), dir_, "test_frame.py")
     python(generator_suite(), dir_, "test_material.py")
 
 
@@ -312,10 +309,8 @@ def _generate_src_lib_mine_task(dir_):
     python(package(), dir_, "__init__.py")
     python(suite(), dir_, "conftest.py")
     python(suite(), dir_, "test_config.py")
-    python(suite(), dir_, "test_exception.py")
     python(suite(), dir_, "test_queue.py")
     python(suite(), dir_, "test_task.py")
-    python(suite(), dir_, "test_task_manager.py")
 
 
 def _generate_src_lib_mine_templates(dir_):
@@ -324,10 +319,6 @@ def _generate_src_lib_mine_templates(dir_):
     python(library(), dir_, "section_3.py")
     python(library(), dir_, "section_4.py")
     python(package(), dir_, "__init__.py")
-    python(suite(), dir_, "test_section_1.py")
-    python(suite(), dir_, "test_section_2.py")
-    python(suite(), dir_, "test_section_3.py")
-    python(suite(), dir_, "test_section_4.py")
 
 
 def _generate_src_lib_mine_utility(dir_):
@@ -349,10 +340,7 @@ def _generate_src_lib_mine_utility(dir_):
     python(library(), dir_, "tracked_path.py")
     python(package(), dir_, "__init__.py")
     python(suite(), dir_, "conftest.py")
-    python(suite(), dir_, "test_color_log_formatter.py")
     python(suite(), dir_, "test_config.py")
-    python(suite(), dir_, "test_environment.py")
-    python(suite(), dir_, "test_filesystem.py")
     python(suite(), dir_, "test_my_assert.py")
     python(suite(), dir_, "test_my_assert_filesystem.py")
     python(suite(), dir_, "test_my_assert_pathname.py")
@@ -360,7 +348,6 @@ def _generate_src_lib_mine_utility(dir_):
     python(suite(), dir_, "test_my_time.py")
     python(suite(), dir_, "test_pathname.py")
     python(suite(), dir_, "test_python.py")
-    python(suite(), dir_, "test_singleton_application.py")
     python(suite(), dir_, "test_text.py")
     python(suite(), dir_, "test_tracked_path.py")
 

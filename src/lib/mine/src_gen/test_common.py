@@ -19,6 +19,8 @@ wont_squash = (False, True, 0, 0.0, 0j, " ", "Test", {})
 
 def test_eol_00():
     assert is_.equal(s(eol()), "\n")
+
+
 def test_eol_01():
     with raises(TypeError):
         eol(None)
@@ -26,8 +28,12 @@ def test_eol_01():
 
 def test_line_00():
     assert is_.equal(s(line()), "\n")
+
+
 def test_line_01():
     assert is_.equal(s(line(None)), "\n")
+
+
 def test_line_02():
     assert is_.equal(s(line("Test")), "Test\n")
 

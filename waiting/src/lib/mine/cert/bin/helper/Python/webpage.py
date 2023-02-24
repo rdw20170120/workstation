@@ -19,7 +19,9 @@ class Html5(object):
 
     def _as_document(self):
         return throw_out_your_templates.HTML5Doc(
-            htmltags.body[self._body,],
+            htmltags.body[
+                self._body,
+            ],
             head=self._head(),
         )
 

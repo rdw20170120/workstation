@@ -15,26 +15,43 @@ s = Renderer(my_visitor_map)._serialize
 
 # TODO: Expand tests for full pattern
 
+
 def test_bt_00():
     assert is_.equal(s(bt()), "``")
+
+
 def test_bt_01():
     assert is_.equal(s(bt(None)), "``")
+
+
 def test_bt_02():
     assert is_.equal(s(bt("")), "``")
+
+
 def test_bt_03():
     assert is_.equal(s(bt("Test")), "`Test`")
+
+
 def test_bt_04():
     assert is_.equal(s(bt("Test", "123")), "`Test123`")
 
 
 def test_dq_00():
     assert is_.equal(s(dq()), '""')
+
+
 def test_dq_01():
     assert is_.equal(s(dq(None)), '""')
+
+
 def test_dq_02():
     assert is_.equal(s(dq("")), '""')
+
+
 def test_dq_03():
     assert is_.equal(s(dq("Test")), '"Test"')
+
+
 def test_dq_04():
     assert is_.equal(s(dq("Test", "123")), '"Test123"')
 
@@ -44,12 +61,20 @@ def test_dq_04():
 
 def test_sq_00():
     assert is_.equal(s(sq()), "''")
+
+
 def test_sq_01():
     assert is_.equal(s(sq(None)), "''")
+
+
 def test_sq_02():
     assert is_.equal(s(sq("")), "''")
+
+
 def test_sq_03():
     assert is_.equal(s(sq("Test")), "'Test'")
+
+
 def test_sq_04():
     assert is_.equal(s(sq("Test", "123")), "'Test123'")
 
