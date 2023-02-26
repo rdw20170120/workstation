@@ -11,10 +11,31 @@ trap warn_on_error EXIT
 main() {
     # Populate Anaconda environment with desired packages (not PIP-based)
     require_arguments $# 0
+    require_directory_in BO_DirAnaconda
 
-    # TODO: CONTENT
+    # Need Python itself
+    local Packages="python=3.11.*"
 
-    return 0
+    # Need Python support tools
+    Packages="${Packages} ansi2html"
+    Packages="${Packages} black"
+    Packages="${Packages} coverage"
+    # TODO: FIX: Why does icdiff=2.0.* seem to all be corrupted?
+    Packages="${Packages} icdiff=1.9.*"
+    Packages="${Packages} pip"
+    Packages="${Packages} pytest"
+    Packages="${Packages} pytest-cov"
+    Packages="${Packages} pytest-html"
+    Packages="${Packages} pytest-icdiff"
+    Packages="${Packages} pytest-sugar"
+
+    # Need Python packages required by project source code
+    Packages="${Packages} awscli"
+    Packages="${Packages} boto3"
+    Packages="${Packages} logzero"
+
+    log_info "Installing desired packages into Anaconda environment '${BO_DirAnaconda}'"
+    conda install --yes ${Packages}
 }
 
 main $@

@@ -12,9 +12,8 @@ main() {
     # Destroy Anaconda environment
     require_arguments $# 0
 
-    # TODO: CONTENT
-
-    return 0
+    require_variable BO_DirAnaconda
+    maybe_delete_directory_tree "${BO_DirAnaconda}"
 }
 
 main $@

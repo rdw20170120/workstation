@@ -12,13 +12,10 @@ main() {
     # Check all project configuration status
     require_arguments $# 0
 
-    # TODO: Implement
-    # dep-check
+    anaconda-check
     env-check
     py-check
     tool-check
-
-    return 0
 }
 
 main $@

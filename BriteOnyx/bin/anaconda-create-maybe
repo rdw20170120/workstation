@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+trap warn_on_error EXIT
+###############################################################################
+[[ -z "${BO_Project}" ]] &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    exit 99
+require_directory_in BO_Project
+
+main() {
+    # Create Anaconda environment
+    require_arguments $# 0
+    require_variable BO_DirAnaconda
+    local Script
+    local ShouldCreate=true
+    local Status
+
+    [[ -d "${BO_DirAnaconda}" ]] && ShouldCreate=false
+
+    if [[ "${ShouldCreate}" == "true" ]] ; then
+        execute_script anaconda-destroy
+        execute_script anaconda-create
+    else
+        log_info "Keeping Anaconda environment in directory '${BO_DirAnaconda}'"
+    fi
+
+    require_directory "${BO_DirAnaconda}"
+    log_info "Activating Anaconda environment in directory '${BO_DirAnaconda}'"
+    conda activate "${BO_DirAnaconda}"
+
+    # NOTE: Is it necessary to initialize Anaconda (and Mamba) again after activation?
+    Script="${BO_Project}/BriteOnyx/bin/lib/initialize-Anaconda.bash"
+    source "${Script}" ; Status=$?
+    [[ ${Status} -ne 0 ]] &&
+        kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
+    export BO_PathAfterAnaconda=${PATH}
+    remembering BO_PathAfterAnaconda
+    export BO_PathTool=${BO_DirAnaconda}/bin:${CONDA_PREFIX}/condabin
+
+    Script="${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
+    source "${Script}" ; Status=$?
+    [[ ${Status} -ne 0 ]] &&
+        kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
+    [[ "${ShouldCreate}" == "true" ]] && execute_script anaconda-populate
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

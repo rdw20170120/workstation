@@ -12,9 +12,23 @@ main() {
     # Capture Anaconda state
     require_arguments $# 0
 
-    # TODO: CONTENT
+    local -r Dir=${BO_Project}/out
+    require_directory "${Dir}"
+    local -r File=${Dir}/anaconda.out
 
-    return 0
+    log_debug "Capturing Anaconda status to '${File}'"
+    &>"${File}" anaconda-report
+    require_file "${File}"
+
+    require_variable BO_FileAnacondaJson
+    log_info "Capturing installed packages to file '${BO_FileAnacondaJson}'"
+    conda list --no-pip >"${BO_FileAnacondaJson}"
+    require_file "${BO_FileAnacondaJson}"
+
+    require_variable BO_FileAnacondaYaml
+    log_info "Capturing installed packages to file '${BO_FileAnacondaYaml}'"
+    conda list --explicit --export --md5 --no-pip >"${BO_FileAnacondaYaml}"
+    require_file "${BO_FileAnacondaYaml}"
 }
 
 main $@

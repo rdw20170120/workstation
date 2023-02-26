@@ -1,12 +1,3 @@
-[0;34m[20230224 191545Z D] Reformatting Python code using Black[0m
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_assert_pathname.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_assert_filesystem.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_pathname.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/script/bash/activating/test_material.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_math.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/src_gen/document/markdown/test_material.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_text.py
-reformatted /Users/x299424/repo/GitHub/wip/workstation/src/lib/mine/utility/test_my_assert.py
-
+[0;34m[20230226 190726Z D] Reformatting Python code using Black[0m
 All done! ✨ 🍰 ✨
-8 files reformatted, 175 files left unchanged.
+170 files left unchanged.

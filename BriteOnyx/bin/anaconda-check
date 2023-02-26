@@ -12,9 +12,13 @@ main() {
     # Check Anaconda state
     require_arguments $# 0
 
-    # TODO: CONTENT
+    local -r Dir=${BO_Project}/out
+    require_directory "${Dir}"
+    local -r File=${Dir}/anaconda.out
+    require_file "${File}"
 
-    return 0
+    log_debug "Checking Anaconda status against '${File}'"
+    anaconda-report | diff - "${File}"
 }
 
 main $@

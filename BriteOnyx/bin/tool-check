@@ -12,17 +12,13 @@ main() {
     # Check tool status
     require_arguments $# 0
 
-    local -r File=${BO_Project}/out/tool.out
-
-    if [[ ! -r "${File}" ]] ; then
-        log_error "Tool status file '${File}' is unreadable, aborting"
-        exit 1
-    fi
+    local -r Dir=${BO_Project}/out
+    require_directory "${Dir}"
+    local -r File=${Dir}/tool.out
+    require_file "${File}"
 
     log_debug "Checking tool status against '${File}'"
     tool-report | diff - "${File}"
-
-    return 0
 }
 
 main $@

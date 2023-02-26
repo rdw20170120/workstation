@@ -12,12 +12,13 @@ main() {
     # Capture tool status
     require_arguments $# 0
 
-    local -r File=${BO_Project}/out/tool.out
+    local -r Dir=${BO_Project}/out
+    require_directory "${Dir}"
+    local -r File=${Dir}/tool.out
 
     log_debug "Capturing tool status to '${File}'"
     &>"${File}" tool-report
-
-    return 0
+    require_file "${File}"
 }
 
 main $@

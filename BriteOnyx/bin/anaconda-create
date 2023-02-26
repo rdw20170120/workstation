@@ -12,9 +12,11 @@ main() {
     # Create Anaconda environment
     require_arguments $# 0
 
-    # TODO: CONTENT
-
-    return 0
+    require_variable BO_DirAnaconda
+    # TODO: Invoke anaconda-destroy first?
+    log_info "Creating Anaconda environment in directory '${BO_DirAnaconda}'"
+    conda create --prefix "${BO_DirAnaconda}"
+    require_directory_in BO_DirAnaconda
 }
 
 main $@
