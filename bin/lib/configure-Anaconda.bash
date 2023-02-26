@@ -9,11 +9,6 @@
     exit 99
 require_directory_in BO_Project
 
-_Script="${BO_Project}/BriteOnyx/bin/lib/initialize-Anaconda.bash"
-source "${_Script}" ; _Status=$?
-[[ ${_Status} -ne 0 ]] &&
-    kill -INT $$  # Kill the executing script, but not the shell (terminal)
-
 # Configure BriteOnyx for Anaconda environment
 export BO_DirAnaconda=${BO_Project}/.anaconda
 remembering BO_DirAnaconda
@@ -22,11 +17,6 @@ remembering BO_FileAnacondaJson
 export BO_FileAnacondaYaml=${BO_Project}/cfg/anaconda.yml
 remembering BO_FileAnacondaYaml
 
-_Script="${BO_Project}/BriteOnyx/bin/anaconda-create-maybe"
-source "${_Script}" ; _Status=$?
-[[ ${_Status} -ne 0 ]] &&
-    kill -INT $$  # Kill the executing script, but not the shell (terminal)
-
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
 # export PS4='$ ' ; set -vx
@@ -34,5 +24,15 @@ source "${_Script}" ; _Status=$?
 # set +vx
 
 : << 'DisabledContent'
+_Script="${BO_Project}/BriteOnyx/bin/lib/initialize-Anaconda.bash"
+source "${_Script}" ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
+_Script="${BO_Project}/BriteOnyx/bin/anaconda-create-maybe"
+source "${_Script}" ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
 DisabledContent
 

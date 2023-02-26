@@ -8,9 +8,6 @@
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-# Save PS1 since Anaconda is about to modify it
-BO_PS1=${PS1}
-
 # Initilize Anaconda
 require_directory_in CONDA_PREFIX
 # >>> conda initialize >>>
@@ -37,9 +34,6 @@ if [ -f "${_Script}" ]; then
 fi
 # <<< conda initialize <<<
 
-# NOTE: Restore PS1 since I don't like having Anaconda put the environment prefix there
-export PS1=${BO_PS1}
-
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
 # export PS4='$ ' ; set -vx
@@ -47,5 +41,11 @@ export PS1=${BO_PS1}
 # set +vx
 
 : << 'DisabledContent'
+# Save PS1 since Anaconda is about to modify it
+export BO_PS1=${PS1}
+
+# NOTE: Restore PS1 since I don't like having Anaconda put the environment prefix there
+export PS1=${BO_PS1}
+
 DisabledContent
 
