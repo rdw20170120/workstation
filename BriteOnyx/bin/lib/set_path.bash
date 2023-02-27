@@ -26,7 +26,8 @@
 # relevant to the current deployed environment--
 # where the specific user is best positioned to address them
 # and failures are most likely limited
-# to affecting only them
+# to affecting only 
+# the current project and user
 # (as they should).
 
 [[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}

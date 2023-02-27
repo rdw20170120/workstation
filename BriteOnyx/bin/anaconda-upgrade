@@ -9,12 +9,11 @@ trap warn_on_error EXIT
     exit 99
 
 main() {
-    # Upgrade packages installed by Anaconda
+    # Update Anaconda
+    # TODO: Upgrade packages installed by Anaconda
     require_arguments $# 0
 
-    # TODO: CONTENT
-
-    return 0
+    conda update conda mamba
 }
 
 main $@

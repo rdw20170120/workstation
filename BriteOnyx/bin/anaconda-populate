@@ -12,6 +12,7 @@ main() {
     # Populate Anaconda environment with desired packages (not PIP-based)
     require_arguments $# 0
     require_directory_in BO_DirAnaconda
+    require_variable BO_cmd_conda
 
     # Need Python itself
     local Packages="python=3.11.*"
@@ -35,7 +36,7 @@ main() {
     Packages="${Packages} logzero"
 
     log_info "Installing desired packages into Anaconda environment '${BO_DirAnaconda}'"
-    conda install --yes ${Packages}
+    ${BO_cmd_conda} install --yes ${Packages}
 }
 
 main $@

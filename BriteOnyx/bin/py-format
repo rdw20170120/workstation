@@ -12,13 +12,13 @@ main() {
     # Reformat Python code using Black
     require_arguments $# 0
 
-    require_value black
+    require_variable BO_cmd_black
 
     # Temporarily override user setting to keep Black's cache under BO_Project
     export XDG_CACHE_HOME=${BO_Project}/.cache
 
     log_debug "Reformatting Python code using Black"
-    ${black} --config "${BO_Project}/cfg/pyproject.toml" "${BO_Project}"
+    ${BO_cmd_black} --config "${BO_Project}/cfg/pyproject.toml" "${BO_Project}"
 
     return 0
 }

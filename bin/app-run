@@ -10,6 +10,8 @@ trap warn_on_error EXIT
 
 main() {
     # Run application
+    require_variable BO_cmd_python3
+    local Cmd
 
     # This is intended to be
     # the single primary execution entry point
@@ -26,11 +28,11 @@ main() {
     cd "${BO_Project}/src/app" ; abort_on_fail $? "from cd"
     
     # Execute Python
-    cmd='python3'
-    # cmd+=' -bb'
-    cmd+=" -m ${BO_NameApp}"
-    echo $cmd $@
-    $cmd $@
+    Cmd=${BO_cmd_python3}
+    # Cmd+=' -bb'
+    Cmd+=" -m ${BO_NameApp}"
+    echo ${Cmd} $@
+    ${Cmd} $@
 
     return 0
 }

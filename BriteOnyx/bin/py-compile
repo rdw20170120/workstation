@@ -12,14 +12,14 @@ main() {
     # Compile all Python source
     require_arguments $# 0
 
-    require_value compileall
+    require_variable BO_cmd_compileall
 
     log_debug "Compiling Python source files..."
-    ${compileall} -f "${BO_Project}/BriteOnyx/bin"
-    ${compileall} -f "${BO_Project}/bin"
-    ${compileall} -f "${BO_Project}/src/app"
-    ${compileall} -f "${BO_Project}/src/gen"
-    ${compileall} -f "${BO_Project}/src/lib"
+    ${BO_cmd_compileall} -f "${BO_Project}/BriteOnyx/bin"
+    ${BO_cmd_compileall} -f "${BO_Project}/bin"
+    ${BO_cmd_compileall} -f "${BO_Project}/src/app"
+    ${BO_cmd_compileall} -f "${BO_Project}/src/gen"
+    ${BO_cmd_compileall} -f "${BO_Project}/src/lib"
 
     return 0
 }

@@ -11,11 +11,12 @@ trap warn_on_error EXIT
 main() {
     # Create Anaconda environment
     require_arguments $# 0
+    require_variable BO_cmd_conda
 
     require_variable BO_DirAnaconda
     # TODO: Invoke anaconda-destroy first?
     log_info "Creating Anaconda environment in directory '${BO_DirAnaconda}'"
-    conda create --prefix "${BO_DirAnaconda}"
+    ${BO_cmd_conda} create --prefix "${BO_DirAnaconda}"
     require_directory_in BO_DirAnaconda
 }
 

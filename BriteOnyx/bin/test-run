@@ -14,12 +14,12 @@ run_coverage() {
     # $1 = Python coverage configuration file
     require_file "$1"
 
-    require_value coverage
+    require_variable BO_cmd_coverage
 
-    ${coverage} html --rcfile="$1"
-    abort_on_fail $? "from ${coverage} html ..."
-    ${coverage} report --rcfile="$1"
-    abort_on_fail $? "from ${coverage} report ..."
+    ${BO_cmd_coverage} html --rcfile="$1"
+    abort_on_fail $? "from ${BO_cmd_coverage} html ..."
+    ${BO_cmd_coverage} report --rcfile="$1"
+    abort_on_fail $? "from ${BO_cmd_coverage} report ..."
 }
 
 run_pytest() {
@@ -31,29 +31,27 @@ run_pytest() {
     require_file "$1"
     require_value "$2"
     require_directory "$3"
-
-    require_value pytest
+    require_variable BO_cmd_pytest
 
     cd "$3" ; abort_on_fail $? "from cd"
-    ${pytest} \
+    ${BO_cmd_pytest} \
         --cov="$3" \
         --cov-append \
         --cov-config="$1" \
         --cov-report= \
         --log-file="${BO_Project}/log/pytest-$2.log"
-    abort_on_fail $? "from ${pytest} ..."
+    abort_on_fail $? "from ${BO_cmd_pytest} ..."
 }
 
 main() {
     # Run Python test suites
     require_arguments $# 0
+    require_variable BO_cmd_coverage
 
     local -r Config=${BO_Project}/cfg/.coveragerc
 
-    require_value coverage
-
-    ${coverage} erase --rcfile="${Config}"
-    abort_on_fail $? "from ${coverage} erase ..."
+    ${BO_cmd_coverage} erase --rcfile="${Config}"
+    abort_on_fail $? "from ${BO_cmd_coverage} erase ..."
 
     run_pytest "${Config}" mine "${BO_Project}/src/lib/mine"
     run_pytest "${Config}" gen  "${BO_Project}/src/gen"

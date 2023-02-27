@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-# Intended to be sourced in a Bash shell.
+# Intended to be sourced in a Bash shell during activation.
 [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
 # NO: trap ... EXIT
@@ -51,20 +51,20 @@ remembering BO_NameApp
 require_directory_in HOME
 
 # Remember how to execute various tools
-export python3=$(which python3)
-remembering python3
-export black="${python3} -m black"
-remembering black
-export compileall="${python3} -m compileall"
-remembering compileall
-export coverage="${python3} -m coverage"
-remembering coverage
-export pip="${python3} -m pip"
-remembering pip
-export pytest="${python3} -m pytest"
-remembering pytest
-export tabnanny="${python3} -m tabnanny"
-remembering tabnanny
+export BO_cmd_python3=$(which python3)
+remembering BO_cmd_python3
+export BO_cmd_black="${python3} -m black"
+remembering BO_cmd_black
+export BO_cmd_compileall="${python3} -m compileall"
+remembering BO_cmd_compileall
+export BO_cmd_coverage="${python3} -m coverage"
+remembering BO_cmd_coverage
+export BO_cmd_pip="${python3} -m pip"
+remembering BO_cmd_pip
+export BO_cmd_pytest="${python3} -m pytest"
+remembering BO_cmd_pytest
+export BO_cmd_tabnanny="${python3} -m tabnanny"
+remembering BO_cmd_tabnanny
 
 ###############################################################################
 # NOTE: Use the following settings
@@ -119,31 +119,5 @@ export Run=Dry
 # set +vx
 
 : << 'DisabledContent'
-
-export BO_DirHomeConfluent=/opt/Confluent/confluent-5.5.1
-require_directory_in BO_DirHomeConfluent
-export BO_PathConfluent=${BO_DirHomeConfluent}/bin
-
-export BO_DirHomeJava=/opt/OpenJDK/jdk-15.jdk/Contents/Home
-require_directory_in BO_DirHomeJava
-export BO_PathJava=${BO_DirHomeJava}/bin
-export JAVA_HOME=${BO_DirHomeJava}
-
-export BO_DirHomeTestSSL=${HOME}/tool/testssl.sh-3.0
-require_directory_in BO_DirHomeTestSSL
-export BO_PathTestSSL=${BO_DirHomeTestSSL}
-
-# Java should preceed Confluent
-# in the PATH
-# (since the latter depends upon the former).
-# At this point in the activation
-# BO_PathTool already contains BO_PathPve.
-# TODO: Remove ${BO_PathSystem} from ${BO_PathPve}
-# Then move ${BO_PathPve} before ${BO_PathConfluent}
-# Then move ${BO_PathPve} before ${BO_PathJava}
-export BO_PathTool=${BO_PathJava}:${BO_PathConfluent}:${BO_PathTestSSL}:${BO_PathTool}
-
-source "${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
-
 DisabledContent
 

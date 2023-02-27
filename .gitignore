@@ -1,12 +1,10 @@
 # Files and directories within THIS project
+/.BO
 /.anaconda
 /alias.bash
 /context.bash
-/BO-*.env
 
 # Common directories
-.cache/
-coverage/
 /log/
 
 # Common file suffixes
@@ -34,6 +32,7 @@ coverage/
 # Python
 *.py[cdo]
 /.coverage
+/coverage/
 __pycache__/
 htmlcov/
 

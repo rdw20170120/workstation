@@ -7,11 +7,11 @@
 [[ -z "${BO_Project}" ]] &&
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
-
-# Initilize Anaconda
+require_directory_in BO_DirCapture
 require_directory_in CONDA_PREFIX
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
+
+# Initialize Anaconda
+(set -o posix ; set) | sort >"${BO_DirCapture}/before/conda_setup.env"
 __conda_setup="$('${CONDA_PREFIX}/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
@@ -19,20 +19,24 @@ else
     _Script="${CONDA_PREFIX}/etc/profile.d/conda.sh"
     if [ -f "${_Script}" ]; then
         log_debug "Sourcing script '${_Script}'"
+        (set -o posix ; set) | sort >"${BO_DirCapture}/before/conda_sh.env"
         source "${_Script}"
+        (set -o posix ; set) | sort >"${BO_DirCapture}/after/conda_sh.env"
     else
         export PATH="${CONDA_PREFIX}/bin:$PATH"
     fi
 fi
 unset __conda_setup
+(set -o posix ; set) | sort >"${BO_DirCapture}/after/conda_setup.env"
 
 # Initialize Mamba too
 _Script="${CONDA_PREFIX}/etc/profile.d/mamba.sh"
 if [ -f "${_Script}" ]; then
     log_debug "Sourcing script '${_Script}'"
+    (set -o posix ; set) | sort >"${BO_DirCapture}/before/mamba_sh.env"
     source "${_Script}"
+    (set -o posix ; set) | sort >"${BO_DirCapture}/after/mamba_sh.env"
 fi
-# <<< conda initialize <<<
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

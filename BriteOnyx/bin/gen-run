@@ -14,13 +14,15 @@ main() {
     
     require_directory_in BO_Project
     require_directory_in TMPDIR
+    require_variable BO_cmd_meld
+    require_variable BO_cmd_python3
 
     # Recreate target directory (handled within Python)
     local -r DirTgt=${TMPDIR}/tgt
 
     log_info "Generating source into directory '${DirTgt}'"
     cd "${BO_Project}/src/gen" ; abort_on_fail $?
-    Cmd='python3'
+    Cmd=${BO_cmd_python3}
     # Cmd+=' -bb'
     Cmd+=' -m generate'
     Cmd+=" ${DirTgt}"
@@ -30,7 +32,7 @@ main() {
 
     log_info "Use the following command to manually merge the generated source:"
     Cmd='&>/dev/null'
-    Cmd+=' meld'
+    Cmd+=" ${BO_cmd_meld}"
     Cmd+=' "${BO_Project}"'
     Cmd+=' ${TMPDIR}/tgt'
     Cmd+=' &'

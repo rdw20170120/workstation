@@ -7,13 +7,12 @@ trap warn_on_error EXIT
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 require_directory_in BO_Project
+require_variable BO_cmd_conda
+require_variable BO_DirAnaconda
+require_directory_in BO_DirCapture
 
 # Create Anaconda environment
-require_arguments $# 0
-require_variable BO_DirAnaconda
-local Script
-local ShouldCreate=true
-local Status
+ShouldCreate=true
 
 [[ -d "${BO_DirAnaconda}" ]] && ShouldCreate=false
 
@@ -24,13 +23,16 @@ else
     log_info "Keeping Anaconda environment in directory '${BO_DirAnaconda}'"
 fi
 
-require_directory "${BO_DirAnaconda}"
+require_directory_in BO_DirAnaconda
 log_info "Activating Anaconda environment in directory '${BO_DirAnaconda}'"
-conda activate "${BO_DirAnaconda}"
+(set -o posix ; set) | sort >"${BO_DirCapture}/before/conda_activate.env"
+${BO_cmd_conda} activate "${BO_DirAnaconda}"
+(set -o posix ; set) | sort >"${BO_DirCapture}/after/conda_activate.env"
 
-export BO_PathAfterAnaconda=${PATH}
-remembering BO_PathAfterAnaconda
-export BO_PathTool=${BO_DirAnaconda}/bin:${CONDA_PREFIX}/condabin
+export BO_PathAnaconda=${BO_DirAnaconda}/bin:${BO_PathAnaconda}
+remembering BO_PathAnaconda
+export BO_PathTool=${BO_PathAnaconda}
+remembering BO_PathTool
 
 Script="${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
 source "${Script}" ; Status=$?
@@ -38,6 +40,8 @@ source "${Script}" ; Status=$?
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
 [[ "${ShouldCreate}" == "true" ]] && execute_script anaconda-populate
+
+unset ShouldCreate
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

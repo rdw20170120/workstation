@@ -9,13 +9,37 @@
     exit 99
 require_directory_in BO_Project
 
+_Script="${BO_Project}/BriteOnyx/bin/lib/initialize_Anaconda.bash"
+source "${_Script}" ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
+export BO_PathAnaconda=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
+remembering BO_PathAnaconda
+export BO_PathTool=${BO_PathAnaconda}
+remembering BO_PathTool
+export CONDA_PYTHON_EXE=${CONDA_PREFIX}/bin/python
+remembering CONDA_PYTHON_EXE
+
+Script="${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
+source "${Script}" ; Status=$?
+[[ ${Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
 # Configure BriteOnyx for Anaconda environment
+export BO_cmd_conda=$(which conda)
+remembering BO_cmd_conda
 export BO_DirAnaconda=${BO_Project}/.anaconda
 remembering BO_DirAnaconda
 export BO_FileAnacondaJson=${BO_Project}/cfg/anaconda.json
 remembering BO_FileAnacondaJson
 export BO_FileAnacondaYaml=${BO_Project}/cfg/anaconda.yml
 remembering BO_FileAnacondaYaml
+
+_Script="${BO_Project}/BriteOnyx/bin/lib/maybe_create_Anaconda_environment.bash"
+source "${_Script}" ; _Status=$?
+[[ ${_Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
@@ -24,15 +48,5 @@ remembering BO_FileAnacondaYaml
 # set +vx
 
 : << 'DisabledContent'
-_Script="${BO_Project}/BriteOnyx/bin/lib/initialize-Anaconda.bash"
-source "${_Script}" ; _Status=$?
-[[ ${_Status} -ne 0 ]] &&
-    kill -INT $$  # Kill the executing script, but not the shell (terminal)
-
-_Script="${BO_Project}/BriteOnyx/bin/anaconda-create-maybe"
-source "${_Script}" ; _Status=$?
-[[ ${_Status} -ne 0 ]] &&
-    kill -INT $$  # Kill the executing script, but not the shell (terminal)
-
 DisabledContent
 

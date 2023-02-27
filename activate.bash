@@ -25,7 +25,9 @@ if [[ -z "${PWD}" ]] ; then
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 fi
 
-(set -o posix ; set) | sort > "${PWD}/BO-activation-before.env"
+export BO_DirCapture=${PWD}/.BO/capture
+mkdir -p "${BO_DirCapture}/after" "${BO_DirCapture}/before" "${BO_DirCapture}/current"
+(set -o posix ; set) | sort >"${BO_DirCapture}/before/activation.env"
 
 _Script=${PWD}/BriteOnyx/bin/lib/declare-log4bash.bash
 source "${_Script}" ; _Status=$?
@@ -45,7 +47,6 @@ remembering() {
 
 export BO_Project=${PWD}
 remembering BO_Project
-remembering BO_Interactive
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/declare.bash
 source "${_Script}" ; _Status=$?
@@ -54,15 +55,6 @@ source "${_Script}" ; _Status=$?
 
 # NOTE: We can now use BriteOnyx Bash functionality.
 
-# BriteOnyx scripts
-# must precede
-# project-specific scripts
-# on the PATH
-# so that collisions fail fast.
-# Any collision should be resolved
-# by renaming
-# the project-specific script
-# to avoid that collision.
 export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
 
 [[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}
@@ -95,8 +87,8 @@ if [[ -d "${_result}" ]] ; then
     log_info "Created temporary directory '${TMPDIR}'"
 fi
 if [[ -d "${TMPDIR}" ]] ; then
-    remembering TMPDIR
     export TMPDIR
+    remembering TMPDIR
 else
     log_error "Aborting, failed to establish temporary directory '${TMPDIR}'"
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
@@ -108,20 +100,20 @@ maybe_copy_file "${BO_Project}/cfg/sample/alias.bash" "${BO_Project}/alias.bash"
 maybe_copy_file "${BO_Project}/cfg/sample/context.bash" "${BO_Project}/context.bash"
 
 # Configure Anaconda environment
-(set -o posix ; set) | sort > "${PWD}/BO-Anaconda-before.env"
-_Script=${BO_Project}/bin/lib/configure-Anaconda.bash
+(set -o posix ; set) | sort >"${BO_DirCapture}/before/Anaconda.env"
+_Script=${BO_Project}/bin/lib/configure_Anaconda.bash
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
-(set -o posix ; set) | sort > "${PWD}/BO-Anaconda-after.env"
+(set -o posix ; set) | sort >"${BO_DirCapture}/after/Anaconda.env"
 
 # Configure Python
-(set -o posix ; set) | sort > "${PWD}/BO-Python-before.env"
-_Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
+(set -o posix ; set) | sort >"${BO_DirCapture}/before/Python.env"
+_Script=${BO_Project}/BriteOnyx/bin/lib/configure_Python.bash
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
-(set -o posix ; set) | sort > "${PWD}/BO-Python-after.env"
+(set -o posix ; set) | sort >"${BO_DirCapture}/after/Python.env"
 
 _Script="${BO_Project}/bin/lib/declare.bash"
 if [[ -r ${_Script} ]] ; then
@@ -145,7 +137,7 @@ source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-(set -o posix ; set) | sort > "${PWD}/BO-activation-after.env"
+(set -o posix ; set) | sort >"${BO_DirCapture}/after/activation.env"
 log_good "BriteOnyx has successfully activated this project"
 log_info "To get started, try executing the 'cycle' alias..."
 
