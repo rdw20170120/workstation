@@ -10,5 +10,8 @@ from src_gen.script.bash.material import *
 from .frame import *
 
 
+def require_script(script):
+    return command("require_script", script)
+
 """DisabledContent
 """

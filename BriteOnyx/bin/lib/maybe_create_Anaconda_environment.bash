@@ -1,7 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env false
+# Intended to be sourced in a Bash shell.
 [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
-trap warn_on_error EXIT
+# NO: trap ... EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&

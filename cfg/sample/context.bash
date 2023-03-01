@@ -53,17 +53,19 @@ require_directory_in HOME
 # Remember how to execute various tools
 export BO_cmd_python3=$(which python3)
 remembering BO_cmd_python3
-export BO_cmd_black="${python3} -m black"
+export BO_cmd_black="${BO_cmd_python3} -m black"
 remembering BO_cmd_black
-export BO_cmd_compileall="${python3} -m compileall"
+export BO_cmd_compileall="${BO_cmd_python3} -m compileall"
 remembering BO_cmd_compileall
-export BO_cmd_coverage="${python3} -m coverage"
+export BO_cmd_coverage="${BO_cmd_python3} -m coverage"
 remembering BO_cmd_coverage
-export BO_cmd_pip="${python3} -m pip"
+export BO_cmd_meld=$(which meld)
+remembering BO_cmd_meld
+export BO_cmd_pip="${BO_cmd_python3} -m pip"
 remembering BO_cmd_pip
-export BO_cmd_pytest="${python3} -m pytest"
+export BO_cmd_pytest="${BO_cmd_python3} -m pytest"
 remembering BO_cmd_pytest
-export BO_cmd_tabnanny="${python3} -m tabnanny"
+export BO_cmd_tabnanny="${BO_cmd_python3} -m tabnanny"
 remembering BO_cmd_tabnanny
 
 ###############################################################################
@@ -104,7 +106,7 @@ export Run=Dry
 # it can be useful
 # to also uncomment the follow lines
 # to execute a 'cycle' (see the alias).
-#
+
 # test-run
 # abort_on_fail $? "from test-run"
 # gen-run -vvv

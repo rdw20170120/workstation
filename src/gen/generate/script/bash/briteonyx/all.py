@@ -22,6 +22,7 @@ def _generate(dir_):
 
 def _generate_bin(dir_):
     _generate_bin_lib(dir_ / "lib")
+    briteonyx(executed(), dir_, "anaconda-populate")
     briteonyx(executed(), dir_, "app-run")
     briteonyx(executed(), dir_, "show_maybe_missed_source")
     briteonyx(executed(), dir_, "sync_on_macOS")
@@ -29,7 +30,6 @@ def _generate_bin(dir_):
 
 
 def _generate_bin_lib(dir_):
-    briteonyx(sourced(), dir_, "configure-Anaconda.bash")
     briteonyx(sourced(), dir_, "declare.bash")
 
 
@@ -46,7 +46,6 @@ def _generate_briteonyx_bin(dir_):
     briteonyx(executed(), dir_, "anaconda-check")
     briteonyx(executed(), dir_, "anaconda-create")
     briteonyx(executed(), dir_, "anaconda-destroy")
-    briteonyx(executed(), dir_, "anaconda-populate")
     briteonyx(executed(), dir_, "anaconda-report")
     briteonyx(executed(), dir_, "anaconda-upgrade")
     briteonyx(executed(), dir_, "env-capture")
@@ -70,6 +69,10 @@ def _generate_briteonyx_bin(dir_):
 
 def _generate_briteonyx_bin_lib(dir_):
     briteonyx(sourced(), dir_, "alias.bash")
+    briteonyx(sourced(), dir_, "configure_Anaconda.bash")
+    briteonyx(sourced(), dir_, "configure_Python.bash")
+    briteonyx(sourced(), dir_, "initialize_Anaconda.bash")
+    briteonyx(sourced(), dir_, "maybe_create_Anaconda_environment.bash")
 
 
 def _generate_briteonyx_doc(dir_):

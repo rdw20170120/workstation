@@ -41,7 +41,6 @@ def _generate_briteonyx_bin(dir_):
 
 
 def _generate_briteonyx_bin_lib(dir_):
-    activating(sourced(), dir_, "configure-Python.bash")
     activating(sourced(), dir_, "declare-base.bash")
     activating(sourced(), dir_, "declare-common.bash")
     activating(sourced(), dir_, "declare-log4bash.bash")

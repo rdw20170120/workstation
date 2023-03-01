@@ -136,19 +136,6 @@ def _generate_src_gen(dir_):
 
 
 def _generate_src_gen_generate(dir_):
-    _generate_src_gen_generate_custom(dir_ / "custom")
-    _generate_src_gen_generate_shared(dir_ / "shared")
-
-
-def _generate_src_gen_generate_custom(dir_):
-    pass
-
-
-def _generate_src_gen_generate_shared(dir_):
-    _generate_src_gen_generate_shared_briteonyx(dir_ / "briteonyx")
-
-
-def _generate_src_gen_generate_shared_briteonyx(dir_):
     pass
 
 

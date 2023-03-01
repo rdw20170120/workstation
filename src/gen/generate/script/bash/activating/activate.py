@@ -1,5 +1,8 @@
 #!/usr/bin/env false
-"""Generate script to activate project."""
+"""Generate script to activate project.
+
+TODO: REFACTOR: Divide into two submodules that respect activating versus briteonyx calls
+"""
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
@@ -8,6 +11,7 @@ from src_gen.script.bash.activating.material import *
 
 # Project modules   (relative references, NOT packaged, in project)
 
+capture_directory = "BO_DirCapture"
 project_alias_script = x(vr("BO_Project"), "/alias.bash")
 project_context_script = x(vr("BO_Project"), "/context.bash")
 script = "_Script"
@@ -71,13 +75,9 @@ def _call_project_scripts():
 
 def _capture_environment(where, when):
     return [
-        "(",
-        set_("-o", "posix"),
-        seq(),
-        set_(),
-        ")",
+        "(", set_("-o", "posix"), seq(), set_(), ")",
         pipe(),
-        command("sort", ">", dq(vr("PWD"), "/BO-", where, "-", when, ".env")),
+        command("sort", ">", dq(vr(capture_directory), "/", when, "/", where, ".env")),
         eol(),
     ]
 
@@ -102,7 +102,7 @@ def _comments():
 
 
 def _configure_anaconda():
-    configure_anaconda_script = x(vr("BO_Project"), "/bin/lib/configure-Anaconda.bash")
+    configure_anaconda_script = x(vr("BO_Project"), "/BriteOnyx/bin/lib/configure_Anaconda.bash")
     return [
         comment("Configure Anaconda environment"),
         _capture_environment("Anaconda", "before"),
@@ -122,6 +122,21 @@ def _configure_python():
         source_or_abort(configure_python_script, script, status),
         _capture_environment("Python", "after"),
         line(),
+    ]
+
+
+def _create_capture_directory():
+    return [
+        export(vn(capture_directory), dq(vr("PWD"), "/.BO/capture")),
+        eol(),
+        command(
+            "mkdir",
+            "-p",
+            dq(vr(capture_directory), "/after"),
+            dq(vr(capture_directory), "/before"),
+            dq(vr(capture_directory), "/current"),
+        ),
+        eol(),
     ]
 
 
@@ -163,12 +178,8 @@ def _create_random_tmpdir():
         fi(),
         if_(
             directory_exists(dq(vr(tmpdir))),
-            indent(),
-            remembering(tmpdir),
-            eol(),
-            indent(),
-            export(vn(tmpdir)),
-            eol(),
+            indent(), export(vn(tmpdir)), eol(),
+            indent(), remembering(tmpdir), eol(),
         ),
         else_(
             indent(),
@@ -313,8 +324,6 @@ def _remember():
         _declare_remembering(),
         line(),
         _remember_project_root(),
-        remembering("BO_Interactive"),
-        eol(),
         line(),
     ]
 
@@ -322,23 +331,10 @@ def _remember():
 def _remember_paths():
     project_path = x(vr("BO_Project"), "/BriteOnyx/bin", ":", vr("BO_Project"), "/bin")
     return [
-        comment("BriteOnyx scripts"),
-        comment("must precede"),
-        comment("project-specific scripts"),
-        comment("on the PATH"),
-        comment("so that collisions fail fast."),
-        comment("Any collision should be resolved"),
-        comment("by renaming"),
-        comment("the project-specific script"),
-        comment("to avoid that collision."),
+        export(vn("BO_PathProject"), project_path), eol(),
         line(),
-        export(vn("BO_PathProject"), project_path),
-        eol(),
-        line(),
-        export_if_null("BO_PathSystem", vr("PATH")),
-        eol(),
-        export_if_null("BO_PathUser", x(vr("HOME"), "/bin")),
-        eol(),
+        export_if_null("BO_PathSystem", vr("PATH")), eol(),
+        export_if_null("BO_PathUser", x(vr("HOME"), "/bin")), eol(),
         line(),
     ]
 
@@ -355,6 +351,7 @@ def _remember_project_root():
 def build():
     return [
         _header(),
+        _create_capture_directory(),
         _capture_environment("activation", "before"),
         _declare_logging(),
         _remember(),

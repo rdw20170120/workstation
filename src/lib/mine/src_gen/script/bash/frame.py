@@ -16,7 +16,7 @@ def abort_script():
     return [
         command("kill", "-INT", "$$"),
         "  ",
-        comment("Kill the executing script, but not the shell (terminal)"),
+        comment("Interrupt the executing script, but do NOT kill the shell (terminal)"),
     ]
 
 
