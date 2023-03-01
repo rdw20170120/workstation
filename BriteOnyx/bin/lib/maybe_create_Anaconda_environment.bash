@@ -23,19 +23,28 @@ else
     log_info "Keeping Anaconda environment in directory '${BO_DirAnaconda}'"
 fi
 
-require_directory_in BO_DirAnaconda
-log_info "Activating Anaconda environment in directory '${BO_DirAnaconda}'"
 (set -o posix ; set) | sort >"${BO_DirCapture}/before/conda_activate.env"
-${BO_cmd_conda} activate "${BO_DirAnaconda}"
+log_info "Activating Anaconda environment in directory '${BO_DirAnaconda}'"
+require_directory_in BO_DirAnaconda
+export _CONDA_ROOT=${CONDA_PREFIX}
+remembering _CONDA_ROOT
+_Script=${_CONDA_ROOT}/bin/activate
+log_debug "Sourcing script '${_Script}'"
+require_script "${_Script}"
+source "${_Script}" "${BO_DirAnaconda}"
+Status=$?
+[[ ${Status} -ne 0 ]] &&
+    kill -INT $$  # Kill the executing script, but not the shell (terminal)
 (set -o posix ; set) | sort >"${BO_DirCapture}/after/conda_activate.env"
 
-export BO_PathAnaconda=${BO_DirAnaconda}/bin:${BO_PathAnaconda}
+export BO_PathAnaconda=${BO_DirAnaconda}/bin
 remembering BO_PathAnaconda
 export BO_PathTool=${BO_PathAnaconda}
 remembering BO_PathTool
 
-Script="${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
-source "${Script}" ; Status=$?
+_Script="${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
+require_script "${_Script}"
+source "${_Script}" ; Status=$?
 [[ ${Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
@@ -50,11 +59,7 @@ unset ShouldCreate
 # set +vx
 
 : << 'DisabledContent'
-    # NOTE: Is it necessary to initialize Anaconda (and Mamba) again after activation?
-    Script="${BO_Project}/BriteOnyx/bin/lib/initialize-Anaconda.bash"
-    source "${Script}" ; Status=$?
-    [[ ${Status} -ne 0 ]] &&
-        kill -INT $$  # Kill the executing script, but not the shell (terminal)
-
+${BO_cmd_conda} info
+mamba info
 DisabledContent
 

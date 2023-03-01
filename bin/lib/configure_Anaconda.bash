@@ -10,33 +10,27 @@
 require_directory_in BO_Project
 
 _Script="${BO_Project}/BriteOnyx/bin/lib/initialize_Anaconda.bash"
+require_script "${_Script}"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
-    kill -INT $$  # Kill the executing script, but not the shell (terminal)
-
-export BO_PathAnaconda=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
-remembering BO_PathAnaconda
-export BO_PathTool=${BO_PathAnaconda}
-remembering BO_PathTool
-export CONDA_PYTHON_EXE=${CONDA_PREFIX}/bin/python
-remembering CONDA_PYTHON_EXE
-
-Script="${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
-source "${Script}" ; Status=$?
-[[ ${Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
 # Configure BriteOnyx for Anaconda environment
 export BO_cmd_conda=$(which conda)
 remembering BO_cmd_conda
+
 export BO_DirAnaconda=${BO_Project}/.anaconda
 remembering BO_DirAnaconda
-export BO_FileAnacondaJson=${BO_Project}/cfg/anaconda.json
+
+require_directory_in BO_DirCapture
+maybe_create_directory_tree ${BO_DirCapture}/current
+export BO_FileAnacondaJson=${BO_DirCapture}/current/anaconda.json
 remembering BO_FileAnacondaJson
-export BO_FileAnacondaYaml=${BO_Project}/cfg/anaconda.yml
+export BO_FileAnacondaYaml=${BO_DirCapture}/current/anaconda.yml
 remembering BO_FileAnacondaYaml
 
 _Script="${BO_Project}/BriteOnyx/bin/lib/maybe_create_Anaconda_environment.bash"
+require_script "${_Script}"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
@@ -48,5 +42,7 @@ source "${_Script}" ; _Status=$?
 # set +vx
 
 : << 'DisabledContent'
+export CONDA_PYTHON_EXE=${CONDA_PREFIX}/bin/python
+remembering CONDA_PYTHON_EXE
 DisabledContent
 

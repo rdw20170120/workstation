@@ -13,8 +13,6 @@ main() {
     require_arguments $# 0
 
     git status --ignored |
-        grep -v BO-incoming\.env |
-        grep -v BO-outgoing\.env |
         grep -v \.DS_Store |
         grep -v \.anaconda |
         grep -v \.cache\/ |

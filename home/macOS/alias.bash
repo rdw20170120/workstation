@@ -25,11 +25,20 @@ alias jump_reference='cd "${BO_DirReference}"'
 alias jump_Work_In_Progress='cd "${BO_DirWorkInProgress}"'
 
 # Git
+alias gi='git status --ignored'
 alias git_diff_check='git diff --check'
+alias git_ignored='git status --ignored'
+alias git_nostash='git stash clear'
 alias git_rebase_continue='git rebase --continue'
-alias ignored='git status --ignored'
-alias status='git status'
-alias unstage='git restore --staged'
+alias git_rebase_finish='git push origin HEAD --force'
+alias git_rebase_prepare='git fetch origin'
+alias git_rebase_start='git rebase origin'
+alias git_stage='git stage'
+alias git_stash='git stash push'
+alias git_status='git status'
+alias git_unstage='git restore --staged'
+alias git_unstash='git stash apply'
+alias gs='git status'
 
 # For working with ~/.inputrc
 alias configure_readline_from='bind -f'

@@ -35,6 +35,9 @@ report_anaconda() {
 
     checkExecutable conda
     check 'conda --version'
+    check 'conda config --show-sources'
+    check 'conda info'
+    check 'conda list --show-channel-urls'
     checkExecutable mamba
     check 'mamba --version'
 }

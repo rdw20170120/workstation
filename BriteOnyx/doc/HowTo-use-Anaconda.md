@@ -60,6 +60,7 @@ conda activate ENV
 conda env list
 conda env update --file environment.yml -prune
 conda list --explicit >FILE
+conda list --show-channel-urls
 conda env export --from-history
 
 # Managing Conda packages
@@ -70,6 +71,7 @@ mamba list
 # Conda configuration
 conda config
 conda config --get
+conda config --show-sources
 
 # Bash tab completion
 mamba install argcomplete

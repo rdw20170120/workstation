@@ -22,7 +22,7 @@ fi
 
 if [[ -z "${PWD}" ]] ; then
     1>&2 echo "Aborting, missing environment variable 'PWD'"
-    kill -INT $$  # Kill the executing script, but not the shell (terminal)
+    kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
 fi
 
 export BO_DirCapture=${PWD}/.BO/capture
@@ -30,6 +30,7 @@ mkdir -p "${BO_DirCapture}/after" "${BO_DirCapture}/before" "${BO_DirCapture}/cu
 (set -o posix ; set) | sort >"${BO_DirCapture}/before/activation.env"
 
 _Script=${PWD}/BriteOnyx/bin/lib/declare-log4bash.bash
+# TODO: Require script
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
@@ -49,6 +50,7 @@ export BO_Project=${PWD}
 remembering BO_Project
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/declare.bash
+# TODO: Require script
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
@@ -61,6 +63,7 @@ export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
 [[ -z "${BO_PathUser}" ]] && export BO_PathUser=${HOME}/bin
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
+require_script "${_Script}"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
@@ -102,6 +105,7 @@ maybe_copy_file "${BO_Project}/cfg/sample/context.bash" "${BO_Project}/context.b
 # Configure Anaconda environment
 (set -o posix ; set) | sort >"${BO_DirCapture}/before/Anaconda.env"
 _Script=${BO_Project}/bin/lib/configure_Anaconda.bash
+require_script "${_Script}"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
@@ -110,6 +114,7 @@ source "${_Script}" ; _Status=$?
 # Configure Python
 (set -o posix ; set) | sort >"${BO_DirCapture}/before/Python.env"
 _Script=${BO_Project}/BriteOnyx/bin/lib/configure_Python.bash
+require_script "${_Script}"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
@@ -123,16 +128,19 @@ if [[ -r ${_Script} ]] ; then
 fi
 
 _Script="${BO_Project}/context.bash"
+require_script "${_Script}"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
 _Script="${BO_Project}/BriteOnyx/bin/lib/alias.bash"
+require_script "${_Script}"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
 _Script="${BO_Project}/alias.bash"
+require_script "${_Script}"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)

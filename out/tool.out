@@ -6,7 +6,112 @@ which conda
 /opt/homebrew/bin/conda
 ##########
 conda --version
-conda 22.11.1
+conda 23.1.0
+##########
+conda config --show-sources
+==> /opt/homebrew/Caskroom/mambaforge/base/.condarc <==
+channels:
+  - conda-forge
+
+##########
+conda info
+
+     active environment : /Users/x299424/repo/GitHub/wip/workstation/.anaconda
+    active env location : /Users/x299424/repo/GitHub/wip/workstation/.anaconda
+            shell level : 2
+       user config file : /Users/x299424/.condarc
+ populated config files : /opt/homebrew/Caskroom/mambaforge/base/.condarc
+          conda version : 23.1.0
+    conda-build version : not installed
+         python version : 3.10.9.final.0
+       virtual packages : __archspec=1=arm64
+                          __osx=12.6.3=0
+                          __unix=0=0
+       base environment : /opt/homebrew/Caskroom/mambaforge/base  (writable)
+      conda av data dir : /opt/homebrew/Caskroom/mambaforge/base/etc/conda
+  conda av metadata url : None
+           channel URLs : https://conda.anaconda.org/conda-forge/osx-arm64
+                          https://conda.anaconda.org/conda-forge/noarch
+          package cache : /opt/homebrew/Caskroom/mambaforge/base/pkgs
+                          /Users/x299424/.conda/pkgs
+       envs directories : /opt/homebrew/Caskroom/mambaforge/base/envs
+                          /Users/x299424/.conda/envs
+               platform : osx-arm64
+             user-agent : conda/23.1.0 requests/2.28.2 CPython/3.10.9 Darwin/21.6.0 OSX/12.6.3
+                UID:GID : 502:20
+             netrc file : None
+           offline mode : False
+
+##########
+conda list --show-channel-urls
+# packages in environment at /Users/x299424/repo/GitHub/wip/workstation/.anaconda:
+#
+# Name                    Version                   Build  Channel
+ansi2html                 1.8.0           py311h267d04e_1    conda-forge
+attrs                     22.2.0             pyh71513ae_0    conda-forge
+awscli                    1.27.80         py311h267d04e_0    conda-forge
+black                     23.1.0          py311h267d04e_0    conda-forge
+boto3                     1.26.80            pyhd8ed1ab_0    conda-forge
+botocore                  1.29.80            pyhd8ed1ab_0    conda-forge
+brotlipy                  0.7.0           py311he2be06e_1005    conda-forge
+bzip2                     1.0.8                h3422bc3_4    conda-forge
+ca-certificates           2022.12.7            h4653dfc_0    conda-forge
+certifi                   2022.12.7          pyhd8ed1ab_0    conda-forge
+cffi                      1.15.1          py311hae827db_3    conda-forge
+click                     8.1.3           unix_pyhd8ed1ab_2    conda-forge
+colorama                  0.4.4              pyh9f0ad1d_0    conda-forge
+coverage                  7.2.1           py311he2be06e_0    conda-forge
+cryptography              39.0.1          py311h507f6e9_0    conda-forge
+docutils                  0.15.2          py311h267d04e_6    conda-forge
+exceptiongroup            1.1.0              pyhd8ed1ab_0    conda-forge
+icdiff                    1.9.1                      py_0    conda-forge
+idna                      3.4                pyhd8ed1ab_0    conda-forge
+iniconfig                 2.0.0              pyhd8ed1ab_0    conda-forge
+jmespath                  1.0.1              pyhd8ed1ab_0    conda-forge
+libffi                    3.4.2                h3422bc3_5    conda-forge
+libsqlite                 3.40.0               h76d750c_0    conda-forge
+libzlib                   1.2.13               h03a7124_4    conda-forge
+logzero                   1.7.0           py311h267d04e_4    conda-forge
+mypy_extensions           1.0.0              pyha770c72_0    conda-forge
+ncurses                   6.3                  h07bb92c_1    conda-forge
+openssl                   3.0.8                h03a7124_0    conda-forge
+packaging                 23.0               pyhd8ed1ab_0    conda-forge
+pathspec                  0.11.0             pyhd8ed1ab_0    conda-forge
+pip                       23.0.1             pyhd8ed1ab_0    conda-forge
+platformdirs              3.0.0              pyhd8ed1ab_0    conda-forge
+pluggy                    1.0.0              pyhd8ed1ab_5    conda-forge
+pprintpp                  0.4.0              pyhd8ed1ab_5    conda-forge
+py                        1.11.0             pyh6c4a22f_0    conda-forge
+pyasn1                    0.4.8                      py_0    conda-forge
+pycparser                 2.21               pyhd8ed1ab_0    conda-forge
+pyopenssl                 23.0.0             pyhd8ed1ab_0    conda-forge
+pysocks                   1.7.1              pyha2e5f31_6    conda-forge
+pytest                    7.2.1              pyhd8ed1ab_0    conda-forge
+pytest-cov                4.0.0              pyhd8ed1ab_0    conda-forge
+pytest-html               3.2.0              pyhd8ed1ab_1    conda-forge
+pytest-icdiff             0.6                pyhd8ed1ab_0    conda-forge
+pytest-metadata           2.0.4              pyhd8ed1ab_0    conda-forge
+pytest-sugar              0.9.6              pyhd8ed1ab_0    conda-forge
+python                    3.11.0          h3ba56d0_1_cpython    conda-forge
+python-dateutil           2.8.2              pyhd8ed1ab_0    conda-forge
+python_abi                3.11                    3_cp311    conda-forge
+pyyaml                    5.4.1           py311he2be06e_4    conda-forge
+readline                  8.1.2                h46ed386_0    conda-forge
+rsa                       4.7.2              pyh44b312d_0    conda-forge
+s3transfer                0.6.0              pyhd8ed1ab_0    conda-forge
+setuptools                67.4.0             pyhd8ed1ab_0    conda-forge
+six                       1.16.0             pyh6c4a22f_0    conda-forge
+termcolor                 2.2.0              pyhd8ed1ab_0    conda-forge
+tk                        8.6.12               he1e0b03_0    conda-forge
+toml                      0.10.2             pyhd8ed1ab_0    conda-forge
+tomli                     2.0.1              pyhd8ed1ab_0    conda-forge
+typing-extensions         4.4.0                hd8ed1ab_0    conda-forge
+typing_extensions         4.4.0              pyha770c72_0    conda-forge
+tzdata                    2022g                h191b570_0    conda-forge
+urllib3                   1.26.14            pyhd8ed1ab_0    conda-forge
+wheel                     0.38.4             pyhd8ed1ab_0    conda-forge
+xz                        5.2.6                h57fd34a_0    conda-forge
+yaml                      0.2.5                h3422bc3_2    conda-forge
 ##########
 type mamba
 /Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 16: type: mamba: not found
@@ -23,7 +128,7 @@ which aws
 /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/aws
 ##########
 aws --version
-aws-cli/1.27.59 Python/3.11.0 Darwin/21.6.0 botocore/1.29.59
+/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/aws: /Users/runner/miniforge3/conda-bld/awscli_1677579724544/_build_env/venv/bin/cr: bad interpreter: No such file or directory
 ##########
 type bash
 bash is /bin/bash
@@ -51,9 +156,7 @@ which brew
 /opt/homebrew/bin/brew
 ##########
 brew --version
-Homebrew 3.6.21
-Homebrew/homebrew-core (git revision 89e9e4e892a; last commit 2023-02-13)
-Homebrew/homebrew-cask (git revision ee9dfcb1b8; last commit 2023-02-14)
+Homebrew 4.0.4
 ##########
 brew list --full-name --casks
 iterm2
@@ -82,7 +185,7 @@ gettext 0.21.1
 libtermkey 0.22
 libuv 1.44.2
 libvterm 0.3.1
-luajit 2.1.0-beta3-20230104.2
+luajit 2.1.0-beta3-20230221.4
 luv 1.44.2-1
 msgpack 5.0.0
 neovim 0.8.3
@@ -104,11 +207,11 @@ which openssl
 /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/openssl
 ##########
 openssl version -a
-OpenSSL 3.0.7 1 Nov 2022 (Library: OpenSSL 3.0.7 1 Nov 2022)
-built on: Fri Jan 27 09:51:22 2023 UTC
+OpenSSL 3.0.8 7 Feb 2023 (Library: OpenSSL 3.0.8 7 Feb 2023)
+built on: Tue Feb  7 23:58:02 2023 UTC
 platform: darwin64-arm64-cc
 options:  bn(64,64)
-compiler: arm64-apple-darwin20.0.0-clang -D_FORTIFY_SOURCE=2 -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -mmacosx-version-min=11.0 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -fdebug-prefix-map=/Users/runner/miniforge3/conda-bld/openssl_split_1674812699853/work=/usr/local/src/conda/openssl_split-3.0.7 -fdebug-prefix-map=/Users/x299424/repo/GitHub/wip/workstation/.anaconda=/usr/local/src/conda-prefix -fPIC -arch arm64 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -fdebug-prefix-map=/Users/runner/miniforge3/conda-bld/openssl_split_1674812699853/work=/usr/local/src/conda/openssl_split-3.0.7 -fdebug-prefix-map=/Users/x299424/repo/GitHub/wip/workstation/.anaconda=/usr/local/src/conda-prefix -DL_ENDIAN -DOPENSSL_PIC -D_REENTRANT -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -mmacosx-version-min=11.0
+compiler: arm64-apple-darwin20.0.0-clang -D_FORTIFY_SOURCE=2 -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -mmacosx-version-min=11.0 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -fdebug-prefix-map=/Users/runner/miniforge3/conda-bld/openssl_split_1675813781384/work=/usr/local/src/conda/openssl_split-3.0.8 -fdebug-prefix-map=/Users/x299424/repo/GitHub/wip/workstation/.anaconda=/usr/local/src/conda-prefix -fPIC -arch arm64 -ftree-vectorize -fPIC -fPIE -fstack-protector-strong -O2 -pipe -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -fdebug-prefix-map=/Users/runner/miniforge3/conda-bld/openssl_split_1675813781384/work=/usr/local/src/conda/openssl_split-3.0.8 -fdebug-prefix-map=/Users/x299424/repo/GitHub/wip/workstation/.anaconda=/usr/local/src/conda-prefix -DL_ENDIAN -DOPENSSL_PIC -D_REENTRANT -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -D_FORTIFY_SOURCE=2 -isystem /Users/x299424/repo/GitHub/wip/workstation/.anaconda/include -mmacosx-version-min=11.0
 OPENSSLDIR: "/Users/x299424/repo/GitHub/wip/workstation/.anaconda/ssl"
 ENGINESDIR: "/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/engines-3"
 MODULESDIR: "/Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/ossl-modules"
@@ -142,7 +245,7 @@ which uname
 uname -a
 Darwin Mac-JF4J397K 21.6.0 Darwin Kernel Version 21.6.0: Mon Dec 19 20:43:09 PST 2022; root:xnu-8020.240.18~2/RELEASE_ARM64_T6000 arm64
 ##########
-PATH=/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin:/Users/x299424/repo/GitHub/wip/workstation/.anaconda/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin:/Users/x299424/repo/GitHub/wip/workstation/bin:/Users/x299424/bin
+PATH=/Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/x299424/repo/GitHub/wip/workstation/BriteOnyx/bin:/Users/x299424/repo/GitHub/wip/workstation/bin:/Users/x299424/bin
 ##########
 type java
 java is /usr/bin/java
@@ -194,9 +297,9 @@ which python2
 python2 --version
 /Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 16: python2: command not found
 ##########
-/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 123: python2: command not found
+/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 126: python2: command not found
 ##########
-/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 125: python2: command not found
+/Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 128: python2: command not found
 ##########
 type python3
 python3 is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/python3
@@ -213,11 +316,11 @@ Python 3.11.0
 ##########
 python -m OpenSSL.debug
 pyOpenSSL: 23.0.0
-cryptography: 39.0.0
+cryptography: 39.0.1
 cffi: 1.15.1
-cryptography's compiled against OpenSSL: OpenSSL 3.0.7 1 Nov 2022
-cryptography's linked OpenSSL: OpenSSL 3.0.7 1 Nov 2022
-Python's OpenSSL: OpenSSL 3.0.7 1 Nov 2022
+cryptography's compiled against OpenSSL: OpenSSL 3.0.8 7 Feb 2023
+cryptography's linked OpenSSL: OpenSSL 3.0.8 7 Feb 2023
+Python's OpenSSL: OpenSSL 3.0.8 7 Feb 2023
 Python executable: /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/python
 Python version: 3.11.0 | packaged by conda-forge | (main, Jan 14 2023, 12:26:40) [Clang 14.0.6 ]
 Platform: darwin
@@ -247,7 +350,7 @@ which black
 /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/black
 ##########
 black --version
-black, 22.12.0 (compiled: no)
+black, 23.1.0 (compiled: no)
 Python (CPython) 3.11.0
 ##########
 type coverage
@@ -257,8 +360,8 @@ which coverage
 /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/coverage
 ##########
 coverage --version
-Coverage.py, version 7.1.0 with C extension
-Full documentation is at https://coverage.readthedocs.io
+Coverage.py, version 7.2.1 with C extension
+Full documentation is at https://coverage.readthedocs.io/en/7.2.1
 ##########
 type coverage3
 /Users/x299424/repo/GitHub/wip/workstation/bin/tool-report: line 16: type: coverage3: not found
@@ -275,7 +378,7 @@ which pip
 /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip
 ##########
 pip --version
-pip 22.3.1 from /Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/site-packages/pip (python 3.11)
+pip 23.0.1 from /Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/site-packages/pip (python 3.11)
 ##########
 type pip3
 pip3 is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip3
@@ -284,7 +387,7 @@ which pip3
 /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/pip3
 ##########
 pip3 --version
-pip 22.3.1 from /Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/site-packages/pip (python 3.11)
+pip 23.0.1 from /Users/x299424/repo/GitHub/wip/workstation/.anaconda/lib/python3.11/site-packages/pip (python 3.11)
 ##########
 type py.test
 py.test is /Users/x299424/repo/GitHub/wip/workstation/.anaconda/bin/py.test

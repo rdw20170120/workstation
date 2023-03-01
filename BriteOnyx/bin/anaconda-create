@@ -9,14 +9,14 @@ trap warn_on_error EXIT
     exit 99
 
 main() {
-    # Create Anaconda environment
+    # Create Anaconda environment private to this BriteOnyx project
     require_arguments $# 0
     require_variable BO_cmd_conda
 
     require_variable BO_DirAnaconda
-    # TODO: Invoke anaconda-destroy first?
+    # TODO: Abort if directory already exists
     log_info "Creating Anaconda environment in directory '${BO_DirAnaconda}'"
-    ${BO_cmd_conda} create --prefix "${BO_DirAnaconda}"
+    ${BO_cmd_conda} create --prefix "${BO_DirAnaconda}" --yes
     require_directory_in BO_DirAnaconda
 }
 

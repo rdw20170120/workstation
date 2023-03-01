@@ -2,7 +2,6 @@
 # Intended to be executed in a Bash shell.
 [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
-# NO: trap ... EXIT
 ###############################################################################
 
 main() {
@@ -11,10 +10,7 @@ main() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
     sudo rm -fr /Applications/iTerm.app
     sudo rm -fr /Applications/Meld.app
-    if [[ -d "${HOMEBREW_PREFIX}" ]] ; then
-        cd "${HOMEBREW_PREFIX}"
-        sudo rm -fr Frameworks Homebrew bin etc include lib opt sbin share var
-    fi
+    [[ -d "${HOMEBREW_PREFIX}" ]] && sudo rm -fr "${HOMEBREW_PREFIX}"
 }
 
 main $@

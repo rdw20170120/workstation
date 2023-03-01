@@ -12,7 +12,7 @@ export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 ################################################################################
 # Homebrew
-export HOMEBREW_PREFIX=/usr/local
+export HOMEBREW_PREFIX=/opt/homebrew
 eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
 export BO_PathAfterHomebrew=${PATH}
 export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
@@ -20,6 +20,7 @@ export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
 ################################################################################
 # Anaconda (Mambaforge)
 export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
+export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
 
 ################################################################################
 # NOTE: Order matters!
