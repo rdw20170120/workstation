@@ -9,6 +9,9 @@
     exit 99
 require_directory_in BO_Project
 
+# Save PS1 since Anaconda is about to modify it
+export BO_PS1=${PS1}
+
 _Script="${BO_Project}/BriteOnyx/bin/lib/initialize_Anaconda.bash"
 require_script "${_Script}"
 source "${_Script}" ; _Status=$?
@@ -34,6 +37,9 @@ require_script "${_Script}"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
+
+# NOTE: Restore PS1 since I don't like having Anaconda put the environment prefix there
+export PS1=${BO_PS1}
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
