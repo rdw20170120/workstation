@@ -113,7 +113,7 @@ source "${_Script}" ; _Status=$?
 
 # Configure Python
 (set -o posix ; set) | sort > "${BO_DirCapture}/before/Python.env"
-_Script=${BO_Project}/BriteOnyx/bin/lib/configure-Python.bash
+_Script=${BO_Project}/BriteOnyx/bin/lib/configure_Python.bash
 require_script "${_Script}"
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&

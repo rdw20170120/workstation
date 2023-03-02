@@ -13,5 +13,6 @@ from .frame import *
 def require_script(script):
     return command("require_script", script)
 
+
 """DisabledContent
 """

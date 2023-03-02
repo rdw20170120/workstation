@@ -11,14 +11,20 @@
 
 source ${HOME}/bin/lib/declare-git.bash
 
-_Source=GitLab
-_Connection=MeAt${_Source}
-_Dir=${HOME}/repo/${_Source}
-
 main() {
-    # TODO: DESCRIPTION
+    # Clone Rob's repositories on GitLab
+    local -r Source=GitLab
+    local -r Connection=MeAt${Source}
+    local -r Dir=${HOME}/repo/${Source}
+    local    Profile
 
-    # TODO: CONTENT
+    Profile=refactoryllc
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" experiment
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" learn-gitlab
+
+    Profile=refactorytechllc
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" private-mono
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" pythonspeed
 
     return 0
 }
@@ -32,12 +38,5 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-_Profile=refactoryllc
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" experiment
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" learn-gitlab
-
-_Profile=refactorytechllc
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" private-mono
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" pythonspeed
 DisabledContent
 

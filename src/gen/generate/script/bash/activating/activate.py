@@ -75,7 +75,11 @@ def _call_project_scripts():
 
 def _capture_environment(where, when):
     return [
-        "(", set_("-o", "posix"), seq(), set_(), ")",
+        "(",
+        set_("-o", "posix"),
+        seq(),
+        set_(),
+        ")",
         pipe(),
         command("sort", ">", dq(vr(capture_directory), "/", when, "/", where, ".env")),
         eol(),
@@ -102,7 +106,9 @@ def _comments():
 
 
 def _configure_anaconda():
-    configure_anaconda_script = x(vr("BO_Project"), "/BriteOnyx/bin/lib/configure_Anaconda.bash")
+    configure_anaconda_script = x(
+        vr("BO_Project"), "/BriteOnyx/bin/lib/configure_Anaconda.bash"
+    )
     return [
         comment("Configure Anaconda environment"),
         _capture_environment("Anaconda", "before"),
@@ -114,7 +120,7 @@ def _configure_anaconda():
 
 def _configure_python():
     configure_python_script = x(
-        vr("BO_Project"), "/BriteOnyx/bin/lib/configure-Python.bash"
+        vr("BO_Project"), "/BriteOnyx/bin/lib/configure_Python.bash"
     )
     return [
         comment("Configure Python"),
@@ -178,8 +184,12 @@ def _create_random_tmpdir():
         fi(),
         if_(
             directory_exists(dq(vr(tmpdir))),
-            indent(), export(vn(tmpdir)), eol(),
-            indent(), remembering(tmpdir), eol(),
+            indent(),
+            export(vn(tmpdir)),
+            eol(),
+            indent(),
+            remembering(tmpdir),
+            eol(),
         ),
         else_(
             indent(),
@@ -331,10 +341,13 @@ def _remember():
 def _remember_paths():
     project_path = x(vr("BO_Project"), "/BriteOnyx/bin", ":", vr("BO_Project"), "/bin")
     return [
-        export(vn("BO_PathProject"), project_path), eol(),
+        export(vn("BO_PathProject"), project_path),
+        eol(),
         line(),
-        export_if_null("BO_PathSystem", vr("PATH")), eol(),
-        export_if_null("BO_PathUser", x(vr("HOME"), "/bin")), eol(),
+        export_if_null("BO_PathSystem", vr("PATH")),
+        eol(),
+        export_if_null("BO_PathUser", x(vr("HOME"), "/bin")),
+        eol(),
         line(),
     ]
 

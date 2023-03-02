@@ -11,17 +11,36 @@
 
 source ${HOME}/bin/lib/declare-git.bash
 
-_Source=GitHub
-_Connection=MeAt${_Source}
-_Dir=${HOME}/repo/${_Source}
-
-_Profile=rdw20170120
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" workstation
-
 main() {
-    # TODO: DESCRIPTION
+    # Clone Rob's repositories on GitHub
+    local -r Source=GitHub
+    local -r Connection=MeAt${Source}
+    local -r Dir=${HOME}/repo/${Source}
+    local -r Profile=rdw20170120
 
-    # TODO: CONTENT
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" astech
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" aws-inventory
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" build
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" cb-infrastructure
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" cert
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" couchbase
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" euler
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" first
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" hortonworks
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" javascript
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" ocdp
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" potrero
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" quoting-api
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" restinjava
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" sample-python
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" samplegwtviaant
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" samples
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" trading
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" training
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" workstation
+
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" build
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" workstation
 
     return 0
 }
@@ -35,25 +54,5 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-_Profile=rdw20170120
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" astech
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" aws-inventory
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" cb-infrastructure
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" cert
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" couchbase
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" euler
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" first
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" hortonworks
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" javascript
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" ocdp
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" potrero
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" quoting-api
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" restinjava
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" sample-python
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" samplegwtviaant
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" samples
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" trading
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" training
-maybe_clone "${_Dir}/wip" "${_Connection}:${_Profile}" workstation
 DisabledContent
 

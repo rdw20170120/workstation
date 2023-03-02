@@ -11,14 +11,32 @@
 
 source ${HOME}/bin/lib/declare-git.bash
 
-_Source=GitHub
-_Connection=MeAt${_Source}
-_Dir=${HOME}/repo/${_Source}
 
 main() {
-    # TODO: DESCRIPTION
+    # Clone others' repositories on GitHub
+    local -r Source=GitHub
+    local -r Connection=MeAt${Source}
+    local -r Dir=${HOME}/repo/${Source}
+    local    Profile
 
-    # TODO: CONTENT
+    Profile=earthly
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" earthly
+
+    Profile=elves
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" awesome-elvish
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish
+
+    Profile=jorgebucaran
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" fisher
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" fishtape
+
+    Profile=zzamboni
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-elvish
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-emacs
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish-completions
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish-modules
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish-themes
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" emacs-org-leanpub
 
     return 0
 }
@@ -32,23 +50,5 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-_Profile=earthly
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" earthly
-
-_Profile=elves
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" awesome-elvish
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish
-
-_Profile=jorgebucaran
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" fisher
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" fishtape
-
-_Profile=zzamboni
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" dot-elvish
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" dot-emacs
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish-completions
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish-modules
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" elvish-themes
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" emacs-org-leanpub
 DisabledContent
 

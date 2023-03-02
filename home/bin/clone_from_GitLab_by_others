@@ -11,14 +11,17 @@
 
 source ${HOME}/bin/lib/declare-git.bash
 
-_Source=GitLab
-_Connection=MeAt${_Source}
-_Dir=${HOME}/repo/${_Source}
 
 main() {
-    # TODO: DESCRIPTION
+    # Clone others' repositories on GitLab
+    local -r Source=GitLab
+    local -r Connection=MeAt${Source}
+    local -r Dir=${HOME}/repo/${Source}
+    local    Profile
 
-    # TODO: CONTENT
+    Profile=zzamboni
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-elvish
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-emacs
 
     return 0
 }
@@ -32,8 +35,5 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-_Profile=zzamboni
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" dot-elvish
-maybe_clone "${_Dir}/other/${_Profile}" "${_Connection}:${_Profile}" dot-emacs
 DisabledContent
 
