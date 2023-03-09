@@ -12,7 +12,6 @@ exclude = '''
   | bin/anaconda-.*$
   | bin/app-.*$
   | bin/env-.*$
-  | bin/homebrew-.*$
   | bin/prj-.*$
   | bin/pve-.*$
   | bin/py-.*$
