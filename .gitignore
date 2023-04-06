@@ -6,6 +6,7 @@
 
 # Common directories
 /log/
+/tmp/
 
 # Common file suffixes
 *.avro

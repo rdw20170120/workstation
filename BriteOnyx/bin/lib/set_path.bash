@@ -1,5 +1,5 @@
 #!/usr/bin/env false
-# Intended to be sourced in a Bash shell during activation.
+# Intended to be sourced in a Bash shell.
 [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
 # NO: trap ... EXIT
@@ -26,7 +26,7 @@
 # relevant to the current deployed environment--
 # where the specific user is best positioned to address them
 # and failures are most likely limited
-# to affecting only 
+# to affecting only
 # the current project and user
 # (as they should).
 
@@ -44,9 +44,9 @@ PATH=${PATH}:${BO_PathProject}
 PATH=${PATH}:${BO_PathUser}
 export PATH
 
-remembering BO_PathTool
-remembering BO_PathSystem
 remembering BO_PathProject
+remembering BO_PathSystem
+remembering BO_PathTool
 remembering BO_PathUser
 remembering PATH
 

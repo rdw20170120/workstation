@@ -8,7 +8,7 @@
 main() {
     # Populate Homebrew by installing desired casks & formulae
 
-    brew install iterm2 mambaforge meld neovim
+    brew install asciidoc iterm2 mambaforge meld neovim
 }
 
 main $@

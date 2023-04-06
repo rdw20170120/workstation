@@ -9,7 +9,7 @@ from pathlib import Path
 # Library modules    (absolute references, NOT packaged, in project)
 from task.task import FileSystemTask
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 from .mapping import Mapping
 
 

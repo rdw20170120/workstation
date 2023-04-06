@@ -79,16 +79,9 @@ else
 fi
 remembering BO_OS
 
-# Create random temporary directory
-if [[ "${BO_OS}" == macOS ]] ; then
-    _result=$(mktemp -d -t "BO")
-else
-    _result=$(mktemp -d -t "BO-${USER}-XXXXXXX")
-fi
-if [[ -d "${_result}" ]] ; then
-    TMPDIR=${_result}
-    log_info "Created temporary directory '${TMPDIR}'"
-fi
+# Establish temporary directory for project
+TMPDIR=${BO_Project}/tmp
+maybe_create_directory_tree "${TMPDIR}"
 if [[ -d "${TMPDIR}" ]] ; then
     export TMPDIR
     remembering TMPDIR
@@ -97,6 +90,7 @@ else
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
 fi
 
+# Establish logging directory for project
 maybe_create_directory_tree "${BO_Project}/log"
 
 maybe_copy_file "${BO_Project}/cfg/sample/alias.bash" "${BO_Project}/alias.bash"

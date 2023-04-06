@@ -22,17 +22,16 @@ unless they should merely be deleted.
 1. [ ] I/U = Item Description
 1. [ ]  /  = 
 
-1. [ ] 1/1 = Integrate OpenTelemetry into Python code
+1. [ ] 1/1 = Refactor hard-coded values into configuration
+1. [ ] 1/1 = Separate project temporary directory from `TMPDIR`
+1. [ ] 1/1 = Split generation of `activate.bash` into separate Python modules for before/after activation
 1. [ ] 2/2 - Disable Python3 automatic encoding coercion between ASCII and Unicode
 1. [ ] 2/2 - Extend code generation to all Bash scripts
-1. [ ] 2/2 - Fix inappropriate shebang on any source
-1. [ ] 2/2 - Test for appropriate shebang on all source
-1. [ ] 2/2 - Use pytest parameterization to extend test suites
 1. [ ] 2/2 = Create scripts & aliases for showing environment variables for Anaconda
 1. [ ] 2/2 = Create scripts & aliases for showing environment variables for BriteOnyx
 1. [ ] 2/2 = Document use of Anaconda for our purposes
 1. [ ] 2/2 = Filter sensitive values out of committed output (environment variables)
-1. [ ] 2/2 = Investigate whether I want to capture log files during `test-run`
+1. [ ] 2/2 = Integrate OpenTelemetry into Python code
 1. [ ] 2/3 - Document conventions for executing Python module
 1. [ ] 2/3 - Document disabled shebang for Bash scripts that are `source`d
 1. [ ] 2/3 - Document disabled shebang for Python source
@@ -50,12 +49,16 @@ unless they should merely be deleted.
 1. [ ] 3/3 - Configure shell to position itself
 1. [ ] 3/3 - Copy Solarized color palettes from iTerm2 to Linux Mint terminal
 1. [ ] 3/3 - Define code generation methods for common test result patterns
+1. [ ] 3/3 - Fix inappropriate shebang on any source
 1. [ ] 3/3 - Implement code generation for testing code generation functionality
 1. [ ] 3/3 - Switch font in Neovim for better readability
 1. [ ] 3/3 - Switch font in shell for better readability
+1. [ ] 3/3 - Test for appropriate shebang on all source
+1. [ ] 3/3 - Use pytest parameterization to extend test suites
 1. [ ] 3/3 = Add encoding header to all Python source
 1. [ ] 3/3 = Create scripts & aliases for showing environment variables for Python
 1. [ ] 3/3 = Enhance functionality to synchronize dotfiles between repository and user account
+1. [ ] 3/3 = Investigate whether I want to capture log files during `test-run`
 1. [ ] 3/3 = `unset` relevant Bash variables when appropriate
 1. [X] 1/1 - Add `redeclare` alias to `source` Bash function declarations again
 1. [X] 1/1 - Convert to Python3 source code

@@ -40,6 +40,7 @@ main() {
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" workstation
 
     maybe_clone "${Dir}/wip" "${Connection}:${Profile}" build
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" javascript
     maybe_clone "${Dir}/wip" "${Connection}:${Profile}" workstation
 
     return 0

@@ -26,10 +26,6 @@ main() {
     maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" awesome-elvish
     maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish
 
-    Profile=jorgebucaran
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" fisher
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" fishtape
-
     Profile=zzamboni
     maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-elvish
     maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-emacs
@@ -50,5 +46,8 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+    Profile=jorgebucaran
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" fisher
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" fishtape
 DisabledContent
 

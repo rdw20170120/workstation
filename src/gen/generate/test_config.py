@@ -5,7 +5,6 @@
 # External packages (absolute references, NOT distributed with Python)
 # Library modules   (absolute references, NOT packaged, in project)
 from utility import my_assert as is_
-
 # Project modules   (relative references, NOT packaged, in project)
 
 
@@ -17,6 +16,8 @@ def test_application_name(config):
 def test_config(config):
     assert is_.not_none(config)
 
+def test_log_name(config):
+    assert is_.nonempty_string(config.log_name)
 
 """DisabledContent
 """

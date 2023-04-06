@@ -9,7 +9,7 @@ from pathlib import Path
 from task.task_manager import TaskManager
 from utility import my_assert as is_
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 from ..config import Config
 from .bootstrap import Bootstrap
 from .mapping import Mapping

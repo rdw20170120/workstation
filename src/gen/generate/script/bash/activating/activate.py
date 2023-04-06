@@ -145,64 +145,25 @@ def _create_capture_directory():
         eol(),
     ]
 
-
-def _create_random_tmpdir():
-    local = "_result"
-    # TODO: Consider capturing this special variable
+def _create_tmpdir():
     tmpdir = "TMPDIR"
     user = "USER"
     return [
-        comment("Create random temporary directory"),
-        # TODO: Consider creating method for 'mktemp'
-        if_(
-            string_equals(dq(vr("BO_OS")), "macOS"),
-            indent(),
-            assign(
-                vn(local),
-                substitute("mktemp", "-d", "-t", dq("BO")),
-            ),
-            eol(),
-        ),
-        else_(
-            indent(),
-            assign(
-                vn(local),
-                substitute("mktemp", "-d", "-t", dq("BO-", vr(user), "-XXXXXXX")),
-            ),
-            eol(),
-        ),
-        fi(),
-        if_(
-            directory_exists(dq(vr(local))),
-            indent(),
-            assign(vn(tmpdir), vr(local)),
-            eol(),
-            indent(),
-            log_info("Created temporary directory ", sq(vr(tmpdir))),
-            eol(),
-        ),
-        fi(),
+        comment("Establish temporary directory for project"),
+            assign(vn(tmpdir), x(vr("BO_Project"), "/tmp")), eol(),
+        command("maybe_create_directory_tree", dq(vr(tmpdir))), eol(),
         if_(
             directory_exists(dq(vr(tmpdir))),
-            indent(),
-            export(vn(tmpdir)),
-            eol(),
-            indent(),
-            remembering(tmpdir),
-            eol(),
+            indent(), export(vn(tmpdir)), eol(),
+            indent(), remembering(tmpdir), eol(),
         ),
         else_(
-            indent(),
-            log_error(
-                "Aborting, failed to establish temporary directory ",
-                sq(vr(tmpdir)),
-            ),
-            eol(),
-            indent(),
-            abort_script(),
+            indent(), log_error("Aborting, failed to establish temporary directory ", sq(vr(tmpdir))), eol(),
+            indent(), abort_script(),
         ),
         fi(),
     ]
+
 
 
 def _declare_briteonyx():
@@ -306,15 +267,13 @@ def _prepare_file_system():
     context_sample = x(vr("BO_Project"), "/cfg/sample/context.bash")
     log_directory = x(vr("BO_Project"), "/log")
     return [
-        _create_random_tmpdir(),
+        _create_tmpdir(),
         line(),
-        command("maybe_create_directory_tree", dq(log_directory)),
-        eol(),
+        comment("Establish logging directory for project"),
+        command("maybe_create_directory_tree", dq(log_directory)), eol(),
         line(),
-        maybe_copy_file(dq(alias_sample), dq(project_alias_script)),
-        eol(),
-        maybe_copy_file(dq(context_sample), dq(project_context_script)),
-        eol(),
+        maybe_copy_file(dq(alias_sample), dq(project_alias_script)), eol(),
+        maybe_copy_file(dq(context_sample), dq(project_context_script)), eol(),
         line(),
     ]
 
@@ -381,4 +340,39 @@ def build():
 
 
 """DisabledContent
+def _create_random_tmpdir():
+    local = "_result"
+    # TODO: Consider capturing this special variable
+    tmpdir = "TMPDIR"
+    user = "USER"
+    return [
+        comment("Create random temporary directory"),
+        # TODO: Consider creating method for 'mktemp'
+        if_(
+            string_equals(dq(vr("BO_OS")), "macOS"),
+            indent(), assign(vn(local), substitute("mktemp", "-d", "-t", dq("BO"))), eol(),
+        ),
+        else_(
+            indent(), assign(vn(local), substitute("mktemp", "-d", "-t", dq("BO-", vr(user), "-XXXXXXX"))), eol(),
+        ),
+        fi(),
+        if_(
+            directory_exists(dq(vr(local))),
+            indent(), assign(vn(tmpdir), vr(local)), eol(),
+            indent(), log_info("Created temporary directory ", sq(vr(tmpdir))), eol(),
+        ),
+        fi(),
+        if_(
+            directory_exists(dq(vr(tmpdir))),
+            indent(), export(vn(tmpdir)), eol(),
+            indent(), remembering(tmpdir), eol(),
+        ),
+        else_(
+            indent(), log_error("Aborting, failed to establish temporary directory ", sq(vr(tmpdir))), eol(),
+            indent(), abort_script(),
+        ),
+        fi(),
+    ]
+
+
 """

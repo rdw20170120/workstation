@@ -7,7 +7,7 @@ from logging import getLogger
 # Library modules    (absolute references, NOT packaged, in project)
 from task.task import PlainTask
 
-# Co-located modules (relative references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 from .scan_directory import ScanDirectory
 
 
