@@ -11,10 +11,11 @@ from utility import my_assert as is_
 
 # Project modules   (relative references, NOT packaged, in project)
 from .app import MyApp
+from .config import Config
 
 
 def test_app():
-    assert is_.not_none(MyApp(Path(), Path()))
+    assert is_.not_none(MyApp(Config(), Path()))
 
 
 def test_sys_getdefaultencoding():

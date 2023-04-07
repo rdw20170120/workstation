@@ -80,18 +80,14 @@ fi
 remembering BO_OS
 
 # Establish temporary directory for project
-TMPDIR=${BO_Project}/tmp
-maybe_create_directory_tree "${TMPDIR}"
-if [[ -d "${TMPDIR}" ]] ; then
-    export TMPDIR
-    remembering TMPDIR
-else
-    log_error "Aborting, failed to establish temporary directory '${TMPDIR}'"
-    kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
-fi
+export BO_DirTemp=${BO_Project}/tmp
+maybe_create_directory_tree "${BO_DirTemp}"
+remembering BO_DirTemp
 
 # Establish logging directory for project
-maybe_create_directory_tree "${BO_Project}/log"
+export BO_DirLog=${BO_Project}/log
+maybe_create_directory_tree "${BO_DirLog}"
+remembering BO_DirLog
 
 maybe_copy_file "${BO_Project}/cfg/sample/alias.bash" "${BO_Project}/alias.bash"
 maybe_copy_file "${BO_Project}/cfg/sample/context.bash" "${BO_Project}/context.bash"

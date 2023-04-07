@@ -10,9 +10,9 @@ from .document.all import generate as generate_document
 from .script.all import generate as generate_script
 
 
-def generate(directory):
-    generate_document(directory)
-    generate_script(directory)
+def generate(config, directory):
+    generate_document(config, directory)
+    generate_script(config, directory)
 
 
 """DisabledContent

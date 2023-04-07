@@ -44,7 +44,7 @@ class Config(object):
 
     @property
     def temporary_directory(self):
-        return TrackedPath("temporary", environment.get("TMPDIR"))
+        return TrackedPath("temporary", environment.get("BO_DirTemp"))
 
 
 """DisabledContent

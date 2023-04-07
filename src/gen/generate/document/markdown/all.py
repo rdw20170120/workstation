@@ -225,7 +225,7 @@ def _generate_src_lib_third_party(dir_):
     markdown(document(), dir_, "README.md")
 
 
-def generate(directory):
+def generate(config, directory):
     _generate(directory)
 
 

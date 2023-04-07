@@ -13,6 +13,7 @@ from .frame import *
 def require_script(script):
     return command("require_script", script)
 
+
 def require_variable(name):
     return command("require_variable", name)
 

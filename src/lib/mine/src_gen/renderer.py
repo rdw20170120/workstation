@@ -42,7 +42,9 @@ class Renderer(object):
                     f.write(self._serialize(content))
         except TypeError as e:
             log_exception(self._log, e)
-        except Exception:
+            raise
+        except Exception as e:
+            log_exception(self._log, e)
             raise
 
 

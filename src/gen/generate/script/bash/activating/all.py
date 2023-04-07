@@ -12,15 +12,15 @@ from .activate import build as activate
 from .set_path import build as set_path
 
 
-def _generate(dir_):
+def _generate(config, dir_):
     _generate_bin(dir_ / "bin")
-    _generate_briteonyx(dir_ / "BriteOnyx")
+    _generate_briteonyx(config, dir_ / "BriteOnyx")
     _generate_cfg(dir_ / "cfg")
     _generate_doc(dir_ / "doc")
     _generate_home(dir_ / "home")
     _generate_out(dir_ / "home")
     _generate_src(dir_ / "src")
-    activating(activate(), dir_, "activate.bash")
+    activating(activate(config), dir_, "activate.bash")
 
 
 def _generate_bin(dir_):
@@ -31,22 +31,22 @@ def _generate_bin_lib(dir_):
     pass
 
 
-def _generate_briteonyx(dir_):
-    _generate_briteonyx_bin(dir_ / "bin")
+def _generate_briteonyx(config, dir_):
+    _generate_briteonyx_bin(config, dir_ / "bin")
     _generate_briteonyx_doc(dir_ / "doc")
 
 
-def _generate_briteonyx_bin(dir_):
-    _generate_briteonyx_bin_lib(dir_ / "lib")
+def _generate_briteonyx_bin(config, dir_):
+    _generate_briteonyx_bin_lib(config, dir_ / "lib")
 
 
-def _generate_briteonyx_bin_lib(dir_):
+def _generate_briteonyx_bin_lib(config, dir_):
     activating(sourced(), dir_, "declare-base.bash")
     activating(sourced(), dir_, "declare-common.bash")
     activating(sourced(), dir_, "declare-log4bash.bash")
     activating(sourced(), dir_, "declare-require.bash")
     activating(sourced(), dir_, "declare.bash")
-    activating(set_path(), dir_, "set_path.bash")
+    activating(set_path(config), dir_, "set_path.bash")
 
 
 def _generate_briteonyx_doc(dir_):
@@ -206,8 +206,8 @@ def _generate_src_lib_third_party(dir_):
     pass
 
 
-def generate(directory):
-    _generate(directory)
+def generate(config, directory):
+    _generate(config, directory)
 
 
 """DisabledContent

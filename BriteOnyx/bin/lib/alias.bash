@@ -21,7 +21,7 @@ grep_options+=' --exclude="*.swp"'
 alias grep="grep ${grep_options}"
 unset grep_options
 
-alias cycle='clear ; test-run && gen-run -vvv && app-run -vvv'
+alias cycle='clear ; py-format && test-run && gen-run -vvv && app-run -vvv'
 alias list_sort_by_size='sort -nr --key=5'
 alias logs_reset='rm -fr "${BO_Project}/log" ; mkdir "${BO_Project}/log"'
 alias redeclare='source "${BO_Project}/BriteOnyx/bin/lib/declare.bash"'

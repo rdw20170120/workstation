@@ -9,8 +9,8 @@ from utility.config import Config
 from .markdown.all import generate as generate_markdown
 
 
-def generate(directory):
-    generate_markdown(directory)
+def generate(config, directory):
+    generate_markdown(config, directory)
 
 
 """DisabledContent

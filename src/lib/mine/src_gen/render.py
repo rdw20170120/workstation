@@ -19,21 +19,31 @@ my_visitor_map = VisitorMap(parent_map=visitor_map)
 
 
 class Content(object):
-    def __init__(self, visitor_map, content):
+    def __init__(
+        self,
+        content,
+        visitor_map=None,
+    ):
         super().__init__()
-        assert is_.instance(visitor_map, VisitorMap)
         self._content = content
+        if visitor_map is None:
+            visitor_map = my_visitor_map
+        assert is_.instance(visitor_map, VisitorMap)
         self._visitor_map = visitor_map
 
     def add(self, content):
         self._content.append(content)
         return self
 
-    def generate(self, target_file=None):
-        if target_file is None:
+    def generate(self, directory=None, filename=None):
+        if directory is None:
+            Renderer(self._visitor_map).render(self._content)
+        elif filename is None:
             Renderer(self._visitor_map).render(self._content)
         else:
-            Renderer(self._visitor_map).render(self._content, target_file)
+            assert is_.instance(directory, Path)
+            maybe_create_directory(directory)
+            Renderer(self._visitor_map).render(self._content, directory / filename)
 
 
 @my_visitor_map.register(Content)
@@ -41,24 +51,8 @@ def _visit_content(content, walker):
     walker.walk(content._content)
 
 
-def generate(
-    content,
-    directory=None,
-    filename=None,
-    visitor_map=None,
-):
-    # TODO: REFACTOR: Reduce code duplication
-    if visitor_map is None:
-        visitor_map = my_visitor_map
-    source = Content(visitor_map, content)
-    if directory is None:
-        source.generate()
-    elif filename is None:
-        source.generate()
-    else:
-        assert is_.instance(directory, Path)
-        maybe_create_directory(directory)
-        source.generate(directory / filename)
+def generate(content, directory=None, filename=None):
+    Content(content).generate(directory, filename)
 
 
 """DisabledContent

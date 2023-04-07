@@ -19,28 +19,18 @@ my_visitor_map = VisitorMap(parent_map=parent_visitor_map)
 
 
 class Script(Content):
-    def __init__(self, visitor_map, content):
-        super().__init__(visitor_map, content)
+    def __init__(
+        self,
+        content,
+        visitor_map=None,
+    ):
+        if visitor_map is None:
+            visitor_map = my_visitor_map
+        super().__init__(content, visitor_map)
 
 
-def generate(
-    content,
-    directory=None,
-    filename=None,
-    visitor_map=None,
-):
-    # TODO: REFACTOR: Reduce code duplication
-    if visitor_map is None:
-        visitor_map = my_visitor_map
-    source = Script(visitor_map, content)
-    if directory is None:
-        source.generate()
-    elif filename is None:
-        source.generate()
-    else:
-        assert is_.instance(directory, Path)
-        maybe_create_directory(directory)
-        source.generate(directory / filename)
+def generate(content, directory=None, filename=None):
+    Script(content).generate(directory, filename)
 
 
 """DisabledContent

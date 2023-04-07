@@ -10,9 +10,9 @@ from .bash.all import generate as generate_bash
 from .python.all import generate as generate_python
 
 
-def generate(directory):
-    generate_bash(directory)
-    generate_python(directory)
+def generate(config, directory):
+    generate_bash(config, directory)
+    generate_python(config, directory)
 
 
 """DisabledContent

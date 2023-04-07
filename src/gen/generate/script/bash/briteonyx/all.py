@@ -233,7 +233,7 @@ def _generate_src_lib_third_party(dir_):
     pass
 
 
-def generate(directory):
+def generate(config, directory):
     _generate(directory)
 
 

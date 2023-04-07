@@ -25,14 +25,15 @@ c = Config()
 
 
 class MyApp(SingletonApplication):
-    def __init__(self, pid_file, target_directory):
+    def __init__(self, config, target_directory):
+        self._config = config
         self._target_directory = target_directory
-        super().__init__(getLogger(self.__class__.__name__), pid_file)
+        super().__init__(getLogger(self.__class__.__name__), self._config.pid_file)
 
     def _run(self):
         self._log.info("Generating content into directory '%s'", self._target_directory)
         recreate_directory(self._target_directory)
-        generate(self._target_directory)
+        generate(self._config, self._target_directory)
 
 
 def _apply_verbosity(verbosity=0):
@@ -104,7 +105,7 @@ def run():
     if args.configuration:
         _report_configuration()
     else:
-        MyApp(c.pid_file, Path(args.target_directory)).run()
+        MyApp(c, Path(args.target_directory)).run()
 
 
 """DisabledContent
