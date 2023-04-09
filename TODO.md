@@ -22,7 +22,6 @@ unless they should merely be deleted.
 1. [ ] I/U = Item Description
 1. [ ]  /  = 
 
-1. [ ] 1/1 = Refactor hard-coded values into configuration
 1. [ ] 1/1 = Rename application module `MODULE` to follow PEP8 conventions
 1. [ ] 1/1 = Split generation of `activate.bash` into separate Python modules for before/after activation
 1. [ ] 2/2 - Disable Python3 automatic encoding coercion between ASCII and Unicode
@@ -70,6 +69,7 @@ unless they should merely be deleted.
 1. [X] 1/1 = Create scripts & aliases for managing Anaconda environments
 1. [X] 1/1 = Create scripts & aliases for managing Homebrew
 1. [X] 1/1 = Refactor BriteOnyx source generation to better distinguish before, during, and after activation
+1. [X] 1/1 = Refactor hard-coded values into configuration
 1. [X] 1/1 = Restore reporting of `coverage`
 1. [X] 1/1 = Restore reporting of test results
 1. [X] 1/1 = Separate project temporary directory from `TMPDIR`

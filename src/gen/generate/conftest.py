@@ -16,14 +16,5 @@ def config():
     return Config()
 
 
-@fixture(scope="session")
-def running_humanless():
-    try:
-        environ["BO_RunningHumanless"]
-        return True
-    except KeyError:
-        return False
-
-
 """DisabledContent
 """

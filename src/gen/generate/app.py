@@ -1,7 +1,7 @@
 #!/usr/bin/env false
 """Generate source for this project.
 
-Intended to be executed as a Python module:  python3 -m generate
+Intended to be executed as a Python module:  python3 -m MODULE
 """
 # Internal packages (absolute references, distributed with Python)
 from argparse import ArgumentParser

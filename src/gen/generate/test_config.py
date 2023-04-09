@@ -50,10 +50,6 @@ def test_var_system_path(config):
     assert is_.equal(config.var_system_path, "BO_PathSystem")
 
 
-def test_var_temporary_directory(config):
-    assert is_.equal(config.var_temporary_directory, "BO_DirTemp")
-
-
 def test_var_tool_path(config):
     assert is_.equal(config.var_tool_path, "BO_PathTool")
 

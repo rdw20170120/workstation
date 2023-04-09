@@ -42,10 +42,6 @@ class Config(BaseConfig):
         return "%sPathSystem" % self.variable_prefix
 
     @property
-    def var_temporary_directory(self):
-        return "%sDirTemp" % self.variable_prefix
-
-    @property
     def var_tool_path(self):
         return "%sPathTool" % self.variable_prefix
 

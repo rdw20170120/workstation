@@ -12,7 +12,7 @@ from utility.tracked_path import TrackedPath
 class Config(object):
     @property
     def application_name(self):
-        return environment.get("BO_NameApp")
+        return environment.get(self.var_application_name)
 
     @property
     def log_directory(self):
@@ -40,19 +40,39 @@ class Config(object):
 
     @property
     def project_directory(self):
-        return TrackedPath("project", environment.get("BO_Project"))
+        return TrackedPath("project", environment.get(self.var_project_directory))
+
+    @property
+    def running_humanless(self):
+        try:
+            environment.get(self.var_running_humanless)
+            return True
+        except KeyError:
+            return False
 
     @property
     def temporary_directory(self):
-        return TrackedPath("temporary", environment.get("BO_DirTemp"))
+        return TrackedPath("temporary", environment.get(self.var_temporary_directory))
 
     @property
     def trace_minimal(self):
         return "TRACE"
 
     @property
+    def var_application_name(self):
+        return "%sNameApp" % self.variable_prefix
+
+    @property
     def var_project_directory(self):
         return "%sProject" % self.variable_prefix
+
+    @property
+    def var_running_humanless(self):
+        return "%sRunningHumanless" % self.variable_prefix
+
+    @property
+    def var_temporary_directory(self):
+        return "%sDirTemp" % self.variable_prefix
 
     @property
     def var_trace(self):
