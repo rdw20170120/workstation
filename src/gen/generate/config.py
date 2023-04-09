@@ -14,6 +14,10 @@ class Config(BaseConfig):
         return "gen"
 
     @property
+    def trace_maximal(self):
+        return "DEEP"
+
+    @property
     def var_capture_directory(self):
         return "%sDirCapture" % self.variable_prefix
 
@@ -28,10 +32,6 @@ class Config(BaseConfig):
     @property
     def var_output_directory(self):
         return "%sDirOut" % self.variable_prefix
-
-    @property
-    def var_project_directory(self):
-        return "%sProject" % self.variable_prefix
 
     @property
     def var_project_path(self):
@@ -52,10 +52,6 @@ class Config(BaseConfig):
     @property
     def var_user_path(self):
         return "%sPathUser" % self.variable_prefix
-
-    @property
-    def variable_prefix(self):
-        return "BO_"
 
 
 """DisabledContent

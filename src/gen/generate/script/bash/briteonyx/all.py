@@ -5,87 +5,86 @@
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.bash.briteonyx.complete import *
 from src_gen.script.bash.briteonyx.render import generate as briteonyx
-from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)
 
 
-def _generate(dir_):
-    _generate_bin(dir_ / "bin")
-    _generate_briteonyx(dir_ / "BriteOnyx")
-    _generate_cfg(dir_ / "cfg")
+def _generate(config, dir_):
+    _generate_bin(config, dir_ / "bin")
+    _generate_briteonyx(config, dir_ / "BriteOnyx")
+    _generate_cfg(config, dir_ / "cfg")
     _generate_doc(dir_ / "doc")
     _generate_home(dir_ / "home")
     _generate_out(dir_ / "home")
-    _generate_src(dir_ / "src")
+    _generate_src(config, dir_ / "src")
 
 
-def _generate_bin(dir_):
-    _generate_bin_lib(dir_ / "lib")
-    briteonyx(executed(), dir_, "anaconda-populate")
-    briteonyx(executed(), dir_, "app-run")
-    briteonyx(executed(), dir_, "show_maybe_missed_source")
-    briteonyx(executed(), dir_, "sync_on_macOS")
-    briteonyx(executed(), dir_, "tool-report")
+def _generate_bin(config, dir_):
+    _generate_bin_lib(config, dir_ / "lib")
+    briteonyx(executed(config), dir_, "anaconda-populate")
+    briteonyx(executed(config), dir_, "app-run")
+    briteonyx(executed(config), dir_, "show_maybe_missed_source")
+    briteonyx(executed(config), dir_, "sync_on_macOS")
+    briteonyx(executed(config), dir_, "tool-report")
 
 
-def _generate_bin_lib(dir_):
-    briteonyx(sourced(), dir_, "declare.bash")
+def _generate_bin_lib(config, dir_):
+    briteonyx(sourced(config), dir_, "declare.bash")
 
 
-def _generate_briteonyx(dir_):
-    _generate_briteonyx_bin(dir_ / "bin")
+def _generate_briteonyx(config, dir_):
+    _generate_briteonyx_bin(config, dir_ / "bin")
     _generate_briteonyx_doc(dir_ / "doc")
 
 
-def _generate_briteonyx_bin(dir_):
-    _generate_briteonyx_bin_lib(dir_ / "lib")
-    briteonyx(executed(), dir_, "all-capture")
-    briteonyx(executed(), dir_, "all-check")
-    briteonyx(executed(), dir_, "anaconda-capture")
-    briteonyx(executed(), dir_, "anaconda-check")
-    briteonyx(executed(), dir_, "anaconda-create")
-    briteonyx(executed(), dir_, "anaconda-destroy")
-    briteonyx(executed(), dir_, "anaconda-report")
-    briteonyx(executed(), dir_, "anaconda-upgrade")
-    briteonyx(executed(), dir_, "env-capture")
-    briteonyx(executed(), dir_, "env-check")
-    briteonyx(executed(), dir_, "env-report")
-    briteonyx(executed(), dir_, "gen-run")
-    briteonyx(executed(), dir_, "prj-clean")
-    briteonyx(executed(), dir_, "prj-wipe")
-    briteonyx(executed(), dir_, "py-2to3")
-    briteonyx(executed(), dir_, "py-capture")
-    briteonyx(executed(), dir_, "py-check")
-    briteonyx(executed(), dir_, "py-compile")
-    briteonyx(executed(), dir_, "py-format")
-    briteonyx(executed(), dir_, "py-report")
-    briteonyx(executed(), dir_, "sig-check")
-    briteonyx(executed(), dir_, "sig-make")
-    briteonyx(executed(), dir_, "test-run")
-    briteonyx(executed(), dir_, "tool-capture")
-    briteonyx(executed(), dir_, "tool-check")
+def _generate_briteonyx_bin(config, dir_):
+    _generate_briteonyx_bin_lib(config, dir_ / "lib")
+    briteonyx(executed(config), dir_, "all-capture")
+    briteonyx(executed(config), dir_, "all-check")
+    briteonyx(executed(config), dir_, "anaconda-capture")
+    briteonyx(executed(config), dir_, "anaconda-check")
+    briteonyx(executed(config), dir_, "anaconda-create")
+    briteonyx(executed(config), dir_, "anaconda-destroy")
+    briteonyx(executed(config), dir_, "anaconda-report")
+    briteonyx(executed(config), dir_, "anaconda-upgrade")
+    briteonyx(executed(config), dir_, "env-capture")
+    briteonyx(executed(config), dir_, "env-check")
+    briteonyx(executed(config), dir_, "env-report")
+    briteonyx(executed(config), dir_, "gen-run")
+    briteonyx(executed(config), dir_, "prj-clean")
+    briteonyx(executed(config), dir_, "prj-wipe")
+    briteonyx(executed(config), dir_, "py-2to3")
+    briteonyx(executed(config), dir_, "py-capture")
+    briteonyx(executed(config), dir_, "py-check")
+    briteonyx(executed(config), dir_, "py-compile")
+    briteonyx(executed(config), dir_, "py-format")
+    briteonyx(executed(config), dir_, "py-report")
+    briteonyx(executed(config), dir_, "sig-check")
+    briteonyx(executed(config), dir_, "sig-make")
+    briteonyx(executed(config), dir_, "test-run")
+    briteonyx(executed(config), dir_, "tool-capture")
+    briteonyx(executed(config), dir_, "tool-check")
 
 
-def _generate_briteonyx_bin_lib(dir_):
-    briteonyx(sourced(), dir_, "alias.bash")
-    briteonyx(sourced(), dir_, "configure_Anaconda.bash")
-    briteonyx(sourced(), dir_, "configure_Python.bash")
-    briteonyx(sourced(), dir_, "initialize_Anaconda.bash")
-    briteonyx(sourced(), dir_, "maybe_create_Anaconda_environment.bash")
+def _generate_briteonyx_bin_lib(config, dir_):
+    briteonyx(sourced(config), dir_, "alias.bash")
+    briteonyx(sourced(config), dir_, "configure_Anaconda.bash")
+    briteonyx(sourced(config), dir_, "configure_Python.bash")
+    briteonyx(sourced(config), dir_, "initialize_Anaconda.bash")
+    briteonyx(sourced(config), dir_, "maybe_create_Anaconda_environment.bash")
 
 
 def _generate_briteonyx_doc(dir_):
     pass
 
 
-def _generate_cfg(dir_):
-    _generate_cfg_sample(dir_ / "sample")
+def _generate_cfg(config, dir_):
+    _generate_cfg_sample(config, dir_ / "sample")
 
 
-def _generate_cfg_sample(dir_):
-    briteonyx(sourced(), dir_, "alias.bash")
-    briteonyx(sourced(), dir_, "context.bash")
+def _generate_cfg_sample(config, dir_):
+    briteonyx(sourced(config), dir_, "alias.bash")
+    briteonyx(sourced(config), dir_, "context.bash")
 
 
 def _generate_doc(dir_):
@@ -127,14 +126,14 @@ def _generate_out(dir_):
     pass
 
 
-def _generate_src(dir_):
-    _generate_src_app(dir_ / "app")
+def _generate_src(config, dir_):
+    _generate_src_app(config, dir_ / "app")
     _generate_src_gen(dir_ / "gen")
     _generate_src_lib(dir_ / "lib")
 
 
-def _generate_src_app(dir_):
-    _generate_src_app_name(dir_ / Config().application_name)
+def _generate_src_app(config, dir_):
+    _generate_src_app_name(dir_ / config.application_name)
 
 
 def _generate_src_app_name(dir_):
@@ -234,7 +233,7 @@ def _generate_src_lib_third_party(dir_):
 
 
 def generate(config, directory):
-    _generate(directory)
+    _generate(config, directory)
 
 
 """DisabledContent

@@ -41,7 +41,7 @@ class Renderer(object):
                 with open(file_path, mode="wt", newline=None) as f:
                     f.write(self._serialize(content))
         except TypeError as e:
-            log_exception(self._log, e)
+            log_exception(self._log, e, with_traceback=True)
             raise
         except Exception as e:
             log_exception(self._log, e)

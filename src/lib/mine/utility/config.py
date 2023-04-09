@@ -46,6 +46,22 @@ class Config(object):
     def temporary_directory(self):
         return TrackedPath("temporary", environment.get("BO_DirTemp"))
 
+    @property
+    def trace_minimal(self):
+        return "TRACE"
+
+    @property
+    def var_project_directory(self):
+        return "%sProject" % self.variable_prefix
+
+    @property
+    def var_trace(self):
+        return "%sTrace" % self.variable_prefix
+
+    @property
+    def variable_prefix(self):
+        return "BO_"
+
 
 """DisabledContent
 """

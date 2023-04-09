@@ -1,22 +1,18 @@
 #!/usr/bin/env false
-"""TODO: Write
-"""
+"""Establish supporting infrastructure for pytest."""
 # Internal packages (absolute references, distributed with Python)
 # External packages (absolute references, NOT distributed with Python)
+from pytest import fixture
+
 # Library modules   (absolute references, NOT packaged, in project)
+from utility.config import Config
+
 # Project modules   (relative references, NOT packaged, in project)
-from .frame import *
-from .material import *
 
 
-def sourced(config):
-    return [
-        header_activation(config),
-        todo("DESCRIPTION"),
-        line(),
-        todo("CONTENT"),
-        disabled_content_footer(),
-    ]
+@fixture(scope="session")
+def config():
+    return Config()
 
 
 """DisabledContent

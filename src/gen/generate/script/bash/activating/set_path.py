@@ -100,7 +100,7 @@ def _require_variables(config):
 
 def build(config):
     return [
-        header_sourced(),
+        header_sourced(config),
         _comments(),
         line(),
         _maybe_initialize_paths(config),

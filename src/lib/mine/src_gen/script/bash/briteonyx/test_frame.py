@@ -13,16 +13,16 @@ from .render import my_visitor_map
 s = Renderer(my_visitor_map)._serialize
 
 
-def test_abort_if_not_activated():
-    assert is_.nonempty_string(s(abort_if_not_activated()))
+def test_abort_if_not_activated(config):
+    assert is_.nonempty_string(s(abort_if_not_activated(config)))
 
 
-def test_header_executed():
-    assert is_.nonempty_string(s(header_executed()))
+def test_header_executed(config):
+    assert is_.nonempty_string(s(header_executed(config)))
 
 
-def test_header_sourced():
-    assert is_.nonempty_string(s(header_sourced()))
+def test_header_sourced(config):
+    assert is_.nonempty_string(s(header_sourced(config)))
 
 
 """DisabledContent

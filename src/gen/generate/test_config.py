@@ -22,6 +22,10 @@ def test_log_name(config):
     assert is_.equal(config.log_name, "gen")
 
 
+def test_trace_maximal(config):
+    assert is_.equal(config.trace_maximal, "DEEP")
+
+
 def test_var_capture_directory(config):
     assert is_.equal(config.var_capture_directory, "BO_DirCapture")
 
@@ -36,10 +40,6 @@ def test_var_operating_system(config):
 
 def test_var_output_directory(config):
     assert is_.equal(config.var_output_directory, "BO_DirOut")
-
-
-def test_var_project_directory(config):
-    assert is_.equal(config.var_project_directory, "BO_Project")
 
 
 def test_var_project_path(config):
@@ -63,8 +63,4 @@ def test_var_user_path(config):
 
 
 """DisabledContent
-def test_(config):
-    assert is_.nonempty_string(config.)
-
-
 """

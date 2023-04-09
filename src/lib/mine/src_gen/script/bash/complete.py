@@ -9,9 +9,9 @@ from .frame import *
 from .material import *
 
 
-def executed():
+def executed(config):
     return [
-        header_executed(),
+        header_executed(config),
         line(),
         function(
             "main",
@@ -35,9 +35,9 @@ def executed():
     ]
 
 
-def sourced():
+def sourced(config):
     return [
-        header_sourced(),
+        header_sourced(config),
         todo("DESCRIPTION"),
         line(),
         todo("CONTENT"),

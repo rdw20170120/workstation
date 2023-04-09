@@ -68,22 +68,22 @@ def exported_function(name, *statement):
     ]
 
 
-def header_executed():
+def header_executed(config):
     return [
         shebang_bash(),
         comment("Intended to be executed in a Bash shell."),
-        tracing_in_header(),
+        tracing_in_header(config),
         no(set_("-e")),
         no(trap("...", "EXIT")),
         rule(),
     ]
 
 
-def header_sourced():
+def header_sourced(config):
     return [
         shebang_sourced(),
         comment("Intended to be sourced in a Bash shell."),
-        tracing_in_header(),
+        tracing_in_header(config),
         no(set_("-e")),
         no(trap("...", "EXIT")),
         rule(),
@@ -140,15 +140,15 @@ def source_or_abort(file_, script="Script", status="Status"):
     ]
 
 
-def tracing_in_header():
+def tracing_in_header(config):
     return [
-        string_is_not_null(dq(vr(trace_variable))),
+        string_is_not_null(dq(vr(config.var_trace))),
         and_(),
         " 1>&2 ",
         echo(dq("Executing ", vr("BASH_SOURCE"))),
         and_(),
         " ",
-        string_not_equal(dq(vr(trace_variable)), sq(trace_minimal)),
+        string_not_equal(dq(vr(config.var_trace)), sq(config.trace_minimal)),
         and_(),
         " ",
         set_("-vx"),

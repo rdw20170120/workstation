@@ -41,12 +41,12 @@ def test_exported_function():
     assert is_.nonempty_string(s(exported_function("Test", [])))
 
 
-def test_header_executed():
-    assert is_.nonempty_string(s(header_executed()))
+def test_header_executed(config):
+    assert is_.nonempty_string(s(header_executed(config)))
 
 
-def test_header_sourced():
-    assert is_.nonempty_string(s(header_sourced()))
+def test_header_sourced(config):
+    assert is_.nonempty_string(s(header_sourced(config)))
 
 
 def test_maybe_source():
@@ -61,8 +61,8 @@ def test_source_or_abort():
     assert is_.nonempty_string(s(source_or_abort(None)))
 
 
-def test_tracing_in_header():
-    assert is_.nonempty_string(s(tracing_in_header()))
+def test_tracing_in_header(config):
+    assert is_.nonempty_string(s(tracing_in_header(config)))
 
 
 """DisabledContent

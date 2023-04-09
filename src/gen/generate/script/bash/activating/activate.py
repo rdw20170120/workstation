@@ -282,7 +282,7 @@ def _footer():
 
 def _header(config):
     return [
-        header_activation(),
+        header_activation(config),
         _comments(),
         _abort_if_activated(config),
         line(),

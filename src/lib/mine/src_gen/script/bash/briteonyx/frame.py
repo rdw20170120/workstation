@@ -11,9 +11,9 @@ from .element import *
 from .material import *
 
 
-def abort_if_not_activated():
+def abort_if_not_activated(config):
     return [
-        string_is_null(dq(vr("BO_Project"))),
+        string_is_null(dq(vr(config.var_project_directory))),
         and_(),
         eol(),
         indent(),
@@ -26,11 +26,11 @@ def abort_if_not_activated():
     ]
 
 
-def header_executed():
+def header_executed(config):
     return [
         shebang_bash(),
         comment("Intended to be executed in a Bash shell."),
-        tracing_in_header(),
+        tracing_in_header(config),
         no(set_("-e")),
         trap("warn_on_error", "EXIT"),
         eol(),
@@ -38,11 +38,11 @@ def header_executed():
     ]
 
 
-def header_sourced():
+def header_sourced(config):
     return [
         shebang_sourced(),
         comment("Intended to be sourced in a Bash shell."),
-        tracing_in_header(),
+        tracing_in_header(config),
         no(set_("-e")),
         no(trap("...", "EXIT")),
         rule(),

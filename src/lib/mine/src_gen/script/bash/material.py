@@ -11,11 +11,6 @@ from utility import my_assert as is_
 from .frame import *
 
 
-trace_variable = "BO_Trace"
-trace_minimal = "TRACE"
-trace_maximal = "DEEP"
-
-
 def assign(variable, *expression):
     return Assign(variable, expression)
 

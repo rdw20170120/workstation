@@ -23,6 +23,7 @@ unless they should merely be deleted.
 1. [ ]  /  = 
 
 1. [ ] 1/1 = Refactor hard-coded values into configuration
+1. [ ] 1/1 = Rename application module `MODULE` to follow PEP8 conventions
 1. [ ] 1/1 = Split generation of `activate.bash` into separate Python modules for before/after activation
 1. [ ] 2/2 - Disable Python3 automatic encoding coercion between ASCII and Unicode
 1. [ ] 2/2 - Extend code generation to all Bash scripts

@@ -13,8 +13,8 @@ from .render import my_visitor_map
 s = Renderer(my_visitor_map)._serialize
 
 
-def test_sourced():
-    assert is_.nonempty_string(s(sourced()))
+def test_sourced(config):
+    assert is_.nonempty_string(s(sourced(config)))
 
 
 """DisabledContent

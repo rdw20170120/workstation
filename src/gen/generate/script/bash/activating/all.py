@@ -5,7 +5,6 @@
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.bash.activating.complete import *
 from src_gen.script.bash.activating.render import generate as activating
-from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)
 from .activate import build as activate
@@ -19,7 +18,7 @@ def _generate(config, dir_):
     _generate_doc(dir_ / "doc")
     _generate_home(dir_ / "home")
     _generate_out(dir_ / "home")
-    _generate_src(dir_ / "src")
+    _generate_src(config, dir_ / "src")
     activating(activate(config), dir_, "activate.bash")
 
 
@@ -41,11 +40,11 @@ def _generate_briteonyx_bin(config, dir_):
 
 
 def _generate_briteonyx_bin_lib(config, dir_):
-    activating(sourced(), dir_, "declare-base.bash")
-    activating(sourced(), dir_, "declare-common.bash")
-    activating(sourced(), dir_, "declare-log4bash.bash")
-    activating(sourced(), dir_, "declare-require.bash")
-    activating(sourced(), dir_, "declare.bash")
+    activating(sourced(config), dir_, "declare-base.bash")
+    activating(sourced(config), dir_, "declare-common.bash")
+    activating(sourced(config), dir_, "declare-log4bash.bash")
+    activating(sourced(config), dir_, "declare-require.bash")
+    activating(sourced(config), dir_, "declare.bash")
     activating(set_path(config), dir_, "set_path.bash")
 
 
@@ -100,14 +99,14 @@ def _generate_out(dir_):
     pass
 
 
-def _generate_src(dir_):
-    _generate_src_app(dir_ / "app")
+def _generate_src(config, dir_):
+    _generate_src_app(config, dir_ / "app")
     _generate_src_gen(dir_ / "gen")
     _generate_src_lib(dir_ / "lib")
 
 
-def _generate_src_app(dir_):
-    _generate_src_app_name(dir_ / Config().application_name)
+def _generate_src_app(config, dir_):
+    _generate_src_app_name(dir_ / config.application_name)
 
 
 def _generate_src_app_name(dir_):

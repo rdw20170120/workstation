@@ -5,21 +5,20 @@
 # Library modules   (absolute references, NOT packaged, in project)
 from src_gen.script.bash.complete import *
 from src_gen.script.bash.render import generate as bash
-from utility.config import Config
 
 # Project modules   (relative references, NOT packaged, in project)
 from .activating.all import generate as generate_activating
 from .briteonyx.all import generate as generate_briteonyx
 
 
-def _generate(dir_):
+def _generate(config, dir_):
     _generate_bin(dir_ / "bin")
     _generate_briteonyx(dir_ / "BriteOnyx")
     _generate_cfg(dir_ / "cfg")
     _generate_doc(dir_ / "doc")
-    _generate_home(dir_ / "home")
+    _generate_home(config, dir_ / "home")
     _generate_out(dir_ / "home")
-    _generate_src(dir_ / "src")
+    _generate_src(config, dir_ / "src")
 
 
 def _generate_bin(dir_):
@@ -59,50 +58,50 @@ def _generate_doc(dir_):
     pass
 
 
-def _generate_home(dir_):
-    _generate_home_bin(dir_ / "bin")
+def _generate_home(config, dir_):
+    _generate_home_bin(config, dir_ / "bin")
     _generate_home_linux(dir_ / "Linux")
-    _generate_home_macos(dir_ / "macOS")
+    _generate_home_macos(config, dir_ / "macOS")
     _generate_home_ssh(dir_ / ".ssh")
 
 
-def _generate_home_bin(dir_):
-    _generate_home_bin_lib(dir_ / "lib")
-    bash(executed(), dir_, "24-bit-color.sh")
-    bash(executed(), dir_, "clone_from_GitHub_by_Rob")
-    bash(executed(), dir_, "clone_from_GitHub_by_TextNow")
-    bash(executed(), dir_, "clone_from_GitHub_by_others")
-    bash(executed(), dir_, "clone_from_GitLab_by_Rob")
-    bash(executed(), dir_, "clone_from_GitLab_by_SWA")
-    bash(executed(), dir_, "clone_from_GitLab_by_Yum")
-    bash(executed(), dir_, "clone_from_GitLab_by_others")
-    bash(executed(), dir_, "git_config_user_Me_at_SWA")
-    bash(executed(), dir_, "git_config_user_Me_at_TextNow")
-    bash(executed(), dir_, "git_config_user_Me_at_home")
-    bash(executed(), dir_, "grep_stable_projects_for_all_phrases")
-    bash(executed(), dir_, "grep_stable_projects_for_phrase")
-    bash(executed(), dir_, "secure")
+def _generate_home_bin(config, dir_):
+    _generate_home_bin_lib(config, dir_ / "lib")
+    bash(executed(config), dir_, "24-bit-color.sh")
+    bash(executed(config), dir_, "clone_from_GitHub_by_Rob")
+    bash(executed(config), dir_, "clone_from_GitHub_by_TextNow")
+    bash(executed(config), dir_, "clone_from_GitHub_by_others")
+    bash(executed(config), dir_, "clone_from_GitLab_by_Rob")
+    bash(executed(config), dir_, "clone_from_GitLab_by_SWA")
+    bash(executed(config), dir_, "clone_from_GitLab_by_Yum")
+    bash(executed(config), dir_, "clone_from_GitLab_by_others")
+    bash(executed(config), dir_, "git_config_user_Me_at_SWA")
+    bash(executed(config), dir_, "git_config_user_Me_at_TextNow")
+    bash(executed(config), dir_, "git_config_user_Me_at_home")
+    bash(executed(config), dir_, "grep_stable_projects_for_all_phrases")
+    bash(executed(config), dir_, "grep_stable_projects_for_phrase")
+    bash(executed(config), dir_, "secure")
 
 
-def _generate_home_bin_lib(dir_):
-    bash(sourced(), dir_, "declare-git.bash")
+def _generate_home_bin_lib(config, dir_):
+    bash(sourced(config), dir_, "declare-git.bash")
 
 
 def _generate_home_linux(dir_):
     pass
 
 
-def _generate_home_macos(dir_):
-    _generate_home_macos_bin(dir_ / "bin")
+def _generate_home_macos(config, dir_):
+    _generate_home_macos_bin(config, dir_ / "bin")
 
 
-def _generate_home_macos_bin(dir_):
-    bash(executed(), dir_, "homebrew-install")
-    bash(executed(), dir_, "homebrew-list")
-    bash(executed(), dir_, "homebrew-populate")
-    bash(executed(), dir_, "homebrew-update")
-    bash(executed(), dir_, "homebrew-upgrade")
-    bash(executed(), dir_, "homebrew-uninstall")
+def _generate_home_macos_bin(config, dir_):
+    bash(executed(config), dir_, "homebrew-install")
+    bash(executed(config), dir_, "homebrew-list")
+    bash(executed(config), dir_, "homebrew-populate")
+    bash(executed(config), dir_, "homebrew-update")
+    bash(executed(config), dir_, "homebrew-upgrade")
+    bash(executed(config), dir_, "homebrew-uninstall")
 
 
 def _generate_home_ssh(dir_):
@@ -113,14 +112,14 @@ def _generate_out(dir_):
     pass
 
 
-def _generate_src(dir_):
-    _generate_src_app(dir_ / "app")
+def _generate_src(config, dir_):
+    _generate_src_app(config, dir_ / "app")
     _generate_src_gen(dir_ / "gen")
     _generate_src_lib(dir_ / "lib")
 
 
-def _generate_src_app(dir_):
-    _generate_src_app_name(dir_ / Config().application_name)
+def _generate_src_app(config, dir_):
+    _generate_src_app_name(dir_ / config.application_name)
 
 
 def _generate_src_app_name(dir_):
@@ -207,7 +206,7 @@ def _generate_src_lib_third_party(dir_):
 
 
 def generate(config, directory):
-    _generate(directory)
+    _generate(config, directory)
     generate_activating(config, directory)
     generate_briteonyx(config, directory)
 
