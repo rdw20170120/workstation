@@ -1,16 +1,15 @@
 # *.env
 # *.html
 # *.json
+# *.log
 # *.out
 # *.sig
 # /out/
-# coverage/
 # htmlcov/
 *.avro
 *.bak
 *.class
 *.list
-*.log
 *.parquet
 *.pid
 *.py[cdo]
@@ -23,5 +22,7 @@
 /alias.bash
 /context.bash
 /log/
+/out/coverage/
+/out/pdoc/
 /tmp/
 __pycache__/

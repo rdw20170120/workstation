@@ -13,19 +13,18 @@ main() {
     require_arguments $# 0
 
     git status --ignored |
+        grep -v \.BO |
         grep -v \.DS_Store |
         grep -v \.anaconda |
-        grep -v \.cache\/ |
-        grep -v \.class |
-        grep -v \.html |
+        grep -v \.coverage |
         grep -v \.pytest_cache |
         grep -v __pycache__ |
-        grep -v cfg\/\.coverage |
+        grep -v alias\.bash |
         grep -v context\.bash |
-        grep -v htmlcov\/ |
-        grep -v log\/ |
+        grep -v log |
         grep -v out\/coverage |
-        grep -v pytest\.log
+        grep -v out\/pdoc |
+        grep -v tmp
 
     return 0
 }
