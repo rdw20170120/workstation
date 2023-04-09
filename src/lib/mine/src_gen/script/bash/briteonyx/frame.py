@@ -49,5 +49,11 @@ def header_sourced(config):
     ]
 
 
+def maybe_copy_file(source, target):
+    return [
+        command("maybe_copy_file", source, target),
+    ]
+
+
 """DisabledContent
 """

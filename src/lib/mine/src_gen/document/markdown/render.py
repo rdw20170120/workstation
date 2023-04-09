@@ -29,7 +29,7 @@ class Markdown(Content):
 
 
 def generate(content, directory=None, filename=None):
-    Markdown(content).generate(directory, filename)
+    return Markdown(content).generate(directory, filename)
 
 
 """DisabledContent

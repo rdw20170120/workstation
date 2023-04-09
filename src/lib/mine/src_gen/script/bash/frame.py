@@ -124,6 +124,12 @@ def maybe_source_or_abort(file_, script, status):
     ]
 
 
+def remembering(name):
+    return [
+        command("remembering", name),
+    ]
+
+
 def source_or_abort(file_, script="Script", status="Status"):
     return [
         assign(vn(script), file_),

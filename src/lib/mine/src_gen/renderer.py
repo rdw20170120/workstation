@@ -17,11 +17,12 @@ from utility.my_logging import log_exception
 
 # Project modules   (relative references, NOT packaged, in project)
 
+_log = getLogger(__name__)
+
 
 class Renderer(object):
     def __init__(self, visitor_map=default_visitor_map, encoding=default_encoding):
         self._encoding = encoding
-        self._log = getLogger(self.__class__.__name__)
         self._visitor_map = visitor_map
         super().__init__()
 
@@ -34,18 +35,21 @@ class Renderer(object):
     def render(self, content, file_path=None):
         try:
             if file_path is None:
-                self._log.info("Printing rendered content to stdout")
-                print((self._serialize(content)))
+                return self._serialize(content)
             else:
-                self._log.info("Writing rendered content to file '%s'", file_path)
-                with open(file_path, mode="wt", newline=None) as f:
-                    f.write(self._serialize(content))
+                write_to_file(self._serialize(content), file_path)
         except TypeError as e:
-            log_exception(self._log, e, with_traceback=True)
+            log_exception(_log, e, with_traceback=True)
             raise
         except Exception as e:
-            log_exception(self._log, e)
+            log_exception(_log, e)
             raise
+
+
+def write_to_file(content, file_path=None):
+    _log.info("Writing rendered content to file '%s'", file_path)
+    with open(file_path, mode="wt", newline=None) as f:
+        f.write(content)
 
 
 """DisabledContent

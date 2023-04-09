@@ -37,9 +37,9 @@ class Content(object):
 
     def generate(self, directory=None, filename=None):
         if directory is None:
-            Renderer(self._visitor_map).render(self._content)
+            return Renderer(self._visitor_map).render(self._content)
         elif filename is None:
-            Renderer(self._visitor_map).render(self._content)
+            return Renderer(self._visitor_map).render(self._content)
         else:
             assert is_.instance(directory, Path)
             maybe_create_directory(directory)
@@ -52,7 +52,7 @@ def _visit_content(content, walker):
 
 
 def generate(content, directory=None, filename=None):
-    Content(content).generate(directory, filename)
+    return Content(content).generate(directory, filename)
 
 
 """DisabledContent

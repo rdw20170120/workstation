@@ -30,7 +30,7 @@ class BashScript(Script):
 
 
 def generate(content, directory=None, filename=None):
-    BashScript(content).generate(directory, filename)
+    return BashScript(content).generate(directory, filename)
 
 
 """DisabledContent

@@ -30,7 +30,7 @@ class BriteOnyxScript(BashScript):
 
 
 def generate(content, directory=None, filename=None):
-    BriteOnyxScript(content).generate(directory, filename)
+    return BriteOnyxScript(content).generate(directory, filename)
 
 
 """DisabledContent

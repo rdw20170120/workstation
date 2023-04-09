@@ -22,17 +22,5 @@ def header_activation(config):
     ]
 
 
-def maybe_copy_file(source, target):
-    return [
-        command("maybe_copy_file", source, target),
-    ]
-
-
-def remembering(name):
-    return [
-        command("remembering", name),
-    ]
-
-
 """DisabledContent
 """

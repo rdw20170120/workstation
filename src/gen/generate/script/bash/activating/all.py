@@ -7,7 +7,6 @@ from src_gen.script.bash.activating.complete import *
 from src_gen.script.bash.activating.render import generate as activating
 
 # Project modules   (relative references, NOT packaged, in project)
-from .activate import build as activate
 from .set_path import build as set_path
 
 
@@ -19,7 +18,6 @@ def _generate(config, dir_):
     _generate_home(dir_ / "home")
     _generate_out(dir_ / "home")
     _generate_src(config, dir_ / "src")
-    activating(activate(config), dir_, "activate.bash")
 
 
 def _generate_bin(dir_):

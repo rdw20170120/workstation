@@ -30,7 +30,7 @@ class PythonSource(Script):
 
 
 def generate(content, directory=None, filename=None):
-    PythonSource(content).generate(directory, filename)
+    return PythonSource(content).generate(directory, filename)
 
 
 """DisabledContent

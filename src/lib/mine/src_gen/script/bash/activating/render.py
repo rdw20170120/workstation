@@ -30,7 +30,7 @@ class ActivatingBashScript(BashScript):
 
 
 def generate(content, directory=None, filename=None):
-    ActivatingBashScript(content).generate(directory, filename)
+    return ActivatingBashScript(content).generate(directory, filename)
 
 
 """DisabledContent

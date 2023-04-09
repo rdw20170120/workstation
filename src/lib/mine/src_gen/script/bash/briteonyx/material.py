@@ -10,6 +10,26 @@ from src_gen.script.bash.material import *
 from .frame import *
 
 
+def log_debug(*element):
+    return command("log_debug", dq(element))
+
+
+def log_error(*element):
+    return command("log_error", dq(element))
+
+
+def log_good(*element):
+    return command("log_good", dq(element))
+
+
+def log_info(*element):
+    return command("log_info", dq(element))
+
+
+def log_warn(*element):
+    return command("log_warn", dq(element))
+
+
 def require_script(script):
     return command("require_script", script)
 

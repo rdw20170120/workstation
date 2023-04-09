@@ -7,6 +7,7 @@ from src_gen.script.bash.complete import *
 from src_gen.script.bash.render import generate as bash
 
 # Project modules   (relative references, NOT packaged, in project)
+from .activate import generate as generate_activate
 from .activating.all import generate as generate_activating
 from .briteonyx.all import generate as generate_briteonyx
 
@@ -19,6 +20,7 @@ def _generate(config, dir_):
     _generate_home(config, dir_ / "home")
     _generate_out(dir_ / "home")
     _generate_src(config, dir_ / "src")
+    generate_activate(config, dir_, "activate.bash")
 
 
 def _generate_bin(dir_):

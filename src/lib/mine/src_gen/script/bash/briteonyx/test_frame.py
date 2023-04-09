@@ -17,6 +17,10 @@ def test_abort_if_not_activated(config):
     assert is_.nonempty_string(s(abort_if_not_activated(config)))
 
 
+def test_maybe_copy_file():
+    assert is_.nonempty_string(s(maybe_copy_file(None, None)))
+
+
 def test_header_executed(config):
     assert is_.nonempty_string(s(header_executed(config)))
 
