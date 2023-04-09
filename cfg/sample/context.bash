@@ -45,7 +45,7 @@ unset BO_RunningHumanless
 # of each environment variable
 # used.
 
-export BO_NameApp=MODULE
+export BO_NameApp=my_app
 remembering BO_NameApp
 
 require_directory_in HOME

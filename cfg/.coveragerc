@@ -11,7 +11,7 @@ omit =
   */__init__.py
   */__main__.py
   */app.py
-  */app/MODULE/task/*.py
+  */app/my_app/task/*.py
   */config.py
   */conftest.py
   */gen/generate/**/all.py
