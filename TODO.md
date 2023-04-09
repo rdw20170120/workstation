@@ -52,7 +52,6 @@ unless they should merely be deleted.
 1. [ ] 3/3 - Switch font in shell for better readability
 1. [ ] 3/3 - Test for appropriate shebang on all source
 1. [ ] 3/3 - Use pytest parameterization to extend test suites
-1. [ ] 3/3 = Add encoding header to all Python source
 1. [ ] 3/3 = Create scripts & aliases for showing environment variables for Python
 1. [ ] 3/3 = Enhance functionality to synchronize dotfiles between repository and user account
 1. [ ] 3/3 = Investigate whether I want to capture log files during `test-run`
@@ -74,4 +73,5 @@ unless they should merely be deleted.
 1. [X] 1/1 = Separate project temporary directory from `TMPDIR`
 1. [X] 1/1 = Split generation of `activate.bash` into separate Python modules for before/after activation
 1. [X] 3/3 - Move captured output files to `out` directory
+1. [X] 3/3 = ~Add encoding header to all Python source~
 
