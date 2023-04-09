@@ -35,13 +35,13 @@
 
 require_variable BO_PathProject
 require_variable BO_PathSystem
-# TODO: require_variable BO_PathTool
+# TODO: SOMEDAY: require_variable BO_PathTool
 require_variable BO_PathUser
 
 PATH=${BO_PathTool}
-PATH=${PATH}:${BO_PathSystem}
-PATH=${PATH}:${BO_PathProject}
-PATH=${PATH}:${BO_PathUser}
+PATH+=:${BO_PathSystem}
+PATH+=:${BO_PathProject}
+PATH+=:${BO_PathUser}
 export PATH
 
 remembering BO_PathProject

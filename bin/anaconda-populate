@@ -21,14 +21,16 @@ main() {
     Packages="${Packages} ansi2html"
     Packages="${Packages} black"
     Packages="${Packages} coverage"
-    # TODO: FIX: Why does icdiff=2.0.* seem to all be corrupted?
-    Packages="${Packages} icdiff=1.9.*"
     Packages="${Packages} pip"
     Packages="${Packages} pytest"
     Packages="${Packages} pytest-cov"
     Packages="${Packages} pytest-html"
     Packages="${Packages} pytest-icdiff"
     Packages="${Packages} pytest-sugar"
+
+    Packages="${Packages} icdiff=1.9.*"
+    # TODO: FIX: Why does icdiff=2.0.* seem to all be corrupted?
+    # Packages="${Packages} icdiff=2.0.*"
 
     # Need Python packages required by project source code
     Packages="${Packages} awscli"
