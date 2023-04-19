@@ -12,7 +12,7 @@ export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 ################################################################################
 # Homebrew
-export HOMEBREW_PREFIX=/opt/homebrew
+export HOMEBREW_PREFIX=/usr/local
 eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
 export BO_PathAfterHomebrew=${PATH}
 export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin

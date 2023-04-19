@@ -9,6 +9,8 @@ main() {
     # Upgrade casks & formulae installed by Homebrew
 
     brew upgrade
+    conda update conda
+    mamba update mamba
 }
 
 main $@
