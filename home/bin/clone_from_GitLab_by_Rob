@@ -18,13 +18,24 @@ main() {
     local -r Dir=${HOME}/repo/${Source}
     local    Profile
 
-    Profile=refactoryllc
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" experiment
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" learn-gitlab
+    Profile=BriteOnyx
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" core
 
-    Profile=refactorytechllc
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" private-mono
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" pythonspeed
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" core
+
+    Profile=not_shared
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" experiment
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" monorepo
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" private_python_library
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" pythonspeed
+
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" private_python_library
+
+    Profile=shared3591916
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" learn-gitlab
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" public_python_library
+
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" public_python_library
 
     return 0
 }
