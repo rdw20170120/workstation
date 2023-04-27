@@ -32,6 +32,7 @@ export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
 # Build up the system path from the end, starting with the native path, moving forward.
 # This allows easier manipulation by (un)commenting entries.
 BO_PathSystem=${BO_PathNative}
+# BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
 BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
 export BO_PathSystem
 export BO_PathUser=${HOME}/bin

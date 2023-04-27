@@ -9,6 +9,7 @@ main() {
     # Install Homebrew on Apple macOS
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew tap homebrew/cask-versions
 }
 
 main $@
