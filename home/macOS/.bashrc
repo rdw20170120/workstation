@@ -11,18 +11,6 @@ export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 [[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
 
 ################################################################################
-# Homebrew
-export HOMEBREW_PREFIX=/usr/local
-eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
-export BO_PathAfterHomebrew=${PATH}
-export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
-
-################################################################################
-# Anaconda (Mambaforge)
-export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
-export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
-
-################################################################################
 # NOTE: Order matters!
 # Anaconda should override all (win all collisions) as the preferred package manager.
 # Then Homebrew comes second.
@@ -33,7 +21,7 @@ export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
 # This allows easier manipulation by (un)commenting entries.
 BO_PathSystem=${BO_PathNative}
 # BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
-BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
+# BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
 export BO_PathSystem
 export BO_PathUser=${HOME}/bin
 export PATH=${BO_PathSystem}:${BO_PathUser}
@@ -49,8 +37,6 @@ esac
 ################################################################################
 # Environment
 export CLICOLOR=true
-# TODO: Change to Spacemacs?
-export EDITOR=vim
 export GREP_OPTIONS='--color=auto'
 export PAGER=less
 
@@ -58,6 +44,13 @@ export PAGER=less
 # LANG
 # LC_ALL
 # TZ
+
+################################################################################
+# Configure for Spacemacs
+alias emacs='/Applications/Emacs.app/Contents/MacOS/emacs-nw'
+alias vim='/Applications/Emacs.app/Contents/MacOS/emacs-nw'
+export EDITOR="vim"
+export VISUAL="vim"
 
 ################################################################################
 # Bash
@@ -140,7 +133,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Colored GCC warnings and errors
-# export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 ################################################################################
 # Alias definitions
@@ -164,5 +157,17 @@ if ! shopt -oq posix; then
 fi
 
 : << 'DisabledContent'
+################################################################################
+# Homebrew
+export HOMEBREW_PREFIX=/usr/local
+eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+export BO_PathAfterHomebrew=${PATH}
+export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
+
+################################################################################
+# Anaconda (Mambaforge)
+export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
+export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
+
 DisabledContent
 

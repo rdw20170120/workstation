@@ -13,8 +13,6 @@ alias lB='ls -Aln'
 alias ll='ls -l'
 alias lL='ls -Lln'
 
-alias vim='nvim'
-
 alias jump_build='cd ~/repo/GitHub/wip/build'
 alias jump_experiment='cd ~/repo/GitLab/wip/experiment'
 alias jump_interview='cd ~/repo/GitHub/wip/spring-test-project/complete'

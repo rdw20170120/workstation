@@ -3,6 +3,9 @@
 
 umask u=rwx,g=,o=
 
+[[ -r ~/.bashrc ]] && source ~/.bashrc
+
+: << 'DisabledContent'
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/usr/local/Caskroom/mambaforge/base/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -17,9 +20,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-[[ -r ~/.bashrc ]] && source ~/.bashrc
-
-: << 'DisabledContent'
 DisabledContent
 
