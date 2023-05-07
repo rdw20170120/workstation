@@ -4,44 +4,84 @@
 # NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
-# Secure parts of user home directory
 
-# Secure login scripts
-chmod u=rw,g=,o= ~/.bash_logout
-chmod u=rw,g=,o= ~/.bash_profile
-chmod u=rw,g=,o= ~/.bashrc
-chmod u=rw,g=,o= ~/.profile
-chmod u=rw,g=,o= ~/*.bash
+chmod_contents_as_executable() {
+    chmod u=rwx $1/*
+}
 
-# Secure SSH directory
-dir=~/.ssh
-if [[ -d $dir ]] ; then
-  chmod u=rwx,g=,o= $dir
-  chmod u=rw,g=,o=  $dir/*
-fi
+chmod_directory() {
+    chmod -R u=rwx $1
+}
 
-# Secure personal script directory
-dir=~/bin
-if [[ -d $dir ]] ; then
-  chmod -R u=rwx,g=,o= $dir
-fi
-dir=~/bin/lib
-if [[ -d $dir ]] ; then
-  chmod u=rw,g=,o= $dir/*
-fi
+chmod_known() {
+    chmod u=rw $1/*.bash
+    chmod u=rw $1/*.md
+}
 
-# Secure projects (Git working directories)
-dir=~/project
-if [[ -d $dir ]] ; then
-  chmod -R g=,o= $dir
-fi
+chmod_recursively_to_only_me() {
+    chmod -R g=,o= $1
+}
+
+secure_bin() {
+  # Secure personal script directory
+  local Dir
+ 
+  Dir=~/bin
+  if [[ -d $Dir ]] ; then
+    chmod_directory $Dir
+    chmod_recursively_to_only_me $Dir
+    chmod_contents_as_executable $Dir
+    chmod_known $Dir
+  fi
+
+  Dir=~/bin/lib
+  if [[ -d $Dir ]] ; then
+    chmod_directory $Dir
+    chmod_known $Dir
+  fi
+}
+
+secure_home() {
+  # Secure login scripts
+  chmod u=rw,g=,o= ~/*.bash
+  chmod u=rw,g=,o= ~/.bash_logout
+  chmod u=rw,g=,o= ~/.bash_profile
+  chmod u=rw,g=,o= ~/.bashrc
+  chmod u=rw,g=,o= ~/.profile
+}
+
+secure_repo() {
+  # Secure projects (source control repository working Directories)
+  local Dir
+ 
+  Dir=~/repo
+  if [[ -d $Dir ]] ; then
+    chmod_directory $Dir
+    chmod_recursively_to_only_me $Dir
+  fi
+}
+
+secure_ssh() {
+  # Secure SSH directory
+  local Dir
+ 
+  Dir=~/.ssh
+  if [[ -d $Dir ]] ; then
+    chmod_directory $Dir
+    chmod_recursively_to_only_me $Dir
+    chmod_known $Dir
+  fi
+}
 
 main() {
-    # TODO: DESCRIPTION
+  # Secure parts of user home directory
 
-    # TODO: CONTENT
+  secure_home
+  secure_bin
+  secure_ssh
+  secure_repo
 
-    return 0
+  return 0
 }
 
 main $@

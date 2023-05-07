@@ -1,16 +1,13 @@
 #!/bin/false
 # NOTE:  This file is intended to be executed as part of starting a Bash shell.
-
+################################################################################
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-[[ -z "$BO_PathOriginal" ]] && export BO_PathOriginal=$PATH
-export BO_PathHomebrew=/usr/local/bin
-export BO_PathSystem=/usr/bin:/bin:/usr/sbin
-export BO_PathUser=$BO_PathHomebrew:~/bin
-export PATH=$BO_PathSystem:$BO_PathUser
+umask -S u=rwx,g=,o=
 
+################################################################################
 # If not running interactively,
 # don't do anything
 case $- in
@@ -18,42 +15,12 @@ case $- in
       *) return;;
 esac
 
-# Environment
-export CLICOLOR=true
-export EDITOR=vim
-export GREP_OPTIONS='--color=auto'
-export PAGER=vimpager
-
-# These are handled by Apple macOS
-# LANG
-# LC_ALL
-# TZ
-
-# Bash
-shopt -s checkwinsize cmdhist histappend huponexit lithist
-shopt -u sourcepath
-# shopt -s globstar (unsupported in BASH 3.2.57)
-# export FIGNORE=
-# export GLOBIGNORE=
-export HISTCONTROL=ignoreboth
-export HISTFILESIZE=500
-export HISTSIZE=500
-# export HISTTIMEFORMAT=
-# export TIMEFORMAT=
-# Make less more friendly
-# for non-text input files,
-# see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# Set variable identifying the chroot you work in
-# (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
+################################################################################
+# Customize terminal
 export COLORTERM=truecolor
 export TERM=xterm-256color
 
+################################################################################
 # Set a fancy prompt
 # (non-color, unless we know we "want" color)
 # case "$TERM" in
@@ -107,15 +74,20 @@ fi
 # Colored GCC warnings and errors
 # export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# Alias definitions
-# You may want to put all your additions
-# into a separate file like ~/.bash_aliases,
-# instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+################################################################################
+# Make less more friendly
+# for non-text input files,
+# see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Define Bash aliases
-[[ -r alias.bash ]] && source alias.bash
+################################################################################
+# Set variable identifying the chroot you work in
+# (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
 
+################################################################################
 # Enable programmable completion features
 # You don't need to enable this 
 # if it's already enabled in /etc/bash.bashrc
@@ -127,4 +99,92 @@ if ! shopt -oq posix; then
     source /etc/bash_completion
   fi
 fi
+
+################################################################################
+# Remember the native and original system PATHs
+export BO_PathNative=/usr/bin:/bin:/usr/sbin
+[[ -z "$BO_PathOriginal" ]] && export BO_PathOriginal=$PATH
+
+##############################################################################
+# NOTE: Order matters!
+# Anaconda should override all
+# (win all collisions)
+# as the preferred package manager
+# for projects being developed and/or deployed.
+# However, Anaconda is managed
+# using project-specific environments
+# that are incorporated into the PATH
+# as part of the BriteOnyx activation
+# for each project.
+# Therefore, Anaconda is absent here.
+# Then the system package manager comes second,
+# which is
+# APT for Ubuntu (handled under the native system path)
+# and Homebrew (currently) for Apple macOS.
+# Other non-native tools follow
+# such as VMware Fusion (if installed).
+# The native system path is next.
+# The user path is last
+# (so user MUST resolve collisions).
+# Build up the system path from the end,
+# starting with the native path,
+# then moving forward.
+# This allows easier manipulation by (un)commenting entries.
+BO_PathSystem=${BO_PathNative}
+# BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
+# BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
+export BO_PathSystem
+export BO_PathUser=${HOME}/bin
+export PATH=${BO_PathSystem}:${BO_PathUser}
+
+################################################################################
+# Environment
+export CLICOLOR=true
+export GREP_OPTIONS='--color=auto'
+export PAGER=less
+# Needed?
+# LANG
+# LC_ALL
+# TZ
+
+################################################################################
+# Configure for Spacemacs
+export EDITOR="emacs"
+export VISUAL="emacs"
+ 
+################################################################################
+# Bash
+# export FIGNORE=
+# export GLOBIGNORE=
+# export HISTTIMEFORMAT=
+# export TIMEFORMAT=
+# shopt -s globstar (unsupported in BASH 3.2.57)
+export HISTCONTROL=ignoreboth
+export HISTFILESIZE=500
+export HISTSIZE=500
+shopt -s checkwinsize cmdhist histappend huponexit lithist
+shopt -u sourcepath
+
+################################################################################
+# Alias definitions
+# You may want to put all your additions
+# into a separate file like ~/.bash_aliases,
+# instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+[[ -r ~/alias.bash ]] && source ~/alias.bash
+
+: << 'DisabledContent'
+################################################################################
+# Homebrew
+export HOMEBREW_PREFIX=/opt/homebrew
+eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+export BO_PathAfterHomebrew=${PATH}
+export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
+
+################################################################################
+# Anaconda (Mambaforge)
+export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
+export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
+
+DisabledContent
 
