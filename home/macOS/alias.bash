@@ -5,14 +5,7 @@
 # sleep 10; alert
 # alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-
-alias la='ls -Al'
-alias lB='ls -Aln'
-alias ll='ls -l'
-alias lL='ls -Lln'
-
+# cd
 alias jump_build='cd ~/repo/GitHub/wip/build'
 alias jump_experiment='cd ~/repo/GitLab/wip/experiment'
 alias jump_interview='cd ~/repo/GitHub/wip/spring-test-project/complete'
@@ -20,12 +13,11 @@ alias jump_javascript='cd ~/repo/GitHub/wip/javascript'
 alias jump_mono='cd ~/repo/GitLab/wip/private-mono'
 alias jump_pythonspeed='cd ~/repo/GitLab/wip/pythonspeed'
 alias jump_workstation='cd ~/repo/GitHub/wip/workstation'
-
 # For working with two local copies of the same repository
 alias jump_reference='cd "${BO_DirReference}"'
 alias jump_Work_In_Progress='cd "${BO_DirWorkInProgress}"'
 
-# Git
+# git
 alias gi='git status --ignored'
 alias git_branch_delete='git branch --delete'
 alias git_branch_list='git branch --list'
@@ -41,6 +33,17 @@ alias git_stash='git stash push'
 alias git_unstage='git restore --staged'
 alias git_unstash='git stash apply'
 alias gs='git status'
+
+# ls (and related)
+alias dir='dir --color=auto'
+alias lB='ls -Aln'
+alias lL='ls -Lln'
+alias la='ls -Al'
+alias ll='ls -l'
+alias vdir='vdir --color=auto'
+
+# ssh
+alias connect_to_dev='ssh DevAtAws'
 
 # For working with ~/.inputrc
 alias configure_readline_from='bind -f'
