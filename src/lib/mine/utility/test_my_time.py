@@ -29,7 +29,7 @@ from utility.my_time import UnixTime
 
 
 epoch_as_datetime = dt.datetime(2020, 5, 10, 20, 5, 3)
-epoch_as_int_seconds = 1589155503
+epoch_as_int_seconds = 1589141103
 
 
 def test_as_iso8601_MM():
@@ -82,8 +82,6 @@ def test_timedelta_as_hours():
 
 
 def test_datetime_as_int_seconds(config):
-    if config.running_humanless:
-        skip("RESEARCH:  Why does this fail under Jenkins? Timezone?")
     v = datetime_as_int_seconds(epoch_as_datetime)
     assert is_.equal(v, epoch_as_int_seconds)
 
