@@ -12,8 +12,9 @@ main() {
     # Update Anaconda
     # TODO: Upgrade packages installed by Anaconda
     require_arguments $# 0
+    require_variable BO_cmd_mamba
 
-    conda update conda mamba
+    ${BO_cmd_mamba} update conda mamba
 }
 
 main $@

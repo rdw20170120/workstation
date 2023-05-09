@@ -11,8 +11,9 @@
 main() {
     # Report Anaconda state
     require_arguments $# 0
+    require_variable BO_cmd_mamba
 
-    conda list --no-pip
+    ${BO_cmd_mamba} list --no-pip
 }
 
 main $@
