@@ -1,6 +1,6 @@
 " Rob Williams' Neovim initialization
 
-call plug#begin(stdpath('data') . '/plugged')
+call plug#begin('~/.local/share/nvim/site/plugged')
 Plug 'junegunn/vim-plug'
 
 Plug 'https://github.com/lifepillar/vim-solarized8'

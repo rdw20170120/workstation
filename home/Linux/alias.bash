@@ -55,7 +55,5 @@ alias show_readline_macros='bind -s'
 alias show_readline_variables='bind -v'
 
 : << 'DisabledContent'
-# For Linux Mint development VM
-alias fullscreen='~/MANUAL.xprofile'
 DisabledContent
 

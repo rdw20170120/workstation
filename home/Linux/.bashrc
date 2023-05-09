@@ -5,7 +5,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-umask -S u=rwx,g=,o=
+umask u=rwx,g=,o=
 
 ################################################################################
 # If not running interactively,
@@ -101,9 +101,50 @@ if ! shopt -oq posix; then
 fi
 
 ################################################################################
+# Environment
+export CLICOLOR=true
+export GREP_OPTIONS='--color=auto'
+export PAGER=less
+# Needed?
+# LANG
+# LC_ALL
+# TZ
+
+################################################################################
+# Configure for Neovim
+export EDITOR="nvim"
+export VISUAL="nvim"
+ 
+################################################################################
+# Bash
+# export FIGNORE=
+# export GLOBIGNORE=
+# export HISTTIMEFORMAT=
+# export TIMEFORMAT=
+# shopt -s globstar (unsupported in BASH 3.2.57)
+export HISTCONTROL=ignoreboth
+export HISTFILESIZE=500
+export HISTSIZE=500
+shopt -s checkwinsize cmdhist histappend huponexit lithist
+shopt -u sourcepath
+
+################################################################################
+# Alias definitions
+# You may want to put all your additions
+# into a separate file like ~/.bash_aliases,
+# instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+[[ -r ~/alias.bash ]] && source ~/alias.bash
+
+################################################################################
 # Remember the native and original system PATHs
-export BO_PathNative=/usr/bin:/bin:/usr/sbin
-[[ -z "$BO_PathOriginal" ]] && export BO_PathOriginal=$PATH
+[[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
+export BO_PathNative=${BO_PathOriginal}
+
+################################################################################
+# Anaconda (Mambaforge)
+export CONDA_PREFIX=${HOME}/mambaforge
+export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
 
 ##############################################################################
 # NOTE: Order matters!
@@ -131,60 +172,30 @@ export BO_PathNative=/usr/bin:/bin:/usr/sbin
 # then moving forward.
 # This allows easier manipulation by (un)commenting entries.
 BO_PathSystem=${BO_PathNative}
-# BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
-# BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
+BO_PathSystem=${BO_PathAnacondaBase}:${BO_PathSystem}
 export BO_PathSystem
 export BO_PathUser=${HOME}/bin
 export PATH=${BO_PathSystem}:${BO_PathUser}
 
-################################################################################
-# Environment
-export CLICOLOR=true
-export GREP_OPTIONS='--color=auto'
-export PAGER=less
-# Needed?
-# LANG
-# LC_ALL
-# TZ
-
-################################################################################
-# Configure for Spacemacs
-export EDITOR="emacs"
-export VISUAL="emacs"
- 
-################################################################################
-# Bash
-# export FIGNORE=
-# export GLOBIGNORE=
-# export HISTTIMEFORMAT=
-# export TIMEFORMAT=
-# shopt -s globstar (unsupported in BASH 3.2.57)
-export HISTCONTROL=ignoreboth
-export HISTFILESIZE=500
-export HISTSIZE=500
-shopt -s checkwinsize cmdhist histappend huponexit lithist
-shopt -u sourcepath
-
-################################################################################
-# Alias definitions
-# You may want to put all your additions
-# into a separate file like ~/.bash_aliases,
-# instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-[[ -r ~/alias.bash ]] && source ~/alias.bash
-
 : << 'DisabledContent'
-################################################################################
-# Homebrew
-export HOMEBREW_PREFIX=/opt/homebrew
-eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
-export BO_PathAfterHomebrew=${PATH}
-export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
+export BO_PathAnacondaBefore=${PATH}
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/ubuntu/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/ubuntu/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/home/ubuntu/mambaforge/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/ubuntu/mambaforge/bin:$PATH"
+    fi
+fi
+unset __conda_setup
 
-################################################################################
-# Anaconda (Mambaforge)
-export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
-export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
-
+if [ -f "/home/ubuntu/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/home/ubuntu/mambaforge/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+export BO_PathAnacondaAfter=${PATH}
 DisabledContent
-
