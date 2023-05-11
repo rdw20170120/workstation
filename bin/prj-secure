@@ -1,0 +1,200 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+[[ -z "${BO_Project}" ]] &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    exit 99
+require_directory_in BO_Project
+
+log_change() {
+    # Log change being made as described by message $1
+    # $1 = message
+    require_arguments $# 1
+
+    log_info "$1"
+} && export -f log_change
+
+log_visit() {
+    # Log visit to a filesystem entry as described by message $1
+    # $1 = message
+    require_arguments $# 1
+
+    # DISABLED: To reduce verbosity
+#   log_debug "$1"
+} && export -f log_visit
+
+secure_directories() {
+    # Secure directories in directory $1
+    # $1 = directory to search for more directories
+    require_arguments $# 1
+    require_variable BO_DirAnaconda
+    require_variable BO_Project
+    require_variable PermissionsDirectory
+
+    log_visit "Securing directories in directory '$1'"
+    find "$1" \
+        -maxdepth 1 \
+        -not \( -path "${BO_Project}/.git" -prune \) \
+        -not \( -path "${BO_DirAnaconda}" -prune \) \
+        -not -perm ${PermissionsDirectory} \
+        -type d \
+        -exec bash -c 'secure_directory "{}"' \;
+} && export -f secure_directories
+
+secure_directory() {
+    # Secure directory $1
+    # $1 = directory to secure
+    require_arguments $# 1
+    require_variable PermissionsDirectory
+
+    log_change "Securing directory '$1'"
+    chmod ${PermissionsDirectory} "$1"
+} && export -f secure_directory
+
+secure_directory_tree() {
+    # Secure tree (with default assumptions) rooted at directory $1
+    # $1 = root directory of tree
+    require_arguments $# 1
+
+    log_visit "Securing directory tree '$1'"
+    secure_directories "$1"
+    secure_nonexecutables "$1"
+    secure_directory_trees "$1"
+} && export -f secure_directory_tree
+
+secure_directory_trees() {
+    # Secure directory trees (with default assumptions) in directory $1
+    # $1 = directory to search for more directory trees
+    require_arguments $# 1
+    require_variable BO_DirAnaconda
+    require_variable BO_Project
+
+    log_visit "Securing directory trees in '$1'"
+    find "$1" \
+        -maxdepth 1 \
+	    -not -path "$1" \
+        -not \( -path "${BO_Project}/.git" -prune \) \
+        -not \( -path "${BO_DirAnaconda}" -prune \) \
+        -type d \
+        -exec bash -c 'secure_directory_tree "{}"' \;
+} && export -f secure_directory_trees
+
+secure_executable() {
+    # Secure executable file $1
+    # $1 = file to secure
+    require_arguments $# 1
+    require_variable PermissionsFileExecutable
+
+    log_change "Securing executable file '$1'"
+    chmod ${PermissionsFileExecutable} "$1"
+} && export -f secure_executable
+
+secure_executables() {
+    # Secure directory $1 containing files intended to be executable
+    # $1 = directory
+    require_arguments $# 1
+    require_variable PermissionsFileExecutable
+
+    log_visit "Securing executables in directory '$1'"
+    find "$1" \
+        -maxdepth 1 \
+        -not -name '*.md' \
+        -not -perm ${PermissionsFileExecutable} \
+        -type f \
+        -exec bash -c 'secure_executable "{}"' \;
+    secure_known_files "$1"
+}
+
+secure_known_files () {
+    # Secure known (nonexecutable) files in directory $1
+    # $1 = directory
+    require_arguments $# 1
+    require_variable PermissionsFileNonexecutable
+
+    log_visit "Securing known (nonexecutable) files in directory '$1'"
+    find "$1" \
+        -maxdepth 1 \
+        -name '*.md' \
+        -not -perm ${PermissionsFileNonexecutable} \
+        -type f \
+        -exec bash -c 'secure_nonexecutable "{}"' \;
+} && export -f secure_known_files 
+
+secure_nonexecutable() {
+    # Secure nonexecutable file $1
+    # $1 = file to secure
+    require_arguments $# 1
+    require_variable PermissionsFileNonexecutable
+
+    log_change "Securing nonexecutable file '$1'"
+    chmod ${PermissionsFileNonexecutable} "$1"
+} && export -f secure_nonexecutable
+
+secure_nonexecutables() {
+    # Secure directory $1 containing files NOT intended to be executable
+    # $1 = directory
+    require_arguments $# 1
+    require_variable PermissionsFileNonexecutable
+
+    log_visit "Securing nonexecutables in directory '$1'"
+    find "$1" \
+        -maxdepth 1 \
+        -not -perm ${PermissionsFileNonexecutable} \
+        -type f \
+        -exec bash -c 'secure_nonexecutable "{}"' \;
+} && export -f secure_nonexecutables
+
+main() {
+    # Secure project files
+    # Visited directories are logged for debug
+    # Changes are logged for information
+    # Repeated runs should not change anything
+    require_arguments $# 0
+
+    local -rx PermissionsDirectory=u=rwx,g=,o=
+    local -rx PermissionsFileExecutable=u=rwx,g=,o=
+    local -rx PermissionsFileNonexecutable=u=rw,g=,o=
+
+    log_info "Securing project in directory '${BO_Project}'"
+
+    secure_directories "${BO_Project}"
+    secure_directories "${BO_Project}/BriteOnyx"
+    secure_directories "${BO_Project}/bin"
+
+    secure_directory_tree "${BO_Project}/.BO"
+    secure_directory_tree "${BO_Project}/cfg"
+    secure_directory_tree "${BO_Project}/doc"
+    secure_directory_tree "${BO_Project}/home"
+    secure_directory_tree "${BO_Project}/log"
+    secure_directory_tree "${BO_Project}/out"
+    secure_directory_tree "${BO_Project}/src"
+    secure_directory_tree "${BO_Project}/tmp"
+    secure_directory_tree "${BO_Project}/waiting"
+
+    secure_executables "${BO_Project}/BriteOnyx/bin"
+    secure_executables "${BO_Project}/bin"
+
+    secure_nonexecutables "${BO_Project}"
+    secure_nonexecutables "${BO_Project}/BriteOnyx"
+    secure_nonexecutables "${BO_Project}/BriteOnyx/bin/lib"
+    secure_nonexecutables "${BO_Project}/BriteOnyx/doc"
+    secure_nonexecutables "${BO_Project}/bin/lib"
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+        \( \
+            -or \
+        \) \
+DisabledContent
+

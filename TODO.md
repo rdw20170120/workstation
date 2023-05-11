@@ -72,6 +72,7 @@ unless they should merely be deleted.
 1. [X] 1/1 = Restore reporting of test results
 1. [X] 1/1 = Separate project temporary directory from `TMPDIR`
 1. [X] 1/1 = Split generation of `activate.bash` into separate Python modules for before/after activation
+1. [X] 1/1 = Write script to secure project files
 1. [X] 3/3 - Move captured output files to `out` directory
 1. [X] 3/3 = ~Add encoding header to all Python source~
 
