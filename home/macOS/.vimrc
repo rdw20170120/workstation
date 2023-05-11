@@ -1,6 +1,6 @@
-" Rob Williams' Neovim initialization
+" Rob Williams' Vim initialization
 
-call plug#begin(stdpath('data') . '/plugged')
+call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-plug'
 " To manage these plugins:
 " :PlugUpgrade
