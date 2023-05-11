@@ -9,6 +9,14 @@
     exit 99
 require_directory_in BO_Project
 
+export BO_DirAnaconda=${BO_Project}/.anaconda
+remembering BO_DirAnaconda
+
+if [[ -z "${CONDA_PREFIX}" ]] ; then
+    log_warn "CONDA_PREFIX is missing, Anaconda does not appear to be installed, skipping configuration for project."
+    return 0
+fi
+
 # Save PS1 since Anaconda is about to modify it
 export BO_PS1=${PS1}
 
@@ -23,9 +31,6 @@ export BO_cmd_conda="$(which conda)"
 remembering BO_cmd_conda
 export BO_cmd_mamba="$(which mamba)"
 remembering BO_cmd_mamba
-
-export BO_DirAnaconda=${BO_Project}/.anaconda
-remembering BO_DirAnaconda
 
 require_directory_in BO_DirCapture
 maybe_create_directory_tree ${BO_DirCapture}/current
