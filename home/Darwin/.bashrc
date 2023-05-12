@@ -1,5 +1,6 @@
 #!/bin/false
 # NOTE:  This file is intended to be executed as part of starting a Bash shell.
+# TODO: REFACTOR: Based on operating system support, relevant command, etc.
 ################################################################################
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -17,15 +18,17 @@ esac
 
 ################################################################################
 # Customize terminal
+# TODO: Where is this supported (macOS, Ubuntu, etc.)?
 export COLORTERM=truecolor
+# TODO: Is this handled by iTerm2?
 export TERM=xterm-256color
 
 ################################################################################
 # Set a fancy prompt
 # (non-color, unless we know we "want" color)
-# case "$TERM" in
-#   xterm-color|*-256color) color_prompt=yes;;
-# esac
+case "$TERM" in
+  xterm-color|*-256color) color_prompt=yes;;
+esac
 
 ################################################################################
 # Uncomment for a colored prompt,
@@ -72,9 +75,6 @@ esac
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
-
-# Colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 ################################################################################
 # Make less more friendly

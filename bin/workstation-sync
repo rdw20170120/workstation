@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+[[ -z "${BO_Project}" ]] &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    exit 99
+
+sync_directory() {
+    # Synchronize directory trees
+    require_arguments $# 2
+    local -r DirTarget=$1
+    local -r DirSource=$2
+
+    # TODO: Create BO_cmd_vim variable to reference Vim
+    if [[ -d "${DirSource}" ]] ; then
+        log_info "Synchronizing directories '${DirTarget}' and '${DirSource}'"
+        maybe_create_directory_tree "${DirTarget}"
+        vim -c "DirDiff ${DirTarget} ${DirSource}"
+    else
+        log_warn "Missing directory '${DirSource}', skipping"
+    fi
+}
+
+sync_file() {
+    # Synchronize file
+    require_arguments $# 3
+    local -r DirTarget=$1
+    local -r DirSource=$2
+    local -r File=$3
+
+    # TODO: Create BO_cmd_vim variable to reference Vim
+    if [[ -f "${DirSource}/${File}" ]] ; then
+        log_info "Synchronizing files '${DirTarget}/${File}' and '${DirSource}/${File}'"
+        maybe_create_directory_tree "${DirTarget}"
+        vimdiff "${DirTarget}/${File}" "${DirSource}/${File}"
+    else
+        log_warn "Missing file '${DirSource}/${File}', skipping"
+    fi
+}
+
+main() {
+    # Synchronize relevant files & directories
+    # against home directory tree
+    # on local workstation
+    require_arguments $# 0
+    require_variable BO_OS
+
+    log_info "Synchronizing workstation (non-operating-system-specific)"
+
+    sync_directory "${HOME}/.config" "${BO_Project}/home/.config"
+    sync_directory "${HOME}/.local"  "${BO_Project}/home/.local"
+    sync_directory "${HOME}/.ssh"    "${BO_Project}/home/.ssh"
+    sync_directory "${HOME}/.vim"    "${BO_Project}/home/.vim"
+    sync_directory "${HOME}/bin"     "${BO_Project}/home/bin"
+
+    sync_file "${HOME}" "${BO_Project}/home" .bashrc
+    sync_file "${HOME}" "${BO_Project}/home" .condarc
+    sync_file "${HOME}" "${BO_Project}/home" .inputrc
+    sync_file "${HOME}" "${BO_Project}/home" alias.bash
+
+    log_info "Synchronizing workstation (${BO_OS}-specific)"
+
+    sync_directory "${HOME}/.config" "${BO_Project}/home/${BO_OS}/.config"
+    sync_directory "${HOME}/.local"  "${BO_Project}/home/${BO_OS}/.local"
+    sync_directory "${HOME}/.vim"    "${BO_Project}/home/${BO_OS}/.vim"
+    sync_directory "${HOME}/bin"     "${BO_Project}/home/${BO_OS}/bin"
+
+    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .bash_logout
+    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .bash_profile
+    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .bashrc
+    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .profile
+    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .spacemacs
+    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .vimrc
+    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" alias.bash
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+    [[ ! -e "${DirSource}/${File}" ]] && touch "${DirSource}/${File}"
+    [[ ! -e "${DirTarget}/${File}" ]] && touch "${DirTarget}/${File}"
+DisabledContent
+

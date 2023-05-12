@@ -35,14 +35,12 @@ main() {
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" sample-python
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" samplegwtviaant
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" samples
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" spring-test-project
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" trading
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" training
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" workstation
 
     maybe_clone "${Dir}/wip" "${Connection}:${Profile}" build
     maybe_clone "${Dir}/wip" "${Connection}:${Profile}" javascript
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" spring-test-project
     maybe_clone "${Dir}/wip" "${Connection}:${Profile}" workstation
 
     return 0
@@ -57,5 +55,7 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" spring-test-project
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" spring-test-project
 DisabledContent
 
