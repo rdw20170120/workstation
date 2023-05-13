@@ -1,6 +1,5 @@
 #!/bin/false
 # NOTE:  This file is intended to be executed as part of starting a Bash shell.
-# TODO: REFACTOR: Based on operating system support, relevant command, etc.
 ################################################################################
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -9,171 +8,86 @@
 umask u=rwx,g=,o=
 
 ################################################################################
-# If not running interactively,
-# don't do anything
+# If not running interactively, don't do anything
 case $- in
   *i*) ;;
   *) return;;
 esac
 
 ################################################################################
-# Customize terminal
-# TODO: Where is this supported (macOS, Ubuntu, etc.)?
-export COLORTERM=truecolor
-# TODO: Is this handled by iTerm2?
-export TERM=xterm-256color
-
-################################################################################
-# Set a fancy prompt
-# (non-color, unless we know we "want" color)
-case "$TERM" in
-  xterm-color|*-256color) color_prompt=yes;;
-esac
-
-################################################################################
-# Uncomment for a colored prompt,
-# if the terminal has the capability;
-# turned off by default
-# to not distract the user:
-# the focus in a terminal window
-# should be on the output of commands,
-# not on the prompt
-# force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # We have color support;
-    # assume it's compliant with Ecma-48 (ISO/IEC-6429).
-    # Lack of such support is extremely rare,
-    # and such a case
-    # would tend to support setf rather than setaf.
-    color_prompt=yes
-  else
-    color_prompt=
-  fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# Configure terminal first, since other scripts depend upon it
+_Script=${HOME}/bin/lib/configure_terminal.bash
+if [[ -r "${_Script}" ]] ; then
+    echo "INFO: Sourcing script '${_Script}'"
+    source "${_Script}"
 else
-  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-################################################################################
-# If this is an xterm
-# set the title to user@host:dir
-case "$TERM" in
-  xterm*|rxvt*)
-    # PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    PS1="\[\e]0;\w\a\]$PS1"
-    ;;
-  *)
-    ;;
-esac
-
-if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    echo "WARN: Skipping missing script '${_Script}'"
 fi
 
 ################################################################################
-# Make less more friendly
-# for non-text input files,
-# see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# Configure other things, alphabetically
 
-################################################################################
-# Set variable identifying the chroot you work in
-# (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-  debian_chroot=$(cat /etc/debian_chroot)
+_Script=${HOME}/bin/lib/configure_bash.bash
+if [[ -r "${_Script}" ]] ; then
+    echo "INFO: Sourcing script '${_Script}'"
+    source "${_Script}"
+else
+    echo "WARN: Skipping missing script '${_Script}'"
+fi
+
+_Script=${HOME}/bin/lib/configure_chroot.bash
+if [[ -r "${_Script}" ]] ; then
+    echo "INFO: Sourcing script '${_Script}'"
+    source "${_Script}"
+else
+    echo "WARN: Skipping missing script '${_Script}'"
+fi
+
+_Script=${HOME}/bin/lib/configure_dircolors.bash
+if [[ -r "${_Script}" ]] ; then
+    echo "INFO: Sourcing script '${_Script}'"
+    source "${_Script}"
+else
+    echo "WARN: Skipping missing script '${_Script}'"
+fi
+
+_Script=${HOME}/bin/lib/configure_less.bash
+if [[ -r "${_Script}" ]] ; then
+    echo "INFO: Sourcing script '${_Script}'"
+    source "${_Script}"
+else
+    echo "WARN: Skipping missing script '${_Script}'"
+fi
+
+_Script=${HOME}/bin/lib/configure_vim.bash
+if [[ -r "${_Script}" ]] ; then
+    echo "INFO: Sourcing script '${_Script}'"
+    source "${_Script}"
+else
+    echo "WARN: Skipping missing script '${_Script}'"
 fi
 
 ################################################################################
-# Enable programmable completion features
-# You don't need to enable this
-# if it's already enabled in /etc/bash.bashrc
-# and /etc/profile sources /etc/bash.bashrc.
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    source /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
-  fi
+# Configure paths last, since it depends upon most other scripts
+_Script=${HOME}/bin/lib/configure_paths.bash
+if [[ -r "${_Script}" ]] ; then
+    echo "INFO: Sourcing script '${_Script}'"
+    source "${_Script}"
+else
+    echo "WARN: Skipping missing script '${_Script}'"
 fi
 
 ################################################################################
-# Remember the native and original system PATHs
-export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-[[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
+# Finally, define aliases to help the user
+_Script=${HOME}/alias.bash
+if [[ -r "${_Script}" ]] ; then
+    echo "INFO: Sourcing script '${_Script}'"
+    source "${_Script}"
+else
+    echo "WARN: Skipping missing script '${_Script}'"
+fi
 
-################################################################################
-# NOTE: Order matters!
-# Anaconda should override all
-# (win all collisions)
-# as the preferred package manager
-# for projects being developed and/or deployed.
-# However, Anaconda is managed
-# using project-specific environments
-# that are incorporated into the PATH
-# as part of the BriteOnyx activation
-# for each project.
-# Therefore, Anaconda is absent here.
-# Then the system package manager comes second,
-# which is
-# APT for Ubuntu (handled under the native system path)
-# and Homebrew (currently) for Apple macOS.
-# Other non-native tools follow
-# such as VMware Fusion (if installed).
-# The native system path is next.
-# The user path is last
-# (so user MUST resolve collisions).
-# Build up the system path from the end,
-# starting with the native path,
-# then moving forward.
-# This allows easier manipulation by (un)commenting entries.
-BO_PathSystem=${BO_PathNative}
-# BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
-# BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
-export BO_PathSystem
-export BO_PathUser=${HOME}/bin
-export PATH=${BO_PathSystem}:${BO_PathUser}
-
-################################################################################
-# Environment
-export CLICOLOR=true
-export GREP_OPTIONS='--color=auto'
-export PAGER=less
-# Needed? (These are handled by Apple macOS)
-# LANG
-# LC_ALL
-# TZ
-
-################################################################################
-# Configure for Vim
-export EDITOR="vim"
-export VISUAL="vim"
-
-################################################################################
-# Bash
-# export FIGNORE=
-# export GLOBIGNORE=
-# export HISTTIMEFORMAT=
-# export TIMEFORMAT=
-# shopt -s globstar (unsupported in BASH 3.2.57)
-export HISTCONTROL=ignoreboth
-export HISTFILESIZE=500
-export HISTSIZE=500
-shopt -s checkwinsize cmdhist histappend huponexit lithist
-shopt -u sourcepath
-
-################################################################################
-# Alias definitions
-# You may want to put all your additions
-# into a separate file like ~/.bash_aliases,
-# instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-[[ -r ~/alias.bash ]] && source ~/alias.bash
+unset _Script
 
 : << 'DisabledContent'
 ################################################################################

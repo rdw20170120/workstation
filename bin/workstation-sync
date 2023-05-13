@@ -47,34 +47,37 @@ main() {
     # on local workstation
     require_arguments $# 0
     require_variable BO_OS
+    local Dir
 
     log_info "Synchronizing workstation (non-operating-system-specific)"
+    Dir=${BO_Project}/home/shared
 
-    sync_directory "${HOME}/.config" "${BO_Project}/home/.config"
-    sync_directory "${HOME}/.local"  "${BO_Project}/home/.local"
-    sync_directory "${HOME}/.ssh"    "${BO_Project}/home/.ssh"
-    sync_directory "${HOME}/.vim"    "${BO_Project}/home/.vim"
-    sync_directory "${HOME}/bin"     "${BO_Project}/home/bin"
+    sync_directory "${HOME}/.config" "${Dir}/.config"
+    sync_directory "${HOME}/.local"  "${Dir}/.local"
+    sync_directory "${HOME}/.ssh"    "${Dir}/.ssh"
+    sync_directory "${HOME}/.vim"    "${Dir}/.vim"
+    sync_directory "${HOME}/bin"     "${Dir}/bin"
 
-    sync_file "${HOME}" "${BO_Project}/home" .bashrc
-    sync_file "${HOME}" "${BO_Project}/home" .condarc
-    sync_file "${HOME}" "${BO_Project}/home" .inputrc
-    sync_file "${HOME}" "${BO_Project}/home" alias.bash
+    sync_file "${HOME}" "${Dir}" .bashrc
+    sync_file "${HOME}" "${Dir}" .condarc
+    sync_file "${HOME}" "${Dir}" .inputrc
+    sync_file "${HOME}" "${Dir}" alias.bash
 
     log_info "Synchronizing workstation (${BO_OS}-specific)"
+    Dir=${BO_Project}/home/${BO_OS}
 
-    sync_directory "${HOME}/.config" "${BO_Project}/home/${BO_OS}/.config"
-    sync_directory "${HOME}/.local"  "${BO_Project}/home/${BO_OS}/.local"
-    sync_directory "${HOME}/.vim"    "${BO_Project}/home/${BO_OS}/.vim"
-    sync_directory "${HOME}/bin"     "${BO_Project}/home/${BO_OS}/bin"
+    sync_directory "${HOME}/.config" "${Dir}/.config"
+    sync_directory "${HOME}/.local"  "${Dir}/.local"
+    sync_directory "${HOME}/.vim"    "${Dir}/.vim"
+    sync_directory "${HOME}/bin"     "${Dir}/bin"
 
-    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .bash_logout
-    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .bash_profile
-    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .bashrc
-    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .profile
-    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .spacemacs
-    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" .vimrc
-    sync_file "${HOME}" "${BO_Project}/home/${BO_OS}" alias.bash
+    sync_file "${HOME}" "${Dir}" .bash_logout
+    sync_file "${HOME}" "${Dir}" .bash_profile
+    sync_file "${HOME}" "${Dir}" .bashrc
+    sync_file "${HOME}" "${Dir}" .profile
+    sync_file "${HOME}" "${Dir}" .spacemacs
+    sync_file "${HOME}" "${Dir}" .vimrc
+    sync_file "${HOME}" "${Dir}" alias.bash
 
     return 0
 }

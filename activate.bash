@@ -69,14 +69,8 @@ source "${_Script}" ; _Status=$?
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
 
 # Detect operating system
-# TODO: Write as function
 # TODO: Add detection of various Linux, when we care
-_result=$(uname)
-if [[ "${_result}" == Darwin ]] ; then
-    export BO_OS=macOS
-else
-    export BO_OS=UNKNOWN
-fi
+export BO_OS=$(uname)
 remembering BO_OS
 
 # Establish temporary directory for project
