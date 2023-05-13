@@ -2,7 +2,7 @@
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
 
-# For using Spacemacs (Emacs) on Apple macOS
+# For using Spacemacs (Emacs) on Apple macOS (Darwin)
 alias emacs='/Applications/Emacs.app/Contents/MacOS/emacs-nw'
 
 # ssh
