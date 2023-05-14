@@ -41,9 +41,9 @@ export BO_PathNative=${BO_PathOriginal}
 # then moving forward.
 # This allows easier manipulation by (un)commenting entries.
 BO_PathSystem=${BO_PathNative}
-export BO_PathSystem
 # BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
 # BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
+export BO_PathSystem
 export BO_PathUser=${HOME}/bin
 export PATH=${BO_PathSystem}:${BO_PathUser}
 
