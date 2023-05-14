@@ -4,12 +4,15 @@
 # NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
+# TODO: backup original Bash scripts
+# TODO: copy files into place on new workstation (separate script?)
 [[ -z "${BO_Project}" ]] &&
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
 sync_directory() {
     # Synchronize directory trees
+    # TODO: REFACTOR into BriteOnyx Bash declarations
     require_arguments $# 2
     local -r DirTarget=$1
     local -r DirSource=$2
@@ -26,6 +29,7 @@ sync_directory() {
 
 sync_file() {
     # Synchronize file
+    # TODO: REFACTOR into BriteOnyx Bash declarations
     require_arguments $# 3
     local -r DirTarget=$1
     local -r DirSource=$2
@@ -41,16 +45,15 @@ sync_file() {
     fi
 }
 
-main() {
+sync_shared() {
     # Synchronize relevant files & directories
-    # against home directory tree
-    # on local workstation
+    # based on what is shared across operating systems
     require_arguments $# 0
-    require_variable BO_OS
-    local Dir
+    require_directory_in BO_Project
+    require_directory_in HOME
+    local -r Dir=${BO_Project}/home/shared
 
     log_info "Synchronizing workstation (non-operating-system-specific)"
-    Dir=${BO_Project}/home/shared
 
     sync_directory "${HOME}/.config" "${Dir}/.config"
     sync_directory "${HOME}/.local"  "${Dir}/.local"
@@ -62,9 +65,18 @@ main() {
     sync_file "${HOME}" "${Dir}" .condarc
     sync_file "${HOME}" "${Dir}" .inputrc
     sync_file "${HOME}" "${Dir}" alias.bash
+}
+
+sync_specific() {
+    # Synchronize relevant files & directories
+    # based on what is specific to the local workstation's operating systems
+    require_arguments $# 0
+    require_directory_in BO_Project
+    require_directory_in HOME
+    require_variable BO_OS
+    local -r Dir=${BO_Project}/home/${BO_OS}
 
     log_info "Synchronizing workstation (${BO_OS}-specific)"
-    Dir=${BO_Project}/home/${BO_OS}
 
     sync_directory "${HOME}/.config" "${Dir}/.config"
     sync_directory "${HOME}/.local"  "${Dir}/.local"
@@ -78,6 +90,20 @@ main() {
     sync_file "${HOME}" "${Dir}" .spacemacs
     sync_file "${HOME}" "${Dir}" .vimrc
     sync_file "${HOME}" "${Dir}" alias.bash
+}
+
+main() {
+    # Synchronize relevant files & directories
+    # against home directory tree
+    # on local workstation
+    require_arguments $# 0
+
+    sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Linux"
+    sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Darwin"
+    sync_directory "${BO_Project}/home/Darwin" "${BO_Project}/home/Linux"
+
+    sync_shared
+    sync_specific
 
     return 0
 }
@@ -91,7 +117,5 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-    [[ ! -e "${DirSource}/${File}" ]] && touch "${DirSource}/${File}"
-    [[ ! -e "${DirTarget}/${File}" ]] && touch "${DirTarget}/${File}"
 DisabledContent
 

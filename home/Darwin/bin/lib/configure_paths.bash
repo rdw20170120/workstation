@@ -9,6 +9,13 @@
 export BO_PathNative=${BO_PathOriginal}
 
 ################################################################################
+# Homebrew
+# export HOMEBREW_PREFIX=/opt/homebrew
+# eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+# export BO_PathAfterHomebrew=${PATH}
+# export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
+
+################################################################################
 # NOTE: Order matters!
 # Anaconda should override all
 # (win all collisions)
@@ -35,8 +42,15 @@ export BO_PathNative=${BO_PathOriginal}
 # This allows easier manipulation by (un)commenting entries.
 BO_PathSystem=${BO_PathNative}
 export BO_PathSystem
+# BO_PathSystem=${BO_PathVmware}:${BO_PathSystem}
+# BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
 export BO_PathUser=${HOME}/bin
 export PATH=${BO_PathSystem}:${BO_PathUser}
+
+################################################################################
+# Anaconda (Mambaforge)
+# export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
+# export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
 
 : << 'DisabledContent'
 DisabledContent

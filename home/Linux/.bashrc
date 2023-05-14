@@ -68,12 +68,6 @@ else
 fi
 
 ################################################################################
-# Anaconda (Mambaforge)
-# Configured for Ubuntu Server (Linux)
-export CONDA_PREFIX=${HOME}/mambaforge
-export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
-
-################################################################################
 # Configure paths last, since it depends upon most other scripts
 _Script=${HOME}/bin/lib/configure_paths.bash
 if [[ -r "${_Script}" ]] ; then

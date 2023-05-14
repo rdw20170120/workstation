@@ -90,17 +90,5 @@ fi
 unset _Script
 
 : << 'DisabledContent'
-################################################################################
-# Homebrew
-export HOMEBREW_PREFIX=/opt/homebrew
-eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
-export BO_PathAfterHomebrew=${PATH}
-export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
-
-################################################################################
-# Anaconda (Mambaforge)
-export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
-export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
-
 DisabledContent
 

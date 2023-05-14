@@ -6,7 +6,6 @@ Plug 'junegunn/vim-plug'
 " :PlugUpgrade
 " :PlugInstall
 " :PlugUpdate
-" :UpdateRemotePlugins
 " :PlugClean
 " :PlugStatus
 " :PlugDiff
