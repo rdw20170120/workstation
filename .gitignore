@@ -15,6 +15,7 @@
 *.py[cdo]
 *.swp
 .DS_Store
+.cache/
 .pytest_cache/
 /.BO
 /.anaconda
