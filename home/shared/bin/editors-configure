@@ -6,14 +6,12 @@
 ###############################################################################
 
 main() {
-    # Install Spacemacs
-    local -r Dir=${HOME}/.emacs.d
-    local -r URL=https://github.com/syl20bnr/spacemacs
+    # Configure editors by invoking each of them
 
-    if [[ ! -e "${Dir}" ]]; then
-        echo "Installing Spacemacs into '${Dir}'"
-        git clone ${URL} "${Dir}"
-    fi
+    echo "You must configure the editors manually"
+    emacs
+    nvim ${HOME}/.config/nvim/init.vim
+    vim ${HOME}/.vimrc
 
     return 0
 }

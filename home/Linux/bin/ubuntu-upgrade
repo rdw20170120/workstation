@@ -6,14 +6,9 @@
 ###############################################################################
 
 main() {
-    # Install Spacemacs
-    local -r Dir=${HOME}/.emacs.d
-    local -r URL=https://github.com/syl20bnr/spacemacs
+    # Upgrade packages installed on the Ubuntu operating system
 
-    if [[ ! -e "${Dir}" ]]; then
-        echo "Installing Spacemacs into '${Dir}'"
-        git clone ${URL} "${Dir}"
-    fi
+    sudo apt-get upgrade --assume-yes --quiet
 
     return 0
 }

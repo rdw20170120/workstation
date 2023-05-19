@@ -104,6 +104,13 @@ maybe_delete_file() {
     forbid_path "$1"
 } && export -f maybe_delete_file
 
+maybe_recreate_directory_tree() {
+    # Recreate directory $1, including parents
+    require_arguments $# 1
+    maybe_delete_directory_tree "$1"
+    maybe_create_directory_tree "$1"
+} && export -f maybe_recreate_directory_tree
+
 status_invert() {
     # Return inverse of status $1
     require_arguments $# 1

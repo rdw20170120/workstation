@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+[[ -z "${BO_Project}" ]] &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    exit 99
+
+duplicate_directory() {
+    # Duplicate subdirectory $3 from source directory $1 to target directory $2, recursively
+    require_arguments $# 3
+    # $1 = absolute source directory
+    # $2 = absolute target directory
+    # $3 = relative subdirectory
+    log_debug "Duplicating directory '$1/$3' to '$2/'"
+    cp -cRv "$1/$3" "$2/"
+    abort_on_fail $? "from cp -cRv '$1/$3' to '$2/'"
+}
+
+duplicate_file() {
+    # Duplicate file $3 from source directory $1 to target directory $2
+    require_arguments $# 3
+    # $1 = absolute source directory
+    # $2 = absolute target directory
+    # $3 = relative file
+    log_debug "Duplicating file '$1/$3' '$2/$3'"
+    cp -cv "$1/$3" "$2/$3"
+    abort_on_fail $? "from cp -cv '$1/$3' '$2/$3'"
+}
+
+package_for_Darwin() {
+    # Package our BriteOnyx bootstrap in directory $1
+    # for the Apple macOS (Darwin) operating system
+    require_arguments $# 1
+    # $1 = target working directory
+    local -r OS=Darwin
+    local DirSource
+    local -r DirTarget=$1/${OS}
+    local -r FileArchive=$1/${OS}.tgz
+
+    log_info "Packaging for ${OS}..."
+    # TODO: Implement
+    return 0
+}
+
+package_for_Linux() {
+    # Package our BriteOnyx bootstrap in directory $1
+    # for Linux (Ubuntu) operating systems
+    require_arguments $# 1
+    # $1 = target working directory
+    require_directory_in BO_Project
+    local -r OS=Linux
+    local DirSource
+    local -r DirTarget=$1/${OS}
+    local -r FileArchive=$1/${OS}.tgz
+
+    log_info "Packaging for ${OS}..."
+
+    maybe_recreate_directory_tree "${DirTarget}"
+
+    DirSource=${BO_Project}/home/shared
+    log_debug "Duplicating '${DirSource}/' to '${DirTarget}/'"
+    cp -cRv "${DirSource}/" "${DirTarget}/"
+    abort_on_fail $? "from cp -cRv '${DirSource}/' to '${DirTarget}/'"
+
+    DirSource=${BO_Project}/home/${OS}
+    log_debug "Duplicating '${DirSource}/' to '${DirTarget}/'"
+    cp -cRv "${DirSource}/" "${DirTarget}/"
+    abort_on_fail $? "from cp -cRv '${DirSource}/' to '${DirTarget}/'"
+
+    log_debug "Packaging '${DirTarget}' into '${FileArchive}'"
+    maybe_delete_file "${FileArchive}"
+    cd "${DirTarget}"
+    abort_on_fail $? "from cd '${DirTarget}'"
+    tar --create \
+        --file="${FileArchive}" \
+        --gzip \
+        .
+    abort_on_fail $? "from tar ..."
+    require_file "${FileArchive}"
+    tar --list \
+        --gunzip \
+        --file="${FileArchive}"
+    abort_on_fail $? "from tar ..."
+ 
+    return 0
+}
+
+main() {
+    # Package the BriteOnyx bootstrap
+    require_directory_in BO_DirTemp
+    local -r Dir=${BO_DirTemp}/bootstrap
+
+    log_info "Packaging the BriteOnyx bootstrap in '${Dir}'"
+
+    maybe_delete_directory_tree "${Dir}"
+    package_for_Darwin "${Dir}"
+    package_for_Linux "${Dir}"
+
+    return 0
+}
+
+main
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+
+    DirSource=${BO_Project}/home/shared
+    duplicate_file "${DirSource}" "${DirTarget}" .inputrc
+    duplicate_directory "${DirSource}" "${DirTarget}" .ssh
+    duplicate_directory "${DirSource}" "${DirTarget}" .vim
+    duplicate_directory "${DirSource}" "${DirTarget}" bin
+
+    DirSource=${BO_Project}/home/${OS}
+    duplicate_file "${DirSource}" "${DirTarget}" .bash_logout
+    duplicate_file "${DirSource}" "${DirTarget}" .bashrc
+    duplicate_file "${DirSource}" "${DirTarget}" .profile
+    duplicate_file "${DirSource}" "${DirTarget}" .vimrc
+    duplicate_file "${DirSource}" "${DirTarget}" alias.bash
+    duplicate_directory "${DirSource}" "${DirTarget}" .config
+    duplicate_directory "${DirSource}" "${DirTarget}" .local
+    duplicate_directory "${DirSource}" "${DirTarget}" bin
+DisabledContent
+

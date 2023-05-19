@@ -6,19 +6,15 @@
 ###############################################################################
 
 main() {
-    # Install Spacemacs
-    local -r Dir=${HOME}/.emacs.d
-    local -r URL=https://github.com/syl20bnr/spacemacs
+    # Prepare and publish the BriteOnyx bootstrap
 
-    if [[ ! -e "${Dir}" ]]; then
-        echo "Installing Spacemacs into '${Dir}'"
-        git clone ${URL} "${Dir}"
-    fi
+    execute_script "${BO_Project}/bin/bootstrap-package"
+    execute_script "${BO_Project}/bin/bootstrap-publish"
 
     return 0
 }
 
-main $@
+main
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

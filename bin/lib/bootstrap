@@ -1,0 +1,185 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+
+distribute_archive() {
+    # Distribute contents of archive extracted in directory $1
+    local -r Dir=$1
+
+    echo "Distributing files from bootstrap archive '${Dir}'"
+    maybe_copy_file "${Dir}" "${HOME}" .bash_logout
+    maybe_copy_file "${Dir}" "${HOME}" .bashrc
+    maybe_copy_file "${Dir}" "${HOME}" .inputrc
+    maybe_copy_file "${Dir}" "${HOME}" .profile
+    maybe_copy_file "${Dir}" "${HOME}" .vimrc
+    maybe_copy_file "${Dir}" "${HOME}" alias.bash
+    maybe_copy_file "${Dir}" "${HOME}" init.vim .config/nvim
+    maybe_copy_file "${Dir}" "${HOME}" plug.vim .local/share/nvim/site/autoload
+    maybe_copy_file "${Dir}" "${HOME}" config .ssh
+    maybe_copy_file "${Dir}" "${HOME}" plug.vim .vim/autoload
+    maybe_copy_files "${Dir}" "${HOME}" bin
+
+    return 0
+}
+
+download_archive() {
+    # Download (and extract) archive file $3 into directory $2 from URL $1
+    # $1 = base URL of archive file
+    # $2 = target directory for download
+    # $3 = name of archive file
+    local -r URL=$1
+    local -r Dir=$2
+    local -r File=$3
+
+    echo "Downloading bootstrap archive '${File}'"
+    [[ ! -e "${Dir}/${File}" ]] && \
+        wget --output-document="${Dir}/${File}" ${URL}/${File}
+    cd "${Dir}"
+    tar --extract --file "${File}"
+
+    return 0
+}
+
+install_editors() {
+    echo "Installing editors"
+    sudo apt-get install --assume-yes emacs-nox neovim
+    spacemacs-install
+
+    return 0
+}
+
+maybe_backup_file() {
+    # Backup file $1, if not already done
+    local -r FileSource=$1
+    local -r FileTarget=$1.original
+
+    echo "Backing up file '${FileSource}' to '${FileTarget}'"
+    [[ ! -e "${FileTarget}" ]] && cp --preserve "${FileSource}" "${FileTarget}"
+
+    return 0
+}
+
+maybe_copy_file() {
+    # Copy file $3 from directory $1 to directory $2,
+    # including optional subdirectory $4
+    # if not already done
+    local    DirSource=$1
+    local    DirTarget=$2
+    local -r File=$3
+    local -r Sub=$4
+
+    if [[ -n "${Sub}" ]]; then
+        DirSource=${DirSource}/${Sub}
+        DirTarget=${DirTarget}/${Sub}
+        if [[ ! -e "${DirTarget}" ]]; then
+            echo "Creating directory '${DirTarget}'"
+            mkdir -p "${DirTarget}"
+        fi
+    fi
+    echo "Copying file '${DirSource}/${File}' to '${DirTarget}/${File}'"
+    cp --preserve --update \
+        "${DirSource}/${File}" \
+        "${DirTarget}/${File}"
+
+    return 0
+}
+
+maybe_copy_files() {
+    # Copy files from directory $1 to directory $2,
+    # including optional subdirectory $3
+    # if not already done
+    local    DirSource=$1
+    local    DirTarget=$2
+    local -r Sub=$3
+
+    if [[ -n "${Sub}" ]]; then
+        DirSource=${DirSource}/${Sub}
+        DirTarget=${DirTarget}/${Sub}
+        if [[ ! -e "${DirTarget}" ]]; then
+            echo "Creating directory '${DirTarget}'"
+            mkdir -p "${DirTarget}"
+        fi
+    fi
+    echo "Copying files in directory '${DirSource}' to directory '${DirTarget}'"
+    cp --preserve --recursive --update \
+        ${DirSource}/* \
+        ${DirTarget}/
+
+    return 0
+}
+
+prepare_git_access() {
+    # Prepare SSH access to public Git hosts
+    local -r FileKnown=${HOME}/.ssh/known_hosts
+    local -r FileKey=${HOME}/.ssh/id_rsa
+
+    if [[ ! -e "${FileKnown}" ]]; then
+        echo "Remember relevant SSH host keys"
+        ssh-keyscan -H github.com >>"${FileKnown}"
+        ssh-keyscan -H gitlab.com >>"${FileKnown}"
+    fi
+
+    if [[ ! -e "${FileKey}" ]]; then
+        echo "You must manually generate an SSH user key: `ssh-keygen`"
+        ssh-keygen -A
+    fi
+
+    return 0
+}
+
+main() {
+    # Bootstrap BriteOnyx
+    echo "Bootstrapping user '${USER}' on this workstationi '$(hostname --long)'"
+    local -r OS=$(uname)
+    local -r TMPDIR=${HOME}/tmp
+    local -r URL=https://briteonyx.s3.us-west-2.amazonaws.com
+    local -r FileArchive=${OS}.tgz
+
+    echo "Establishing temporary directory '${TMPDIR}'"
+    mkdir -p "${TMPDIR}"
+
+    maybe_backup_file ${HOME}/.bash_logout
+    maybe_backup_file ${HOME}/.profile
+    maybe_backup_file ${HOME}/.spacemacs
+
+    download_archive "${URL}" "${TMPDIR}" ${FileArchive}
+    distribute_archive "${TMPDIR}"
+
+    echo "Securing files"
+    bash "${HOME}/bin/secure"
+
+    echo "Updating and upgrading system packages"
+    ubuntu-update
+    ubuntu-upgrade
+
+    install_editors
+    anaconda-install
+    prepare_git_access
+
+    echo "You may configure the editors manually by invoking 'editors-configure'"
+    echo "You may want to reboot the workstation now, if there were any package upgrades"
+
+    return 0
+}
+
+main
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+~/bin/clone_all
+jump_workstation
+bash -c "source activate.bash"
+
+Manual:
+install Mambaforge
+configure Mambaforge
+DisabledContent
+

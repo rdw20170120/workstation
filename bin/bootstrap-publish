@@ -6,19 +6,15 @@
 ###############################################################################
 
 main() {
-    # Install Spacemacs
-    local -r Dir=${HOME}/.emacs.d
-    local -r URL=https://github.com/syl20bnr/spacemacs
+    # Publish the BriteOnyx bootstrap
+    # TODO: Automate this using the AWS S3 CLI
 
-    if [[ ! -e "${Dir}" ]]; then
-        echo "Installing Spacemacs into '${Dir}'"
-        git clone ${URL} "${Dir}"
-    fi
+    log_warn "You must manually publish the BriteOnyx bootstrap"
 
     return 0
 }
 
-main $@
+main
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
