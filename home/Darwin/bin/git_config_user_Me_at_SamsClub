@@ -6,10 +6,12 @@
 ###############################################################################
 
 main() {
-    # Populate Homebrew by installing desired casks & formulae
+    # Configure Me@Sam's Club as the current user in the current Git repository
 
-    brew install --cask emacs iterm2 mambaforge
-    brew install --formula asciidoc neovim yamllint
+    git config user.email Rob.Williams@samsclub.com
+    git config user.name 'Rob Williams'
+
+    return 0
 }
 
 main $@

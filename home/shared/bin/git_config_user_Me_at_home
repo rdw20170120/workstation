@@ -4,14 +4,12 @@
 # NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
-# Configure Me@home as the current user in the current Git repository
-git config user.email rob@refactory.biz
-git config user.name 'Rob Williams'
 
 main() {
-    # TODO: DESCRIPTION
+    # Configure Me@home as the current user in the current Git repository
 
-    # TODO: CONTENT
+    git config user.email rob@refactory.biz
+    git config user.name 'Rob Williams'
 
     return 0
 }
@@ -26,4 +24,5 @@ main $@
 
 : << 'DisabledContent'
 DisabledContent
+
 
