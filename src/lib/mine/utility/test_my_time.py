@@ -29,7 +29,6 @@ from utility.my_time import UnixTime
 
 
 epoch_as_datetime = dt.datetime(2020, 5, 10, 20, 5, 3)
-epoch_as_int_seconds = 1589141103
 
 
 def test_as_iso8601_MM():
@@ -81,11 +80,6 @@ def test_timedelta_as_hours():
     assert is_.equal(v, -1)
 
 
-def test_datetime_as_int_seconds(config):
-    v = datetime_as_int_seconds(epoch_as_datetime)
-    assert is_.equal(v, epoch_as_int_seconds)
-
-
 @mark.xfail(raises=NotImplementedError, strict=True)
 def test_datetime_combine():
     # TODO: dt.datetime.combine()
@@ -101,13 +95,6 @@ def test_datetime_current():
     # TODO: dt.datetime.fromtimestamp(0.0)
     # TODO: dt.datetime.utcfromtimestamp(0)
     # TODO: dt.datetime.utcfromtimestamp(0.0)
-
-
-def test_datetime_from_int_seconds(config):
-    if config.running_humanless:
-        skip("RESEARCH:  Why does this fail under Jenkins? Timezone?")
-    v = datetime_from_int_seconds(epoch_as_int_seconds)
-    assert is_.equal(v, epoch_as_datetime)
 
 
 @mark.xfail(raises=NotImplementedError, strict=True)
@@ -212,4 +199,19 @@ def test_proleptic_gregorian_ordinal():
 
 
 """DisabledContent
+# TODO: FIX: These tests are dependent upon the machine's current timezone
+
+epoch_as_int_seconds = 1589141103
+
+def test_datetime_as_int_seconds(config):
+    v = datetime_as_int_seconds(epoch_as_datetime)
+    assert is_.equal(v, epoch_as_int_seconds)
+
+
+def test_datetime_from_int_seconds(config):
+    if config.running_humanless:
+        skip("RESEARCH:  Why does this fail under Jenkins? Timezone?")
+    v = datetime_from_int_seconds(epoch_as_int_seconds)
+    assert is_.equal(v, epoch_as_datetime)
+
 """

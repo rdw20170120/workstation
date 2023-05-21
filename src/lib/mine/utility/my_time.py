@@ -192,7 +192,7 @@ def is_aware(value):
     elif isinstance(value, dt.time):
         if value.tzinfo is None:
             return False
-        elif value.tzinfo.utcoffset(value) is None:
+        elif value.tzinfo.utcoffset(None) is None:
             return False
         else:
             return True
