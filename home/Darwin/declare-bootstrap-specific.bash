@@ -1,17 +1,19 @@
-#!/usr/bin/env bash
-# Intended to be executed in a Bash shell.
+#!/usr/bin/env false
+# Intended to be sourced in a Bash shell.
 [[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
+# Library of Bash functions
+# to support bootstrapping a new development workstation
+# specific to particular operating systems
 
-main() {
-    # Populate Homebrew by installing desired casks & formulae
+install_editors() {
+    echo "Installing editors"
+    spacemacs-install
 
-    brew install asciidoc iterm2 mambaforge neovim yamllint
-}
-
-main $@
+    return 0
+} && export -f install_editors
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

@@ -16,6 +16,8 @@ chmod_directory() {
 chmod_known() {
     chmod u=rw $1/*.bash
     chmod u=rw $1/*.md
+
+    return 0
 }
 
 chmod_recursively_to_only_me() {
@@ -23,53 +25,62 @@ chmod_recursively_to_only_me() {
 }
 
 secure_bin() {
-  # Secure personal script directory
-  local Dir
+    # Secure personal script directory
+    local Dir
  
-  Dir=~/bin
-  if [[ -d $Dir ]] ; then
-    chmod_directory $Dir
-    chmod_recursively_to_only_me $Dir
-    chmod_contents_as_executable $Dir
-    chmod_known $Dir
-  fi
+    Dir=~/bin
+    if [[ -d $Dir ]] ; then
+      chmod_directory $Dir
+      chmod_recursively_to_only_me $Dir
+      chmod_contents_as_executable $Dir
+      chmod_known $Dir
+    fi
 
-  Dir=~/bin/lib
-  if [[ -d $Dir ]] ; then
-    chmod_directory $Dir
-    chmod_known $Dir
-  fi
+    Dir=~/bin/lib
+    if [[ -d $Dir ]] ; then
+      chmod_directory $Dir
+      chmod_known $Dir
+    fi
+
+    return 0
 }
 
 secure_home() {
-  # Secure login scripts
-  chmod u=rw,g=,o= ~/*.bash
-  chmod u=rw,g=,o= ~/.bash_logout
-  chmod u=rw,g=,o= ~/.bash_profile
-  chmod u=rw,g=,o= ~/.bashrc
-  chmod u=rw,g=,o= ~/.profile
+    # Secure login scripts
+    chmod u=rw,g=,o= ~/*.bash
+    chmod u=rw,g=,o= ~/.bash_logout
+    chmod u=rw,g=,o= ~/.bash_profile
+    chmod u=rw,g=,o= ~/.bashrc
+    chmod u=rw,g=,o= ~/.profile
+    chmod_recursively_to_only_me ~/.config
+    chmod_recursively_to_only_me ~/.local
+    chmod_recursively_to_only_me ~/.vim
+
+    return 0
 }
 
 secure_ssh() {
-  # Secure SSH directory
-  local Dir
+    # Secure SSH directory
+    local Dir
  
-  Dir=~/.ssh
-  if [[ -d $Dir ]] ; then
-    chmod_directory $Dir
-    chmod_recursively_to_only_me $Dir
-    chmod_known $Dir
-  fi
+    Dir=~/.ssh
+    if [[ -d $Dir ]] ; then
+      chmod_directory $Dir
+      chmod_recursively_to_only_me $Dir
+      chmod_known $Dir
+    fi
+
+    return 0
 }
 
 main() {
-  # Secure parts of user home directory
+    # Secure parts of user home directory
 
-  secure_home
-  secure_bin
-  secure_ssh
+    secure_home
+    secure_bin
+    secure_ssh
 
-  return 0
+    return 0
 }
 
 main $@

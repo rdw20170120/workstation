@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+
+main() {
+    # Bootstrap BriteOnyx on a new development workstation
+    # $1 = directory containing extracted archive file
+    echo "Bootstrapping user '${USER}' on this workstation '$(hostname)'"
+    local -r OS=$(uname)
+    local -r DirTemp=$1
+
+    maybe_backup_file "${HOME}/.bash_logout"
+    maybe_backup_file "${HOME}/.profile"
+    maybe_backup_file "${HOME}/.spacemacs"
+
+    distribute_archive "${DirTemp}"
+
+    echo "Securing files"
+    bash "${HOME}/bin/secure"
+
+    echo "Updating and upgrading packages"
+    ubuntu-update
+    ubuntu-upgrade
+
+    install_editors
+    anaconda-install
+    prepare_git_access
+
+    echo "You may configure the editors manually by invoking 'editors-configure'"
+    echo "You may want to reboot the workstation now, if there were any package upgrades"
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+sudo shutdown -r now
+editors-configure
+vim ~/bin/lib/configure_paths.bash
+ssh-keygen
+clone_all
+jump_workstation
+bash -c "source activate.bash"
+
+Consider installing these on Ubuntu, similar to using Homebrew on macOS:
+brew install asciidoc iterm2 mambaforge neovim yamllint
+DisabledContent
+

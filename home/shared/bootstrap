@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+
+download_archive_on_Darwin() {
+    # Download archive file $3 into directory $2 from URL $1
+    # $1 = base URL of archive file
+    # $2 = target directory for download
+    # $3 = name of archive file
+    local -r URL=$1
+    local -r Dir=$2
+    local -r File=$3
+
+    curl --output "${Dir}/${File}" ${URL}/${File}
+
+    return 0
+}
+
+download_archive_on_Linux() {
+    # Download archive file $3 into directory $2 from URL $1
+    # $1 = base URL of archive file
+    # $2 = target directory for download
+    # $3 = name of archive file
+    local -r URL=$1
+    local -r Dir=$2
+    local -r File=$3
+
+    wget --output-document="${Dir}/${File}" ${URL}/${File}
+
+    return 0
+}
+
+main() {
+    # Bootstrap BriteOnyx on a new development workstation
+    echo "Bootstrapping user '${USER}' on this workstation '$(hostname)'"
+    local -r OS=$(uname)
+    local -r DirTemp=${HOME}/tmp
+    local -r URL=https://briteonyx.s3.us-west-2.amazonaws.com
+    local -r FileArchive=${OS}.tgz
+
+    echo "Establishing temporary directory '${DirTemp}'"
+    [[ ! -e "${DirTemp}" ]] && mkdir -p "${DirTemp}"
+
+    echo "Downloading bootstrap archive '${FileArchive}'"
+    download_archive_on_${OS} "${URL}" "${DirTemp}" ${FileArchive}
+
+    echo "Extracting bootstrap archive '${FileArchive}'"
+    cd "${DirTemp}"
+    tar --extract --file "${FileArchive}"
+
+    source "${DirTemp}/declare-bootstrap-shared.bash"
+    source "${DirTemp}/declare-bootstrap-specific.bash"
+
+    bash "${DirTemp}/bootstrap" "${DirTemp}"
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+Invoke this script
+using one of these commands
+within a shell opened
+on the target workstation:
+curl https://briteonyx.s3.us-west-2.amazonaws.com/bootstrap | bash
+wget -O - https://briteonyx.s3.us-west-2.amazonaws.com/bootstrap | bash
+DisabledContent
+

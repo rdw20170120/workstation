@@ -35,14 +35,8 @@ package_for_Darwin() {
     # for the Apple macOS (Darwin) operating system
     require_arguments $# 1
     # $1 = target working directory
-    local -r OS=Darwin
-    local DirSource
-    local -r DirTarget=$1/${OS}
-    local -r FileArchive=$1/${OS}.tgz
 
-    log_info "Packaging for ${OS}..."
-    # TODO: Implement
-    return 0
+    package_for_operating_system "$1" Darwin
 }
 
 package_for_Linux() {
@@ -50,8 +44,18 @@ package_for_Linux() {
     # for Linux (Ubuntu) operating systems
     require_arguments $# 1
     # $1 = target working directory
+
+    package_for_operating_system "$1" Linux
+}
+
+package_for_operating_system() {
+    # Package our BriteOnyx bootstrap in directory $1
+    # for operating system $2
+    require_arguments $# 2
+    # $1 = target working directory
+    # $2 = target operating system (family)
     require_directory_in BO_Project
-    local -r OS=Linux
+    local -r OS=$2
     local DirSource
     local -r DirTarget=$1/${OS}
     local -r FileArchive=$1/${OS}.tgz
@@ -61,11 +65,13 @@ package_for_Linux() {
     maybe_recreate_directory_tree "${DirTarget}"
 
     DirSource=${BO_Project}/home/shared
+    duplicate_file "${DirSource}" "$1" bootstrap
     log_debug "Duplicating '${DirSource}/' to '${DirTarget}/'"
     cp -cRv "${DirSource}/" "${DirTarget}/"
     abort_on_fail $? "from cp -cRv '${DirSource}/' to '${DirTarget}/'"
 
     DirSource=${BO_Project}/home/${OS}
+    duplicate_file "${DirSource}" "${DirTarget}" bootstrap
     log_debug "Duplicating '${DirSource}/' to '${DirTarget}/'"
     cp -cRv "${DirSource}/" "${DirTarget}/"
     abort_on_fail $? "from cp -cRv '${DirSource}/' to '${DirTarget}/'"
@@ -91,6 +97,7 @@ package_for_Linux() {
 main() {
     # Package the BriteOnyx bootstrap
     require_directory_in BO_DirTemp
+    require_directory_in BO_Project
     local -r Dir=${BO_DirTemp}/bootstrap
 
     log_info "Packaging the BriteOnyx bootstrap in '${Dir}'"
