@@ -7,9 +7,19 @@
 
 main() {
     # Install Homebrew on Apple macOS
+    # NOTE: The Homebrew installation script installs
+    # to `/opt/homebrew` when running on Apple Silicon CPUs (ARM64)
+    # and
+    # to `/usr/local` when running on Intel CPUs.
+    local -r Dir=${HOME}
+    local -r File=Homebrew-install.bash
+    local -r URL=https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    curl -fsSL --output "${Dir}/${File}" "${URL}"
+    bash "${Dir}/${File}"
     brew tap homebrew/cask-versions
+
+    return 0
 }
 
 main $@
@@ -21,5 +31,7 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 DisabledContent
+
 

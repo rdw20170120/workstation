@@ -16,26 +16,13 @@ main() {
     local -r Source=GitLab
     local -r Connection=MeAt${Source}
     local -r Dir=${HOME}/repo/${Source}
-    local    Profile
 
-    Profile=BriteOnyx
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" core
-
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" core
-
-    Profile=not_shared
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" experiment
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" monorepo
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" private_python_library
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" pythonspeed
-
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" private_python_library
-
-    Profile=shared3591916
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" learn-gitlab
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" public_python_library
-
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" public_python_library
+    maybe_clone "${Dir}/ref" "${Connection}:BriteOnyx" core
+    maybe_clone "${Dir}/ref" "${Connection}:not_shared" private_python_library
+    maybe_clone "${Dir}/ref" "${Connection}:shared3591916" public_python_library
+    maybe_clone "${Dir}/wip" "${Connection}:BriteOnyx" core
+    maybe_clone "${Dir}/wip" "${Connection}:not_shared" private_python_library
+    maybe_clone "${Dir}/wip" "${Connection}:shared3591916" public_python_library
 
     return 0
 }
@@ -49,5 +36,9 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+    maybe_clone "${Dir}/ref" "${Connection}:not_shared" experiment
+    maybe_clone "${Dir}/ref" "${Connection}:not_shared" monorepo
+    maybe_clone "${Dir}/ref" "${Connection}:not_shared" pythonspeed
+    maybe_clone "${Dir}/ref" "${Connection}:shared3591916" learn-gitlab
 DisabledContent
 

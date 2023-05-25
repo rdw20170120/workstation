@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+
+check() {
+    # Check that command $1 is available,
+    # then check the version using argument(s) $2
+    # $1 = command to check
+    # $2 = argument(s) for command to output its version
+    local -r Command=$1
+    local -r Arguments="$2"
+    local -rx PATH=${BO_PathHomebrew}:${BO_PathOriginal}
+
+    local -r Actual=$(which ${Command})
+    if [[ $(which ${Command}) ]]; then
+        echo "INFO: Found command '${Actual}'"
+        [[ -n "${Arguments}" ]] && ${Command} ${Arguments}
+    else
+        echo "WARN: Did NOT find command '${Command}'"
+        return 1
+    fi
+
+    return 0
+}
+
+main() {
+    # Check commands available via Homebrew
+
+    check asciidoc --version
+    check brew --version
+    check conda --version
+    check emacs --version
+    check git --version
+    check jsonlint --version
+    check mamba --version
+    check markdownlint --version
+    check nvim --version
+    check pip3 --version
+    check pydoc3
+    check python3 --version
+    check rst-lint --version
+    check shellcheck --version
+    check yamllint --version
+
+    # For Sam's Club Legato system
+    # Postman is a GUI application, so no check is appropriate
+    check az --version
+    check kube-linter version
+    check kubectl "version --short"
+    check kubectl-krew version
+    check kubectx
+    check kubens
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+    check nvm --version
+DisabledContent
+

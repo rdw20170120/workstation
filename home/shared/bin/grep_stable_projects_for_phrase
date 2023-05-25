@@ -4,25 +4,23 @@
 # NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
-# Search for phrase $1 in projects (checked out git repositories)
-# 1=search phrase
-
-if [[ -z "$1" ]] ; then
-  echo 'FATAL: Search phrase $1 is required, aborting'
-  return
-fi
-
-grep -EiR $1 \
-    --exclude-dir=.git \
-    --exclude-dir=.PVE \
-    --files-with-matches \
-    ~/project/stable |
-    sort
 
 main() {
-    # TODO: DESCRIPTION
+    # Search for phrase $1 in repositories
+    # $1 = search phrase
 
-    # TODO: CONTENT
+    if [[ -z "$1" ]] ; then
+      echo 'FATAL: Search phrase $1 is required, aborting'
+      return
+    fi
+
+    grep -EiR $1 \
+        --exclude-dir=.git \
+        --exclude-dir=.hg \
+        --exclude-dir=.anaconda \
+        --files-with-matches \
+        ~/repo |
+        sort
 
     return 0
 }
@@ -37,4 +35,5 @@ main $@
 
 : << 'DisabledContent'
 DisabledContent
+
 

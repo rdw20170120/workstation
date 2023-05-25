@@ -8,8 +8,28 @@
 main() {
     # Populate Homebrew by installing desired casks & formulae
 
-    brew install --cask emacs iterm2 mambaforge
-    brew install --formula asciidoc neovim yamllint
+    brew install \
+        asciidoc \
+        emacs \
+        git \
+        iterm2 \
+        jsonlint \
+        mambaforge \
+        markdownlint-cli \
+        neovim \
+        python \
+        rst-lint \
+        shellcheck \
+        yamllint
+    # For Sam's Club Legato system
+    brew install \
+        azure-cli \
+        krew \
+        kubectx \
+        kube-linter \
+        kubernetes-cli \
+        nvm \
+        postman
 }
 
 main $@
@@ -21,5 +41,11 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+Other Homebrew installs to consider:
+gitlint
+pulumi
+pylint
+tfproviderlint
 DisabledContent
+
 

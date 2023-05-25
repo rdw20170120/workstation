@@ -18,29 +18,10 @@ main() {
     local -r Dir=${HOME}/repo/${Source}
     local -r Profile=rdw20170120
 
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" astech
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" aws-inventory
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" build
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" cb-infrastructure
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" cert
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" couchbase
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" euler
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" first
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" hortonworks
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" javascript
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" ocdp
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" potrero
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" quoting-api
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" restinjava
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" sample-python
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" samplegwtviaant
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" samples
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" trading
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" training
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" workstation
 
     maybe_clone "${Dir}/wip" "${Connection}:${Profile}" build
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" javascript
     maybe_clone "${Dir}/wip" "${Connection}:${Profile}" workstation
 
     return 0
@@ -55,7 +36,24 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" astech
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" aws-inventory
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" cb-infrastructure
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" cert
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" couchbase
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" euler
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" first
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" hortonworks
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" javascript
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" ocdp
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" potrero
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" quoting-api
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" restinjava
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" sample-python
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" samplegwtviaant
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" samples
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" spring-test-project
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" spring-test-project
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" trading
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" training
 DisabledContent
 
