@@ -14,14 +14,14 @@ sync_directory() {
     # Synchronize directory trees
     # TODO: REFACTOR into BriteOnyx Bash declarations
     require_arguments $# 2
+    require_variable MyVim
     local -r DirTarget=$1
     local -r DirSource=$2
 
-    # TODO: Create BO_cmd_vim variable to reference Vim
     if [[ -d "${DirSource}" ]] ; then
         log_info "Synchronizing directories '${DirTarget}' and '${DirSource}'"
         maybe_create_directory_tree "${DirTarget}"
-        vim -c "DirDiff ${DirTarget} ${DirSource}"
+        ${MyVim} -c "DirDiff ${DirTarget} ${DirSource}"
     else
         log_warn "Missing directory '${DirSource}', skipping"
     fi
@@ -31,15 +31,15 @@ sync_file() {
     # Synchronize file
     # TODO: REFACTOR into BriteOnyx Bash declarations
     require_arguments $# 3
+    require_variable MyVim
     local -r DirTarget=$1
     local -r DirSource=$2
     local -r File=$3
 
-    # TODO: Create BO_cmd_vim variable to reference Vim
     if [[ -f "${DirSource}/${File}" ]] ; then
         log_info "Synchronizing files '${DirTarget}/${File}' and '${DirSource}/${File}'"
         maybe_create_directory_tree "${DirTarget}"
-        vimdiff "${DirTarget}/${File}" "${DirSource}/${File}"
+        ${MyVim} -d "${DirTarget}/${File}" "${DirSource}/${File}"
     else
         log_warn "Missing file '${DirSource}/${File}', skipping"
     fi
@@ -92,17 +92,30 @@ sync_specific() {
     sync_file "${HOME}" "${Dir}" alias.bash
 }
 
+preferred_vim() {
+    # Return absolute path to my preferred Vim
+    local -r PathNvim="$(which nvim)"
+    local -r PathVi="$(which vi)"
+    local -r PathVim="$(which vim)"
+
+    if [[ -n "${PathNvim}" ]]; then
+        echo -n "${PathNvim}"
+    elif [[ -n "${PathVim}" ]]; then
+        echo -n "${PathVim}"
+    else
+        echo -n "${PathVi}"
+    fi
+
+    return 0
+}
+
 main() {
     # Synchronize relevant files & directories
     # against home directory tree
     # on local workstation
     require_arguments $# 0
+    local -r MyVim="$(preferred_vim)"
 
-    sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Linux"
-    sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Darwin"
-    sync_directory "${BO_Project}/home/Darwin" "${BO_Project}/home/Linux"
-
-    sync_shared
     sync_specific
 
     return 0
@@ -117,5 +130,9 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+    sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Linux"
+    sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Darwin"
+    sync_directory "${BO_Project}/home/Darwin" "${BO_Project}/home/Linux"
+    sync_shared
 DisabledContent
 

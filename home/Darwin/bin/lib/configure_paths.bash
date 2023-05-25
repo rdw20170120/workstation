@@ -68,4 +68,3 @@ export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
 : << 'DisabledContent'
 DisabledContent
 
-
