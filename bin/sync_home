@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+[[ -z "${BO_Project}" ]] &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    exit 99
+
+preferred_vim() {
+    # Return absolute path to my preferred Vim
+    local -r PathNvim="$(which nvim)"
+    local -r PathVi="$(which vi)"
+    local -r PathVim="$(which vim)"
+
+    if [[ -n "${PathNvim}" ]]; then
+        echo -n "${PathNvim}"
+    elif [[ -n "${PathVim}" ]]; then
+        echo -n "${PathVim}"
+    else
+        echo -n "${PathVi}"
+    fi
+
+    return 0
+}
+
+sync_directory() {
+    # Synchronize directory trees
+    # TODO: REFACTOR into BriteOnyx Bash declarations
+    require_arguments $# 2
+    require_variable MyVim
+    local -r DirTarget=$1
+    local -r DirSource=$2
+
+    if [[ -d "${DirSource}" ]] ; then
+        log_info "Synchronizing directories '${DirTarget}' and '${DirSource}'"
+        maybe_create_directory_tree "${DirTarget}"
+        ${MyVim} -c "DirDiff ${DirTarget} ${DirSource}"
+    else
+        log_warn "Missing directory '${DirSource}', skipping"
+    fi
+}
+
+sync_files() {
+    # Synchronize files $1 and $2
+    require_arguments $# 2
+    require_variable MyVim
+    local -r FileTarget=$1
+    local -r FileSource=$2
+
+    log_info "Synchronizing files '${FileTarget}' and '${FileSource}'"
+    ${MyVim} -d "${FileTarget}" "${FileSource}"
+}
+
+sync_three() {
+    # Synchronize files between the Darwin, Linux, and shared subdirectories
+    require_directory_in DirHome
+    local SubDarwin=$1
+    local SubLinux=$2
+    local SubShared=$3
+
+    [[ -z "${SubLinux}" ]] && SubLinux=${SubDarwin}
+    [[ -z "${SubShared}" ]] && SubShared=${SubLinux}
+    ${MyVim} -d "${DirHome}/Darwin/${SubDarwin}" "${DirHome}/Linux/${SubLinux}" "${DirHome}/shared/${SubShared}"
+}
+
+sync_two() {
+    # Synchronize files between the Darwin & Linux operating systems
+    require_directory_in DirHome
+    local SubDarwin=$1
+    local SubLinux=$2
+
+    [[ -z "${SubLinux}" ]] && SubLinux=${SubDarwin}
+    sync_files "${DirHome}/Darwin/${SubDarwin}" "${DirHome}/Linux/${SubLinux}"
+}
+
+main() {
+    # Synchronize relevant files & directories
+    # against home directory tree
+    # on local workstation
+    require_arguments $# 0
+    local -r DirHome=${BO_Project}/home
+    local -r MyVim="$(preferred_vim)"
+    require_directory_in DirHome
+
+    # `.bash_logout` should only exist in `home/Linux`, so no need to sync
+    # `.condarc` should only exist in `home/shared`, so no need to sync
+    # `.inputrc` should only exist in `home/shared`, so no need to sync
+    sync_three .bashrc
+    sync_three .ssh/config
+    sync_three alias.bash
+    sync_three bootstrap
+    sync_three declare-bootstrap-specific.bash declare-bootstrap-specific.bash declare-bootstrap-shared.bash
+    sync_two .bash_profile .profile
+    sync_two .config/nvim/init.vim
+    sync_two .spacemacs
+    sync_two .vim/autoload/plug.vim
+    sync_two .vimrc
+
+    sync_files "${DirHome}/Darwin/.config/nvim/autoload/plug.vim" "${DirHome}/Darwin/.vim/autoload/plug.vim" 
+    sync_files "${DirHome}/Darwin/.config/nvim/init.vim" "${DirHome}/Darwin/.vimrc"
+    sync_files "${DirHome}/Linux/.config/nvim/init.vim" "${DirHome}/Linux/.vimrc"
+    sync_files "${DirHome}/Linux/.local/share/nvim/site/autoload/plug.vim" "${DirHome}/Linux/.vim/autoload/plug.vim" 
+
+    sync_directory "${DirHome}/Darwin/bin" "${DirHome}/Linux/bin"
+    sync_directory "${DirHome}/Darwin/bin" "${DirHome}/shared/bin"
+    sync_directory "${DirHome}/Linux/bin" "${DirHome}/shared/bin"
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+    sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Linux"
+    sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Darwin"
+    sync_directory "${BO_Project}/home/Darwin" "${BO_Project}/home/Linux"
+DisabledContent
+

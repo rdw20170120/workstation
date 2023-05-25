@@ -10,6 +10,23 @@
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
+preferred_vim() {
+    # Return absolute path to my preferred Vim
+    local -r PathNvim="$(which nvim)"
+    local -r PathVi="$(which vi)"
+    local -r PathVim="$(which vim)"
+
+    if [[ -n "${PathNvim}" ]]; then
+        echo -n "${PathNvim}"
+    elif [[ -n "${PathVim}" ]]; then
+        echo -n "${PathVim}"
+    else
+        echo -n "${PathVi}"
+    fi
+
+    return 0
+}
+
 sync_directory() {
     # Synchronize directory trees
     # TODO: REFACTOR into BriteOnyx Bash declarations
@@ -45,28 +62,6 @@ sync_file() {
     fi
 }
 
-sync_shared() {
-    # Synchronize relevant files & directories
-    # based on what is shared across operating systems
-    require_arguments $# 0
-    require_directory_in BO_Project
-    require_directory_in HOME
-    local -r Dir=${BO_Project}/home/shared
-
-    log_info "Synchronizing workstation (non-operating-system-specific)"
-
-    sync_directory "${HOME}/.config" "${Dir}/.config"
-    sync_directory "${HOME}/.local"  "${Dir}/.local"
-    sync_directory "${HOME}/.ssh"    "${Dir}/.ssh"
-    sync_directory "${HOME}/.vim"    "${Dir}/.vim"
-    sync_directory "${HOME}/bin"     "${Dir}/bin"
-
-    sync_file "${HOME}" "${Dir}" .bashrc
-    sync_file "${HOME}" "${Dir}" .condarc
-    sync_file "${HOME}" "${Dir}" .inputrc
-    sync_file "${HOME}" "${Dir}" alias.bash
-}
-
 sync_specific() {
     # Synchronize relevant files & directories
     # based on what is specific to the local workstation's operating systems
@@ -92,23 +87,6 @@ sync_specific() {
     sync_file "${HOME}" "${Dir}" alias.bash
 }
 
-preferred_vim() {
-    # Return absolute path to my preferred Vim
-    local -r PathNvim="$(which nvim)"
-    local -r PathVi="$(which vi)"
-    local -r PathVim="$(which vim)"
-
-    if [[ -n "${PathNvim}" ]]; then
-        echo -n "${PathNvim}"
-    elif [[ -n "${PathVim}" ]]; then
-        echo -n "${PathVim}"
-    else
-        echo -n "${PathVi}"
-    fi
-
-    return 0
-}
-
 main() {
     # Synchronize relevant files & directories
     # against home directory tree
@@ -130,6 +108,28 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+sync_shared() {
+    # Synchronize relevant files & directories
+    # based on what is shared across operating systems
+    require_arguments $# 0
+    require_directory_in BO_Project
+    require_directory_in HOME
+    local -r Dir=${BO_Project}/home/shared
+
+    log_info "Synchronizing workstation (non-operating-system-specific)"
+
+    sync_directory "${HOME}/.config" "${Dir}/.config"
+    sync_directory "${HOME}/.local"  "${Dir}/.local"
+    sync_directory "${HOME}/.ssh"    "${Dir}/.ssh"
+    sync_directory "${HOME}/.vim"    "${Dir}/.vim"
+    sync_directory "${HOME}/bin"     "${Dir}/bin"
+
+    sync_file "${HOME}" "${Dir}" .bashrc
+    sync_file "${HOME}" "${Dir}" .condarc
+    sync_file "${HOME}" "${Dir}" .inputrc
+    sync_file "${HOME}" "${Dir}" alias.bash
+}
+
     sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Linux"
     sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Darwin"
     sync_directory "${BO_Project}/home/Darwin" "${BO_Project}/home/Linux"
