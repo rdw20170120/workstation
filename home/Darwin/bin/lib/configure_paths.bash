@@ -11,17 +11,20 @@ export BO_PathNative=${BO_PathOriginal}
 ################################################################################
 # Homebrew
 # NOTE: On Apple macOS running on Apple Silicon (ARM64)
-export HOMEBREW_PREFIX=/opt/homebrew
+# export HOMEBREW_PREFIX=/opt/homebrew
 # NOTE: On Apple macOS running on Intel CPU
 # export HOMEBREW_PREFIX=/usr/local
-eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
-export BO_PathAfterHomebrew=${PATH}
-export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
-export BO_PathKrew=${HOME}/.krew/bin
+# eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+# export BO_PathAfterHomebrew=${PATH}
+# export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
+
+################################################################################
+# Kubernetes CLI
+# export BO_PathKrew=${HOME}/.krew/bin
 
 ################################################################################
 # Node Version Manager (NVM)
-export NVM_DIR="${HOME}/.nvm"
+# export NVM_DIR="${HOME}/.nvm"
 # TODO: Incorporate these scripts into the relevant project(s) when needed
 # [ -s "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh" ] && \
 #     source "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh"
@@ -54,16 +57,16 @@ export NVM_DIR="${HOME}/.nvm"
 # then moving forward.
 # This allows easier manipulation by (un)commenting entries.
 BO_PathSystem=${BO_PathNative}
-BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
-BO_PathSystem=${BO_PathKrew}:${BO_PathSystem}
+# BO_PathSystem=${BO_PathHomebrew}:${BO_PathSystem}
+# BO_PathSystem=${BO_PathKrew}:${BO_PathSystem}
 export BO_PathSystem
 export BO_PathUser=${HOME}/bin
 export PATH=${BO_PathSystem}:${BO_PathUser}
 
 ################################################################################
 # Anaconda (Mambaforge)
-export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
-export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
+# export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
+# export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
 
 : << 'DisabledContent'
 DisabledContent

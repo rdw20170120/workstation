@@ -18,7 +18,7 @@ else
     echo "WARN: Skipping missing script '${_Script}'"
 fi
 
-_Script=${HOME}/bin/lib/alias_for_ls.bash
+_Script=${HOME}/bin/lib/alias_for_inputrc.bash
 if [[ -r "${_Script}" ]] ; then
     echo "INFO: Sourcing script '${_Script}'"
     source "${_Script}"
@@ -26,7 +26,7 @@ else
     echo "WARN: Skipping missing script '${_Script}'"
 fi
 
-_Script=${HOME}/bin/lib/alias_for_inputrc.bash
+_Script=${HOME}/bin/lib/alias_for_ls.bash
 if [[ -r "${_Script}" ]] ; then
     echo "INFO: Sourcing script '${_Script}'"
     source "${_Script}"
