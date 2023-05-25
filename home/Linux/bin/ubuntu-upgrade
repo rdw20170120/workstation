@@ -7,6 +7,7 @@
 
 main() {
     # Upgrade packages installed on the Ubuntu operating system
+    # TODO: Automate handling of restarting affected services
 
     sudo apt-get upgrade --assume-yes --quiet
 

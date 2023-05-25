@@ -4,14 +4,12 @@
 # NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
-# TODO: backup original Bash scripts
-# TODO: copy files into place on new workstation (separate script?)
 [[ -z "${BO_Project}" ]] &&
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
-preferred_vim() {
-    # Return absolute path to my preferred Vim
+my_vim() {
+    # Return absolute path to my my Vim
     local -r PathNvim="$(which nvim)"
     local -r PathVi="$(which vi)"
     local -r PathVim="$(which vim)"
@@ -40,38 +38,54 @@ sync_directory() {
         maybe_create_directory_tree "${DirTarget}"
         ${MyVim} -c "DirDiff ${DirTarget} ${DirSource}"
     else
-        log_warn "Missing directory '${DirSource}', skipping"
+        log_warn "Skipped missing directory '${DirSource}'"
     fi
 }
 
 sync_file() {
     # Synchronize file
-    # TODO: REFACTOR into BriteOnyx Bash declarations
     require_arguments $# 3
-    require_variable MyVim
     local -r DirTarget=$1
     local -r DirSource=$2
     local -r File=$3
 
-    if [[ -f "${DirSource}/${File}" ]] ; then
-        log_info "Synchronizing files '${DirTarget}/${File}' and '${DirSource}/${File}'"
-        maybe_create_directory_tree "${DirTarget}"
-        ${MyVim} -d "${DirTarget}/${File}" "${DirSource}/${File}"
+    sync_files "${DirTarget}/${File}" "${DirSource}/${File}"
+}
+
+sync_files() {
+    # Synchronize files $1 and $2
+    require_arguments $# 2
+    require_variable MyVim
+    local -r Diff="diff -aNq"
+    local -r FileTarget=$1
+    local -r FileSource=$2
+
+    if [[ ! -e "${FileSource}" ]]; then
+        log_debug "Skipped missing file '${FileSource}'"
+        return 0
+    fi
+    if [[ ! -e "${FileTarget}" ]]; then
+        log_debug "Skipped missing file '${FileTarget}'"
+        return 0
+    fi
+    if ${Diff} "${FileTarget}" "${FileSource}"; then
+        log_debug "Skipped same files '${FileTarget}' and '${FileSource}'"
     else
-        log_warn "Missing file '${DirSource}/${File}', skipping"
+        log_info "Synchronizing files '${FileTarget}' and '${FileSource}'"
+        ${MyVim} -d "${FileTarget}" "${FileSource}"
     fi
 }
 
-sync_specific() {
+sync_home() {
     # Synchronize relevant files & directories
-    # based on what is specific to the local workstation's operating systems
-    require_arguments $# 0
-    require_directory_in BO_Project
+    # in the user's HOME directory
+    # with those captured in directory $1 of this project
+    require_arguments $# 1
     require_directory_in HOME
-    require_variable BO_OS
-    local -r Dir=${BO_Project}/home/${BO_OS}
+    local -r Dir=$1
 
-    log_info "Synchronizing workstation (${BO_OS}-specific)"
+    log_info "Synchronizing workstation with content captured in '${Dir}'"
+    require_directory "${Dir}"
 
     sync_directory "${HOME}/.config" "${Dir}/.config"
     sync_directory "${HOME}/.local"  "${Dir}/.local"
@@ -81,6 +95,8 @@ sync_specific() {
     sync_file "${HOME}" "${Dir}" .bash_logout
     sync_file "${HOME}" "${Dir}" .bash_profile
     sync_file "${HOME}" "${Dir}" .bashrc
+    sync_file "${HOME}" "${Dir}" .condarc
+    sync_file "${HOME}" "${Dir}" .inputrc
     sync_file "${HOME}" "${Dir}" .profile
     sync_file "${HOME}" "${Dir}" .spacemacs
     sync_file "${HOME}" "${Dir}" .vimrc
@@ -92,9 +108,15 @@ main() {
     # against home directory tree
     # on local workstation
     require_arguments $# 0
-    local -r MyVim="$(preferred_vim)"
+    require_variable BO_OS
+    require_directory_in BO_Project
+    local -r DirHome=${BO_Project}/home
+    local -r MyVim="$(my_vim)"
 
-    sync_specific
+    sync_directory "${HOME}/bin" "${DirHome}/${BO_OS}/bin"
+    sync_directory "${HOME}/bin" "${DirHome}/shared/bin"
+    sync_home "${DirHome}/${BO_OS}"
+    sync_home "${DirHome}/shared"
 
     return 0
 }
@@ -108,31 +130,5 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-sync_shared() {
-    # Synchronize relevant files & directories
-    # based on what is shared across operating systems
-    require_arguments $# 0
-    require_directory_in BO_Project
-    require_directory_in HOME
-    local -r Dir=${BO_Project}/home/shared
-
-    log_info "Synchronizing workstation (non-operating-system-specific)"
-
-    sync_directory "${HOME}/.config" "${Dir}/.config"
-    sync_directory "${HOME}/.local"  "${Dir}/.local"
-    sync_directory "${HOME}/.ssh"    "${Dir}/.ssh"
-    sync_directory "${HOME}/.vim"    "${Dir}/.vim"
-    sync_directory "${HOME}/bin"     "${Dir}/bin"
-
-    sync_file "${HOME}" "${Dir}" .bashrc
-    sync_file "${HOME}" "${Dir}" .condarc
-    sync_file "${HOME}" "${Dir}" .inputrc
-    sync_file "${HOME}" "${Dir}" alias.bash
-}
-
-    sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Linux"
-    sync_directory "${BO_Project}/home/shared" "${BO_Project}/home/Darwin"
-    sync_directory "${BO_Project}/home/Darwin" "${BO_Project}/home/Linux"
-    sync_shared
 DisabledContent
 
