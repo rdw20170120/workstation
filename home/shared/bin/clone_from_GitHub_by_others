@@ -11,28 +11,33 @@
 
 source ${HOME}/bin/lib/declare-git.bash
 
+clone_for_Earthly() {
+    maybe_clone "${Dir}/other/earthly" "${Connection}:earthly" earthly
+}
+
+clone_for_Elvish() {
+    maybe_clone "${Dir}/other/elves" "${Connection}:elves" awesome-elvish
+    maybe_clone "${Dir}/other/elves" "${Connection}:elves" elvish
+    maybe_clone "${Dir}/other/zzamboni" "${Connection}:zzamboni" dot-elvish
+    maybe_clone "${Dir}/other/zzamboni" "${Connection}:zzamboni" elvish-completions
+    maybe_clone "${Dir}/other/zzamboni" "${Connection}:zzamboni" elvish-modules
+    maybe_clone "${Dir}/other/zzamboni" "${Connection}:zzamboni" elvish-themes
+}
+
+clone_for_Emacs() {
+    maybe_clone "${Dir}/other/zzamboni" "${Connection}:zzamboni" dot-emacs
+    maybe_clone "${Dir}/other/zzamboni" "${Connection}:zzamboni" emacs-org-leanpub
+}
 
 main() {
     # Clone others' repositories on GitHub
     local -r Source=GitHub
     local -r Connection=MeAt${Source}
     local -r Dir=${HOME}/repo/${Source}
-    local    Profile
 
-    Profile=earthly
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" earthly
-
-    Profile=elves
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" awesome-elvish
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish
-
-    Profile=zzamboni
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-elvish
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-emacs
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish-completions
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish-modules
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish-themes
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" emacs-org-leanpub
+#   clone_for_Earthly
+#   clone_for_Elvish
+#   clone_for_Emacs
 
     return 0
 }

@@ -11,17 +11,22 @@
 
 source ${HOME}/bin/lib/declare-git.bash
 
+clone_for_Elvish() {
+    maybe_clone "${Dir}/other/zzamboni" "${Connection}:zzamboni" dot-elvish
+}
+
+clone_for_Emacs() {
+    maybe_clone "${Dir}/other/zzamboni" "${Connection}:zzamboni" dot-emacs
+}
 
 main() {
     # Clone others' repositories on GitLab
     local -r Source=GitLab
     local -r Connection=MeAt${Source}
     local -r Dir=${HOME}/repo/${Source}
-    local    Profile
 
-    Profile=zzamboni
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-elvish
-    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-emacs
+#   clone_for_Elvish
+#   clone_for_Emacs
 
     return 0
 }

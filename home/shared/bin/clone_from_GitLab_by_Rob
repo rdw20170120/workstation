@@ -11,18 +11,30 @@
 
 source ${HOME}/bin/lib/declare-git.bash
 
-main() {
-    # Clone Rob's repositories on GitLab
-    local -r Source=GitLab
-    local -r Connection=MeAt${Source}
-    local -r Dir=${HOME}/repo/${Source}
-
+clone_BriteOnyx() {
     maybe_clone "${Dir}/ref" "${Connection}:BriteOnyx" core
     maybe_clone "${Dir}/ref" "${Connection}:not_shared" private_python_library
     maybe_clone "${Dir}/ref" "${Connection}:shared3591916" public_python_library
     maybe_clone "${Dir}/wip" "${Connection}:BriteOnyx" core
     maybe_clone "${Dir}/wip" "${Connection}:not_shared" private_python_library
     maybe_clone "${Dir}/wip" "${Connection}:shared3591916" public_python_library
+}
+
+clone_other() {
+    maybe_clone "${Dir}/ref" "${Connection}:not_shared" experiment
+    maybe_clone "${Dir}/ref" "${Connection}:not_shared" monorepo
+    maybe_clone "${Dir}/ref" "${Connection}:not_shared" pythonspeed
+    maybe_clone "${Dir}/ref" "${Connection}:shared3591916" learn-gitlab
+}
+
+main() {
+    # Clone Rob's repositories on GitLab
+    local -r Source=GitLab
+    local -r Connection=MeAt${Source}
+    local -r Dir=${HOME}/repo/${Source}
+
+    clone_BriteOnyx
+#   clone_other
 
     return 0
 }
@@ -36,9 +48,5 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-    maybe_clone "${Dir}/ref" "${Connection}:not_shared" experiment
-    maybe_clone "${Dir}/ref" "${Connection}:not_shared" monorepo
-    maybe_clone "${Dir}/ref" "${Connection}:not_shared" pythonspeed
-    maybe_clone "${Dir}/ref" "${Connection}:shared3591916" learn-gitlab
 DisabledContent
 

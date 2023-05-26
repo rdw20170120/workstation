@@ -11,31 +11,14 @@
 
 source ${HOME}/bin/lib/declare-git.bash
 
-main() {
-    # Clone Rob's repositories on GitHub
-    local -r Source=GitHub
-    local -r Connection=MeAt${Source}
-    local -r Dir=${HOME}/repo/${Source}
-    local -r Profile=rdw20170120
-
+clone_BriteOnyx() {
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" build
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" workstation
-
     maybe_clone "${Dir}/wip" "${Connection}:${Profile}" build
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" workstation
 
     return 0
 }
 
-main $@
-
-###############################################################################
-# NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -vx
-# Code to debug...
-# set +vx
-
-: << 'DisabledContent'
+clone_other() {
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" astech
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" aws-inventory
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" cb-infrastructure
@@ -55,5 +38,39 @@ main $@
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" spring-test-project
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" trading
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" training
+
+    return 0
+}
+
+clone_workstation() {
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" workstation
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" workstation
+
+    return 0
+}
+
+main() {
+    # Clone Rob's repositories on GitHub
+    local -r Source=GitHub
+    local -r Connection=MeAt${Source}
+    local -r Dir=${HOME}/repo/${Source}
+    local -r Profile=rdw20170120
+
+    clone_BriteOnyx
+#   clone_other
+    clone_workstation
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
 DisabledContent
 
