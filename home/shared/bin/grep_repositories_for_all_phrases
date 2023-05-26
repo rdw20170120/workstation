@@ -4,110 +4,92 @@
 # NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
+# Hunt for all interesting phrases in repositories
+
+script=$(which grep_repositories_for_phrase)
+if [[ -z "$script" ]] ; then
+  echo "FATAL: Missing script '$script', aborting"
+  exit
+elif [[ ! -r "$script" ]] ; then
+  echo "FATAL: Unreadable script '$script', aborting"
+  exit
+fi
+
+out=~/Documents/hunt
+mkdir -p $out
+if [[ ! -d "$out" ]] ; then
+  echo "FATAL: Missing output directory '$out', aborting"
+  exit
+fi
 
 hunt () {
-    # Hunt for search phrase $2, capturing to file $1
-    # $1 = output directory
-    # $2 = search phrase
-    local -r f=$1/$2.out
-
-    if [[ -f "$f" ]] ; then
-      echo "WARN: Skipping, output file '$f' already exists"
-    else
-      echo "INFO: Hunting for '$2', writing to output file '$f'"
-      ${Script} $2 >$f
-    fi
-
-    return 0
+  # Hunt for search phrase $2, capturing to file $1
+  # $1 = output directory
+  # $2 = search phrase
+  local -r f=$1/$2.out
+  if [[ -f "$f" ]] ; then
+    echo "WARN: Skipping, output file '$f' already exists"
+  else
+    echo "INFO: Hunting for '$2', writing to output file '$f'"
+    $script $2 >$f
+  fi
 }
 
+# Docker image
+hunt $out Bitnami
+hunt $out Docker
+hunt $out image
+
+# Environment
+hunt $out dev
+hunt $out lab
+hunt $out non-prod
+hunt $out nonprod
+hunt $out prd
+hunt $out prod
+hunt $out stage
+hunt $out staging
+hunt $out stg
+
+# Environment variable
+
+# secret
+hunt $out cert
+hunt $out password
+hunt $out secret
+hunt $out SSL
+hunt $out TLS
+
+# tools and vendors
+hunt $out Amazon
+hunt $out Apache
+hunt $out AWS
+hunt $out Dell
+hunt $out Hashicorp 
+hunt $out Helm
+hunt $out Java
+hunt $out Jenkins
+hunt $out K8s
+hunt $out Kafka
+hunt $out kubectl
+hunt $out Kubernetes
+hunt $out Microsoft
+hunt $out nginx
+hunt $out Oracle
+hunt $out PHP
+hunt $out Puppet
+hunt $out Terraform 
+hunt $out Vault 
+
+# proper name
+hunt $out Enflick
+hunt $out TextNow
+
 main() {
-    # Hunt for all interesting phrases in repositories
+    # TODO: DESCRIPTION
 
-    local -r Script=$(which grep_stable_projects_for_phrase)
-    if [[ -z "$Script" ]] ; then
-      echo "FATAL: Missing script '$Script', aborting"
-      exit
-    elif [[ ! -r "$Script" ]] ; then
-      echo "FATAL: Unreadable script '$Script', aborting"
-      exit
-    fi
+    # TODO: CONTENT
 
-    local -r Dir=~/Documents/hunt
-    mkdir -p "$Dir"
-    if [[ ! -d "$Dir" ]] ; then
-      echo "FATAL: Missing output directory '${Dir}', aborting"
-      exit
-    fi
-
-    # Docker image
-    hunt ${Dir} Bitnami
-    hunt ${Dir} Docker
-    hunt ${Dir} image
-
-    # Environment
-    hunt ${Dir} dev
-    hunt ${Dir} lab
-    hunt ${Dir} non-prod
-    hunt ${Dir} nonprod
-    hunt ${Dir} prd
-    hunt ${Dir} prod
-    hunt ${Dir} stage
-    hunt ${Dir} staging
-    hunt ${Dir} stg
-
-    # Environment variable
-    hunt ${Dir} BO_
-    hunt ${Dir} HOME
-    hunt ${Dir} PATH
-    hunt ${Dir} PREFIX
-    hunt ${Dir} USER
-
-    # secret
-    hunt ${Dir} SSL
-    hunt ${Dir} TLS
-    hunt ${Dir} cert
-    hunt ${Dir} password
-    hunt ${Dir} secret
-
-    # tools and vendors
-    hunt ${Dir} AWS
-    hunt ${Dir} Amazon
-    hunt ${Dir} Apache
-    hunt ${Dir} Couchbase
-    hunt ${Dir} Dell
-    hunt ${Dir} Go
-    hunt ${Dir} Golang
-    hunt ${Dir} Google
-    hunt ${Dir} Hashicorp 
-    hunt ${Dir} Helm
-    hunt ${Dir} Java
-    hunt ${Dir} Jenkins
-    hunt ${Dir} K8s
-    hunt ${Dir} Kafka
-    hunt ${Dir} Kubernetes
-    hunt ${Dir} Microsoft
-    hunt ${Dir} MySQL
-    hunt ${Dir} Oracle
-    hunt ${Dir} PHP
-    hunt ${Dir} Postgres
-    hunt ${Dir} Postgresql
-    hunt ${Dir} Puppet
-    hunt ${Dir} Python
-    hunt ${Dir} Ruby
-    hunt ${Dir} Rust
-    hunt ${Dir} SQL
-    hunt ${Dir} Terraform 
-    hunt ${Dir} Vault 
-    hunt ${Dir} kubectl
-    hunt ${Dir} nginx
-
-    # Sam's Club
-    hunt ${Dir} api
-    hunt ${Dir} bulk-edit
-    hunt ${Dir} legato
-    hunt ${Dir} mass-edit
-    hunt ${Dir} pim
     return 0
 }
 
@@ -121,5 +103,4 @@ main $@
 
 : << 'DisabledContent'
 DisabledContent
-
 

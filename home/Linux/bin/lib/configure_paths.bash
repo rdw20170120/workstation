@@ -40,8 +40,8 @@ export PATH=${BO_PathSystem}:${BO_PathUser}
 
 ################################################################################
 # Anaconda (Mambaforge)
-# export CONDA_PREFIX=${HOME}/mambaforge
-# export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
+export CONDA_PREFIX=${HOME}/mambaforge
+export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
 
 : << 'DisabledContent'
 DisabledContent
