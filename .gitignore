@@ -17,8 +17,8 @@
 .DS_Store
 .cache/
 .pytest_cache/
-/.BO
-/.anaconda
+/.BO/
+/.anaconda/
 /.coverage
 /alias.bash
 /context.bash

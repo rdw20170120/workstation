@@ -14,11 +14,18 @@ main() {
 
     require_variable BO_cmd_black
 
-    # Temporarily override user setting to keep Black's cache under BO_Project
-    export XDG_CACHE_HOME=${BO_Project}/.cache
+    # Temporarily override user setting to keep Black's cache within the project directory
+    export XDG_CACHE_HOME="${BO_Project}/.cache"
 
     log_debug "Reformatting Python code using Black"
-    ${BO_cmd_black} --config "${BO_Project}/cfg/pyproject.toml" "${BO_Project}"
+    # NOTE: that Black will not detect scripts as Python code
+    # if they lack the `.py` extension,
+    # so list them on the command-line explicitly
+    ${BO_cmd_black} \
+        --config "${BO_Project}/cfg/pyproject.toml" \
+        "${BO_Project}/BriteOnyx/bin/files-list" \
+        "${BO_Project}/BriteOnyx/bin/prj-count_file_extensions" \
+        "${BO_Project}"
 
     return 0
 }

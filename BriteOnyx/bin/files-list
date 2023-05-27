@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+"""List files within current directory, recursively.
+
+Intended to be executed directly by the user.
+"""
+# Internal packages (absolute references, distributed with Python)
+from os import walk
+from re import compile
+
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
+
+
+_excluded_regexes_directory = [
+    compile(r".BO"),
+    compile(r".anaconda"),
+    compile(r".cache"),
+    compile(r".git"),
+    compile(r".hg"),
+    compile(r".pytest_cache"),
+    compile(r"__pycache__"),
+    compile(r"log"),
+    compile(r"obsolete"),
+    compile(r"out"),
+    compile(r"tmp"),
+    compile(r"waiting"),
+]
+_excluded_regexes_files = []
+
+
+def _prune_matches(items, regexes):
+    for r in regexes:
+        for i in items:
+            if not r.match(i) is None:
+                # print("Removing '%s' due to '%s'" % (i, r))
+                items.remove(i)
+                continue
+
+
+def main():
+    """Script entry point."""
+    for top, directories, files in walk("."):
+        _prune_matches(directories, _excluded_regexes_directory)
+        _prune_matches(files, _excluded_regexes_files)
+        print("Directory '%s'" % top)
+        for f in files:
+            print("File '%s/%s'" % (top, f))
+
+
+if __name__ == "__main__":
+    main()
+
+"""DisabledContent
+"""

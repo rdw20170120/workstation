@@ -3,67 +3,27 @@ exclude = '''
 (
     PLACEHOLDER$
   # By parent directory
-  # By specific pathname
-  | bin/show_maybe_missed_source$
-  # By file suffix
-  # By more interesting patterns
-  | bin/.*-run$
-  | bin/all-.*$
-  | bin/anaconda-.*$
-  | bin/app-.*$
-  | bin/env-.*$
-  | bin/prj-.*$
-  | bin/pve-.*$
-  | bin/py-.*$
-  | bin/show_maybe_missed_source$
-  | bin/sig-.*$
-  | bin/sync_on_macOS$
-  | bin/tool-.*$
-  # Project-specific
-  | home/\.ssh/.*$
-  | home/bin/clone_.*$
-  | home/bin/git_.*$
-  | home/bin/grep_.*$
-  | home/bin/secure$
-  | home/Linux/\.config/.*$
-  | home/macOS/\.config/.*$
-  | home/macOS/\.inputrc$
-  | home/macOS/\.zshrc$
-)
-'''
-force-exclude = '''
-(
-    PLACEHOLDER$
-  # By parent directory
   | \.anaconda/.*$
+  | \.config/.*$
   | \.git/.*$
+  | \.hg/.*$
   | \.pytest_cache/.*$
+  | \.ssh/.*$
   | __pycache__/.*$
   | log/.*$
   | out/.*$
+  | tmp/.*$
   # By specific pathname
-  | Dockerfile$
-  | \.DS_Store$
-  | \.bash_logout$
-  | \.bash_profile$
-  | \.bashrc$
-  | \.coverage$
-  | \.coveragerc$
-  | \.gitignore$
-  | \.grep-exclude-from$
-  | \.mailmap$
-  | \.profile$
-  | \.xprofile$
   # By file suffix
   | \.avsc$
   | \.bash$
   | \.c$
   | \.cfg$
   | \.env$
-  | \.log$
-  | \.md$
   | \.java$
   | \.json$
+  | \.log$
+  | \.md$
   | \.nix$
   | \.out$
   | \.properties$
@@ -77,6 +37,34 @@ force-exclude = '''
   | \.yaml$
   | \.yml$
   # By more interesting patterns
+  | Dockerfile$
+  | \.DS_Store$
+  | \.bash_logout$
+  | \.bash_profile$
+  | \.bashrc$
+  | \.coverage$
+  | \.coveragerc$
+  | \.gitignore$
+  | \.grep-exclude-from$
+  | \.inputrc$
+  | \.mailmap$
+  | \.profile$
+  | \.xprofile$
+  # Project-specific
+  | bin/.*-run$
+  | bin/all-.*$
+  | bin/anaconda-.*$
+  | bin/app-.*$
+  | bin/env-.*$
+  | bin/py-.*$
+  | bin/show_.*$
+  | bin/sig-.*$
+  | bin/sync_.*$
+  | bin/tool-.*$
+  | home/bin/clone_.*$
+  | home/bin/git_.*$
+  | home/bin/grep_.*$
+  | home/bin/secure$
 )
 '''
 

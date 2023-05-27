@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+"""Count extensions of files within current directory, recursively.
+
+Intended to be executed directly by the user.
+
+TODO: Convert to use pathlib
+TODO: Enhance to use configured environment variables to reference excluded directories & files
+TODO: Enhance to use BriteOnyx Python libraries
+"""
+# Internal packages (absolute references, distributed with Python)
+from os import path
+from os import walk
+from re import compile
+
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
+
+
+_excluded_regexes_directory = [
+    compile(r".BO"),
+    compile(r".anaconda"),
+    compile(r".cache"),
+    compile(r".git"),
+    compile(r".hg"),
+    compile(r".pytest_cache"),
+    compile(r"__pycache__"),
+    compile(r"log"),
+    compile(r"obsolete"),
+    compile(r"out"),
+    compile(r"tmp"),
+    compile(r"waiting"),
+]
+_excluded_regexes_files = []
+
+
+def _prune_matches(items, regexes):
+    for r in regexes:
+        for i in items:
+            if not r.match(i) is None:
+                # print("Removing '%s' due to '%s'" % (i, r))
+                items.remove(i)
+                continue
+
+
+def main():
+    """Script entry point."""
+    counts = {}
+    for top, directories, files in walk(".", topdown=True):
+        _prune_matches(directories, _excluded_regexes_directory)
+        _prune_matches(files, _excluded_regexes_files)
+        # print("Directory '%s'" % top)
+        for f in files:
+            # print("File '%s'" % f)
+            prefix, extension = path.splitext(f)
+            if extension in counts:
+                counts[extension] += 1
+            else:
+                counts[extension] = 1
+    for extension in sorted(counts.keys()):
+        print("%6u  %s" % (counts[extension], extension))
+
+
+if __name__ == "__main__":
+    main()
+
+"""DisabledContent
+"""
