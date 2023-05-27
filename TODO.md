@@ -21,19 +21,6 @@ unless they should merely be deleted.
 1. [ ] Anaconda - Create scripts & aliases for showing environment variables for Anaconda
 1. [ ] Anaconda - Document use of Anaconda for our purposes
 1. [ ] Anaconda - Sort Anaconda packages in `cfg/anaconda.yml`
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.bash\_logout on Ubuntu Server
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.bash\_profile on Apple macOS
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.bashrc on Apple macOS
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.bashrc on Ubuntu Server
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.condarc on Apple macOS
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.condarc on Ubuntu Server
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.config/nvim/init.vim on Apple macOS
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.config/nvim/init.vim on Ubuntu Server
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.profile on Ubuntu Server
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.spacemacs on Apple macOS
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.spacemacs on Ubuntu Server
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.vimrc on Apple macOS
-1. [ ] Bash - Capture original versions of various dotfiles = ~/.vimrc on Ubuntu Server
 1. [ ] Bash - Create scripts & aliases for showing environment variables for BriteOnyx
 1. [ ] Bash - Document disabled shebang for Bash scripts that are `source`d
 1. [ ] Bash - Document dropped file extension for Bash scripts
@@ -66,10 +53,12 @@ unless they should merely be deleted.
 1. [ ] iTerm2 - Switch font in terminal for better readability
 1. [ ] output - Investigate whether I want to capture log files during `test-run`
 1. [ ] security - Filter sensitive values out of committed output (environment variables)
-1. [ ] synchronize - Enhance functionality to synchronize dotfiles between repository and user account
 1. [X] Anaconda - Create scripts & aliases for managing Anaconda environments
 1. [X] Anaconda - Switch from Python virtual environment to Anaconda environment
 1. [X] Bash - Add `redeclare` alias to `source` Bash function declarations again
+1. [X] Bash - Capture original versions of various dotfiles = ~/.bash\_logout on Ubuntu Server
+1. [X] Bash - Capture original versions of various dotfiles = ~/.bash\_profile on Apple macOS
+1. [X] Bash - Capture original versions of various dotfiles = ~/.profile on Ubuntu Server
 1. [X] Bash - Enhance Bash activation to declare functions
 1. [X] Bash - Log Bash messages to stderr instead of stdout
 1. [X] BriteOnyx - Separate project temporary directory from `TMPDIR`
@@ -86,4 +75,5 @@ unless they should merely be deleted.
 1. [X] generation - Split generation of `activate.bash` into separate Python modules for before/after activation
 1. [X] output - Move captured output files to `out` directory
 1. [X] security - Write script to secure project files
+1. [X] synchronize - Enhance functionality to synchronize dotfiles between repository and user account
 
