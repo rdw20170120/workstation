@@ -34,8 +34,6 @@
 
 # alias NAME='COMMAND ARGS...'
 
-alias vdiff='&> /dev/null meld'
-
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
 # export PS4='$ ' ; set -vx

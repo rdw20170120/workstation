@@ -24,7 +24,7 @@ main() {
     ${BO_cmd_black} \
         --config "${BO_Project}/cfg/pyproject.toml" \
         "${BO_Project}/BriteOnyx/bin/files-list" \
-        "${BO_Project}/BriteOnyx/bin/prj-count_file_extensions" \
+        "${BO_Project}/BriteOnyx/bin/files-count_by_extension" \
         "${BO_Project}"
 
     return 0

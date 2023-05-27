@@ -1,12 +1,12 @@
 # HowTo install Ubuntu packages
-Ubuntu provides most of what we need for an effective development, testing, and
-execution environment.
+Ubuntu provides most of what we need
+for an effective development, testing, and execution environment.
 Here is how to get the last few bits specific to this project.
 
 ## Install packages
 ~~~bash
 sudo apt-get update
-sudo apt-get install git meld
+sudo apt-get install git
 sudo apt-get install dropbox python3-gpg
 ~~~
 

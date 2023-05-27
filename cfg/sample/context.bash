@@ -59,8 +59,6 @@ export BO_cmd_compileall="${BO_cmd_python3} -m compileall"
 remembering BO_cmd_compileall
 export BO_cmd_coverage="${BO_cmd_python3} -m coverage"
 remembering BO_cmd_coverage
-export BO_cmd_meld=$(which meld)
-remembering BO_cmd_meld
 export BO_cmd_pip="${BO_cmd_python3} -m pip"
 remembering BO_cmd_pip
 export BO_cmd_pytest="${BO_cmd_python3} -m pytest"

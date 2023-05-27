@@ -17,7 +17,6 @@ which is likewise based on his many years of technical experience.
 1. Install Linux Mint 19.3 Tricia Cinnamon amd64 20191213
 1. Use Software Manager to install:
     * `git`           Source control
-    * `meld`          Visual directory & file comparison
     * `python3-venv`  Update Python3 with `venv` (virtual environment)
     * `vim`           Enhanced text editing
 
