@@ -16,6 +16,7 @@ main() {
         grep -v \.BO |
         grep -v \.DS_Store |
         grep -v \.anaconda |
+        grep -v \.cache |
         grep -v \.coverage |
         grep -v \.pytest_cache |
         grep -v __pycache__ |
