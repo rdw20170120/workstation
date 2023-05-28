@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+[[ -z "${BO_Project}" ]] &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    exit 99
+
+main() {
+    # Capture generated source
+    require_directory_in BO_Project
+    require_directory_in BO_DirTemp
+
+    local -r DirCaptured=${BO_Project}/out/gen
+    local -r DirGenerated=${BO_DirTemp}/gen
+
+    log_info "Capturing generated source into directory '${DirCaptured}' from directory '${DirGenerated}'"
+    maybe_recreate_directory_tree "${DirCaptured}"
+    cp -pRv "${DirGenerated}"/* "${DirCaptured}/"
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

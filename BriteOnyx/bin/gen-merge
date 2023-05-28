@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+"""Prompt user to manually merge generated source files.
+
+Intended to be executed directly by the user.
+"""
+# Internal packages (absolute references, distributed with Python)
+from os import environ
+from os import path
+from os import walk
+from re import compile
+
+# External packages (absolute references, NOT distributed with Python)
+# Library modules   (absolute references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
+
+
+_excluded_regexes_directory = [
+    compile(r".BO"),
+    compile(r".anaconda"),
+    compile(r".cache"),
+    compile(r".git"),
+    compile(r".hg"),
+    compile(r".pytest_cache"),
+    compile(r"__pycache__"),
+    compile(r"log"),
+    compile(r"obsolete"),
+    compile(r"out"),
+]
+_excluded_regexes_files = []
+
+root_project = environ["BO_Project"]
+root_captured = path.join(root_project, "out/gen")
+root_generated = path.join(root_project, "tmp/gen")
+
+def _prune_matches(items, regexes):
+    for r in regexes:
+        for i in items:
+            if not r.match(i) is None:
+                # print("Removing '%s' due to '%s'" % (i, r))
+                items.remove(i)
+                continue
+
+def _relative_source_files(root):
+    print("Root is '%s'" % (root))
+    for top, directories, files in walk(root):
+        _prune_matches(directories, _excluded_regexes_directory)
+        _prune_matches(files, _excluded_regexes_files)
+        for f in files:
+            absolute = path.realpath(path.join(top, f), strict=True)
+            relative = path.relpath(absolute, start=root)
+            print("Relative file '%s'" % (relative))
+
+def main():
+    """Script entry point."""
+#   _relative_source_files(root_project)
+    _relative_source_files(root_captured)
+    _relative_source_files(root_generated)
+
+
+if __name__ == "__main__":
+    main()
+
+"""DisabledContent
+"""
