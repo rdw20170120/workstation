@@ -96,6 +96,7 @@ package_for_operating_system() {
 
 main() {
     # Package the BriteOnyx bootstrap
+    # TODO: Check this for proper function on Ubuntu
     require_directory_in BO_DirTemp
     require_directory_in BO_Project
     local -r Dir=${BO_DirTemp}/bootstrap
@@ -118,21 +119,5 @@ main
 # set +vx
 
 : << 'DisabledContent'
-
-    DirSource=${BO_Project}/home/shared
-    duplicate_file "${DirSource}" "${DirTarget}" .inputrc
-    duplicate_directory "${DirSource}" "${DirTarget}" .ssh
-    duplicate_directory "${DirSource}" "${DirTarget}" .vim
-    duplicate_directory "${DirSource}" "${DirTarget}" bin
-
-    DirSource=${BO_Project}/home/${OS}
-    duplicate_file "${DirSource}" "${DirTarget}" .bash_logout
-    duplicate_file "${DirSource}" "${DirTarget}" .bashrc
-    duplicate_file "${DirSource}" "${DirTarget}" .profile
-    duplicate_file "${DirSource}" "${DirTarget}" .vimrc
-    duplicate_file "${DirSource}" "${DirTarget}" alias.bash
-    duplicate_directory "${DirSource}" "${DirTarget}" .config
-    duplicate_directory "${DirSource}" "${DirTarget}" .local
-    duplicate_directory "${DirSource}" "${DirTarget}" bin
 DisabledContent
 
