@@ -13,8 +13,8 @@ main() {
     require_directory_in BO_Project
     require_directory_in BO_DirTemp
 
-    local -r DirCaptured=${BO_Project}/out/gen
-    local -r DirGenerated=${BO_DirTemp}/gen
+    local -r DirCaptured=${BO_Project}/out/generated
+    local -r DirGenerated=${BO_DirTemp}/generated
 
     log_info "Capturing generated source into directory '${DirCaptured}' from directory '${DirGenerated}'"
     maybe_recreate_directory_tree "${DirCaptured}"

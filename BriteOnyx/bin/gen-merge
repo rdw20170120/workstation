@@ -14,7 +14,7 @@ from re import compile
 # Project modules   (relative references, NOT packaged, in project)
 
 
-_excluded_regexes_directory = [
+_excluded_directory_regexes = [
     compile(r".BO"),
     compile(r".anaconda"),
     compile(r".cache"),
@@ -22,17 +22,44 @@ _excluded_regexes_directory = [
     compile(r".hg"),
     compile(r".pytest_cache"),
     compile(r"__pycache__"),
+    compile(r"generated"),
     compile(r"log"),
     compile(r"obsolete"),
-    compile(r"out"),
+    compile(r"tmp"),
 ]
-_excluded_regexes_files = []
+_excluded_file_regexes = []
+_root_source = environ["BO_Project"]
 
-root_project = environ["BO_Project"]
-root_captured = path.join(root_project, "out/gen")
-root_generated = path.join(root_project, "tmp/gen")
+_root_captured = path.join(_root_source, "out/generated")
+_root_generated = path.join(_root_source, "tmp/generated")
+
+def _absolute_path_or_none(root, relative_path):
+    result = path.abspath(path.join(root, relative_path))
+    if not path.exists(result): result = None
+    return result
+
+def _maybe_add_source_file(source_files, relative_path):
+    """Maybe add the source file (given its relative path) to our desired source files."""
+    # print("Relative file '%s'" % (relative_path))
+    captured = _absolute_path_or_none(_root_captured, relative_path)
+    generated = _absolute_path_or_none(_root_generated, relative_path)
+    source = _absolute_path_or_none(_root_source, relative_path)
+    source_files[str(relative_path)] = (source, generated, captured)
+
+def _merge(source_files):
+    for relative_path in source_files:
+        (source, generated, captured) = source_files[relative_path]
+        if source is None:
+            print("source is missing:  generated='%s', captured='%s'" % (generated, captured))
+        elif generated is None:
+            print("generated is missing:  source='%s', captured='%s'" % (source, captured))
+        elif captured is None:
+            print("captured is missing:  source='%s', generated='%s'" % (source, generated))
+        else:
+            print("all present:  source='%s', generated='%s', captured='%s'" % (source, generated, captured))
 
 def _prune_matches(items, regexes):
+    """Prune (remove) any items that match any of the regexes."""
     for r in regexes:
         for i in items:
             if not r.match(i) is None:
@@ -40,21 +67,27 @@ def _prune_matches(items, regexes):
                 items.remove(i)
                 continue
 
-def _relative_source_files(root):
-    print("Root is '%s'" % (root))
+def _scan_relative_source_files(source_files, root):
+    """Scan the directory tree from root, adding any desired source files found."""
+    result = []
+    print("Scanning root '%s'" % (root))
     for top, directories, files in walk(root):
-        _prune_matches(directories, _excluded_regexes_directory)
-        _prune_matches(files, _excluded_regexes_files)
+        _prune_matches(directories, _excluded_directory_regexes)
+        _prune_matches(files, _excluded_file_regexes)
         for f in files:
             absolute = path.realpath(path.join(top, f), strict=True)
             relative = path.relpath(absolute, start=root)
-            print("Relative file '%s'" % (relative))
+            _maybe_add_source_file(source_files, relative)
+
+
 
 def main():
     """Script entry point."""
-#   _relative_source_files(root_project)
-    _relative_source_files(root_captured)
-    _relative_source_files(root_generated)
+    source_files = {}
+    _scan_relative_source_files(source_files, _root_captured)
+    _scan_relative_source_files(source_files, _root_generated)
+    _scan_relative_source_files(source_files, _root_source)
+    _merge(source_files)
 
 
 if __name__ == "__main__":

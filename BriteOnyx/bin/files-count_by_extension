@@ -17,7 +17,7 @@ from re import compile
 # Project modules   (relative references, NOT packaged, in project)
 
 
-_excluded_regexes_directory = [
+_excluded_directory_regexes = [
     compile(r".BO"),
     compile(r".anaconda"),
     compile(r".cache"),
@@ -31,7 +31,7 @@ _excluded_regexes_directory = [
     compile(r"tmp"),
     compile(r"waiting"),
 ]
-_excluded_regexes_files = []
+_excluded_file_regexes = []
 
 
 def _prune_matches(items, regexes):
@@ -47,8 +47,8 @@ def main():
     """Script entry point."""
     counts = {}
     for top, directories, files in walk(".", topdown=True):
-        _prune_matches(directories, _excluded_regexes_directory)
-        _prune_matches(files, _excluded_regexes_files)
+        _prune_matches(directories, _excluded_directory_regexes)
+        _prune_matches(files, _excluded_file_regexes)
         # print("Directory '%s'" % top)
         for f in files:
             # print("File '%s'" % f)
