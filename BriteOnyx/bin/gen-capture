@@ -10,10 +10,10 @@
 
 main() {
     # Capture generated source
-    require_directory_in BO_Project
+    require_directory_in BO_DirCapture
     require_directory_in BO_DirTemp
 
-    local -r DirCaptured=${BO_Project}/out/generated
+    local -r DirCaptured=${BO_DirCapture}/generated
     local -r DirGenerated=${BO_DirTemp}/generated
 
     log_info "Capturing generated source into directory '${DirCaptured}' from directory '${DirGenerated}'"

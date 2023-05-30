@@ -25,6 +25,7 @@ main() {
         --config "${BO_Project}/cfg/pyproject.toml" \
         "${BO_Project}/BriteOnyx/bin/files-list" \
         "${BO_Project}/BriteOnyx/bin/files-count_by_extension" \
+        "${BO_Project}/BriteOnyx/bin/gen-merge" \
         "${BO_Project}"
 
     return 0

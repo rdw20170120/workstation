@@ -4,90 +4,174 @@
 Intended to be executed directly by the user.
 """
 # Internal packages (absolute references, distributed with Python)
+from filecmp import cmp
 from os import environ
 from os import path
 from os import walk
 from re import compile
 
 # External packages (absolute references, NOT distributed with Python)
+from commandlib import Command
+
 # Library modules   (absolute references, NOT packaged, in project)
 # Project modules   (relative references, NOT packaged, in project)
 
 
 _excluded_directory_regexes = [
-    compile(r".BO"),
-    compile(r".anaconda"),
-    compile(r".cache"),
-    compile(r".git"),
-    compile(r".hg"),
-    compile(r".pytest_cache"),
+    compile(r"\.BO"),
+    compile(r"\.anaconda"),
+    compile(r"\.cache"),
+    compile(r"\.config"),
+    compile(r"\.coverage"),
+    compile(r"\.git"),
+    compile(r"\.hg"),
+    compile(r"\.pytest_cache"),
     compile(r"__pycache__"),
+    compile(r"bin"),
+    compile(r"coverage"),
     compile(r"generated"),
     compile(r"log"),
     compile(r"obsolete"),
     compile(r"tmp"),
+    compile(r"waiting"),
 ]
-_excluded_file_regexes = []
-_root_source = environ["BO_Project"]
+_excluded_file_regexes = [
+    compile(r".*\.bash"),
+    compile(r".*\.elv"),
+    compile(r".*\.json"),
+    # Focus during manual testing by only including Markdown files
+    # compile(r".*\.md"),
+    compile(r".*\.out"),
+    compile(r".*\.py"),
+    compile(r".*\.toml"),
+    compile(r".*\.vim"),
+    compile(r".*\.yaml"),
+    compile(r".*\.yml"),
+    compile(r"\..*"),
+]
 
-_root_captured = path.join(_root_source, "out/generated")
-_root_generated = path.join(_root_source, "tmp/generated")
+_root_capture = environ["BO_DirCapture"]
+_root_project = environ["BO_Project"]
+_root_temporary = environ["BO_DirTemp"]
 
-def _absolute_path_or_none(root, relative_path):
+_root_captured = path.join(_root_capture, "generated")
+_root_generated = path.join(_root_temporary, "generated")
+_root_source = path.join(_root_project)
+
+# Prepare shell command to let the user merge pairs of files
+_nvim = Command("nvim")
+_nvim_diff = _nvim("-d").in_dir(str(_root_project))
+
+
+def _absolute_real_path_or_none(root, relative_path):
     result = path.abspath(path.join(root, relative_path))
-    if not path.exists(result): result = None
+    if not path.exists(result):
+        result = None
     return result
 
-def _maybe_add_source_file(source_files, relative_path):
+
+def _add_source_file(source_files, relative_path):
     """Maybe add the source file (given its relative path) to our desired source files."""
-    # print("Relative file '%s'" % (relative_path))
-    captured = _absolute_path_or_none(_root_captured, relative_path)
-    generated = _absolute_path_or_none(_root_generated, relative_path)
-    source = _absolute_path_or_none(_root_source, relative_path)
+    # print("Adding relative source file '%s'" % (relative_path))
+    captured = _absolute_real_path_or_none(_root_captured, relative_path)
+    generated = _absolute_real_path_or_none(_root_generated, relative_path)
+    source = _absolute_real_path_or_none(_root_source, relative_path)
     source_files[str(relative_path)] = (source, generated, captured)
 
-def _merge(source_files):
+
+def _maybe_merge_one(source, generated, captured):
+    if generated is None:
+        return
+    if source is None:
+        return
+    if cmp(generated, source, shallow=False):
+        # If generated is same as source,
+        # the merge is unnecessary
+        # print("Generated is same as source:  source='%s'" % (source))
+        pass
+    elif captured is None:
+        # If generated is NOT same as source,
+        # but captured is missing,
+        # then must merge
+        _merge_one(source, generated)
+    elif cmp(generated, captured, shallow=False):
+        # If generated is NOT same as source,
+        # but captured is same as generated,
+        # then assume merge has already been performed
+        # since user captured the generated source
+        # print("Captured is same as generated:  source='%s'" % (source))
+        pass
+    else:
+        # If generated is NOT same as source,
+        # and captured is NOT same as generated,
+        # so merge uncaptured form of generated
+        _merge_one(source, generated)
+
+
+def _merge_all(source_files):
     for relative_path in source_files:
         (source, generated, captured) = source_files[relative_path]
         if source is None:
-            print("source is missing:  generated='%s', captured='%s'" % (generated, captured))
+            print(
+                "source is missing:  generated='%s', captured='%s'"
+                % (generated, captured)
+            )
+            # Without source, cannot merge
         elif generated is None:
-            print("generated is missing:  source='%s', captured='%s'" % (source, captured))
+            print(
+                "generated is missing:  source='%s', captured='%s'" % (source, captured)
+            )
+            # Without generated, cannot merge
         elif captured is None:
-            print("captured is missing:  source='%s', generated='%s'" % (source, generated))
+            # Without captured, assume new generated source never before merged (or complete reset)
+            _merge_one(source, generated)
         else:
-            print("all present:  source='%s', generated='%s', captured='%s'" % (source, generated, captured))
+            # print("all present:  source='%s', generated='%s', captured='%s'" % (source, generated, captured))
+            # With all three present, consider merge
+            _maybe_merge_one(source, generated, captured)
 
-def _prune_matches(items, regexes):
+
+def _merge_one(source, generated):
+    if generated is None:
+        return
+    if source is None:
+        return
+    print("Merging '%s' into '%s'" % (generated, source))
+    # Focus during manual testing by not invoking Neovim
+    # _nvim_diff.with_trailing_args(generated, source).run()
+
+
+def _prune_excluded_items(items, regexes):
     """Prune (remove) any items that match any of the regexes."""
-    for r in regexes:
-        for i in items:
-            if not r.match(i) is None:
+    # Iterate over a copy of the list to avoid mutation errors
+    for i in items[:]:
+        for r in regexes:
+            if not r.fullmatch(i) is None:
                 # print("Removing '%s' due to '%s'" % (i, r))
                 items.remove(i)
-                continue
+
 
 def _scan_relative_source_files(source_files, root):
     """Scan the directory tree from root, adding any desired source files found."""
-    result = []
-    print("Scanning root '%s'" % (root))
+    # print("Scanning root '%s'" % (root))
     for top, directories, files in walk(root):
-        _prune_matches(directories, _excluded_directory_regexes)
-        _prune_matches(files, _excluded_file_regexes)
+        _prune_excluded_items(directories, _excluded_directory_regexes)
+        _prune_excluded_items(files, _excluded_file_regexes)
         for f in files:
             absolute = path.realpath(path.join(top, f), strict=True)
             relative = path.relpath(absolute, start=root)
-            _maybe_add_source_file(source_files, relative)
-
+            _add_source_file(source_files, relative)
 
 
 def main():
     """Script entry point."""
     source_files = {}
-    _scan_relative_source_files(source_files, _root_captured)
+    # No need to scan
+    # generated source that has been captured (`_root_captured`),
+    # because such orphans will be discarded upon the next run of `gen-capture`
     _scan_relative_source_files(source_files, _root_generated)
     _scan_relative_source_files(source_files, _root_source)
-    _merge(source_files)
+    _merge_all(source_files)
 
 
 if __name__ == "__main__":

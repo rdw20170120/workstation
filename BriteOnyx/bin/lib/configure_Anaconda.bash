@@ -26,7 +26,7 @@ source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-# Configure BriteOnyx for Anaconda environment
+# Remember Anaconda commands
 export BO_cmd_conda="$(which conda)"
 remembering BO_cmd_conda
 export BO_cmd_mamba="$(which mamba)"

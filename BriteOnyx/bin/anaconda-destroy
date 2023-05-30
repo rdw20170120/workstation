@@ -14,6 +14,8 @@ main() {
 
     require_variable BO_DirAnaconda
     maybe_delete_directory_tree "${BO_DirAnaconda}"
+
+    return 0
 }
 
 main $@

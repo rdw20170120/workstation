@@ -34,7 +34,7 @@ _excluded_directory_regexes = [
 _excluded_file_regexes = []
 
 
-def _prune_matches(items, regexes):
+def _prune_excluded_items(items, regexes):
     for r in regexes:
         for i in items:
             if not r.match(i) is None:
@@ -47,8 +47,8 @@ def main():
     """Script entry point."""
     counts = {}
     for top, directories, files in walk(".", topdown=True):
-        _prune_matches(directories, _excluded_directory_regexes)
-        _prune_matches(files, _excluded_file_regexes)
+        _prune_excluded_items(directories, _excluded_directory_regexes)
+        _prune_excluded_items(files, _excluded_file_regexes)
         # print("Directory '%s'" % top)
         for f in files:
             # print("File '%s'" % f)

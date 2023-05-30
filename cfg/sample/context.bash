@@ -50,22 +50,6 @@ remembering BO_NameApp
 
 require_directory_in HOME
 
-# Remember how to execute various tools
-export BO_cmd_python3=$(which python3)
-remembering BO_cmd_python3
-export BO_cmd_black="${BO_cmd_python3} -m black"
-remembering BO_cmd_black
-export BO_cmd_compileall="${BO_cmd_python3} -m compileall"
-remembering BO_cmd_compileall
-export BO_cmd_coverage="${BO_cmd_python3} -m coverage"
-remembering BO_cmd_coverage
-export BO_cmd_pip="${BO_cmd_python3} -m pip"
-remembering BO_cmd_pip
-export BO_cmd_pytest="${BO_cmd_python3} -m pytest"
-remembering BO_cmd_pytest
-export BO_cmd_tabnanny="${BO_cmd_python3} -m tabnanny"
-remembering BO_cmd_tabnanny
-
 ###############################################################################
 # NOTE: Use the following settings
 # activate special task execution modes
