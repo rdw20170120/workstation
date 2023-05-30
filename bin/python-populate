@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+[[ -z "${BO_Project}" ]] &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    exit 99
+
+main() {
+    # Populate Anaconda environment with desired Python packages (PIP-based)
+    require_arguments $# 0
+    require_directory_in BO_DirAnaconda
+    require_variable BO_cmd_pip
+    local Packages
+
+
+    # Need Python packages required by project source code
+    Packages="commandlib"
+    # Packages="${Packages} icdiff=1.9.*"
+    # TODO: FIX: Why does icdiff=2.0.* seem to all be corrupted?
+    # Packages="${Packages} icdiff=2.0.*"
+
+    log_info "Installing desired packages (via PIP) into Anaconda environment '${BO_DirAnaconda}'"
+    ${BO_cmd_pip} install ${Packages}
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

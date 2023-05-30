@@ -12,26 +12,25 @@ DirThird=${BO_Project}/src/lib/third_party
 export PYTHONPATH=${PYTHONPATH}:"${DirThird}":"${DirMine}"
 remembering PYTHONPATH
 
+# Configure Python locale
 export PYTHONCOERCELOCALE=warn
 remembering PYTHONCOERCELOCALE
+# export PYTHONUNBUFFERED=1
+# remembering PYTHONUNBUFFERED
 
-# Set Python to use UTF-8 encoding
+# Configure Python to use UTF-8 encoding
 export PYTHONIOENCODING=utf8:warn
-export PYTHONUTF8=1
 remembering PYTHONIOENCODING
+export PYTHONUTF8=1
 remembering PYTHONUTF8
 
-# Remember Python commands
-export BO_cmd_python3=$(which python3)
-remembering BO_cmd_python3
+# Remember secondary Python commands
 export BO_cmd_black="${BO_cmd_python3} -m black"
 remembering BO_cmd_black
 export BO_cmd_compileall="${BO_cmd_python3} -m compileall"
 remembering BO_cmd_compileall
 export BO_cmd_coverage="${BO_cmd_python3} -m coverage"
 remembering BO_cmd_coverage
-export BO_cmd_pip="${BO_cmd_python3} -m pip"
-remembering BO_cmd_pip
 export BO_cmd_pytest="${BO_cmd_python3} -m pytest"
 remembering BO_cmd_pytest
 export BO_cmd_tabnanny="${BO_cmd_python3} -m tabnanny"

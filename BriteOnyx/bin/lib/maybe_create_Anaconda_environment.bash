@@ -7,23 +7,25 @@
 [[ -z "${BO_Project}" ]] &&
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
-require_directory_in BO_Project
-require_variable BO_cmd_conda
-require_variable BO_DirAnaconda
+
 require_directory_in BO_DirCapture
+require_directory_in BO_Project
+require_variable BO_DirAnaconda
+require_variable BO_cmd_conda
 
-# Create Anaconda environment
-ShouldCreate=true
+# Maybe create Anaconda environment
+_ShouldCreate=true
 
-[[ -d "${BO_DirAnaconda}" ]] && ShouldCreate=false
+[[ -d "${BO_DirAnaconda}" ]] && _ShouldCreate=false
 
-if [[ "${ShouldCreate}" == "true" ]] ; then
+if [[ "${_ShouldCreate}" == "true" ]] ; then
     execute_script anaconda-destroy
     execute_script anaconda-create
 else
     log_info "Keeping Anaconda environment in directory '${BO_DirAnaconda}'"
 fi
 
+# Activate Anaconda virtual environment for this project
 (set -o posix ; set) | sort >"${BO_DirCapture}/before/conda_activate.env"
 log_info "Activating Anaconda environment in directory '${BO_DirAnaconda}'"
 require_directory_in BO_DirAnaconda
@@ -38,6 +40,7 @@ Status=$?
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 (set -o posix ; set) | sort >"${BO_DirCapture}/after/conda_activate.env"
 
+# Configure PATH to include Anaconda
 export BO_PathAnaconda=${BO_DirAnaconda}/bin
 remembering BO_PathAnaconda
 export BO_PathTool=${BO_PathAnaconda}
@@ -49,9 +52,19 @@ source "${_Script}" ; Status=$?
 [[ ${Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-[[ "${ShouldCreate}" == "true" ]] && execute_script anaconda-populate
+# Populate the newly-created Anaconda virtual environment
+[[ "${_ShouldCreate}" == "true" ]] && execute_script anaconda-populate
 
-unset ShouldCreate
+# Remember primary Python commands
+export BO_cmd_python3=$(which python3)
+remembering BO_cmd_python3
+export BO_cmd_pip="${BO_cmd_python3} -m pip"
+remembering BO_cmd_pip
+
+# Populate the newly-created Anaconda virtual environment
+[[ "${_ShouldCreate}" == "true" ]] && execute_script python-populate
+
+unset _ShouldCreate
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

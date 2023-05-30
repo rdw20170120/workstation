@@ -13,7 +13,6 @@ main() {
     require_arguments $# 0
     require_directory_in BO_DirAnaconda
     require_variable BO_cmd_mamba
-    require_variable BO_cmd_pip
     local Packages
 
     # Need Python itself
@@ -41,12 +40,6 @@ main() {
 
     log_info "Installing desired packages (via Mamba) into Anaconda environment '${BO_DirAnaconda}'"
     ${BO_cmd_mamba} install --yes ${Packages}
-
-    # Need Python packages required by project source code
-    Packages="commandlib"
-
-    log_info "Installing desired packages (via PIP) into Anaconda environment '${BO_DirAnaconda}'"
-    ${BO_cmd_pip} install ${Packages}
 
     return 0
 }

@@ -13,7 +13,7 @@ export BO_DirAnaconda=${BO_Project}/.anaconda
 remembering BO_DirAnaconda
 
 if [[ -z "${CONDA_PREFIX}" ]] ; then
-    log_warn "CONDA_PREFIX is missing, Anaconda does not appear to be installed, skipping configuration for project."
+    log_warn "CONDA_PREFIX is missing, Anaconda does not appear to be installed, skipping configuration for Anaconda."
     return 0
 fi
 
@@ -45,7 +45,7 @@ source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-# NOTE: Restore PS1 since I don't like having Anaconda put the environment prefix there
+# NOTE: Restore PS1 since I don't like Anaconda put the environment prefix there
 export PS1=${BO_PS1}
 
 ###############################################################################
