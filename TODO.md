@@ -49,6 +49,7 @@ unless they should merely be deleted.
 1. [ ] generation - Extend code generation to all Bash scripts
 1. [ ] generation - Implement code generation for testing code generation functionality
 1. [ ] generation - Implement full test suite for code generation functionality
+1. [ ] generation - Refactor `all.py` modules to have a `_Generator` class that holds `config`
 1. [ ] iTerm2 - Configure iTerm2 to position itself
 1. [ ] iTerm2 - Switch font in terminal for better readability
 1. [ ] output - Investigate whether I want to capture log files during `test-run`
