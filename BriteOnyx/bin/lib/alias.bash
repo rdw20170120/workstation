@@ -8,8 +8,11 @@
 
 grep_options='--color=auto'
 grep_options+=' --exclude-dir=.anaconda'
+grep_options+=' --exclude-dir=.coverage'
 grep_options+=' --exclude-dir=.git'
+grep_options+=' --exclude-dir=.hg'
 grep_options+=' --exclude-dir=.pytest_cache'
+grep_options+=' --exclude-dir=__pycache__'
 grep_options+=' --exclude-dir=coverage'
 # TODO: Consider augmenting the other forms of 'grep' too
 # TODO: It appears that '--exclude-from' is not supported on macOS Mojave 10.14.6
@@ -21,7 +24,8 @@ grep_options+=' --exclude="*.swp"'
 alias grep="grep ${grep_options}"
 unset grep_options
 
-alias cycle='clear ; py-format && test-run && gen-run -vvv && app-run -vvv'
+alias cycle='clear ; test-run && gen-run -vvv && py-format && app-run -vvv'
+alias generate='clear ; gen-run && py-format && gen-merge'
 alias list_sort_by_size='sort -nr --key=5'
 alias logs_reset='rm -fr "${BO_Project}/log" ; mkdir "${BO_Project}/log"'
 alias redeclare='source "${BO_Project}/BriteOnyx/bin/lib/declare.bash"'
