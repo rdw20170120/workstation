@@ -1,5 +1,5 @@
-#!/usr/bin/env cat
-# NOTE:  This file is intended to be sourced into a Bash shell.
+#!/usr/bin/env false
+# This script is sourced into a Bash shell during user initialization.
 ################################################################################
 
 prepare_to_source() {

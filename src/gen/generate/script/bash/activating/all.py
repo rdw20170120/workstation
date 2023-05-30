@@ -64,8 +64,8 @@ def _generate_doc(dir_):
 
 def _generate_home(dir_):
     _generate_home_bin(dir_ / "bin")
+    _generate_home_darwin(dir_ / "Darwin")
     _generate_home_linux(dir_ / "Linux")
-    _generate_home_macos(dir_ / "macOS")
     _generate_home_ssh(dir_ / ".ssh")
 
 
@@ -77,15 +77,15 @@ def _generate_home_bin_lib(dir_):
     pass
 
 
-def _generate_home_linux(dir_):
+def _generate_home_darwin(dir_):
+    _generate_home_darwin_bin(dir_ / "bin")
+
+
+def _generate_home_darwin_bin(dir_):
     pass
 
 
-def _generate_home_macos(dir_):
-    _generate_home_macos_bin(dir_ / "bin")
-
-
-def _generate_home_macos_bin(dir_):
+def _generate_home_linux(dir_):
     pass
 
 

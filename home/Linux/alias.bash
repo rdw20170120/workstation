@@ -1,6 +1,10 @@
-#!/usr/bin/env cat
-# NOTE:  This file is intended to be sourced into a Bash shell.
-################################################################################
+#!/usr/bin/env false
+# Intended to be sourced in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+# TODO: DESCRIPTION
 
 _Script=${HOME}/bin/lib/alias_for_cd.bash
 if [[ -r "${_Script}" ]] ; then

@@ -26,6 +26,7 @@ _excluded_directory_regexes = [
     compile(r"\.git"),
     compile(r"\.hg"),
     compile(r"\.pytest_cache"),
+    compile(r"\.ssh"),
     compile(r"__pycache__"),
     compile(r"bin"),
     compile(r"coverage"),
@@ -36,18 +37,21 @@ _excluded_directory_regexes = [
     compile(r"waiting"),
 ]
 _excluded_file_regexes = [
-    compile(r".*\.bash"),
+    # These are file extensions for types of content never likely to be generated
+    compile(r".*\.out"),
+    compile(r"\..*"),
+    # These are file extensions for types of content not yet generated
     compile(r".*\.elv"),
     compile(r".*\.json"),
-    # Focus during manual testing by only including Markdown files
-    # compile(r".*\.md"),
-    compile(r".*\.out"),
-    compile(r".*\.py"),
     compile(r".*\.toml"),
     compile(r".*\.vim"),
     compile(r".*\.yaml"),
     compile(r".*\.yml"),
-    compile(r"\..*"),
+    # These are file extensions for types of content that are generated
+    # (so normally commented out to include them)
+    # compile(r".*\.bash"),
+    # compile(r".*\.md"),
+    # compile(r".*\.py"),
 ]
 
 _root_capture = environ["BO_DirCapture"]
@@ -136,9 +140,8 @@ def _merge_one(source, generated):
         return
     if source is None:
         return
-    print("Merging '%s' into '%s'" % (generated, source))
-    # Focus during manual testing by not invoking Neovim
-    # _nvim_diff.with_trailing_args(generated, source).run()
+    # print("Merging '%s' into '%s'" % (generated, source))
+    _nvim_diff.with_trailing_args(generated, source).run()
 
 
 def _prune_excluded_items(items, regexes):

@@ -64,9 +64,9 @@ def _generate_doc(dir_):
 def _generate_home(dir_):
     _generate_home_bin(dir_ / "bin")
     _generate_home_bin_lib(dir_ / "lib")
+    _generate_home_darwin(dir_ / "Darwin")
     _generate_home_linux(dir_ / "Linux")
-    _generate_home_macos(dir_ / "macOS")
-    _generate_home_macos_bin(dir_ / "bin")
+    _generate_home_darwin_bin(dir_ / "bin")
     _generate_home_ssh(dir_ / ".ssh")
 
 
@@ -78,15 +78,15 @@ def _generate_home_bin_lib(dir_):
     pass
 
 
+def _generate_home_darwin(dir_):
+    pass
+
+
+def _generate_home_darwin_bin(dir_):
+    pass
+
+
 def _generate_home_linux(dir_):
-    pass
-
-
-def _generate_home_macos(dir_):
-    pass
-
-
-def _generate_home_macos_bin(dir_):
     pass
 
 
@@ -165,6 +165,7 @@ def _generate_src_gen_generate_script(dir_):
 def _generate_src_gen_generate_script_bash(dir_):
     _generate_src_gen_generate_script_bash_activating(dir_ / "activating")
     _generate_src_gen_generate_script_bash_briteonyx(dir_ / "briteonyx")
+    python(generator(), dir_, "activate.py")
     python(library(), dir_, "all.py")
     python(package(), dir_, "__init__.py")
 
@@ -177,6 +178,7 @@ def _generate_src_gen_generate_script_bash_activating(dir_):
 
 
 def _generate_src_gen_generate_script_bash_briteonyx(dir_):
+    python(generator(), dir_, "activate.py")
     python(library(), dir_, "all.py")
     python(package(), dir_, "__init__.py")
 

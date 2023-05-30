@@ -62,8 +62,9 @@ def _generate_doc(dir_):
 
 def _generate_home(config, dir_):
     _generate_home_bin(config, dir_ / "bin")
-    _generate_home_linux(dir_ / "Linux")
-    _generate_home_macos(config, dir_ / "macOS")
+    _generate_home_darwin(config, dir_ / "Darwin")
+    _generate_home_linux(config, dir_ / "Linux")
+    _generate_home_shared(config, dir_ / "shared")
     _generate_home_ssh(dir_ / ".ssh")
 
 
@@ -89,21 +90,32 @@ def _generate_home_bin_lib(config, dir_):
     bash(sourced(config), dir_, "declare-git.bash")
 
 
-def _generate_home_linux(dir_):
-    pass
+def _generate_home_darwin(config, dir_):
+    _generate_home_darwin_bin(config, dir_ / "bin")
+    bash(executed(config), dir_, "bootstrap")
+    bash(sourced(config), dir_, "alias.bash")
+    bash(sourced(config), dir_, "declare-bootstrap-specific.bash")
 
 
-def _generate_home_macos(config, dir_):
-    _generate_home_macos_bin(config, dir_ / "bin")
-
-
-def _generate_home_macos_bin(config, dir_):
+def _generate_home_darwin_bin(config, dir_):
     bash(executed(config), dir_, "homebrew-install")
     bash(executed(config), dir_, "homebrew-list")
     bash(executed(config), dir_, "homebrew-populate")
     bash(executed(config), dir_, "homebrew-update")
     bash(executed(config), dir_, "homebrew-upgrade")
     bash(executed(config), dir_, "homebrew-uninstall")
+
+
+def _generate_home_linux(config, dir_):
+    bash(executed(config), dir_, "bootstrap")
+    bash(sourced(config), dir_, "alias.bash")
+    bash(sourced(config), dir_, "declare-bootstrap-specific.bash")
+
+
+def _generate_home_shared(config, dir_):
+    bash(executed(config), dir_, "bootstrap")
+    bash(sourced(config), dir_, "alias.bash")
+    bash(sourced(config), dir_, "declare-bootstrap-shared.bash")
 
 
 def _generate_home_ssh(dir_):

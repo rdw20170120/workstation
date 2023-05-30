@@ -17,6 +17,8 @@ def _generate(config, dir_):
     _generate_home(dir_ / "home")
     _generate_out(dir_ / "home")
     _generate_src(config, dir_ / "src")
+    briteonyx(sourced(config), dir_, "alias.bash")
+    briteonyx(sourced(config), dir_, "context.bash")
 
 
 def _generate_bin(config, dir_):
@@ -24,7 +26,7 @@ def _generate_bin(config, dir_):
     briteonyx(executed(config), dir_, "anaconda-populate")
     briteonyx(executed(config), dir_, "app-run")
     briteonyx(executed(config), dir_, "show_maybe_missed_source")
-    briteonyx(executed(config), dir_, "sync_on_macOS")
+    briteonyx(executed(config), dir_, "sync_workstation")
     briteonyx(executed(config), dir_, "tool-report")
 
 
@@ -93,8 +95,8 @@ def _generate_doc(dir_):
 
 def _generate_home(dir_):
     _generate_home_bin(dir_ / "bin")
+    _generate_home_darwin(dir_ / "Darwin")
     _generate_home_linux(dir_ / "Linux")
-    _generate_home_macos(dir_ / "macOS")
     _generate_home_ssh(dir_ / ".ssh")
 
 
@@ -106,15 +108,15 @@ def _generate_home_bin_lib(dir_):
     pass
 
 
-def _generate_home_linux(dir_):
+def _generate_home_darwin(dir_):
+    _generate_home_darwin_bin(dir_ / "bin")
+
+
+def _generate_home_darwin_bin(dir_):
     pass
 
 
-def _generate_home_macos(dir_):
-    _generate_home_macos_bin(dir_ / "bin")
-
-
-def _generate_home_macos_bin(dir_):
+def _generate_home_linux(dir_):
     pass
 
 

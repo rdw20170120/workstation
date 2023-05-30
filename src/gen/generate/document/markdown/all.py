@@ -51,8 +51,8 @@ def _generate_briteonyx_bin_lib(dir_):
 def _generate_briteonyx_doc(dir_):
     markdown(document(), dir_, "HowTo-activate_this_project.md")
     markdown(document(), dir_, "HowTo-execute_application.md")
-    markdown(document(), dir_, "HowTo-install-OpenJDK-15.md")
-    markdown(document(), dir_, "HowTo-install-packages.md")
+    #   markdown(document(), dir_, "HowTo-install-OpenJDK-15.md")
+    #   markdown(document(), dir_, "HowTo-install-packages.md")
     markdown(document(), dir_, "HowTo-setup-AWS_CLI.md")
     markdown(document(), dir_, "HowTo-setup-source_control.md")
     markdown(document(), dir_, "HowTo-setup-workstation.md")
@@ -62,8 +62,10 @@ def _generate_briteonyx_doc(dir_):
     markdown(document(), dir_, "HowTo-use-Vim.md")
     markdown(document(), dir_, "README.md")
     markdown(document(), dir_, "Solarized.md")
-    markdown(document(), dir_, "project_initiation.md")
-    markdown(document(), dir_, "testssl.md")
+
+
+#   markdown(document(), dir_, "project_initiation.md")
+#   markdown(document(), dir_, "testssl.md")
 
 
 def _generate_cfg(dir_):
@@ -76,13 +78,14 @@ def _generate_cfg_sample(dir_):
 
 
 def _generate_doc(dir_):
+    markdown(document(), dir_, "HowTo-use-Apple_macOS.md")
     markdown(document(), dir_, "README.md")
 
 
 def _generate_home(dir_):
     _generate_home_bin(dir_ / "bin")
+    _generate_home_darwin(dir_ / "Darwin")
     _generate_home_linux(dir_ / "Linux")
-    _generate_home_macos(dir_ / "macOS")
     _generate_home_ssh(dir_ / ".ssh")
     markdown(document(), dir_, "README.md")
 
@@ -96,21 +99,22 @@ def _generate_home_bin_lib(dir_):
     markdown(document(), dir_, "README.md")
 
 
+def _generate_home_darwin(dir_):
+    _generate_home_darwin_bin(dir_ / "bin")
+    markdown(document(), dir_, "README.md")
+
+
+def _generate_home_darwin_bin(dir_):
+    markdown(document(), dir_, "README.md")
+
+
 def _generate_home_linux(dir_):
     markdown(document(), dir_, "README.md")
 
 
-def _generate_home_macos(dir_):
-    _generate_home_macos_bin(dir_ / "bin")
-    markdown(document(), dir_, "README.md")
-
-
-def _generate_home_macos_bin(dir_):
-    markdown(document(), dir_, "README.md")
-
-
 def _generate_home_ssh(dir_):
-    markdown(document(), dir_, "README.md")
+    #   markdown(document(), dir_, "README.md")
+    pass
 
 
 def _generate_out(dir_):
