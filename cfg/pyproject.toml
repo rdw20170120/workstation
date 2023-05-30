@@ -2,55 +2,47 @@
 exclude = '''
 (
     PLACEHOLDER$
-  # By parent directory
+  | Dockerfile$
+  | \.DS_Store$
   | \.anaconda/.*$
-  | \.config/.*$
-  | \.git/.*$
-  | \.hg/.*$
-  | \.pytest_cache/.*$
-  | \.ssh/.*$
-  | __pycache__/.*$
-  | log/.*$
-  | out/.*$
-  | tmp/.*$
-  # By specific pathname
-  # By file suffix
   | \.avsc$
   | \.bash$
+  | \.bash_logout$
+  | \.bash_profile$
+  | \.bashrc$
   | \.c$
   | \.cfg$
+  | \.config/.*$
+  | \.coverage$
+  | \.coveragerc$
   | \.env$
+  | \.git/.*$
+  | \.gitignore$
+  | \.grep-exclude-from$
+  | \.hg/.*$
+  | \.inputrc$
   | \.java$
   | \.json$
   | \.log$
+  | \.mailmap$
   | \.md$
   | \.nix$
   | \.out$
+  | \.profile$
   | \.properties$
+  | \.pytest_cache/.*$
   | \.rst$
   | \.sh$
   | \.sig$
   | \.sql$
+  | \.ssh/.*$
   | \.toml$
   | \.txt$
   | \.vim$
+  | \.xprofile$
   | \.yaml$
   | \.yml$
-  # By more interesting patterns
-  | Dockerfile$
-  | \.DS_Store$
-  | \.bash_logout$
-  | \.bash_profile$
-  | \.bashrc$
-  | \.coverage$
-  | \.coveragerc$
-  | \.gitignore$
-  | \.grep-exclude-from$
-  | \.inputrc$
-  | \.mailmap$
-  | \.profile$
-  | \.xprofile$
-  # Project-specific
+  | __pycache__/.*$
   | bin/.*-run$
   | bin/all-.*$
   | bin/anaconda-.*$
@@ -65,6 +57,7 @@ exclude = '''
   | home/bin/git_.*$
   | home/bin/grep_.*$
   | home/bin/secure$
+  | log/.*$
 )
 '''
 
