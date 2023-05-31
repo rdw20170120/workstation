@@ -11,7 +11,6 @@
 require_directory_in BO_DirCapture
 require_directory_in BO_Project
 require_variable BO_DirAnaconda
-require_variable BO_cmd_conda
 
 # Maybe create Anaconda environment
 _ShouldCreate=true
@@ -73,7 +72,9 @@ unset _ShouldCreate
 # set +vx
 
 : << 'DisabledContent'
+require_variable BO_cmd_conda
 ${BO_cmd_conda} info
-mamba info
+require_variable BO_cmd_mamba
+${BO_cmd_mamba} info
 DisabledContent
 

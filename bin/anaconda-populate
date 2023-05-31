@@ -19,24 +19,24 @@ main() {
     Packages="python=3.11.*"
 
     # Need Python support tools
-    Packages="${Packages} ansi2html"
-    Packages="${Packages} black"
-    Packages="${Packages} coverage"
-    Packages="${Packages} pip"
-    Packages="${Packages} pytest"
-    Packages="${Packages} pytest-cov"
-    Packages="${Packages} pytest-html"
-    Packages="${Packages} pytest-icdiff"
-    Packages="${Packages} pytest-sugar"
+    Packages+=" ansi2html"
+    Packages+=" black"
+    Packages+=" coverage"
+    Packages+=" pip"
+    Packages+=" pytest"
+    Packages+=" pytest-cov"
+    Packages+=" pytest-html"
+    Packages+=" pytest-icdiff"
+    Packages+=" pytest-sugar"
 
-    Packages="${Packages} icdiff=1.9.*"
+    Packages+=" icdiff=1.9.*"
     # TODO: FIX: Why does icdiff=2.0.* seem to all be corrupted?
     # Packages="${Packages} icdiff=2.0.*"
 
     # Need Python packages required by project source code
-    Packages="${Packages} awscli"
-    Packages="${Packages} boto3"
-    Packages="${Packages} logzero"
+    Packages+=" awscli"
+    Packages+=" boto3"
+    Packages+=" logzero"
 
     log_info "Installing desired packages (via Mamba) into Anaconda environment '${BO_DirAnaconda}'"
     ${BO_cmd_mamba} install --yes ${Packages}
