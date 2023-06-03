@@ -1,4 +1,4 @@
-#!/usr/bin/env cat
+#!/usr/bin/env false
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
 # Configure paths
@@ -30,6 +30,12 @@ export BO_PathNative=${BO_PathOriginal}
 #     source "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh"
 # [ -s "${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm" ] && \
 #     source "${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm"
+
+################################################################################
+# Python Pyenv
+export PYENV_ROOT=${HOME}/.pyenv
+eval "$(pyenv init -)"
+# eval "$(pyenv init --path)"
 
 ################################################################################
 # NOTE: Order matters!
@@ -67,6 +73,7 @@ export PATH=${BO_PathSystem}:${BO_PathUser}
 # Anaconda (Mambaforge)
 export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
 export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
+export BO_PathTool=${BO_PathAnacondaBase}
 
 : << 'DisabledContent'
 DisabledContent

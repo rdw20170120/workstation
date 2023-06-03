@@ -8,16 +8,22 @@
 main() {
     # Populate Homebrew by installing desired casks & formulae
 
+    # minimal essential tools
+    brew install \
+        git \
+        iterm2 \
+        neovim \
+        python pyenv
+    python3 -m pip install --upgrade pip
+    python3 -m pip install pipenv
+    python3 -m pip install --upgrade pipenv
+    # helpful additional tools
     brew install \
         asciidoc \
         emacs \
-        git \
-        iterm2 \
         jsonlint \
         mambaforge \
         markdownlint-cli \
-        neovim \
-        python \
         rst-lint \
         shellcheck \
         yamllint
@@ -29,6 +35,7 @@ main() {
         kube-linter \
         kubernetes-cli \
         nvm \
+        postgresql@14 \
         postman
 }
 

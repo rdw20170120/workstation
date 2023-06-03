@@ -27,7 +27,7 @@ prepare_to_source() {
         echo "WARN: Skipping missing script '${_Script}'"
     fi
     return 1
-}
+} && export -f prepare_to_source
 
 ################################################################################
 # Configure terminal first, since other scripts depend upon it
@@ -58,8 +58,13 @@ _Script=${HOME}/bin/lib/configure_paths.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
 ################################################################################
-# Finally, define aliases to help the user
+# Define aliases to help the user
 _Script=${HOME}/alias.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+
+################################################################################
+# Configure for customer environment
+_Script=${HOME}/SamsClub.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
 unset _Script

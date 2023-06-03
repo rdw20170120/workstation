@@ -1,8 +1,11 @@
 #!/usr/bin/env false
-# Intended to be sourced in a Bash shell.
-[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-# NO: set -e
-# NO: trap ... EXIT
+# Intended to be executed in a Bash shell via `source`.
+set -o errexit -o nounset -o pipefail +o verbose +o xtrace
+[[ "${BO_Trace:-UNDEFINED}" != UNDEFINED ]] && \
+    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
+    [[ "${BO_Trace:-UNDEFINED}" == TRACE ]] && \
+    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
+    set -o verbose -o xtrace
 ###############################################################################
 # TODO: Implement: Consider installing Git pre-commit hook
 # First, by installing the tool: `brew install pre-commit`
@@ -102,10 +105,12 @@ maybe_pull() {
 }
 
 ###############################################################################
+# TODO: Show Bash's currently-active short options: `printf %s\\n "$-"`
+# TODO: Show Bash's currently-active options: `set -o | grep -Fw on`
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -vx
+# export PS4='$ ' ; set -o verbose -o xtrace
 # Code to debug...
-# set +vx
+# set +o verbose +o xtrace
 
 : << 'DisabledContent'
 DisabledContent

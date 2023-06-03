@@ -10,7 +10,10 @@ main() {
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
     sudo rm -fr /Applications/iTerm.app
-    sudo rm -fr /Applications/Meld.app
+    sudo rm -fr /Applications/Postman.app
+    sudo rm -fr "${HOMEBREW_PREFIX}"
+
+    return 0
 }
 
 main $@

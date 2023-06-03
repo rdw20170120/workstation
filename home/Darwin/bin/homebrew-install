@@ -18,6 +18,7 @@ main() {
     curl -fsSL --output "${Dir}/${File}" "${URL}"
     bash "${Dir}/${File}"
     brew tap homebrew/cask-versions
+    brew tap homebrew/core
 
     return 0
 }

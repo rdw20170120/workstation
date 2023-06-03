@@ -15,7 +15,6 @@ main() {
     require_variable BO_cmd_pip
     local Packages
 
-
     # Need Python packages required by project source code
     Packages="commandlib"
     # Packages="${Packages} icdiff=1.9.*"
