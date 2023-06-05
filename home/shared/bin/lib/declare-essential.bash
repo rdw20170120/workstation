@@ -1,5 +1,6 @@
 #!/usr/bin/env false
 # Intended to be executed in a Bash shell via `source`.
+# NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
 [[ "${BO_Trace:-UNDEFINED}" != UNDEFINED ]] && \
     1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
@@ -91,16 +92,6 @@ require_value() {
     abort_on_fail $? "Missing value '$1'"
 } && export -f require_value
 
-###############################################################################
-# TODO: Show Bash's currently-active short options: `printf %s\\n "$-"`
-# TODO: Show Bash's currently-active options: `set -o | grep -Fw on`
-# NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -o verbose -o xtrace
-# Code to debug...
-# set +o verbose +o xtrace
-
-: << 'DisabledContent'
-# This function is redundant when using Bash option nounset
 require_variable() {
     # Require variable $1
     require_arguments $# 1
@@ -111,5 +102,15 @@ require_variable() {
     abort_on_fail $? "Undefined variable '$1'"
 } && export -f require_variable
 
+###############################################################################
+# TODO: Show Bash's currently-active short options: `printf %s\\n "$-"`
+# TODO: Show Bash's currently-active options: `set -o | grep -Fw on`
+# NOTE: Uncomment these lines for debugging, placed where needed
+# NO: set -o errexit -o nounset
+# export PS4='$ ' ; set -o verbose -o xtrace
+# Code to debug...
+# set +o verbose +o xtrace
+
+: << 'DisabledContent'
 DisabledContent
 
