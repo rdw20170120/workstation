@@ -32,12 +32,6 @@ export BO_PathNative=${BO_PathOriginal}
 #     source "${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm"
 
 ################################################################################
-# Python Pyenv
-export PYENV_ROOT=${HOME}/.pyenv
-eval "$(pyenv init -)"
-# eval "$(pyenv init --path)"
-
-################################################################################
 # NOTE: Order matters!
 # Anaconda should override all
 # (win all collisions)
@@ -72,9 +66,16 @@ export PATH=${BO_PathSystem}:${BO_PathUser}
 ################################################################################
 # Anaconda (Mambaforge)
 # export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
+# export CONDA_PREFIX=${HOME}/mambaforge
 # export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
 # export BO_PathTool=${BO_PathAnacondaBase}
 
 : << 'DisabledContent'
+################################################################################
+# Python Pyenv
+# export PYENV_ROOT=${HOME}/.pyenv
+# eval "$(pyenv init -)"
+# eval "$(pyenv init --path)"
+
 DisabledContent
 

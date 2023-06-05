@@ -87,11 +87,10 @@ sync_home() {
     log_info "Synchronizing workstation with content captured in '${Dir}'"
     require_directory "${Dir}"
 
-    sync_directory "${HOME}/.config" "${Dir}/.config"
-    sync_directory "${HOME}/.local"  "${Dir}/.local"
-    sync_directory "${HOME}/.ssh"    "${Dir}/.ssh"
-    sync_directory "${HOME}/.vim"    "${Dir}/.vim"
-    sync_directory "${HOME}/bin"     "${Dir}/bin"
+    sync_directory "${HOME}/.config/nvim" "${Dir}/.config/nvim"
+    sync_directory "${HOME}/.local"       "${Dir}/.local"
+    sync_directory "${HOME}/.vim"         "${Dir}/.vim"
+    sync_directory "${HOME}/bin"          "${Dir}/bin"
 
     sync_file "${HOME}" "${Dir}" .bash_logout
     sync_file "${HOME}" "${Dir}" .bash_profile
@@ -102,6 +101,8 @@ sync_home() {
     sync_file "${HOME}" "${Dir}" .spacemacs
     sync_file "${HOME}" "${Dir}" .vimrc
     sync_file "${HOME}" "${Dir}" alias.bash
+
+    sync_file "${HOME}/.ssh" "${Dir}/.ssh" config
 }
 
 main() {
@@ -116,7 +117,9 @@ main() {
 
     sync_directory "${HOME}/bin" "${DirHome}/${BO_OS}/bin"
     sync_directory "${HOME}/bin" "${DirHome}/shared/bin"
+    sync_directory "${HOME}/bin" "${DirHome}/customer/bin"
     sync_home "${DirHome}/${BO_OS}"
+    sync_home "${DirHome}/customer"
     sync_home "${DirHome}/shared"
 
     return 0

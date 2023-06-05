@@ -2,7 +2,7 @@
 # This script is sourced into a Bash shell during user initialization.
 ################################################################################
 
-_Script=${HOME}/bin/lib/alias_for_Bash.bash
+_Script=${HOME}/bin/lib/alias_for_bash.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
 _Script=${HOME}/bin/lib/alias_for_cd.bash

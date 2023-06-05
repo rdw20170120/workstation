@@ -62,6 +62,11 @@ prepare_to_source "${_Script}" && source "${_Script}"
 _Script=${HOME}/alias.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
+################################################################################
+# Configure for customer environment
+_Script=${HOME}/SamsClub.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+
 unset _Script
 
 : << 'DisabledContent'

@@ -13,16 +13,20 @@ main() {
     require_arguments $# 0
     require_directory_in BO_DirAnaconda
     require_variable BO_cmd_pip
-    local Packages
+
+    # Upgrade PIP
+    ${BO_cmd_pip} install --upgrade pip
+    abort_on_fail $? "from ${BO_cmd_pip} install --upgrade pip"
 
     # Need Python packages required by project source code
-    Packages="commandlib"
+    local Packages="commandlib"
     # Packages="${Packages} icdiff=1.9.*"
     # TODO: FIX: Why does icdiff=2.0.* seem to all be corrupted?
     # Packages="${Packages} icdiff=2.0.*"
 
     log_info "Installing desired packages (via PIP) into Anaconda environment '${BO_DirAnaconda}'"
-    ${BO_cmd_pip} install ${Packages}
+    # ${BO_cmd_pip} install ${Packages}
+    # abort_on_fail $? "from ${BO_cmd_pip} install ${Packages}"
 
     return 0
 }

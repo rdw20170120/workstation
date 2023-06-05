@@ -3,7 +3,9 @@
 ################################################################################
 # Alias for ls
 alias lB='ls -Aln'
+alias lF='ls -AFln'
 alias lL='ls -Lln'
+alias lR='ls -AlnR'
 alias la='ls -Al'
 alias ll='ls -l'
 
