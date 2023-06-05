@@ -25,8 +25,8 @@ main() {
     # Packages="${Packages} icdiff=2.0.*"
 
     log_info "Installing desired packages (via PIP) into Anaconda environment '${BO_DirAnaconda}'"
-    # ${BO_cmd_pip} install ${Packages}
-    # abort_on_fail $? "from ${BO_cmd_pip} install ${Packages}"
+    ${BO_cmd_pip} install ${Packages}
+    abort_on_fail $? "from ${BO_cmd_pip} install ${Packages}"
 
     return 0
 }
