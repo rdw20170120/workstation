@@ -1,5 +1,13 @@
 #!/usr/bin/env false
-# This script is sourced into a Bash shell during user initialization.
+# Intended to be executed in a Bash shell during user initialization (login).
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+[[ "${BO_Trace:-UNDEFINED}" != UNDEFINED ]] && \
+    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
+    [[ "${BO_Trace:-UNDEFINED}" == TRACE ]] && \
+    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
+    set -o verbose -o xtrace
+# NO: trap ... EXIT
 ################################################################################
 
 _Script=${HOME}/bin/lib/alias_for_bash.bash

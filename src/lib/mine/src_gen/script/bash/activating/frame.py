@@ -14,9 +14,13 @@ from .material import *
 def header_activation(config):
     return [
         shebang_sourced(),
-        comment("Intended to be sourced in a Bash shell during activation."),
+        comment(
+            "Intended to be executed in a Bash shell via `source` during activation."
+        ),
+        no(set_("-o errexit", "-o nounset")),
+        set_("-o pipefail", "+o verbose", "+o xtrace"),
+        eol(),
         tracing_in_header(config),
-        no(set_("-e")),
         no(trap("...", "EXIT")),
         rule(),
     ]

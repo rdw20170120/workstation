@@ -72,8 +72,25 @@ def header_executed(config):
     return [
         shebang_bash(),
         comment("Intended to be executed in a Bash shell."),
+        no(set_("-o errexit", "-o nounset")),
+        set_("-o pipefail", "+o verbose", "+o xtrace"),
+        eol(),
         tracing_in_header(config),
-        no(set_("-e")),
+        no(trap("...", "EXIT")),
+        rule(),
+    ]
+
+
+def header_initialization(config):
+    return [
+        shebang_bash(),
+        comment(
+            "Intended to be executed in a Bash shell during user initialization (login)."
+        ),
+        no(set_("-o errexit", "-o nounset")),
+        set_("-o pipefail", "+o verbose", "+o xtrace"),
+        eol(),
+        tracing_in_header(config),
         no(trap("...", "EXIT")),
         rule(),
     ]
@@ -82,9 +99,11 @@ def header_executed(config):
 def header_sourced(config):
     return [
         shebang_sourced(),
-        comment("Intended to be sourced in a Bash shell."),
+        comment("Intended to be executed in a Bash shell via `source`."),
+        no(set_("-o errexit", "-o nounset")),
+        set_("-o pipefail", "+o verbose", "+o xtrace"),
+        eol(),
         tracing_in_header(config),
-        no(set_("-e")),
         no(trap("...", "EXIT")),
         rule(),
     ]
@@ -148,16 +167,29 @@ def source_or_abort(file_, script="Script", status="Status"):
 
 def tracing_in_header(config):
     return [
-        string_is_not_null(dq(vr(config.var_trace))),
-        and_(),
-        " 1>&2 ",
-        echo(dq("Executing ", vr("BASH_SOURCE"))),
+        string_not_equals(dq(vr(x(config.var_trace, ":-UNDEFINED"))), "UNDEFINED"),
         and_(),
         " ",
-        string_not_equal(dq(vr(config.var_trace)), sq(config.trace_minimal)),
+        bs(),
+        indent(),
+        "1>&2 ",
+        echo(dq("DEBUG: Executing ", vr("BASH_SOURCE"))),
         and_(),
         " ",
-        set_("-vx"),
+        bs(),
+        indent(),
+        string_equals(dq(vr(x(config.var_trace, ":-UNDEFINED"))), config.trace_minimal),
+        and_(),
+        " ",
+        bs(),
+        indent(),
+        "1>&2 ",
+        echo(dq("DEBUG: Tracing ", vr("BASH_SOURCE"))),
+        and_(),
+        " ",
+        bs(),
+        indent(),
+        set_("-o verbose", "-o xtrace"),
         eol(),
     ]
 

@@ -179,7 +179,7 @@ def string_is_null(expression):
     return condition("[[", "-z", expression, "]]")
 
 
-def string_not_equal(left, right):
+def string_not_equals(left, right):
     return condition("[[", left, "!=", right, "]]")
 
 

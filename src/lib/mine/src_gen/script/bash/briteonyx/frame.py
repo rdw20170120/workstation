@@ -30,8 +30,10 @@ def header_executed(config):
     return [
         shebang_bash(),
         comment("Intended to be executed in a Bash shell."),
+        no(set_("-o errexit", "-o nounset")),
+        set_("-o pipefail", "+o verbose", "+o xtrace"),
+        eol(),
         tracing_in_header(config),
-        no(set_("-e")),
         trap("warn_on_error", "EXIT"),
         eol(),
         rule(),
@@ -41,9 +43,11 @@ def header_executed(config):
 def header_sourced(config):
     return [
         shebang_sourced(),
-        comment("Intended to be sourced in a Bash shell."),
+        comment("Intended to be executed in a Bash shell via `source`."),
+        no(set_("-o errexit", "-o nounset")),
+        set_("-o pipefail", "+o verbose", "+o xtrace"),
+        eol(),
         tracing_in_header(config),
-        no(set_("-e")),
         no(trap("...", "EXIT")),
         rule(),
     ]

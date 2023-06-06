@@ -35,6 +35,16 @@ def executed(config):
     ]
 
 
+def initialization(config):
+    return [
+        header_initialization(config),
+        todo("DESCRIPTION"),
+        line(),
+        todo("CONTENT"),
+        disabled_content_footer(),
+    ]
+
+
 def sourced(config):
     return [
         header_sourced(config),
