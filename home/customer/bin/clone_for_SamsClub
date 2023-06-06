@@ -15,44 +15,53 @@ main() {
     # Clone repositories for Sam's Club
     local -r Source=SamsClub
     local -r Connection=MeAt${Source}
-    local -r Dir=${HOME}/repo/${Source}
+    local    Dir
     local -r Profile=legato-pim
 
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" V2-comparator
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" comparator
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-aggregator
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-atg-validator
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-be
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-be-archive
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-client
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-dags
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-data-utils
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-data-validator
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-e2e-tests
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-ingestion
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-ingestion-archive
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-ingestion-atg
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-integration-tests
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-jobs
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-omni-validation
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-ops
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-performance-tests
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-rule-engine
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-scheduler
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-server
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-status-portal
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-sync
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-ui
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-utils
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" legato-v2-migration
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" reconcile-service
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" rule-engine
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" slr-comparator
-    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" version-comparator
+    Dir=${HOME}/repo/${Source}/ref/V1
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-client
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-data-validator
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-e2e-tests
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ingestion
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-omni-validation
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ops
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-server
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-status-portal
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-sync
 
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" legato-be
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" legato-ingestion
-    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" legato-server
+    Dir=${HOME}/repo/${Source}/ref/V2
+    maybe_clone "${Dir}" "${Connection}:${Profile}" V2-comparator
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-be
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-dags
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-data-validator
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ingestion
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-integration-tests
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ops
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-rule-engine
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ui
+
+    Dir=${HOME}/repo/${Source}/ref/unknown
+    maybe_clone "${Dir}" "${Connection}:${Profile}" comparator
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-aggregator
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-atg-validator
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-be-archive
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-data-utils
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ingestion-archive
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ingestion-atg
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-jobs
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-performance-tests
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-scheduler
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-utils
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-v2-migration
+    maybe_clone "${Dir}" "${Connection}:${Profile}" reconcile-service
+    maybe_clone "${Dir}" "${Connection}:${Profile}" rule-engine
+    maybe_clone "${Dir}" "${Connection}:${Profile}" slr-comparator
+    maybe_clone "${Dir}" "${Connection}:${Profile}" version-comparator
+
+    Dir=${HOME}/repo/${Source}/wip
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-be
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ingestion
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-server
 
     return 0
 }
