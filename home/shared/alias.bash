@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env false
 # Intended to be executed in a Bash shell during user initialization (login).
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace

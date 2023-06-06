@@ -8,6 +8,7 @@
 main() {
     # Configure Me@Sam's Club as the current user in the current Git repository
 
+    git config pull.rebase true
     git config user.email Rob.Williams@samsclub.com
     git config user.name 'Rob Williams'
 
