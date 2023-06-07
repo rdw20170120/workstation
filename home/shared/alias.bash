@@ -9,14 +9,23 @@ set -o pipefail +o verbose +o xtrace
     set -o verbose -o xtrace
 # NO: trap ... EXIT
 ###############################################################################
-# TODO: DESCRIPTION
 
-# TODO: CONTENT
-###############################################################################
-# NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -vx
-# Code to debug...
-# set +vx
+_Script=${HOME}/bin/lib/alias_for_bash.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+
+_Script=${HOME}/bin/lib/alias_for_cd.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+
+_Script=${HOME}/bin/lib/alias_for_git.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+
+_Script=${HOME}/bin/lib/alias_for_inputrc.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+
+_Script=${HOME}/bin/lib/alias_for_ls.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+
+unset _Script
 
 : << 'DisabledContent'
 # Add an "alert" alias for long running commands.  Use like so:

@@ -65,6 +65,7 @@ export PATH=${BO_PathSystem}:${BO_PathUser}
 
 ################################################################################
 # Anaconda (Mambaforge)
+# TODO: Add logic based on presence of HOMEBREW_PREFIX
 # export CONDA_PREFIX=${HOMEBREW_PREFIX}/Caskroom/mambaforge/base
 # export CONDA_PREFIX=${HOME}/mambaforge
 # export BO_PathAnacondaBase=${CONDA_PREFIX}/bin:${CONDA_PREFIX}/condabin
