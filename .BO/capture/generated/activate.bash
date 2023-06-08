@@ -1,7 +1,12 @@
 #!/usr/bin/env false
-# Intended to be sourced in a Bash shell during activation.
-[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-# NO: set -e
+# Intended to be executed in a Bash shell via `source` during activation.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+[[ -n "${BO_Trace}" ]] && \
+    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
+    [[ "${BO_Trace}" == TRACE ]] && \
+    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
+    set -o verbose -o xtrace
 # NO: trap ... EXIT
 ###############################################################################
 # Activate the BriteOnyx framework to manage this project directory tree
@@ -28,7 +33,9 @@ fi
 export BO_DirCapture="${PWD}/.BO/capture"
 mkdir -p "${BO_DirCapture}/after" "${BO_DirCapture}/before" "${BO_DirCapture}/current"
 (set -o posix ; set) | sort > "${BO_DirCapture}/before/activation.env"
+
 _Script=${PWD}/BriteOnyx/bin/lib/declare-log4bash.bash
+# TODO: Require script
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
@@ -48,6 +55,7 @@ export BO_Project=${PWD}
 remembering BO_Project
 
 _Script=${BO_Project}/BriteOnyx/bin/lib/declare.bash
+# TODO: Require script
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
@@ -59,21 +67,15 @@ export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
 [[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}
 [[ -z "${BO_PathUser}" ]] && export BO_PathUser=${HOME}/bin
 
-
 _Script=${BO_Project}/BriteOnyx/bin/lib/set_path.bash
+# TODO: Require script
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
 
 # Detect operating system
-# TODO: Write as function
 # TODO: Add detection of various Linux, when we care
-_result=$(uname)
-if [[ "${_result}" == Darwin ]] ; then
-    export BO_OS=macOS
-else
-    export BO_OS=UNKNOWN
-fi
+export BO_OS=$(uname)
 remembering BO_OS
 
 # Establish temporary directory for project
@@ -92,6 +94,7 @@ maybe_copy_file "${BO_Project}/cfg/sample/context.bash" "${BO_Project}/context.b
 # Configure Anaconda environment
 (set -o posix ; set) | sort > "${BO_DirCapture}/before/Anaconda.env"
 _Script=${BO_Project}/BriteOnyx/bin/lib/configure_Anaconda.bash
+# TODO: Require script
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
@@ -100,6 +103,7 @@ source "${_Script}" ; _Status=$?
 # Configure Python
 (set -o posix ; set) | sort > "${BO_DirCapture}/before/Python.env"
 _Script=${BO_Project}/BriteOnyx/bin/lib/configure_Python.bash
+# TODO: Require script
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
@@ -113,29 +117,34 @@ if [[ -r ${_Script} ]] ; then
 fi
 
 _Script="${BO_Project}/context.bash"
+# TODO: Require script
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
 
 _Script="${BO_Project}/BriteOnyx/bin/lib/alias.bash"
+# TODO: Require script
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
 
 _Script="${BO_Project}/alias.bash"
+# TODO: Require script
 source "${_Script}" ; _Status=$?
 [[ ${_Status} -ne 0 ]] &&
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
 
 (set -o posix ; set) | sort > "${BO_DirCapture}/after/activation.env"
+
 log_good "BriteOnyx has successfully activated this project"
 log_info "To get started, try executing the 'cycle' alias..."
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -vx
+# NO: set -o errexit -o nounset
+# export PS4='$ ' ; set -o verbose -o xtrace
 # Code to debug...
-# set +vx
+# set +o verbose +o xtrace
 
 : << 'DisabledContent'
 DisabledContent

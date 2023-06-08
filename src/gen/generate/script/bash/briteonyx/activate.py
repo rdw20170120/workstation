@@ -33,12 +33,19 @@ def _build(config):
         note("We can now use BriteOnyx Bash functionality."),
         line(),
         _prepare_paths(config),
+        line(),
         _detect_operating_system(config),
+        line(),
         _prepare_file_system(config),
+        line(),
         _configure_anaconda(config),
+        line(),
         _configure_python(config),
+        line(),
         _call_project_scripts(config),
+        line(),
         _capture_environment(config, "activation", "after"),
+        line(),
         _footer(),
     ]
 
@@ -52,7 +59,6 @@ def _call_project_scripts(config):
         source_or_abort(dq(_briteonyx_alias_script(config)), _script, _status),
         line(),
         source_or_abort(dq(_project_alias_script(config)), _script, _status),
-        line(),
     ]
 
 
@@ -79,7 +85,6 @@ def _configure_anaconda(config):
         _capture_environment(config, "Anaconda", "before"),
         source_or_abort(_configure_anaconda_script(config), _script, _status),
         _capture_environment(config, "Anaconda", "after"),
-        line(),
     ]
 
 
@@ -95,7 +100,6 @@ def _configure_python(config):
         _capture_environment(config, "Python", "before"),
         source_or_abort(_configure_python_script(config), _script, _status),
         _capture_environment(config, "Python", "after"),
-        line(),
     ]
 
 
@@ -140,29 +144,13 @@ def _create_temporary_directory(config):
 
 
 def _detect_operating_system(config):
-    # TODO: Make appropriate constants
-    local = "_result"
     return [
         comment("Detect operating system"),
-        todo("Write as function"),
         todo("Add detection of various Linux, when we care"),
-        assign(vn(local), substitute("uname")),
+        export(vn(config.var_operating_system), substitute("uname")),
         eol(),
-        if_(
-            string_equals(dq(vr(local)), "Darwin"),
-            indent(),
-            export(vn(config.var_operating_system), "macOS"),
-            eol(),
-        ),
-        else_(
-            indent(),
-            export(vn(config.var_operating_system), "UNKNOWN"),
-            eol(),
-        ),
-        fi(),
         remembering(config.var_operating_system),
         eol(),
-        line(),
     ]
 
 
@@ -189,7 +177,6 @@ def _prepare_file_system(config):
             dq(_context_sample(config)), dq(_project_context_script(config))
         ),
         eol(),
-        line(),
     ]
 
 
@@ -198,7 +185,6 @@ def _prepare_paths(config):
         _remember_paths(config),
         line(),
         source_or_abort(_set_path_script(config), _script, _status),
-        line(),
     ]
 
 
@@ -233,7 +219,6 @@ def _remember_paths(config):
         eol(),
         export_if_null(config.var_user_path, x(vr("HOME"), "/bin")),
         eol(),
-        line(),
     ]
 
 

@@ -24,6 +24,9 @@ require_script "${_Script}" ; source "${_Script}"
 _Script=${HOME}/bin/lib/declare-PostgreSQL.bash
 require_script "${_Script}" ; source "${_Script}"
 
+_Script=${HOME}/Documents/SamsClub/credential.bash
+require_script "${_Script}" ; source "${_Script}"
+
 unset _Script
 
 _Project=legato-be

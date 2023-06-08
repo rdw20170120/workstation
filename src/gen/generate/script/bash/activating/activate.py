@@ -63,10 +63,14 @@ def _briteonyx_declare_script(config):
 def _build(config):
     return [
         _header(config),
+        line(),
         _create_capture_directory(config),
         _capture_environment(config, "activation", "before"),
+        line(),
         _declare_logging(),
+        line(),
         _remember(config),
+        line(),
         _declare_briteonyx(config),
         line(),
     ]
@@ -135,7 +139,6 @@ def _declare_logging():
         line(),
         log_info("Activating ", sq(vr("PWD")), " as the current project"),
         eol(),
-        line(),
     ]
 
 
@@ -172,7 +175,6 @@ def _header(config):
         _abort_if_activated(config),
         line(),
         _abort_if_missing_pwd(),
-        line(),
     ]
 
 
@@ -185,7 +187,6 @@ def _remember(config):
         _declare_remembering(),
         line(),
         _remember_project_root(config),
-        line(),
     ]
 
 

@@ -23,9 +23,10 @@ def abort_script():
 def debugging_comment():
     return [
         note("Uncomment these lines for debugging, placed where needed"),
-        comment(export("PS4", sq("$ ")), seq(), set_("-vx")),
+        no(set_("-o errexit", "-o nounset")),
+        comment(export("PS4", sq("$ ")), seq(), set_("-o verbose", "-o xtrace")),
         comment("Code to debug..."),
-        comment(set_("+vx")),
+        comment(set_("+o verbose", "+o xtrace")),
     ]
 
 
@@ -153,6 +154,7 @@ def source_or_abort(file_, script="Script", status="Status"):
     return [
         assign(vn(script), file_),
         eol(),
+        todo("Require script"),
         source(dq(vr(script))),
         seq(),
         remember_last_status(status),
@@ -167,7 +169,7 @@ def source_or_abort(file_, script="Script", status="Status"):
 
 def tracing_in_header(config):
     return [
-        string_not_equals(dq(vr(x(config.var_trace, ":-UNDEFINED"))), "UNDEFINED"),
+        string_is_not_null(dq(vr(config.var_trace))),
         and_(),
         " ",
         bs(),
@@ -178,7 +180,7 @@ def tracing_in_header(config):
         " ",
         bs(),
         indent(),
-        string_equals(dq(vr(x(config.var_trace, ":-UNDEFINED"))), config.trace_minimal),
+        string_equals(dq(vr(config.var_trace)), config.trace_minimal),
         and_(),
         " ",
         bs(),

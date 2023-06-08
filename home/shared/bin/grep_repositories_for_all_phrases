@@ -4,91 +4,110 @@
 # NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
-# Hunt for all interesting phrases in repositories
 
-script=$(which grep_repositories_for_phrase)
-if [[ -z "$script" ]] ; then
-  echo "FATAL: Missing script '$script', aborting"
-  exit
-elif [[ ! -r "$script" ]] ; then
-  echo "FATAL: Unreadable script '$script', aborting"
-  exit
-fi
-
-out=~/Documents/hunt
-mkdir -p $out
-if [[ ! -d "$out" ]] ; then
-  echo "FATAL: Missing output directory '$out', aborting"
-  exit
-fi
-
-hunt () {
+hunt() {
   # Hunt for search phrase $2, capturing to file $1
   # $1 = output directory
   # $2 = search phrase
-  local -r f=$1/$2.out
-  if [[ -f "$f" ]] ; then
-    echo "WARN: Skipping, output file '$f' already exists"
+  local -r File=$1/$2.out
+  if [[ -f "${File}" ]] ; then
+    echo "WARN: Skipping, output file '${File}' already exists"
   else
-    echo "INFO: Hunting for '$2', writing to output file '$f'"
-    $script $2 >$f
+    echo "INFO: Hunting for '$2', writing to output file '${File}'"
+    ${Script} $2 >"${File}"
   fi
 }
 
-# Docker image
-hunt $out Bitnami
-hunt $out Docker
-hunt $out image
-
-# Environment
-hunt $out dev
-hunt $out lab
-hunt $out non-prod
-hunt $out nonprod
-hunt $out prd
-hunt $out prod
-hunt $out stage
-hunt $out staging
-hunt $out stg
-
-# Environment variable
-
-# secret
-hunt $out cert
-hunt $out password
-hunt $out secret
-hunt $out SSL
-hunt $out TLS
-
-# tools and vendors
-hunt $out Amazon
-hunt $out Apache
-hunt $out AWS
-hunt $out Dell
-hunt $out Hashicorp 
-hunt $out Helm
-hunt $out Java
-hunt $out Jenkins
-hunt $out K8s
-hunt $out Kafka
-hunt $out kubectl
-hunt $out Kubernetes
-hunt $out Microsoft
-hunt $out nginx
-hunt $out Oracle
-hunt $out PHP
-hunt $out Puppet
-hunt $out Terraform 
-hunt $out Vault 
-
-# proper name
-hunt $out Enflick
-hunt $out TextNow
-
 main() {
-    # TODO: DESCRIPTION
+    # Hunt for all interesting phrases in repositories
+    local -r Out=~/Documents/hunt
+    local -r Script=$(which grep_repositories_for_phrase)
 
-    # TODO: CONTENT
+    if [[ -z "${Script}" ]] ; then
+      echo "FATAL: Missing script '${Script}', aborting"
+      exit
+    elif [[ ! -r "${Script}" ]] ; then
+      echo "FATAL: Unreadable script '${Script}', aborting"
+      exit
+    fi
+
+    mkdir -p "${Out}"
+    if [[ ! -d "${Out}" ]] ; then
+      echo "FATAL: Missing output directory '${Out}', aborting"
+      exit
+    fi
+
+    # container
+    hunt "${Out}" Bitnami
+    hunt "${Out}" Docker
+    hunt "${Out}" container
+    hunt "${Out}" image
+
+    # environment
+    hunt "${Out}" dev
+    hunt "${Out}" development
+    hunt "${Out}" lab
+    hunt "${Out}" non-prod
+    hunt "${Out}" non-production
+    hunt "${Out}" nonprod
+    hunt "${Out}" nonproduction
+    hunt "${Out}" prd
+    hunt "${Out}" prod
+    hunt "${Out}" production
+    hunt "${Out}" qa
+    hunt "${Out}" stage
+    hunt "${Out}" staging
+    hunt "${Out}" stg
+
+    # environment variable
+    hunt "${Out}" BO_
+
+    # secret
+    hunt "${Out}" SSL
+    hunt "${Out}" TLS
+    hunt "${Out}" cert
+    hunt "${Out}" certificate
+    hunt "${Out}" password
+    hunt "${Out}" secret
+    hunt "${Out}" token
+
+    # tool and vendor
+    hunt "${Out}" AWS
+    hunt "${Out}" Amazon
+    hunt "${Out}" Apache
+    hunt "${Out}" Celery
+    hunt "${Out}" Dell
+    hunt "${Out}" Django
+    hunt "${Out}" Hashicorp
+    hunt "${Out}" Helm
+    hunt "${Out}" Homebrew
+    hunt "${Out}" Java
+    hunt "${Out}" Javascript
+    hunt "${Out}" Jenkins
+    hunt "${Out}" K8s
+    hunt "${Out}" Kafka
+    hunt "${Out}" Krew
+    hunt "${Out}" Kubernetes
+    hunt "${Out}" Microsoft
+    hunt "${Out}" MySQL
+    hunt "${Out}" Oracle
+    hunt "${Out}" PHP
+    hunt "${Out}" PostgreSQL
+    hunt "${Out}" Puppet
+    hunt "${Out}" Python
+    hunt "${Out}" Rust
+    hunt "${Out}" Terraform
+    hunt "${Out}" Terragrunt
+    hunt "${Out}" Vault
+    hunt "${Out}" brew
+    hunt "${Out}" kubectl
+    hunt "${Out}" nginx
+
+    # Sam's Club
+    hunt "${Out}" CreateProductAssetsFn
+    hunt "${Out}" CreateProjectFn
+    hunt "${Out}" Legato
+    hunt "${Out}" PublishProjectFn
 
     return 0
 }

@@ -2,9 +2,9 @@
 # Intended to be executed in a Bash shell via `source`.
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
-[[ "${BO_Trace:-UNDEFINED}" != UNDEFINED ]] && \
+[[ -n "${BO_Trace}" ]] && \
     1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
-    [[ "${BO_Trace:-UNDEFINED}" == TRACE ]] && \
+    [[ "${BO_Trace}" == TRACE ]] && \
     1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
     set -o verbose -o xtrace
 # NO: trap ... EXIT
@@ -41,9 +41,10 @@ set -o pipefail +o verbose +o xtrace
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -vx
+# NO: set -o errexit -o nounset
+# export PS4='$ ' ; set -o verbose -o xtrace
 # Code to debug...
-# set +vx
+# set +o verbose +o xtrace
 
 : << 'DisabledContent'
 DisabledContent

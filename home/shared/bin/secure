@@ -79,6 +79,8 @@ main() {
     secure_home
     secure_bin
     secure_ssh
+    chmod_recursively_to_only_me ~/Documents
+    chmod_recursively_to_only_me ~/Dropbox
 
     return 0
 }
