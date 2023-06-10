@@ -4,6 +4,7 @@
 # *.log
 # *.out
 # *.sig
+# /.BO/
 # /out/
 # htmlcov/
 *.avro
@@ -17,7 +18,6 @@
 .DS_Store
 .cache/
 .pytest_cache/
-/.BO/
 /.anaconda/
 /.coverage
 /alias.bash
