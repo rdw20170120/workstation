@@ -14,8 +14,8 @@ main() {
     cd "${HOME}"
     if [[ ! -e "${HOME}/${File}" ]]; then
         curl -L -O "${URL}"
-        bash "${File}" -b
     fi
+    bash "${File}" -b
 
     return 0
 }

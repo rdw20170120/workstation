@@ -6,9 +6,9 @@
 ###############################################################################
 
 main() {
-    # Update Homebrew itself
+    # Update Homebrew
 
-    brew update
+    brew update --force
 }
 
 main $@

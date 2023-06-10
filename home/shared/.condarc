@@ -1,3 +1,2 @@
-channels:
-  - conda-forge
+channels: [conda-forge]
 auto_activate_base: true

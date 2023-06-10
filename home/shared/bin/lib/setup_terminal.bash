@@ -1,7 +1,8 @@
 #!/usr/bin/env cat
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
-# Configure terminal
+# Set up the terminal
+
 export CLICOLOR=true
 # TODO: Where is this supported (macOS, Ubuntu, etc.)?
 export COLORTERM=truecolor

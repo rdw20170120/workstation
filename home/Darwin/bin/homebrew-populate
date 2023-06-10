@@ -8,35 +8,38 @@
 main() {
     # Populate Homebrew by installing desired casks & formulae
 
+    homebrew-update
+    homebrew-upgrade
+
     # minimal essential tools
-    brew install \
-        git \
-        iterm2 \
-        neovim \
-        python pyenv
-    python3 -m pip install --upgrade pip
-    python3 -m pip install pipenv
-    python3 -m pip install --upgrade pipenv
+    local Packages
+    Packages='bash'
+    Packages+=' git'
+    Packages+=' iterm2'
+    Packages+=' neovim'
+
     # helpful additional tools
-    brew install \
-        asciidoc \
-        emacs \
-        jsonlint \
-        mambaforge \
-        markdownlint-cli \
-        rst-lint \
-        shellcheck \
-        yamllint
+    # Packages+=' asciidoc'
+    # Packages+=' emacs'
+    # Packages+=' jsonlint'
+    # Packages+=' markdownlint-cli'
+    # Packages+=' rst-lint'
+    # Packages+=' shellcheck'
+    # Packages+=' yamllint'
+
     # For Sam's Club Legato system
-    brew install \
-        azure-cli \
-        krew \
-        kubectx \
-        kube-linter \
-        kubernetes-cli \
-        nvm \
-        postgresql@14 \
-        postman
+    # Packages+=' azure-cli'
+    # Packages+=' krew'
+    # Packages+=' kubectx'
+    # Packages+=' kube-linter'
+    # Packages+=' kubernetes-cli'
+    # Packages+=' postgresql@14'
+    # Packages+=' postman'
+    Packages+=' pyenv'
+
+    brew install ${Packages}
+
+    return 0
 }
 
 main $@

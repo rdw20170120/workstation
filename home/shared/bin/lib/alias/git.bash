@@ -1,7 +1,7 @@
 #!/usr/bin/env cat
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
-# Alias for git
+# Aliases for git
 alias gi='git status --ignored'
 alias git_branch_delete='git branch --delete'
 alias git_branch_list='git branch --list'

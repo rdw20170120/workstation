@@ -6,9 +6,9 @@
 ###############################################################################
 
 main() {
-    # Upgrade casks & formulae installed by Homebrew
+    # Clean Anaconda
 
-    brew upgrade
+    mamba clean --all --yes
 }
 
 main $@

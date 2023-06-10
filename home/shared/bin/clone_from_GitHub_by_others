@@ -9,7 +9,9 @@
 # TODO: Implement this:
 # hint:   git config pull.ff only       # fast-forward only
 
-source ${HOME}/bin/lib/declare-git.bash
+_Script=${HOME}/bin/lib/declare/git.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+unset _Script
 
 clone_for_Earthly() {
     maybe_clone "${Dir}/other/earthly" "${Connection}:earthly" earthly

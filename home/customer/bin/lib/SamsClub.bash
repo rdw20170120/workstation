@@ -1,9 +1,10 @@
 #!/usr/bin/env cat
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
-if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
+
+alias legato-be='source ~/bin/lib/activate_legato-be.bash'
+
+alias jump_legato-be='cd ~/repo/SamsClub/wip/legato-be'
 
 : << 'DisabledContent'
 DisabledContent

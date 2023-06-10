@@ -6,9 +6,9 @@
 ###############################################################################
 
 main() {
-    # Upgrade casks & formulae installed by Homebrew
+    # Clean Homebrew
 
-    brew upgrade
+    brew cleanup --prune=all -s
 }
 
 main $@

@@ -15,13 +15,13 @@ if [[ -z "${HOME}" ]]; then
     exit 1
 fi
 
-_Script=${HOME}/bin/lib/declare-essential.bash
+_Script=${HOME}/bin/lib/declare/essential.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
-_Script=${HOME}/bin/lib/declare-git.bash
+_Script=${HOME}/bin/lib/declare/git.bash
 require_script "${_Script}" ; source "${_Script}"
 
-_Script=${HOME}/bin/lib/declare-PostgreSQL.bash
+_Script=${HOME}/bin/lib/declare/PostgreSQL.bash
 require_script "${_Script}" ; source "${_Script}"
 
 _Script=${HOME}/Documents/SamsClub/credential.bash

@@ -6,12 +6,22 @@
 ###############################################################################
 
 main() {
-    # Uninstall Homebrew on Apple macOS
+    # Uninstall Homebrew
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+    if [[ -n "${HOMEBREW_PREFIX}" ]]; then
+        if [[ -d "${HOMEBREW_PREFIX}" ]]; then
+            echo "INFO: Deleting directory '${HOMEBREW_PREFIX}' to uninstall Homebrew"
+            echo rm -fr "${HOMEBREW_PREFIX}"
+        else
+            echo "WARN: Missing directory '${HOMEBREW_PREFIX}', skipping uninstall of Homebrew"
+        fi
+    else
+        echo "DEBUG: Missing 'HOMEBREW_PREFIX', skipping uninstall of Homebrew"
+    fi
+    sudo rm -fr /Applications/Emacs.app
     sudo rm -fr /Applications/iTerm.app
     sudo rm -fr /Applications/Postman.app
-    sudo rm -fr "${HOMEBREW_PREFIX}"
 
     return 0
 }
@@ -25,6 +35,7 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
+    # TODO: Consider
     [[ -d "${HOMEBREW_PREFIX}" ]] && sudo rm -fr "${HOMEBREW_PREFIX}"
 DisabledContent
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env cat
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
-# Configure for less
+# Configure less
 
 export PAGER=less
 

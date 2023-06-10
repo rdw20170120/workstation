@@ -10,8 +10,9 @@ set -o pipefail +o verbose +o xtrace
 ###############################################################################
 # Test PostgreSQL database connectivity
 
-_Script=${HOME}/bin/lib/declare-database.bash
+_Script=${HOME}/bin/lib/declare/PostgreSQL.bash
 prepare_to_source "${_Script}" && source "${_Script}"
+unset _Script
 
 set -o verbose
 db-connect-dev-admin   --list

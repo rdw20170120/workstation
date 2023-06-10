@@ -1,7 +1,7 @@
 #!/usr/bin/env cat
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
-# Alias for working with ~/.inputrc
+# Aliases for working with ~/.inputrc
 alias configure_readline_from='bind -f'
 alias show_readline_keymap_current='bind -p'
 alias show_readline_keymap_emacs-ctlx='bind -pm emacs-ctlx'

@@ -7,7 +7,7 @@
 # Clone git repositories, if they have not been cloned already.
 # NOTE: I reference my special SSH configuration to handle the connection, see `~/.ssh/config`.
 
-_Script=${HOME}/bin/lib/declare-git.bash
+_Script=${HOME}/bin/lib/declare/git.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 unset _Script
 
@@ -39,6 +39,7 @@ main() {
     maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ops
     maybe_clone "${Dir}" "${Connection}:${Profile}" legato-rule-engine
     maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ui
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-v2-migration
 
     Dir=${HOME}/repo/${Source}/ref/unknown
     maybe_clone "${Dir}" "${Connection}:${Profile}" comparator
@@ -52,7 +53,6 @@ main() {
     maybe_clone "${Dir}" "${Connection}:${Profile}" legato-performance-tests
     maybe_clone "${Dir}" "${Connection}:${Profile}" legato-scheduler
     maybe_clone "${Dir}" "${Connection}:${Profile}" legato-utils
-    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-v2-migration
     maybe_clone "${Dir}" "${Connection}:${Profile}" reconcile-service
     maybe_clone "${Dir}" "${Connection}:${Profile}" rule-engine
     maybe_clone "${Dir}" "${Connection}:${Profile}" slr-comparator
@@ -60,8 +60,8 @@ main() {
 
     Dir=${HOME}/repo/${Source}/wip
     maybe_clone "${Dir}" "${Connection}:${Profile}" legato-be
-    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ingestion
-    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-server
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-rule-engine
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ui
 
     return 0
 }

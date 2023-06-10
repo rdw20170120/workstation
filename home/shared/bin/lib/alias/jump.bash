@@ -1,6 +1,8 @@
 #!/usr/bin/env cat
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
+# Aliases for cd
+
 # Configure for jumping to interesting source-control repository local working directories
 alias jump_build='cd ~/repo/GitHub/wip/build'
 alias jump_experiment='cd ~/repo/GitLab/wip/experiment'

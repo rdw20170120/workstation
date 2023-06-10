@@ -6,9 +6,20 @@
 ###############################################################################
 
 main() {
-    # Upgrade casks & formulae installed by Homebrew
+    # Uninstall Anaconda
 
-    brew upgrade
+    if [[ -n "${CONDA_PREFIX}" ]]; then
+        if [[ -d "${CONDA_PREFIX}" ]]; then
+            echo "INFO: Deleting directory '${CONDA_PREFIX}' to uninstall Anaconda"
+            rm -fr "${CONDA_PREFIX}"
+        else
+            echo "WARN: Missing directory '${CONDA_PREFIX}', skipping uninstall of Anaconda"
+        fi
+    else
+        echo "DEBUG: Missing 'CONDA_PREFIX', skipping uninstall of Anaconda"
+    fi
+
+    return 0
 }
 
 main $@
