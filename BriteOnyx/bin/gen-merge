@@ -31,9 +31,7 @@ _excluded_directory_regexes = [
     compile(r"bin"),
     compile(r"coverage"),
     compile(r"generated"),
-    compile(r"log"),
     compile(r"obsolete"),
-    compile(r"tmp"),
     compile(r"waiting"),
 ]
 _excluded_file_regexes = [

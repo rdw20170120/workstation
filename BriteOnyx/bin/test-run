@@ -39,7 +39,7 @@ run_pytest() {
         --cov-append \
         --cov-config="$1" \
         --cov-report= \
-        --log-file="${BO_Project}/log/pytest-$2.log"
+        --log-file="${BO_DirLog}/pytest-$2.log"
     abort_on_fail $? "from ${BO_cmd_pytest} ..."
 }
 

@@ -20,10 +20,7 @@ _excluded_directory_regexes = [
     compile(r".hg"),
     compile(r".pytest_cache"),
     compile(r"__pycache__"),
-    compile(r"log"),
     compile(r"obsolete"),
-    compile(r"out"),
-    compile(r"tmp"),
     compile(r"waiting"),
 ]
 _excluded_file_regexes = []

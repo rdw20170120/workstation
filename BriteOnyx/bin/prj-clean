@@ -32,11 +32,10 @@ main() {
     findAnd print "${BO_Project}" '__pycache__'
 
     log_debug "Deleting files..."
+    findAnd delete "${BO_DirLog}" '*.log'
     findAnd delete "${BO_Project}" '*.bak'
     findAnd delete "${BO_Project}" '*.pyc'
     findAnd delete "${BO_Project}" '__pycache__'
-    findAnd delete "${BO_Project}/log" '*.log'
- 
 
     log_warn "Found these files REMAINING..."
     findAnd print "${BO_Project}" '*.bak'
