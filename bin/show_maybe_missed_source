@@ -13,13 +13,13 @@ main() {
     require_arguments $# 0
 
     git status --ignored |
+        grep -v \.BO/tmp |
         grep -v \.DS_Store |
         grep -v \.anaconda |
         grep -v \.cache |
         grep -v \.coverage |
         grep -v \.pytest_cache |
-        grep -v __pycache__ |
-        grep -v tmp
+        grep -v __pycache__
 
     return 0
 }

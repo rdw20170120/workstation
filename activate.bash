@@ -84,7 +84,7 @@ export BO_OS=$(uname)
 remembering BO_OS
 
 # Establish logging directory for project
-export BO_DirLog=${BO_DirTemp}/log
+export BO_DirLog=${BO_Project}/.BO/log
 maybe_create_directory_tree "${BO_DirLog}"
 remembering BO_DirLog
 

@@ -16,7 +16,7 @@ class Config(object):
 
     @property
     def log_directory(self):
-        return self.project_directory / "log"
+        return TrackedPath("logging", environment.get(self.var_logging_directory))
 
     @property
     def log_file(self):
@@ -61,6 +61,10 @@ class Config(object):
     @property
     def var_application_name(self):
         return "%sNameApp" % self.variable_prefix
+
+    @property
+    def var_logging_directory(self):
+        return "%sDirLog" % self.variable_prefix
 
     @property
     def var_project_directory(self):
