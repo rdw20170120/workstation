@@ -12,13 +12,15 @@ main() {
     # Capture tool status
     require_arguments $# 0
 
-    local -r Dir=${BO_Project}/out
-    require_directory "${Dir}"
-    local -r File=${Dir}/tool.out
+    local -r Dir=${BO_DirCapture}/current
+    maybe_create_directory_tree "${Dir}"
 
+    local -r File=${Dir}/tool.out
     log_debug "Capturing tool status to '${File}'"
     &>"${File}" tool-report
     require_file "${File}"
+
+    return 0
 }
 
 main $@

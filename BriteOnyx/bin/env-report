@@ -13,7 +13,6 @@ main() {
     require_arguments $# 0
 
     (set -o posix ; set) | sort
-    return 0
 }
 
 main $@

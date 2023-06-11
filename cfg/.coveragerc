@@ -6,7 +6,7 @@ sort = Cover
 
 [coverage:run]
 branch = true
-data_file = ${BO_Project?}/.coverage
+data_file = ${BO_DirTemp?}/.coverage
 omit =
   */__init__.py
   */__main__.py
@@ -39,7 +39,7 @@ omit =
   */lib/mine/utility/singleton_application.py
 
 [html]
-directory = ${BO_Project?}/out/coverage
+directory = ${BO_DirTemp?}/coverage
 
 [json]
 pretty_print = true

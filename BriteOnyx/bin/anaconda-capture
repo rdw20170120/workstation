@@ -13,10 +13,10 @@ main() {
     require_arguments $# 0
     require_variable BO_cmd_mamba
 
-    local -r Dir=${BO_Project}/out
-    require_directory "${Dir}"
-    local -r File=${Dir}/anaconda.out
+    local -r Dir=${BO_DirCapture}/current
+    maybe_create_directory_tree "${Dir}"
 
+    local -r File=${Dir}/anaconda.out
     log_debug "Capturing Anaconda status to '${File}'"
     &>"${File}" anaconda-report
     require_file "${File}"
@@ -30,6 +30,8 @@ main() {
     log_info "Capturing installed packages to file '${BO_FileAnacondaYaml}'"
     ${BO_cmd_mamba} list --explicit --export --md5 --no-pip >"${BO_FileAnacondaYaml}"
     require_file "${BO_FileAnacondaYaml}"
+
+    return 0
 }
 
 main $@

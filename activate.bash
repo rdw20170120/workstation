@@ -30,7 +30,12 @@ if [[ -z "${PWD}" ]] ; then
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
 fi
 
-export BO_DirCapture="${PWD}/.BO/capture"
+# Establish temporary directory for project
+export BO_DirTemp=${PWD}/.BO/tmp
+mkdir -p "${BO_DirTemp}"
+
+# Establish capture directories for project
+export BO_DirCapture="${BO_DirTemp}/capture"
 mkdir -p "${BO_DirCapture}/after" "${BO_DirCapture}/before" "${BO_DirCapture}/current"
 (set -o posix ; set) | sort > "${BO_DirCapture}/before/activation.env"
 
@@ -78,13 +83,8 @@ source "${_Script}" ; _Status=$?
 export BO_OS=$(uname)
 remembering BO_OS
 
-# Establish temporary directory for project
-export BO_DirTemp=${BO_Project}/tmp
-maybe_create_directory_tree "${BO_DirTemp}"
-remembering BO_DirTemp
-
 # Establish logging directory for project
-export BO_DirLog=${BO_Project}/log
+export BO_DirLog=${BO_DirTemp}/log
 maybe_create_directory_tree "${BO_DirLog}"
 remembering BO_DirLog
 
@@ -138,6 +138,9 @@ source "${_Script}" ; _Status=$?
 
 log_good "BriteOnyx has successfully activated this project"
 log_info "To get started, try executing the 'cycle' alias..."
+
+unset _Script
+unset _Status
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

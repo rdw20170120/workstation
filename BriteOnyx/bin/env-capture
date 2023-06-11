@@ -12,14 +12,12 @@ main() {
     # Capture Bash environment status
     require_arguments $# 0
 
-    local -r File=${BO_Project}/out/env.out
+    local -r Dir=${BO_DirCapture}/current
+    maybe_create_directory_tree "${Dir}"
 
+    local -r File=${Dir}/env.out
     log_debug "Capturing Bash environment status to '${File}'"
-    &>"${File}" \
-        env-report
-
-    # TODO: Capture activation output (freeze instead?)
-    # cp "${BO_Project}"/*.env "${BO_Project}/out/"
+    &>"${File}" env-report
 
     return 0
 }

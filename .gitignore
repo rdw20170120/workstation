@@ -18,6 +18,7 @@
 .DS_Store
 .cache/
 .pytest_cache/
+/.BO/tmp/
 /.anaconda/
 /.coverage
 /alias.bash
@@ -25,5 +26,4 @@
 /log/
 /out/coverage/
 /out/pdoc/
-/tmp/
 __pycache__/

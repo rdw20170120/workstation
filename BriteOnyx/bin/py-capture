@@ -12,8 +12,10 @@ main() {
     # Capture Python status
     require_arguments $# 0
 
-    local -r File=${BO_Project}/out/python.out
+    local -r Dir=${BO_DirCapture}/current
+    maybe_create_directory_tree "${Dir}"
 
+    local -r File=${Dir}/python.out
     log_debug "Capturing Python status to '${File}'"
     >"${File}" py-report
 

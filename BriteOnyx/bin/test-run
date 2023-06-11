@@ -61,7 +61,7 @@ main() {
         cd "${BO_Project}/src" ; abort_on_fail $? "from cd"
         run_coverage "${Config}"
         # TODO: Manage this hard-coded file path
-        log_info "Consider reviewing test coverage at '${BO_Project}/out/coverage/index.html'"
+        log_info "Consider reviewing test coverage at '${BO_DirTemp}/coverage/index.html'"
     fi
 
     return 0

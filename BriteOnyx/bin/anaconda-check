@@ -12,7 +12,7 @@ main() {
     # Check Anaconda state
     require_arguments $# 0
 
-    local -r Dir=${BO_Project}/out
+    local -r Dir=${BO_DirCapture}/current
     require_directory "${Dir}"
     local -r File=${Dir}/anaconda.out
     require_file "${File}"

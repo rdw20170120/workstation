@@ -47,17 +47,16 @@ exclude = '''
   | bin/all-.*$
   | bin/anaconda-.*$
   | bin/app-.*$
+  | bin/clone_.*$
   | bin/env-.*$
+  | bin/git_.*$
+  | bin/grep_.*$
   | bin/py-.*$
+  | bin/secure$
   | bin/show_.*$
   | bin/sig-.*$
   | bin/sync_.*$
   | bin/tool-.*$
-  | home/bin/clone_.*$
-  | home/bin/git_.*$
-  | home/bin/grep_.*$
-  | home/bin/secure$
-  | log/.*$
 )
 '''
 

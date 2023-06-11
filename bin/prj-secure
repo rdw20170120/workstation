@@ -168,10 +168,7 @@ main() {
     secure_directory_tree "${BO_Project}/cfg"
     secure_directory_tree "${BO_Project}/doc"
     secure_directory_tree "${BO_Project}/home"
-    secure_directory_tree "${BO_Project}/log"
-    secure_directory_tree "${BO_Project}/out"
     secure_directory_tree "${BO_Project}/src"
-    secure_directory_tree "${BO_Project}/tmp"
     secure_directory_tree "${BO_Project}/waiting"
 
     secure_executables "${BO_Project}/BriteOnyx/bin"

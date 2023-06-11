@@ -13,17 +13,13 @@ main() {
     # TODO: FIX: Why does this break?
     require_arguments $# 0
 
-    local -r File=${BO_Project}/out/env.out
-
-    if [[ ! -r "${File}" ]] ; then
-        log_error "Bash environment status file '${File}' is unreadable, aborting"
-        exit 1
-    fi
+    local -r Dir=${BO_DirCapture}/current
+    require_directory "${Dir}"
+    local -r File=${Dir}/env.out
+    require_file "${File}"
 
     log_debug "Checking Bash environment status against '${File}'"
     env-report | diff - "${File}"
-
-    return 0
 }
 
 main $@

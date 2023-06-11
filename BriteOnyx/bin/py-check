@@ -12,17 +12,13 @@ main() {
     # Check Python status
     require_arguments $# 0
 
-    local -r File=${BO_Project}/out/Python.out
-
-    if [[ ! -r "${File}" ]] ; then
-        log_error "Python status file '${File}' is unreadable, aborting"
-        exit 1
-    fi
+    local -r Dir=${BO_DirCapture}/current
+    require_directory "${Dir}"
+    local -r File=${Dir}/python.out
+    require_file "${File}"
 
     log_debug "Checking Python status against '${File}'"
     py-report | diff - "${File}"
-
-    return 0
 }
 
 main $@

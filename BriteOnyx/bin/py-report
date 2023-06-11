@@ -11,22 +11,22 @@
 main() {
     # Report Python code status
     require_arguments $# 0
-
     require_value tabnanny
 
-    Out=${BO_Project}/out/tabnanny.out
-     >"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/BriteOnyx/bin"
-    >>"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/bin"
-    >>"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/src/app"
-    >>"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/src/gen"
-    >>"${Out}" 2>&1 ${tabnanny} -v "${BO_Project}/src/lib"
-    cat "${Out}" \
+    local -r Dir=${BO_DirCapture}/current
+    maybe_create_directory_tree "${Dir}"
+
+    local -r File=${Dir}/tabnanny.out
+    log_debug "Capturing Python TabNanny status to '${File}'"
+     >"${File}" 2>&1 ${tabnanny} -v "${BO_Project}/BriteOnyx/bin"
+    >>"${File}" 2>&1 ${tabnanny} -v "${BO_Project}/bin"
+    >>"${File}" 2>&1 ${tabnanny} -v "${BO_Project}/src/app"
+    >>"${File}" 2>&1 ${tabnanny} -v "${BO_Project}/src/gen"
+    >>"${File}" 2>&1 ${tabnanny} -v "${BO_Project}/src/lib"
+    cat "${File}" \
         | grep -v 'listing directory' \
         | grep -v 'Clean bill of health.'
     log_debug "No output means all Python code passes all TabNanny checks"
-
-    Out=${BO_Project}/out/py-format.out
-    &>"${Out}" py-format
 
     return 0
 }
