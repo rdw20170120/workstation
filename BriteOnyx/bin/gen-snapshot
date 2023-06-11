@@ -9,16 +9,16 @@
     exit 99
 
 main() {
-    # Capture generated source
-    require_directory_in BO_DirCapture
+    # Snapshot generated source
+    require_directory_in BO_DirSnapshot
     require_directory_in BO_DirTemp
 
-    local -r DirCaptured=${BO_DirCapture}/generated
-    local -r DirGenerated=${BO_DirTemp}/generated
+    local -r DirGenerate=${BO_DirTemp}/generated
+    local -r DirSnapshot=${BO_DirSnapshot}/generated
 
-    log_info "Capturing generated source into directory '${DirCaptured}' from directory '${DirGenerated}'"
-    maybe_recreate_directory_tree "${DirCaptured}"
-    cp -pRv "${DirGenerated}"/* "${DirCaptured}/"
+    log_info "Snapshotting generated source into directory '${DirSnapshot}' from directory '${DirGenerate}'"
+    maybe_recreate_directory_tree "${DirSnapshot}"
+    cp -pRv "${DirGenerate}"/* "${DirSnapshot}/"
 
     return 0
 }

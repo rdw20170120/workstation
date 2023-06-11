@@ -56,6 +56,12 @@ remembering() {
     log_debug "Remembering ${Name} = '${!Name}'"
 } && export -f remembering
 
+export BO_DirSnapshot=${PWD}/.BO/snapshot
+
+remembering BO_DirCapture
+remembering BO_DirSnapshot
+remembering BO_DirTemp
+
 export BO_Project=${PWD}
 remembering BO_Project
 

@@ -18,6 +18,7 @@
 .DS_Store
 .cache/
 .pytest_cache/
+/.BO/log/
 /.BO/tmp/
 /.anaconda/
 /.coverage
