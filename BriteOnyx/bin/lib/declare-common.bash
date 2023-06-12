@@ -85,14 +85,18 @@ maybe_copy_file() {
 maybe_create_directory_tree() {
     # Create directory $1, if it does not already exist, including parents
     require_arguments $# 1
-    [[ ! -e "$1" ]] && mkdir -p "$1"
+    [[ ! -e "$1" ]] && \
+        log_debug "Creating directory '$1'" && \
+        mkdir -p "$1"
     require_directory "$1"
 } && export -f maybe_create_directory_tree
 
 maybe_delete_directory_tree() {
     # Delete directory $1, if it exists, including children
     require_arguments $# 1
-    [[ -d "$1" ]] && rm -fr "$1"
+    [[ -d "$1" ]] && \
+        log_debug "Deleting directory '$1'" && \
+        rm -fr "$1"
     forbid_path "$1"
 } && export -f maybe_delete_directory_tree
 

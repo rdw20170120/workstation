@@ -21,6 +21,7 @@ unless they should merely be deleted.
 1. [ ] Anaconda - Create scripts & aliases for showing environment variables for Anaconda
 1. [ ] Anaconda - Document use of Anaconda for our purposes
 1. [ ] Anaconda - Sort Anaconda packages in `cfg/anaconda.yml`
+1. [ ] Bash - Adjust `setup_terminal.bash` to handle both Solarized Dark & Solarized Light
 1. [ ] Bash - Create scripts & aliases for showing environment variables for BriteOnyx
 1. [ ] Bash - Document disabled shebang for Bash scripts that are `source`d
 1. [ ] Bash - Document dropped file extension for Bash scripts
@@ -28,16 +29,21 @@ unless they should merely be deleted.
 1. [ ] Bash - Fix inappropriate shebang on Bash source
 1. [ ] Bash - Test for appropriate shebang on all Bash source
 1. [ ] Bash - `unset` relevant Bash variables when appropriate
+1. [ ] Neovim - Adjust to handle both Solarized Dark & Solarized Light
 1. [ ] Neovim - Configure Neovim to position itself
 1. [ ] Neovim - Switch font in Neovim for better readability
 1. [ ] OpenTelemetry - Integrate OpenTelemetry into Python code
 1. [ ] Python - Create scripts & aliases for showing environment variables for Python
+1. [ ] Python - Document convention of using f-strings over `str.format()` or %-strings
+1. [ ] Python - Document convention of using string templates when templates are insecure
 1. [ ] Python - Document conventions for executing Python module
 1. [ ] Python - Document disabled shebang for Python source
 1. [ ] Python - Document dropped file extension for Python scripts
 1. [ ] Python - Document use of `.py` file extension for Python source
 1. [ ] Python - Document use of shebang for Python scripts
 1. [ ] Python - Fix inappropriate shebang on Python source
+1. [ ] Python - Replace all %-strings with f-strings
+1. [ ] Python - Replace all `str.format()` with f-strings
 1. [ ] Python - Test for appropriate shebang on all Python source
 1. [ ] Python - Use pytest parameterization to extend test suites
 1. [ ] encoding - Disable Python3 automatic encoding coercion between ASCII and Unicode
@@ -46,13 +52,15 @@ unless they should merely be deleted.
 1. [ ] encoding - Implement full test suite for environment variable character encodings
 1. [ ] encoding - Implement full test suite for file character encodings
 1. [ ] generation - Define code generation methods for common test result patterns
+1. [ ] generation - Enhance merge to present a script of files to be merged, which can be edited before executing
 1. [ ] generation - Extend code generation to all Bash scripts
 1. [ ] generation - Implement code generation for testing code generation functionality
 1. [ ] generation - Implement full test suite for code generation functionality
 1. [ ] generation - Refactor `all.py` modules to have a `_Generator` class that holds `config`
+1. [ ] generation - Refactor source generation to be `class`-based rather than `import`-based
 1. [ ] iTerm2 - Configure iTerm2 to position itself
+1. [ ] iTerm2 - Create profiles for both Solarized Dark & Solarized Light
 1. [ ] iTerm2 - Switch font in terminal for better readability
-1. [ ] output - Investigate whether I want to capture log files during `test-run`
 1. [ ] security - Filter sensitive values out of committed output (environment variables)
 1. [X] Anaconda - Create scripts & aliases for managing Anaconda environments
 1. [X] Anaconda - Switch from Python virtual environment to Anaconda environment
@@ -74,6 +82,7 @@ unless they should merely be deleted.
 1. [X] generation - Fix broken code generation functionality
 1. [X] generation - Refactor BriteOnyx source generation to better distinguish before, during, and after activation
 1. [X] generation - Split generation of `activate.bash` into separate Python modules for before/after activation
+1. [X] output - Investigate whether I want to capture log files during `test-run`
 1. [X] output - Move captured output files to `out` directory
 1. [X] security - Write script to secure project files
 1. [X] synchronize - Enhance functionality to synchronize dotfiles between repository and user account

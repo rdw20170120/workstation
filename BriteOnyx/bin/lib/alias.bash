@@ -27,6 +27,7 @@ unset grep_options
 alias cycle='clear ; test-run && gen-run -vvv && py-format && app-run -vvv'
 # TODO: alias generate='clear ; gen-run && py-format && gen-merge'
 alias generate='clear ; gen-run && py-format'
+alias gen-unsnapshot='rm -fr "${BO_DirSnapshot}/generated"'
 alias list_sort_by_size='sort -nr --key=5'
 alias logs_reset='rm -fr "${BO_DirLog}" ; mkdir "${BO_DirLog}"'
 alias redeclare='source "${BO_Project}/BriteOnyx/bin/lib/declare.bash"'

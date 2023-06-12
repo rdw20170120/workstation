@@ -16,7 +16,7 @@ from commandlib import Command
 # Library modules   (absolute references, NOT packaged, in project)
 # Project modules   (relative references, NOT packaged, in project)
 
-
+_debugging = False
 _excluded_directory_regexes = [
     compile(r"\.BO"),
     compile(r"\.anaconda"),
@@ -36,8 +36,9 @@ _excluded_directory_regexes = [
 ]
 _excluded_file_regexes = [
     # These are file extensions for types of content never likely to be generated
+    compile(r".*\.log"),
     compile(r".*\.out"),
-    compile(r"\..*"),
+    compile(r"\.DS_Store"),
     # These are file extensions for types of content not yet generated
     compile(r".*\.elv"),
     compile(r".*\.json"),
@@ -52,17 +53,11 @@ _excluded_file_regexes = [
     # compile(r".*\.py"),
 ]
 
-_root_capture = environ["BO_DirCapture"]
-_root_project = environ["BO_Project"]
-_root_temporary = environ["BO_DirTemp"]
-
-_root_captured = path.join(_root_capture, "generated")
-_root_generated = path.join(_root_temporary, "generated")
-_root_source = path.join(_root_project)
-
-# Prepare shell command to let the user merge pairs of files
-_nvim = Command("nvim")
-_nvim_diff = _nvim("-d").in_dir(str(_root_project))
+_root_generate = path.join(environ["BO_DirTemp"], "generated")
+_root_project = path.join(environ["BO_Project"])
+_root_snapshot = path.join(environ["BO_DirSnapshot"], "generated")
+_root_source = _root_project
+_root_temporary = path.join(environ["BO_DirTemp"])
 
 
 def _absolute_real_path_or_none(root, relative_path):
@@ -72,74 +67,75 @@ def _absolute_real_path_or_none(root, relative_path):
     return result
 
 
-def _add_source_file(source_files, relative_path):
-    """Maybe add the source file (given its relative path) to our desired source files."""
-    # print("Adding relative source file '%s'" % (relative_path))
-    captured = _absolute_real_path_or_none(_root_captured, relative_path)
-    generated = _absolute_real_path_or_none(_root_generated, relative_path)
-    source = _absolute_real_path_or_none(_root_source, relative_path)
-    source_files[str(relative_path)] = (source, generated, captured)
+def _as_bash_script(desired_files):
+    """Return the desired_files as a Bash script to merge them."""
+    # TODO: Enhance to use relative paths on each merge line
+    # and to start with a `cd` command targeting the project root directory.
+    lines = []
+    lines.append("# The lines starting with `#` are comments")
+    lines.append("# containing instructions for you.")
+    lines.append("#")
+    lines.append("# The non-comment lines are commands")
+    lines.append("# that will be executed by Bash.")
+    lines.append("#")
+    lines.append("# Each command will invoke an editor")
+    lines.append("# in which you may manually merge")
+    lines.append("# a pair of files:")
+    lines.append("# one is a source file")
+    lines.append("# belonging to this project (repository)")
+    lines.append("# and the other is a generated file")
+    lines.append("# of potentially useful content.")
+    lines.append("#")
+    lines.append("# Edit this file, save it, and it will then be executed.")
+    lines.append("# Remove (or disable) any lines containing commands")
+    lines.append("# that you do not want executed.")
+    lines.append("# Clear the whole file")
+    lines.append("# to prevent anything from being executed.")
+    lines.append("#")
+    for k, v in desired_files.items():
+        (source, generate, snapshot) = v
+        lines.append(f"nvim -d {generate} {source}")
+    return "\n".join(lines)
 
 
-def _maybe_merge_one(source, generated, captured):
-    if generated is None:
-        return
-    if source is None:
-        return
-    if cmp(generated, source, shallow=False):
-        # If generated is same as source,
-        # the merge is unnecessary
-        # print("Generated is same as source:  source='%s'" % (source))
-        pass
-    elif captured is None:
-        # If generated is NOT same as source,
-        # but captured is missing,
-        # then must merge
-        _merge_one(source, generated)
-    elif cmp(generated, captured, shallow=False):
-        # If generated is NOT same as source,
-        # but captured is same as generated,
-        # then assume merge has already been performed
-        # since user captured the generated source
-        # print("Captured is same as generated:  source='%s'" % (source))
-        pass
-    else:
-        # If generated is NOT same as source,
-        # and captured is NOT same as generated,
-        # so merge uncaptured form of generated
-        _merge_one(source, generated)
+def _debug(message):
+    if _debugging:
+        print(message)
 
 
-def _merge_all(source_files):
-    for relative_path in source_files:
-        (source, generated, captured) = source_files[relative_path]
-        if source is None:
-            print(
-                "source is missing:  generated='%s', captured='%s'"
-                % (generated, captured)
-            )
-            # Without source, cannot merge
-        elif generated is None:
-            print(
-                "generated is missing:  source='%s', captured='%s'" % (source, captured)
-            )
-            # Without generated, cannot merge
-        elif captured is None:
-            # Without captured, assume new generated source never before merged (or complete reset)
-            _merge_one(source, generated)
-        else:
-            # print("all present:  source='%s', generated='%s', captured='%s'" % (source, generated, captured))
-            # With all three present, consider merge
-            _maybe_merge_one(source, generated, captured)
+def _dump_files_dictionary(dict_):
+    _debug(f"Files dictionary contains {len(dict_)} items:")
+    for k, v in dict_.items():
+        # _debug(f"relative path: {k}")
+        (source, generate, snapshot) = v
+        _debug(f"source: {source}, generate: {generate}, snapshot: {snapshot}")
 
 
-def _merge_one(source, generated):
-    if generated is None:
-        return
-    if source is None:
-        return
-    # print("Merging '%s' into '%s'" % (generated, source))
-    _nvim_diff.with_trailing_args(generated, source).run()
+def _edit_file(file_):
+    _info(f"Editing file '{file_}'")
+    Command("nvim").in_dir(str(_root_project)).with_trailing_args(str(file_)).run()
+
+
+def _execute_file(file_):
+    _info(f"Executing file '{file_}'")
+    Command("bash").in_dir(str(_root_project)).with_trailing_args(str(file_)).run()
+
+
+def _file_triple(file_relative_path):
+    """Return a tuple
+    of the source, generate, and snapshot files
+    associated with the file_relative_path.
+    """
+    # _debug(f"Adding relative source file '{file_relative_path}'")
+    return (
+        _absolute_real_path_or_none(_root_source, file_relative_path),
+        _absolute_real_path_or_none(_root_generate, file_relative_path),
+        _absolute_real_path_or_none(_root_snapshot, file_relative_path),
+    )
+
+
+def _info(message):
+    print(message)
 
 
 def _prune_excluded_items(items, regexes):
@@ -148,31 +144,90 @@ def _prune_excluded_items(items, regexes):
     for i in items[:]:
         for r in regexes:
             if not r.fullmatch(i) is None:
-                # print("Removing '%s' due to '%s'" % (i, r))
+                # _debug(f"Removing '{i}' due to '{r}'")
                 items.remove(i)
 
 
-def _scan_relative_source_files(source_files, root):
-    """Scan the directory tree from root, adding any desired source files found."""
-    # print("Scanning root '%s'" % (root))
+def _scanned_files(root):
+    """Scan the directory tree from root, returning any desired source files found."""
+    result = {}
     for top, directories, files in walk(root):
         _prune_excluded_items(directories, _excluded_directory_regexes)
         _prune_excluded_items(files, _excluded_file_regexes)
         for f in files:
             absolute = path.realpath(path.join(top, f), strict=True)
             relative = path.relpath(absolute, start=root)
-            _add_source_file(source_files, relative)
+            result[str(relative)] = _file_triple(relative)
+    return result
+
+
+def _should_merge_file(file_relative_path, file_triple):
+    """Return whether the user should be asked to manually merge the source at file_relative_path."""
+    (source, generate, snapshot) = file_triple
+    # _debug(f"file triple:  source='{source}', generate='{generate}', snapshot='{snapshot}'")
+    result = False
+    if source is None:
+        # Without source, cannot merge
+        _info(f"source is missing:  generate='{generate}', snapshot='{snapshot}'")
+        result = False
+    elif generate is None:
+        # Without generate, cannot merge
+        # _debug(f"generate is missing:  source='{source}', snapshot='{snapshot}'")
+        result = False
+    elif cmp(generate, source, shallow=False):
+        # If generate is same as source,
+        # the merge is unnecessary
+        # _debug(f"Generated is same as source:  source='{source}'")
+        result = False
+    elif snapshot is None:
+        # Without snapshot, assume new generate never before merged (or complete reset)
+        _debug(f"Merging '{generate}' into '{source}'")
+        result = True
+    else:
+        # With all three present, consider merge
+        # _debug(f"all present:  source='{source}', generate='{generate}', snapshot='{snapshot}'")
+        if cmp(generate, snapshot, shallow=False):
+            # If generate is NOT same as source,
+            # but snapshot is same as generate,
+            # then assume merge has already been performed
+            # since user snapshotted the generated source
+            # _debug(f"Snapshotted is same as generate:  source='{source}'")
+            result = False
+        else:
+            # If generate is NOT same as source,
+            # and snapshot is NOT same as generate,
+            # merge
+            _debug(f"Merging '{generate}' into '{source}'")
+            result = True
+    # _debug(f"_should_merge_file = '{result}'")
+    return result
+
+
+def _write_file(text_content, file_):
+    with open(file_, encoding="utf_8", mode="wt", newline=None) as writer:
+        count = writer.write(text_content)
+    _info(f"Wrote {count} characters to file '{file_}'")
 
 
 def main():
     """Script entry point."""
-    source_files = {}
-    # No need to scan
-    # generated source that has been captured (`_root_captured`),
-    # because such orphans will be discarded upon the next run of `gen-capture`
-    _scan_relative_source_files(source_files, _root_generated)
-    _scan_relative_source_files(source_files, _root_source)
-    _merge_all(source_files)
+    # No need to scan generated source
+    # that has been snapshotted (`_root_snapshot`),
+    # because such orphans will be discarded
+    # upon the next run of `gen-snapshot`
+    generated_files = _scanned_files(_root_generate)
+    _info(f"Generated files list contains {len(generated_files)} files")
+    source_files = _scanned_files(_root_source)
+    _info(f"Source files list contains {len(source_files)} files")
+    desired_files = {**generated_files, **source_files}
+    _info(f"Desired files list contains {len(desired_files)} files")
+    desired_files = {k: v for k, v in desired_files.items() if _should_merge_file(k, v)}
+    _info(f"Desired files list contains {len(desired_files)} files")
+    # _dump_files_dictionary(desired_files)
+    script = path.join(_root_temporary, "edit_generated_source")
+    _write_file(_as_bash_script(desired_files), script)
+    _edit_file(script)
+    _execute_file(script)
 
 
 if __name__ == "__main__":
