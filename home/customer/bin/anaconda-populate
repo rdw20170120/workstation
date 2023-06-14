@@ -22,6 +22,9 @@ main() {
 
     # helpful additional tools
 
+    # For Sam's Club Legato system
+    # Packages+=' nodeJS'
+
     mamba install --name base --yes ${Packages}
 
     # Populate Python tools via PIP

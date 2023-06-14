@@ -11,6 +11,7 @@
 require_directory_in BO_DirCapture
 require_directory_in BO_Project
 require_variable BO_DirAnaconda
+require_variable BO_PathAnacondaBase
 
 # Maybe create Anaconda environment
 _ShouldCreate=true
@@ -39,11 +40,11 @@ Status=$?
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 (set -o posix ; set) | sort >"${BO_DirCapture}/after/conda_activate.env"
 
-# Configure PATH to include Anaconda
-export BO_PathAnaconda=${BO_DirAnaconda}/bin
+# Configure PATH to include Anaconda virtual environment FIRST
+export BO_PathAnacondaProject=${BO_DirAnaconda}/bin
+remembering BO_PathAnacondaProject
+export BO_PathAnaconda=${BO_PathAnacondaProject}:${BO_PathAnacondaBase}
 remembering BO_PathAnaconda
-export BO_PathTool=${BO_PathAnaconda}
-remembering BO_PathTool
 
 _Script="${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
 require_script "${_Script}"

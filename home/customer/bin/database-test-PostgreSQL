@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell directly by the user.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+[[ "${BO_Trace:-UNDEFINED}" != UNDEFINED ]] && \
+    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
+    [[ "${BO_Trace:-UNDEFINED}" == TRACE ]] && \
+    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
+    set -o verbose -o xtrace
+###############################################################################
+# Test PostgreSQL database connectivity at Sam's Club
+
+_Script=${HOME}/bin/lib/declare/PostgreSQL.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+_Script=${HOME}/credential.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+unset _Script
+
+set -o verbose
+
+# These work (so far)
+postgresql-connect-dev-admin     --list
+postgresql-connect-qa-regular    --list
+postgresql-connect-qa-unknown    --list
+postgresql-connect-stage-unknown --list
+
+# These do NOT work (so far)
+postgresql-connect-dev-regular   --list
+postgresql-connect-dev-unknown   --list
+postgresql-connect-qa-admin      --list
+postgresql-connect-stage-admin   --list
+postgresql-connect-stage-regular --list
+
+# NOTE: I do not yet have tests for the remaining PostgreSQL connectivity
+

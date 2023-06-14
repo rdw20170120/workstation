@@ -44,6 +44,16 @@ main() {
     check shellcheck --version
     check yamllint --version
 
+    # For Sam's Club Legato system
+    # Postman is a GUI application, so no check is appropriate
+    check az --version
+    check kube-linter version
+    check kubectl "version --short"
+    check kubectl-krew version
+    check kubectx
+    check kubens
+    check nvm --version
+
     return 0
 }
 

@@ -4,23 +4,14 @@
 # NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
-[[ -z "${BO_Project}" ]] &&
-    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
-    exit 99
 
 main() {
-    # List files that MAY be wrongly ignored by source control
-    require_arguments $# 0
+    # Clone all git repositories
 
-    git status --ignored |
-        grep -v \.BO/log |
-        grep -v \.BO/tmp |
-        grep -v \.DS_Store |
-        grep -v \.anaconda |
-        grep -v \.cache |
-        grep -v \.coverage |
-        grep -v \.pytest_cache |
-        grep -v __pycache__
+    clone_from_GitHub_by_Rob
+    clone_from_GitHub_by_others
+    clone_from_GitLab_by_Rob
+    clone_from_GitLab_by_others
 
     return 0
 }
