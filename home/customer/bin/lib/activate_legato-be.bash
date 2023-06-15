@@ -35,7 +35,12 @@ _DirProject=$(git_working_directory "${HOME}/repo/SamsClub/wip" ${_Project})
 echo "Jumping into project directory '${_DirProject}'"
 cd "${_DirProject}"
 
+alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
+
+export DB_HOST=${DB_HostFqdnDev}
+export DB_NAME=${DB_NameDev}
 export DB_PASSWORD=${DB_PassDevAdmin}
+export DB_USER=${DB_UserDevAdmin}
 
 # TODO: NOTE: For now, don't try to run locally
 # since it is so problematic.

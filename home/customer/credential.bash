@@ -18,17 +18,17 @@ export DB_PassProdWusRegular='UNKNOWN'
 export DB_PassProdWusUnknown='UNKNOWN'
 
 # From Arti
-export DB_PassDevAdmin='S@msC1ub#Item'
-export DB_PassDevRegular='S@msC1ub#Item'
-export DB_PassDevUnknown='S@msC1ub#Item'
-export DB_PassQaAdmin='l39@t0d3v'
-export DB_PassQaRegular='l39@t0d3v'
-export DB_PassQaUnknown='l39@t0d3v'
+export DB_PassDevAdmin=
+export DB_PassDevRegular=
+export DB_PassDevUnknown=
+export DB_PassQaAdmin=
+export DB_PassQaRegular=
+export DB_PassQaUnknown=
 
 # From Bhavana
-export DB_PassStageAdmin='l39@t0d3v'
-export DB_PassStageRegular='l39@t0d3v'
-export DB_PassStageUnknown='l39@t0d3v'
+export DB_PassStageAdmin=
+export DB_PassStageRegular=
+export DB_PassStageUnknown=
 
 ################################################################################
 : << 'DisabledContent'

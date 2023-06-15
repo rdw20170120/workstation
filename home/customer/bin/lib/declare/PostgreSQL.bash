@@ -131,6 +131,10 @@ export DB_UserStageRegular=UNKNOWN@${DB_HostNameStage}
 export DB_UserStageUnknown=legato_dev@${DB_HostNameStage}
 
 ###############################################################################
+# NOTE: This is in `legato-be` repository at `pim/env/*.py`
+# TODO: Fill in from Django environment files
+
+###############################################################################
 # NOTE: This is what I was told by Arti (different from reference)
 export DB_HostNameDev=devsamsitm
 export DB_HostNameQa=${DB_HostPrefix}np

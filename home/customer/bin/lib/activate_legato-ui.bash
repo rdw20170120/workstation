@@ -29,6 +29,8 @@ _DirProject=$(git_working_directory "${HOME}/repo/SamsClub/wip" ${_Project})
 echo "Jumping into project directory '${_DirProject}'"
 cd "${_DirProject}"
 
+alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
+
 nvm use 14
 npm install --force
 

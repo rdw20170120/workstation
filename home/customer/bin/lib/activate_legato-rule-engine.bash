@@ -29,6 +29,13 @@ _DirProject=$(git_working_directory "${HOME}/repo/SamsClub/wip" ${_Project})
 echo "Jumping into project directory '${_DirProject}'"
 cd "${_DirProject}"
 
+alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
+
+python3 -m venv rules_venv
+source rules_venv/bin/activate
+pip install -r requirements.txt
+python3 -m unittest tests/test*.py
+
 ###############################################################################
 # Test this script:
 # clear ; bash -c "source ~/bin/lib/activate_legato-be.bash" ; echo "Status: $?"
@@ -41,5 +48,8 @@ cd "${_DirProject}"
 # set +o verbose +o xtrace
 
 : << 'DisabledContent'
+# TODO: Building & installing the package locally
+python setup.py bdist_wheel
+pip install /path/to/wheelfile.whl
 DisabledContent
 
