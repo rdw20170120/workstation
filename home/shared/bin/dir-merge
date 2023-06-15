@@ -6,12 +6,9 @@
 ###############################################################################
 
 main() {
-    # Clone all git repositories
+    # Merge directories $1 and $2
 
-    clone_from_GitHub_by_Rob
-    clone_from_GitHub_by_others
-    clone_from_GitLab_by_Rob
-    clone_from_GitLab_by_others
+    nvim -c "DirDiff $1 $2"
 
     return 0
 }
