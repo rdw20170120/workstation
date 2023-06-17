@@ -14,7 +14,8 @@ alias jump_workstation='cd ~/repo/GitHub/wip/workstation'
 
 # For working with two local copies of the same repository
 alias jump_reference='cd "${BO_DirReference}"'
-alias jump_Work_In_Progress='cd "${BO_DirWorkInProgress}"'
+alias jump_WorkInProgress='cd "${BO_DirWorkInProgress}"'
+alias sync_WIP='dir-merge "${BO_DirReference}" "${BO_DirWorkInProgress}"'
 [[ -z "${BO_DirReference}" ]] && export BO_DirReference=~/repo/GitHub/ref/workstation
 [[ -z "${BO_DirWorkInProgress}" ]] && export BO_DirWorkInProgress=~/repo/GitHub/wip/workstation
 

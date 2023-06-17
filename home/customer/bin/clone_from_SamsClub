@@ -61,6 +61,7 @@ main() {
     Dir=${HOME}/repo/${Source}/wip
     maybe_clone "${Dir}" "${Connection}:${Profile}" legato-be
     maybe_clone "${Dir}" "${Connection}:${Profile}" legato-rule-engine
+    maybe_clone "${Dir}" "${Connection}:${Profile}" legato-server
     maybe_clone "${Dir}" "${Connection}:${Profile}" legato-ui
 
     return 0

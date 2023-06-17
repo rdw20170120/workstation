@@ -24,17 +24,23 @@ require_script "${_Script}" ; source "${_Script}"
 unset _Script
 
 _Project=legato-rule-engine
-_DirProject=$(git_working_directory "${HOME}/repo/SamsClub/wip" ${_Project})
+_Generation=V2
+export BO_DirReference=$(git_working_directory "${HOME}/repo/SamsClub/ref/${_Generation}" ${_Project})
+export BO_DirWorkInProgress=$(git_working_directory "${HOME}/repo/SamsClub/wip" ${_Project})
+_DirProject=${BO_DirWorkInProgress}
 
 echo "Jumping into project directory '${_DirProject}'"
 cd "${_DirProject}"
 
-alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
-
 python3 -m venv rules_venv
 source rules_venv/bin/activate
 pip install -r requirements.txt
-python3 -m unittest tests/test*.py
+
+alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
+alias ${_Project}_test="python3 -m unittest tests/test*.py"
+
+echo "Available aliases:"
+alias | grep ${_Project}
 
 ###############################################################################
 # Test this script:

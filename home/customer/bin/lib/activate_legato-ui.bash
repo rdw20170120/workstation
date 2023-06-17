@@ -24,19 +24,23 @@ require_script "${_Script}" ; source "${_Script}"
 unset _Script
 
 _Project=legato-ui
-_DirProject=$(git_working_directory "${HOME}/repo/SamsClub/wip" ${_Project})
+_Generation=V2
+export BO_DirReference=$(git_working_directory "${HOME}/repo/SamsClub/ref/${_Generation}" ${_Project})
+export BO_DirWorkInProgress=$(git_working_directory "${HOME}/repo/SamsClub/wip" ${_Project})
+_DirProject=${BO_DirWorkInProgress}
 
 echo "Jumping into project directory '${_DirProject}'"
 cd "${_DirProject}"
 
-alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
-
-nvm use 14
-npm install --force
-
 # Browse to http://localhost:3000/
 # Press Ctrl-C to exit (running in the foreground)
-npm run start-local
+
+alias ${_Project}_install="nvm use 14 ; npm install --force"
+alias ${_Project}_start_local="npm run start-local"
+alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
+
+echo "Available aliases:"
+alias | grep ${_Project}
 
 ###############################################################################
 # Test this script:

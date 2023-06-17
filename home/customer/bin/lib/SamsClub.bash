@@ -3,11 +3,13 @@
 ################################################################################
 
 alias legato-be_activate='source ~/bin/lib/activate_legato-be.bash'
-alias legato-rule_engine_activate='source ~/bin/lib/activate_legato-rule-engine.bash'
+alias legato-rule-engine_activate='source ~/bin/lib/activate_legato-rule-engine.bash'
+alias legato-server_activate='source ~/bin/lib/activate_legato-server.bash'
 alias legato-ui_activate='source ~/bin/lib/activate_legato-ui.bash'
 
 alias jump_legato-be='cd ~/repo/SamsClub/wip/legato-be'
 alias jump_legato-rule-engine='cd ~/repo/SamsClub/wip/legato-rule-engine'
+alias jump_legato-server='cd ~/repo/SamsClub/wip/legato-server'
 alias jump_legato-ui='cd ~/repo/SamsClub/wip/legato-ui'
 
 : << 'DisabledContent'
