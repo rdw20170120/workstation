@@ -9,6 +9,7 @@ set -o pipefail +o verbose +o xtrace
     set -o verbose -o xtrace
 ###############################################################################
 # Declare Bash functions for `git`
+
 # TODO: Implement: Consider installing Git pre-commit hook
 # First, by installing the tool: `brew install pre-commit`
 # Then by using the tool: `cd REPO ; pre-commit install`

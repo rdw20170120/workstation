@@ -2,6 +2,7 @@
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
 # Alias for ls
+
 alias lB='ls -Aln'
 alias lF='ls -AFln'
 alias lL='ls -Lln'

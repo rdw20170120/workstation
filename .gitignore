@@ -1,16 +1,13 @@
 # *.env
 # *.html
 # *.json
-# *.log
 # *.out
 # *.sig
-# /.BO/
-# /out/
-# htmlcov/
 *.avro
 *.bak
 *.class
 *.list
+*.log
 *.parquet
 *.pid
 *.py[cdo]
@@ -18,13 +15,14 @@
 .DS_Store
 .cache/
 .pytest_cache/
+/.BO/capture/
 /.BO/log/
 /.BO/tmp/
 /.anaconda/
 /.coverage
 /alias.bash
 /context.bash
-/log/
 /out/coverage/
 /out/pdoc/
 __pycache__/
+htmlcov/

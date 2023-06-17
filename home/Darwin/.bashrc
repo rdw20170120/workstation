@@ -1,5 +1,5 @@
 #!/bin/false
-# NOTE:  This file is intended to be executed while initializing a Bash shell.
+# NOTE:  This script is executed via `source` while initializing a Bash shell.
 ################################################################################
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -11,7 +11,9 @@ umask u=rwx,g=,o=
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
-  *) return;;
+  *) 
+      echo "WARN: Noninteractive shell, skipping Bash initialization"
+      return;;
 esac
 
 export BO_ARCH=$(uname -m)
