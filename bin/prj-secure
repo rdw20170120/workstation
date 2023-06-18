@@ -37,10 +37,15 @@ secure_directories() {
     log_visit "Securing directories in directory '$1'"
     find "$1" \
         -maxdepth 1 \
-        -not \( -path "${BO_Project}/.git" -prune \) \
-        -not \( -path "${BO_DirAnaconda}" -prune \) \
-        -not -perm ${PermissionsDirectory} \
         -type d \
+        -not -perm ${PermissionsDirectory} \
+        \( \
+            -path ${BO_DirAnaconda} \
+            -or \
+            -path ${BO_Project}/.BO \
+            -or  \
+            -path ${BO_Project}/.git \
+        \) -prune \
         -exec bash -c 'secure_directory "{}"' \;
 } && export -f secure_directories
 
@@ -76,9 +81,14 @@ secure_directory_trees() {
     find "$1" \
         -maxdepth 1 \
 	    -not -path "$1" \
-        -not \( -path "${BO_Project}/.git" -prune \) \
-        -not \( -path "${BO_DirAnaconda}" -prune \) \
         -type d \
+        \( \
+            -path ${BO_DirAnaconda} \
+            -or \
+            -path ${BO_Project}/.BO \
+            -or  \
+            -path ${BO_Project}/.git \
+        \) -prune \
         -exec bash -c 'secure_directory_tree "{}"' \;
 } && export -f secure_directory_trees
 
@@ -190,8 +200,5 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-        \( \
-            -or \
-        \) \
 DisabledContent
 

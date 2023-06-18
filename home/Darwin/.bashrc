@@ -60,7 +60,7 @@ prepare_to_source "${_Script}" && source "${_Script}"
 unset _Script
 
 : << 'DisabledContent'
-# ~/bin/lib/configure & ~/bin/lib/activate
+# Create ~/bin/lib subdirectories
 # that can then be iterated using a simple loop
 # Configure scripts will set whatever variables, etc.
 # that can be before updating PATH

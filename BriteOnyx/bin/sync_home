@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prompt user to manually merge generated source files.
+"""Prompt user to manually merge files under `${BO_Project}/home`.
 
 Intended to be executed directly by the user.
 """
@@ -17,46 +17,30 @@ from commandlib import Command
 # Project modules   (relative references, NOT packaged, in project)
 
 _debugging = False
-_excluded_directory_regexes = [
-    compile(r"\.BO"),
-    compile(r"\.anaconda"),
-    compile(r"\.cache"),
-    compile(r"\.config"),
-    compile(r"\.coverage"),
-    compile(r"\.git"),
-    compile(r"\.hg"),
-    compile(r"\.pytest_cache"),
-    compile(r"\.ssh"),
-    compile(r"__pycache__"),
-    compile(r"bin"),
-    compile(r"coverage"),
-    compile(r"generated"),
-    compile(r"obsolete"),
-    compile(r"waiting"),
-]
+_excluded_directory_regexes = []
 _excluded_file_regexes = [
     # These are file extensions for types of content never likely to be interesting here
     compile(r".*\.log"),
     compile(r".*\.out"),
     compile(r"\.DS_Store"),
     # These are file extensions for types of content not yet interesting
-    compile(r".*\.elv"),
-    compile(r".*\.json"),
-    compile(r".*\.toml"),
-    compile(r".*\.vim"),
-    compile(r".*\.yaml"),
-    compile(r".*\.yml"),
     # These are file extensions for types of content that are already interesting
     # (so normally commented out to include them)
     # compile(r".*\.bash"),
+    # compile(r".*\.elv"),
+    # compile(r".*\.json"),
     # compile(r".*\.md"),
     # compile(r".*\.py"),
+    # compile(r".*\.toml"),
+    # compile(r".*\.vim"),
+    # compile(r".*\.yaml"),
+    # compile(r".*\.yml"),
 ]
 
-_root_generate = path.join(environ["BO_DirTemp"], "generated")
+_root_darwin = path.join(environ["BO_Project"], "home", "Darwin")
+_root_linux = path.join(environ["BO_Project"], "home", "Linux")
 _root_project = path.join(environ["BO_Project"])
-_root_snapshot = path.join(environ["BO_DirSnapshot"], "generated")
-_root_source = path.join(environ["BO_Project"])
+_root_shared = path.join(environ["BO_Project"], "home", "shared")
 _root_temporary = path.join(environ["BO_DirTemp"])
 
 
@@ -78,11 +62,7 @@ def _as_bash_script(desired_files):
     lines.append("#")
     lines.append("# Each command will invoke an editor")
     lines.append("# in which you may manually merge")
-    lines.append("# a pair of files:")
-    lines.append("# one is a source file")
-    lines.append("# belonging to this project (repository)")
-    lines.append("# and the other is a generated file")
-    lines.append("# of potentially useful content.")
+    lines.append("# a set of two or three files.")
     lines.append("#")
     lines.append("# Edit this file, save it, and it will then be executed.")
     lines.append("# Remove (or disable) any lines containing commands")
@@ -100,11 +80,12 @@ def _as_bash_script(desired_files):
     lines.append(f"cd {_root_project}")
     lines.append("")
     for k, v in desired_files.items():
-        (source, generate, snapshot) = v
+        (shared, darwin, linux) = v
         lines.append(
             _merge_command_for(
-                _relative_real_path_or_none(_root_project, source),
-                _relative_real_path_or_none(_root_project, generate),
+                _relative_real_path_or_none(_root_project, shared),
+                _relative_real_path_or_none(_root_project, darwin),
+                _relative_real_path_or_none(_root_project, linux),
             )
         )
     return "\n".join(lines)
@@ -119,8 +100,8 @@ def _dump_files_dictionary(dict_):
     _debug(f"Files dictionary contains {len(dict_)} items:")
     for k, v in dict_.items():
         # _debug(f"relative path: {k}")
-        (source, generate, snapshot) = v
-        _debug(f"source: {source}, generate: {generate}, snapshot: {snapshot}")
+        (shared, darwin, linux) = v
+        _debug(f"shared: {shared}, darwin: {darwin}, linux: {linux}")
 
 
 def _edit_file(file_):
@@ -140,9 +121,9 @@ def _file_triple(file_relative_path):
     """
     _debug(f"Adding relative file '{file_relative_path}'")
     return (
-        _absolute_real_path_or_none(_root_source, file_relative_path),
-        _absolute_real_path_or_none(_root_generate, file_relative_path),
-        _absolute_real_path_or_none(_root_snapshot, file_relative_path),
+        _absolute_real_path_or_none(_root_shared, file_relative_path),
+        _absolute_real_path_or_none(_root_darwin, file_relative_path),
+        _absolute_real_path_or_none(_root_linux, file_relative_path),
     )
 
 
@@ -150,17 +131,19 @@ def _info(message):
     print(message)
 
 
-def _merge_command_for(source, generate):
+def _merge_command_for(shared, darwin, linux):
     result = "vim -d"
-    result += "" if generate is None else f" {generate}"
-    result += "" if source is None else f" {source}"
+    result += "" if shared is None else f" {shared}"
+    result += "" if darwin is None else f" {darwin}"
+    result += "" if linux is None else f" {linux}"
     return result
 
 
-def _merge_file_dicts(generated_files, source_files):
+def _merge_file_dicts(shared_files, darwin_files, linux_files):
     result = {}
-    result.update(generated_files)
-    result.update(source_files)
+    result.update(shared_files)
+    result.update(darwin_files)
+    result.update(linux_files)
     return result
 
 
@@ -200,43 +183,38 @@ def _scanned_files(root):
 def _should_merge_file(file_relative_path, file_triple):
     """Return whether the user should be asked
     to manually merge the files at file_relative_path."""
-    (source, generate, snapshot) = file_triple
-    # _debug(f"file triple:  source='{source}', generate='{generate}', snapshot='{snapshot}'")
-    if source is None:
-        # Without source, cannot merge
-        _info(f"source is missing:  generate='{generate}', snapshot='{snapshot}'")
-        return False
-    elif generate is None:
-        # Without generate, cannot merge
-        # _debug(f"generate is missing:  source='{source}', snapshot='{snapshot}'")
-        return False
-    elif cmp(generate, source, shallow=False):
-        # If generate is same as source,
-        # the merge is unnecessary
-        # _debug(f"Generated is same as source:  source='{source}'")
-        return False
-    elif snapshot is None:
-        # Without snapshot, assume new generate never before merged (or complete reset)
-        _debug(f"Merging '{generate}' into '{source}'")
-        return True
-    else:
-        # With all three present, consider merge
-        # _debug(f"all present:  source='{source}', generate='{generate}', snapshot='{snapshot}'")
-        if cmp(generate, snapshot, shallow=False):
-            # If generate is NOT same as source,
-            # but snapshot is same as generate,
-            # then assume merge has already been performed
-            # since user snapshotted the generated source
-            # _debug(f"Snapshotted is same as generate:  source='{source}'")
+    (shared, darwin, linux) = file_triple
+    _debug(f"file triple:  shared='{shared}', darwin='{darwin}', linux='{linux}'")
+    count = 0
+    count += 1 if shared is not None else 0
+    count += 1 if darwin is not None else 0
+    count += 1 if linux is not None else 0
+    # If there are fewer than two files, cannot merge
+    if count < 2: return False
+    if shared is None:
+        if cmp(darwin, linux, shallow=False):
+            # If darwin is same as linux,
+            # the merge is unnecessary
+            # _debug(f"Darwin is same as Linux:  relative path = '{file_relative_path}'")
             return False
-        else:
-            # If generate is NOT same as source,
-            # and snapshot is NOT same as generate,
-            # merge
-            _debug(f"Merging '{generate}' into '{source}'")
-            return True
-    # Should never reach here
-    return False
+        else: return True
+    elif darwin is None:
+        if cmp(linux, shared, shallow=False):
+            # If linux is same as shared,
+            # the merge is unnecessary
+            # _debug(f"Linux is same as shared:  relative path = '{file_relative_path}'")
+            return False
+        else: return True
+    elif linux is None:
+        if cmp(darwin, shared, shallow=False):
+            # If darwin is same as shared,
+            # the merge is unnecessary
+            # _debug(f"Darwin is same as shared:  relative path = '{file_relative_path}'")
+            return False
+        else: return True
+    else:
+        # Should never reach here
+        return False
 
 
 def _write_file(text_content, file_):
@@ -247,15 +225,14 @@ def _write_file(text_content, file_):
 
 def main():
     """Script entry point."""
-    # No need to scan generated source
-    # that has been snapshotted (`_root_snapshot`),
-    # because such orphans will be discarded
-    # upon the next run of `gen-snapshot`
-    generated_files = _scanned_files(_root_generate)
-    _info(f"Generated files dict contains {len(generated_files)} files")
-    source_files = _scanned_files(_root_source)
-    _info(f"Source files dict contains {len(source_files)} files")
-    desired_files = _merge_file_dicts(generated_files, source_files)
+    darwin_files = _scanned_files(_root_darwin)
+    _info(f"Darwin files dict contains {len(darwin_files)} files")
+    linux_files = _scanned_files(_root_linux)
+    _info(f"Linux files dict contains {len(linux_files)} files")
+    shared_files = _scanned_files(_root_shared)
+    _info(f"Shared files dict contains {len(shared_files)} files")
+
+    desired_files = _merge_file_dicts(shared_files, darwin_files, linux_files)
     _info(f"Desired files dict contains {len(desired_files)} files")
     desired_files = {k: v for k, v in desired_files.items() if _should_merge_file(k, v)}
     _info(f"Desired files dict contains {len(desired_files)} files")

@@ -1,4 +1,4 @@
-#!/usr/bin/env cat
+#!/usr/bin/env false
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
 # Configure paths, especially PATH

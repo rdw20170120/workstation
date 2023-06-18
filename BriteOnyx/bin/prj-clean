@@ -14,11 +14,16 @@ findAnd() {
     # $2 = directory in which to work
     # $3 = filename pattern to match
     find "$2" \
-	-not -path "${BO_Project}/.git/*" \
-	-not -path "${BO_DirAnaconda}/*" \
-	-and -name "$3" \
-	-and -type f \
-	-$1
+	    -name "$3" \
+	    -type f \
+        \( \
+            -path ${BO_DirAnaconda} \
+            -or \
+            -path ${BO_Project}/.BO \
+            -or  \
+            -path ${BO_Project}/.git \
+        \) -prune \
+	    -$1
 }
 
 main() {

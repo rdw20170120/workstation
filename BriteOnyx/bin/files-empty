@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+[[ -z "${BO_Project}" ]] &&
+    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    exit 99
+
+main() {
+    # Find empty files within the project directory
+    require_arguments $# 0
+
+    log_debug "Found these empty files..."
+    find ${BO_Project} \
+	    -type f \
+        -empty \
+        \( \
+            -path ${BO_DirAnaconda} \
+            -or \
+            -path ${BO_Project}/.BO \
+            -or  \
+            -path ${BO_Project}/.git \
+        \) -prune \
+        -print
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

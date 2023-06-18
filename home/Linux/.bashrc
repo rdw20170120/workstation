@@ -1,5 +1,5 @@
 #!/bin/false
-# NOTE:  This file is intended to be executed as part of starting a Bash shell.
+# NOTE:  This script is executed via `source` while initializing a Bash shell.
 ################################################################################
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -11,8 +11,15 @@ umask u=rwx,g=,o=
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
-  *) return;;
+  *) 
+      echo "WARN: Noninteractive shell, skipping Bash initialization"
+      return;;
 esac
+
+export BO_ARCH=$(uname -m)
+export BO_OS=$(uname)
+
+# TODO: export BO_PathNative=
 
 prepare_to_source() {
     # Prepare to `source` script $1,
@@ -29,41 +36,38 @@ prepare_to_source() {
     return 1
 } && export -f prepare_to_source
 
-################################################################################
-# Configure terminal first, since other scripts depend upon it
-_Script=${HOME}/bin/lib/configure_terminal.bash
+_Script=${HOME}/bin/lib/setup_terminal.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
-################################################################################
-# Configure other things, alphabetically
-
-_Script=${HOME}/bin/lib/configure_bash.bash
+_Script=${HOME}/bin/lib/all_configure.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
-_Script=${HOME}/bin/lib/configure_chroot.bash
+_Script=${HOME}/bin/lib/set_path.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
-_Script=${HOME}/bin/lib/configure_dircolors.bash
+_Script=${HOME}/bin/lib/all_activate.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
-_Script=${HOME}/bin/lib/configure_less.bash
+_Script=${HOME}/bin/lib/set_path.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
-_Script=${HOME}/bin/lib/configure_vim.bash
+_Script=${HOME}/bin/lib/SamsClub.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
-################################################################################
-# Configure paths last, since it depends upon most other scripts
-_Script=${HOME}/bin/lib/configure_paths.bash
-prepare_to_source "${_Script}" && source "${_Script}"
-
-################################################################################
-# Define aliases to help the user
-_Script=${HOME}/alias.bash
+_Script=${HOME}/bin/lib/all_alias.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
 unset _Script
 
 : << 'DisabledContent'
+# Create ~/bin/lib subdirectories
+# that can then be iterated using a simple loop
+# Configure scripts will set whatever variables, etc.
+# that can be before updating PATH
+# while
+# Activate scripts will rely upon PATH being complete
+# Most commands will not need either kind of script
+# built-in commands will not need an activate script
+# while externally-added tools will likely need both kinds of script
 DisabledContent
 
