@@ -190,28 +190,32 @@ def _should_merge_file(file_relative_path, file_triple):
     count += 1 if darwin is not None else 0
     count += 1 if linux is not None else 0
     # If there are fewer than two files, cannot merge
-    if count < 2: return False
+    if count < 2:
+        return False
     if shared is None:
         if cmp(darwin, linux, shallow=False):
             # If darwin is same as linux,
             # the merge is unnecessary
             # _debug(f"Darwin is same as Linux:  relative path = '{file_relative_path}'")
             return False
-        else: return True
+        else:
+            return True
     elif darwin is None:
         if cmp(linux, shared, shallow=False):
             # If linux is same as shared,
             # the merge is unnecessary
             # _debug(f"Linux is same as shared:  relative path = '{file_relative_path}'")
             return False
-        else: return True
+        else:
+            return True
     elif linux is None:
         if cmp(darwin, shared, shallow=False):
             # If darwin is same as shared,
             # the merge is unnecessary
             # _debug(f"Darwin is same as shared:  relative path = '{file_relative_path}'")
             return False
-        else: return True
+        else:
+            return True
     else:
         # Should never reach here
         return False
