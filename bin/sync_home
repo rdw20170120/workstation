@@ -9,7 +9,7 @@
     exit 99
 
 my_vim() {
-    # Return absolute path to my my Vim
+    # Return absolute path to my Vim
     local -r PathNvim="$(which nvim)"
     local -r PathVi="$(which vi)"
     local -r PathVim="$(which vim)"
