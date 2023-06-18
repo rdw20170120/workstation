@@ -8,6 +8,17 @@
     1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
+findAllAnd() {
+    # Find and perform action $1 on all thse files
+    # $1 = action to perform, either 'delete' or 'print'
+    findAnd $1 "${BO_Project}" '*.bak'
+    findAnd $1 "${BO_Project}" '*.log'
+    findAnd $1 "${BO_Project}" '*.pyc'
+    findAnd $1 "${BO_Project}" '__pycache__'
+
+    return 0
+}
+
 findAnd() {
     # Find and perform action $1 on files within directory $2 matching pattern $3
     # $1 = action to perform, either 'delete' or 'print'
@@ -31,22 +42,13 @@ main() {
     require_arguments $# 0
 
     log_debug "Found these files..."
-    findAnd print "${BO_Project}" '*.bak'
-    findAnd print "${BO_Project}" '*.log'
-    findAnd print "${BO_Project}" '*.pyc'
-    findAnd print "${BO_Project}" '__pycache__'
+    findAllAnd print
 
     log_debug "Deleting files..."
-    findAnd delete "${BO_DirLog}" '*.log'
-    findAnd delete "${BO_Project}" '*.bak'
-    findAnd delete "${BO_Project}" '*.pyc'
-    findAnd delete "${BO_Project}" '__pycache__'
+    findAllAnd delete
 
     log_warn "Found these files REMAINING..."
-    findAnd print "${BO_Project}" '*.bak'
-    findAnd print "${BO_Project}" '*.log'
-    findAnd print "${BO_Project}" '*.pyc'
-    findAnd print "${BO_Project}" '__pycache__'
+    findAllAnd print
 
     return 0
 }
@@ -60,9 +62,5 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-    maybe_delete_file "${BO_Project}/src/app/pytest.log"
-    maybe_delete_file "${BO_Project}/src/gen/pytest.log"
-    maybe_delete_file "${BO_Project}/src/lib/mine/pytest.log"
-    maybe_delete_file "${BO_Project}/src/lib/third_party/pytest.log"
 DisabledContent
 
