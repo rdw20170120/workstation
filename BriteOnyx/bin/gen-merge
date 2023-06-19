@@ -115,12 +115,16 @@ def _debug(message):
         print(message)
 
 
-def _dump_files_dictionary(dict_):
+def _dump_files_dict(dict_):
     _debug(f"Files dictionary contains {len(dict_)} items:")
     for k, v in dict_.items():
-        # _debug(f"relative path: {k}")
         (source, generate, snapshot) = v
-        _debug(f"source: {source}, generate: {generate}, snapshot: {snapshot}")
+        line = ""
+        line += "       " if source is None else "source "
+        line += "         " if generate is None else "generate "
+        line += "         " if snapshot is None else "snapshot "
+        line += f"  {k}"
+        _debug(line)
 
 
 def _edit_file(file_):
@@ -138,7 +142,7 @@ def _file_triple(file_relative_path):
     of the source files
     associated with the file_relative_path.
     """
-    _debug(f"Adding relative file '{file_relative_path}'")
+    # _debug(f"Adding relative file '{file_relative_path}'")
     return (
         _absolute_real_path_or_none(_root_source, file_relative_path),
         _absolute_real_path_or_none(_root_generate, file_relative_path),
@@ -257,6 +261,7 @@ def main():
     _info(f"Source files dict contains {len(source_files)} files")
     desired_files = _merge_file_dicts(generated_files, source_files)
     _info(f"Desired files dict contains {len(desired_files)} files")
+    # _dump_files_dict(desired_files)
     desired_files = {k: v for k, v in desired_files.items() if _should_merge_file(k, v)}
     _info(f"Desired files dict contains {len(desired_files)} files")
     # _dump_files_dict(desired_files)

@@ -28,11 +28,12 @@ main() {
     echo "Updating and upgrading packages"
     # TODO: Manually install Homebrew until I can fully automate it
     # TODO: Homebrew checks for `sudo` access, so fully automate that too
-#   homebrew-install
+    # homebrew-install
     homebrew-update
     homebrew-upgrade
     homebrew-populate
 
+    anaconda-install
     prepare_git_access
 
     echo "You may configure the editors manually by invoking 'editors-configure'"
@@ -53,7 +54,6 @@ main $@
 chsh -s /bin/bash
 homebrew-install
 editors-configure
-vim ~/bin/lib/configure_paths.bash
 ssh-keygen
 clone_all
 jump_workstation

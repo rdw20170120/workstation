@@ -52,13 +52,9 @@ main $@
 : << 'DisabledContent'
 sudo shutdown -r now
 editors-configure
-vim ~/bin/lib/configure_paths.bash
 ssh-keygen
 clone_all
 jump_workstation
 bash -c "source activate.bash"
-
-Consider installing these on Ubuntu, similar to using Homebrew on macOS:
-brew install asciidoc iterm2 mambaforge neovim yamllint
 DisabledContent
 
