@@ -38,20 +38,15 @@ _DirProject=${BO_DirWorkInProgress}
 echo "Jumping into project directory '${_DirProject}'"
 cd "${_DirProject}"
 
-export DB_HOST=${DB_HostFqdnDev}
-export DB_NAME=${DB_NameDev}
-export DB_PASSWORD=${DB_PassDevAdmin}
-export DB_USER=${DB_UserDevAdmin}
+export DB_HOST=${PostgresHostFqdnDev}
+export DB_NAME=${PostgresNameDev}
+export DB_PASSWORD=${PostgresPassDevAdmin}
+export DB_USER=${PostgresUserDevAdmin}
 
-# Remember primary Python commands
-# export BO_cmd_python3=$(which python3)
-# export BO_cmd_pip="${BO_cmd_python3} -m pip"
-# export BO_cmd_pipenv="${BO_cmd_python3} -m pipenv"
-
+echo "INFO: Show available project aliases by executing 'show_project_alias'"
+alias show_project_alias="alias | grep ${_Project}"
+alias ${_Project}_build="./build_for_Rob"
 alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
-
-echo "Available aliases:"
-alias | grep ${_Project}
 
 ###############################################################################
 # Test this script:
@@ -65,5 +60,10 @@ alias | grep ${_Project}
 # set +o verbose +o xtrace
 
 : << 'DisabledContent'
+# Remember primary Python commands
+export BO_cmd_python3=$(which python3)
+export BO_cmd_pip="${BO_cmd_python3} -m pip"
+export BO_cmd_pipenv="${BO_cmd_python3} -m pipenv"
+
 DisabledContent
 

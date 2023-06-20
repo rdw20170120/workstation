@@ -36,11 +36,10 @@ python3 -m venv rules_venv
 source rules_venv/bin/activate
 pip install -r requirements.txt
 
+echo "INFO: Show available project aliases by executing 'show_project_alias'"
+alias show_project_alias="alias | grep ${_Project}"
 alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
 alias ${_Project}_test="python3 -m unittest tests/test*.py"
-
-echo "Available aliases:"
-alias | grep ${_Project}
 
 ###############################################################################
 # Test this script:

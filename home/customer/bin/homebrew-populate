@@ -17,6 +17,7 @@ main() {
     Packages+=' git'
     Packages+=' iterm2'
     Packages+=' neovim'
+    Packages+=' pyenv'
 
     # helpful additional tools
     # Packages+=' asciidoc'
@@ -34,9 +35,9 @@ main() {
     # Packages+=' kube-linter'
     # Packages+=' kubernetes-cli'
     Packages+=' nvm'
+    Packages+=' pgadmin4'
     Packages+=' postgresql@14'
     Packages+=' postman'
-    Packages+=' pyenv'
 
     brew install ${Packages}
 

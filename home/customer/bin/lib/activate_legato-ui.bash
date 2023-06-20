@@ -35,12 +35,11 @@ cd "${_DirProject}"
 # Browse to http://localhost:3000/
 # Press Ctrl-C to exit (running in the foreground)
 
+echo "INFO: Show available project aliases by executing 'show_project_alias'"
+alias show_project_alias="alias | grep ${_Project}"
 alias ${_Project}_install="nvm use 14 ; npm install --force"
 alias ${_Project}_start_local="npm run start-local"
 alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
-
-echo "Available aliases:"
-alias | grep ${_Project}
 
 ###############################################################################
 # Test this script:

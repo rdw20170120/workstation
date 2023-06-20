@@ -78,6 +78,7 @@ main() {
     hunt "${Out}" Celery
     hunt "${Out}" Dell
     hunt "${Out}" Django
+    hunt "${Out}" Earthly
     hunt "${Out}" Hashicorp
     hunt "${Out}" Helm
     hunt "${Out}" Homebrew

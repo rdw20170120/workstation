@@ -17,6 +17,7 @@ main() {
     Packages+=' git'
     Packages+=' iterm2'
     Packages+=' neovim'
+    Packages+=' pyenv'
 
     # helpful additional tools
     # Packages+=' asciidoc'
@@ -27,16 +28,6 @@ main() {
     # Packages+=' shellcheck'
     # Packages+=' yamllint'
 
-    # For Sam's Club Legato system
-    # Packages+=' azure-cli'
-    # Packages+=' krew'
-    # Packages+=' kubectx'
-    # Packages+=' kube-linter'
-    # Packages+=' kubernetes-cli'
-    Packages+=' nvm'
-    Packages+=' postgresql@14'
-    Packages+=' postman'
-    Packages+=' pyenv'
 
     brew install ${Packages}
 
