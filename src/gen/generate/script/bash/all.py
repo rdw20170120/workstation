@@ -93,6 +93,7 @@ def _generate_home_bin_lib(config, dir_):
 def _generate_home_darwin(config, dir_):
     _generate_home_darwin_bin(config, dir_ / "bin")
     bash(executed(config), dir_, "bootstrap")
+    bash(sourced(config), dir_, ".bashrc")
     bash(sourced(config), dir_, "declare-bootstrap-specific.bash")
 
 
@@ -107,11 +108,13 @@ def _generate_home_darwin_bin(config, dir_):
 
 def _generate_home_linux(config, dir_):
     bash(executed(config), dir_, "bootstrap")
+    bash(sourced(config), dir_, ".bashrc")
     bash(sourced(config), dir_, "declare-bootstrap-specific.bash")
 
 
 def _generate_home_shared(config, dir_):
     bash(executed(config), dir_, "bootstrap")
+    bash(sourced(config), dir_, ".bashrc")
     bash(sourced(config), dir_, "declare-bootstrap-shared.bash")
 
 
