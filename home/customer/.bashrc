@@ -1,5 +1,5 @@
 #!/bin/false
-# NOTE:  This script is executed via `source` while initializing a Bash shell.
+# This script is executed via `source` while initializing a Bash shell.
 ################################################################################
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)

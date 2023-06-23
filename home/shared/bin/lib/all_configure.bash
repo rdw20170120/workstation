@@ -1,5 +1,5 @@
 #!/bin/false
-# NOTE:  This file is intended to be executed while initializing a Bash shell.
+# This script is executed via `source` while initializing a Bash shell.
 ################################################################################
 
 _Script=${HOME}/bin/lib/configure/bash.bash
@@ -27,6 +27,9 @@ _Script=${HOME}/bin/lib/configure/Kubernetes.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
 _Script=${HOME}/bin/lib/configure/NodeJS.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+
+_Script=${HOME}/bin/lib/configure/PostgreSQL.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
 _Script=${HOME}/bin/lib/configure/Pyenv.bash

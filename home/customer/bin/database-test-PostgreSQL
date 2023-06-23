@@ -10,26 +10,159 @@ set -o pipefail +o verbose +o xtrace
 ###############################################################################
 # Test PostgreSQL database connectivity at Sam's Club
 
+###############################################################################
+# Existing PostgreSQL databases found:
+#
+# Host                       Name           Owner            Environment  Version
+# =========================  =============  ===============  ===========  =======
+# devsamsitm                 pim            samsitem         Dev          V1
+# devsamsitm                 pim_qa         samsitem         UNKNOWN      V1?
+# devsamsitm                 pim_stage      samsitem         UNKNOWN      V1?
+# devsamsitm                 postgres       azure_superuser  UNKNOWN      V1?
+# legato-pim-postgres-np     postgres       azure_superuser  Qa           V2
+# legato-pim-postgres-np     test_postgres  samsitem         UNKNOWN      V2?
+# legato-pim-postgres-stage  postgres       azure_superuser  Stage        V2
+# samspimstage               postgres       azure_superuser  Stage        V1
+# samspimstage               test_postgres  samsitem         UNKNOWN      V1?
+
+# Aravind says that only the stage database has working validation rules,
+# so I should copy from the stage database to a local development database.
+# Arti & Bhavana say that I should be using `postgres` databases, except for Dev.
+# They also say that they do not know about the `test_postgres` databases,
+# so I should avoid them.
+# All say that only the Stage databases are valid, but QA and Dev databases are incomplete
+# in various ways.
+
 _Script=${HOME}/bin/lib/declare/PostgreSQL.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 _Script=${HOME}/credential.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 unset _Script
 
-set -o verbose
+_report() {
+    # Report on the potential success of connecting to PostgreSQL database
+    # $1 = PostgreSQL exit status
+    # $2 = Reference
+    # $3 = System version/variant (V?/V?)
+    # $4 = Environment
+    # $5 = Database host name
+    # $6 = Database name
+    # $7 = Database user name
+    # $8 = name of variable containing database user password
+    if (( $1 )); then
+        echo "*** FAILURE for $3 $4 $5 $6 $7 $8 from reference: $2"
+    else
+        echo "*** SUCCESS for $3 $4 $5 $6 $7 $8 from reference: $2"
+    fi
+    return $1
+}
 
-# These work (so far)
-postgresql-connect-dev-admin     --list
-postgresql-connect-qa-regular    --list
-postgresql-connect-qa-unknown    --list
-postgresql-connect-stage-unknown --list
+_try() {
+    # Try to connect to a PostgreSQL database
+    # using provided details
+    # and report the result
+    # $1 = reference to source of details (documentation, person, etc.)
+    # $2 = database host name (NOT FQDN)
+    # $3 = database name
+    # $4 = database user name
+    # $5 = name of environment variable containing database user password
+    # $6 = environment
+    # $7 = system version (optional, V1/V2/V?)
+    local -r Ref=$1
+    local -r Host=$2
+    local -r Name=$3
+    local -r User=$4
+    local -r Pass=$5
+    local -r Env=$6
+    local    Version=$7 ; [[ -z "${Version}" ]] && Version=V?
+    local -r Fqdn=${Host}${PostgresHostSuffix}
+    local -i Status
 
-# These do NOT work (so far)
-postgresql-connect-dev-regular   --list
-postgresql-connect-dev-unknown   --list
-postgresql-connect-qa-admin      --list
-postgresql-connect-stage-admin   --list
-postgresql-connect-stage-regular --list
+    postgresql-connect ${Fqdn} ${Name} ${User}@${Host} ${Pass}
+    Status=$? ; _report ${Status} ${Ref} ${Version} ${Env} ${Host} ${Name} ${User} ${Pass}
+}
 
-# NOTE: I do not yet have tests for the remaining PostgreSQL connectivity
+_Local="${PostgresUserLocal} PostgresPassLocal"
+_Owner="${PostgresUserOwner} PostgresPassOwner"
+_Readonly="${PostgresUserReadonly} PostgresPassReadonly"
+
+###############################################################################
+_RefW=WORKS
+_try ${_RefW} legato-pim-postgres-np    postgres ${_Readonly} Qa    # SUCCESS
+_try ${_RefW} legato-pim-postgres-stage postgres ${_Readonly} Stage # SUCCESS
+_try ${_RefW} devsamsitm                pim      ${_Owner}    Dev   # SUCCESS
+_try ${_RefW} devsamsitm                pim      ${_Readonly} Dev   # SUCCESS
+_try ${_RefW} samspimstage              postgres ${_Readonly} Stage # SUCCESS
+_try ${_RefW} localhost                 pim      ${_Local}    Dev   # ???
+
+: << 'DisabledContent'
+###############################################################################
+_Ref=
+_try ${_Ref} HOST NAME USER PASS ENV # result
+
+###############################################################################
+# References
+_RefA=Arti
+_RefB=Bhavana
+_RefC=https://gecgithub01.walmart.com/legato-pim/legato-server/blob/main/docs/environments.md
+_RefD=https://gecgithub01.walmart.com/legato-pim/legato-server/blob/main/pim/env/dev.py
+_RefE=https://gecgithub01.walmart.com/legato-pim/legato-server/blob/main/pim/env/devpostgres.py
+_RefF=https://gecgithub01.walmart.com/legato-pim/legato-server/blob/main/pim/env/qa.py
+_RefG=https://gecgithub01.walmart.com/legato-pim/legato-server/blob/main/pim/env/stage.py
+_RefH=https://gecgithub01.walmart.com/legato-pim/legato-be/blob/main/docs/environments.md
+_RefI=https://gecgithub01.walmart.com/legato-pim/legato-be/blob/main/pim/env/dev.py
+_RefJ=https://gecgithub01.walmart.com/legato-pim/legato-be/blob/main/pim/env/devpostgres.py
+_RefK=https://gecgithub01.walmart.com/legato-pim/legato-be/blob/main/pim/env/qa.py
+_RefL=https://gecgithub01.walmart.com/legato-pim/legato-be/blob/main/pim/env/stage.py
+
+###############################################################################
+# Complete set of potential PostgreSQL connections
+_try ${_RefA} legato-pim-postgres-np    postgres  ${_Owner}                     Qa    # password
+_try ${_RefA} legato-pim-postgres-np    postgres  ${_Readonly}                  Qa    # SUCCESS
+_try ${_RefA} legato-pim-postgres-np    postgres  samsitem PostgresPassReadonly Qa    # password
+_try ${_RefA} devsamsitm                 pim      ${_Owner}                     Dev   # SUCCESS
+_try ${_RefA} devsamsitm                 pim      ${_Readonly}                  Dev   # SUCCESS
+_try ${_RefB} samspimstage               postgres ${_Readonly}                  Stage # SUCCESS
+_try ${_RefC} devsamsitm                 pim      ${_Owner}                     Dev   # SUCCESS
+_try ${_RefC} samspimstage               postgres ${_Owner}                     Stage # password
+_try ${_RefC} samspimstage               postgres samsitem PostgresPassReadonly Stage # password
+_try ${_RefD} devsamsitm                 pim      ${_Owner}                     Dev   # SUCCESS
+_try ${_RefG} samspimstage               postgres ${_Owner}                     Stage # password
+_try ${_RefG} samspimstage               postgres samsitem PostgresPassReadonly Stage # password
+_try ${_RefH} legato-pim-postgres-np    pim       ${_Readonly}                  Dev   # database
+_try ${_RefH} legato-pim-postgres-np    pim       legato_dev PostgresPassOwner  Dev   # password
+_try ${_RefH} legato-pim-postgres-stage postgres  ${_Readonly}                  Stage # SUCCESS
+_try ${_RefI} legato-pim-postgres-np    pim       ${_Readonly}                  Dev   # database
+_try ${_RefI} legato-pim-postgres-np    pim       legato_dev PostgresPassOwner  Dev   # password
+_try ${_RefK} legato-pim-postgres-np    postgres  ${_Readonly}                  Qa    # SUCCESS
+_try ${_RefL} legato-pim-postgres-stage postgres  ${_Readonly}                  Stage # SUCCESS
+
+###############################################################################
+_RefZ=FAILURE
+_try ${_RefZ} legato-pim-postgres-np    postgres      ${_Owner} Qa      # password
+_try ${_RefZ} legato-pim-postgres-np    test_postgres ${_Owner} UNKNOWN # password
+_try ${_RefZ} legato-pim-postgres-stage postgres      ${_Owner} Stage   # password
+_try ${_RefZ} samspimstage              postgres      ${_Owner} Stage   # password
+_try ${_RefZ} samspimstage              test_postgres ${_Owner} UNKNOWN # password
+
+###############################################################################
+# Unknown environment
+_try ${_RefC} devsamsitm             pim_qa        ${_Owner}                    UNKNOWN # SUCCESS
+_try ${_RefE} devsamsitm             postgres      ${_Owner}                    UNKNOWN # SUCCESS
+_try ${_RefF} devsamsitm             pim_qa        ${_Owner}                    UNKNOWN # SUCCESS
+_try ${_RefH} legato-pim-postgres-np pim_qa        ${_Readonly}                 UNKNOWN # database
+_try ${_RefH} legato-pim-postgres-np pim_qa        legato_dev PostgresPassOwner UNKNOWN # password
+_try ${_RefJ} devsamsitm             postgres      ${_Owner}                    UNKNOWN # SUCCESS
+_try ${_RefW} legato-pim-postgres-np test_postgres ${_Readonly}                 UNKNOWN # SUCCESS
+_try ${_RefW} devsamsitm             pim_qa        ${_Owner}                    UNKNOWN # SUCCESS
+_try ${_RefW} devsamsitm             pim_qa        ${_Readonly}                 UNKNOWN # SUCCESS
+_try ${_RefW} devsamsitm             pim_stage     ${_Owner}                    UNKNOWN # SUCCESS
+_try ${_RefW} devsamsitm             pim_stage     ${_Readonly}                 UNKNOWN # SUCCESS
+_try ${_RefW} devsamsitm             postgres      ${_Owner}                    UNKNOWN # SUCCESS
+_try ${_RefW} devsamsitm             postgres      ${_Readonly}                 UNKNOWN # SUCCESS
+_try ${_RefW} samspimstage           test_postgres ${_Readonly}                 UNKNOWN # SUCCESS
+_try ${_RefZ} legato-pim-postgres-np test_postgres ${_Owner}                    UNKNOWN # password
+_try ${_RefZ} samspimstage           test_postgres ${_Owner}                    UNKNOWN # password
+
+DisabledContent
 

@@ -29,8 +29,8 @@ require_script "${_Script}" ; source "${_Script}"
 
 unset _Script
 
-_Project=legato-be
-_Generation=V2
+_Project=legato-server
+_Generation=V1
 export BO_DirReference=$(git_working_directory "${HOME}/repo/SamsClub/ref/${_Generation}" ${_Project})
 export BO_DirWorkInProgress=$(git_working_directory "${HOME}/repo/SamsClub/wip" ${_Project})
 _DirProject=${BO_DirWorkInProgress}
@@ -38,10 +38,14 @@ _DirProject=${BO_DirWorkInProgress}
 echo "Jumping into project directory '${_DirProject}'"
 cd "${_DirProject}"
 
-export DB_HOST=legato-pim-postgres-stage${PostgresHostSuffix}
+export DB_HOST=samspimstage${PostgresHostSuffix}
 export DB_NAME=postgres
+
 export DB_PASSWORD=${PostgresPassReadonly}
-export DB_USER=${PostgresUserReadonly}@legato-pim-postgres-stage
+export DB_USER=${PostgresUserReadonly}@samspimstage
+
+export DB_PASSWORD=${PostgresPassOwner}
+export DB_USER=${PostgresUserOwner}@samspimstage
 
 echo "INFO: Show available project aliases by executing 'show_project_alias'"
 alias show_project_alias="alias | grep ${_Project}"
@@ -60,10 +64,8 @@ alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsCl
 # set +o verbose +o xtrace
 
 : << 'DisabledContent'
-# Remember primary Python commands
-export BO_cmd_python3=$(which python3)
-export BO_cmd_pip="${BO_cmd_python3} -m pip"
-export BO_cmd_pipenv="${BO_cmd_python3} -m pipenv"
-
+# TODO: Building & installing the package locally
+python setup.py bdist_wheel
+pip install /path/to/wheelfile.whl
 DisabledContent
 
