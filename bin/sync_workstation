@@ -1,138 +1,266 @@
-#!/usr/bin/env bash
-# Intended to be executed in a Bash shell.
-[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-# NO: set -e
-# NO: trap ... EXIT
-###############################################################################
-[[ -z "${BO_Project}" ]] &&
-    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
-    exit 99
+#!/usr/bin/env python3
+"""Prompt user to manually merge files on this workstation.
 
-my_vim() {
-    # Return absolute path to my Vim
-    local -r PathNvim="$(which nvim)"
-    local -r PathVi="$(which vi)"
-    local -r PathVim="$(which vim)"
+Intended to be executed directly by the user.
+"""
+# Internal packages (absolute references, distributed with Python)
+from filecmp import cmp
+from os import environ
+from os import path
+from os import walk
+from re import compile
 
-    if [[ -n "${PathNvim}" ]]; then
-        echo -n "${PathNvim}"
-    elif [[ -n "${PathVim}" ]]; then
-        echo -n "${PathVim}"
-    else
-        echo -n "${PathVi}"
-    fi
+# External packages (absolute references, NOT distributed with Python)
+from commandlib import Command
 
-    return 0
-}
+# Library modules   (absolute references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
 
-sync_directory() {
-    # Synchronize directory trees
-    # TODO: REFACTOR into BriteOnyx Bash declarations
-    require_arguments $# 2
-    require_variable MyVim
-    local -r DirTarget=$1
-    local -r DirSource=$2
+_debugging = False
+_excluded_directory_regexes = []
+_excluded_file_regexes = [
+    # These are file extensions for types of content never likely to be interesting here
+    compile(r".*\.log"),
+    compile(r".*\.out"),
+    compile(r"\.DS_Store"),
+    # These are file extensions for types of content not yet interesting
+    # These are file extensions for types of content that are already interesting
+    # (so normally commented out to include them)
+    # compile(r".*\.bash"),
+    # compile(r".*\.elv"),
+    # compile(r".*\.json"),
+    # compile(r".*\.md"),
+    # compile(r".*\.py"),
+    # compile(r".*\.toml"),
+    # compile(r".*\.vim"),
+    # compile(r".*\.yaml"),
+    # compile(r".*\.yml"),
+]
 
-    if [[ -d "${DirSource}" ]] ; then
-        log_info "Synchronizing directories '${DirTarget}' and '${DirSource}'"
-        maybe_create_directory_tree "${DirTarget}"
-        ${MyVim} -c "DirDiff ${DirTarget} ${DirSource}"
-    else
-        log_warn "Skipped missing directory '${DirSource}'"
-    fi
-}
+_root_darwin = path.join(environ["BO_Project"], "home", "Darwin")
+_root_linux = path.join(environ["BO_Project"], "home", "Linux")
+_root_project = path.join(environ["BO_Project"])
+_root_shared = path.join(environ["BO_Project"], "home", "shared")
+_root_temporary = path.join(environ["BO_DirTemp"])
 
-sync_file() {
-    # Synchronize file
-    require_arguments $# 3
-    local -r DirTarget=$1
-    local -r DirSource=$2
-    local -r File=$3
 
-    sync_files "${DirTarget}/${File}" "${DirSource}/${File}"
-}
+def _absolute_real_path_or_none(root, relative_path):
+    result = path.abspath(path.join(root, relative_path))
+    if not path.exists(result):
+        result = None
+    return result
 
-sync_files() {
-    # Synchronize files $1 and $2
-    require_arguments $# 2
-    require_variable MyVim
-    local -r Diff="diff -aNq"
-    local -r FileTarget=$1
-    local -r FileSource=$2
 
-    if [[ ! -e "${FileSource}" ]]; then
-        log_debug "Skipped missing file '${FileSource}'"
-        return 0
-    fi
-    if [[ ! -e "${FileTarget}" ]]; then
-        log_debug "Skipped missing file '${FileTarget}'"
-        return 0
-    fi
-    if ${Diff} "${FileTarget}" "${FileSource}"; then
-        log_debug "Skipped same files '${FileTarget}' and '${FileSource}'"
-    else
-        log_info "Synchronizing files '${FileTarget}' and '${FileSource}'"
-        ${MyVim} -d "${FileTarget}" "${FileSource}"
-    fi
-}
+def _as_bash_script(desired_files):
+    """Return the desired_files as a Bash script to merge them."""
+    lines = []
+    lines.append("# The lines starting with `#` are comments")
+    lines.append("# containing instructions for you.")
+    lines.append("#")
+    lines.append("# The non-comment lines are commands")
+    lines.append("# that will be executed by Bash.")
+    lines.append("#")
+    lines.append("# Each command will invoke an editor")
+    lines.append("# in which you may manually merge")
+    lines.append("# a set of two or three files.")
+    lines.append("#")
+    lines.append("# Edit this file, save it, and it will then be executed.")
+    lines.append("# Remove (or disable) any lines containing commands")
+    lines.append("# that you do not want executed.")
+    lines.append("# Clear the whole file")
+    lines.append("# to prevent anything from being executed.")
+    lines.append("#")
+    lines.append("# The first command `cd` sets the working directory")
+    lines.append("# while the rest of the commands")
+    lines.append("# invoke the editor")
+    lines.append("# using file paths relative to that directory.")
+    lines.append("")
+    lines.append("# SO, do NOT delete or disable this command")
+    lines.append("# UNLESS you delete or disable ALL the commands.")
+    lines.append(f"cd {_root_project}")
+    lines.append("")
+    for k, v in desired_files.items():
+        (shared, darwin, linux) = v
+        lines.append(
+            _merge_command_for(
+                _relative_real_path_or_none(_root_project, shared),
+                _relative_real_path_or_none(_root_project, darwin),
+                _relative_real_path_or_none(_root_project, linux),
+            )
+        )
+    return "\n".join(lines)
 
-sync_home() {
-    # Synchronize relevant files & directories
-    # in the user's HOME directory
-    # with those captured in directory $1 of this project
-    require_arguments $# 1
-    require_directory_in HOME
-    local -r Dir=$1
 
-    log_info "Synchronizing workstation with content captured in '${Dir}'"
-    require_directory "${Dir}"
+def _debug(message):
+    if _debugging:
+        print(message)
 
-    sync_directory "${HOME}/.config/nvim" "${Dir}/.config/nvim"
-    sync_directory "${HOME}/.local"       "${Dir}/.local"
-    sync_directory "${HOME}/.vim"         "${Dir}/.vim"
-    sync_directory "${HOME}/bin"          "${Dir}/bin"
 
-    sync_file "${HOME}" "${Dir}" .bash_logout
-    sync_file "${HOME}" "${Dir}" .bash_profile
-    sync_file "${HOME}" "${Dir}" .bashrc
-    sync_file "${HOME}" "${Dir}" .condarc
-    sync_file "${HOME}" "${Dir}" .inputrc
-    sync_file "${HOME}" "${Dir}" .profile
-    sync_file "${HOME}" "${Dir}" .spacemacs
-    sync_file "${HOME}" "${Dir}" .vimrc
-    sync_file "${HOME}" "${Dir}" alias.bash
+def _dump_files_dict(dict_):
+    _debug(f"Files dictionary contains {len(dict_)} items:")
+    for k, v in dict_.items():
+        (shared, darwin, linux) = v
+        line = ""
+        line += "       " if shared is None else "shared "
+        line += "       " if darwin is None else "Darwin "
+        line += "      " if linux is None else "Linux "
+        line += f"  {k}"
+        _debug(line)
 
-    sync_file "${HOME}/.ssh" "${Dir}/.ssh" config
-}
 
-main() {
-    # Synchronize relevant files & directories
-    # against home directory tree
-    # on local workstation
-    require_arguments $# 0
-    require_variable BO_OS
-    require_directory_in BO_Project
-    local -r DirHome=${BO_Project}/home
-    local -r MyVim="$(my_vim)"
+def _edit_file(file_):
+    _info(f"Editing file '{file_}'")
+    Command("vim").in_dir(str(_root_project)).with_trailing_args(str(file_)).run()
 
-    sync_directory "${HOME}/bin" "${DirHome}/${BO_OS}/bin"
-    sync_directory "${HOME}/bin" "${DirHome}/shared/bin"
-    sync_directory "${HOME}/bin" "${DirHome}/customer/bin"
-    sync_home "${DirHome}/${BO_OS}"
-    sync_home "${DirHome}/customer"
-    sync_home "${DirHome}/shared"
 
-    return 0
-}
+def _execute_file(file_):
+    _info(f"Executing file '{file_}'")
+    Command("bash").in_dir(str(_root_project)).with_trailing_args(str(file_)).run()
 
-main $@
 
-###############################################################################
-# NOTE: Uncomment these lines for debugging, placed where needed
-# export PS4='$ ' ; set -vx
-# Code to debug...
-# set +vx
+def _file_triple(file_relative_path):
+    """Return a tuple
+    of the source files
+    associated with the file_relative_path.
+    """
+    # _debug(f"Adding relative file '{file_relative_path}'")
+    return (
+        _absolute_real_path_or_none(_root_shared, file_relative_path),
+        _absolute_real_path_or_none(_root_darwin, file_relative_path),
+        _absolute_real_path_or_none(_root_linux, file_relative_path),
+    )
 
-: << 'DisabledContent'
-DisabledContent
 
+def _info(message):
+    print(message)
+
+
+def _merge_command_for(shared, darwin, linux):
+    result = "vim -d"
+    result += "" if shared is None else f" {shared}"
+    result += "" if darwin is None else f" {darwin}"
+    result += "" if linux is None else f" {linux}"
+    return result
+
+
+def _merge_file_dicts(shared_files, darwin_files, linux_files):
+    result = {}
+    result.update(shared_files)
+    result.update(darwin_files)
+    result.update(linux_files)
+    return result
+
+
+def _prune_excluded_items(items, regexes):
+    """Prune (remove) any items that match any of the regexes."""
+    # Iterate over a copy of the list to avoid mutation errors
+    for i in items[:]:
+        for r in regexes:
+            if not r.fullmatch(i) is None:
+                # _debug(f"Removing '{i}' due to '{r}'")
+                items.remove(i)
+
+
+def _relative_real_path_or_none(root, absolute_path):
+    if absolute_path is None:
+        return None
+    if not path.exists(absolute_path):
+        result = None
+    if not path.isabs(absolute_path):
+        raise ValueError(f"Not an absolute path: '{absolute_path}'")
+    return path.relpath(absolute_path, start=root)
+
+
+def _scanned_files(root):
+    """Scan the directory tree from root, returning any desired source files found."""
+    result = {}
+    for top, directories, files in walk(root):
+        _prune_excluded_items(directories, _excluded_directory_regexes)
+        _prune_excluded_items(files, _excluded_file_regexes)
+        for f in files:
+            absolute = path.realpath(path.join(top, f), strict=True)
+            relative = path.relpath(absolute, start=root)
+            result[str(relative)] = _file_triple(relative)
+    return result
+
+
+def _should_merge_file(file_relative_path, file_triple):
+    """Return whether the user should be asked
+    to manually merge the files at file_relative_path."""
+    (shared, darwin, linux) = file_triple
+    # _debug(f"file triple:  shared='{shared}', darwin='{darwin}', linux='{linux}'")
+    count = 0
+    count += 1 if shared is not None else 0
+    count += 1 if darwin is not None else 0
+    count += 1 if linux is not None else 0
+    # If there are fewer than two files, cannot merge
+    if count < 2:
+        return False
+    if count == 3:
+        _info(f"Found all three:  merging '{file_relative_path}'")
+        return True
+    # So, count == 2
+    if shared is None:
+        if cmp(darwin, linux, shallow=False):
+            # If darwin is same as linux,
+            # the merge is unnecessary
+            _info(
+                f"Darwin is same as Linux, consider moving to shared:  skipping '{file_relative_path}'"
+            )
+            return False
+        else:
+            return True
+    if darwin is None:
+        if cmp(linux, shared, shallow=False):
+            # If linux is same as shared,
+            # the merge is unnecessary
+            _info(f"Linux is same as shared, WHY?:  skipping '{file_relative_path}'")
+            return False
+        else:
+            return True
+    if linux is None:
+        if cmp(darwin, shared, shallow=False):
+            # If darwin is same as shared,
+            # the merge is unnecessary
+            _info(f"Darwin is same as shared, WHY?:  skipping '{file_relative_path}'")
+            return False
+        else:
+            return True
+    raise RuntimeError("Should never reach here")
+
+
+def _write_file(text_content, file_):
+    with open(file_, encoding="utf_8", mode="wt", newline=None) as writer:
+        count = writer.write(text_content)
+    _info(f"Wrote {count} characters to file '{file_}'")
+
+
+def main():
+    """Script entry point."""
+    darwin_files = _scanned_files(_root_darwin)
+    _info(f"Darwin files dict contains {len(darwin_files)} files")
+    linux_files = _scanned_files(_root_linux)
+    _info(f"Linux files dict contains {len(linux_files)} files")
+    shared_files = _scanned_files(_root_shared)
+    _info(f"Shared files dict contains {len(shared_files)} files")
+
+    desired_files = _merge_file_dicts(shared_files, darwin_files, linux_files)
+    _info(f"Desired files dict contains {len(desired_files)} files")
+    # _dump_files_dict(desired_files)
+    desired_files = {k: v for k, v in desired_files.items() if _should_merge_file(k, v)}
+    _info(f"Desired files dict contains {len(desired_files)} files")
+    # _dump_files_dict(desired_files)
+
+    script = path.join(_root_temporary, "edit_workstation_merge")
+    content = _as_bash_script(desired_files)
+    _debug(f"As Bash script:\n{content}")
+    _write_file(content, script)
+    _edit_file(script)
+    _execute_file(script)
+
+
+if __name__ == "__main__":
+    main()
+
+"""DisabledContent
+"""
