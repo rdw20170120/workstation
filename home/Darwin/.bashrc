@@ -1,5 +1,13 @@
-#!/bin/false
+#!/usr/bin/env false
 # This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+[[ -n "${BO_Trace}" ]] && \
+    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
+    [[ "${BO_Trace}" == TRACE ]] && \
+    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
+    set -o verbose -o xtrace
+# NO: trap ... EXIT
 ################################################################################
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
