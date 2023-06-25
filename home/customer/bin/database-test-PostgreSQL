@@ -67,38 +67,71 @@ _try() {
     # $4 = database user name
     # $5 = name of environment variable containing database user password
     # $6 = environment
-    # $7 = system version (optional, V1/V2/V?)
+    # $7 = database host name FQDN
+    # $8 = SSL mode
+    # $9 = system version (optional, V1/V2/V?)
     local -r Ref=$1
     local -r Host=$2
     local -r Name=$3
     local -r User=$4
     local -r Pass=$5
     local -r Env=$6
-    local    Version=$7 ; [[ -z "${Version}" ]] && Version=V?
-    local -r Fqdn=${Host}${PostgresHostSuffix}
+    local -r Fqdn=$7
+    local -r SslMode=$8
+    local    Version=$9 ; [[ -z "${Version}" ]] && Version=V?
     local -i Status
 
-    postgresql-connect ${Fqdn} ${Name} ${User}@${Host} ${Pass}
+    postgresql-connect ${Fqdn} ${Name} ${User} ${Pass} ${SslMode}
     Status=$? ; _report ${Status} ${Ref} ${Version} ${Env} ${Host} ${Name} ${User} ${Pass}
 }
 
-_Local="${PostgresUserLocal} PostgresPassLocal"
-_Owner="${PostgresUserOwner} PostgresPassOwner"
-_Readonly="${PostgresUserReadonly} PostgresPassReadonly"
+_local() {
+    # Try to connect to a local PostgreSQL database
+    # using provided details
+    # and report the result
+    # $1 = reference to source of details (documentation, person, etc.)
+    # $2 = database host name (NOT FQDN)
+    # $3 = database name
+    # $4 = database user name
+    # $5 = name of environment variable containing database user password
+    # $6 = environment
+    # $7 = system version (optional, V1/V2/V?)
+
+    _try $1 $2 $3 $4 $5 $6 $2 disable $7
+}
+
+_remote() {
+    # Try to connect to a remote PostgreSQL database
+    # using provided details
+    # and report the result
+    # $1 = reference to source of details (documentation, person, etc.)
+    # $2 = database host name (NOT FQDN)
+    # $3 = database name
+    # $4 = database user name
+    # $5 = name of environment variable containing database user password
+    # $6 = environment
+    # $7 = system version (optional, V1/V2/V?)
+
+    _try $1 $2 $3 $4@$2 $5 $6 $2${PostgresHostSuffix} require $7
+}
+
+_LocalRegular="${PostgresUserLocalRegular} PostgresPassLocalRegular"
+_RemoteOwner="${PostgresUserRemoteOwner} PostgresPassRemoteOwner"
+_RemoteRegular="${PostgresUserRemoteRegular} PostgresPassRemoteRegular"
 
 ###############################################################################
 _RefW=WORKS
-_try ${_RefW} legato-pim-postgres-np    postgres ${_Readonly} Qa    # SUCCESS
-_try ${_RefW} legato-pim-postgres-stage postgres ${_Readonly} Stage # SUCCESS
-_try ${_RefW} devsamsitm                pim      ${_Owner}    Dev   # SUCCESS
-_try ${_RefW} devsamsitm                pim      ${_Readonly} Dev   # SUCCESS
-_try ${_RefW} samspimstage              postgres ${_Readonly} Stage # SUCCESS
-_try ${_RefW} localhost                 pim      ${_Local}    Dev   # ???
+_remote ${_RefW} legato-pim-postgres-np    postgres ${_RemoteRegular} Qa    # SUCCESS
+_remote ${_RefW} legato-pim-postgres-stage postgres ${_RemoteRegular} Stage # SUCCESS
+_remote ${_RefW} devsamsitm                pim      ${_RemoteOwner}   Dev   # SUCCESS
+_remote ${_RefW} devsamsitm                pim      ${_RemoteRegular} Dev   # SUCCESS
+_remote ${_RefW} samspimstage              postgres ${_RemoteRegular} Stage # SUCCESS
+_local  ${_RefW} localhost                 pim      ${_LocalRegular}  Dev   # SUCCESS
 
 : << 'DisabledContent'
 ###############################################################################
 _Ref=
-_try ${_Ref} HOST NAME USER PASS ENV # result
+_remote ${_Ref} HOST NAME USER PASS ENV # result
 
 ###############################################################################
 # References
@@ -117,52 +150,46 @@ _RefL=https://gecgithub01.walmart.com/legato-pim/legato-be/blob/main/pim/env/sta
 
 ###############################################################################
 # Complete set of potential PostgreSQL connections
-_try ${_RefA} legato-pim-postgres-np    postgres  ${_Owner}                     Qa    # password
-_try ${_RefA} legato-pim-postgres-np    postgres  ${_Readonly}                  Qa    # SUCCESS
-_try ${_RefA} legato-pim-postgres-np    postgres  samsitem PostgresPassReadonly Qa    # password
-_try ${_RefA} devsamsitm                 pim      ${_Owner}                     Dev   # SUCCESS
-_try ${_RefA} devsamsitm                 pim      ${_Readonly}                  Dev   # SUCCESS
-_try ${_RefB} samspimstage               postgres ${_Readonly}                  Stage # SUCCESS
-_try ${_RefC} devsamsitm                 pim      ${_Owner}                     Dev   # SUCCESS
-_try ${_RefC} samspimstage               postgres ${_Owner}                     Stage # password
-_try ${_RefC} samspimstage               postgres samsitem PostgresPassReadonly Stage # password
-_try ${_RefD} devsamsitm                 pim      ${_Owner}                     Dev   # SUCCESS
-_try ${_RefG} samspimstage               postgres ${_Owner}                     Stage # password
-_try ${_RefG} samspimstage               postgres samsitem PostgresPassReadonly Stage # password
-_try ${_RefH} legato-pim-postgres-np    pim       ${_Readonly}                  Dev   # database
-_try ${_RefH} legato-pim-postgres-np    pim       legato_dev PostgresPassOwner  Dev   # password
-_try ${_RefH} legato-pim-postgres-stage postgres  ${_Readonly}                  Stage # SUCCESS
-_try ${_RefI} legato-pim-postgres-np    pim       ${_Readonly}                  Dev   # database
-_try ${_RefI} legato-pim-postgres-np    pim       legato_dev PostgresPassOwner  Dev   # password
-_try ${_RefK} legato-pim-postgres-np    postgres  ${_Readonly}                  Qa    # SUCCESS
-_try ${_RefL} legato-pim-postgres-stage postgres  ${_Readonly}                  Stage # SUCCESS
+_remote ${_RefA} legato-pim-postgres-np    postgres ${_RemoteOwner}   Qa    # password
+_remote ${_RefA} legato-pim-postgres-np    postgres ${_RemoteRegular} Qa    # SUCCESS
+_remote ${_RefA} devsamsitm                pim      ${_RemoteOwner}   Dev   # SUCCESS
+_remote ${_RefA} devsamsitm                pim      ${_RemoteRegular} Dev   # SUCCESS
+_remote ${_RefB} samspimstage              postgres ${_RemoteRegular} Stage # SUCCESS
+_remote ${_RefC} devsamsitm                pim      ${_RemoteOwner}   Dev   # SUCCESS
+_remote ${_RefC} samspimstage              postgres ${_RemoteOwner}   Stage # password
+_remote ${_RefD} devsamsitm                pim      ${_RemoteOwner}   Dev   # SUCCESS
+_remote ${_RefG} samspimstage              postgres ${_RemoteOwner}   Stage # password
+_remote ${_RefH} legato-pim-postgres-np    pim      ${_RemoteRegular} Dev   # database
+_remote ${_RefH} legato-pim-postgres-stage postgres ${_RemoteRegular} Stage # SUCCESS
+_remote ${_RefI} legato-pim-postgres-np    pim      ${_RemoteRegular} Dev   # database
+_remote ${_RefK} legato-pim-postgres-np    postgres ${_RemoteRegular} Qa    # SUCCESS
+_remote ${_RefL} legato-pim-postgres-stage postgres ${_RemoteRegular} Stage # SUCCESS
 
 ###############################################################################
 _RefZ=FAILURE
-_try ${_RefZ} legato-pim-postgres-np    postgres      ${_Owner} Qa      # password
-_try ${_RefZ} legato-pim-postgres-np    test_postgres ${_Owner} UNKNOWN # password
-_try ${_RefZ} legato-pim-postgres-stage postgres      ${_Owner} Stage   # password
-_try ${_RefZ} samspimstage              postgres      ${_Owner} Stage   # password
-_try ${_RefZ} samspimstage              test_postgres ${_Owner} UNKNOWN # password
+_remote ${_RefZ} legato-pim-postgres-np    postgres      ${_RemoteOwner} Qa      # password
+_remote ${_RefZ} legato-pim-postgres-np    test_postgres ${_RemoteOwner} UNKNOWN # password
+_remote ${_RefZ} legato-pim-postgres-stage postgres      ${_RemoteOwner} Stage   # password
+_remote ${_RefZ} samspimstage              postgres      ${_RemoteOwner} Stage   # password
+_remote ${_RefZ} samspimstage              test_postgres ${_RemoteOwner} UNKNOWN # password
 
 ###############################################################################
 # Unknown environment
-_try ${_RefC} devsamsitm             pim_qa        ${_Owner}                    UNKNOWN # SUCCESS
-_try ${_RefE} devsamsitm             postgres      ${_Owner}                    UNKNOWN # SUCCESS
-_try ${_RefF} devsamsitm             pim_qa        ${_Owner}                    UNKNOWN # SUCCESS
-_try ${_RefH} legato-pim-postgres-np pim_qa        ${_Readonly}                 UNKNOWN # database
-_try ${_RefH} legato-pim-postgres-np pim_qa        legato_dev PostgresPassOwner UNKNOWN # password
-_try ${_RefJ} devsamsitm             postgres      ${_Owner}                    UNKNOWN # SUCCESS
-_try ${_RefW} legato-pim-postgres-np test_postgres ${_Readonly}                 UNKNOWN # SUCCESS
-_try ${_RefW} devsamsitm             pim_qa        ${_Owner}                    UNKNOWN # SUCCESS
-_try ${_RefW} devsamsitm             pim_qa        ${_Readonly}                 UNKNOWN # SUCCESS
-_try ${_RefW} devsamsitm             pim_stage     ${_Owner}                    UNKNOWN # SUCCESS
-_try ${_RefW} devsamsitm             pim_stage     ${_Readonly}                 UNKNOWN # SUCCESS
-_try ${_RefW} devsamsitm             postgres      ${_Owner}                    UNKNOWN # SUCCESS
-_try ${_RefW} devsamsitm             postgres      ${_Readonly}                 UNKNOWN # SUCCESS
-_try ${_RefW} samspimstage           test_postgres ${_Readonly}                 UNKNOWN # SUCCESS
-_try ${_RefZ} legato-pim-postgres-np test_postgres ${_Owner}                    UNKNOWN # password
-_try ${_RefZ} samspimstage           test_postgres ${_Owner}                    UNKNOWN # password
+_remote ${_RefC} devsamsitm             pim_qa        ${_RemoteOwner}   UNKNOWN # SUCCESS
+_remote ${_RefE} devsamsitm             postgres      ${_RemoteOwner}   UNKNOWN # SUCCESS
+_remote ${_RefF} devsamsitm             pim_qa        ${_RemoteOwner}   UNKNOWN # SUCCESS
+_remote ${_RefH} legato-pim-postgres-np pim_qa        ${_RemoteRegular} UNKNOWN # database
+_remote ${_RefJ} devsamsitm             postgres      ${_RemoteOwner}   UNKNOWN # SUCCESS
+_remote ${_RefW} legato-pim-postgres-np test_postgres ${_RemoteRegular} UNKNOWN # SUCCESS
+_remote ${_RefW} devsamsitm             pim_qa        ${_RemoteOwner}   UNKNOWN # SUCCESS
+_remote ${_RefW} devsamsitm             pim_qa        ${_RemoteRegular} UNKNOWN # SUCCESS
+_remote ${_RefW} devsamsitm             pim_stage     ${_RemoteOwner}   UNKNOWN # SUCCESS
+_remote ${_RefW} devsamsitm             pim_stage     ${_RemoteRegular} UNKNOWN # SUCCESS
+_remote ${_RefW} devsamsitm             postgres      ${_RemoteOwner}   UNKNOWN # SUCCESS
+_remote ${_RefW} devsamsitm             postgres      ${_RemoteRegular} UNKNOWN # SUCCESS
+_remote ${_RefW} samspimstage           test_postgres ${_RemoteRegular} UNKNOWN # SUCCESS
+_remote ${_RefZ} legato-pim-postgres-np test_postgres ${_RemoteOwner}   UNKNOWN # password
+_remote ${_RefZ} samspimstage           test_postgres ${_RemoteOwner}   UNKNOWN # password
 
 DisabledContent
 

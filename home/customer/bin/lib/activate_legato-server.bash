@@ -17,16 +17,12 @@ fi
 
 _Script=${HOME}/bin/lib/declare/essential.bash
 prepare_to_source "${_Script}" && source "${_Script}"
-
 _Script=${HOME}/bin/lib/declare/git.bash
 require_script "${_Script}" ; source "${_Script}"
-
 _Script=${HOME}/bin/lib/declare/PostgreSQL.bash
 require_script "${_Script}" ; source "${_Script}"
-
 _Script=${HOME}/credential.bash
 require_script "${_Script}" ; source "${_Script}"
-
 unset _Script
 
 _Project=legato-server
@@ -40,12 +36,8 @@ cd "${_DirProject}"
 
 export DB_HOST=samspimstage${PostgresHostSuffix}
 export DB_NAME=postgres
-
-export DB_PASSWORD=${PostgresPassReadonly}
-export DB_USER=${PostgresUserReadonly}@samspimstage
-
-export DB_PASSWORD=${PostgresPassOwner}
-export DB_USER=${PostgresUserOwner}@samspimstage
+export DB_PASSWORD=${PostgresPassRemoteRegular}
+export DB_USER=${PostgresUserRemoteRegular}@samspimstage
 
 echo "INFO: Show available project aliases by executing 'show_project_alias'"
 alias show_project_alias="alias | grep ${_Project}"

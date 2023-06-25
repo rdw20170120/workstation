@@ -20,11 +20,12 @@ postgresql-connect() {
     # $2 = database name
     # $3 = database user name
     # $4 = name of variable containing database user password
+    # $5 = SSL mode ('require', 'allow', 'disable', etc.)
     local Pass="$4" ; Pass="${!Pass}"
     local _Status
 
-    echo "Connecting to PostgreSQL database '$2' on host '$1' as user '$3' with '$4'"
-    psql "port=5432 sslmode=require host=$1 dbname=$2 user=$3 password=${Pass}" --list
+    echo "Connecting to PostgreSQL database '$2' on host '$1' with SSL '$5' as user '$3' with '$4'"
+    psql "port=5432 sslmode=$5 host=$1 dbname=$2 user=$3 password=${Pass}" --list
     _Status=$?
     echo "psql exited with status: ${_Status}"
     return ${_Status}
@@ -37,19 +38,19 @@ postgresql-connect-indirect() {
     # $2 = name of variable containing database name
     # $3 = name of variable containing database user name
     # $4 = name of variable containing database user password
+    # $5 = SSL mode ('require', 'allow', 'disable', etc.)
     local Fqdn="$1" ; Fqdn="${!Fqdn}"
     local Name="$2" ; Name="${!Name}"
     local User="$3" ; User="${!User}"
     local Pass="$4"
     local _Status
 
-    echo "Connecting to PostgreSQL database '$2' on host '$1' as user '$3' with '$4'"
-    postgresql-connect ${Fqdn} ${Name} ${User} ${Pass}
+    postgresql-connect ${Fqdn} ${Name} ${User} ${Pass} $5
     _Status=$?
     return ${_Status}
 } && export -f postgresql-connect-indirect
 
-# Kinds of users: Owner (owner) and Readonly
+# Kinds of users: Owner (owner) and Regular
 # Environments: Dev, Qa, Stage, PqaScus, ProdScus, ProdWus
 # Variable attributes are: HostFqdn, HostName, Name, Pass, User
 # Variable naming convention is: Postgres<attribute>
@@ -58,9 +59,9 @@ postgresql-connect-indirect() {
 
 PostgresHostSuffix=.postgres.database.azure.com
 
-PostgresUserLocal=pimuser
-PostgresUserOwner=samsitem
-PostgresUserReadonly=legato_dev
+PostgresUserLocalRegular=pimuser
+PostgresUserRemoteOwner=samsitem
+PostgresUserRemoteRegular=legato_dev
 
 : << 'DisabledContent'
 DisabledContent
