@@ -36,7 +36,10 @@ main() {
     local -r Dir=${HOME}/repo/${Source}
 
     clone_BriteOnyx
-#   clone_other
+    # Leave this commented-out in the repository.
+    # Let the user uncomment it on their workstation
+    # if they wish.
+    # clone_other
 
     return 0
 }

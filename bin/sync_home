@@ -253,10 +253,10 @@ def main():
 
     script = path.join(_root_temporary, "edit_home_files_merge")
     content = _as_bash_script(desired_files)
-    _debug(f"As Bash script:\n{content}")
     _write_file(content, script)
     _edit_file(script)
-    _execute_file(script)
+    if not _debugging:
+        _execute_file(script)
 
 
 if __name__ == "__main__":

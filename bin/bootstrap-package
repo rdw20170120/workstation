@@ -64,13 +64,13 @@ package_for_operating_system() {
 
     maybe_recreate_directory_tree "${DirTarget}"
 
-    DirSource=${BO_Project}/home/shared
+    DirSource=${BO_Project}/bootstrap/shared
     duplicate_file "${DirSource}" "$1" bootstrap
     log_debug "Duplicating '${DirSource}/' to '${DirTarget}/'"
     cp -cRv "${DirSource}/" "${DirTarget}/"
     abort_on_fail $? "from cp -cRv '${DirSource}/' to '${DirTarget}/'"
 
-    DirSource=${BO_Project}/home/${OS}
+    DirSource=${BO_Project}/bootstrap/${OS}
     duplicate_file "${DirSource}" "${DirTarget}" bootstrap
     log_debug "Duplicating '${DirSource}/' to '${DirTarget}/'"
     cp -cRv "${DirSource}/" "${DirTarget}/"

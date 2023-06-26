@@ -37,11 +37,12 @@ _excluded_file_regexes = [
     # compile(r".*\.yml"),
 ]
 
-_root_darwin = path.join(environ["BO_Project"], "home", "Darwin")
-_root_linux = path.join(environ["BO_Project"], "home", "Linux")
+_root_customer = path.join(environ["BO_Project"], "home", "customer")
+_root_os = path.join(environ["BO_Project"], "home", environ["BO_OS"])
 _root_project = path.join(environ["BO_Project"])
 _root_shared = path.join(environ["BO_Project"], "home", "shared")
 _root_temporary = path.join(environ["BO_DirTemp"])
+_root_workstation = path.join(environ["HOME"])
 
 
 def _absolute_real_path_or_none(root, relative_path):
@@ -51,8 +52,8 @@ def _absolute_real_path_or_none(root, relative_path):
     return result
 
 
-def _as_bash_script(desired_files):
-    """Return the desired_files as a Bash script to merge them."""
+def _as_bash_script(potential_files):
+    """Return the potential_files as a Bash script to merge them."""
     lines = []
     lines.append("# The lines starting with `#` are comments")
     lines.append("# containing instructions for you.")
@@ -77,19 +78,14 @@ def _as_bash_script(desired_files):
     lines.append("")
     lines.append("# SO, do NOT delete or disable this command")
     lines.append("# UNLESS you delete or disable ALL the commands.")
-    lines.append(f"cd {_root_project}")
+    lines.append(f"cd {_root_workstation}")
     lines.append("")
-    for k, v in desired_files.items():
-        (shared, darwin, linux) = v
-        lines.append(
-            _merge_command_for(
-                _relative_real_path_or_none(_root_project, shared),
-                _relative_real_path_or_none(_root_project, darwin),
-                _relative_real_path_or_none(_root_project, linux),
-            )
-        )
+    for k, v in potential_files.items():
+        (customer, os, shared, workstation) = v
+        _maybe_append(lines, _merge_command_for(
+            k, _root_workstation, customer, os, shared, workstation,
+        ))
     return "\n".join(lines)
-
 
 def _debug(message):
     if _debugging:
@@ -99,11 +95,12 @@ def _debug(message):
 def _dump_files_dict(dict_):
     _debug(f"Files dictionary contains {len(dict_)} items:")
     for k, v in dict_.items():
-        (shared, darwin, linux) = v
+        (customer, os, shared, workstation) = v
         line = ""
+        line += "         " if customer is None else "customer "
+        line += "   " if os is None else "OS "
         line += "       " if shared is None else "shared "
-        line += "       " if darwin is None else "Darwin "
-        line += "      " if linux is None else "Linux "
+        line += "            " if workstation is None else "workstation "
         line += f"  {k}"
         _debug(line)
 
@@ -118,16 +115,14 @@ def _execute_file(file_):
     Command("bash").in_dir(str(_root_project)).with_trailing_args(str(file_)).run()
 
 
-def _file_triple(file_relative_path):
-    """Return a tuple
-    of the source files
-    associated with the file_relative_path.
-    """
+def _file_tuple(file_relative_path):
+    """Return a tuple associated with the file_relative_path."""
     # _debug(f"Adding relative file '{file_relative_path}'")
     return (
+        _absolute_real_path_or_none(_root_customer, file_relative_path),
+        _absolute_real_path_or_none(_root_os, file_relative_path),
         _absolute_real_path_or_none(_root_shared, file_relative_path),
-        _absolute_real_path_or_none(_root_darwin, file_relative_path),
-        _absolute_real_path_or_none(_root_linux, file_relative_path),
+        _absolute_real_path_or_none(_root_workstation, file_relative_path),
     )
 
 
@@ -135,19 +130,64 @@ def _info(message):
     print(message)
 
 
-def _merge_command_for(shared, darwin, linux):
-    result = "vim -d"
-    result += "" if shared is None else f" {shared}"
-    result += "" if darwin is None else f" {darwin}"
-    result += "" if linux is None else f" {linux}"
+def _maybe_append(list_, content):
+    if content is not None:
+        list_.append(content)
+
+def _merge_command_for(file_relative_path, root, customer, os, shared, workstation):
+    count = 0
+    count += 1 if customer is not None else 0
+    count += 1 if os is not None else 0
+    count += 1 if shared is not None else 0
+    count += 1 if workstation is not None else 0
+
+    if count == 0:
+        raise RuntimeError("Should never reach here")
+    if count == 4:
+        _info(f"Found all FOUR, WHY?:  merging '{file_relative_path}'")
+
+    rel_customer = str(_relative_real_path_or_none(root, customer))
+    rel_os = str(_relative_real_path_or_none(root, os))
+    rel_shared = str(_relative_real_path_or_none(root, shared))
+    rel_workstation = str(_relative_real_path_or_none(root, workstation))
+
+    if workstation is None:
+        # Copy whatever tracked file(s) exist into the missing workstation file
+        result = f"cp -c"
+        if customer is not None:
+            result += f" {rel_customer} {file_relative_path}"
+        elif os is not None:
+            result += f" {rel_os} {file_relative_path}"
+        elif shared is not None:
+            result += f" {rel_shared} {file_relative_path}"
+        else:
+            raise RuntimeError("Should never reach here")
+    elif workstation is not None:
+        # Merge whatever tracked file(s) exist into the existing workstation file
+        result = f"vim -d {rel_workstation}"
+        if count == 1:
+            raise RuntimeError("Should never reach here")
+        if customer is not None:
+            if cmp(workstation, customer, shallow=False):
+                return None
+            else:
+                result += f" {rel_customer}"
+        if os is not None:
+            if cmp(workstation, os, shallow=False):
+                return None
+            else:
+                result += f" {rel_os}"
+        if shared is not None:
+            if cmp(workstation, shared, shallow=False):
+                return None
+            else:
+                result += f" {rel_shared}"
     return result
 
-
-def _merge_file_dicts(shared_files, darwin_files, linux_files):
+def _merge_file_dicts(left_files, right_files):
     result = {}
-    result.update(shared_files)
-    result.update(darwin_files)
-    result.update(linux_files)
+    result.update(left_files)
+    result.update(right_files)
     return result
 
 
@@ -180,54 +220,8 @@ def _scanned_files(root):
         for f in files:
             absolute = path.realpath(path.join(top, f), strict=True)
             relative = path.relpath(absolute, start=root)
-            result[str(relative)] = _file_triple(relative)
+            result[str(relative)] = _file_tuple(relative)
     return result
-
-
-def _should_merge_file(file_relative_path, file_triple):
-    """Return whether the user should be asked
-    to manually merge the files at file_relative_path."""
-    (shared, darwin, linux) = file_triple
-    # _debug(f"file triple:  shared='{shared}', darwin='{darwin}', linux='{linux}'")
-    count = 0
-    count += 1 if shared is not None else 0
-    count += 1 if darwin is not None else 0
-    count += 1 if linux is not None else 0
-    # If there are fewer than two files, cannot merge
-    if count < 2:
-        return False
-    if count == 3:
-        _info(f"Found all three:  merging '{file_relative_path}'")
-        return True
-    # So, count == 2
-    if shared is None:
-        if cmp(darwin, linux, shallow=False):
-            # If darwin is same as linux,
-            # the merge is unnecessary
-            _info(
-                f"Darwin is same as Linux, consider moving to shared:  skipping '{file_relative_path}'"
-            )
-            return False
-        else:
-            return True
-    if darwin is None:
-        if cmp(linux, shared, shallow=False):
-            # If linux is same as shared,
-            # the merge is unnecessary
-            _info(f"Linux is same as shared, WHY?:  skipping '{file_relative_path}'")
-            return False
-        else:
-            return True
-    if linux is None:
-        if cmp(darwin, shared, shallow=False):
-            # If darwin is same as shared,
-            # the merge is unnecessary
-            _info(f"Darwin is same as shared, WHY?:  skipping '{file_relative_path}'")
-            return False
-        else:
-            return True
-    raise RuntimeError("Should never reach here")
-
 
 def _write_file(text_content, file_):
     with open(file_, encoding="utf_8", mode="wt", newline=None) as writer:
@@ -237,26 +231,30 @@ def _write_file(text_content, file_):
 
 def main():
     """Script entry point."""
-    darwin_files = _scanned_files(_root_darwin)
-    _info(f"Darwin files dict contains {len(darwin_files)} files")
-    linux_files = _scanned_files(_root_linux)
-    _info(f"Linux files dict contains {len(linux_files)} files")
+    customer_files = _scanned_files(_root_customer)
+    _info(f"Customer files dict contains {len(customer_files)} files")
+    os_files = _scanned_files(_root_os)
+    _info(f"OS files dict contains {len(os_files)} files")
     shared_files = _scanned_files(_root_shared)
     _info(f"Shared files dict contains {len(shared_files)} files")
+    # Do NOT scan _root_workstation
+    # because it will result in an overwhelming number of files
+    # Instead, let the user control
+    # what workstation files are interesting
+    # by copying them into one or more of the other roots
 
-    desired_files = _merge_file_dicts(shared_files, darwin_files, linux_files)
-    _info(f"Desired files dict contains {len(desired_files)} files")
-    # _dump_files_dict(desired_files)
-    desired_files = {k: v for k, v in desired_files.items() if _should_merge_file(k, v)}
-    _info(f"Desired files dict contains {len(desired_files)} files")
-    # _dump_files_dict(desired_files)
+    potential_files = {}
+    potential_files = _merge_file_dicts(potential_files , customer_files)
+    potential_files = _merge_file_dicts(potential_files , os_files)
+    potential_files = _merge_file_dicts(potential_files , shared_files)
+    _info(f"Potential files dict contains {len(potential_files)} files")
+    _dump_files_dict(potential_files)
 
     script = path.join(_root_temporary, "edit_workstation_merge")
-    content = _as_bash_script(desired_files)
-    _debug(f"As Bash script:\n{content}")
+    content = _as_bash_script(potential_files)
     _write_file(content, script)
     _edit_file(script)
-    _execute_file(script)
+    if not _debugging: _execute_file(script)
 
 
 if __name__ == "__main__":
