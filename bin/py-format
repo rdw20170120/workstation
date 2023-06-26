@@ -10,11 +10,14 @@
 
 main() {
     # Reformat Python code using Black
+    # TODO: Split this into a pair of scripts,
+    # one that is specific to BriteOnyx and
+    # one that is specific to the project
     require_arguments $# 0
     require_variable BO_cmd_black
 
     # Temporarily override user setting to keep Black's cache within the project directory
-    export XDG_CACHE_HOME="${BO_Project}/.cache"
+    export XDG_CACHE_HOME="${BO_DirTemp}/.cache"
 
     log_debug "Reformatting Python code using Black"
     # NOTE: that Black will not detect scripts as Python code
@@ -25,7 +28,7 @@ main() {
         "${BO_Project}/BriteOnyx/bin/files-list" \
         "${BO_Project}/BriteOnyx/bin/files-count_by_extension" \
         "${BO_Project}/BriteOnyx/bin/gen-merge" \
-        "${BO_Project}/BriteOnyx/bin/sync_home" \
+        "${BO_Project}/bin/sync_home" \
         "${BO_Project}"
 
     return 0
