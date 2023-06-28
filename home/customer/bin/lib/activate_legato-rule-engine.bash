@@ -1,7 +1,7 @@
 #!/usr/bin/env false
 # Intended to be executed in a Bash shell via `source` directly by the user.
 # NO: set -o errexit -o nounset
-set -o pipefail +o verbose +o xtrace
+set -o pipefail +o verbose +o xtrace ; shopt -s expand_aliases
 [[ "${BO_Trace:-UNDEFINED}" != UNDEFINED ]] && \
     1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
     [[ "${BO_Trace:-UNDEFINED}" == TRACE ]] && \
@@ -40,6 +40,7 @@ echo "INFO: Show available project aliases by executing 'show_project_alias'"
 alias show_project_alias="alias | grep ${_Project}"
 alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
 alias ${_Project}_test="python3 -m unittest tests/test*.py"
+show_project_alias
 
 ###############################################################################
 # Test this script:
