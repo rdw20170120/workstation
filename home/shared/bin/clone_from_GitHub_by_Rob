@@ -29,6 +29,7 @@ clone_other() {
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" euler
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" first
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" hortonworks
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" j0062
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" javascript
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" ocdp
     maybe_clone "${Dir}/ref" "${Connection}:${Profile}" potrero
@@ -61,6 +62,8 @@ main() {
     clone_BriteOnyx
 #   clone_other
     clone_workstation
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" j0062
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" j0062
 
     return 0
 }

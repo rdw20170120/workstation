@@ -1,6 +1,7 @@
 #!/usr/bin/env false
 # NOTE:  This file is intended to be sourced into a Bash shell.
 ################################################################################
+# For job j0062
 
 alias legato-be_activate='source ~/bin/lib/activate_legato-be.bash'
 alias legato-client_activate='source ~/bin/lib/activate_legato-client.bash'
@@ -8,6 +9,7 @@ alias legato-rule-engine_activate='source ~/bin/lib/activate_legato-rule-engine.
 alias legato-server_activate='source ~/bin/lib/activate_legato-server.bash'
 alias legato-ui_activate='source ~/bin/lib/activate_legato-ui.bash'
 
+alias jump_j0062='cd ~/repo/GitHub/wip/j0062'
 alias jump_legato-be='cd ~/repo/SamsClub/wip/legato-be'
 alias jump_legato-client='cd ~/repo/SamsClub/wip/legato-client'
 alias jump_legato-rule-engine='cd ~/repo/SamsClub/wip/legato-rule-engine'

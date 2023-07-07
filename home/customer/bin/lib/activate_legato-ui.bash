@@ -39,7 +39,7 @@ echo "INFO: Show available project aliases by executing 'show_project_alias'"
 alias show_project_alias="alias | grep ${_Project}"
 alias ${_Project}_build="nvm use 14 ; npm install --force"
 alias ${_Project}_run="nvm use 14 ; npm run start-local"
-alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
+alias ${_Project}_sync="dir-merge ~/repo/GitHub/wip/j0062/${_Project} ~/repo/SamsClub/wip/${_Project}"
 show_project_alias
 
 ###############################################################################

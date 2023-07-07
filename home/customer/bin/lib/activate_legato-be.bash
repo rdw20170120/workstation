@@ -43,7 +43,7 @@ echo "INFO: Show available project aliases by executing 'show_project_alias'"
 alias show_project_alias="alias | grep ${_Project}"
 alias ${_Project}_build="./build_for_Rob"
 alias ${_Project}_run='docker compose up'
-alias ${_Project}_sync="dir-merge ~/Documents/SamsClub/${_Project} ~/repo/SamsClub/wip/${_Project}"
+alias ${_Project}_sync="dir-merge ~/repo/GitHub/wip/j0062/${_Project} ~/repo/SamsClub/wip/${_Project}"
 show_project_alias
 
 ###############################################################################
