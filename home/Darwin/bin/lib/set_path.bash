@@ -57,11 +57,17 @@
 [[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
 export BO_PathSystem=${BO_PathOriginal}
 
+# TODO: REFACTOR: Move this to an appropriate script
+export BO_PathNeovim=${HOME}/opt/Neovim/0.9.0/bin
+
 # Most system-level modifications to `PATH`
-# should happen to `BO_PathToolOther`
-BO_PathTool=${BO_PathAnaconda}
-BO_PathTool+=:${BO_PathHomebrew}
-BO_PathTool+=:${BO_PathToolOther}
+# should happen to `BO_PathTool`
+# Remember:  Order MATTERS!
+BO_PathTool=
+[[ -d "${BO_PathAnaconda}" ]] && BO_PathTool+=:${BO_PathAnaconda}
+[[ -d "${BO_PathHomebrew}" ]] && BO_PathTool+=:${BO_PathHomebrew}
+[[ -d "${BO_PathKrew}" ]] && BO_PathTool+=:${BO_PathKrew}
+[[ -d "${BO_PathNeovim}" ]] && BO_PathTool+=:${BO_PathNeovim}
 export BO_PathTool
 
 # Only the user should modify `BO_PathUser`
