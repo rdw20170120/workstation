@@ -15,9 +15,7 @@ require_variable BO_PathAnacondaBase
 
 # Maybe create Anaconda environment
 _ShouldCreate=true
-
 [[ -d "${BO_DirAnaconda}" ]] && _ShouldCreate=false
-
 if [[ "${_ShouldCreate}" == "true" ]] ; then
     execute_script anaconda-destroy
     execute_script anaconda-create
@@ -40,11 +38,9 @@ Status=$?
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 (set -o posix ; set) | sort >"${BO_DirCapture}/after/conda_activate.env"
 
-# Configure PATH to include Anaconda virtual environment FIRST
-export BO_PathAnacondaProject=${BO_DirAnaconda}/bin
-remembering BO_PathAnacondaProject
-export BO_PathAnaconda=${BO_PathAnacondaProject}:${BO_PathAnacondaBase}
-remembering BO_PathAnaconda
+# Configure PATH element for project Anaconda virtual environment
+export BO_PathProjectAnaconda=${BO_DirAnaconda}/bin
+remembering BO_PathProjectAnaconda
 
 _Script="${BO_Project}/BriteOnyx/bin/lib/set_path.bash"
 require_script "${_Script}"
@@ -52,7 +48,7 @@ source "${_Script}" ; Status=$?
 [[ ${Status} -ne 0 ]] &&
     kill -INT $$  # Kill the executing script, but not the shell (terminal)
 
-# Populate the newly-created Anaconda virtual environment
+# Populate the newly-created virtual environment (via Mamba)
 [[ "${_ShouldCreate}" == "true" ]] && execute_script anaconda-populate
 
 # Remember primary Python commands
@@ -61,7 +57,7 @@ remembering BO_cmd_python3
 export BO_cmd_pip="${BO_cmd_python3} -m pip"
 remembering BO_cmd_pip
 
-# Populate the newly-created Anaconda virtual environment
+# Populate the newly-created virtual environment (via PIP)
 [[ "${_ShouldCreate}" == "true" ]] && execute_script python-populate
 
 unset _ShouldCreate

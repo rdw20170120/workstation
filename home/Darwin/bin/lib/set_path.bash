@@ -1,5 +1,13 @@
 #!/usr/bin/env false
-# NOTE:  This file is intended to be sourced into a Bash shell.
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+[[ -n "${BO_Trace}" ]] && \
+    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
+    [[ "${BO_Trace}" == TRACE ]] && \
+    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
+    set -o verbose -o xtrace
+# NO: trap ... EXIT
 ################################################################################
 # Configure paths, especially PATH
 
@@ -49,13 +57,10 @@
 # and failures are most likely limited to affecting only
 # the current project and user (as they should).
 
-# Projects should modify PATH mostly by setting `BO_PathProject`
-[[ -z "${BO_PathProject}" ]] && export BO_PathProject=
-
 # Remember variants of the system `PATH`
 [[ -z "${BO_PathNative}" ]] && export BO_PathNative=${PATH}
 [[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
-export BO_PathSystem=${BO_PathOriginal}
+[[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${BO_PathOriginal}
 
 # TODO: REFACTOR: Move this to an appropriate script
 export BO_PathNeovim=${HOME}/opt/Neovim/0.9.0/bin
@@ -64,10 +69,10 @@ export BO_PathNeovim=${HOME}/opt/Neovim/0.9.0/bin
 # should happen to `BO_PathTool`
 # Remember:  Order MATTERS!
 BO_PathTool=
-[[ -d "${BO_PathAnaconda}" ]] && BO_PathTool+=:${BO_PathAnaconda}
-[[ -d "${BO_PathHomebrew}" ]] && BO_PathTool+=:${BO_PathHomebrew}
-[[ -d "${BO_PathKrew}" ]] && BO_PathTool+=:${BO_PathKrew}
-[[ -d "${BO_PathNeovim}" ]] && BO_PathTool+=:${BO_PathNeovim}
+[[ -n "${BO_PathAnacondaBase}" ]] && BO_PathTool+=:${BO_PathAnacondaBase}
+[[ -n "${BO_PathHomebrew}" ]] && BO_PathTool+=:${BO_PathHomebrew}
+[[ -n "${BO_PathKrew}" ]] && BO_PathTool+=:${BO_PathKrew}
+[[ -n "${BO_PathNeovim}" ]] && BO_PathTool+=:${BO_PathNeovim}
 export BO_PathTool
 
 # Only the user should modify `BO_PathUser`
@@ -77,12 +82,8 @@ export BO_PathTool
 # should remain fixed and invariant,
 # except by modifying the elements properly
 # as described above.
-# TODO: However, a project-specific virtual environment
-# should come FIRST on `PATH`
-# before ANY other elements.
 PATH=${BO_PathTool}
 PATH+=:${BO_PathSystem}
-PATH+=:${BO_PathProject}
 PATH+=:${BO_PathUser}
 export PATH
 

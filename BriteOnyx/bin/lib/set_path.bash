@@ -6,9 +6,38 @@
 ###############################################################################
 # Set PATH for project
 
-# NOTE: This specific ordering of PATH elements is REQUIRED and ESSENTIAL.
+# TODO: REWRITE: detailed explanation
+
+# Summary:
+# - This specific ordering of PATH elements is REQUIRED and ESSENTIAL.
+# - Project PATH element `BO_PathProject`
+#   - Project manipulates its PATH primarily here
+#   - Project-specific `bin` directory
+#   - Project-specific Anaconda environment PATH
+# - Tool PATH element `BO_PathTool`
+#   - used as-is, NOT modified by the project AT ALL
+#   - defaulted if not already set
+# - System PATH element `BO_PathSystem`
+#   - used as-is, NOT modified by the project AT ALL
+#   - defaulted if not already set
+# - BriteOnyx PATH element `BO_PathBriteOnyx`
+#   - Project may override the incoming setting to pick a specific release
+#   - defaulted?
+# - User PATH element `BO_PathUser`
+#   - used as-is, NOT modified by the project AT ALL
+#   - defaulted if not already set
+# - 
+# The project PATH element `BO_PathProject` MUST come FIRST
+# to override ALL other PATH elements.
+# This allows the project to control its environment
+# over and above what the user and the system may have installed.
 #
-# The Anaconda environment MUST come first
+# The tool PATH element `BO_PathTool` MUST come next
+# so that the user can control what tools they wish to use
+# instead of any provided by the system.
+#
+# The `base` Anaconda environment MUST come first
+# on the tool PATH element `BO_PathTool`
 # in order to override everything else.
 # Anaconda should override all (win all collisions)
 # as the preferred package manager
@@ -26,22 +55,15 @@
 # therefore they are included in `BO_PathTool`
 # at the front of `PATH`.
 #
-# The original system path `BO_PathOriginal` is next.
-# This usually consists of `PATH` as it exists
-# before executing any user-specific shell login scripts.
 # The system PATH element `BO_PathSystem`
 # MUST precede
 # any user PATH element `BO_PathUser`
 # in order to make collisions fail-fast and
 # to defeat simple attempts at redirecting system commands as an attack vector.
 #
-# Similarly,
-# the project PATH element `BO_PathProject`
-# MUST precede
-# the user PATH element `BO_PathUser`
+# The user PATH element `BO_PathUser` comes LAST
 # in order to make collisions fail-fast
 # in favor of the project over the user.
-# The user path is last as `BO_PathUser`.
 #
 # This arrangement is best for ensuring consistent behavior
 # of the environment, the system, and the project.
@@ -54,42 +76,39 @@
 
 require_variable BO_Project
 
+# Projects will typically select a specific release of BriteOnyx
+# Default it here with a self-contained copy for now
+[[ -z "${BO_PathBriteOnyx}" ]] && export BO_PathBriteOnyx=${BO_Project}/BriteOnyx/bin
+
 # Projects should modify PATH mostly by setting `BO_PathProject`
-[[ -z "${BO_PathProject}" ]] && export BO_PathProject=${BO_Project}/bin:${BO_Project}/BriteOnyx/bin
+export BO_PathProject=${BO_Project}/bin:${BO_PathProjectAnaconda}
 
-# Remember variants of the system `PATH`
-[[ -z "${BO_PathNative}" ]] && export BO_PathNative=${PATH}
+# Default system PATH element
 [[ -z "${BO_PathOriginal}" ]] && export BO_PathOriginal=${PATH}
-export BO_PathSystem=${BO_PathOriginal}
+[[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${BO_PathOriginal}
 
-require_variable BO_PathProject
-require_variable BO_PathSystem
-require_variable BO_PathTool
-require_variable BO_PathUser
+# Currently no defaulting of the tool PATH element
 
-# Most system-level modifications to `PATH`
-# should happen to `BO_PathToolOther`
-BO_PathTool=${BO_PathAnaconda}
-BO_PathTool+=:${BO_PathHomebrew}
-BO_PathTool+=:${BO_PathToolOther}
-export BO_PathTool
-
-# Only the user should modify `BO_PathUser`
+# Default user PATH element
 [[ -z "${BO_PathUser}" ]] && export BO_PathUser=${HOME}/bin
 
 # This assemblage of `PATH`
 # should remain fixed and invariant,
 # except by modifying the elements properly
 # as described above.
-# TODO: However, a project-specific virtual environment
-# should come FIRST on `PATH`
-# before ANY other elements.
-PATH=${BO_PathTool}
+require_variable BO_PathBriteOnyx
+require_variable BO_PathProject
+require_variable BO_PathSystem
+require_variable BO_PathTool
+require_variable BO_PathUser
+PATH=${BO_PathProject}
+PATH+=:${BO_PathTool}
 PATH+=:${BO_PathSystem}
-PATH+=:${BO_PathProject}
+PATH+=:${BO_PathBriteOnyx}
 PATH+=:${BO_PathUser}
 export PATH
 
+remembering BO_PathBriteOnyx
 remembering BO_PathProject
 remembering BO_PathSystem
 remembering BO_PathTool

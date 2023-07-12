@@ -73,7 +73,8 @@ source "${_Script}" ; _Status=$?
 
 # NOTE: We can now use BriteOnyx Bash functionality.
 
-export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
+# TODO: Remove
+# export BO_PathProject=${BO_Project}/BriteOnyx/bin:${BO_Project}/bin
 
 [[ -z "${BO_PathSystem}" ]] && export BO_PathSystem=${PATH}
 [[ -z "${BO_PathUser}" ]] && export BO_PathUser=${HOME}/bin

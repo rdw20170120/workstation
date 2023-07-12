@@ -59,9 +59,6 @@ prepare_to_source "${_Script}" && source "${_Script}"
 _Script=${HOME}/bin/lib/set_path.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
-_Script=${HOME}/bin/lib/SamsClub.bash
-prepare_to_source "${_Script}" && source "${_Script}"
-
 _Script=${HOME}/bin/lib/all_alias.bash
 prepare_to_source "${_Script}" && source "${_Script}"
 
