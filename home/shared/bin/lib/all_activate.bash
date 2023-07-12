@@ -1,4 +1,4 @@
-#!/bin/false
+#!/usr/bin/env false
 # NOTE:  This file is intended to be executed while initializing a Bash shell.
 ################################################################################
 

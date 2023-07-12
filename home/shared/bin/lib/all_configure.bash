@@ -1,4 +1,4 @@
-#!/bin/false
+#!/usr/bin/env false
 # This script is executed via `source` while initializing a Bash shell.
 ################################################################################
 
