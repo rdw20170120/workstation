@@ -1,14 +1,29 @@
 #!/usr/bin/env false
-# Intended to be executed in a Bash shell via `source`.
+# This script is executed via `source` while initializing a Bash shell.
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
-[[ "${BO_Trace:-UNDEFINED}" != UNDEFINED ]] && \
-    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
-    [[ "${BO_Trace:-UNDEFINED}" == TRACE ]] && \
-    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
-    set -o verbose -o xtrace
-###############################################################################
+# NO: Do NOT `export` this function, it only works if defined locally
+# NOTE: Each new definition of this function via `source` REPLACES the previous
+me() { echo ${BASH_SOURCE} ; }
+# NOTE: Must still use raw Bash syntax until we have declared essential functions
+# NOTE: Special header since this script is called while initializing Bash
+1>&2 echo "TRACE: Executing '$(me)'"
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
 # Declare essential Bash functions
+
+export BO_DirTemp=${HOME}/tmp
+mkdir "${BO_DirTemp}"
+
+get_temporary_file() {
+    # Return a temporary file absolute pathname
+    # Uses `$BO_DirTemp`
+    # TODO: require_directory_in BO_DirTemp
+    mktemp ${BO_DirTemp}/XXXXXXXX
+    abort_on_fail $? "from mktemp"
+} && export -f get_temporary_file
+
+################################################################################
 
 abort_on_fail() {
     # Abort execution on fail of previous command
@@ -27,42 +42,98 @@ abort_on_fail() {
         else
             log_error "Aborting with status ${Status}: $2"
         fi
-        # NOTE: This is the one exception to NOT calling 'exit' from a function
+        # NOTE: This is the ONE exception to NOT calling 'exit' from a function
         exit ${Status}
     fi
     return 0
 } && export -f abort_on_fail
 
+################################################################################
+# Declare logging functions
+# NOTE: Reference environment variables for terminal control codes,
+# which will initially be no-ops
+# until defined in setup_terminal.bash
+
 log_() {
+    # Log message $1 at priority level $2 with a UTC timestamp
+    # $1 = message to log
+    # $2 = priority level (just one letter of D/E/F/G/I/T/W)
+    # $3 = terminal control codes to match priority level
     local -r Text="$1"
-    local Level="$2"
+    local -r Level="$2"
+    local -r Control="$3"
     local -r Timestamp=$(date -u +"%Y%m%d %H%M%SZ")
 
-    # Default Level to "info"
-    [[ -z ${Level} ]] && Level=I
-
-    1>&2 echo "[${Timestamp} ${Level}] ${Text}"
+    1>&2 echo "${Control}[${Timestamp} ${Level}] ${Text}${BO_ColorReset}"
 } && export -f log_
 
 log_debug() {
-    log_ "$1" D
+    # Log message $1 at DEBUG priority level
+    # $1 = message to log
+    log_ "$1" "D" "${BO_ColorDebug}"
 } && export -f log_debug
 
 log_error() {
-    log_ "$1" E
+    # Log message $1 at ERROR priority level
+    # $1 = message to log
+    log_ "$1" "E" "${BO_ColorError}"
 } && export -f log_error
 
+log_fatal() {
+    # Log message $1 at FATAL priority level
+    # $1 = message to log
+    log_ "$1" "F" "${BO_ColorFatal}"
+} && export -f log_fatal
+
 log_good() {
-    log_ "$1" G
+    # Log message $1 at GOOD priority level
+    # $1 = message to log
+    log_ "$1" "G" "${BO_ColorGood}"
 } && export -f log_good
 
 log_info() {
-    log_ "$@" I
+    # Log message $1 at INFO priority level
+    # $1 = message to log
+    log_ "$1" "I" "${BO_ColorInfo}"
 } && export -f log_info
 
+log_trace() {
+    # Log message $1 at TRACE priority level
+    # $1 = message to log
+    log_ "$1" "T" "${BO_ColorTrace}"
+} && export -f log_trace
+
 log_warn() {
-    log_ "$1" W
+    # Log message $1 at WARN priority level
+    # $1 = message to log
+    log_ "$1" "W" "${BO_ColorWarn}"
 } && export -f log_warn
+
+################################################################################
+
+parent_of() {
+    # Return the parent directory for filesystem entry $1
+    # $1 = filesystem entry (file or directory)
+    echo -n $(dirname $1)
+} && export -f parent_of
+
+prepare_to_source() {
+    # Prepare to `source` script $1,
+    # returning 0 if the script is found and
+    # returning 1 if the script is not found
+    # Should be invoked like this:
+    # _Script=DIR/SCRIPT.bash
+    # prepare_to_source "${_Script}" && source "${_Script}"
+    if [[ -r "${_Script}" ]] ; then
+        log_info "Sourcing '${_Script}'"
+        return 0
+    else
+        log_warn "Missing '${_Script}'"
+    fi
+    return 1
+} && export -f prepare_to_source
+
+################################################################################
 
 require_arguments() {
     # Require that caller received expected number of arguments

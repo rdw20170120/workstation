@@ -14,7 +14,7 @@ Plug 'junegunn/vim-plug'
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 " Plug 'junegunn/vim-easy-align'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 Plug 'https://github.com/lifepillar/vim-solarized8'
 Plug 'will133/vim-dirdiff'
 call plug#end()

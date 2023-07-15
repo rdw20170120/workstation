@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 log_trace "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+
+main() {
+    # Uninstall Anaconda
+
+    if [[ -n "${CONDA_PREFIX}" ]]; then
+        if [[ -d "${CONDA_PREFIX}" ]]; then
+            log_info "Deleting directory '${CONDA_PREFIX}' to uninstall Anaconda"
+            rm -fr "${CONDA_PREFIX}"
+        else
+            log_warn "Missing directory '${CONDA_PREFIX}', skipping uninstall of Anaconda"
+        fi
+    else
+        log_debug "Missing 'CONDA_PREFIX', skipping uninstall of Anaconda"
+    fi
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

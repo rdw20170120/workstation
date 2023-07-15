@@ -1,13 +1,13 @@
 #!/usr/bin/env false
-# Intended to be executed in a Bash shell via `source`.
+# This script is executed via `source` while initializing a Bash shell.
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
-[[ "${BO_Trace:-UNDEFINED}" != UNDEFINED ]] && \
-    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
-    [[ "${BO_Trace:-UNDEFINED}" == TRACE ]] && \
-    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
-    set -o verbose -o xtrace
-###############################################################################
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
 # Declare Bash functions for `git`
 
 # TODO: Implement: Consider installing Git pre-commit hook
@@ -55,7 +55,7 @@ maybe_bare() {
   local -r _Dir=$(git_working_directory "$1" $3)
   if [[ ! -d "${_Dir}" ]] ; then
     local -r _Repo=$(git_repo_url $2 $3)
-    echo "INFO: Cloning --bare git repo ${_Repo}"
+    log_info "Cloning --bare git repo ${_Repo}"
     git clone --bare ${_Repo} "${_Dir}"
 # else
 #   TODO: Why does this fail?
@@ -81,7 +81,7 @@ maybe_clone() {
   local -r _Dir=$(git_working_directory "$1" $3)
   if [[ ! -d "${_Dir}" ]] ; then
     local -r _Repo=$(git_repo_url $2 $3)
-    echo "INFO: Cloning git repo ${_Repo}"
+    log_info "Cloning git repo ${_Repo}"
     git clone ${_Repo} "${_Dir}"
   else
     maybe_pull "$1" $2 $3
@@ -97,13 +97,13 @@ maybe_pull() {
   # $3 = git repository name
   local -r _Dir=$(git_working_directory "$1" $3)
   if git_status_is_clean "${_Dir}" ; then
-    echo "INFO:  Working directory is clean: ${_Dir}"
+    log_info " Working directory is clean: ${_Dir}"
     pushd "${_Dir}" >/dev/null
     git fetch --all --prune
     git pull --all
     popd >/dev/null
   else
-    echo "WARN:  Working directory is DIRTY: ${_Dir}"
+    log_warn " Working directory is DIRTY: ${_Dir}"
   fi
 }
 

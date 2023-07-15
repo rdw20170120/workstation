@@ -1,0 +1,64 @@
+#!/usr/bin/env false
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
+
+check() {
+    # Check that command $1 is available,
+    # then check the version using argument(s) $2
+    # $1 = command to check
+    # $2 = argument(s) for command to output its version
+    local -r Command=$1
+    local -r Arguments="$2"
+    local -rx PATH=${BO_PathHomebrew}:${BO_PathOriginal}
+
+    local -r Actual=$(which ${Command})
+    if [[ $(which ${Command}) ]]; then
+        log_info "Found command '${Actual}'"
+        [[ -n "${Arguments}" ]] && ${Command} ${Arguments}
+    else
+        log_warn "Did NOT find command '${Command}'"
+        return 1
+    fi
+
+    return 0
+}
+
+main() {
+    # Check commands available via Homebrew
+
+    check asciidoc --version
+    check brew --version
+    check conda --version
+    check emacs --version
+    check git --version
+    check jsonlint --version
+    check mamba --version
+    check markdownlint --version
+    check pip3 --version
+    check pydoc3
+    check python3 --version
+    check rst-lint --version
+    check shellcheck --version
+    check yamllint --version
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

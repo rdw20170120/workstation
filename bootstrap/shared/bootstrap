@@ -3,9 +3,9 @@
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
 [[ -n "${BO_Trace}" ]] && \
-    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
+    1>&2 log_trace "Executing ${BASH_SOURCE}" && \
     [[ "${BO_Trace}" == TRACE ]] && \
-    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
+    1>&2 log_trace "${BASH_SOURCE}" && \
     set -o verbose -o xtrace
 # NO: trap ... EXIT
 ###############################################################################
@@ -40,19 +40,19 @@ download_archive_on_Linux() {
 
 main() {
     # Bootstrap BriteOnyx on a new development workstation
-    echo "Bootstrapping user '${USER}' on this workstation '$(hostname)'"
+    log_info "Bootstrapping user '${USER}' on this workstation '$(hostname)'"
     local -r OS=$(uname)
     local -r DirTemp=${HOME}/tmp
     local -r URL=https://briteonyx.s3.us-west-2.amazonaws.com
     local -r FileArchive=${OS}.tgz
 
-    echo "Establishing temporary directory '${DirTemp}'"
+    log_debug "Establishing temporary directory '${DirTemp}'"
     [[ ! -e "${DirTemp}" ]] && mkdir -p "${DirTemp}"
 
-    echo "Downloading bootstrap archive '${FileArchive}'"
+    log_debug "Downloading bootstrap archive '${FileArchive}'"
     download_archive_on_${OS} "${URL}" "${DirTemp}" ${FileArchive}
 
-    echo "Extracting bootstrap archive '${FileArchive}'"
+    log_debug "Extracting bootstrap archive '${FileArchive}'"
     cd "${DirTemp}"
     tar --extract --file "${FileArchive}"
 

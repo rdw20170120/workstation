@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 log_trace "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+
+main() {
+    # Populate Homebrew by installing desired casks & formulae
+
+    homebrew-update
+    homebrew-upgrade
+
+    # minimal essential tools
+    local Packages
+    Packages='bash'
+    Packages+=' git'
+    Packages+=' iterm2'
+    Packages+=' neovim'
+    Packages+=' pyenv'
+
+    # helpful additional tools
+    # Packages+=' asciidoc'
+    # Packages+=' emacs'
+    # Packages+=' jsonlint'
+    # Packages+=' markdownlint-cli'
+    # Packages+=' rst-lint'
+    # Packages+=' shellcheck'
+    # Packages+=' yamllint'
+
+
+    brew install ${Packages}
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+Other Homebrew installs to consider:
+gitlint
+pulumi
+pylint
+tfproviderlint
+DisabledContent
+

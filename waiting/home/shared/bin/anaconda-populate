@@ -1,0 +1,68 @@
+#!/usr/bin/env false
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
+
+main() {
+    # Populate Anaconda base environment
+    local Packages
+
+    anaconda-update
+    anaconda-upgrade
+
+    # Install a reasonably-recent combination of conda & mamba
+    # TODO: WAIT: conda=23.5.0 seems to be broken,
+    # downgrades a lot of packages,
+    # and does not support a recent release of mamba
+    Packages="conda=23.3.1 mamba=1.4.2"
+
+    # minimal essential tools
+
+    # helpful additional tools
+
+    mamba install --name base --yes ${Packages}
+
+    # Populate Python tools via PIP
+    local -r python3=${CONDA_PREFIX}/bin/python3
+    ${python3} -m pip install --upgrade pip
+    ${python3} -m pip install pipenv
+    ${python3} -m pip install --upgrade pipenv
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+    Packages+=' '
+
+# Search for Anaconda packages:
+mamba repoquery search PACKAGE
+mamba repoquery search "PACKAGE>=VERSION"
+mamba repoquery depends PACKAGE
+mamba repoquery depends --recursive PACKAGE
+mamba repoquery depends --tree PACKAGE
+mamba repoquery whoneeds --tree PACKAGE
+
+Others to consider:
+gitlint
+pulumi
+pylint
+tfproviderlint
+
+# How To unpin an Anaconda package
+Edit ${CONDA_PREFIX}/envs/NAME/conda-meta/pinned
+DisabledContent
+

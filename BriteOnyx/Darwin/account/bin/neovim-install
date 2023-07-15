@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 log_trace "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+
+main() {
+    # Install Neovim
+    local -r DirDownload=${HOME}/Downloads/install
+
+    local -r Version=0.9.0
+    local -r DirDeploy=${HOME}/opt/Neovim/${Version}
+
+    # Source release
+    # local -r File=v${Version}.tar.gz
+    # local -r URL=https://github.com/neovim/neovim/archive/refs/tags/${File}
+    # local -r DirExtract=${DirDownload}/neovim-${Version}
+
+    # Binary release
+    local -r File=nvim-macos.tar.gz
+    # local -r URL=https://github.com/neovim/neovim/releases/download/nightly/${File}
+    local -r URL=https://github.com/neovim/neovim/releases/download/v${Version}/${File}
+    local -r DirExtract=${DirDownload}/nvim-macos
+
+    # TODO: Download and verify checksum from 
+    # https://github.com/neovim/neovim/releases/download/v0.9.0/nvim-macos.tar.gz.sha256sum
+
+    log_info "Installing Neovim from '${URL}'"
+    if [[ -e "${DirDownload}/${File}" ]]; then
+        log_debug "Already downloaded '${DirDownload}/${File}', skipping"
+    else
+        if [[ ! -e "${DirDownload}" ]]; then
+            log_info "Creating directory '${DirDownload}'"
+            mkdir -p "${DirDownload}"
+        fi
+        if [[ -d "${DirDownload}" ]]; then
+            cd "${DirDownload}"
+            log_info "Downloading '${URL}'"
+            curl -L -O "${URL}"
+        else
+            log_fatal "Could not find directory '${DirDownload}', aborting"
+            exit 1
+        fi
+    fi
+    if [[ -e "${DirDownload}/${File}" ]]; then
+        cd "${DirDownload}"
+        xattr -c "${File}"
+        log_info "Extracting '${DirDownload}/${File}'"
+        tar xzf "${File}"
+#       if [[ ! -e "${DirDeploy}" ]]; then
+#           mkdir -p "${DirDeploy}"
+#       fi
+        if [[ -d "${DirExtract}" ]]; then
+            if [[ -d "${DirDeploy}" ]]; then
+                log_warn "Deleting previous deployment directory '${DirDeploy}'"
+                rm -fr "${DirDeploy}"
+            fi
+            log_info "Moving '${DirExtract}' to '${DirDeploy}'"
+            mv "${DirExtract}" "${DirDeploy}"
+        fi
+    else
+        log_fatal "Could not download '${URL}', aborting"
+        exit 2
+    fi
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

@@ -1,0 +1,85 @@
+#!/usr/bin/env false
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
+# Clone git repositories, if they have not been cloned already.
+# NOTE: I reference my special SSH configuration to handle the connection, see `~/.ssh/config`.
+# TODO: Implement this:
+# hint:   git config pull.ff only       # fast-forward only
+
+_Script=${HOME}/bin/lib/declare/git.bash
+prepare_to_source "${_Script}" && source "${_Script}"
+unset _Script
+
+clone_BriteOnyx() {
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" build
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" build
+
+    return 0
+}
+
+clone_other() {
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" astech
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" aws-inventory
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" cb-infrastructure
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" cert
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" couchbase
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" euler
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" first
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" hortonworks
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" j0062
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" javascript
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" ocdp
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" potrero
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" quoting-api
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" restinjava
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" sample-python
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" samplegwtviaant
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" samples
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" spring-test-project
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" trading
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" training
+
+    return 0
+}
+
+clone_workstation() {
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" workstation
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" workstation
+
+    return 0
+}
+
+main() {
+    # Clone Rob's repositories on GitHub
+    local -r Source=GitHub
+    local -r Connection=MeAt${Source}
+    local -r Dir=${HOME}/repo/${Source}
+    local -r Profile=rdw20170120
+
+    clone_BriteOnyx
+#   clone_other
+    clone_workstation
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" j0062
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" j0062
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

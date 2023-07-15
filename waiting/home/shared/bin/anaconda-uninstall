@@ -1,0 +1,39 @@
+#!/usr/bin/env false
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
+
+main() {
+    # Uninstall Anaconda
+
+    if [[ -n "${CONDA_PREFIX}" ]]; then
+        if [[ -d "${CONDA_PREFIX}" ]]; then
+            log_info "Deleting directory '${CONDA_PREFIX}' to uninstall Anaconda"
+            rm -fr "${CONDA_PREFIX}"
+        else
+            log_warn "Missing directory '${CONDA_PREFIX}', skipping uninstall of Anaconda"
+        fi
+    else
+        log_debug "Missing 'CONDA_PREFIX', skipping uninstall of Anaconda"
+    fi
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

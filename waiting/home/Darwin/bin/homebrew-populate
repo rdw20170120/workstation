@@ -1,0 +1,56 @@
+#!/usr/bin/env false
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
+
+main() {
+    # Populate Homebrew by installing desired casks & formulae
+
+    homebrew-update
+    homebrew-upgrade
+
+    # minimal essential tools
+    local Packages
+    Packages='bash'
+    Packages+=' git'
+    Packages+=' iterm2'
+    Packages+=' neovim'
+    Packages+=' pyenv'
+
+    # helpful additional tools
+    # Packages+=' asciidoc'
+    # Packages+=' emacs'
+    # Packages+=' jsonlint'
+    # Packages+=' markdownlint-cli'
+    # Packages+=' rst-lint'
+    # Packages+=' shellcheck'
+    # Packages+=' yamllint'
+
+
+    brew install ${Packages}
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+Other Homebrew installs to consider:
+gitlint
+pulumi
+pylint
+tfproviderlint
+DisabledContent
+

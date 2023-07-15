@@ -1,14 +1,13 @@
 #!/usr/bin/env false
-# Intended to be executed in a Bash shell via `source`.
+# This script is executed via `source` while initializing a Bash shell.
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
-[[ -n "${BO_Trace}" ]] && \
-    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
-    [[ "${BO_Trace}" == TRACE ]] && \
-    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
-    set -o verbose -o xtrace
-# NO: trap ... EXIT
-###############################################################################
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
 # User/machine-specific Bash alias definitions
 
 # Bash alias definitions

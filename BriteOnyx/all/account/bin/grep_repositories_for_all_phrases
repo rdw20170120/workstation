@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 log_trace "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+
+hunt() {
+  # Hunt for search phrase $2, capturing to file $1
+  # $1 = output directory
+  # $2 = search phrase
+  local -r File=$1/$2.out
+  if [[ -f "${File}" ]] ; then
+    log_warn "Skipping, output file '${File}' already exists"
+  else
+    log_info "Hunting for '$2', writing to output file '${File}'"
+    ${Script} $2 >"${File}"
+  fi
+}
+
+main() {
+    # Hunt for all interesting phrases in repositories
+    local -r Out=~/Documents/hunt
+    local -r Script=$(which grep_repositories_for_phrase)
+
+    if [[ -z "${Script}" ]] ; then
+      log_fatal "Missing script '${Script}', aborting"
+      exit
+    elif [[ ! -r "${Script}" ]] ; then
+      log_fatal "Unreadable script '${Script}', aborting"
+      exit
+    fi
+
+    mkdir -p "${Out}"
+    if [[ ! -d "${Out}" ]] ; then
+      log_fatal "Missing output directory '${Out}', aborting"
+      exit
+    fi
+
+    # container
+    hunt "${Out}" Bitnami
+    hunt "${Out}" Docker
+    hunt "${Out}" container
+    hunt "${Out}" image
+
+    # environment
+    hunt "${Out}" dev
+    hunt "${Out}" development
+    hunt "${Out}" lab
+    hunt "${Out}" non-prod
+    hunt "${Out}" non-production
+    hunt "${Out}" nonprod
+    hunt "${Out}" nonproduction
+    hunt "${Out}" prd
+    hunt "${Out}" prod
+    hunt "${Out}" production
+    hunt "${Out}" qa
+    hunt "${Out}" stage
+    hunt "${Out}" staging
+    hunt "${Out}" stg
+
+    # environment variable
+    hunt "${Out}" BO_
+
+    # secret
+    hunt "${Out}" SSL
+    hunt "${Out}" TLS
+    hunt "${Out}" cert
+    hunt "${Out}" certificate
+    hunt "${Out}" password
+    hunt "${Out}" secret
+    hunt "${Out}" token
+
+    # tool and vendor
+    hunt "${Out}" AWS
+    hunt "${Out}" Amazon
+    hunt "${Out}" Apache
+    hunt "${Out}" Celery
+    hunt "${Out}" Dell
+    hunt "${Out}" Django
+    hunt "${Out}" Earthly
+    hunt "${Out}" Hashicorp
+    hunt "${Out}" Helm
+    hunt "${Out}" Homebrew
+    hunt "${Out}" Java
+    hunt "${Out}" Javascript
+    hunt "${Out}" Jenkins
+    hunt "${Out}" K8s
+    hunt "${Out}" Kafka
+    hunt "${Out}" Krew
+    hunt "${Out}" Kubernetes
+    hunt "${Out}" Microsoft
+    hunt "${Out}" MySQL
+    hunt "${Out}" Oracle
+    hunt "${Out}" PHP
+    hunt "${Out}" PostgreSQL
+    hunt "${Out}" Puppet
+    hunt "${Out}" Python
+    hunt "${Out}" Rust
+    hunt "${Out}" Terraform
+    hunt "${Out}" Terragrunt
+    hunt "${Out}" Vault
+    hunt "${Out}" brew
+    hunt "${Out}" kubectl
+    hunt "${Out}" nginx
+
+    # Sam's Club
+    hunt "${Out}" CreateProductAssetsFn
+    hunt "${Out}" CreateProjectFn
+    hunt "${Out}" Legato
+    hunt "${Out}" PublishProjectFn
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

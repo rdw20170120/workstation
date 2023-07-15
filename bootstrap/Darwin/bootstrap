@@ -3,9 +3,9 @@
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
 [[ -n "${BO_Trace}" ]] && \
-    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
+    1>&2 log_trace "Executing ${BASH_SOURCE}" && \
     [[ "${BO_Trace}" == TRACE ]] && \
-    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
+    1>&2 log_trace "${BASH_SOURCE}" && \
     set -o verbose -o xtrace
 # NO: trap ... EXIT
 ###############################################################################
@@ -13,7 +13,7 @@ set -o pipefail +o verbose +o xtrace
 main() {
     # Bootstrap BriteOnyx on a new development workstation
     # $1 = directory containing extracted archive file
-    echo "Bootstrapping user '${USER}' on this workstation '$(hostname)'"
+    log_info "Bootstrapping user '${USER}' on this workstation '$(hostname)'"
     local -r OS=$(uname)
     local -r DirTemp=$1
 
@@ -22,10 +22,10 @@ main() {
 
     distribute_archive "${DirTemp}"
 
-    echo "Securing files"
+    log_debug "Securing files"
     bash "${HOME}/bin/secure"
 
-    echo "Updating and upgrading packages"
+    log_debug "Updating and upgrading packages"
     # TODO: Manually install Homebrew until I can fully automate it
     # TODO: Homebrew checks for `sudo` access, so fully automate that too
     # homebrew-install
@@ -36,7 +36,7 @@ main() {
     anaconda-install
     prepare_git_access
 
-    echo "You may configure the editors manually by invoking 'editors-configure'"
+    log_info "You may configure the editors manually by invoking 'editors-configure'"
 
     return 0
 }

@@ -1,11 +1,16 @@
 #!/usr/bin/env false
-# Intended to be sourced in a Bash shell.
-[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-# NO: set -e
-# NO: trap ... EXIT
-###############################################################################
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT `export` this function, it only works if defined locally
+# me() { echo ${BASH_SOURCE} ; }
+me() ( echo ${BASH_SOURCE} ; )
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
 [[ -z "${BO_Project}" ]] &&
-    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    1>&2 log_error "Aborting, this project is NOT ACTIVATED" &&
     exit 99
 require_directory_in BO_Project
 

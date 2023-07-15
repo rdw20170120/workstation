@@ -1,0 +1,41 @@
+#!/usr/bin/env false
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
+
+main() {
+    # Install Homebrew on Apple macOS
+    # NOTE: The Homebrew installation script installs
+    # to `/opt/homebrew` when running on Apple Silicon CPUs (ARM64)
+    # and
+    # to `/usr/local` when running on Intel CPUs.
+    local -r Dir=${HOME}
+    local -r File=Homebrew-install.bash
+    local -r URL=https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+
+    curl -fsSL --output "${Dir}/${File}" "${URL}"
+    bash "${Dir}/${File}"
+    brew tap homebrew/cask-versions
+    brew tap homebrew/core
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+DisabledContent
+

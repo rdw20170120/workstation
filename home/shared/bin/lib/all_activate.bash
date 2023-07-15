@@ -1,18 +1,29 @@
 #!/usr/bin/env false
-# NOTE:  This file is intended to be executed while initializing a Bash shell.
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT export this function, it only works if defined locally
+# NOTE: Each new definition of this function REPLACES the previous via `source`
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
 ################################################################################
 
-_Script=${HOME}/bin/lib/activate/Anaconda.bash
-prepare_to_source "${_Script}" && source "${_Script}"
+_MyDir=$(parent_of $(me))
 
-_Script=${HOME}/bin/lib/activate/Homebrew.bash
-prepare_to_source "${_Script}" && source "${_Script}"
+# Generate and `source` a temporary script to `source` other scripts
+_Script=$(get_temporary_file)
+log_debug "Generating script '${_Script}'"
+cat >"${_Script}" <<EndOfScript
+log_trace "Executing '${_Script}'"
 
-_Script=${HOME}/bin/lib/activate/NodeJS.bash
-prepare_to_source "${_Script}" && source "${_Script}"
+# Nothing to do yet
 
-_Script=${HOME}/bin/lib/activate/Pyenv.bash
-prepare_to_source "${_Script}" && source "${_Script}"
+unset _Script
+
+EndOfScript
+require_script "${_Script}" && source "${_Script}"
 
 unset _Script
 

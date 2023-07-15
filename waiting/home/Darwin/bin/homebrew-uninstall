@@ -1,0 +1,45 @@
+#!/usr/bin/env false
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
+
+main() {
+    # Uninstall Homebrew
+
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+    if [[ -n "${HOMEBREW_PREFIX}" ]]; then
+        if [[ -d "${HOMEBREW_PREFIX}" ]]; then
+            log_info "Deleting directory '${HOMEBREW_PREFIX}' to uninstall Homebrew"
+            # TODO: rm -fr "${HOMEBREW_PREFIX}"
+        else
+            log_warn "Missing directory '${HOMEBREW_PREFIX}', skipping uninstall of Homebrew"
+        fi
+    else
+        log_debug "Missing 'HOMEBREW_PREFIX', skipping uninstall of Homebrew"
+    fi
+    sudo rm -fr /Applications/Emacs.app
+    sudo rm -fr /Applications/iTerm.app
+    sudo rm -fr /Applications/Postman.app
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+    # TODO: Consider
+    [[ -d "${HOMEBREW_PREFIX}" ]] && sudo rm -fr "${HOMEBREW_PREFIX}"
+DisabledContent
+

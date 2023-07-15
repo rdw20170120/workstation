@@ -1,14 +1,13 @@
 #!/usr/bin/env false
-# Intended to be executed in a Bash shell via `source` during activation.
+# This script is executed via `source` while initializing a Bash shell.
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
-[[ -n "${BO_Trace}" ]] && \
-    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
-    [[ "${BO_Trace}" == TRACE ]] && \
-    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
-    set -o verbose -o xtrace
-# NO: trap ... EXIT
-###############################################################################
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
 # Activate the BriteOnyx framework to manage this project directory tree
 #
 # NOTE: We MUST NOT EVER `exit` during BriteOnyx activation!
@@ -21,12 +20,12 @@ set -o pipefail +o verbose +o xtrace
 # Please see HowTo-use_this_project.md for details.
 ###############################################################################
 if [[ -n "${BO_Project}" ]] ; then
-    1>&2 echo "Aborting, this project is already activated as '${BO_Project}'"
+    1>&2 log_fatal "Aborting, this project is already activated as '${BO_Project}'"
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
 fi
 
 if [[ -z "${PWD}" ]] ; then
-    1>&2 echo "Aborting, missing environment variable 'PWD'"
+    1>&2 log_fatal "Aborting, missing environment variable 'PWD'"
     kill -INT $$  # Interrupt the executing script, but do NOT kill the shell (terminal)
 fi
 

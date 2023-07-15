@@ -1,9 +1,14 @@
 #!/usr/bin/env false
-# Intended to be sourced in a Bash shell during activation.
-[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
-# NO: set -e
-# NO: trap ... EXIT
-###############################################################################
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT `export` this function, it only works if defined locally
+# me() { echo ${BASH_SOURCE} ; }
+me() ( echo ${BASH_SOURCE} ; )
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
 # Library of helpful common Bash functions
 
 copy_file() {
@@ -37,7 +42,7 @@ execute_script() {
     Script=$(which ${Script})
     require_script "${Script}"
     shift 1
-    log_debug "Executing script ${Script}"
+    log_trace "Executing script ${Script}"
     "${Script}" $@
     abort_on_fail $? "Failed to execute script ${Script}"
 } && export -f execute_script

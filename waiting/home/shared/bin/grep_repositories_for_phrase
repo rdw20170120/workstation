@@ -1,0 +1,43 @@
+#!/usr/bin/env false
+# This script is executed via `source` while initializing a Bash shell.
+# NO: set -o errexit -o nounset
+set -o pipefail +o verbose +o xtrace
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
+
+main() {
+    # Search for phrase $1 in repositories
+    # $1 = search phrase
+
+    if [[ -z "$1" ]] ; then
+      log_fatal "Search phrase $1 is required, aborting"
+      return
+    fi
+
+    grep -EiR $1 \
+        --exclude-dir=.git \
+        --exclude-dir=.hg \
+        --exclude-dir=.anaconda \
+        --files-with-matches \
+        ~/repo |
+        sort
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+
+

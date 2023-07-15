@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Intended to be executed in a Bash shell.
-[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+[[ -n "${BO_Trace}" ]] && 1>&2 log_trace "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
 trap warn_on_error EXIT
 ###############################################################################
 [[ -z "${BO_Project}" ]] &&
-    1>&2 echo "ERROR: Aborting, this project is NOT ACTIVATED" &&
+    1>&2 log_error "Aborting, this project is NOT ACTIVATED" &&
     exit 99
 
 main() {

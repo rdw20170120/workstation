@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 log_trace "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+
+chmod_contents_as_executable() {
+    chmod u=rwx $1/*
+}
+
+chmod_directory() {
+    chmod u=rwx $1
+}
+
+chmod_known() {
+    chmod u=rw $1/*.bash
+    chmod u=rw $1/*.md
+
+    return 0
+}
+
+chmod_recursively_to_only_me() {
+    chmod -R g=,o= $1
+}
+
+secure_bin() {
+    # Secure personal script directory
+    local Dir
+ 
+    Dir=~/bin
+    if [[ -d $Dir ]] ; then
+      chmod_directory $Dir
+      chmod_recursively_to_only_me $Dir
+      chmod_contents_as_executable $Dir
+      chmod_known $Dir
+    fi
+
+    Dir=~/bin/lib
+    if [[ -d $Dir ]] ; then
+      chmod_directory $Dir
+      chmod_known $Dir
+    fi
+
+    return 0
+}
+
+secure_home() {
+    # Secure login scripts
+    chmod u=rw,g=,o= ~/*.bash
+    chmod u=rw,g=,o= ~/.bash_logout
+    chmod u=rw,g=,o= ~/.bash_profile
+    chmod u=rw,g=,o= ~/.bashrc
+    chmod u=rw,g=,o= ~/.profile
+    chmod_recursively_to_only_me ~/.config
+    chmod_recursively_to_only_me ~/.local
+    chmod_recursively_to_only_me ~/.vim
+
+    return 0
+}
+
+secure_ssh() {
+    # Secure SSH directory
+    local Dir
+ 
+    Dir=~/.ssh
+    if [[ -d $Dir ]] ; then
+      chmod_directory $Dir
+      chmod_recursively_to_only_me $Dir
+      chmod_known $Dir
+    fi
+
+    return 0
+}
+
+main() {
+    # Secure parts of user home directory
+
+    secure_home
+    secure_bin
+    secure_ssh
+    chmod_recursively_to_only_me ~/Documents
+    chmod_recursively_to_only_me ~/Dropbox
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

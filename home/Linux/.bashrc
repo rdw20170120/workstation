@@ -2,12 +2,11 @@
 # This script is executed via `source` while initializing a Bash shell.
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
-[[ -n "${BO_Trace}" ]] && \
-    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
-    [[ "${BO_Trace}" == TRACE ]] && \
-    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
-    set -o verbose -o xtrace
-# NO: trap ... EXIT
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
 ################################################################################
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -20,7 +19,7 @@ umask u=rwx,g=,o=
 case $- in
   *i*) ;;
   *) 
-      echo "WARN: Noninteractive shell, skipping Bash initialization"
+      log_warn "Noninteractive shell, skipping Bash initialization"
       return;;
 esac
 
@@ -36,10 +35,10 @@ prepare_to_source() {
     # Should be invoked like this:
     # prepare_to_source "${_Script}" && source "${_Script}"
     if [[ -r "${_Script}" ]] ; then
-        echo "INFO: Sourcing script '${_Script}'"
+        log_info "Sourcing script '${_Script}'"
         return 0
     else
-        echo "WARN: Skipping missing script '${_Script}'"
+        log_warn "Skipping missing script '${_Script}'"
     fi
     return 1
 } && export -f prepare_to_source

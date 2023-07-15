@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 log_trace "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+
+main() {
+    # Install Anaconda via Mambaforge
+    local -r File=Mambaforge-$(uname)-$(uname -m).sh
+    local -r URL=https://github.com/conda-forge/miniforge/releases/latest/download/${File}
+
+    log_info "Installing Anaconda using '${HOME}/${File}'"
+    cd "${HOME}"
+    if [[ ! -e "${HOME}/${File}" ]]; then
+        curl -L -O "${URL}"
+    fi
+    bash "${File}" -b
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

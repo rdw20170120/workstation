@@ -1,14 +1,13 @@
 #!/usr/bin/env false
-# Intended to be executed in a Bash shell via `source`.
+# This script is executed via `source` while initializing a Bash shell.
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
-[[ -n "${BO_Trace}" ]] && \
-    1>&2 echo "DEBUG: Executing ${BASH_SOURCE}" && \
-    [[ "${BO_Trace}" == TRACE ]] && \
-    1>&2 echo "DEBUG: Tracing ${BASH_SOURCE}" && \
-    set -o verbose -o xtrace
-# NO: trap ... EXIT
-###############################################################################
+# NO: Do NOT `export` this function, it only works if defined locally
+me() { echo ${BASH_SOURCE} ; }
+[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
+    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NO: Do NOT `trap` since it will stay active in the shell
+################################################################################
 # Library of Bash functions
 # to support bootstrapping a new development workstation
 # shared across operating systems
@@ -17,7 +16,7 @@ distribute_archive() {
     # Distribute contents of archive extracted in directory $1
     local -r DirTemp=$1
 
-    echo "Distributing files from bootstrap archive extracted into '${DirTemp}'"
+    log_debug "Distributing files from bootstrap archive extracted into '${DirTemp}'"
     maybe_copy_file "${DirTemp}" "${HOME}" .bash_logout
     maybe_copy_file "${DirTemp}" "${HOME}" .bash_profile
     maybe_copy_file "${DirTemp}" "${HOME}" .bashrc
@@ -41,7 +40,7 @@ maybe_backup_file() {
     local -r FileSource=$1
     local -r FileTarget=$1.original
 
-    echo "Backing up file '${FileSource}' to '${FileTarget}'"
+    log_debug "Backing up file '${FileSource}' to '${FileTarget}'"
 #   [[ ! -e "${FileTarget}" ]] && cp --preserve "${FileSource}" "${FileTarget}"
     [[ ! -e "${FileTarget}" ]] && cp -p "${FileSource}" "${FileTarget}"
 
@@ -63,13 +62,13 @@ maybe_copy_file() {
     fi
     if [[ ! -e "${DirTarget}" ]]; then
         if [[ -r "${DirSource}/${File}" ]]; then
-            echo "Creating directory '${DirTarget}'"
+            log_debug "Creating directory '${DirTarget}'"
             mkdir -p "${DirTarget}"
         fi
     fi
     if [[ ! -e "${DirTarget}/${File}" ]]; then
         if [[ -r "${DirSource}/${File}" ]]; then
-            echo "Copying file '${DirSource}/${File}' to '${DirTarget}/${File}'"
+            log_debug "Copying file '${DirSource}/${File}' to '${DirTarget}/${File}'"
 #           cp --preserve --update \
 #               "${DirSource}/${File}" \
 #               "${DirTarget}/${File}"
@@ -88,7 +87,7 @@ prepare_git_access() {
     local -r FileKey=${HOME}/.ssh/id_rsa
 
     if [[ ! -e "${FileKnown}" ]]; then
-        echo "Remember relevant SSH host keys"
+        log_debug "Remember relevant SSH host keys"
         ssh-keyscan -H github.com >>"${FileKnown}"
         ssh-keyscan -H gitlab.com >>"${FileKnown}"
     fi
@@ -123,11 +122,11 @@ maybe_copy_files() {
         DirSource=${DirSource}/${Sub}
         DirTarget=${DirTarget}/${Sub}
         if [[ ! -e "${DirTarget}" ]]; then
-            echo "Creating directory '${DirTarget}'"
+            log_debug "Creating directory '${DirTarget}'"
             mkdir -p "${DirTarget}"
         fi
     fi
-    echo "Copying files in directory '${DirSource}' to directory '${DirTarget}'"
+    log_debug "Copying files in directory '${DirSource}' to directory '${DirTarget}'"
 #   cp --preserve --recursive --update \
 #       ${DirSource}/* \
 #       ${DirTarget}/
