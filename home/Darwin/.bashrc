@@ -47,7 +47,7 @@ unset _Script
 ################################################################################
 export BO_PathNative=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
-log_info "To activate BriteOnyx, execute 'source ~/source_me.bash'"
+log_good "To activate BriteOnyx, execute 'source ~/source_me.bash'"
 
 ################################################################################
 : << 'DisabledContent'
