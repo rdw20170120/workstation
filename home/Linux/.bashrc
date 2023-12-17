@@ -4,8 +4,9 @@
 set -o pipefail +o verbose +o xtrace
 # NO: Do NOT `export` this function, it only works if defined locally
 me() { echo ${BASH_SOURCE} ; }
-[[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
-    [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
+# NOTE: Must still use raw Bash syntax until we have declared essential functions
+# NOTE: Special header since this script is called while initializing Bash
+1>&2 echo "TRACE: Executing '$(me)'"
 # NO: Do NOT `trap` since it will stay active in the shell
 ################################################################################
 # ~/.bashrc: executed by bash(1) for non-login shells.
@@ -17,10 +18,10 @@ umask u=rwx,g=,o=
 ################################################################################
 # If not running interactively, don't do anything
 case $- in
-  *i*) ;;
-  *) 
-      log_warn "Noninteractive shell, skipping Bash initialization"
-      return;;
+    *i*) ;;
+    *) 
+        1>&2 echo "WARN: Noninteractive shell, skipping Bash initialization"
+        return;;
 esac
 
 export BO_ARCH=$(uname -m)

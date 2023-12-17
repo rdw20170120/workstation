@@ -2,8 +2,7 @@
 # This script is executed via `source` while initializing a Bash shell.
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
-# NO: Do NOT export this function, it only works if defined locally
-# NOTE: Each new definition of this function REPLACES the previous via `source`
+# NO: Do NOT `export` this function, it only works if defined locally
 me() { echo ${BASH_SOURCE} ; }
 # NOTE: Must still use raw Bash syntax until we have declared essential functions
 # NOTE: Special header since this script is called while initializing Bash
@@ -15,6 +14,8 @@ me() { echo ${BASH_SOURCE} ; }
 # for examples
 
 umask u=rwx,g=,o=
+
+export BO_PathTool=~/tool
 
 ################################################################################
 # If not running interactively, don't do anything
