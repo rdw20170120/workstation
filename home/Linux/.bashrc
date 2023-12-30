@@ -15,6 +15,8 @@ me() { echo ${BASH_SOURCE} ; }
 
 umask u=rwx,g=,o=
 
+export BO_PathTool=~/tool
+
 ################################################################################
 # If not running interactively, don't do anything
 case $- in
@@ -24,6 +26,7 @@ case $- in
         return;;
 esac
 
+################################################################################
 export BO_ARCH=$(uname -m)
 export BO_OS=$(uname)
 
