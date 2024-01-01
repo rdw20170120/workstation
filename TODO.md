@@ -18,6 +18,7 @@ unless they should merely be deleted.
 1. [ ] Category - Item
 1. [ ] - 
 
+1. [ ] generation - Refactor source generation to be `class`-based rather than `import`-based
 1. [ ] Anaconda - Create scripts & aliases for showing environment variables for Anaconda
 1. [ ] Anaconda - Document use of Anaconda for our purposes
 1. [ ] Anaconda - Sort Anaconda packages in `cfg/anaconda.yml`
@@ -52,12 +53,10 @@ unless they should merely be deleted.
 1. [ ] encoding - Implement full test suite for environment variable character encodings
 1. [ ] encoding - Implement full test suite for file character encodings
 1. [ ] generation - Define code generation methods for common test result patterns
-1. [ ] generation - Enhance merge to present a script of files to be merged, which can be edited before executing
 1. [ ] generation - Extend code generation to all Bash scripts
 1. [ ] generation - Implement code generation for testing code generation functionality
 1. [ ] generation - Implement full test suite for code generation functionality
 1. [ ] generation - Refactor `all.py` modules to have a `_Generator` class that holds `config`
-1. [ ] generation - Refactor source generation to be `class`-based rather than `import`-based
 1. [ ] iTerm2 - Configure iTerm2 to position itself
 1. [ ] iTerm2 - Create profiles for both Solarized Dark & Solarized Light
 1. [ ] iTerm2 - Switch font in terminal for better readability
@@ -79,6 +78,7 @@ unless they should merely be deleted.
 1. [X] Python - Restore reporting of test results
 1. [X] encoding - Implement methods for always using text files with default UTF-8 encoding
 1. [X] encoding - ~Add encoding header to all Python source~
+1. [X] generation - Enhance merge to present a script of files to be merged, which can be edited before executing
 1. [X] generation - Fix broken code generation functionality
 1. [X] generation - Refactor BriteOnyx source generation to better distinguish before, during, and after activation
 1. [X] generation - Split generation of `activate.bash` into separate Python modules for before/after activation
