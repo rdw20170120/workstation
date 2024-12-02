@@ -1,0 +1,250 @@
+#!/usr/bin/env python3
+"""Prompt user to manually merge files on this workstation.
+
+Intended to be executed directly by the user.
+"""
+# Internal packages (absolute references, distributed with Python)
+from filecmp import cmp
+from os import environ
+from os import path
+from os import walk
+from re import compile
+
+# External packages (absolute references, NOT distributed with Python)
+from commandlib import Command
+
+# Library modules   (absolute references, NOT packaged, in project)
+# Project modules   (relative references, NOT packaged, in project)
+
+_debugging = False
+_excluded_directory_regexes = []
+_excluded_file_regexes = [
+    # These are file extensions for types of content never likely to be interesting here
+    compile(r".*\.log"),
+    compile(r".*\.out"),
+    compile(r"\.DS_Store"),
+    # These are file extensions for types of content not yet interesting
+    # These are file extensions for types of content that are already interesting
+    # (so normally commented out to include them)
+    # compile(r".*\.bash"),
+    # compile(r".*\.elv"),
+    # compile(r".*\.json"),
+    # compile(r".*\.md"),
+    # compile(r".*\.py"),
+    # compile(r".*\.toml"),
+    # compile(r".*\.vim"),
+    # compile(r".*\.yaml"),
+    # compile(r".*\.yml"),
+]
+
+_root_base = path.join(environ["BO_Project"], "home")
+_root_os = path.join(_root_base, environ["BO_OS"])
+_root_project = path.join(environ["BO_Project"])
+_root_shared = path.join(_root_base, "shared")
+_root_temporary = path.join(environ["BO_DirTemp"])
+_root_workstation = path.join(environ["HOME"])
+
+
+def _absolute_real_path_or_none(root, relative_path):
+    result = path.abspath(path.join(root, relative_path))
+    if not path.exists(result):
+        result = None
+    return result
+
+
+def _as_bash_script(potential_files):
+    """Return the potential_files as a Bash script to merge them."""
+    lines = []
+    lines.append("# The lines starting with `#` are comments")
+    lines.append("# containing instructions for you.")
+    lines.append("#")
+    lines.append("# The non-comment lines are commands")
+    lines.append("# that will be executed by Bash.")
+    lines.append("#")
+    lines.append("# Each command will invoke an editor")
+    lines.append("# in which you may manually merge")
+    lines.append("# a set of two or three files.")
+    lines.append("#")
+    lines.append("# Edit this file, save it, and it will then be executed.")
+    lines.append("# Remove (or disable) any lines containing commands")
+    lines.append("# that you do not want executed.")
+    lines.append("# Clear the whole file")
+    lines.append("# to prevent anything from being executed.")
+    lines.append("#")
+    lines.append("# The first command `cd` sets the working directory")
+    lines.append("# while the rest of the commands")
+    lines.append("# invoke the editor")
+    lines.append("# using file paths relative to that directory.")
+    lines.append("")
+    lines.append("# SO, do NOT delete or disable this command")
+    lines.append("# UNLESS you delete or disable ALL the commands.")
+    lines.append(f"cd {_root_workstation}")
+    lines.append("")
+    for k, v in potential_files.items():
+        (os, shared, workstation) = v
+        _maybe_append(lines, _merge_command_for(
+            k, _root_workstation, os, shared, workstation,
+        ))
+    return "\n".join(lines)
+
+def _debug(message):
+    if _debugging:
+        print(message)
+
+
+def _dump_files_dict(dict_):
+    _debug(f"Files dictionary contains {len(dict_)} items:")
+    for k, v in dict_.items():
+        (os, shared, workstation) = v
+        line = ""
+        line += "   " if os is None else "OS "
+        line += "       " if shared is None else "shared "
+        line += "            " if workstation is None else "workstation "
+        line += f"  {k}"
+        _debug(line)
+
+
+def _edit_file(file_):
+    _info(f"Editing file '{file_}'")
+    Command("vim").in_dir(str(_root_project)).with_trailing_args(str(file_)).run()
+
+
+def _execute_file(file_):
+    _info(f"Executing file '{file_}'")
+    Command("bash").in_dir(str(_root_project)).with_trailing_args(str(file_)).run()
+
+
+def _file_tuple(file_relative_path):
+    """Return a tuple associated with the file_relative_path."""
+    # _debug(f"Adding relative file '{file_relative_path}'")
+    return (
+        _absolute_real_path_or_none(_root_os, file_relative_path),
+        _absolute_real_path_or_none(_root_shared, file_relative_path),
+        _absolute_real_path_or_none(_root_workstation, file_relative_path),
+    )
+
+
+def _info(message):
+    print(message)
+
+
+def _maybe_append(list_, content):
+    if content is not None:
+        list_.append(content)
+
+def _merge_command_for(file_relative_path, root, os, shared, workstation):
+    count = 0
+    count += 1 if os is not None else 0
+    count += 1 if shared is not None else 0
+    count += 1 if workstation is not None else 0
+
+    if count == 0:
+        raise RuntimeError("Should never reach here")
+    if count == 4:
+        _info(f"Found all FOUR, WHY?:  merging '{file_relative_path}'")
+
+    rel_os = str(_relative_real_path_or_none(root, os))
+    rel_shared = str(_relative_real_path_or_none(root, shared))
+    rel_workstation = str(_relative_real_path_or_none(root, workstation))
+
+    if workstation is None:
+        # Copy whatever tracked file(s) exist into the missing workstation file
+        result = f"cp -c"
+        if os is not None:
+            result += f" {rel_os} {file_relative_path}"
+        elif shared is not None:
+            result += f" {rel_shared} {file_relative_path}"
+        else:
+            raise RuntimeError("Should never reach here")
+    elif workstation is not None:
+        # Merge whatever tracked file(s) exist into the existing workstation file
+        result = f"vim -d {rel_workstation}"
+        if count == 1:
+            raise RuntimeError("Should never reach here")
+        if os is not None:
+            if cmp(workstation, os, shallow=False):
+                return None
+            else:
+                result += f" {rel_os}"
+        if shared is not None:
+            if cmp(workstation, shared, shallow=False):
+                return None
+            else:
+                result += f" {rel_shared}"
+    return result
+
+def _merge_file_dicts(left_files, right_files):
+    result = {}
+    result.update(left_files)
+    result.update(right_files)
+    return result
+
+
+def _prune_excluded_items(items, regexes):
+    """Prune (remove) any items that match any of the regexes."""
+    # Iterate over a copy of the list to avoid mutation errors
+    for i in items[:]:
+        for r in regexes:
+            if not r.fullmatch(i) is None:
+                # _debug(f"Removing '{i}' due to '{r}'")
+                items.remove(i)
+
+
+def _relative_real_path_or_none(root, absolute_path):
+    if absolute_path is None:
+        return None
+    if not path.exists(absolute_path):
+        result = None
+    if not path.isabs(absolute_path):
+        raise ValueError(f"Not an absolute path: '{absolute_path}'")
+    return path.relpath(absolute_path, start=root)
+
+
+def _scanned_files(root):
+    """Scan the directory tree from root, returning any desired source files found."""
+    result = {}
+    for top, directories, files in walk(root):
+        _prune_excluded_items(directories, _excluded_directory_regexes)
+        _prune_excluded_items(files, _excluded_file_regexes)
+        for f in files:
+            absolute = path.realpath(path.join(top, f), strict=True)
+            relative = path.relpath(absolute, start=root)
+            result[str(relative)] = _file_tuple(relative)
+    return result
+
+def _write_file(text_content, file_):
+    with open(file_, encoding="utf_8", mode="wt", newline=None) as writer:
+        count = writer.write(text_content)
+    _info(f"Wrote {count} characters to file '{file_}'")
+
+
+def main():
+    """Script entry point."""
+    os_files = _scanned_files(_root_os)
+    _info(f"OS files dict contains {len(os_files)} files")
+    shared_files = _scanned_files(_root_shared)
+    _info(f"Shared files dict contains {len(shared_files)} files")
+    # Do NOT scan _root_workstation
+    # because it will result in an overwhelming number of files
+    # Instead, let the user control
+    # what workstation files are interesting
+    # by copying them into one or more of the other roots
+
+    potential_files = {}
+    potential_files = _merge_file_dicts(potential_files , os_files)
+    potential_files = _merge_file_dicts(potential_files , shared_files)
+    _info(f"Potential files dict contains {len(potential_files)} files")
+    _dump_files_dict(potential_files)
+
+    script = path.join(_root_temporary, "edit_workstation_merge")
+    content = _as_bash_script(potential_files)
+    _write_file(content, script)
+    _edit_file(script)
+    if not _debugging: _execute_file(script)
+
+
+if __name__ == "__main__":
+    main()
+
+"""DisabledContent
+"""

@@ -10,19 +10,19 @@ me() { echo ${BASH_SOURCE} ; }
 ################################################################################
 
 _Script=${HOME}/bin/lib/alias_for_bash.bash
-prepare_to_source "${_Script}" && source "${_Script}"
+require_script "${_Script}" && source "${_Script}"
 
 _Script=${HOME}/bin/lib/alias_for_cd.bash
-prepare_to_source "${_Script}" && source "${_Script}"
+require_script "${_Script}" && source "${_Script}"
 
 _Script=${HOME}/bin/lib/alias_for_git.bash
-prepare_to_source "${_Script}" && source "${_Script}"
+require_script "${_Script}" && source "${_Script}"
 
 _Script=${HOME}/bin/lib/alias_for_inputrc.bash
-prepare_to_source "${_Script}" && source "${_Script}"
+require_script "${_Script}" && source "${_Script}"
 
 _Script=${HOME}/bin/lib/alias_for_ls.bash
-prepare_to_source "${_Script}" && source "${_Script}"
+require_script "${_Script}" && source "${_Script}"
 
 unset _Script
 
