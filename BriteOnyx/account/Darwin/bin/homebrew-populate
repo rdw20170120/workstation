@@ -15,6 +15,7 @@ main() {
     local Packages
     Packages='bash'
     Packages+=' git'
+    Packages+=' hyper'
     Packages+=' iterm2'
     Packages+=' neovim'
     Packages+=' pyenv'

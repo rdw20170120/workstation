@@ -18,6 +18,8 @@ unless they should merely be deleted.
 1. [ ] Category - Item
 1. [ ] - 
 
+1. [X] Hyper - Install the Hyper terminal using Homebrew
+1. [ ] Hyper - Consider switching from iTerm2 to Hyper
 1. [ ] generation - Refactor source generation to be `class`-based rather than `import`-based
 1. [ ] Anaconda - Create scripts & aliases for showing environment variables for Anaconda
 1. [ ] Anaconda - Document use of Anaconda for our purposes

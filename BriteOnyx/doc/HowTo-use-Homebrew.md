@@ -18,19 +18,25 @@ as needed to support my projects.
 
 ## List installed packages after initial install
 `brew list`
+```
 ==> Formulae
+```
 
 ## Install desired packages
-`brew install iterm2 neovim`
+`brew install hyper iterm2 neovim`
 
 ## List installed packages again
 `brew list`
+```
 ==> Formulae
 gettext		libuv		luajit		msgpack		tree-sitter
 libtermkey	libvterm	luv		neovim		unibilium
 
 ==> Casks
+hyper
 iterm2
+mambaforge
+```
 
 ## TODO: Authorize Meld to open in System Preferences
 
