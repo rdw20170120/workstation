@@ -13,7 +13,7 @@ main() {
     # Configure Me@home as the current user in the current Git repository
 
     git config pull.rebase true
-    git config user.email rob@refactory.biz
+    git config user.email rdw6688@gmail.com
     git config user.name 'Rob Williams'
 
     return 0

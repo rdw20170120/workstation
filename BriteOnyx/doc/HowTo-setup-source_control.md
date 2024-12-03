@@ -117,7 +117,7 @@ Let's change that.
 
 ~~~ bash
 git config --global user.name 'Rob Williams'
-git config --global user.email rob@refactory.biz
+git/config --global user.email rdw6688@gmail.com
 ~~~
 
 Let's also set our default `git pull` behavior:
@@ -142,7 +142,7 @@ git config --list --show-origin
 
         file:.git/config        core.editor=vim
         file:.git/config        user.name=Rob Williams
-        file:.git/config        user.email=rob@refactory.biz
+        file:.git/config        user.email=rdw6688@gmail.com
 
 [activate]:    ./HowTo-activate_this_project.md "HowTo activate this project"
 [application]: ./HowTo-execute_application.md "HowTo execute application"

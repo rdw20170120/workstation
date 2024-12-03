@@ -11,7 +11,7 @@ me() ( echo ${BASH_SOURCE} ; )
 ################################################################################
 # Copied from https://github.com/fredpalmer/log4bash/blob/master/log4bash.sh
 # on 24-Nov-2020
-# by Rob Williams <rob@refactory.biz>
+# by Rob Williams <rdw6688@gmail.com>
 #--------------------------------------------------------------------------------------------------
 # log4bash - Makes logging in Bash scripting suck less
 # Copyright (c) Fred Palmer
