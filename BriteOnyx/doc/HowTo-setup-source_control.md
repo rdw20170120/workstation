@@ -144,6 +144,25 @@ git config --list --show-origin
         file:.git/config        user.name=Rob Williams
         file:.git/config        user.email=rdw6688@gmail.com
 
+TODO: Document how to redirect/relocate a repository
+
+Consider:
+`git ls-remote --get-url origin`
+
+~~~ bash
+git remote rename origin upstream
+git remote add origin URL
+git push origin main
+~~~
+
+~~~ bash
+git clone --bare OLD_URL/REPO.git
+cd REPO.git
+git push --mirror NEW_URL/REPO.git
+cd ..
+rm -fr REPO.git
+~~~
+
 [activate]:    ./HowTo-activate_this_project.md "HowTo activate this project"
 [application]: ./HowTo-execute_application.md "HowTo execute application"
 [clone]:       ./HowTo-setup-source_control.md "HowTo setup source control"
