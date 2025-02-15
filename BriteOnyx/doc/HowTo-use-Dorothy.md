@@ -35,9 +35,10 @@ since I had yet to install anything via Homebrew.
 I can install utilities using `setup-utils`
 and find the right command using `get-installer`.
 
-I installed more utilities via:
+I installed more utilities:
 ~~~
 setup-util-bash
 setup-util-emacs
+setup-util-fd
 setup-util-git
 ~~~
