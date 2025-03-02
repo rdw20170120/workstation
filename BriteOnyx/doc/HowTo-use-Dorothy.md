@@ -33,19 +33,29 @@ but there was nothing to do
 since I had yet to install anything
 via this new Homebrew.
 
+Dorothy installed Bash, Dash, Elvish, KSH, Nu, and Zsh shells.
+
 I can install utilities using `setup-utils`
 and find the right command using `get-installer`.
 
 I installed more utilities:
 ~~~
+setup-mac-brew
 setup-util-bash
 setup-util-emacs
-setup-util-fd
 setup-util-git
 ~~~
+While installing `git`,
+Homebrew prompted me to install `delta` (which I did).
 
 I need to integrate my manually-installed tools
 into the Dorothy automated installation scripts.
+
+I want to use the `pkgx` installer,
+so I invoked `brew install pkgx`.
+Once `pkgx` was installed
+I invoked `pkgx dev integrate`
+which modified my Bash startup scripts.
 
 Consider using these Dorothy commands:
 ~~~

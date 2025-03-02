@@ -38,5 +38,8 @@ iterm2
 mambaforge
 ```
 
-## TODO: Authorize Meld to open in System Preferences
+## Uninstall Homebrew
+~~~
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+~~~
 

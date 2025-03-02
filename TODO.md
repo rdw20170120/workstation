@@ -28,6 +28,8 @@ unless they should merely be deleted.
 1. [ ] Bash - Test for appropriate shebang on all Bash source
 1. [ ] Dorothy - Add manually-installed tools to automated install scripts
 1. [ ] Dorothy - Consider additional commands listed in `HowTo-use-Dorothy.md`
+1. [ ] Nushell - Rewrite BriteOnyx account-level scripts
+1. [ ] Nushell - Rewrite BriteOnyx project-level scripts
 1. [ ] Python - Document convention of using f-strings over `str.format()` or %-strings
 1. [ ] Python - Document convention of using string templates when templates are insecure
 1. [ ] Python - Document conventions for executing Python module
@@ -48,6 +50,7 @@ unless they should merely be deleted.
 1. [ ] generation - Implement full test suite for code generation functionality
 1. [ ] generation - Refactor source generation to be `class`-based rather than `import`-based
 1. [ ] security - Filter sensitive values out of committed output (environment variables)
+1. [ ] tool - Consider using `pkgx` for tool management
 1. [X] Anaconda - Create scripts & aliases for managing Anaconda environments
 1. [X] Anaconda - Switch from Python virtual environment to Anaconda environment
 1. [X] Bash - Add `redeclare` alias to `source` Bash function declarations again
