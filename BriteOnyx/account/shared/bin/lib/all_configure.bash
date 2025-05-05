@@ -2,52 +2,75 @@
 # This script is executed via `source` while initializing a Bash shell.
 # NO: set -o errexit -o nounset
 set -o pipefail +o verbose +o xtrace
-# NO: Do NOT `export` this function, it only works if defined locally
+# NO: Do NOT export this function, it only works if defined locally
 # NOTE: Each new definition of this function REPLACES the previous via `source`
 me() { echo ${BASH_SOURCE} ; }
 [[ -n "${BO_Trace}" ]] && log_trace "Executing $(me)" && \
     [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
 # NO: Do NOT `trap` since it will stay active in the shell
 ################################################################################
+# TODO: DELETE: Hard-coded for now, until I implement code-generation below
 
-_MyDir=$(parent_of $(me))
+# TODO: DISABLED
+# _Script=${HOME}/bin/lib/configure/Anaconda.bash
+# prepare_to_source_required "${_Script}" && source "${_Script}"
 
+_Script=${HOME}/bin/lib/configure/bash.bash
+prepare_to_source_required "${_Script}" && source "${_Script}"
+
+_Script=${HOME}/bin/lib/configure/dircolors.bash
+prepare_to_source_required "${_Script}" && source "${_Script}"
+
+_Script=${HOME}/bin/lib/configure/grep.bash
+prepare_to_source_required "${_Script}" && source "${_Script}"
+
+_Script=${HOME}/bin/lib/configure/Homebrew.bash
+prepare_to_source_required "${_Script}" && source "${_Script}"
+
+# TODO: DISABLED
+# _Script=${HOME}/bin/lib/configure/Kubernetes.bash
+# prepare_to_source_required "${_Script}" && source "${_Script}"
+
+_Script=${HOME}/bin/lib/configure/less.bash
+prepare_to_source_required "${_Script}" && source "${_Script}"
+
+# TODO: DISABLED
+# _Script=${HOME}/bin/lib/configure/NodeJS.bash
+# prepare_to_source_required "${_Script}" && source "${_Script}"
+
+# TODO: DISABLED
+# _Script=${HOME}/bin/lib/configure/PostgreSQL.bash
+# prepare_to_source_required "${_Script}" && source "${_Script}"
+
+# TODO: DISABLED
+# _Script=${HOME}/bin/lib/configure/Pyenv.bash
+# prepare_to_source_required "${_Script}" && source "${_Script}"
+
+_Script=${HOME}/bin/lib/configure/emacs.bash
+prepare_to_source_required "${_Script}" && source "${_Script}"
+
+# TODO: DISABLED
+# _Script=${HOME}/bin/lib/configure/vim.bash
+# prepare_to_source_required "${_Script}" && source "${_Script}"
+
+################################################################################
 # Generate and `source` a temporary script to `source` other scripts
+_MyDir=$(parent_of $(me))
 _Script=$(get_temporary_file)
 log_debug "Generating script '${_Script}'"
 cat >"${_Script}" <<EndOfScript
 log_trace "Executing '${_Script}'"
 
-_Script=${_MyDir}/configure/bash.bash
-require_script "\${_Script}" && source "\${_Script}" ; abort_on_fail \$? "from \${_Script}"
+# Nothing to do yet
 
-_Script=${_MyDir}/configure/dircolors.bash
-require_script "\${_Script}" && source "\${_Script}" ; abort_on_fail \$? "from \${_Script}"
-
-_Script=${_MyDir}/configure/grep.bash
-require_script "\${_Script}" && source "\${_Script}" ; abort_on_fail \$? "from \${_Script}"
-
-_Script=${_MyDir}/configure/less.bash
-require_script "\${_Script}" && source "\${_Script}" ; abort_on_fail \$? "from \${_Script}"
-
-_Script=${_MyDir}/configure/vim.bash
-require_script "\${_Script}" && source "\${_Script}" ; abort_on_fail \$? "from \${_Script}"
-
-_Script=${_MyDir}/configure/Anaconda.bash
-require_script "\${_Script}" && source "\${_Script}" ; abort_on_fail \$? "from \${_Script}"
-
-_Script=${_MyDir}/configure/NodeJS.bash
-require_script "\${_Script}" && source "\${_Script}" ; abort_on_fail \$? "from \${_Script}"
-
-_Script=${_MyDir}/configure/PostgreSQL.bash
-require_script "\${_Script}" && source "\${_Script}" ; abort_on_fail \$? "from \${_Script}"
-
-_Script=${_MyDir}/configure/Pyenv.bash
-require_script "\${_Script}" && source "\${_Script}" ; abort_on_fail \$? "from \${_Script}"
+unset _Script
 
 EndOfScript
-require_script "${_Script}" && source "${_Script}" ; abort_on_fail $? "from ${_Script}"
+require_script "${_Script}" && source "${_Script}"
 
+unset _Script
+
+################################################################################
 : << 'DisabledContent'
 DisabledContent
 

@@ -1,38 +1,47 @@
 #!/usr/bin/env bash
 # Intended to be executed in a Bash shell.
-[[ -n "${BO_Trace}" ]] && 1>&2 log_trace "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
 # NO: set -e
 # NO: trap ... EXIT
 ###############################################################################
 
 main() {
+    # Configure Homebrew tap for best Emacs
+    brew tap railwaycat/emacsmacport
+
     # Populate Homebrew by installing desired casks & formulae
-
-    homebrew-update
-    homebrew-upgrade
-
-    # minimal essential tools
-    local Packages
-    Packages='bash'
+    Packages=
+    # base dependencies
+    Packages+=' bash'
+    # Deno & dependencies
+    Packages+=' deno'
+    # Emacs & dependencies
+    Packages+=' coreutils'
+    Packages+=' editorconfig'
+    Packages+=' emacs-mac --with-modules'
+    Packages+=' fd'
+    Packages+=' findutils'
+    Packages+=' fontconfig'
     Packages+=' git'
-    Packages+=' hyper'
-    Packages+=' iterm2'
-    Packages+=' neovim'
-    Packages+=' pyenv'
-
-    # helpful additional tools
-    # Packages+=' asciidoc'
-    # Packages+=' emacs'
-    # Packages+=' jsonlint'
-    # Packages+=' markdownlint-cli'
-    # Packages+=' rst-lint'
-    # Packages+=' shellcheck'
-    # Packages+=' yamllint'
-
-
+    Packages+=' pandoc'
+    Packages+=' ripgrep'
+    Packages+=' shellcheck'
+    Packages+=' shfmt'
+    # Chostty & dependencies
+    # TODO: Currently installed manually, switch...
+    # Packages+=' ghostty'
+    # Nushell & dependencies
+    Packages+=' cmake'
+    Packages+=' nushell'
+    Packages+=' openssl'
+    Packages+=' pueue'
+    # Pkgx & dependencies
+    Packages+=' pkgx'
+    # Python & dependencies
+    Packages+=' python'
     brew install ${Packages}
 
-    return 0
+    # TODO: Create symbolic link for Emacs GUI application
 }
 
 main $@
@@ -44,10 +53,18 @@ main $@
 # set +vx
 
 : << 'DisabledContent'
-Other Homebrew installs to consider:
-gitlint
-pulumi
-pylint
-tfproviderlint
+Homebrew says about `emacs`:
+
+To start emacs now and restart at login:
+  brew services start emacs
+Or, if you don't want/need a background service you can just run:
+  /opt/homebrew/opt/emacs/bin/emacs --fg-daemon
+
+Homebrew says about `findutils`:
+
+All commands have been installed with the prefix "g".
+If you need to use these commands with their normal names, you
+can add a "gnubin" directory to your PATH from your bashrc like:
+    PATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin:$PATH"
 DisabledContent
 

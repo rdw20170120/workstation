@@ -23,6 +23,7 @@ tput init
 ################################################################################
 # Remember desired colors for logging
 
+# Colors for Solarized Dark
 export BO_ColorReset=$(tput sgr0)
 export BO_ColorDebug=$(tput setaf 6)
 export BO_ColorError=$(tput setaf 1)
@@ -31,6 +32,9 @@ export BO_ColorGood=$(tput setaf 7)
 export BO_ColorInfo=$(tput setaf 2)
 export BO_ColorTrace=$(tput setaf 4)
 export BO_ColorWarn=$(tput setaf 3)
+
+# Override Good color for Solarized Light
+# export BO_ColorGood=$(tput setaf 0)
 
 : << 'DisabledContent'
 NORMAL=$(tput sgr0)

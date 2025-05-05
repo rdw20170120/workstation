@@ -8,15 +8,24 @@ me() { echo ${BASH_SOURCE} ; }
     [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
 # NO: Do NOT `trap` since it will stay active in the shell
 ################################################################################
-# Alias for ls
+# Configure Homebrew
 
-alias la='ls -AFGhl -D "%Y-%m-%d %H:%M:%S"'
-alias lc='ls -FG'
-alias ll='ls -FGhl -D "%Y-%m-%d %H:%M:%S"'
-alias lr='ls -FGhlRX -D "%Y-%m-%d %H:%M:%S"'
+case "${BO_ARCH}" in
+    arm64) 
+        # NOTE: On Apple macOS running on Apple Silicon
+        export HOMEBREW_PREFIX=/opt/homebrew
+        ;;
+    x86_64)
+        # NOTE: On Apple macOS running on Intel CPU
+        export HOMEBREW_PREFIX=/usr/local
+        ;;
+    *)
+        log_warn "HOMEBREW_PREFIX is UNKNOWN for architecture '${BO_ARCH}'"
+        export HOMEBREW_PREFIX=${HOME}/HomeBrew
+        ;;
+esac
 
-# Show tracking files touched during startup script execution
-alias show-ran='ls -AFGhlrt -D "%Y-%m-%d %H:%M:%S" ~/.ran_* ~/.config/bash/.ran_* ~/.config/nushell/.ran_*'
+export BO_PathHomebrew=${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
 
 : << 'DisabledContent'
 DisabledContent

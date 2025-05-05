@@ -19,7 +19,7 @@ git_repo_url() {
   # $1 = git repository URL prefix
   # $2 = git repository name
   echo $1/$2.git
-}
+} && export -f git_repo_url
 
 git_status_is_clean() {
   # Return whether status of git working directory $1 is clean
@@ -30,14 +30,14 @@ git_status_is_clean() {
   local -r _Output=$(git status --porcelain)
   popd >/dev/null
   [[ -z "${_Output}" ]]
-}
+} && export -f git_status_is_clean
 
 git_working_directory() {
   # Return path of local working directory with parent directory $1 and repository name $2
   # $1 = parent directory of git working directory
   # $2 = git repository name
   echo $1/$2
-}
+} && export -f git_working_directory
 
 maybe_bare() {
   # Maybe bare clone git repository $3,
@@ -63,7 +63,7 @@ maybe_bare() {
 #   that I apparently do not yet understand.
 #   maybe_pull "$1" $2 $3
   fi
-}
+} && export -f maybe_bare
 
 maybe_clone() {
   # Maybe clone git repository $3,
@@ -86,7 +86,7 @@ maybe_clone() {
   else
     maybe_pull "$1" $2 $3
   fi
-}
+} && export -f maybe_clone
 
 maybe_pull() {
   # Maybe pull git repository $3,
@@ -105,7 +105,7 @@ maybe_pull() {
   else
     log_warn " Working directory is DIRTY: ${_Dir}"
   fi
-}
+} && export -f maybe_pull
 
 ###############################################################################
 # TODO: Show Bash's currently-active short options: `printf %s\\n "$-"`

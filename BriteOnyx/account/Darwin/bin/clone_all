@@ -6,11 +6,14 @@
 ###############################################################################
 
 main() {
-    # Upgrade casks & formulae installed by Homebrew
+    # Clone all git repositories
 
-    brew upgrade
-    # TODO: conda update conda
-    # TODO: mamba update mamba
+    clone_from_GitHub_by_Rob
+    clone_from_GitHub_by_others
+    clone_from_GitLab_by_Rob
+    clone_from_GitLab_by_others
+
+    return 0
 }
 
 main $@

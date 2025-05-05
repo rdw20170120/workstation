@@ -1,0 +1,11 @@
+#!/usr/bin/env false
+###################################################################################################
+# NOTE:  This file is intended to be sourced into a Bash shell.
+# NOTE:  This script has been renamed so that Bash will execute ~/.bash_login instead.
+# NOTE:  Then Bash will execute ~/.bash_login and ~/.bash_logout symmetrically.
+###################################################################################################
+touch $(dirname ${BASH_SOURCE})/.ran_script_dot_bash_profile
+
+###################################################################################################
+: << 'DisabledContent'
+DisabledContent

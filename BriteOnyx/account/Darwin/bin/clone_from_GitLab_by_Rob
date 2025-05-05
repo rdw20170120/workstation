@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+# Clone git repositories, if they have not been cloned already.
+# NOTE: I reference my special SSH configuration to handle the connection, see `~/.ssh/config`.
+# TODO: Implement this:
+# hint:   git config pull.ff only       # fast-forward only
+
+# DELETE: source ${HOME}/bin/lib/declare-git.bash
+
+main() {
+    # Clone Rob's repositories on GitLab
+    local -r Source=GitLab
+    local -r Connection=MeAt${Source}
+    local -r Dir=${HOME}/repo/${Source}
+    local    Profile
+
+    Profile=BriteOnyx
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" core
+
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" core
+
+    Profile=not_shared
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" experiment
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" monorepo
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" private_python_library
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" pythonspeed
+
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" private_python_library
+
+    Profile=shared3591916
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" learn-gitlab
+    maybe_clone "${Dir}/ref" "${Connection}:${Profile}" public_python_library
+
+    maybe_clone "${Dir}/wip" "${Connection}:${Profile}" public_python_library
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+DisabledContent
+

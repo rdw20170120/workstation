@@ -13,7 +13,7 @@ me() { echo ${BASH_SOURCE} ; }
 export BO_PathAnacondaBefore=${PATH}
 
 if [[ -z "${CONDA_PREFIX}" ]]; then
-    log_warn "Missing 'CONDA_PREFIX', skipping activation of Anaconda"
+    log_debug "Missing 'CONDA_PREFIX', skipping activation of Anaconda"
     return 0
 fi
 

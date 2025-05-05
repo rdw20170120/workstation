@@ -8,15 +8,10 @@ me() { echo ${BASH_SOURCE} ; }
     [[ "${BO_Trace}" == TRACE ]] && set -o verbose -o xtrace
 # NO: Do NOT `trap` since it will stay active in the shell
 ################################################################################
-# Alias for ls
+# Configure Emacs
 
-alias la='ls -AFGhl -D "%Y-%m-%d %H:%M:%S"'
-alias lc='ls -FG'
-alias ll='ls -FGhl -D "%Y-%m-%d %H:%M:%S"'
-alias lr='ls -FGhlRX -D "%Y-%m-%d %H:%M:%S"'
-
-# Show tracking files touched during startup script execution
-alias show-ran='ls -AFGhlrt -D "%Y-%m-%d %H:%M:%S" ~/.ran_* ~/.config/bash/.ran_* ~/.config/nushell/.ran_*'
+export EDITOR="emacs"
+export VISUAL="emacs"
 
 : << 'DisabledContent'
 DisabledContent

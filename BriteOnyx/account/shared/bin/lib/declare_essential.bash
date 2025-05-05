@@ -100,16 +100,6 @@ abort_on_fail() {
 
 ################################################################################
 
-check_for_script() {
-    # Check for optional script $1
-    require_arguments $# 1
-    # $1 = script that is optional
-    require_value "$1"
-    [[ -r "$1" ]]
-} && export -f check_for_script
-
-################################################################################
-
 require_arguments() {
     # Require that caller received expected number of arguments
     [[ "$#" -ne 2 ]] &&
@@ -126,7 +116,7 @@ require_script() {
     require_arguments $# 1
     # $1 = script that is required
     require_value "$1"
-    check_for_script "$1"
+    [[ -r "$1" ]]
     abort_on_fail $? "Missing script '$1'"
 } && export -f require_script
 
@@ -156,6 +146,36 @@ parent_of() {
     echo -n $(dirname $1)
 } && export -f parent_of
 
+prepare_to_source_optional() {
+    # Prepare to `source` optional script $1,
+    # returning 0 if the script is found and
+    # returning 1 if the script is not found
+    # Should be invoked like this:
+    # _Script=DIR/SCRIPT.bash
+    # prepare_to_source_optional "${_Script}" && source "${_Script}"
+    if [[ -r "${_Script}" ]] ; then
+        log_debug "Sourcing optional script '${_Script}'"
+        return 0
+    else
+        log_info "Missing optional script '${_Script}'"
+    fi
+    return 1
+} && export -f prepare_to_source_optional
+
+prepare_to_source_required() {
+    # Prepare to `source` required script $1,
+    # returning 0 if the script is found and
+    # abort if the script is not found
+    # Should be invoked like this:
+    # _Script=DIR/SCRIPT.bash
+    # prepare_to_source_required "${_Script}" && source "${_Script}"
+    if [[ -r "${_Script}" ]] ; then
+        log_debug "Sourcing required script '${_Script}'"
+        return 0
+    fi
+    abort_on_fail 99 "from prepare_to_source_required '${_Script}'"
+} && export -f prepare_to_source_required
+
 ###############################################################################
 
 get_temporary_file() {
@@ -168,15 +188,15 @@ get_temporary_file() {
 
 ###############################################################################
 
-[[ -z "${BO_DirTemp}" ]] && export BO_DirTemp=${HOME}/tmp
+export BO_DirTemp=${HOME}/tmp
 [[ ! -e "${BO_DirTemp}" ]] &&
     echo "Creating directory '${BO_DirTemp}'" &&
     mkdir "${BO_DirTemp}"
 
-# Remember the native system PATH
-[[ -z "${BO_PathNative}" ]] && export BO_PathNative=${PATH}
-
-[[ -z "${BO_PathTool}" ]] && export BO_PathTool=~/tool
+prepare_to_source() {
+    # TODO: DELETE
+    prepare_to_source_required "${_Script}"
+} && export -f prepare_to_source
 
 ###############################################################################
 # NOTE: Uncomment these lines for debugging, placed where needed

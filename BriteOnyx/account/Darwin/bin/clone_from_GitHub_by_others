@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# Intended to be executed in a Bash shell.
+[[ -n "${BO_Trace}" ]] && 1>&2 echo "Executing ${BASH_SOURCE}" && [[ "${BO_Trace}" != 'TRACE' ]] && set -vx
+# NO: set -e
+# NO: trap ... EXIT
+###############################################################################
+# Clone git repositories, if they have not been cloned already.
+# NOTE: I reference my special SSH configuration to handle the connection, see `~/.ssh/config`.
+# TODO: Implement this:
+# hint:   git config pull.ff only       # fast-forward only
+
+# DELETE: source ${HOME}/bin/lib/declare-git.bash
+
+
+main() {
+    # Clone others' repositories on GitHub
+    local -r Source=GitHub
+    local -r Connection=MeAt${Source}
+    local -r Dir=${HOME}/repo/${Source}
+    local    Profile
+
+    Profile=earthly
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" earthly
+
+    Profile=josevalim
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" kv_umbrella
+
+    Profile=vyadh
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" nutest
+
+    Profile=zzamboni
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-emacs
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" emacs-org-leanpub
+
+    return 0
+}
+
+main $@
+
+###############################################################################
+# NOTE: Uncomment these lines for debugging, placed where needed
+# export PS4='$ ' ; set -vx
+# Code to debug...
+# set +vx
+
+: << 'DisabledContent'
+    Profile=elves
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" awesome-elvish
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish
+
+    Profile=zzamboni
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" dot-elvish
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish-completions
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish-modules
+    maybe_clone "${Dir}/other/${Profile}" "${Connection}:${Profile}" elvish-themes
+
+DisabledContent
+

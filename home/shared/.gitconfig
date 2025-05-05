@@ -1,0 +1,30 @@
+[user]
+	name = Rob Williams
+	email = rdw6688@gmail.com
+[pull]
+	ff = only
+[core]
+	editor = open -a TextEdit
+	excludesfile = /Users/rob/.gitignore_global
+[push]
+	default = simple
+[mergetool]
+	keepBackup = false
+[color]
+	ui = auto
+[init]
+	defaultBranch = main
+[git]
+	protocol = ssh
+[github]
+	user = rdw20170120
+[gitlab]
+	user = RobertDavidWilliams
+[diff]
+	tool = delta
+[merge]
+	tool = delta
+[credential]
+	helper = osxkeychain
+[difftool]
+	prompt = false
